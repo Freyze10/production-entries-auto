@@ -75,12 +75,30 @@
       <option name="project" value="LOCAL" />
       <updated>1773804132748</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="created main layout">
+      <option name="closed" value="true" />
+      <created>1773823686310</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1773823686310</updated>
+    </task>
+    <task id="LOCAL-00004" summary="changed main label">
+      <option name="closed" value="true" />
+      <created>1773823705921</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1773823705921</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created main window fila" />
     <MESSAGE value="added imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="added imports" />
+    <MESSAGE value="created main layout" />
+    <MESSAGE value="changed main label" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed main label" />
   </component>
 </project>

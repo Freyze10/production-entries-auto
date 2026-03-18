@@ -422,25 +422,44 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(main_widget)
 
+    def create_menu_button(self, text, icon, page_index):
+        btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
+        if page_index is not None:
+            btn.clicked.connect(lambda: self.show_page(page_index))
+        return btn
+
     def create_side_menu(self):
         menu = QWidget(objectName="SideMenu")
         layout = QVBoxLayout(menu)
-        layout.setContentsMargins(10, 20, 10, 10)
+        layout.setContentsMargins(5, 20, 5, 10)
         layout.setSpacing(5)
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         sep = QFrame(frameShape=QFrame.Shape.HLine, objectName="Separator")
         sep.setContentsMargins(0, 10, 0, 10)
 
+        self.btn_production_records = self.create_menu_button(" Production Records", "ph.stack", 0)
+        self.btn_manual_entry = self.create_menu_button(" Manual Entry", "msc.tools", 0)
+        # self.btn_auto_entry
+        # self.btn_manual_entry_dc
+        # self.btn_auto_entry_dc
+
         layout.addWidget(sep)
         layout.addWidget(QLabel("Production Entry", objectName="MenuLabel"))
+        layout.addWidget(self.btn_production_records)
+        layout.addWidget(self.btn_manual_entry)
 
         return menu
+
+    def set_page(self, index):
+        self.stacked_widget.setCurrentIndex(index)
+
 def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()
