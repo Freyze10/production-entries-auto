@@ -433,7 +433,7 @@ class MainWindow(QMainWindow):
         sep.setContentsMargins(0, 10, 0, 10)
 
         layout.addWidget(sep)
-        layout.addWidget(QLabel("FORMULATION", objectName="MenuLabel"))
+        layout.addWidget(QLabel("Production Entry", objectName="MenuLabel"))
 
         return menu
 def main():
