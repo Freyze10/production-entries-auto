@@ -4,10 +4,10 @@ from datetime import datetime
 import qtawesome as fa
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVBoxLayout, QLabel, QFrame, QPushButton, \
-    QStackedWidget
+    QStackedWidget, QStatusBar
 
 from css.styles import AppStyles
-
+from workstation.workstation_details import _get_workstation_info
 
 class MainWindow(QMainWindow):
     def __init__(self): # , username, user_role, login_window
@@ -17,6 +17,8 @@ class MainWindow(QMainWindow):
         self.username = "Brant"
         self.user_role = "Admin"
         # self.login_window = login_window
+        self.workstation_info = _get_workstation_info()
+
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
         self.setWindowTitle("Production Entry")
@@ -93,6 +95,18 @@ class MainWindow(QMainWindow):
 
     def set_page(self, index):
         self.stacked_widget.setCurrentIndex(index)
+
+    def set_status_bar(self):
+        self.status_bar = QStatusBar()
+        self.setStatusBar(self.status_bar)
+        self.time_label = QLabel()
+
+        for w in [self.time_label,
+                  QLabel(f" | PC: {self.workstation_info['h']}"),
+                  QLabel(f" | IP: {self.workstation_info['i']}"),
+                  QLabel(f" | MAC: {self.workstation_info['m']}")]:
+            self.status_bar.addPermanentWidget(w)
+
 
 def main():
     app = QApplication(sys.argv)

@@ -5,7 +5,7 @@ import socket
 import uuid
 
 
-def workstation_info():
+def _get_workstation_info():
     # Hostname and IP
     try:
         h, i = socket.gethostname(), socket.gethostbyname(socket.gethostname())
