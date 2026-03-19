@@ -9,8 +9,9 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
 from css.styles import AppStyles
 from workstation.workstation_details import _get_workstation_info
 
+
 class MainWindow(QMainWindow):
-    def __init__(self): # , username, user_role, login_window
+    def __init__(self):  # , username, user_role, login_window
         super().__init__()
         # self.username = username
         # self.user_role = user_role
@@ -93,7 +94,7 @@ class MainWindow(QMainWindow):
 
         return menu
 
-    def set_page(self, index):
+    def show_page(self, index):
         self.stacked_widget.setCurrentIndex(index)
 
     def set_status_bar(self):
