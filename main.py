@@ -59,7 +59,9 @@ class MainWindow(QMainWindow):
         self.btn_manual_entry = self.create_menu_button(" Manual Entry", "msc.tools", 1)
         self.btn_auto_entry = self.create_menu_button(" Auto Entry", "mdi.head-cog-outline", 2)
         self.btn_manual_entry_dc = self.create_menu_button(" Manual Entry - DC", "msc.wrench", 3)
-        self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 3)
+        self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 4)
+
+        self.btn_audit_trail = self.create_menu_button("  Audit Trail", 'fa5s.history', 5)
 
         self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color=AppStyles.RED_500))
         self.btn_logout.setStyleSheet(f"""QPushButton {{ color: {AppStyles.RED_500};}}""")
@@ -73,6 +75,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.btn_manual_entry_dc)
         layout.addWidget(self.btn_auto_entry_dc)
         layout.addWidget(QLabel("System", objectName="MenuLabel"))
+        layout.addWidget(self.btn_audit_trail)
         layout.addStretch(1)
         layout.addWidget(self.btn_logout)
 

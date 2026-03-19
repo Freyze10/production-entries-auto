@@ -155,7 +155,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773880762666</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added red color for logout">
+      <option name="closed" value="true" />
+      <created>1773881278979</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1773881278979</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added system  label">
+      <option name="closed" value="true" />
+      <created>1773881460824</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1773881460824</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,6 +197,8 @@
     <MESSAGE value="added auto entry dc button" />
     <MESSAGE value="addded logout button" />
     <MESSAGE value="created seperate file for styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="created seperate file for styles" />
+    <MESSAGE value="added red color for logout" />
+    <MESSAGE value="added system  label" />
+    <option name="LAST_COMMIT_MESSAGE" value="added system  label" />
   </component>
 </project>
