@@ -56,7 +56,8 @@ class MainWindow(QMainWindow):
         user_profile = QHBoxLayout(profile)
         user_profile.setContentsMargins(5,0,0,0)
         user_profile.setAlignment(Qt.AlignmentFlag.AlignTop)
-
+        user_profile.addWidget(QLabel(pixmap=fa.icon('fa5s.user-circle', color="ecf0f1").pixmap(QSize(40, 40))))
+        # user_profile.addWidget(QLabel(f"<b>{self.username}</b><br><font color='#bdc3c7'>{self.user_role}</font>"))
         sep = QFrame(frameShape=QFrame.Shape.HLine, objectName="Separator")
         sep.setContentsMargins(0, 10, 0, 10)
 
