@@ -124,6 +124,38 @@ def create_table():
         )
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production02(
+            id SERIAL PRIMARY KEY,
+            prod_id INT,
+            sequence_no INT,
+            material_code VARCHAR(32),
+            prod_a DECIMAL(6,6),
+            prod_b DECIMAL(6,6),
+            lab_a DECIMAL(6,6),
+            lab_b DECIMAL(6,6),
+            total_weight DECIMAL(6,6),
+            is_deleted VARCHAR(5) DEFAULT 'False',
+            loss DECIMAL(6,6),
+            cons DECIMAL(6,6),
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_audit_trail(
+            id SERIAL PRIMARY KEY,
+            timestamp TIMESTAMP,
+            user_id INT,
+            action_type VARCHAR(32),
+            details VARCHAR(62),
+            hostname VARCHAR(32),
+            ip_adress VARCHAR(32),
+            mac_adress VARCHAR(32),
+            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
+        )
+    """)
+
     con.commit()
     cursor.close()
     con.close()
