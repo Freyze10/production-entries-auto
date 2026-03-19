@@ -93,7 +93,7 @@ def create_table():
     """)
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_production02(
+        CREATE TABLE IF NOT EXISTS tbl_production01(
             prod_id SERIAL PRIMARY KEY,
             prod_date DATE,
             customer_id INT,
@@ -107,7 +107,20 @@ def create_table():
             order_no INT,
             colormatch_no VARCHAR(8),
             colormatch_date date NOT NULL,
-            quantity_prod DECIMAL(10,6)     
+            mix_time VARCHAR(10),
+            machine_no VARCHAR(32),
+            quantity_id INT,
+            note VARCHAR(128),
+            user_id INT,
+            encode_id INT,
+            is_deleted VARCHAR(5) DEFAULT 'False',
+            is_printed VARCHAR(5) DEFAULT 'False',
+            inventory_c_date DATE,
+            form_type VARCHAR(16),
+            FOREIGN KEY (encode_id) REFERENCES tbl_production_encode(encode_id),
+            FOREIGN KEY (quantity_id) REFERENCES tbl_production_quantity(quantity_id),
+            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id),
+            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
         )
     """)
 
