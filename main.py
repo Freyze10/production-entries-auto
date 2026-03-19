@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
 
 from css.styles import AppStyles
 from workstation.workstation_details import _get_workstation_info
+from db.schema import create_table
 
 
 class MainWindow(QMainWindow):
@@ -27,6 +28,7 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1400, 720)
         self.setGeometry(100, 100, 1366, 768)
 
+        create_table()
         self.set_status_bar()
         self.init_ui()
 

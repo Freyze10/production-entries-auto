@@ -332,7 +332,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773902122215</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="created schema">
+      <option name="closed" value="true" />
+      <created>1773906191181</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1773906191181</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,7 +355,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed main label" />
     <MESSAGE value="added buttons" />
     <MESSAGE value="added auto gen button" />
     <MESSAGE value="added dc manual entry button" />
@@ -372,7 +379,8 @@
     <MESSAGE value="adding database structure" />
     <MESSAGE value="creating schema" />
     <MESSAGE value="finished production01" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished production01" />
+    <MESSAGE value="created schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="created schema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
