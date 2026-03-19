@@ -43,10 +43,10 @@ def create_table():
             date DATE,
             customer_id INT NOT NULL,
             prod_code VARCHAR(12) NOT NULL,
-            prod_color VARCHAR(32),
+            prod_color VARCHAR(62),
             dosage DECIMAL(6,2) NOT NULL,
             total_concentration DECIMAL(6,2),
-            ld DECIMAL(3,2),
+            ld DECIMAL(6,2),
             mix_time VARCHAR(10),
             resin VARCHAR(36),
             application VARCHAR(36),
@@ -60,6 +60,7 @@ def create_table():
             FOREIGN KEY (encode_id) REFERENCES tbl_formula_encode(encode_id)
         )
     """)
+
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula02(
             id SERIAL PRIMARY KEY,
@@ -69,6 +70,44 @@ def create_table():
             concentration DECIMAL(6,6),
             is_deleted VARCHAR(6) DEFAULT 'False',
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production_encode(
+            encode_id SERIAL PRIMARY KEY,
+            prepared_by VARCHAR(128),
+            encoded_by VARCHAR(128),
+            encoded_on TIMESTAMP,
+            confirmation_encoded_on TIMESTAMP        
+            )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production_quantity(
+            quantity_id SERIAL PRIMARY KEY,
+            quantity_req DECIMAL(10,6),
+            quantity_batch DECIMAL(10,6),
+            quantity_prod DECIMAL(10,6)     
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production02(
+            prod_id SERIAL PRIMARY KEY,
+            prod_date DATE,
+            customer_id INT,
+            form_id INT,
+            index_no VARCAR(10),
+            prod_code VARCHAR(12) NOT NULL,
+            prod_color VARCHAR(62),
+            dosage DECIMAL(6,2) NOT NULL,
+            ld DECIMAL(6,2) NOT NULL,
+            lot_no VARCHAR(128),
+            order_no INT,
+            colormatch_no VARCHAR(8),
+            colormatch_date date NOT NULL,
+            quantity_prod DECIMAL(10,6)     
         )
     """)
 
