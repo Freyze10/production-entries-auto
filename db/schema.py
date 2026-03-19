@@ -43,10 +43,34 @@ def create_table():
             date DATE,
             customer_id INT NOT NULL,
             prod_code VARCHAR(12) NOT NULL,
-            prod_color VARCHAR(32) NOT NULL,
+            prod_color VARCHAR(32),
+            dosage DECIMAL(6,2) NOT NULL,
+            total_concentration DECIMAL(6,2),
+            ld DECIMAL(3,2),
+            mix_time VARCHAR(10),
+            resin VARCHAR(36),
+            application VARCHAR(36),
+            colormatch_no VARCHAR(8),
+            colormatch_date date NOT NULL,
+            encode_id INT,
+            notes VARCHAR(128),
+            date_time TIMESTAMP,
+            is_deleted VARCHAR(5) DEFAULT 'False',
+            is_used VARCHAR(5) DEFAULT 'False',
+            FOREIGN KEY (encode_id) REFERENCES tbl_formula_encode(encode_id)
         )
     """)
-
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_formula02(
+            id SERIAL PRIMARY KEY,
+            form_id INT,
+            sequence_no INT,
+            material_code VARCHAR(32),
+            concentration DECIMAL(6,6),
+            is_deleted VARCHAR(6) DEFAULT 'False',
+            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
+        )
+    """)
 
     con.commit()
     cursor.close()
