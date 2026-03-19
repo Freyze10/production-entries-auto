@@ -139,7 +139,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773880363822</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="created seperate file for styles">
+      <option name="closed" value="true" />
+      <created>1773880478236</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1773880478236</updated>
+    </task>
+    <task id="LOCAL-00012" summary="created seperate file for styles">
+      <option name="closed" value="true" />
+      <created>1773880762666</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1773880762666</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +180,7 @@
     <MESSAGE value="changed button name" />
     <MESSAGE value="added auto entry dc button" />
     <MESSAGE value="addded logout button" />
-    <option name="LAST_COMMIT_MESSAGE" value="addded logout button" />
+    <MESSAGE value="created seperate file for styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="created seperate file for styles" />
   </component>
 </project>

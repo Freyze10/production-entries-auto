@@ -379,6 +379,5 @@ class AppStyles:
         QScrollBar::handle:vertical:hover {{
             background: {GRAY_500};
         }}
-
-        /* ... add horizontal scrollbar similarly ... */
+        
     """

@@ -62,6 +62,7 @@ class MainWindow(QMainWindow):
         self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 3)
 
         self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color=AppStyles.RED_500))
+        self.btn_logout.setStyleSheet(f"""QPushButton {{ color: {AppStyles.RED_500};}}""")
         # self.btn_logout.clicked.connect(self.logout)
 
         layout.addWidget(sep)
