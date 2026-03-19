@@ -441,8 +441,8 @@ class MainWindow(QMainWindow):
         self.btn_production_records = self.create_menu_button(" Production Records", "ph.stack", 0)
         self.btn_manual_entry = self.create_menu_button(" Manual Entry", "msc.tools", 1)
         self.btn_auto_entry = self.create_menu_button(" Auto Entry", "mdi.head-cog-outline", 2)
-        self.btn_manual_entry_dc = self.create_menu_button(" Manual Entry - DC", "mdi6.wrench-cog-outline", 3)
-        self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry", "mdi.head-cog-outline", 3)
+        self.btn_manual_entry_dc = self.create_menu_button(" Manual Entry - DC", "msc.wrench", 3)
+        self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 3)
 
         layout.addWidget(sep)
         layout.addWidget(QLabel("Production Entry", objectName="MenuLabel"))
@@ -450,6 +450,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.btn_manual_entry)
         layout.addWidget(self.btn_auto_entry)
         layout.addWidget(self.btn_manual_entry_dc)
+        layout.addWidget(self.btn_auto_entry_dc)
 
         return menu
 
