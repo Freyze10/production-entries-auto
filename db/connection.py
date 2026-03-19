@@ -7,7 +7,7 @@ def get_connection():
         host="localhost",
         dbname="db_production",
         user="postgres",
-        password="passsword",
+        password="password",
         port="5433"
     )
 

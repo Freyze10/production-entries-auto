@@ -9,6 +9,7 @@ def create_table():
             role_id SERIAL PRIMARY KEY,
             department VARCHAR(36) NOT NULL,
             role VARCHAR(10) NOT NULL
+        )
     """)
 
     cursor.execute("""
@@ -18,6 +19,7 @@ def create_table():
             hostname VARCHAR(36) NOT NULL,
             password VARCHAR(36) NOT NULL, 
             FOREIGN KEY (role_id) REFERENCES tbl_role(role_id)
+        )
     """)
 
     cursor.execute("""
@@ -98,7 +100,7 @@ def create_table():
             prod_date DATE,
             customer_id INT,
             form_id INT,
-            index_no VARCAR(10),
+            index_no VARCHAR(10),
             prod_code VARCHAR(12) NOT NULL,
             prod_color VARCHAR(62),
             dosage DECIMAL(6,2) NOT NULL,
