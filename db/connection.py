@@ -2,6 +2,7 @@ import psycopg2
 
 
 def get_connection():
+    # localhost
     return psycopg2.connect(
         host="localhost",
         dbname="db_production",
@@ -10,6 +11,3 @@ def get_connection():
         port="5433"
     )
 
-def connect_db():
-    connection = get_connection()
-    return connection.cursor()
