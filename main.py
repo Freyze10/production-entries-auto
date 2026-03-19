@@ -14,6 +14,8 @@ class MainWindow(QMainWindow):
         super().__init__()
         # self.username = username
         # self.user_role = user_role
+        self.username = "Brant"
+        self.user_role = "Admin"
         # self.login_window = login_window
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
@@ -54,10 +56,10 @@ class MainWindow(QMainWindow):
 
         profile = QWidget()
         user_profile = QHBoxLayout(profile)
-        user_profile.setContentsMargins(5,0,0,0)
+        user_profile.setContentsMargins(10, 0, 0, 0)
         user_profile.setAlignment(Qt.AlignmentFlag.AlignTop)
         user_profile.addWidget(QLabel(pixmap=fa.icon('fa5s.user-circle', color="#ecf0f1").pixmap(QSize(40, 40))))
-        # user_profile.addWidget(QLabel(f"<b>{self.username}</b><br><font color='#bdc3c7'>{self.user_role}</font>"))
+        user_profile.addWidget(QLabel(f"<b>{self.username}</b><br><font color='#bdc3c7'>{self.user_role}</font>"))
         sep = QFrame(frameShape=QFrame.Shape.HLine, objectName="Separator")
         sep.setContentsMargins(0, 10, 0, 10)
 
