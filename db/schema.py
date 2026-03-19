@@ -122,7 +122,8 @@ def create_table():
             FOREIGN KEY (encode_id) REFERENCES tbl_production_encode(encode_id),
             FOREIGN KEY (quantity_id) REFERENCES tbl_production_quantity(quantity_id),
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id),
-            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
+            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id),
+            FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id)
         )
     """)
 

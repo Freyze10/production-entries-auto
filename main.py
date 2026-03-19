@@ -28,8 +28,13 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1400, 720)
         self.setGeometry(100, 100, 1366, 768)
 
-        create_table()
-        self.set_status_bar()
+        self.production_records = None
+        self.production_manual_entry = None
+        self.production_auto_entry = None
+        self.production_manual_entry_dc = None
+        self.production_auto_entry_dc = None
+        self.audit_trail = None
+
         self.init_ui()
 
     def init_ui(self):
@@ -45,6 +50,8 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.stacked_widget)
 
         self.setCentralWidget(main_widget)
+        create_table()
+        self.set_status_bar()
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
