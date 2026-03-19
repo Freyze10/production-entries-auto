@@ -171,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773881460824</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added audit trail button">
+      <option name="closed" value="true" />
+      <created>1773881620878</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1773881620878</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,6 +207,7 @@
     <MESSAGE value="created seperate file for styles" />
     <MESSAGE value="added red color for logout" />
     <MESSAGE value="added system  label" />
-    <option name="LAST_COMMIT_MESSAGE" value="added system  label" />
+    <MESSAGE value="added audit trail button" />
+    <option name="LAST_COMMIT_MESSAGE" value="added audit trail button" />
   </component>
 </project>

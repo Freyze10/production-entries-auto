@@ -52,6 +52,11 @@ class MainWindow(QMainWindow):
         layout.setSpacing(5)
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
+        profile = QWidget()
+        user_profile = QHBoxLayout(profile)
+        user_profile.setContentsMargins(5,0,0,0)
+        user_profile.setAlignment(Qt.AlignmentFlag.AlignTop)
+
         sep = QFrame(frameShape=QFrame.Shape.HLine, objectName="Separator")
         sep.setContentsMargins(0, 10, 0, 10)
 
