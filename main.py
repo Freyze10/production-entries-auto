@@ -444,6 +444,9 @@ class MainWindow(QMainWindow):
         self.btn_manual_entry_dc = self.create_menu_button(" Manual Entry - DC", "msc.wrench", 3)
         self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 3)
 
+        self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color='#ecf0f1'))
+        # self.btn_logout.clicked.connect(self.logout)
+
         layout.addWidget(sep)
         layout.addWidget(QLabel("Production Entry", objectName="MenuLabel"))
         layout.addWidget(self.btn_production_records)
@@ -451,6 +454,8 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.btn_auto_entry)
         layout.addWidget(self.btn_manual_entry_dc)
         layout.addWidget(self.btn_auto_entry_dc)
+        layout.addStretch(1)
+        layout.addWidget(self.btn_logout)
 
         return menu
 
