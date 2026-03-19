@@ -1,65 +1,71 @@
 class AppStyles:
-    """Tailwind-inspired design system for PyQt6/QSS"""
+    """Tailwind-inspired design system for PyQt6/QSS — Clean Teal & Slate (Corporate)"""
 
-    # Main palette (indigo + cyan accent – similar to your original)
-    INDIGO_600 = "#4F46E5"  # primary
-    INDIGO_700 = "#4338CA"  # primary-hover
-    INDIGO_500 = "#6366F1"
-    INDIGO_400 = "#818CF8"  # primary-light
+    # ── Primary: Teal ──────────────────────────────────────────────────────────
+    TEAL_400 = "#2DD4BF"   # primary-light
+    TEAL_500 = "#14B8A6"   # primary
+    TEAL_600 = "#0D9488"   # primary-hover
+    TEAL_700 = "#0F766E"   # primary-dark
 
-    CYAN_500 = "#06B6D4"  # accent
+    # ── Accent: Steel Blue ─────────────────────────────────────────────────────
+    STEEL_400 = "#60A5FA"
+    STEEL_500 = "#3B82F6"
 
+    # ── Semantic ───────────────────────────────────────────────────────────────
     EMERALD_500 = "#10B981"  # success
     EMERALD_600 = "#059669"
 
-    AMBER_500 = "#F59E0B"  # warning
-    AMBER_700 = "#B45309"
+    AMBER_500  = "#F59E0B"   # warning
+    AMBER_700  = "#B45309"
 
-    RED_500 = "#EF4444"  # danger
-    RED_600 = "#DC2626"
+    RED_500    = "#EF4444"   # danger
+    RED_600    = "#DC2626"
 
-    BLUE_500 = "#3B82F6"  # info
-    BLUE_600 = "#2563EB"
+    BLUE_500   = "#3B82F6"   # info
+    BLUE_600   = "#2563EB"
 
-    # Neutrals (gray scale similar to Tailwind gray)
-    GRAY_50 = "#F9FAFB"
-    GRAY_100 = "#F3F4F6"
-    GRAY_200 = "#E5E7EB"
-    GRAY_300 = "#D1D5DB"
-    GRAY_400 = "#9CA3AF"
-    GRAY_500 = "#6B7280"
-    GRAY_600 = "#4B5563"
-    GRAY_700 = "#374151"
-    GRAY_800 = "#1F2937"
-    GRAY_900 = "#111827"
+    # ── Slate neutrals (replaces gray) ────────────────────────────────────────
+    SLATE_50  = "#F8FAFC"
+    SLATE_100 = "#F1F5F9"
+    SLATE_200 = "#E2E8F0"
+    SLATE_300 = "#CBD5E1"
+    SLATE_400 = "#94A3B8"
+    SLATE_500 = "#64748B"
+    SLATE_600 = "#475569"
+    SLATE_700 = "#334155"
+    SLATE_800 = "#1E293B"
+    SLATE_900 = "#0F172A"
 
-    # Text
-    TEXT_PRIMARY = GRAY_900
-    TEXT_SECONDARY = GRAY_500
-    TEXT_TERTIARY = GRAY_400
-    TEXT_INVERSE = GRAY_50
+    # ── Text ──────────────────────────────────────────────────────────────────
+    TEXT_PRIMARY   = SLATE_900
+    TEXT_SECONDARY = SLATE_500
+    TEXT_TERTIARY  = SLATE_400
+    TEXT_INVERSE   = SLATE_50
 
-    # Backgrounds
-    BG_BASE = GRAY_50
-    BG_SURFACE = "white"
-    BG_ELEVATED = GRAY_50
-    BG_DARK = GRAY_900
+    # ── Backgrounds ───────────────────────────────────────────────────────────
+    BG_BASE     = SLATE_50
+    BG_SURFACE  = "white"
+    BG_ELEVATED = SLATE_50
+    BG_DARK     = SLATE_900
 
-    # Borders & focus
-    BORDER = GRAY_200
-    BORDER_FOCUS = INDIGO_500
-    RING_FOCUS = "0 0 0 3px rgba(79, 70, 229, 0.2)"  # indigo-500/20
+    # ── Borders & focus ───────────────────────────────────────────────────────
+    BORDER       = SLATE_200
+    BORDER_FOCUS = TEAL_500
+    RING_FOCUS   = "0 0 0 3px rgba(20, 184, 166, 0.2)"  # teal-500/20
 
-    # Shadows (very close to Tailwind's default shadows)
+    # ── Shadows ───────────────────────────────────────────────────────────────
     SHADOW_SM = "0 1px 2px 0 rgb(0 0 0 / 0.05)"
-    SHADOW = "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+    SHADOW    = "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
     SHADOW_MD = "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
     SHADOW_LG = "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
 
+    # ══════════════════════════════════════════════════════════════════════════
+    #  LOGIN STYLESHEET
+    # ══════════════════════════════════════════════════════════════════════════
     LOGIN_STYLESHEET = f"""
         #LoginWindow, #FormFrame {{
             background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                stop:0 {GRAY_100}, stop:1 #E0E7FF);
+                stop:0 {SLATE_100}, stop:1 #CCFBF1);
         }}
 
         QWidget {{
@@ -72,7 +78,7 @@ class AppStyles:
             background: white;
             border-radius: 16px;
             padding: 32px;
-            border: 1px solid {GRAY_200};
+            border: 1px solid {SLATE_200};
         }}
 
         #LoginTitle {{
@@ -83,14 +89,14 @@ class AppStyles:
         }}
 
         #InputFrame {{
-            background: {GRAY_50};
-            border: 2px solid {GRAY_200};
+            background: {SLATE_50};
+            border: 2px solid {SLATE_200};
             border-radius: 12px;
             padding: 4px 8px;
         }}
 
         #InputFrame:focus-within {{
-            border-color: {INDIGO_600};
+            border-color: {TEAL_500};
             box-shadow: {RING_FOCUS};
             background: white;
         }}
@@ -104,12 +110,12 @@ class AppStyles:
         }}
 
         QLineEdit::placeholder {{
-            color: {GRAY_400};
+            color: {SLATE_400};
         }}
 
         QPushButton#PrimaryButton {{
             background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                stop:0 {INDIGO_600}, stop:1 {INDIGO_700});
+                stop:0 {TEAL_500}, stop:1 {TEAL_600});
             color: white;
             border: none;
             border-radius: 12px;
@@ -121,7 +127,7 @@ class AppStyles:
 
         QPushButton#PrimaryButton:hover {{
             background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                stop:0 {INDIGO_700}, stop:1 #312E81);
+                stop:0 {TEAL_600}, stop:1 {TEAL_700});
         }}
 
         QPushButton#PrimaryButton:pressed {{
@@ -130,8 +136,8 @@ class AppStyles:
         }}
 
         QPushButton#PrimaryButton:disabled {{
-            background: {GRAY_300};
-            color: {GRAY_100};
+            background: {SLATE_300};
+            color: {SLATE_100};
         }}
 
         #StatusLabel {{
@@ -141,6 +147,9 @@ class AppStyles:
         }}
     """
 
+    # ══════════════════════════════════════════════════════════════════════════
+    #  MAIN WINDOW STYLESHEET
+    # ══════════════════════════════════════════════════════════════════════════
     MAIN_WINDOW_STYLESHEET = f"""
         QMainWindow, QStackedWidget > QWidget {{
             background-color: {BG_BASE};
@@ -160,12 +169,13 @@ class AppStyles:
             font-size: 12px;
         }}
 
+        /* ── Side Menu ─────────────────────────────────────────────────────── */
         QWidget#SideMenu {{
             background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                stop:0 {GRAY_900}, stop:1 {GRAY_800});
+                stop:0 {SLATE_900}, stop:1 {SLATE_800});
             color: white;
             min-width: 240px;
-            border-right: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid rgba(255,255,255,0.06);
         }}
 
         #SideMenu QLabel {{
@@ -174,17 +184,17 @@ class AppStyles:
         }}
 
         #SideMenu #MenuLabel {{
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            color: {GRAY_400};
+            color: {SLATE_400};
             padding: 16px 20px 8px 20px;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }}
 
         #SideMenu QPushButton {{
             background: transparent;
-            color: white;
+            color: {SLATE_300};
             border: none;
             text-align: left;
             padding: 14px 20px;
@@ -192,57 +202,57 @@ class AppStyles:
             font-weight: 500;
             border-radius: 10px;
             margin: 2px 12px;
-            transition: all 0.15s ease;
         }}
 
         #SideMenu QPushButton:hover {{
-            background: rgba(255,255,255,0.09);
+            background: rgba(255,255,255,0.07);
+            color: white;
             padding-left: 24px;
         }}
 
         #SideMenu QPushButton:checked {{
             background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
-                stop:0 {INDIGO_600}, stop:1 {INDIGO_400});
+                stop:0 {TEAL_600}, stop:1 {TEAL_500});
             font-weight: 600;
             color: white;
         }}
 
         QFrame#Separator {{
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.10);
             height: 1px;
             margin: 10px 0;
         }}
 
-        /* Form fields – input, select, textarea */
+        /* ── Form fields ───────────────────────────────────────────────────── */
         QLineEdit, QComboBox, QDateEdit, QTextEdit {{
             background: white;
-            border: 1px solid {GRAY_200};
+            border: 1px solid {SLATE_200};
             border-radius: 8px;
             padding: 4px 6px;
             min-height: 26px;
             color: {TEXT_PRIMARY};
-            selection-background-color: {INDIGO_400};
+            selection-background-color: {TEAL_400};
         }}
 
         QLineEdit:focus, QComboBox:focus, QDateEdit:focus, QTextEdit:focus {{
-            border-color: {INDIGO_600};
+            border-color: {TEAL_500};
             box-shadow: {RING_FOCUS};
             outline: none;
         }}
 
         QLineEdit:read-only {{
-            background: {GRAY_100};
+            background: {SLATE_100};
             color: {TEXT_SECONDARY};
         }}
 
         QLineEdit::placeholder, QTextEdit::placeholder {{
-            color: {GRAY_400};
+            color: {SLATE_400};
         }}
 
-        /* Buttons – default, primary, success, danger, etc. */
+        /* ── Buttons ───────────────────────────────────────────────────────── */
         QPushButton {{
             background: white;
-            border: 1px solid {GRAY_200};
+            border: 1px solid {SLATE_200};
             border-radius: 8px;
             padding: 8px 16px;
             font-weight: 500;
@@ -250,50 +260,51 @@ class AppStyles:
         }}
 
         QPushButton:hover {{
-            background: {GRAY_100};
-            border-color: {GRAY_300};
+            background: {SLATE_100};
+            border-color: {SLATE_300};
         }}
 
         QPushButton:pressed {{
-            background: {GRAY_200};
+            background: {SLATE_200};
         }}
 
         QPushButton#PrimaryButton {{
-            background: {INDIGO_600};
+            background: {TEAL_500};
             color: white;
             border: none;
             font-weight: 600;
         }}
 
         QPushButton#PrimaryButton:hover {{
-            background: {INDIGO_700};
+            background: {TEAL_600};
         }}
 
-        QPushButton#SuccessButton  {{ background: {EMERALD_500}; color: white; border: none; font-weight: 600; }}
+        QPushButton#SuccessButton       {{ background: {EMERALD_500}; color: white; border: none; font-weight: 600; }}
         QPushButton#SuccessButton:hover {{ background: {EMERALD_600}; }}
 
-        QPushButton#DangerButton   {{ background: {RED_500};    color: white; border: none; font-weight: 600; }}
-        QPushButton#DangerButton:hover  {{ background: {RED_600};    }}
+        QPushButton#DangerButton        {{ background: {RED_500};     color: white; border: none; font-weight: 600; }}
+        QPushButton#DangerButton:hover  {{ background: {RED_600};     }}
 
-        QPushButton#WarningButton  {{ background: {AMBER_500}; color: {GRAY_900}; border: none; font-weight: 600; }}
-        QPushButton#WarningButton:hover {{ background: {AMBER_700}; }}
+        QPushButton#WarningButton       {{ background: {AMBER_500};   color: {SLATE_900}; border: none; font-weight: 600; }}
+        QPushButton#WarningButton:hover {{ background: {AMBER_700};   color: white; }}
 
-        QPushButton#InfoButton     {{ background: {BLUE_500};  color: white; border: none; font-weight: 600; }}
-        QPushButton#InfoButton:hover    {{ background: {BLUE_600};  }}
+        QPushButton#InfoButton          {{ background: {BLUE_500};    color: white; border: none; font-weight: 600; }}
+        QPushButton#InfoButton:hover    {{ background: {BLUE_600};    }}
 
-        /* Table – card-like with subtle stripes */
+        /* ── Table ─────────────────────────────────────────────────────────── */
         QTableWidget {{
             background: white;
-            border: 1px solid {GRAY_200};
+            border: 1px solid {SLATE_200};
             border-radius: 10px;
-            gridline-color: {GRAY_200};
-            alternate-background-color: {GRAY_50};
+            gridline-color: {SLATE_100};
+            alternate-background-color: {SLATE_50};
         }}
 
         QHeaderView::section {{
-            background: {GRAY_100};
+            background: {SLATE_800};
+            color: {SLATE_100};
             padding: 10px 8px;
-            border-bottom: 2px solid {GRAY_200};
+            border-bottom: 2px solid {TEAL_600};
             font-weight: 600;
             font-size: 12px;
             text-transform: uppercase;
@@ -301,17 +312,17 @@ class AppStyles:
         }}
 
         QTableWidget::item:selected {{
-            background: {INDIGO_400};
-            color: {GRAY_900};
+            background: {TEAL_400};
+            color: {SLATE_900};
         }}
 
         QTableWidget::item:hover {{
-            background: rgba(79,70,229,0.07);
+            background: rgba(20, 184, 166, 0.07);
         }}
 
-        /* Tabs */
+        /* ── Tabs ──────────────────────────────────────────────────────────── */
         QTabWidget::pane {{
-            border: 1px solid {GRAY_200};
+            border: 1px solid {SLATE_200};
             border-top: none;
             background: white;
             padding: 16px;
@@ -320,8 +331,8 @@ class AppStyles:
         }}
 
         QTabBar::tab {{
-            background: {GRAY_100};
-            border: 1px solid {GRAY_200};
+            background: {SLATE_100};
+            border: 1px solid {SLATE_200};
             border-bottom: none;
             padding: 12px 28px;
             margin-right: 2px;
@@ -332,21 +343,21 @@ class AppStyles:
         }}
 
         QTabBar::tab:hover {{
-            background: {GRAY_50};
+            background: {SLATE_50};
             color: {TEXT_PRIMARY};
         }}
 
         QTabBar::tab:selected {{
             background: white;
-            color: {INDIGO_600};
-            border-bottom: 3px solid {INDIGO_600};
+            color: {TEAL_600};
+            border-bottom: 3px solid {TEAL_500};
             font-weight: 600;
         }}
 
-        /* Cards & Groups */
+        /* ── Cards & Groups ────────────────────────────────────────────────── */
         QGroupBox, QFrame#ContentCard, QFrame#HeaderCard {{
             background: white;
-            border: 1px solid {GRAY_200};
+            border: 1px solid {SLATE_200};
             border-radius: 12px;
             padding: 16px;
             margin-top: 1.25rem;
@@ -357,30 +368,31 @@ class AppStyles:
             left: 12px;
             top: -10px;
             padding: 0 10px;
-            color: {INDIGO_600};
+            color: {TEAL_600};
             font-weight: 700;
             background: transparent;
         }}
 
-        /* Scrollbars – cleaner modern look */
+        /* ── Scrollbars ────────────────────────────────────────────────────── */
         QScrollBar:vertical {{
-            background: {GRAY_100};
+            background: {SLATE_100};
             width: 10px;
             border-radius: 5px;
             margin: 0;
         }}
 
         QScrollBar::handle:vertical {{
-            background: {GRAY_400};
+            background: {SLATE_400};
             border-radius: 5px;
             min-height: 40px;
         }}
 
         QScrollBar::handle:vertical:hover {{
-            background: {GRAY_500};
+            background: {SLATE_500};
         }}
-        
+
+        /* ── Card header accent ────────────────────────────────────────────── */
         QLabel#card_header {{
-            color: {CYAN_500};
+            color: {TEAL_500};
         }}
     """

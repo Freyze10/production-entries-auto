@@ -1,6 +1,6 @@
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit
-
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton
+import qtawesome as fa
 
 class ProductionRecords(QWidget):
     def __init__(self, username, user_role):
@@ -33,7 +33,12 @@ class ProductionRecords(QWidget):
         self.search_input.setPlaceholderText("Search Productions...")
         self.search_input.setFixedWidth(250)
 
+        search_btn = QPushButton("Search", objectName="PrimaryButton")
+        search_btn.setIcon(fa.icon('fa5s.search', color='white'))
+        # TODO: create search function for production
+
         header_layout.addWidget(self.search_input)
+        header_layout.addWidget(search_btn)
 
 
         main_layout.addWidget(header_card)
