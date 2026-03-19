@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar
 
 from css.styles import AppStyles
+from menu.production_records import ProductionRecords
 from workstation.workstation_details import _get_workstation_info
 from db.schema import create_table
 
@@ -52,6 +53,11 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(main_widget)
         create_table()
         self.set_status_bar()
+
+    def _init_pages(self):
+        self.production_records = ProductionRecords(self.username, self.user_role)
+
+        self.stacked_widget.addWidget(self.production_records)
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
