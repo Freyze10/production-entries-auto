@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1400, 720)
         self.setGeometry(100, 100, 1366, 768)
 
-        # self.workstation_info = _get_workstation_info()
+        self.set_status_bar()
         self.init_ui()
 
     def init_ui(self):
@@ -101,11 +101,11 @@ class MainWindow(QMainWindow):
         self.setStatusBar(self.status_bar)
         self.time_label = QLabel()
 
-        for w in [self.time_label,
+        for status in [self.time_label,
                   QLabel(f" PC: {self.workstation_info['h']}"),
                   QLabel(f" IP: {self.workstation_info['i']}"),
                   QLabel(f" MAC: {self.workstation_info['m']}")]:
-            self.status_bar.addPermanentWidget(w)
+            self.status_bar.addPermanentWidget(status)
 
         self.time_timer = QTimer(self, timeout=self.update_time)
         self.time_timer.start(1000)

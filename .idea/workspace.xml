@@ -252,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773886284583</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added time">
+      <option name="closed" value="true" />
+      <created>1773886450435</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1773886450435</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,6 +296,7 @@
     <MESSAGE value="modified margin spacing profile" />
     <MESSAGE value="added workstation details" />
     <MESSAGE value="configuring status bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="configuring status bar" />
+    <MESSAGE value="added time" />
+    <option name="LAST_COMMIT_MESSAGE" value="added time" />
   </component>
 </project>
