@@ -244,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773885663414</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="configuring status bar">
+      <option name="closed" value="true" />
+      <created>1773886284583</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1773886284583</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -279,6 +287,7 @@
     <MESSAGE value="change allignment of profile to left" />
     <MESSAGE value="modified margin spacing profile" />
     <MESSAGE value="added workstation details" />
-    <option name="LAST_COMMIT_MESSAGE" value="added workstation details" />
+    <MESSAGE value="configuring status bar" />
+    <option name="LAST_COMMIT_MESSAGE" value="configuring status bar" />
   </component>
 </project>

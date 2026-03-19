@@ -2,7 +2,7 @@ import sys
 from datetime import datetime
 
 import qtawesome as fa
-from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtCore import Qt, QSize, QTimer
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVBoxLayout, QLabel, QFrame, QPushButton, \
     QStackedWidget, QStatusBar
 
@@ -102,10 +102,17 @@ class MainWindow(QMainWindow):
         self.time_label = QLabel()
 
         for w in [self.time_label,
-                  QLabel(f" | PC: {self.workstation_info['h']}"),
-                  QLabel(f" | IP: {self.workstation_info['i']}"),
-                  QLabel(f" | MAC: {self.workstation_info['m']}")]:
+                  QLabel(f" PC: {self.workstation_info['h']}"),
+                  QLabel(f" IP: {self.workstation_info['i']}"),
+                  QLabel(f" MAC: {self.workstation_info['m']}")]:
             self.status_bar.addPermanentWidget(w)
+
+        self.time_timer = QTimer(self, timeout=self.update_time)
+        self.time_timer.start(1000)
+        self.update_time()
+
+    def update_time(self):
+        self.time_label.setText(f" {datetime.now().strftime('%b %d, %Y  %I:%M:%S %p')}")
 
 
 def main():
