@@ -218,8 +218,8 @@ class AppStyles:
             background: white;
             border: 1px solid {GRAY_200};
             border-radius: 8px;
-            padding: 8px 12px;
-            min-height: 32px;
+            padding: 4px 6px;
+            min-height: 26px;
             color: {TEXT_PRIMARY};
             selection-background-color: {INDIGO_400};
         }}
@@ -380,4 +380,7 @@ class AppStyles:
             background: {GRAY_500};
         }}
         
+        QLabel#card_header {{
+            color: {CYAN_500};
+        }}
     """

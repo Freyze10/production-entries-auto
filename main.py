@@ -53,6 +53,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(main_widget)
         create_table()
         self.set_status_bar()
+        self._init_pages()
 
     def _init_pages(self):
         self.production_records = ProductionRecords(self.username, self.user_role)
