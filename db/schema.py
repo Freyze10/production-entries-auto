@@ -30,15 +30,6 @@ def create_table():
     """)
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_formula_encode(
-            encode_id SERIAL PRIMARY KEY,
-            match_by VARCHAR(128),
-            encoded_by VARCHAR(128),
-            updated_by VARCHAR(128)
-        )
-    """)
-
-    cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula01(
             form_id SERIAL PRIMARY KEY,
             index_no VARCHAR(10),
@@ -54,13 +45,22 @@ def create_table():
             application VARCHAR(36),
             colormatch_no VARCHAR(8),
             colormatch_date date NOT NULL,
-            encode_id INT,
             notes VARCHAR(128),
             date_time TIMESTAMP,
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_used VARCHAR(5) DEFAULT 'False',
-            FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id),
-            FOREIGN KEY (encode_id) REFERENCES tbl_formula_encode(encode_id)
+            FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id)
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_formula_encode(
+            encode_id SERIAL PRIMARY KEY,
+            form_id INT,
+            match_by VARCHAR(128),
+            encoded_by VARCHAR(128),
+            updated_by VARCHAR(128),
+            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
         )
     """)
 
@@ -73,25 +73,6 @@ def create_table():
             concentration DECIMAL(6,6),
             is_deleted VARCHAR(6) DEFAULT 'False',
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
-        )
-    """)
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_production_encode(
-            encode_id SERIAL PRIMARY KEY,
-            prepared_by VARCHAR(128),
-            encoded_by VARCHAR(128),
-            encoded_on TIMESTAMP,
-            confirmation_encoded_on TIMESTAMP        
-            )
-    """)
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_production_quantity(
-            quantity_id SERIAL PRIMARY KEY,
-            quantity_req DECIMAL(10,6),
-            quantity_batch DECIMAL(10,6),
-            quantity_prod DECIMAL(10,6)     
         )
     """)
 
@@ -112,19 +93,38 @@ def create_table():
             colormatch_date date NOT NULL,
             mix_time VARCHAR(10),
             machine_no VARCHAR(32),
-            quantity_id INT,
             note VARCHAR(128),
             user_id INT,
-            encode_id INT,
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_printed VARCHAR(5) DEFAULT 'False',
             inventory_c_date DATE,
             form_type VARCHAR(16),
-            FOREIGN KEY (encode_id) REFERENCES tbl_production_encode(encode_id),
-            FOREIGN KEY (quantity_id) REFERENCES tbl_production_quantity(quantity_id),
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id),
             FOREIGN KEY (user_id) REFERENCES tbl_user(user_id),
             FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id)
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production_encode(
+            encode_id SERIAL PRIMARY KEY,
+            prod_id INT,
+            prepared_by VARCHAR(128),
+            encoded_by VARCHAR(128),
+            encoded_on TIMESTAMP,
+            confirmation_encoded_on TIMESTAMP,
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id),
+            )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production_quantity(
+            quantity_id SERIAL PRIMARY KEY,
+            prod_id INT,
+            quantity_req DECIMAL(10,6),
+            quantity_batch DECIMAL(10,6),
+            quantity_prod DECIMAL(10,6),
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
 

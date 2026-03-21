@@ -18,6 +18,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -29,21 +34,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "Python.styles.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "test-trigger"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
@@ -88,22 +93,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00009" summary="added auto entry dc button">
-      <option name="closed" value="true" />
-      <created>1773880101285</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1773880101285</updated>
-    </task>
-    <task id="LOCAL-00010" summary="addded logout button">
-      <option name="closed" value="true" />
-      <created>1773880363822</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1773880363822</updated>
     </task>
     <task id="LOCAL-00011" summary="created seperate file for styles">
       <option name="closed" value="true" />
@@ -481,7 +470,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774064583138</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="addded rownumber">
+      <option name="closed" value="true" />
+      <created>1774069950275</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1774069950275</updated>
+    </task>
+    <task id="LOCAL-00059" summary="creating auto count encode_id">
+      <option name="closed" value="true" />
+      <created>1774070266184</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1774070266184</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -496,8 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added status" />
-    <MESSAGE value="added database connection" />
     <MESSAGE value="added database" />
     <MESSAGE value="adding database structure" />
     <MESSAGE value="creating schema" />
@@ -521,7 +524,9 @@
     <MESSAGE value="fixed table structure" />
     <MESSAGE value="added legacy file" />
     <MESSAGE value="updated schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated schema" />
+    <MESSAGE value="addded rownumber" />
+    <MESSAGE value="creating auto count encode_id" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating auto count encode_id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
