@@ -441,7 +441,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774053390445</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="addded records layout">
+      <option name="closed" value="true" />
+      <created>1774053737662</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1774053737662</updated>
+    </task>
+    <task id="LOCAL-00046" summary="added table label">
+      <option name="closed" value="true" />
+      <created>1774053976046</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1774053976046</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -456,8 +472,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added red color for logout" />
-    <MESSAGE value="added system  label" />
     <MESSAGE value="added audit trail button" />
     <MESSAGE value="adding profile widget" />
     <MESSAGE value="changed color of user iscon" />
@@ -481,7 +495,9 @@
     <MESSAGE value="added header card" />
     <MESSAGE value="added table modle structure" />
     <MESSAGE value="adding table designm" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding table designm" />
+    <MESSAGE value="addded records layout" />
+    <MESSAGE value="added table label" />
+    <option name="LAST_COMMIT_MESSAGE" value="added table label" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

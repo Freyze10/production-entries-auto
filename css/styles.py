@@ -395,4 +395,7 @@ class AppStyles:
         QLabel#card_header {{
             color: {TEAL_500};
         }}
+        QLabel#table_label {{
+            color: {STEEL_400};
+        }}
     """
