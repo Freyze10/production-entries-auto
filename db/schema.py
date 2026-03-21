@@ -59,6 +59,7 @@ def create_table():
             date_time TIMESTAMP,
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_used VARCHAR(5) DEFAULT 'False',
+            FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id),
             FOREIGN KEY (encode_id) REFERENCES tbl_formula_encode(encode_id)
         )
     """)
