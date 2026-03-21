@@ -97,7 +97,7 @@ class SyncFormulaWorker(QObject):
 
             self.progress.emit(f"Phase 2/3: Found {len(primary_recs)} new valid records.")
             if not primary_recs: self.finished.emit(True,
-                                                    f"Sync Info: No new formula records (UID >) found to sync."); return
+                                                    f"Sync Info: No new formula records found to sync."); return
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
 
@@ -106,12 +106,13 @@ class SyncFormulaWorker(QObject):
                 with conn.begin():
                     conn.execute(text("""
                         INSERT INTO tbl_formula_encode (
-                            match_by, encoded_by, updated_by
+                            encode_id, match_by, encoded_by, updated_by
                         )
                         VALUES (
-                             :matched_by, :encoded_by, :dbf_updated_by
+                             :row_num, :matched_by, :encoded_by, :dbf_updated_by
                         )
                         ON CONFLICT (uid) DO UPDATE SET
+                            encoded_id = EXCLUDED.encoded_id,
                             matched_by = EXCLUDED.matched_by,
                             encoded_by = EXCLUDED.encoded_by,
                             dbf_updated_by = EXCLUDED.dbf_updated_by,
