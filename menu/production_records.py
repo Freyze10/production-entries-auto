@@ -51,6 +51,9 @@ class ProductionRecords(QWidget):
         records_layout.setContentsMargins(15, 0, 15, 0)
         records_layout.setSpacing(10)
 
+        self.table_records_label = QLabel("Poduction Records")
+        self.table_records_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
+
         # set of rows
         self.headers = ["Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
         self.rows = [["0000-00-00", "SMYPC", "BA2322E", "BLUE", "LOT434", "3.88906"],
