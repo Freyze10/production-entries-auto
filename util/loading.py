@@ -40,3 +40,9 @@ class LoadingDialog(QDialog):
         layout.addWidget(self.title_label);
         layout.addWidget(self.animation_label);
         layout.addWidget(self.progress_label)
+
+    def update_progress(self, text):
+        self.progress_label.setText(text)
+
+    def closeEvent(self, event):
+        event.accept()

@@ -94,14 +94,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00020" summary="change allignment of profile to left">
-      <option name="closed" value="true" />
-      <created>1773882869767</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1773882869767</updated>
-    </task>
     <task id="LOCAL-00021" summary="modified margin spacing profile">
       <option name="closed" value="true" />
       <created>1773884616914</created>
@@ -486,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774078897491</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="updated button desighn">
+      <option name="closed" value="true" />
+      <created>1774079181691</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1774079181691</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added header card" />
     <MESSAGE value="added table modle structure" />
     <MESSAGE value="adding table designm" />
     <MESSAGE value="addded records layout" />
@@ -526,14 +525,15 @@
     <MESSAGE value="edited table design" />
     <MESSAGE value="create controls layout" />
     <MESSAGE value="added context menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="added context menu" />
+    <MESSAGE value="updated button desighn" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated button desighn" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>446</line>
+          <line>445</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

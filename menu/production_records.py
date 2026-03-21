@@ -1,10 +1,12 @@
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QThread
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
     QHeaderView, QMenu
 import qtawesome as fa
 
+from db.legacy import Sync
 from table_model.model import TableModel
+from util.loading import LoadingDialog
 
 
 class ProductionRecords(QWidget):
@@ -126,7 +128,7 @@ class ProductionRecords(QWidget):
 
         self.btn_sync = QPushButton("Sync", objectName="SuccessButton")
         self.btn_sync.setIcon(fa.icon('fa5s.sync-alt', color='white'))
-
+        self.btn_sync.clicked.connect(self.run_production_sync())
         controls_layout.addWidget(self.btn_sync)
 
         self.btn_refresh = QPushButton("Refresh", objectName="TertiaryButton")
@@ -191,3 +193,24 @@ class ProductionRecords(QWidget):
     def view_manual_dc(self, index):
         row_id = self.get_row_id(index)
         print("Delete row ID:", row_id)
+
+
+    def run_production_sync(self):
+        thread = QThread()
+        worker = Sync()
+        worker.moveToThread(thread)
+
+        loading_dialog = LoadingDialog("Syncing Production Data", self)
+
+        worker.progress.connect(loading_dialog.update_progress)
+        worker.finished.connect(
+            lambda success, message: self.on_sync_finished(success, message, thread, loading_dialog)
+        )
+
+        thread.started.connect(worker.run)
+        worker.finished.connect(thread.quit)
+        thread.finished.connect(lambda: worker.deleteLater())
+        thread.finished.connect(thread.deleteLater)
+
+        thread.start()
+        loading_dialog.exec()
