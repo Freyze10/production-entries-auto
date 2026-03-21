@@ -113,7 +113,7 @@ def create_table():
             encoded_by VARCHAR(128),
             encoded_on TIMESTAMP,
             confirmation_encoded_on TIMESTAMP,
-            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id),
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
             )
     """)
 
