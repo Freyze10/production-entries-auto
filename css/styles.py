@@ -292,7 +292,7 @@ class AppStyles:
         QPushButton#InfoButton:hover    {{ background: {BLUE_600};    }}
 
         /* ── Table ─────────────────────────────────────────────────────────── */
-        QTableWidget {{
+        QTableView{{
             background: white;
             border: 1px solid {SLATE_200};
             border-radius: 10px;
@@ -301,9 +301,9 @@ class AppStyles:
         }}
 
         QHeaderView::section {{
-            background: {SLATE_800};
+            background: {TEXT_TERTIARY};
             color: {SLATE_100};
-            padding: 10px 8px;
+            padding: 6px 0px;
             border-bottom: 2px solid {TEAL_600};
             font-weight: 600;
             font-size: 12px;
@@ -311,12 +311,12 @@ class AppStyles:
             letter-spacing: 0.4px;
         }}
 
-        QTableWidget::item:selected {{
+        QTableView::item:selected {{
             background: {TEAL_400};
             color: {SLATE_900};
         }}
 
-        QTableWidget::item:hover {{
+        QTableView::item:hover {{
             background: rgba(20, 184, 166, 0.07);
         }}
 

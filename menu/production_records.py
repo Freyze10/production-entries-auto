@@ -57,20 +57,21 @@ class ProductionRecords(QWidget):
         records_layout.addWidget(self.table_records_label)
 
         # set of rows
-        self.headers = ["Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
-        self.rows = [["0000-00-00", "SMYPC", "BA2322E", "BLUE", "LOT434", "3.88906"],
-                     ["1100-00-00", "SMYPC", "BA2326E", "BLUE", "LOT432", "3.882906"]]
+        self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
+        self.rows = [["111","0000-00-00", "SMYPC", "BA2322E", "BLUE", "LOT434", "3.88906"],
+                     ["112","1100-00-00", "SMYPC", "BA2326E", "BLUE", "LOT432", "3.882906"]]
 
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
         self.table_records.setModel(self.table_model)
         self.table_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table_records.verticalHeader().setVisible(False)  # hide row numbers
 
         self.table_records.setAlternatingRowColors(True)
         self.table_records.setSortingEnabled(True)
 
         records_layout.addWidget(self.table_records, stretch=1)
-
+        print(type(self.table_records))
         main_layout.addWidget(records_card)
 
 

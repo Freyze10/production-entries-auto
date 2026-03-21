@@ -89,14 +89,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00002" summary="added imports">
-      <option name="closed" value="true" />
-      <created>1773804132748</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1773804132748</updated>
-    </task>
     <task id="LOCAL-00003" summary="created main layout">
       <option name="closed" value="true" />
       <created>1773823686310</created>
@@ -481,7 +473,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774055432884</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="added header">
+      <option name="closed" value="true" />
+      <created>1774055870486</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1774055870486</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -496,7 +496,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sample username and role" />
     <MESSAGE value="change allignment of profile to left" />
     <MESSAGE value="modified margin spacing profile" />
     <MESSAGE value="added workstation details" />
@@ -521,7 +520,8 @@
     <MESSAGE value="added color for table label" />
     <MESSAGE value="connected to the main layout" />
     <MESSAGE value="changed margins" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed margins" />
+    <MESSAGE value="added header" />
+    <option name="LAST_COMMIT_MESSAGE" value="added header" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
