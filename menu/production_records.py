@@ -1,6 +1,9 @@
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView
 import qtawesome as fa
+
+from table_model.model import TableModel
+
 
 class ProductionRecords(QWidget):
     def __init__(self, username, user_role):
@@ -41,4 +44,18 @@ class ProductionRecords(QWidget):
         header_layout.addWidget(search_btn)
 
         main_layout.addWidget(header_card)
+
+        self.headers = ["Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
+        self.rows = [["0000-00-00", "SMYPC", "BA2322E", "BLUE", "LOT434", "3.88906"],
+                     ["1100-00-00", "SMYPC", "BA2326E", "BLUE", "LOT432", "3.882906"]]
+
+        self.table_records = QTableView()
+        self.table_model = TableModel(self.rows, self.headers)
+        self.table_records.setModel(self.table_model)
+
+        self.table_records.setAlternatingRowColors(True)
+        self.table_records.setSortingEnabled(True)
+
+
+
 
