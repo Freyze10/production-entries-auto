@@ -55,29 +55,34 @@ class SyncFormulaWorker(QObject):
 
     def run(self):
         try:
+            with engine.connect() as conn:
+                max_uid = conn.execute(text("SELECT COALESCE(MAX(uid), 0) FROM formula_primary")).scalar()
             self.progress.emit(f"Phase 1/3: Reading local formula items...")
             items_by_uid = collections.defaultdict(list)
             new_uids = set()
             dbf_items = dbfread.DBF(FORMULA_ITEMS_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
             for item_rec in dbf_items:
                 uid = _to_int(item_rec.get('T_UID'))
+                if uid is None or uid <= max_uid: continue
                 new_uids.add(uid)
                 items_by_uid[uid].append({
                     "uid": uid, "seq": _to_int(item_rec.get('T_SEQ')),
                     "material_code": str(item_rec.get('T_MATCODE', '') or '').strip(),
                     "concentration": _to_float(item_rec.get('T_CON')),
-                    "update_by": str(item_rec.get('T_UPDATEBY', '') or '').strip(),
-                    "update_on_text": str(item_rec.get('T_UDATE', '') or '').strip()
+                    "is_deleted": str(item_rec.get('T_DELETED', '') or '').strip()
                 })
             self.progress.emit(f"Phase 1/3: Found {len(items_by_uid)} groups of new active items.")
 
             self.progress.emit("Phase 2/3: Reading Formula data...")
             primary_recs = []
             dbf_primary = dbfread.DBF(FORMULA_PRIMARY_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
-            for row_num, r in enumerate(dbf_primary, start=1):
+            for r in dbf_primary:
+                ### CHANGE: Skip T_DELETED records ###
+                # if bool(r.get('T_DELETED', False)):
+                #     continue
                 uid = _to_int(r.get('T_UID'))
+                if uid is None or uid <= max_uid: continue
                 primary_recs.append({
-                    "row_num" : row_num,
                     "formula_index": str(r.get('T_INDEX', '') or '').strip(), "uid": uid,
                     "formula_date": r.get('T_DATE'),
                     "customer": str(r.get('T_CUSTOMER', '') or '').strip(),
@@ -91,13 +96,14 @@ class SyncFormulaWorker(QObject):
                     "encoded_by": str(r.get('T_ENCODEB', '') or '').strip(),
                     "remarks": str(r.get('T_REM', '') or '').strip(),
                     "total_concentration": _to_float(r.get('T_TOTALCON')), "is_used": bool(r.get('T_USED')),
+                    "is_deleted": str(r.get('T_DELETED', '') or '').strip(),
                     "dbf_updated_by": str(r.get('T_UPDATEBY', '') or '').strip(),
                     "dbf_updated_on_text": str(r.get('T_UDATE', '') or '').strip(),
                 })
 
             self.progress.emit(f"Phase 2/3: Found {len(primary_recs)} new valid records.")
             if not primary_recs: self.finished.emit(True,
-                                                    f"Sync Info: No new formula records found to sync."); return
+                                                    f"Sync Info: No new formula records (UID > {max_uid}) found to sync."); return
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
 
@@ -106,13 +112,12 @@ class SyncFormulaWorker(QObject):
                 with conn.begin():
                     conn.execute(text("""
                         INSERT INTO tbl_formula_encode (
-                            encode_id, match_by, encoded_by, updated_by
+                            form_id, match_by, encoded_by, updated_by
                         )
                         VALUES (
-                             :row_num, :matched_by, :encoded_by, :dbf_updated_by
+                             :uid, :matched_by, :encoded_by, :dbf_updated_by
                         )
                         ON CONFLICT (uid) DO UPDATE SET
-                            encoded_id = EXCLUDED.encoded_id,
                             matched_by = EXCLUDED.matched_by,
                             encoded_by = EXCLUDED.encoded_by,
                             dbf_updated_by = EXCLUDED.dbf_updated_by,
@@ -121,14 +126,14 @@ class SyncFormulaWorker(QObject):
 
                     conn.execute(text("""
                         INSERT INTO tbl_formula01 (
-                            formula_index, uid, formula_date, customer, product_code, product_color, dosage, ld,
-                            mix_type, resin, application, cm_num, cm_date, matched_by, encoded_by, remarks,
-                            total_concentration, is_used, dbf_updated_by, dbf_updated_on_text, last_synced_on
+                            formula_id, index_no, date, customer_id, prod_code, prod_color, dosage, total_concentration, ld, 
+                            mix_time, resin, application, colormatch_num, colormatch_date, notes,
+                            datetime, is_deleted, is_used
                         )
                         VALUES (
-                            :formula_index, :uid, :formula_date, :customer, :product_code, :product_color, :dosage, :ld,
-                            :mix_type, :resin, :application, :cm_num, :cm_date, :matched_by, :encoded_by, :remarks,
-                            :total_concentration, :is_used, :dbf_updated_by, :dbf_updated_on_text, NOW()
+                            :uid, :formula_index, :formula_date, 1, :product_code, :product_color, :dosage, :total_concentration,
+                            :ld, :mix_type, :resin, :application, :cm_num, :cm_date, :remarks, :is_deleted
+                            :is_used, :dbf_updated_on_text
                         )
                         ON CONFLICT (uid) DO UPDATE SET
                             formula_index = EXCLUDED.formula_index,
@@ -143,19 +148,15 @@ class SyncFormulaWorker(QObject):
                             application = EXCLUDED.application,
                             cm_num = EXCLUDED.cm_num,
                             cm_date = EXCLUDED.cm_date,
-                            matched_by = EXCLUDED.matched_by,
-                            encoded_by = EXCLUDED.encoded_by,
                             remarks = EXCLUDED.remarks,
                             total_concentration = EXCLUDED.total_concentration,
                             is_used = EXCLUDED.is_used,
-                            dbf_updated_by = EXCLUDED.dbf_updated_by,
                             dbf_updated_on_text = EXCLUDED.dbf_updated_on_text,
-                            last_synced_on = NOW();
                     """), primary_recs)
                     if all_items_to_insert:
                         conn.execute(text("""
-                            INSERT INTO formula_items (uid, seq, material_code, concentration, update_by, update_on_text)
-                            VALUES (:uid, :seq, :material_code, :concentration, :update_by, :update_on_text);
+                            INSERT INTO tbl_formula02 (form_id, sequence_no, material_code, concentration, is_deleted)
+                            VALUES (:uid, :seq, :material_code, :concentration, :is_deleted);
                         """), all_items_to_insert)
             self.finished.emit(True,
                                f"Formula sync complete.\n{len(primary_recs)} new primary records and {len(all_items_to_insert)} items processed.")
