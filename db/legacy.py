@@ -138,7 +138,6 @@ class SyncFormulaWorker(QObject):
                         ON CONFLICT (uid) DO UPDATE SET
                             formula_index = EXCLUDED.formula_index,
                             formula_date = EXCLUDED.formula_date,
-                            customer = EXCLUDED.customer,
                             product_code = EXCLUDED.product_code,
                             product_color = EXCLUDED.product_color,
                             dosage = EXCLUDED.dosage,
@@ -150,6 +149,7 @@ class SyncFormulaWorker(QObject):
                             cm_date = EXCLUDED.cm_date,
                             remarks = EXCLUDED.remarks,
                             total_concentration = EXCLUDED.total_concentration,
+                            is_deleted = EXCLUDED.is_deleted,
                             is_used = EXCLUDED.is_used,
                             dbf_updated_on_text = EXCLUDED.dbf_updated_on_text,
                     """), primary_recs)

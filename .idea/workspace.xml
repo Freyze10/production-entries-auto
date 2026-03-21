@@ -94,14 +94,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00013" summary="added red color for logout">
-      <option name="closed" value="true" />
-      <created>1773881278979</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1773881278979</updated>
-    </task>
     <task id="LOCAL-00014" summary="added system  label">
       <option name="closed" value="true" />
       <created>1773881460824</created>
@@ -486,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774071169211</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="updating formula legacy">
+      <option name="closed" value="true" />
+      <created>1774072565299</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1774072565299</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="creating schema" />
     <MESSAGE value="finished production01" />
     <MESSAGE value="created schema" />
     <MESSAGE value="fixed conection" />
@@ -526,7 +525,8 @@
     <MESSAGE value="creating auto count encode_id" />
     <MESSAGE value="changed database schema: changed dependencies" />
     <MESSAGE value="deleted coma" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted coma" />
+    <MESSAGE value="updating formula legacy" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating formula legacy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
