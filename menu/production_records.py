@@ -45,6 +45,13 @@ class ProductionRecords(QWidget):
 
         main_layout.addWidget(header_card)
 
+        records_card = QFrame()
+        records_card.setObjectName("ContentCard")
+        records_layout = QVBoxLayout(records_card)
+        records_layout.setContentsMargins(15, 0, 15, 0)
+        records_layout.setSpacing(10)
+
+        # set of rows
         self.headers = ["Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
         self.rows = [["0000-00-00", "SMYPC", "BA2322E", "BLUE", "LOT434", "3.88906"],
                      ["1100-00-00", "SMYPC", "BA2326E", "BLUE", "LOT432", "3.882906"]]

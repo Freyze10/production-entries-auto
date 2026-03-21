@@ -433,7 +433,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774052434530</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="adding table designm">
+      <option name="closed" value="true" />
+      <created>1774053390445</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1774053390445</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -448,7 +456,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created seperate file for styles" />
     <MESSAGE value="added red color for logout" />
     <MESSAGE value="added system  label" />
     <MESSAGE value="added audit trail button" />
@@ -473,7 +480,8 @@
     <MESSAGE value="creating production records page" />
     <MESSAGE value="added header card" />
     <MESSAGE value="added table modle structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="added table modle structure" />
+    <MESSAGE value="adding table designm" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding table designm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
