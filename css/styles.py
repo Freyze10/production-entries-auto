@@ -305,12 +305,13 @@ class AppStyles:
             color: {SLATE_100};
             padding: 6px 0px;
             border-bottom: 2px solid {TEAL_600};
-            font-weight: 600;
+            font-weight: bold;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.4px;
+            height: 18px;
         }}
-
+        
         QTableView::item:selected {{
             background: {TEAL_400};
             color: {SLATE_900};
