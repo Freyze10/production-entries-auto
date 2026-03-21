@@ -89,14 +89,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00003" summary="created main layout">
-      <option name="closed" value="true" />
-      <created>1773823686310</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1773823686310</updated>
-    </task>
     <task id="LOCAL-00004" summary="changed main label">
       <option name="closed" value="true" />
       <created>1773823705921</created>
@@ -481,7 +473,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774055870486</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="added table">
+      <option name="closed" value="true" />
+      <created>1774061709081</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1774061709081</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -496,7 +496,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change allignment of profile to left" />
     <MESSAGE value="modified margin spacing profile" />
     <MESSAGE value="added workstation details" />
     <MESSAGE value="configuring status bar" />
@@ -521,7 +520,8 @@
     <MESSAGE value="connected to the main layout" />
     <MESSAGE value="changed margins" />
     <MESSAGE value="added header" />
-    <option name="LAST_COMMIT_MESSAGE" value="added header" />
+    <MESSAGE value="added table" />
+    <option name="LAST_COMMIT_MESSAGE" value="added table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -530,6 +530,11 @@
           <url>file://$PROJECT_DIR$/css/styles.py</url>
           <line>357</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/table_model/model.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
