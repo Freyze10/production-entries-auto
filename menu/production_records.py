@@ -66,7 +66,9 @@ class ProductionRecords(QWidget):
         self.table_records.setModel(self.table_model)
         self.table_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.table_records.verticalHeader().setVisible(False)  # hide row numbers
-
+        self.table_records.setColumnHidden(0, True)
+        self.table_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
+        self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(True)
         self.table_records.setSortingEnabled(True)
 
