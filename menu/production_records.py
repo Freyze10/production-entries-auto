@@ -18,13 +18,13 @@ class ProductionRecords(QWidget):
 
     def setup_ui(self):
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(15, 10, 15, 15)
-        main_layout.setSpacing(10)
+        main_layout.setContentsMargins(10, 8, 10, 8)
+        main_layout.setSpacing(8)
 
         header_card = QFrame()
         header_card.setObjectName("HeaderCard")
         header_layout = QHBoxLayout(header_card)
-        header_layout.setContentsMargins(6, 0, 6, 0)
+        header_layout.setContentsMargins(4, 0, 4, 0)
 
         self.selected_formulation_label = QLabel("INDEX REF. - FORMULATION NO.: No Selection", objectName="card_header")
         self.selected_formulation_label.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
@@ -48,10 +48,10 @@ class ProductionRecords(QWidget):
         records_card = QFrame()
         records_card.setObjectName("ContentCard")
         records_layout = QVBoxLayout(records_card)
-        records_layout.setContentsMargins(10, 0, 10, 0)
+        records_layout.setContentsMargins(8, 0, 8, 0)
         records_layout.setSpacing(10)
 
-        self.table_records_label = QLabel("Poduction Records")
+        self.table_records_label = QLabel("Poduction Records", objectName="table_label")
         self.table_records_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
         records_layout.addWidget(self.table_records_label)
 

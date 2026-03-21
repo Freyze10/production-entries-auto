@@ -396,6 +396,6 @@ class AppStyles:
             color: {TEAL_500};
         }}
         QLabel#table_label {{
-            color: {STEEL_400};
+            color: {TEXT_PRIMARY};
         }}
     """
