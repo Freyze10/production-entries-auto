@@ -73,8 +73,43 @@ class ProductionRecords(QWidget):
         self.table_records.setSortingEnabled(True)
 
         records_layout.addWidget(self.table_records, stretch=1)
-        print(type(self.table_records))
-        main_layout.addWidget(records_card)
+        main_layout.addWidget(records_card, stretch=3)
 
+        details_card = QFrame()
+        details_card.setObjectName("ContentCard")
+        details_card.setStyleSheet("""
+            QFrame#ContentCard {
+                background-color: #ffffff;
+                border: 1px solid #dee2e6;
+                border-radius: 6px;
+            }
+        """)
+        details_layout = QVBoxLayout(details_card)
+        details_layout.setContentsMargins(15, 0, 15, 0)
+        details_layout.setSpacing(10)
+
+        details_label = QLabel("Production Materials Details", objectName="table_label")
+        details_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
+        details_layout.addWidget(details_label)
+
+        self.details_header = ["prod_id", "Material Name", "Large Scale(kg)", "Small Scale(g)", "Total Weight(kg)"]
+        self.details_row = [
+            ["1", "O60", "5.750000", "0.000000", "184.000000"],
+            ["1", "v0", "6.750000", "5.000000", "43.000000"],
+            ["1", "C0", "7.750000", "6.000000", "45.000000"],
+            ["1", "D4", "9.750000", "2.000000", "389.000000"]
+        ]
+        self.details_table = QTableView()
+        self.details_table_model = TableModel(self.details_row, self.details_header)
+        self.details_table.setModel(self.details_table_model)
+        self.details_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.details_table.verticalHeader().setVisible(False)  # hide row numbers
+        self.details_table.setColumnHidden(0, True)
+        self.details_table.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
+        self.details_table.setSelectionMode(QTableView.SelectionMode.SingleSelection)
+        self.details_table.setAlternatingRowColors(True)
+
+        details_layout.addWidget(self.details_table, stretch=1)
+        main_layout.addWidget(details_card, stretch=3)
 
 
