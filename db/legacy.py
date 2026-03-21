@@ -9,6 +9,7 @@ from sqlalchemy import text, create_engine
 
 DB_CONFIG = {"host": "192.168.1.13", "port": 5432, "dbname": "db_formula", "user": "postgres", "password": "mbpi"}
 DBF_BASE_PATH = r'\\system-server\SYSTEM-NEW-OLD'
+CUSTOMER_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_customer01.dbf')
 FORMULA_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula01.dbf')
 FORMULA_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula02.dbf')
 PRODUCTION_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')
@@ -44,24 +45,22 @@ def _to_int(value, default=None):
         except (ValueError, TypeError):
             return default
 
+
+
+
+
 class SyncFormulaWorker(QObject):
     finished = pyqtSignal(bool, str)
     progress = pyqtSignal(str)
 
     def run(self):
         try:
-            with engine.connect() as conn:
-                max_uid = conn.execute(text("SELECT COALESCE(MAX(uid), 0) FROM formula_primary")).scalar()
             self.progress.emit(f"Phase 1/3: Reading local formula items...")
             items_by_uid = collections.defaultdict(list)
             new_uids = set()
             dbf_items = dbfread.DBF(FORMULA_ITEMS_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
             for item_rec in dbf_items:
-                ### CHANGE: Skip T_DELETED records ###
-                if bool(item_rec.get('T_DELETED', False)):
-                    continue
                 uid = _to_int(item_rec.get('T_UID'))
-                if uid is None or uid <= max_uid: continue
                 new_uids.add(uid)
                 items_by_uid[uid].append({
                     "uid": uid, "seq": _to_int(item_rec.get('T_SEQ')),
@@ -75,13 +74,10 @@ class SyncFormulaWorker(QObject):
             self.progress.emit("Phase 2/3: Reading Formula data...")
             primary_recs = []
             dbf_primary = dbfread.DBF(FORMULA_PRIMARY_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
-            for r in dbf_primary:
-                ### CHANGE: Skip T_DELETED records ###
-                if bool(r.get('T_DELETED', False)):
-                    continue
+            for row_num, r in enumerate(dbf_primary, start=1):
                 uid = _to_int(r.get('T_UID'))
-                if uid is None or uid <= max_uid: continue
                 primary_recs.append({
+                    "row_num" : row_num,
                     "formula_index": str(r.get('T_INDEX', '') or '').strip(), "uid": uid,
                     "formula_date": r.get('T_DATE'),
                     "customer": str(r.get('T_CUSTOMER', '') or '').strip(),
@@ -101,7 +97,7 @@ class SyncFormulaWorker(QObject):
 
             self.progress.emit(f"Phase 2/3: Found {len(primary_recs)} new valid records.")
             if not primary_recs: self.finished.emit(True,
-                                                    f"Sync Info: No new formula records (UID > {max_uid}) found to sync."); return
+                                                    f"Sync Info: No new formula records (UID >) found to sync."); return
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
 
@@ -109,7 +105,21 @@ class SyncFormulaWorker(QObject):
             with engine.connect() as conn:
                 with conn.begin():
                     conn.execute(text("""
-                        INSERT INTO formula_primary (
+                        INSERT INTO tbl_formula_encode (
+                            match_by, encoded_by, updated_by
+                        )
+                        VALUES (
+                             :matched_by, :encoded_by, :dbf_updated_by
+                        )
+                        ON CONFLICT (uid) DO UPDATE SET
+                            matched_by = EXCLUDED.matched_by,
+                            encoded_by = EXCLUDED.encoded_by,
+                            dbf_updated_by = EXCLUDED.dbf_updated_by,
+                    """), primary_recs)
+
+
+                    conn.execute(text("""
+                        INSERT INTO tbl_formula01 (
                             formula_index, uid, formula_date, customer, product_code, product_color, dosage, ld,
                             mix_type, resin, application, cm_num, cm_date, matched_by, encoded_by, remarks,
                             total_concentration, is_used, dbf_updated_by, dbf_updated_on_text, last_synced_on
