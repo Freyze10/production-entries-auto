@@ -112,4 +112,5 @@ class ProductionRecords(QWidget):
         details_layout.addWidget(self.details_table, stretch=1)
         main_layout.addWidget(details_card, stretch=3)
 
-
+        controls_layout =QHBoxLayout()
+        controls_layout.setSpacing(10)
