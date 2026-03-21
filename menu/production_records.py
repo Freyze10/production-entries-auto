@@ -24,7 +24,7 @@ class ProductionRecords(QWidget):
         header_card = QFrame()
         header_card.setObjectName("HeaderCard")
         header_layout = QHBoxLayout(header_card)
-        header_layout.setContentsMargins(10, 0, 10, 0)
+        header_layout.setContentsMargins(6, 0, 6, 0)
 
         self.selected_formulation_label = QLabel("INDEX REF. - FORMULATION NO.: No Selection", objectName="card_header")
         self.selected_formulation_label.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
@@ -53,6 +53,7 @@ class ProductionRecords(QWidget):
 
         self.table_records_label = QLabel("Poduction Records")
         self.table_records_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
+        records_layout.addWidget(self.table_records_label)
 
         # set of rows
         self.headers = ["Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
@@ -66,6 +67,9 @@ class ProductionRecords(QWidget):
         self.table_records.setAlternatingRowColors(True)
         self.table_records.setSortingEnabled(True)
 
+        records_layout.addWidget(self.table_records, stretch=1)
+
+        main_layout.addWidget(records_card)
 
 
 

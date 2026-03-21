@@ -457,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774053976046</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="added color for table label">
+      <option name="closed" value="true" />
+      <created>1774054092126</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1774054092126</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -472,7 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added audit trail button" />
     <MESSAGE value="adding profile widget" />
     <MESSAGE value="changed color of user iscon" />
     <MESSAGE value="sample username and role" />
@@ -497,7 +504,8 @@
     <MESSAGE value="adding table designm" />
     <MESSAGE value="addded records layout" />
     <MESSAGE value="added table label" />
-    <option name="LAST_COMMIT_MESSAGE" value="added table label" />
+    <MESSAGE value="added color for table label" />
+    <option name="LAST_COMMIT_MESSAGE" value="added color for table label" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
