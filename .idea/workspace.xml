@@ -94,14 +94,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00019" summary="sample username and role">
-      <option name="closed" value="true" />
-      <created>1773882658738</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1773882658738</updated>
-    </task>
     <task id="LOCAL-00020" summary="change allignment of profile to left">
       <option name="closed" value="true" />
       <created>1773882869767</created>
@@ -486,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774075190156</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="added context menu">
+      <option name="closed" value="true" />
+      <created>1774078897491</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1774078897491</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="creating production records page" />
     <MESSAGE value="added header card" />
     <MESSAGE value="added table modle structure" />
     <MESSAGE value="adding table designm" />
@@ -526,7 +525,8 @@
     <MESSAGE value="modifying styl;e" />
     <MESSAGE value="edited table design" />
     <MESSAGE value="create controls layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="create controls layout" />
+    <MESSAGE value="added context menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added context menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

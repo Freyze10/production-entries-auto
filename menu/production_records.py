@@ -133,13 +133,9 @@ class ProductionRecords(QWidget):
         self.btn_refresh.setIcon(fa.icon('fa5s.redo', color='white'))
         controls_layout.addWidget(self.btn_refresh)
 
-        self.btn_view = QPushButton("View - Auto", objectName="PrimaryButton")
+        self.btn_view = QPushButton("View", objectName="InfoButton")
         self.btn_view.setIcon(fa.icon('fa5s.eye', color='white'))
         controls_layout.addWidget(self.btn_view)
-
-        self.edit_btn = QPushButton("View - Manual", objectName="InfoButton")
-        self.edit_btn.setIcon(fa.icon('fa5.eye', color='white'))
-        controls_layout.addWidget(self.edit_btn)
 
         main_layout.addLayout(controls_layout)
 

@@ -343,8 +343,7 @@ class AppStyles:
         }}
 
         QPushButton#TertiaryButton:hover {{
-            background: {SLATE_300};
-            color: {SLATE_800};
+            background: {SLATE_700};
             border-color: {SLATE_400};
         }}
 
