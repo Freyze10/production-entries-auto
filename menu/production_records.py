@@ -1,6 +1,7 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
-    QHeaderView
+    QHeaderView, QMenu
 import qtawesome as fa
 
 from table_model.model import TableModel
@@ -71,6 +72,8 @@ class ProductionRecords(QWidget):
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(True)
         self.table_records.setSortingEnabled(True)
+        self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.table_records.customContextMenuRequested.connect(self.show_context_menu)
 
         records_layout.addWidget(self.table_records, stretch=1)
         main_layout.addWidget(records_card, stretch=3)
@@ -114,3 +117,81 @@ class ProductionRecords(QWidget):
 
         controls_layout =QHBoxLayout()
         controls_layout.setSpacing(10)
+
+        self.btn_cancelled = QPushButton("Cancelled", objectName="DangerButton")
+        self.btn_cancelled.setIcon(fa.icon('mdi.cancel', color='white'))
+        controls_layout.addWidget(self.btn_cancelled)
+
+        controls_layout.addStretch()
+
+        self.btn_sync = QPushButton("Sync", objectName="SuccessButton")
+        self.btn_sync.setIcon(fa.icon('fa5s.sync-alt', color='white'))
+
+        controls_layout.addWidget(self.btn_sync)
+
+        self.btn_refresh = QPushButton("Refresh", objectName="TertiaryButton")
+        self.btn_refresh.setIcon(fa.icon('fa5s.redo', color='white'))
+        controls_layout.addWidget(self.btn_refresh)
+
+        self.btn_view = QPushButton("View - Auto", objectName="PrimaryButton")
+        self.btn_view.setIcon(fa.icon('fa5s.eye', color='white'))
+        controls_layout.addWidget(self.btn_view)
+
+        self.edit_btn = QPushButton("View - Manual", objectName="InfoButton")
+        self.edit_btn.setIcon(fa.icon('fa5.eye', color='white'))
+        controls_layout.addWidget(self.edit_btn)
+
+        main_layout.addLayout(controls_layout)
+
+
+
+
+
+    def show_context_menu(self, position):
+        index = self.table_records.indexAt(position)
+
+        if not index.isValid():
+            return
+
+        self.table_records.selectRow(index.row())
+
+        menu = QMenu()
+
+        view_manual_mb = menu.addAction(fa.icon('msc.wrench-subaction'), " Manual - MB")
+        view_auto_mb = menu.addAction(fa.icon('ph.eye-light'), " Auto - MB")
+        view_manual_dc = menu.addAction(fa.icon('msc.tools'), " Manual - DC")
+        view_auto_dc = menu.addAction(fa.icon('mdi.monitor-eye'), " Auto - DC")
+
+        action = menu.exec(self.table_records.viewport().mapToGlobal(position))
+
+        if action == view_auto_mb:
+            self.view_auto(index)
+        elif action == view_manual_mb:
+            self.view_manual(index)
+        elif action == view_auto_dc:
+            self.view_auto_dc(index)
+        elif action == view_manual_dc:
+            self.view_manual_dc(index)
+
+    def get_row_id(self, index):
+        row = index.row()
+        return self.table_model.data(
+            self.table_model.index(row, 0),  # column 0 = hidden ID
+            Qt.ItemDataRole.DisplayRole
+        )
+
+    def view_auto(self, index):
+        row_id = self.get_row_id(index)
+        print("View row ID:", row_id)
+
+    def view_manual(self, index):
+        row_id = self.get_row_id(index)
+        print("Edit row ID:", row_id)
+
+    def view_auto_dc(self, index):
+        row_id = self.get_row_id(index)
+        print("Delete row ID:", row_id)
+
+    def view_manual_dc(self, index):
+        row_id = self.get_row_id(index)
+        print("Delete row ID:", row_id)

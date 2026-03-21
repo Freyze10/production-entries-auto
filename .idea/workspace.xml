@@ -94,22 +94,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00017" summary="adding profile widget">
-      <option name="closed" value="true" />
-      <created>1773882293031</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1773882293031</updated>
-    </task>
-    <task id="LOCAL-00018" summary="changed color of user iscon">
-      <option name="closed" value="true" />
-      <created>1773882549670</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1773882549670</updated>
-    </task>
     <task id="LOCAL-00019" summary="sample username and role">
       <option name="closed" value="true" />
       <created>1773882658738</created>
@@ -486,7 +470,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774074692673</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="edited table design">
+      <option name="closed" value="true" />
+      <created>1774074980922</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1774074980922</updated>
+    </task>
+    <task id="LOCAL-00067" summary="create controls layout">
+      <option name="closed" value="true" />
+      <created>1774075190156</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1774075190156</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,8 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debugged db error" />
-    <MESSAGE value="added variable for pages" />
     <MESSAGE value="creating production records page" />
     <MESSAGE value="added header card" />
     <MESSAGE value="added table modle structure" />
@@ -526,14 +524,16 @@
     <MESSAGE value="added loading dialogue" />
     <MESSAGE value="added details table" />
     <MESSAGE value="modifying styl;e" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifying styl;e" />
+    <MESSAGE value="edited table design" />
+    <MESSAGE value="create controls layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="create controls layout" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>364</line>
+          <line>446</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

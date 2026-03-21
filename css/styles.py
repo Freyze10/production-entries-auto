@@ -24,7 +24,7 @@ class AppStyles:
     BLUE_500   = "#3B82F6"   # info
     BLUE_600   = "#2563EB"
 
-    # ── Slate neutrals (replaces gray) ────────────────────────────────────────
+    # ── Slate neutrals ────────────────────────────────────────────────────────
     SLATE_50  = "#F8FAFC"
     SLATE_100 = "#F1F5F9"
     SLATE_200 = "#E2E8F0"
@@ -249,7 +249,7 @@ class AppStyles:
             color: {SLATE_400};
         }}
 
-        /* ── Buttons ───────────────────────────────────────────────────────── */
+        /* ── Base button reset ─────────────────────────────────────────────── */
         QPushButton {{
             background: white;
             border: 1px solid {SLATE_200};
@@ -268,6 +268,17 @@ class AppStyles:
             background: {SLATE_200};
         }}
 
+        QPushButton:disabled {{
+            background: {SLATE_100};
+            color: {SLATE_400};
+            border-color: {SLATE_200};
+        }}
+
+        /* ┌──────────────────────────────────────────────────────────────────┐
+           │  PRIMARY BUTTON                                                  │
+           │  Solid teal — highest emphasis                                  │
+           │  Use for: Save, Submit, Confirm, Add New                        │
+           └──────────────────────────────────────────────────────────────────┘ */
         QPushButton#PrimaryButton {{
             background: {TEAL_500};
             color: white;
@@ -279,6 +290,77 @@ class AppStyles:
             background: {TEAL_600};
         }}
 
+        QPushButton#PrimaryButton:pressed {{
+            background: {TEAL_700};
+        }}
+
+        QPushButton#PrimaryButton:disabled {{
+            background: {SLATE_300};
+            color: {SLATE_50};
+            border: none;
+        }}
+
+        /* ┌──────────────────────────────────────────────────────────────────┐
+           │  SECONDARY BUTTON                                                │
+           │  Teal-tinted slate fill + teal border — medium emphasis         │
+           │  Use for: Edit, View Details, Export, Back                      │
+           └──────────────────────────────────────────────────────────────────┘ */
+        QPushButton#SecondaryButton {{
+            background: {TEAL_700};
+            color: white;
+            border: 1.5px solid {TEAL_600};
+            font-weight: 600;
+        }}
+
+        QPushButton#SecondaryButton:hover {{
+            background: {TEAL_600};
+            border-color: {TEAL_500};
+            color: white;
+        }}
+
+        QPushButton#SecondaryButton:pressed {{
+            background: {TEAL_700};
+            border-color: {TEAL_600};
+            color: white;
+        }}
+
+        QPushButton#SecondaryButton:disabled {{
+            background: {SLATE_200};
+            color: {SLATE_400};
+            border-color: {SLATE_300};
+        }}
+
+        /* ┌──────────────────────────────────────────────────────────────────┐
+           │  TERTIARY BUTTON                                                 │
+           │  Solid slate fill — lowest emphasis                             │
+           │  Use for: Cancel, Reset, Clear, Close                           │
+           └──────────────────────────────────────────────────────────────────┘ */
+        QPushButton#TertiaryButton {{
+            background: {SLATE_600};
+            color: white;
+            border: 1px solid {SLATE_300};
+            font-weight: 500;
+        }}
+
+        QPushButton#TertiaryButton:hover {{
+            background: {SLATE_300};
+            color: {SLATE_800};
+            border-color: {SLATE_400};
+        }}
+
+        QPushButton#TertiaryButton:pressed {{
+            background: {SLATE_400};
+            color: {SLATE_900};
+            border-color: {SLATE_500};
+        }}
+
+        QPushButton#TertiaryButton:disabled {{
+            background: {SLATE_100};
+            color: {SLATE_300};
+            border-color: {SLATE_200};
+        }}
+
+        /* ── Semantic buttons ──────────────────────────────────────────────── */
         QPushButton#SuccessButton       {{ background: {EMERALD_500}; color: white; border: none; font-weight: 600; }}
         QPushButton#SuccessButton:hover {{ background: {EMERALD_600}; }}
 
@@ -292,7 +374,7 @@ class AppStyles:
         QPushButton#InfoButton:hover    {{ background: {BLUE_600};    }}
 
         /* ── Table ─────────────────────────────────────────────────────────── */
-        QTableView{{
+        QTableView {{
             background: white;
             border: 1px solid {SLATE_200};
             border-radius: 10px;
@@ -312,12 +394,12 @@ class AppStyles:
             letter-spacing: 0.4px;
             height: 18px;
         }}
-        
+
         QTableView::item {{
             padding-left: 5px;
             border: none;
         }}
-        
+
         QTableView::item:selected {{
             background: {TEAL_400};
             color: {SLATE_900};
@@ -402,6 +484,7 @@ class AppStyles:
         QLabel#card_header {{
             color: {TEAL_500};
         }}
+
         QLabel#table_label {{
             color: {TEXT_PRIMARY};
         }}
