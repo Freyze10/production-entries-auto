@@ -40,5 +40,5 @@ class ProductionRecords(QWidget):
         header_layout.addWidget(self.search_input)
         header_layout.addWidget(search_btn)
 
-
         main_layout.addWidget(header_card)
+
