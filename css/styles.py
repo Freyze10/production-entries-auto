@@ -297,7 +297,8 @@ class AppStyles:
             border: 1px solid {SLATE_200};
             border-radius: 10px;
             gridline-color: {SLATE_100};
-            alternate-background-color: {SLATE_50};
+            alternate-background-color: {SLATE_200};
+            font-size: 13px;
         }}
 
         QHeaderView::section {{
@@ -305,11 +306,16 @@ class AppStyles:
             color: {SLATE_100};
             padding: 6px 0px;
             border-bottom: 2px solid {TEAL_600};
-            font-weight: bold;
-            font-size: 12px;
+            font-weight: 600;
+            font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.4px;
             height: 18px;
+        }}
+        
+        QTableView::item {{
+            padding-left: 5px;
+            border: none;
         }}
         
         QTableView::item:selected {{

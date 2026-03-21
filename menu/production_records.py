@@ -50,7 +50,7 @@ class ProductionRecords(QWidget):
         records_card.setObjectName("ContentCard")
         records_layout = QVBoxLayout(records_card)
         records_layout.setContentsMargins(8, 0, 8, 0)
-        records_layout.setSpacing(10)
+        records_layout.setSpacing(8)
 
         self.table_records_label = QLabel("Poduction Records", objectName="table_label")
         self.table_records_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
@@ -86,7 +86,7 @@ class ProductionRecords(QWidget):
         """)
         details_layout = QVBoxLayout(details_card)
         details_layout.setContentsMargins(15, 0, 15, 0)
-        details_layout.setSpacing(10)
+        details_layout.setSpacing(8)
 
         details_label = QLabel("Production Materials Details", objectName="table_label")
         details_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
