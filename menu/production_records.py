@@ -48,7 +48,7 @@ class ProductionRecords(QWidget):
         records_card = QFrame()
         records_card.setObjectName("ContentCard")
         records_layout = QVBoxLayout(records_card)
-        records_layout.setContentsMargins(15, 0, 15, 0)
+        records_layout.setContentsMargins(10, 0, 10, 0)
         records_layout.setSpacing(10)
 
         self.table_records_label = QLabel("Poduction Records")
