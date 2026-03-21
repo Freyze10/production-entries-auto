@@ -1,5 +1,6 @@
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
+    QHeaderView
 import qtawesome as fa
 
 from table_model.model import TableModel
@@ -63,6 +64,7 @@ class ProductionRecords(QWidget):
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
         self.table_records.setModel(self.table_model)
+        self.table_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         self.table_records.setAlternatingRowColors(True)
         self.table_records.setSortingEnabled(True)
