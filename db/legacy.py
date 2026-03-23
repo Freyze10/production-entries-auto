@@ -53,8 +53,8 @@ class Sync(QObject):
 
     def run(self):
         try:
-            # with engine.connect() as conn:
-            #     max_uid = conn.execute(text("SELECT COALESCE(MAX(uid), 0) FROM formula_primary")).scalar()
+            with engine.connect() as conn:
+                max_form_id = conn.execute(text("SELECT COALESCE(MAX(form_id), 0) FROM tbl_formula01")).scalar() or 0
             self.progress.emit(f"Phase 1/3: Reading local formula items...")
             items_by_uid = collections.defaultdict(list)
             new_uids = set()
@@ -62,7 +62,7 @@ class Sync(QObject):
             for item_rec in dbf_items:
                 uid = _to_int(item_rec.get('T_UID'))
                 # if uid is None or uid <= max_uid: continue
-                if uid is None:
+                if uid is None or uid <= max_form_id:
                     continue
                 new_uids.add(uid)
                 items_by_uid[uid].append({
@@ -78,7 +78,7 @@ class Sync(QObject):
             dbf_primary = dbfread.DBF(FORMULA_PRIMARY_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
             for r in dbf_primary:
                 uid = _to_int(r.get('T_UID'))
-                if uid is None:
+                if uid is None or uid <= max_form_id:
                     continue
                 # if uid is None or uid <= max_uid: continue
                 dbf_updated_on_text = str(r.get('T_UDATE', '') or '').strip()
@@ -107,8 +107,8 @@ class Sync(QObject):
                 })
 
             self.progress.emit(f"Phase 2/3: Found {len(primary_recs)} new valid records.")
-            if not primary_recs: self.finished.emit(True,
-                                                    f"Sync Info: No new formula records found to sync."); return
+            if not primary_recs:
+                self.finished.emit(True, f"Sync Info: No new formula records found to sync."); return
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
 
