@@ -94,14 +94,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00024" summary="configuring status bar">
-      <option name="closed" value="true" />
-      <created>1773886284583</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1773886284583</updated>
-    </task>
     <task id="LOCAL-00025" summary="added time">
       <option name="closed" value="true" />
       <created>1773886450435</created>
@@ -486,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774226685201</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="change schema">
+      <option name="closed" value="true" />
+      <created>1774228214414</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1774228214415</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="addded records layout" />
     <MESSAGE value="added table label" />
     <MESSAGE value="added color for table label" />
     <MESSAGE value="connected to the main layout" />
@@ -526,7 +525,8 @@
     <MESSAGE value="updated button desighn" />
     <MESSAGE value="update sync position" />
     <MESSAGE value="updated onclflict sync" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated onclflict sync" />
+    <MESSAGE value="change schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="change schema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
