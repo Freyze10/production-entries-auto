@@ -83,8 +83,10 @@ class Sync(QObject):
                 uid = _to_int(r.get('T_UID'))
                 # if uid is None or uid <= max_uid: continue
                 dbf_updated_on_text = str(r.get('T_UDATE', '') or '').strip()
+                cm_date = str(r.get('T_CMDATE', '') or '').strip()
                 # If empty → set to None
                 dbf_updated_on = None if not dbf_updated_on_text else dbf_updated_on_text
+                colormatch_date = None if not cm_date else cm_date
                 primary_recs.append({
                     "formula_index": str(r.get('T_INDEX', '') or '').strip(), "uid": uid,
                     "formula_date": r.get('T_DATE'),
@@ -94,7 +96,8 @@ class Sync(QObject):
                     "ld": _to_float(r.get('T_LD')),
                     "mix_type": str(r.get('T_MIX', '') or '').strip(), "resin": str(r.get('T_RESIN', '') or '').strip(),
                     "application": str(r.get('T_APP', '') or '').strip(),
-                    "cm_num": str(r.get('T_CMNUM', '') or '').strip(), "cm_date": r.get('T_CMDATE'),
+                    "cm_num": str(r.get('T_CMNUM', '') or '').strip(),
+                    "cm_date": colormatch_date,
                     "matched_by": str(r.get('T_MATCHBY', '') or '').strip(),
                     "encoded_by": str(r.get('T_ENCODEB', '') or '').strip(),
                     "remarks": str(r.get('T_REM', '') or '').strip(),

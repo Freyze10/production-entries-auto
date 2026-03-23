@@ -44,7 +44,7 @@ def create_table():
             resin VARCHAR(36),
             application VARCHAR(36),
             colormatch_no VARCHAR(8),
-            colormatch_date date NOT NULL,
+            colormatch_date date,
             notes VARCHAR(128),
             date_time TIMESTAMP,
             is_deleted VARCHAR(5) DEFAULT 'False',
