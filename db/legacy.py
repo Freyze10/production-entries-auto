@@ -126,21 +126,21 @@ class Sync(QObject):
                         )
                         ON CONFLICT (form_id) DO UPDATE SET
                             index_no = EXCLUDED.index_no,
-                            formula_date = EXCLUDED.formula_date,
-                            product_code = EXCLUDED.product_code,
-                            product_color = EXCLUDED.product_color,
+                            date = EXCLUDED.date,
+                            prod_code = EXCLUDED.prod_code,
+                            prod_color = EXCLUDED.prod_color,
                             dosage = EXCLUDED.dosage,
                             ld = EXCLUDED.ld,
-                            mix_type = EXCLUDED.mix_type,
+                            mix_time = EXCLUDED.mix_time,
                             resin = EXCLUDED.resin,
                             application = EXCLUDED.application,
-                            cm_num = EXCLUDED.cm_num,
-                            cm_date = EXCLUDED.cm_date,
-                            remarks = EXCLUDED.remarks,
+                            colormatch_no = EXCLUDED.colormatch_no,
+                            colormatch_date = EXCLUDED.colormatch_date,
+                            notes = EXCLUDED.notes,
                             total_concentration = EXCLUDED.total_concentration,
                             is_deleted = EXCLUDED.is_deleted,
                             is_used = EXCLUDED.is_used,
-                            dbf_updated_on_text = EXCLUDED.dbf_updated_on_text
+                            date_time = EXCLUDED.date_time
                     """), primary_recs)
 
                     conn.execute(text("""
