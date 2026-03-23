@@ -55,53 +55,6 @@ class Sync(QObject):
 
     def run(self):
         try:
-            with engine.begin() as conn:
-                self.progress.emit("Reading customer data...")
-
-                dbf_customer = dbfread.DBF(CUSTOMER_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
-
-                primary_cust = []
-
-                for r in dbf_customer:
-                    if bool(r.get('T_DELETED', False)):
-                        continue
-
-                    cust_id_str = str(r.get('T_CUSTID', '') or '').strip()
-
-                    try:
-                        cust_id = int(cust_id_str)
-                    except:
-                        print(f"Invalid ID: {cust_id_str}")
-                        continue
-
-                    customer_name = str(r.get('T_CUSTOMER', '') or '').strip()
-
-                    primary_cust.append({
-                        "customer_id": cust_id,
-                        "customer_name": customer_name
-                    })
-
-                if not primary_cust:
-                    self.finished.emit(True, "No records found.")
-                    return
-
-                self.progress.emit(f"Syncing {len(primary_cust)} records...")
-
-                conn.execute(text("""
-                    INSERT INTO tbl_customer (customer_id, customer_name)
-                    VALUES (:customer_id, :customer_name)
-                    ON CONFLICT (customer_id) DO UPDATE SET
-                        customer_name = EXCLUDED.customer_name
-                """), primary_cust)
-        except dbfread.DBFNotFound as e:
-            self.finished.emit(False, f"File Not Found: A required Customer DBF file is missing.\nDetails: {e}")
-        except Exception as e:
-            trace_info = traceback.format_exc();
-            print(f"CUSTOMER SYNC CRITICAL ERROR: {e}\n{trace_info}")
-            self.finished.emit(False, f"An unexpected error occurred during customer sync:\n{e}")
-
-
-        try:
             # with engine.connect() as conn:
             #     max_uid = conn.execute(text("SELECT COALESCE(MAX(uid), 0) FROM formula_primary")).scalar()
             self.progress.emit(f"Phase 1/3: Reading local formula items...")
