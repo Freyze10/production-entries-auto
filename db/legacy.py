@@ -160,8 +160,9 @@ class Sync(QObject):
                             INSERT INTO tbl_formula02 (form_id, sequence_no, material_code, concentration, is_deleted)
                             VALUES (:uid, :seq, :material_code, :concentration, :is_deleted);
                         """), all_items_to_insert)
+
             self.finished.emit(True,
-                               f"Formula sync complete.\n{len(primary_recs)} new primary records and {len(all_items_to_insert)} items processed.")
+                               f"Production sync complete.\n new records items processed.")
         except dbfread.DBFNotFound as e:
             self.finished.emit(False, f"File Not Found: A required formula DBF file is missing.\nDetails: {e}")
         except Exception as e:

@@ -114,7 +114,7 @@ def create_table():
             prod_id INT,
             quantity_req DECIMAL(12,6),
             quantity_batch DECIMAL(12,6),
-            quantity_prod DECIMAL(12,6),
+            quantity_prod DECIMAL(12u,6),
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
