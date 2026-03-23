@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt, QThread
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
-    QHeaderView, QMenu
+    QHeaderView, QMenu, QMessageBox
 import qtawesome as fa
 
 from db.legacy import Sync
@@ -214,3 +214,20 @@ class ProductionRecords(QWidget):
 
         thread.start()
         loading_dialog.exec()
+
+    def on_sync_finished(self, success, message, thread, loading_dialog, sync_type=None):
+        try:
+            if loading_dialog.isVisible():
+                loading_dialog.accept()
+
+            if success:
+                QMessageBox.information(self, "Sync Complete", message)
+            else:
+                QMessageBox.critical(self, "Sync Error", message)
+                self.formulation_id_input.setText("ERROR")
+                self.formulation_id_input.setStyleSheet("background-color: #f8d7da;")
+                self.formulation_id_input_cm.setText("ERROR")
+                self.formulation_id_input_cm.setStyleSheet("background-color: #f8d7da;")
+
+        except Exception as e:
+            print(f"Error in on_sync_finished: {e}")

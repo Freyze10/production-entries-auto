@@ -47,8 +47,6 @@ def _to_int(value, default=None):
 
 
 
-
-
 class Sync(QObject):
     finished = pyqtSignal(bool, str)
     progress = pyqtSignal(str)

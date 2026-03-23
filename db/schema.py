@@ -30,9 +30,9 @@ def create_table():
             customer VARCHAR(62),
             prod_code VARCHAR(22) NOT NULL,
             prod_color VARCHAR(62),
-            dosage DECIMAL(6,6),
-            total_concentration DECIMAL(6,6),
-            ld DECIMAL(6,6),
+            dosage DECIMAL(12,6),
+            total_concentration DECIMAL(12,6),
+            ld DECIMAL(12,6),
             mix_time VARCHAR(22),
             resin VARCHAR(36),
             application VARCHAR(36),
@@ -62,7 +62,7 @@ def create_table():
             form_id INT,
             sequence_no INT,
             material_code VARCHAR(32),
-            concentration DECIMAL(6,6),
+            concentration DECIMAL(12,6),
             is_deleted VARCHAR(6) DEFAULT 'False',
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
         )
@@ -77,8 +77,8 @@ def create_table():
             index_no VARCHAR(32),
             prod_code VARCHAR(12) NOT NULL,
             prod_color VARCHAR(62),
-            dosage DECIMAL(6,6),
-            ld DECIMAL(6,6) NOT NULL,
+            dosage DECIMAL(12,6),
+            ld DECIMAL(12,6) NOT NULL,
             lot_no VARCHAR(128),
             order_no INT,
             colormatch_no VARCHAR(8),
@@ -112,9 +112,9 @@ def create_table():
         CREATE TABLE IF NOT EXISTS tbl_production_quantity(
             quantity_id SERIAL PRIMARY KEY,
             prod_id INT,
-            quantity_req DECIMAL(10,6),
-            quantity_batch DECIMAL(10,6),
-            quantity_prod DECIMAL(10,6),
+            quantity_req DECIMAL(12,6),
+            quantity_batch DECIMAL(12,6),
+            quantity_prod DECIMAL(12,6),
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
@@ -125,14 +125,14 @@ def create_table():
             prod_id INT,
             sequence_no INT,
             material_code VARCHAR(32),
-            prod_a DECIMAL(6,6),
-            prod_b DECIMAL(6,6),
-            lab_a DECIMAL(6,6),
-            lab_b DECIMAL(6,6),
-            total_weight DECIMAL(6,6),
+            prod_a DECIMAL(12,6),
+            prod_b DECIMAL(12,6),
+            lab_a DECIMAL(12,6),
+            lab_b DECIMAL(12,6),
+            total_weight DECIMAL(12,6),
             is_deleted VARCHAR(5) DEFAULT 'False',
-            loss DECIMAL(6,6),
-            cons DECIMAL(6,6),
+            loss DECIMAL(12,6),
+            cons DECIMAL(12,6),
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
