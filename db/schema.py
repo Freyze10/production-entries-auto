@@ -23,18 +23,11 @@ def create_table():
     """)
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_customer(
-            customer_id SERIAL PRIMARY KEY,
-            customer_name VARCHAR(128)
-        )
-    """)
-
-    cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula01(
             form_id SERIAL PRIMARY KEY,
             index_no VARCHAR(10),
             date DATE,
-            customer_id INT NOT NULL,
+            customer VARCHAR(62),
             prod_code VARCHAR(12) NOT NULL,
             prod_color VARCHAR(62),
             dosage DECIMAL(6,2) NOT NULL,
@@ -48,8 +41,7 @@ def create_table():
             notes VARCHAR(128),
             date_time VARCHAR(32),
             is_deleted VARCHAR(5) DEFAULT 'False',
-            is_used VARCHAR(5) DEFAULT 'False',
-            FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id)
+            is_used VARCHAR(5) DEFAULT 'False'
         )
     """)
 
@@ -80,7 +72,7 @@ def create_table():
         CREATE TABLE IF NOT EXISTS tbl_production01(
             prod_id SERIAL PRIMARY KEY,
             prod_date DATE,
-            customer_id INT,
+            customer VARCHAR(62),
             form_id INT,
             index_no VARCHAR(32),
             prod_code VARCHAR(12) NOT NULL,
@@ -100,8 +92,7 @@ def create_table():
             inventory_c_date DATE,
             form_type VARCHAR(16),
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id),
-            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id),
-            FOREIGN KEY (customer_id) REFERENCES tbl_customer(customer_id)
+            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
         )
     """)
 
