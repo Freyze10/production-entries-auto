@@ -55,21 +55,35 @@ class Sync(QObject):
 
     def run(self):
         try:
-            # with engine.connect() as conn:
-            #     max_uid = conn.execute(text("SELECT COALESCE(MAX(uid), 0) FROM formula_primary")).scalar()
+            with engine.connect() as conn:
+                max_cust_id = conn.execute(text("""
+                    SELECT COALESCE(MAX(customer_id::integer), 0)
+                    FROM tbl_customer
+                """)).scalar()
             self.progress.emit(f"Phase 1/3: Reading local customer items...")
             self.progress.emit("Phase 2/3: Reading Customer data...")
             primary_cust = []
             dbf_customer = dbfread.DBF(CUSTOMER_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
+
+            new_count = 0
             for r in dbf_customer:
                 ### CHANGE: Skip T_DELETED records ###
                 if bool(r.get('T_DELETED', False)):
                     continue
-                uid = _to_int(r.get('T_CUSTID'))
-                primary_cust.append({
-                    "customer_id": str(r.get('T_CUSTID', '') or '').strip(),
-                    "customer_id": str(r.get('T_CUSTOMER', '') or '').strip()
-                })
+                cust_id_str = str(r.get('T_CUSTID', '') or '').strip()
+                try:
+                    cust_id = int(cust_id_str)
+                except (ValueError, TypeError):
+                    continue
+
+                customer_name = str(r.get('T_CUSTOMER', '') or '').strip()
+
+                if cust_id > max_cust_id:
+                    primary_cust.append({
+                        "customer_id": cust_id_str,  # keep as string if column is text
+                        "customer_name": customer_name
+                    })
+                    new_count += 1
 
             self.progress.emit(f"Phase 2/3: Found {len(primary_cust)} new valid records.")
             if not primary_cust: self.finished.emit(True,
@@ -78,13 +92,15 @@ class Sync(QObject):
             self.progress.emit("Phase 3/3: Syncing Data...")
             with engine.connect() as conn:
                 with conn.begin():
+                    conn.execute(text("TRUNCATE TABLE tbl_customer RESTART IDENTITY;"))
                     conn.execute(text("""
                         INSERT INTO tbl_customer (
                             customer_id, customer_name
                         )
                         VALUES (
-                            :customer_id, :customer_id
+                            :customer_id, :customer
                         )
+                        ON CONFLICT (customer_id) DO NOTHING
                     """), primary_cust)
 
             self.finished.emit(True,
@@ -93,7 +109,7 @@ class Sync(QObject):
             self.finished.emit(False, f"File Not Found: A required Customer DBF file is missing.\nDetails: {e}")
         except Exception as e:
             trace_info = traceback.format_exc();
-            print(f"FORMULA SYNC CRITICAL ERROR: {e}\n{trace_info}")
+            print(f"CUSTOMER SYNC CRITICAL ERROR: {e}\n{trace_info}")
             self.finished.emit(False, f"An unexpected error occurred during customer sync:\n{e}")
 
 
