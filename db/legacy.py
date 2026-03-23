@@ -55,10 +55,19 @@ class Sync(QObject):
         try:
             with engine.connect() as conn:
                 max_form_id = conn.execute(text("SELECT COALESCE(MAX(form_id), 0) FROM tbl_formula01")).scalar() or 0
-            self.progress.emit(f"Phase 1/3: Reading local formula items...")
+                max_prod_id = conn.execute(text("SELECT COALESCE(MAX(prod_id), 0) FROM tbl_production01")).scalar() or 0
+
+            self.progress.emit(f"Phase 1/3: Reading local items...")
+
             items_by_uid = collections.defaultdict(list)
             new_uids = set()
+
+            items_by_prod_id = collections.defaultdict(list)
+            new_prod_ids = set()
+
+            production_items = dbfread.DBF(PRODUCTION_ITEMS_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
             dbf_items = dbfread.DBF(FORMULA_ITEMS_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
+
             for item_rec in dbf_items:
                 uid = _to_int(item_rec.get('T_UID'))
                 # if uid is None or uid <= max_uid: continue
@@ -71,6 +80,33 @@ class Sync(QObject):
                     "concentration": _to_float(item_rec.get('T_CON')),
                     "is_deleted": str(item_rec.get('T_DELETED', '') or '').strip()
                 })
+
+            for item_rec in production_items:
+                # Skip deleted records
+                prod_id = _to_int(item_rec.get('T_PRODID'))
+                if prod_id is None or prod_id <= max_prod_id:
+                    continue
+
+                new_prod_ids.add(prod_id)
+
+                # Extract item data (excluding t_prodb and t_labb as requested)
+                items_by_prod_id[prod_id].append({
+                    "prod_id": prod_id,
+                    "lot_num": str(item_rec.get('T_LOTNUM', '') or '').strip(),
+                    "confirmation_date": item_rec.get('T_CDATE'),  # confirmation date
+                    "production_date": item_rec.get('T_PRODDATE'),  # production date
+                    "seq": _to_int(item_rec.get('T_SEQ')),
+                    "material_code": str(item_rec.get('T_MATCODE', '') or '').strip(),
+                    "large_scale": _to_float(item_rec.get('T_PRODA')),  # Large scale (KG)
+                    "small_scale": _to_float(item_rec.get('T_LABA')),  # Small scale (G)
+                    # t_prodb and t_labb are intentionally excluded
+                    "total_weight": _to_float(item_rec.get('T_WT')),  # Total weight
+                    "total_loss": _to_float(item_rec.get('T_LOSS')),  # Total loss
+                    "total_consumption": _to_float(item_rec.get('T_CONS'))  # Total consumption
+                })
+
+
+
             self.progress.emit(f"Phase 1/3: Found {len(items_by_uid)} groups of new active items.")
 
             self.progress.emit("Phase 2/3: Reading Formula data...")

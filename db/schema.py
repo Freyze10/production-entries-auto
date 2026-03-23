@@ -125,14 +125,12 @@ def create_table():
             prod_id INT,
             sequence_no INT,
             material_code VARCHAR(32),
-            prod_a DECIMAL(12,6),
-            prod_b DECIMAL(12,6),
-            lab_a DECIMAL(12,6),
-            lab_b DECIMAL(12,6),
+            large_scale DECIMAL(12,6),
+            small_scale DECIMAL(12,6),
             total_weight DECIMAL(12,6),
             is_deleted VARCHAR(5) DEFAULT 'False',
-            loss DECIMAL(12,6),
-            cons DECIMAL(12,6),
+            total_loss DECIMAL(12,6),
+            total_consumption DECIMAL(12,6),
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
