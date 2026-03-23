@@ -25,7 +25,7 @@ def create_table():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula01(
             form_id SERIAL PRIMARY KEY,
-            index_no VARCHAR(10),
+            index_no VARCHAR(22),
             date DATE,
             customer VARCHAR(62),
             prod_code VARCHAR(12) NOT NULL,
@@ -33,12 +33,12 @@ def create_table():
             dosage DECIMAL(6,2) NOT NULL,
             total_concentration DECIMAL(6,2),
             ld DECIMAL(6,2),
-            mix_time VARCHAR(10),
+            mix_time VARCHAR(22),
             resin VARCHAR(36),
             application VARCHAR(36),
             colormatch_no VARCHAR(8),
             colormatch_date date,
-            notes VARCHAR(128),
+            notes VARCHAR(256),
             date_time VARCHAR(32),
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_used VARCHAR(5) DEFAULT 'False'
