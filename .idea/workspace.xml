@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="c93621e93f4c1d11a85b6cfc9ffe8df76daafc3b" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,6 +75,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -93,14 +94,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00026" summary="added status">
-      <option name="closed" value="true" />
-      <created>1773886604883</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1773886604883</updated>
     </task>
     <task id="LOCAL-00027" summary="added status">
       <option name="closed" value="true" />
@@ -486,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774229490842</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="updated customer sync">
+      <option name="closed" value="true" />
+      <created>1774231111517</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1774231111517</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added color for table label" />
     <MESSAGE value="connected to the main layout" />
     <MESSAGE value="changed margins" />
     <MESSAGE value="added header" />
@@ -526,7 +526,8 @@
     <MESSAGE value="updated onclflict sync" />
     <MESSAGE value="change schema" />
     <MESSAGE value="added sync on customer" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sync on customer" />
+    <MESSAGE value="updated customer sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated customer sync" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

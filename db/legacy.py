@@ -55,56 +55,44 @@ class Sync(QObject):
 
     def run(self):
         try:
-            with engine.connect() as conn:
-                max_cust_id = conn.execute(text("""
-                    SELECT COALESCE(MAX(customer_id::integer), 0)
-                    FROM tbl_customer
-                """)).scalar()
-            self.progress.emit(f"Phase 1/3: Reading local customer items...")
-            self.progress.emit("Phase 2/3: Reading Customer data...")
-            primary_cust = []
-            dbf_customer = dbfread.DBF(CUSTOMER_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
+            with engine.begin() as conn:
+                self.progress.emit("Reading customer data...")
 
-            new_count = 0
-            for r in dbf_customer:
-                ### CHANGE: Skip T_DELETED records ###
-                if bool(r.get('T_DELETED', False)):
-                    continue
-                cust_id_str = str(r.get('T_CUSTID', '') or '').strip()
-                try:
-                    cust_id = int(cust_id_str)
-                except (ValueError, TypeError):
-                    continue
+                dbf_customer = dbfread.DBF(CUSTOMER_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
 
-                customer_name = str(r.get('T_CUSTOMER', '') or '').strip()
+                primary_cust = []
 
-                if cust_id > max_cust_id:
+                for r in dbf_customer:
+                    if bool(r.get('T_DELETED', False)):
+                        continue
+
+                    cust_id_str = str(r.get('T_CUSTID', '') or '').strip()
+
+                    try:
+                        cust_id = int(cust_id_str)
+                    except:
+                        print(f"Invalid ID: {cust_id_str}")
+                        continue
+
+                    customer_name = str(r.get('T_CUSTOMER', '') or '').strip()
+
                     primary_cust.append({
-                        "customer_id": cust_id_str,  # keep as string if column is text
+                        "customer_id": cust_id,
                         "customer_name": customer_name
                     })
-                    new_count += 1
 
-            self.progress.emit(f"Phase 2/3: Found {len(primary_cust)} new valid records.")
-            if not primary_cust: self.finished.emit(True,
-                                                    f"Sync Info: No new customer records found to sync."); return
+                if not primary_cust:
+                    self.finished.emit(True, "No records found.")
+                    return
 
-            self.progress.emit("Phase 3/3: Syncing Data...")
-            with engine.connect() as conn:
-                with conn.begin():
-                    conn.execute(text("TRUNCATE TABLE tbl_customer RESTART IDENTITY;"))
-                    conn.execute(text("""
-                        INSERT INTO tbl_customer (
-                            customer_id, customer_name
-                        )
-                        VALUES (
-                            :customer_id, :customer
-                        )
-                        ON CONFLICT (customer_id) DO NOTHING
-                    """), primary_cust)
+                self.progress.emit(f"Syncing {len(primary_cust)} records...")
 
-            self.finished.emit(True,
-                               f"Customer sync complete.")
+                conn.execute(text("""
+                    INSERT INTO tbl_customer (customer_id, customer_name)
+                    VALUES (:customer_id, :customer_name)
+                    ON CONFLICT (customer_id) DO UPDATE SET
+                        customer_name = EXCLUDED.customer_name
+                """), primary_cust)
         except dbfread.DBFNotFound as e:
             self.finished.emit(False, f"File Not Found: A required Customer DBF file is missing.\nDetails: {e}")
         except Exception as e:

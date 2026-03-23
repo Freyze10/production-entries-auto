@@ -128,7 +128,7 @@ class ProductionRecords(QWidget):
 
         self.btn_sync = QPushButton("Sync", objectName="SuccessButton")
         self.btn_sync.setIcon(fa.icon('fa5s.sync-alt', color='white'))
-        self.btn_sync.clicked.connect(self.run_production_sync())
+        self.btn_sync.clicked.connect(self.run_production_sync)
         controls_layout.addWidget(self.btn_sync)
 
         self.btn_refresh = QPushButton("Refresh", objectName="TertiaryButton")
