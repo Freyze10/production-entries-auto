@@ -151,6 +151,9 @@ class Sync(QObject):
                 prod_id = _to_int(r.get('T_PRODID'))
                 if prod_id is None or prod_id <= max_prod_id:
                     continue
+                formula_id = _to_int(r.get('T_FID'))
+                if formula_id is None or formula_id == 0:
+                    continue
                 # Concatenate remarks and notes
                 remarks = str(r.get('T_REMARKS', '') or '').strip()
                 notes_raw = str(r.get('T_NOTE', '') or '').strip()
@@ -163,7 +166,7 @@ class Sync(QObject):
                     "prod_id": prod_id,
                     "production_date": r.get('T_PRODDATE'),
                     "customer": str(r.get('T_CUSTOMER', '') or '').strip(),
-                    "formulation_id": _to_int(r.get('T_FID')),
+                    "formulation_id": formula_id,
                     "formula_index": str(r.get('T_INDEX', '') or '').strip(),
                     "product_code": str(r.get('T_PRODCODE', '') or '').strip(),
                     "product_color": str(r.get('T_PRODCOLO', '') or '').strip(),
