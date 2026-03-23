@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00038" summary="added variable for pages">
-      <option name="closed" value="true" />
-      <created>1773908485275</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1773908485275</updated>
-    </task>
     <task id="LOCAL-00039" summary="added variable for pages">
       <option name="closed" value="true" />
       <created>1773908494844</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774246529355</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="changed prod02 schema">
+      <option name="closed" value="true" />
+      <created>1774247147307</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1774247147307</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="creating auto count encode_id" />
     <MESSAGE value="changed database schema: changed dependencies" />
     <MESSAGE value="deleted coma" />
     <MESSAGE value="updating formula legacy" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added on sync finished" />
     <MESSAGE value="changed finished message" />
     <MESSAGE value="updated formulation sync, use latest form id" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated formulation sync, use latest form id" />
+    <MESSAGE value="changed prod02 schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed prod02 schema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

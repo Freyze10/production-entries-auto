@@ -86,15 +86,15 @@ def create_table():
             mix_time VARCHAR(32),
             machine_no VARCHAR(32),
             note VARCHAR(128),
-            user_id INT,
+            user_id VARCHAR(62),
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_printed VARCHAR(5) DEFAULT 'False',
             inventory_c_date DATE,
             form_type VARCHAR(16),
-            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id),
-            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
+            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
         )
     """)
+    # TODO: for user_id; mag add ng condition na kung convertible sa int, use that id para i connect sa tbl_user
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production_encode(
@@ -102,8 +102,8 @@ def create_table():
             prod_id INT,
             prepared_by VARCHAR(128),
             encoded_by VARCHAR(128),
-            encoded_on TIMESTAMP,
-            confirmation_encoded_on TIMESTAMP,
+            encoded_on TIMESTAMP, 
+            confirmation_encoded_on TIMESTAMP, 
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
             )
     """)
