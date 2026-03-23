@@ -121,11 +121,11 @@ class Sync(QObject):
                         )
                         VALUES (
                             :uid, :formula_index, :formula_date, 1, :product_code, :product_color, :dosage, :total_concentration,
-                            :ld, :mix_type, :resin, :application, :cm_num, :cm_date, :remarks, :is_deleted,
-                            :is_used, :dbf_updated_on_text
+                            :ld, :mix_type, :resin, :application, :cm_num, :cm_date, :remarks, :dbf_updated_on_text, :is_deleted,
+                            :is_used
                         )
                         ON CONFLICT (form_id) DO UPDATE SET
-                            formula_index = EXCLUDED.formula_index,
+                            index_no = EXCLUDED.index_no,
                             formula_date = EXCLUDED.formula_date,
                             product_code = EXCLUDED.product_code,
                             product_color = EXCLUDED.product_color,
