@@ -64,6 +64,8 @@ class Sync(QObject):
             for item_rec in dbf_items:
                 uid = _to_int(item_rec.get('T_UID'))
                 # if uid is None or uid <= max_uid: continue
+                if uid is None:
+                    continue
                 new_uids.add(uid)
                 items_by_uid[uid].append({
                     "uid": uid, "seq": _to_int(item_rec.get('T_SEQ')),
@@ -77,10 +79,9 @@ class Sync(QObject):
             primary_recs = []
             dbf_primary = dbfread.DBF(FORMULA_PRIMARY_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
             for r in dbf_primary:
-                ### CHANGE: Skip T_DELETED records ###
-                # if bool(r.get('T_DELETED', False)):
-                #     continue
                 uid = _to_int(r.get('T_UID'))
+                if uid is None:
+                    continue
                 # if uid is None or uid <= max_uid: continue
                 dbf_updated_on_text = str(r.get('T_UDATE', '') or '').strip()
                 cm_date = str(r.get('T_CMDATE', '') or '').strip()

@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00033" summary="creating schema">
-      <option name="closed" value="true" />
-      <created>1773901483848</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1773901483848</updated>
-    </task>
     <task id="LOCAL-00034" summary="finished production01">
       <option name="closed" value="true" />
       <created>1773902122215</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774235253778</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="changed schema: updated restriction">
+      <option name="closed" value="true" />
+      <created>1774235624658</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1774235624658</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated table model" />
     <MESSAGE value="fixed table structure" />
     <MESSAGE value="added legacy file" />
     <MESSAGE value="updated schema" />
@@ -527,7 +526,8 @@
     <MESSAGE value="updated legacy" />
     <MESSAGE value="removing customer table" />
     <MESSAGE value="changed schema: removed customer table" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed schema: removed customer table" />
+    <MESSAGE value="changed schema: updated restriction" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed schema: updated restriction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
