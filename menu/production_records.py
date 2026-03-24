@@ -180,7 +180,12 @@ class ProductionRecords(QWidget):
             for row in details:
                 row_list = []
                 for col, value in enumerate(row):
-                    if col == 0:  # Material name/code
+                    if col == 0:
+                        try:
+                            row_list.append(int(value) if value is not None else 0)
+                        except (ValueError, TypeError):
+                            row_list.append(0)
+                    elif col == 1:  # Material name/code
                         row_list.append(str(value) if value else "")
                     else:  # Numeric values
                         try:

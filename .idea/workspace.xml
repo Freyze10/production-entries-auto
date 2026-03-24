@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00046" summary="added table label">
-      <option name="closed" value="true" />
-      <created>1774053976046</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1774053976046</updated>
-    </task>
     <task id="LOCAL-00047" summary="added color for table label">
       <option name="closed" value="true" />
       <created>1774054092126</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774320787641</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="added display of details per row">
+      <option name="closed" value="true" />
+      <created>1774321245453</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1774321245453</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create controls layout" />
     <MESSAGE value="added context menu" />
     <MESSAGE value="updated button desighn" />
     <MESSAGE value="update sync position" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added call all data function in database" />
     <MESSAGE value="disabled focus on table" />
     <MESSAGE value="modified table model" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified table model" />
+    <MESSAGE value="added display of details per row" />
+    <option name="LAST_COMMIT_MESSAGE" value="added display of details per row" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
