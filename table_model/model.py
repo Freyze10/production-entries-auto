@@ -43,5 +43,8 @@ class TableModel(QAbstractTableModel):
     def clear_data(self):
         """Clear all data"""
         self.beginResetModel()
-        self._data = []
+        self._data = [["0", "--", "0.00", "0.00", "0.00"],
+            ["0", "--", "0.00", "0.00", "0.00"],
+            ["0", "--", "0.00", "0.00", "0.00"],
+            ["0", "--", "0.00", "0.00", "0.00"]]
         self.endResetModel()
