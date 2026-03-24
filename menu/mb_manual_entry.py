@@ -61,15 +61,14 @@ class MBManualEntry(QWidget):
         # Form Type
         self.form_type_combo = QComboBox()
         self.form_type_combo.addItems(["", "New", "Correction"])
-        self.form_type_combo.setStyleSheet("background-color: #fff9c4;")
+        self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Form Type:"), row, 0)
         primary_layout.addWidget(self.form_type_combo, row, 1)
         row += 1
 
         # Product Code
-        self.product_code_input = QLineEdit()
+        self.product_code_input = QLineEdit(objectName='required')
         self.product_code_input.setPlaceholderText("Enter product code")
-        self.product_code_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Product Code:"), row, 0)
         primary_layout.addWidget(self.product_code_input, row, 1)
         row += 1
@@ -100,9 +99,8 @@ class MBManualEntry(QWidget):
         dosage_label = QLabel("Dosage:")
         sum_dosage_layout.addWidget(dosage_label)
 
-        self.dosage_input = QLineEdit()
+        self.dosage_input = QLineEdit(objectName='required')
         self.dosage_input.setPlaceholderText("0.000000")
-        self.dosage_input.setStyleSheet("background-color: #fff9c4;")
         self.dosage_input.focusOutEvent = lambda event: format_to_float(self, event, self.dosage_input)
         sum_dosage_layout.addWidget(self.dosage_input)
 
@@ -111,24 +109,22 @@ class MBManualEntry(QWidget):
         row += 1
 
         # Customer
-        self.customer_input = QLineEdit()
+        self.customer_input = QLineEdit(objectName='required')
         self.customer_input.setPlaceholderText("Enter customer")
-        self.customer_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Customer:"), row, 0)
         primary_layout.addWidget(self.customer_input, row, 1)
         row += 1
 
         # Lot No
-        self.lot_no_input = QLineEdit()
+        self.lot_no_input = QLineEdit(objectName='required')
         self.lot_no_input.setPlaceholderText("Enter lot number")
-        self.lot_no_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Lot No:"), row, 0)
         primary_layout.addWidget(self.lot_no_input, row, 1)
         row += 1
 
         # Production Date
         self.production_date_input = SmartDateEdit()
-        self.production_date_input.setStyleSheet("background-color: #fff9c4;")
+        self.production_date_input.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Production Date:"), row, 0)
         primary_layout.addWidget(self.production_date_input, row, 1)
         row += 1
@@ -140,9 +136,8 @@ class MBManualEntry(QWidget):
         row += 1
 
         # Order Form No
-        self.order_form_no_input = QLineEdit()
+        self.order_form_no_input = QLineEdit(objectName='required')
         self.order_form_no_input.setPlaceholderText("Enter order form number")
-        self.order_form_no_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Order Form No:"), row, 0)
         primary_layout.addWidget(self.order_form_no_input, row, 1)
         row += 1
@@ -184,18 +179,16 @@ class MBManualEntry(QWidget):
         qty_layout = QHBoxLayout()
         qty_layout.setSpacing(9)
 
-        self.qty_required_input = QLineEdit()
+        self.qty_required_input = QLineEdit(objectName='required')
         self.qty_required_input.setPlaceholderText("0.0000000")
-        self.qty_required_input.setStyleSheet("background-color: #fff9c4;")
         self.qty_required_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_required_input)
         qty_layout.addWidget(self.qty_required_input)
 
         qty_batch_label = QLabel("Qty. Per Batch:")
         qty_layout.addWidget(qty_batch_label)
 
-        self.qty_per_batch_input = QLineEdit()
+        self.qty_per_batch_input = QLineEdit(objectName='required')
         self.qty_per_batch_input.setPlaceholderText("0.0000000")
-        self.qty_per_batch_input.setStyleSheet("background-color: #fff9c4;")
         self.qty_per_batch_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_per_batch_input)
         qty_layout.addWidget(self.qty_per_batch_input)
 
@@ -204,9 +197,8 @@ class MBManualEntry(QWidget):
         row += 1
 
         # Prepared By
-        self.prepared_by_input = QLineEdit()
+        self.prepared_by_input = QLineEdit(objectName='required')
         self.prepared_by_input.setPlaceholderText("Enter preparer name")
-        self.prepared_by_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Prepared By:"), row, 0)
         primary_layout.addWidget(self.prepared_by_input, row, 1)
         row += 1

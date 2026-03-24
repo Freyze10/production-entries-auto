@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00059" summary="creating auto count encode_id">
-      <option name="closed" value="true" />
-      <created>1774070266184</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1774070266184</updated>
-    </task>
     <task id="LOCAL-00060" summary="changed database schema: changed dependencies">
       <option name="closed" value="true" />
       <created>1774070895394</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774336250409</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="added new color design">
+      <option name="closed" value="true" />
+      <created>1774337498470</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1774337498470</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated decimal points" />
     <MESSAGE value="added on sync finished" />
     <MESSAGE value="changed finished message" />
     <MESSAGE value="updated formulation sync, use latest form id" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added date format function" />
     <MESSAGE value="modified format and manual entry ui" />
     <MESSAGE value="changed confirmation date label" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed confirmation date label" />
+    <MESSAGE value="added new color design" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new color design" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

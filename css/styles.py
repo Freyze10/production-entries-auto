@@ -497,7 +497,7 @@ class AppStyles:
         QLineEdit#gray_bg{{
             background-color: {BG_GRAY};
         }}
-        QLineEdit#required, QComboBox#requried{{
+        QLineEdit#required{{
             background-color: {AMBER_200};
         }}
     """
