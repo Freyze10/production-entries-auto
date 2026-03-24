@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
-    QLabel, QComboBox, QTextEdit
+    QLabel, QComboBox, QTextEdit, QCheckBox
 
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time
 from workstation.workstation_details import _get_workstation_info
@@ -35,13 +35,13 @@ class MBManualEntry(QWidget):
 
         # Left Column - Production Information
         left_column = QVBoxLayout()
-        left_column.setSpacing(8)
+        left_column.setSpacing(6)
 
         # Production Information Card
         primary_card = QGroupBox("Production Information")
         primary_layout = QGridLayout(primary_card)
         primary_layout.setSpacing(4)
-        primary_layout.setContentsMargins(8, 12, 8, 8)
+        primary_layout.setContentsMargins(8, 12, 8, 4)
 
         row = 0
 
@@ -217,19 +217,54 @@ class MBManualEntry(QWidget):
 
         # Right Column - Materials
         right_column = QVBoxLayout()
-        right_column.setSpacing(6)
+        right_column.setSpacing(4)
 
         # Materials Card
         material_card = QGroupBox("Material Composition")
         material_layout = QVBoxLayout(material_card)
-        material_layout.setContentsMargins(8, 12, 8, 8)
+        material_layout.setContentsMargins(8, 12, 8, 4)
         material_layout.setSpacing(6)
 
+        # Material Type Selection (Radio-button behavior)
+        material_type_layout = QHBoxLayout()
+        material_type_layout.addWidget(QLabel("Material Used:"))
+        self.raw_material_check = QCheckBox("RAW MATERIAL")
+        self.raw_material_check.setObjectName("RawMaterialCheck")
+        self.raw_material_check.setChecked(True)
+        self.non_raw_material_check = QCheckBox("NON-RAW MATERIAL")
+        self.non_raw_material_check.setObjectName("NonRawMaterialCheck")
 
+        # Make checkboxes behave like radio buttons
+        self.raw_material_check.toggled.connect(lambda checked: self.on_material_type_changed(checked, True))
+        self.non_raw_material_check.toggled.connect(lambda checked: self.on_material_type_changed(checked, False))
 
+        material_type_layout.addWidget(self.raw_material_check)
+        material_type_layout.addWidget(self.non_raw_material_check)
+        material_type_layout.addStretch()
+        material_layout.addLayout(material_type_layout)
 
         right_column.addWidget(material_card)
         scroll_layout.addLayout(right_column, stretch=1)
 
         scroll.setWidget(scroll_widget)
         main_layout.addWidget(scroll)
+
+
+    def on_material_type_changed(self, checked, is_raw):
+        """Handle material type selection like radio buttons and switch input fields."""
+        if is_raw:
+            if checked:
+                self.non_raw_material_check.setChecked(False)
+                # self.material_code_combo.setVisible(True)
+                # self.material_code_lineedit.setVisible(False)
+            else:
+                if not self.non_raw_material_check.isChecked():
+                    self.raw_material_check.setChecked(True)
+        else:
+            if checked:
+                self.raw_material_check.setChecked(False)
+                # self.material_code_combo.setVisible(False)
+                # self.material_code_lineedit.setVisible(True)
+            else:
+                if not self.raw_material_check.isChecked():
+                    self.non_raw_material_check.setChecked(True)

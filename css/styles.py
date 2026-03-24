@@ -251,7 +251,7 @@ class AppStyles:
         }}
         
         QLabel {{
-            font-size: 14px;
+            font-size: 13px;
             color: {TEXT_PRIMARY};
         }}
 
@@ -499,5 +499,28 @@ class AppStyles:
         }}
         QLineEdit#required{{
             background-color: {AMBER_200};
+        }}
+        QCheckBox#RawMaterialCheck::indicator,
+        QCheckBox#NonRawMaterialCheck::indicator {{
+            width: 18px;
+            height: 18px;
+            border: 2px solid {SLATE_300};
+            border-radius: 4px;
+            background-color: white;
+        }}
+    
+        QCheckBox#RawMaterialCheck::indicator:checked {{
+            background-color: {EMERALD_500};     /* Green for Raw Material */
+            border: 2px solid {EMERALD_500};
+        }}
+    
+        QCheckBox#NonRawMaterialCheck::indicator:checked {{
+            background-color: {AMBER_500};     /* Amber for Non-Raw Material */
+            border: 2px solid {AMBER_500};
+        }}
+    
+        QCheckBox#RawMaterialCheck::indicator:hover,
+        QCheckBox#NonRawMaterialCheck::indicator:hover {{
+            border: 2px solid {SLATE_600};
         }}
     """
