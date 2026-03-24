@@ -314,7 +314,7 @@ class AppStyles:
         QPushButton#SecondaryButton {{
             background: {TEAL_700};
             color: white;
-            border: 1.5px solid {TEAL_600};
+            border: 1px solid {TEAL_600};
             font-weight: 600;
         }}
 
@@ -345,7 +345,7 @@ class AppStyles:
             background: {SLATE_600};
             color: white;
             border: 1px solid {SLATE_300};
-            font-weight: 500;
+            font-weight: 600;
         }}
 
         QPushButton#TertiaryButton:hover {{

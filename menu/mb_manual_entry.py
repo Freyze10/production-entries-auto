@@ -248,7 +248,6 @@ class MBManualEntry(QWidget):
 
         # Material Input Section
         input_card = QFrame()
-        input_card.setObjectName('ContentCard')
         input_layout = QGridLayout(input_card)
         input_layout.setSpacing(6)
 
