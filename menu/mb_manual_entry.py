@@ -112,7 +112,28 @@ class MBManualEntry(QWidget):
         primary_layout.addLayout(sum_dosage_layout, row, 1)
         row += 1
 
+        # Customer
+        self.customer_input = QLineEdit()
+        self.customer_input.setPlaceholderText("Enter customer")
+        self.customer_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Customer:"), row, 0)
+        primary_layout.addWidget(self.customer_input, row, 1)
+        row += 1
 
+        # Lot No
+        self.lot_no_input = QLineEdit()
+        self.lot_no_input.setPlaceholderText("Enter lot number")
+        self.lot_no_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Lot No:"), row, 0)
+        primary_layout.addWidget(self.lot_no_input, row, 1)
+        row += 1
+
+        # Production Datey
+        self.production_date_input = SmartDateEdit()
+        self.production_date_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Production Date:"), row, 0)
+        primary_layout.addWidget(self.production_date_input, row, 1)
+        row += 1
 
         left_column.addWidget(primary_card)
         scroll_layout.addLayout(left_column, stretch=1)
