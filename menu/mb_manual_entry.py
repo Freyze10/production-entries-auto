@@ -46,16 +46,14 @@ class MBManualEntry(QWidget):
         row = 0
 
         # WIP No (Production ID)
-        self.wip_no_input = QLineEdit()
-        self.wip_no_input.setStyleSheet("background-color: #e9ecef;")
+        self.wip_no_input = QLineEdit(objectName='gray_bg')
         primary_layout.addWidget(QLabel("WIP No:"), row, 0)
         primary_layout.addWidget(self.wip_no_input, row, 1)
         row += 1
 
         # Production ID
-        self.production_id_input = QLineEdit()
+        self.production_id_input = QLineEdit(objectName='required')
         self.production_id_input.setPlaceholderText("0098988")
-        self.production_id_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Production ID:"), row, 0)
         primary_layout.addWidget(self.production_id_input, row, 1)
         row += 1

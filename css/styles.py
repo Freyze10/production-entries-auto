@@ -15,7 +15,8 @@ class AppStyles:
     EMERALD_500 = "#10B981"  # success
     EMERALD_600 = "#059669"
 
-    AMBER_500  = "#F59E0B"   # warning
+    AMBER_200  = "#FDECCE"   # warning
+    AMBER_500  = "#F59E0B"
     AMBER_700  = "#B45309"
 
     RED_500    = "#EF4444"   # danger
@@ -45,7 +46,7 @@ class AppStyles:
     # ── Backgrounds ───────────────────────────────────────────────────────────
     BG_BASE     = SLATE_50
     BG_SURFACE  = "white"
-    BG_ELEVATED = SLATE_50
+    BG_GRAY = SLATE_200
     BG_DARK     = SLATE_900
 
     # ── Borders & focus ───────────────────────────────────────────────────────
@@ -492,5 +493,11 @@ class AppStyles:
 
         QLabel#table_label {{
             color: {TEXT_PRIMARY};
+        }}
+        QLineEdit#gray_bg{{
+            background-color: {BG_GRAY};
+        }}
+        QLineEdit#required, QComboBox#requried{{
+            background-color: {AMBER_200};
         }}
     """
