@@ -80,7 +80,7 @@ def create_table():
             dosage DECIMAL(12,6),
             ld DECIMAL(12,6),
             lot_no VARCHAR(128),
-            order_no INT,
+            order_no VARCHAR(36),
             colormatch_no VARCHAR(8),
             colormatch_date date,
             mix_time VARCHAR(32),
@@ -90,10 +90,11 @@ def create_table():
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_printed VARCHAR(5) DEFAULT 'False',
             inventory_c_date DATE,
-            form_type VARCHAR(16),
-            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
-        )
+            form_type VARCHAR(16)
+            )
     """)
+            # removed foreign key connection because of foreign key error 
+            # FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
     # TODO: for user_id; mag add ng condition na kung convertible sa int, use that id para i connect sa tbl_user
 
     cursor.execute("""

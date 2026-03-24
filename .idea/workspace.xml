@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00041" summary="creating production records page">
-      <option name="closed" value="true" />
-      <created>1773910545796</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1773910545796</updated>
-    </task>
     <task id="LOCAL-00042" summary="added header card">
       <option name="closed" value="true" />
       <created>1773911448183</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774254446066</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="fixing foreign key error with form id">
+      <option name="closed" value="true" />
+      <created>1774256596015</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1774256596015</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updating formula legacy" />
     <MESSAGE value="added loading dialogue" />
     <MESSAGE value="added details table" />
     <MESSAGE value="modifying styl;e" />
@@ -527,7 +526,8 @@
     <MESSAGE value="changed prod02 schema" />
     <MESSAGE value="added production in legacy" />
     <MESSAGE value="updated schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated schema" />
+    <MESSAGE value="fixing foreign key error with form id" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing foreign key error with form id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
