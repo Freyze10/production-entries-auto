@@ -137,7 +137,7 @@ class MBManualEntry(QWidget):
 
         # Confirmation Date
         self.confirmation_date_input = SmartDateEdit()
-        primary_layout.addWidget(QLabel("Confirmation Date\n(For Inventory Only):"), row, 0)
+        primary_layout.addWidget(QLabel("Confirmation Date:  <br><span style='font-size: 10px;'>(For Inventory Only)</span>"), row, 0)
         primary_layout.addWidget(self.confirmation_date_input, row, 1)
         row += 1
 

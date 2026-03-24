@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00057" summary="updated schema">
-      <option name="closed" value="true" />
-      <created>1774064583137</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1774064583138</updated>
-    </task>
     <task id="LOCAL-00058" summary="addded rownumber">
       <option name="closed" value="true" />
       <created>1774069950275</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774334132704</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="modified format and manual entry ui">
+      <option name="closed" value="true" />
+      <created>1774335620315</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1774335620315</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed schema: removed customer table" />
     <MESSAGE value="changed schema: updated restriction" />
     <MESSAGE value="updated decimal points" />
     <MESSAGE value="added on sync finished" />
@@ -527,14 +526,15 @@
     <MESSAGE value="adding manual_entry to menu button" />
     <MESSAGE value="added format to float function" />
     <MESSAGE value="added date format function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added date format function" />
+    <MESSAGE value="modified format and manual entry ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified format and manual entry ui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>445</line>
+          <line>450</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -101,8 +101,6 @@ class AppStyles:
             background: white;
         }}
     
-        
-    
         QLineEdit {{
             border: none;
             background: transparent;
@@ -249,6 +247,11 @@ class AppStyles:
 
         QLineEdit::placeholder, QTextEdit::placeholder {{
             color: {SLATE_400};
+        }}
+        
+        QLabel {{
+            font-size: 14px;
+            color: {TEXT_PRIMARY};
         }}
 
         /* ── Base button reset ─────────────────────────────────────────────── */
@@ -460,6 +463,7 @@ class AppStyles:
             padding: 0 10px;
             color: {TEAL_600};
             font-weight: 700;
+            font-size: 16px;
             background: transparent;
         }}
 
