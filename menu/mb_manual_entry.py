@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox
 
+from util.field_format import format_to_float
 from workstation.workstation_details import _get_workstation_info
 
 
@@ -67,6 +68,49 @@ class MBManualEntry(QWidget):
         primary_layout.addWidget(self.form_type_combo, row, 1)
         row += 1
 
+        # Product Code
+        self.product_code_input = QLineEdit()
+        self.product_code_input.setPlaceholderText("Enter product code")
+        self.product_code_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Product Code:"), row, 0)
+        primary_layout.addWidget(self.product_code_input, row, 1)
+        row += 1
+
+        # Product Color
+        self.product_color_input = QLineEdit()
+        self.product_color_input.setPlaceholderText("Enter product color")
+        primary_layout.addWidget(QLabel("Product Color:"), row, 0)
+        primary_layout.addWidget(self.product_color_input, row, 1)
+        row += 1
+
+        # Formula
+        self.formula_input = QLineEdit()
+        self.formula_input.setPlaceholderText("0")
+        primary_layout.addWidget(QLabel("Formula:"), row, 0)
+        primary_layout.addWidget(self.formula_input, row, 1)
+        row += 1
+
+        # Sum of Cons and Dosage in one row
+        sum_dosage_layout = QHBoxLayout()
+        sum_dosage_layout.setSpacing(9)
+
+        self.sum_cons_input = QLineEdit()
+        self.sum_cons_input.setPlaceholderText("0.00000")
+        self.sum_cons_input.focusOutEvent = lambda event: format_to_float(self, event, self.sum_cons_input)
+        sum_dosage_layout.addWidget(self.sum_cons_input)
+
+        dosage_label = QLabel("Dosage:")
+        sum_dosage_layout.addWidget(dosage_label)
+
+        self.dosage_input = QLineEdit()
+        self.dosage_input.setPlaceholderText("0.000000")
+        self.dosage_input.setStyleSheet("background-color: #fff9c4;")
+        self.dosage_input.focusOutEvent = lambda event: format_to_float(self, event, self.dosage_input)
+        sum_dosage_layout.addWidget(self.dosage_input)
+
+        primary_layout.addWidget(QLabel("Sum of Cons:"), row, 0)
+        primary_layout.addLayout(sum_dosage_layout, row, 1)
+        row += 1
 
 
 

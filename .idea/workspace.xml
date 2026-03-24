@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00053" summary="updated table model">
-      <option name="closed" value="true" />
-      <created>1774062033339</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1774062033339</updated>
-    </task>
-    <task id="LOCAL-00054" summary="updated table model">
-      <option name="closed" value="true" />
-      <created>1774062527477</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1774062527477</updated>
-    </task>
     <task id="LOCAL-00055" summary="fixed table structure">
       <option name="closed" value="true" />
       <created>1774062934329</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774331206784</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="adding manual_entry">
+      <option name="closed" value="true" />
+      <created>1774332773270</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1774332773270</updated>
+    </task>
+    <task id="LOCAL-00103" summary="adding manual_entry to menu button">
+      <option name="closed" value="true" />
+      <created>1774333056927</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1774333056927</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated customer sync" />
-    <MESSAGE value="changed schema" />
     <MESSAGE value="updated legacy" />
     <MESSAGE value="removing customer table" />
     <MESSAGE value="changed schema: removed customer table" />
@@ -527,7 +525,9 @@
     <MESSAGE value="working on search bar" />
     <MESSAGE value="added function for search" />
     <MESSAGE value="finished connecting search function" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished connecting search function" />
+    <MESSAGE value="adding manual_entry" />
+    <MESSAGE value="adding manual_entry to menu button" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding manual_entry to menu button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

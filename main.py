@@ -60,7 +60,8 @@ class MainWindow(QMainWindow):
         self.production_records = ProductionRecords(self.username, self.user_role)
         self.mb_manual_entry = MBManualEntry()
 
-        self.stacked_widget.addWidget(self.production_records, self.mb_manual_entry)
+        self.stacked_widget.addWidget(self.production_records)
+        self.stacked_widget.addWidget(self.mb_manual_entry)
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
