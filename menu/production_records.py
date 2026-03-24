@@ -166,15 +166,33 @@ class ProductionRecords(QWidget):
             print("Error: Could not read row data")
 
     def load_production_details(self, prod_id):
-        if not prod_id:
-            self.details_table_model.clear_data()
-            return
+        try:
+            if not prod_id:
+                self.details_table_model.clear_data()
+                return
 
-        details = read.get_single_production_details(prod_id)
-        if not details:
-            return
+            details = read.get_single_production_details(prod_id)
+            if not details:
+                self.details_table_model.clear_data()
+                return
 
-        self.details_table.setRowCount(0)
+            data = []
+            for row in details:
+                row_list = []
+                for col, value in enumerate(row):
+                    if col == 0:  # Material name/code
+                        row_list.append(str(value) if value else "")
+                    else:  # Numeric values
+                        try:
+                            row_list.append(float(value) if value is not None else 0.0)
+                        except (ValueError, TypeError):
+                            row_list.append(0.0)
+                data.append(row_list)
+
+            self.details_table_model.set_data(data)
+        except Exception as e:
+            print(e)
+
 
 
 

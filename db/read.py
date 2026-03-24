@@ -44,12 +44,12 @@ def get_all_production_data():
 def get_single_production_details(prod_id):
     conn = get_connection()
     cur = conn.cursor()
-
+    # , total_loss, total_consumption
     cur.execute("""
-        SELECT material_code, large_scale, small_scale, total_weight, total_loss, total_consumption 
+        SELECT material_code, large_scale, small_scale, total_weight
         FROM tbl_production02
         WHERE material_code != '' AND prod_id = %s
-        ORDER BY seq ASC;
+        ORDER BY sequence_no ASC;
     """, (prod_id,))
 
     records = cur.fetchall()
