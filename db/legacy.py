@@ -302,7 +302,7 @@ class Sync(QObject):
 
                     conn.execute(text("""
                         INSERT INTO tbl_production_quantity (
-                                prod_id, qty_req , qty_per_batch, qty_produced
+                                prod_id, quantity_req , quantity_batch, quantity_prod
                         )
                         VALUES (
                             :prod_id, :qty_required, :qty_per_batch, :qty_produced
@@ -313,14 +313,14 @@ class Sync(QObject):
                     if all_prod_items_to_insert:
                         conn.execute(text("""
                             INSERT INTO tbl_production02 (
-                                prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted
+                                prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted,
                                 total_loss, total_consumption
                             )
                             VALUES (
                                 :prod_id, :seq, :material_code, :large_scale, 
-                                :small_scale, :total_weight, is_deleted
+                                :small_scale, :total_weight, :is_deleted,
                                 :total_loss, :total_consumption
-                            );
+                            )ON CONFLICT DO NOTHING
                         """), all_prod_items_to_insert)
 
             self.finished.emit(True,
