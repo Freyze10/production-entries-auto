@@ -296,7 +296,7 @@ class Sync(QObject):
                             prod_id, prepared_by, encoded_by, encoded_on, confirmation_encoded_on
                         )
                         VALUES (
-                            :prod_id, :prepared_by, :encoded_by, :encoded_on, :scheduled_date,
+                            :prod_id, :prepared_by, :encoded_by, :encoded_on, :scheduled_date
                         )
                     """), prod_recs)
 
