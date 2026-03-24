@@ -302,7 +302,7 @@ class Sync(QObject):
 
                     conn.execute(text("""
                         INSERT INTO tbl_production_quantity (
-                                prod_id, qty_required, qty_per_batch, qty_produced
+                                prod_id, qty_req , qty_per_batch, qty_produced
                         )
                         VALUES (
                             :prod_id, :qty_required, :qty_per_batch, :qty_produced
