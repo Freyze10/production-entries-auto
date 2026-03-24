@@ -41,12 +41,12 @@ class ProductionRecords(QWidget):
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText("Search Productions...")
         self.search_input.setFixedWidth(250)
+        self.search_input.returnPressed.connect(self.filter_production)
         self.production_search_timer = finished_typing(self.search_input, self.filter_production, delay=700)
-
 
         search_btn = QPushButton("Search", objectName="PrimaryButton")
         search_btn.setIcon(fa.icon('fa5s.search', color='white'))
-        # TODO: create search function for production
+        search_btn.clicked.connect(self.filter_production)
 
         header_layout.addWidget(self.search_input)
         header_layout.addWidget(search_btn)
@@ -150,6 +150,7 @@ class ProductionRecords(QWidget):
 
     def filter_production(self):
         search_text = self.search_input.text().lower()
+        self.table_model.filter_data(search_text)
 
 
     def on_row_selected(self):
