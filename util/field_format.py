@@ -56,7 +56,6 @@ class SmartDateEdit(QLineEdit):
         super().__init__(parent)
         self.setPlaceholderText("MM/DD/YYYY")
         self.setMaxLength(10)
-        self.setFixedWidth(120)
         self._digits = ""  # stores only the raw digits the user has typed
 
     # ── Internal helpers ──────────────────────────────────────────────────────

@@ -100,7 +100,9 @@ class AppStyles:
             box-shadow: {RING_FOCUS};
             background: white;
         }}
-
+    
+        
+    
         QLineEdit {{
             border: none;
             background: transparent;
@@ -229,7 +231,7 @@ class AppStyles:
             border: 1px solid {SLATE_200};
             border-radius: 8px;
             padding: 4px 6px;
-            min-height: 26px;
+            min-height: 22px;
             color: {TEXT_PRIMARY};
             selection-background-color: {TEAL_400};
         }}
@@ -453,8 +455,8 @@ class AppStyles:
 
         QGroupBox::title {{
             subcontrol-origin: margin;
-            left: 12px;
-            top: -10px;
+            left: 10px;
+            top: 6px;
             padding: 0 10px;
             color: {TEAL_600};
             font-weight: 700;

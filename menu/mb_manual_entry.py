@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
-    QLabel, QComboBox
+    QLabel, QComboBox, QTextEdit
 
-from util.field_format import format_to_float
+from util.field_format import format_to_float, SmartDateEdit, production_mixing_time
 from workstation.workstation_details import _get_workstation_info
 
 
@@ -35,7 +35,7 @@ class MBManualEntry(QWidget):
 
         # Left Column - Production Information
         left_column = QVBoxLayout()
-        left_column.setSpacing(6)
+        left_column.setSpacing(8)
 
         # Production Information Card
         primary_card = QGroupBox("Production Information")
@@ -128,11 +128,98 @@ class MBManualEntry(QWidget):
         primary_layout.addWidget(self.lot_no_input, row, 1)
         row += 1
 
-        # Production Datey
+        # Production Date
         self.production_date_input = SmartDateEdit()
         self.production_date_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Production Date:"), row, 0)
         primary_layout.addWidget(self.production_date_input, row, 1)
+        row += 1
+
+        # Confirmation Date
+        self.confirmation_date_input = SmartDateEdit()
+        primary_layout.addWidget(QLabel("Confirmation Date\n(For Inventory Only):"), row, 0)
+        primary_layout.addWidget(self.confirmation_date_input, row, 1)
+        row += 1
+
+        # Order Form No
+        self.order_form_no_input = QLineEdit()
+        self.order_form_no_input.setPlaceholderText("Enter order form number")
+        self.order_form_no_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Order Form No:"), row, 0)
+        primary_layout.addWidget(self.order_form_no_input, row, 1)
+        row += 1
+
+        # Colormatch No
+        self.colormatch_no_input = QLineEdit()
+        self.colormatch_no_input.setPlaceholderText("Enter colormatch number")
+        primary_layout.addWidget(QLabel("Colormatch No:"), row, 0)
+        primary_layout.addWidget(self.colormatch_no_input, row, 1)
+        row += 1
+
+        # Matched Date
+        self.matched_date_input = SmartDateEdit()
+        primary_layout.addWidget(QLabel("Matched Date:"), row, 0)
+        primary_layout.addWidget(self.matched_date_input, row, 1)
+        row += 1
+
+        # Mixing Time and Machine No in one row
+        mixing_machine_layout = QHBoxLayout()
+        mixing_machine_layout.setSpacing(9)
+
+        self.mixing_time_input = QLineEdit()
+        self.mixing_time_input.setPlaceholderText("Enter mixing time")
+        self.mixing_time_input.focusOutEvent = lambda event: production_mixing_time(event, self.mixing_time_input)
+        mixing_machine_layout.addWidget(self.mixing_time_input)
+
+        machine_no_label = QLabel("Machine No:")
+        mixing_machine_layout.addWidget(machine_no_label)
+
+        self.machine_no_input = QLineEdit()
+        self.machine_no_input.setPlaceholderText("Enter machine number")
+        mixing_machine_layout.addWidget(self.machine_no_input)
+
+        primary_layout.addWidget(QLabel("Mixing Time:"), row, 0)
+        primary_layout.addLayout(mixing_machine_layout, row, 1)
+        row += 1
+
+        # Qty Required and Qty Per Batch in one row
+        qty_layout = QHBoxLayout()
+        qty_layout.setSpacing(9)
+
+        self.qty_required_input = QLineEdit()
+        self.qty_required_input.setPlaceholderText("0.0000000")
+        self.qty_required_input.setStyleSheet("background-color: #fff9c4;")
+        self.qty_required_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_required_input)
+        qty_layout.addWidget(self.qty_required_input)
+
+        qty_batch_label = QLabel("Qty. Per Batch:")
+        qty_layout.addWidget(qty_batch_label)
+
+        self.qty_per_batch_input = QLineEdit()
+        self.qty_per_batch_input.setPlaceholderText("0.0000000")
+        self.qty_per_batch_input.setStyleSheet("background-color: #fff9c4;")
+        self.qty_per_batch_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_per_batch_input)
+        qty_layout.addWidget(self.qty_per_batch_input)
+
+        primary_layout.addWidget(QLabel("Qty. Required:"), row, 0)
+        primary_layout.addLayout(qty_layout, row, 1)
+        row += 1
+
+        # Prepared By
+        self.prepared_by_input = QLineEdit()
+        self.prepared_by_input.setPlaceholderText("Enter preparer name")
+        self.prepared_by_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Prepared By:"), row, 0)
+        primary_layout.addWidget(self.prepared_by_input, row, 1)
+        row += 1
+
+        # Notes
+        self.notes_input = QTextEdit()
+        self.notes_input.setPlaceholderText("Enter any notes...")
+        self.notes_input.setMinimumHeight(30)
+        self.notes_input.setMaximumHeight(50)
+        primary_layout.addWidget(QLabel("Notes:"), row, 0)
+        primary_layout.addWidget(self.notes_input, row, 1)
         row += 1
 
         left_column.addWidget(primary_card)
