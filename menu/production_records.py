@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, Q
 import qtawesome as fa
 
 from db.legacy import Sync
-from db.read import get_all_production_data
+from db import read
 from table_model.model import TableModel
 from util.loading import LoadingDialog
 
@@ -31,9 +31,9 @@ class ProductionRecords(QWidget):
         header_layout = QHBoxLayout(header_card)
         header_layout.setContentsMargins(4, 0, 4, 0)
 
-        self.selected_formulation_label = QLabel("INDEX REF. - FORMULATION NO.: No Selection", objectName="card_header")
-        self.selected_formulation_label.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
-        header_layout.addWidget(self.selected_formulation_label)
+        self.selected_production_label = QLabel("INDEX REF. - FORMULATION NO.: No Selection", objectName="card_header")
+        self.selected_production_label.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
+        header_layout.addWidget(self.selected_production_label)
 
         header_layout.addStretch()
 
@@ -62,7 +62,7 @@ class ProductionRecords(QWidget):
 
         # set of rows
         self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
-        self.rows = get_all_production_data()
+        self.rows = read.get_all_production_data()
 
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
@@ -78,7 +78,7 @@ class ProductionRecords(QWidget):
         self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.table_records.customContextMenuRequested.connect(self.show_context_menu)
         # Connect to row selection change
-        # self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)
+        self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)
 
         records_layout.addWidget(self.table_records, stretch=1)
         main_layout.addWidget(records_card, stretch=3)
@@ -146,6 +146,35 @@ class ProductionRecords(QWidget):
         main_layout.addLayout(controls_layout)
 
 
+
+    def on_row_selected(self):
+        index = self.table_records.selectionModel().selectedRows()
+        if not index:
+            return
+
+        row = index[0].row()
+
+        try:
+            prod_id = self.rows[row][0]  # prod_id
+            customer = self.rows[row][2]  # customer
+            lot_no = self.rows[row][5]  # lot_number
+
+            self.selected_production_label.setText(f"LOT NO: {lot_no} - {customer}")
+            self.load_production_details(prod_id)
+
+        except IndexError:
+            print("Error: Could not read row data")
+
+    def load_production_details(self, prod_id):
+        if not prod_id:
+            self.details_table_model.clear_data()
+            return
+
+        details = read.get_single_production_details(prod_id)
+        if not details:
+            return
+
+        self.details_table.setRowCount(0)
 
 
 

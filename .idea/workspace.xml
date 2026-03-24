@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00044" summary="adding table designm">
-      <option name="closed" value="true" />
-      <created>1774053390445</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1774053390445</updated>
-    </task>
     <task id="LOCAL-00045" summary="addded records layout">
       <option name="closed" value="true" />
       <created>1774053737662</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774319014913</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="disabled focus on table">
+      <option name="closed" value="true" />
+      <created>1774319575061</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1774319575061</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modifying styl;e" />
     <MESSAGE value="edited table design" />
     <MESSAGE value="create controls layout" />
     <MESSAGE value="added context menu" />
@@ -527,7 +526,8 @@
     <MESSAGE value="fixing foreign key error with form id" />
     <MESSAGE value="fixed legacy database transfee" />
     <MESSAGE value="added call all data function in database" />
-    <option name="LAST_COMMIT_MESSAGE" value="added call all data function in database" />
+    <MESSAGE value="disabled focus on table" />
+    <option name="LAST_COMMIT_MESSAGE" value="disabled focus on table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -33,3 +33,15 @@ class TableModel(QAbstractTableModel):
             reverse=(order == Qt.SortOrder.DescendingOrder)
         )
         self.layoutChanged.emit()
+
+    def set_data(self, data):
+        """Update the entire data and refresh the view"""
+        self.beginResetModel()
+        self._data = data
+        self.endResetModel()
+
+    def clear_data(self):
+        """Clear all data"""
+        self.beginResetModel()
+        self._data = []
+        self.endResetModel()
