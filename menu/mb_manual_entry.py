@@ -1,5 +1,8 @@
+from datetime import datetime
+
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
-    QLabel, QComboBox, QTextEdit, QCheckBox
+    QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton
 
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time
 from workstation.workstation_details import _get_workstation_info
@@ -242,6 +245,152 @@ class MBManualEntry(QWidget):
         material_type_layout.addWidget(self.non_raw_material_check)
         material_type_layout.addStretch()
         material_layout.addLayout(material_type_layout)
+
+        # Material Input Section
+        input_card = QFrame()
+        input_card.setObjectName('ContentCard')
+        input_layout = QGridLayout(input_card)
+        input_layout.setSpacing(6)
+
+        # Material Code - Create both QComboBox and QLineEdit
+        self.material_code_combo = QComboBox()
+        self.material_code_combo.setEditable(True)
+        self.material_code_combo.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
+        self.material_code_combo.setPlaceholderText("Enter material code")
+        self.material_code_combo.setStyleSheet("background-color: #FDECCE;")
+        # self.material_code_combo.lineEdit().editingFinished.connect(self.validate_rm_code)
+        # TODO: gawa ng completer para sa combobox ng material code
+        # Setup completer for combo box
+        # self.setup_rm_code_completer()
+
+        self.material_code_lineedit = QLineEdit()
+        self.material_code_lineedit.setPlaceholderText("Enter material code")
+        self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
+        self.material_code_lineedit.setVisible(False)  # Hidden by default
+
+        # Add label
+        input_layout.addWidget(QLabel("Material Code:"), 0, 0)
+        # Add both widgets to the same position (only one will be visible at a time)
+        input_layout.addWidget(self.material_code_combo, 0, 1)
+        input_layout.addWidget(self.material_code_lineedit, 0, 1)
+
+        # Add label
+        input_layout.addWidget(QLabel("Material Code:"), 0, 0)
+        # Add both widgets to the same position (only one will be visible at a time)
+        input_layout.addWidget(self.material_code_combo, 0, 1)
+        input_layout.addWidget(self.material_code_lineedit, 0, 1)
+
+        # Large Scale
+        self.large_scale_input = QLineEdit()
+        self.large_scale_input.setPlaceholderText("0.0000000")
+        self.large_scale_input.setStyleSheet("background-color: #fff9c4;")
+        input_layout.addWidget(QLabel("Large Scale (KG):"), 1, 0)
+        input_layout.addWidget(self.large_scale_input, 1, 1)
+
+        # Small Scale
+        self.small_scale_input = QLineEdit()
+        self.small_scale_input.setPlaceholderText("0.0000000")
+        self.small_scale_input.setStyleSheet("background-color: #fff9c4;")
+        input_layout.addWidget(QLabel("Small Scale (G):"), 2, 0)
+        input_layout.addWidget(self.small_scale_input, 2, 1)
+
+        # Total Weight
+        self.total_weight_input = QLineEdit()
+        self.total_weight_input.setPlaceholderText("0.0000000")
+        self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
+        # self.total_weight_input.returnPressed.connect(self.add_material)
+        input_layout.addWidget(QLabel("Total Weight (KG):"), 3, 0)
+        input_layout.addWidget(self.total_weight_input, 3, 1)
+
+        # Action Buttons
+        action_layout = QHBoxLayout()
+        action_layout.addStretch()
+
+        add_btn = QPushButton("Add")
+        add_btn.setObjectName("SuccessButton")
+        # add_btn.clicked.connect(self.add_material)
+        action_layout.addWidget(add_btn)
+
+        remove_btn = QPushButton("Remove")
+        remove_btn.setObjectName("DangerButton")
+        # remove_btn.clicked.connect(self.remove_material)
+        action_layout.addWidget(remove_btn)
+
+        clear_btn = QPushButton("Clear")
+        clear_btn.setObjectName("SecondaryButton")
+        # clear_btn.clicked.connect(self.clear_material_table)
+        action_layout.addWidget(clear_btn)
+
+        remove_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        clear_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        input_layout.addLayout(action_layout, 4, 0, 1, 2)
+        material_layout.addWidget(input_card)
+
+        # Materials Table
+        self.materials_table = QTableWidget()
+        self.materials_table.setColumnCount(4)
+        self.materials_table.setHorizontalHeaderLabels([
+            "Material Name", "Large Scale (KG)", "Small Scale (G)",
+            "Total Weight (KG)"
+        ])
+        self.materials_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.materials_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.materials_table.verticalHeader().setVisible(False)
+        self.materials_table.setAlternatingRowColors(True)
+        self.materials_table.setMinimumHeight(300)
+        self.materials_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.materials_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        material_layout.addWidget(self.materials_table)
+
+        # Totals Display
+        total_layout = QHBoxLayout()
+        total_layout.addWidget(QLabel("No. of Item(s):"))
+        self.no_items_label = QLabel("0")
+        self.no_items_label.setStyleSheet("font-weight: bold; color: #0078d4;")
+        total_layout.addWidget(self.no_items_label)
+        total_layout.addStretch()
+        total_layout.addWidget(QLabel("Total Weight:"))
+        self.total_weight_label = QLabel("0.0000000")
+        self.total_weight_label.setStyleSheet("font-weight: bold; color: #0078d4;")
+        total_layout.addWidget(self.total_weight_label)
+        total_layout.addWidget(QLabel("FG # in 10 (EQR WH) only"))
+        self.fg_label = QLabel("0000000")
+        self.fg_label.setStyleSheet("background-color: #fff9c4; padding: 2px 8px; font-weight: bold;")
+        total_layout.addWidget(self.fg_label)
+        material_layout.addLayout(total_layout)
+
+        # Encoding Information
+        encoding_layout = QGridLayout()
+        encoding_layout.setSpacing(6)
+
+        self.encoded_by_display = QLineEdit()
+        self.encoded_by_display.setReadOnly(True)
+        self.encoded_by_display.setText(self.work_station['u'])
+        self.encoded_by_display.setStyleSheet("background-color: #e9ecef;")
+
+        encoding_layout.addWidget(QLabel("Encoded By:"), 0, 0)
+        encoding_layout.addWidget(self.encoded_by_display, 0, 1)
+
+        self.production_confirmation_display = QLineEdit()
+        self.production_confirmation_display.setPlaceholderText("mm/dd/yyyy h:m:s")
+        self.production_confirmation_display.setStyleSheet("background-color: #fff9c4;")
+        self.production_confirmation_display.setReadOnly(True)
+        encoding_layout.addWidget(QLabel("Production Confirmation Encoded On:"), 1, 0)
+        encoding_layout.addWidget(self.production_confirmation_display, 1, 1)
+
+        self.production_encoded_display = QLineEdit()
+        self.production_encoded_display.setText(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        self.production_encoded_display.setReadOnly(True)
+        self.production_encoded_display.setStyleSheet("background-color: #e9ecef;")
+        encoding_layout.addWidget(QLabel("Production Encoded On:"), 2, 0)
+        encoding_layout.addWidget(self.production_encoded_display, 2, 1)
+
+        material_layout.addLayout(encoding_layout)
+
+
+
 
         right_column.addWidget(material_card)
         scroll_layout.addLayout(right_column, stretch=1)
