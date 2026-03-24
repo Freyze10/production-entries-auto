@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, Q
 import qtawesome as fa
 
 from db.legacy import Sync
+from db.read import get_all_production_data
 from table_model.model import TableModel
 from util.loading import LoadingDialog
 
@@ -61,8 +62,7 @@ class ProductionRecords(QWidget):
 
         # set of rows
         self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
-        self.rows = [["111","0000-00-00", "SMYPC", "BA2322E", "BLUE", "LOT434", "3.88906"],
-                     ["112","1100-00-00", "SMYPC", "BA2326E", "BLUE", "LOT432", "3.882906"]]
+        self.rows = get_all_production_data()
 
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
@@ -74,8 +74,11 @@ class ProductionRecords(QWidget):
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(True)
         self.table_records.setSortingEnabled(True)
+        self.table_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.table_records.customContextMenuRequested.connect(self.show_context_menu)
+        # Connect to row selection change
+        # self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)
 
         records_layout.addWidget(self.table_records, stretch=1)
         main_layout.addWidget(records_card, stretch=3)
@@ -113,6 +116,7 @@ class ProductionRecords(QWidget):
         self.details_table.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.details_table.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.details_table.setAlternatingRowColors(True)
+        self.details_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         details_layout.addWidget(self.details_table, stretch=1)
         main_layout.addWidget(details_card, stretch=3)

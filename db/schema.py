@@ -150,6 +150,14 @@ def create_table():
         )
     """)
 
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_prod_id 
+        ON tbl_production01(prod_id);
+
+        CREATE INDEX IF NOT EXISTS idx_qty_prod_id 
+        ON tbl_production_quantity(prod_id);
+    """)
+
     con.commit()
     cursor.close()
     con.close()

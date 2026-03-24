@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00042" summary="added header card">
-      <option name="closed" value="true" />
-      <created>1773911448183</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1773911448183</updated>
-    </task>
-    <task id="LOCAL-00043" summary="added table modle structure">
-      <option name="closed" value="true" />
-      <created>1774052434530</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1774052434530</updated>
-    </task>
     <task id="LOCAL-00044" summary="adding table designm">
       <option name="closed" value="true" />
       <created>1774053390445</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774256596015</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="fixed legacy database transfee">
+      <option name="closed" value="true" />
+      <created>1774317413110</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1774317413110</updated>
+    </task>
+    <task id="LOCAL-00092" summary="added call all data function in database">
+      <option name="closed" value="true" />
+      <created>1774319014913</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1774319014913</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added loading dialogue" />
-    <MESSAGE value="added details table" />
     <MESSAGE value="modifying styl;e" />
     <MESSAGE value="edited table design" />
     <MESSAGE value="create controls layout" />
@@ -527,7 +525,9 @@
     <MESSAGE value="added production in legacy" />
     <MESSAGE value="updated schema" />
     <MESSAGE value="fixing foreign key error with form id" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing foreign key error with form id" />
+    <MESSAGE value="fixed legacy database transfee" />
+    <MESSAGE value="added call all data function in database" />
+    <option name="LAST_COMMIT_MESSAGE" value="added call all data function in database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
