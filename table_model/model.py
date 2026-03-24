@@ -3,6 +3,7 @@ from PyQt6.QtCore import Qt, QAbstractTableModel
 class TableModel(QAbstractTableModel):
     def __init__(self, data, headers):
         super().__init__()
+        self._all_data = data or []
         self._data = data
         self._headers = headers
 
@@ -37,7 +38,24 @@ class TableModel(QAbstractTableModel):
     def set_data(self, data):
         """Update the entire data and refresh the view"""
         self.beginResetModel()
-        self._data = data
+        self._all_data = data
+        self._data = data[:]
+        self.endResetModel()
+
+    def filter_data(self, search_text):
+        """Filter rows based on search text (searches all columns + hidden prod_id)"""
+        if not search_text or not search_text.strip():
+            self._data = self._all_data[:]  # show all
+        else:
+            search_text = search_text.lower().strip()
+            self._data = []
+            for row in self._all_data:
+                # Convert entire row to string and search
+                row_str = " ".join(str(item).lower() for item in row)
+                if search_text in row_str:
+                    self._data.append(row)
+
+        self.beginResetModel()
         self.endResetModel()
 
     def clear_data(self):
