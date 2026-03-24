@@ -7,6 +7,7 @@ import qtawesome as fa
 from db.legacy import Sync
 from db import read
 from table_model.model import TableModel
+from util.debounce import finished_typing
 from util.loading import LoadingDialog
 
 
@@ -40,6 +41,8 @@ class ProductionRecords(QWidget):
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText("Search Productions...")
         self.search_input.setFixedWidth(250)
+        self.production_search_timer = finished_typing(self.search_input, self.filter_production, delay=700)
+
 
         search_btn = QPushButton("Search", objectName="PrimaryButton")
         search_btn.setIcon(fa.icon('fa5s.search', color='white'))
@@ -145,6 +148,8 @@ class ProductionRecords(QWidget):
 
         main_layout.addLayout(controls_layout)
 
+    def filter_production(self):
+        search_text = self.search_input.text().lower()
 
 
     def on_row_selected(self):

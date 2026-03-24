@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00048" summary="connected to the main layout">
-      <option name="closed" value="true" />
-      <created>1774054463288</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1774054463288</updated>
-    </task>
-    <task id="LOCAL-00049" summary="changed margins">
-      <option name="closed" value="true" />
-      <created>1774054478423</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1774054478423</updated>
-    </task>
     <task id="LOCAL-00050" summary="changed margins">
       <option name="closed" value="true" />
       <created>1774055432884</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774323486307</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="added default value 0 on details">
+      <option name="closed" value="true" />
+      <created>1774323896379</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1774323896379</updated>
+    </task>
+    <task id="LOCAL-00098" summary="added debounce function">
+      <option name="closed" value="true" />
+      <created>1774323967134</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1774323967134</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated button desighn" />
-    <MESSAGE value="update sync position" />
     <MESSAGE value="updated onclflict sync" />
     <MESSAGE value="change schema" />
     <MESSAGE value="added sync on customer" />
@@ -527,7 +525,9 @@
     <MESSAGE value="modified table model" />
     <MESSAGE value="added display of details per row" />
     <MESSAGE value="fixed table view display on click of rows" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed table view display on click of rows" />
+    <MESSAGE value="added default value 0 on details" />
+    <MESSAGE value="added debounce function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added debounce function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
