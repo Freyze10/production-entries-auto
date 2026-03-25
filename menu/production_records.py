@@ -104,12 +104,7 @@ class ProductionRecords(QWidget):
         details_layout.addWidget(details_label)
 
         self.details_header = ["prod_id", "Material Name", "Large Scale(kg)", "Small Scale(g)", "Total Weight(kg)"]
-        self.details_row = [
-            ["0", "--", "0.00", "0.00", "0.00"],
-            ["0", "--", "0.00", "0.00", "0.00"],
-            ["0", "--", "0.00", "0.00", "0.00"],
-            ["0", "--", "0.00", "0.00", "0.00"]
-        ]
+        self.details_row = [["0", "--", "0.00", "0.00", "0.00"]        ]
         self.details_table = QTableView()
         self.details_table_model = TableModel(self.details_row, self.details_header)
         self.details_table.setModel(self.details_table_model)
