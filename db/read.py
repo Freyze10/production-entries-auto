@@ -41,7 +41,7 @@ def get_all_production_data():
     return data
 
 
-def get_single_production_details(prod_id):
+def get_single_production_details(prod_id):  # matrials details
     conn = get_connection()
     cur = conn.cursor()
     # , total_loss, total_consumption
@@ -56,3 +56,13 @@ def get_single_production_details(prod_id):
     cur.close()
     conn.close()
     return records
+
+def get_single_production_data(prod_id):
+    conn = get_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    cur.execute("SELECT * FROM tbl_production01 WHERE prod_id = %s", (prod_id,))
+    record = cur.fetchone()
+    cur.close()
+    conn.close()
+    return record
+

@@ -10,20 +10,25 @@ from workstation.workstation_details import _get_workstation_info
 
 
 class MBManualEntry(QWidget):
-    def __init__(self):  # , username, user_role, log_audit_trail
+    def __init__(self, prod_id=0):  # , username, user_role, log_audit_trail
         super().__init__()
         # self.username = username
         # self.user_role = user_role
         # self.log_audit_trail = log_audit_trail
+        self.prod_id = prod_id
         self.work_station = _get_workstation_info()
         # self.user_id = f"{self.work_station['h']} # {self.user_role}"
-
         # Track current production for edit/view
         self.current_production_id = None
 
         self.setup_ui()
 
     def setup_ui(self):
+        self.prod_results = []
+        self.prod_materials = []
+        if self.prod_id != 0:
+            pass
+
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(5, 5, 5, 5)
         main_layout.setSpacing(5)
