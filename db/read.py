@@ -77,3 +77,18 @@ def get_single_production_data(prod_id):
     conn.close()
     return record
 
+def get_rm_code_lists():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT rm_code
+                    FROM tbl_raw_material_list 
+                    ORDER BY rm_code ASC""")
+    records = cur.fetchall()
+
+    cur.close()
+    conn.close()
+    if records:
+        return [row[0] for row in records]
+    else:
+        return []

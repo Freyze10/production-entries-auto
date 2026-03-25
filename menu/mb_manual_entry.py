@@ -3,11 +3,11 @@ from datetime import datetime
 from PyQt6.QtCore import Qt, QThread
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
-    QTableWidgetItem
+    QTableWidgetItem, QCompleter
 import qtawesome as fa
 
 from db.legacy import SyncRM
-from db.read import get_single_production_data, get_single_production_details
+from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
@@ -263,10 +263,9 @@ class MBManualEntry(QWidget):
         self.material_code_combo.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
         self.material_code_combo.setPlaceholderText("Enter material code")
         self.material_code_combo.setStyleSheet("background-color: #FDECCE;")
-        # self.material_code_combo.lineEdit().editingFinished.connect(self.validate_rm_code)
-        # TODO: gawa ng completer para sa combobox ng material code
-        # Setup completer for combo box
-        # self.setup_rm_code_completer()
+        self.material_code_combo.lineEdit().editingFinished.connect(self.validate_rm_code)
+        self.setup_rm_code_completer()
+        self.material_code_combo.setCurrentIndex(0)
 
         self.material_code_lineedit = QLineEdit()
         self.material_code_lineedit.setPlaceholderText("Enter material code")
@@ -275,6 +274,7 @@ class MBManualEntry(QWidget):
 
         btn_sync_rm = QPushButton("Sync")
         btn_sync_rm.setObjectName("SuccessButton")
+        btn_sync_rm.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         btn_sync_rm.clicked.connect(self.sync_rm)
 
         # Add label
@@ -544,7 +544,23 @@ class MBManualEntry(QWidget):
         self.total_weight_label.setText(f"{total_weight:.7f}")
 
 
-    def run_production_sync(self):
+    def setup_rm_code_completer(self):
+        self.rm_list = get_rm_code_lists()
+        self.material_code_combo.clear()
+        self.material_code_combo.addItems(self.rm_list)
+
+        rm_completer = QCompleter(self.rm_list, self.material_code_combo)
+        rm_completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
+        rm_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        self.material_code_combo.setCompleter(rm_completer)
+
+    def validate_rm_code(self):
+        """Prevent invalid input."""
+        current_text = self.material_code_combo.currentText()
+        if current_text not in self.rm_list:
+            self.material_code_combo.setCurrentIndex(0)
+
+    def sync_rm(self):
         thread = QThread()
         worker = SyncRM()
         worker.moveToThread(thread)

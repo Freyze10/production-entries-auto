@@ -153,7 +153,7 @@ def create_table():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_raw_material_list(
             id SERIAL PRIMARY KEY,
-            rm_code VARCHAR(50),
+            rm_code VARCHAR(50)
         )
     """)
 
