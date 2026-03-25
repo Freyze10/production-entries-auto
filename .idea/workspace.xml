@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00075" summary="updated customer sync">
-      <option name="closed" value="true" />
-      <created>1774231111517</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1774231111517</updated>
-    </task>
     <task id="LOCAL-00076" summary="updated customer sync">
       <option name="closed" value="true" />
       <created>1774233705214</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774421331869</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="updated total value">
+      <option name="closed" value="true" />
+      <created>1774422528131</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1774422528131</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working on search bar" />
     <MESSAGE value="added function for search" />
     <MESSAGE value="finished connecting search function" />
     <MESSAGE value="adding manual_entry" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added update totals" />
     <MESSAGE value="created a new map to manual page" />
     <MESSAGE value="sent prod_id to manual from production page" />
-    <option name="LAST_COMMIT_MESSAGE" value="sent prod_id to manual from production page" />
+    <MESSAGE value="updated total value" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated total value" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

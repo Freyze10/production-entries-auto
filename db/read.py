@@ -18,7 +18,7 @@ def get_all_production_data():
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
-        ORDER BY a.prod_id DESC
+        ORDER BY a.prod_id ASC
     """)
 
     records = cur.fetchall()
