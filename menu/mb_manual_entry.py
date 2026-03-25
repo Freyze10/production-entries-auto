@@ -489,6 +489,7 @@ class MBManualEntry(QWidget):
         self.machine_no_input.setText(str(self.prod_results['machine_no']))
         self.qty_required_input.setText(f"{self.prod_results['quantity_req']:.6f}")
         self.qty_per_batch_input.setText(f"{self.prod_results['quantity_batch']:.6f}")
+        self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.7f}")
 
         self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
         if self.prod_results.get('encoded_on'):
@@ -517,7 +518,7 @@ class MBManualEntry(QWidget):
             self.materials_table.setItem(row, 3,
                                          NumericTableWidgetItem(mat[4], is_float=True))  # total_weight
 
-        self.update_totals()  # gagwin
+
         return True
 
     def update_totals(self):

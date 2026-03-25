@@ -69,8 +69,8 @@ class MainWindow(QMainWindow):
         self.mb_manual_entry = MBManualEntry(prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
         self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index
+        self.btn_manual_entry.setChecked(True)
         self.stacked_widget.setCurrentIndex(1)
-
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)

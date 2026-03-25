@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00074" summary="added sync on customer">
-      <option name="closed" value="true" />
-      <created>1774229490842</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1774229490842</updated>
-    </task>
     <task id="LOCAL-00075" summary="updated customer sync">
       <option name="closed" value="true" />
       <created>1774231111517</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774419096979</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="sent prod_id to manual from production page">
+      <option name="closed" value="true" />
+      <created>1774421331869</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1774421331869</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added debounce function" />
     <MESSAGE value="working on search bar" />
     <MESSAGE value="added function for search" />
     <MESSAGE value="finished connecting search function" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added display of materials" />
     <MESSAGE value="added update totals" />
     <MESSAGE value="created a new map to manual page" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a new map to manual page" />
+    <MESSAGE value="sent prod_id to manual from production page" />
+    <option name="LAST_COMMIT_MESSAGE" value="sent prod_id to manual from production page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -544,12 +544,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>237</line>
+          <line>225</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>274</line>
+          <line>262</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -559,7 +559,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>500</line>
+          <line>501</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
