@@ -289,10 +289,6 @@ class ProductionRecords(QWidget):
                 QMessageBox.information(self, "Sync Complete", message)
             else:
                 QMessageBox.critical(self, "Sync Error", message)
-                self.formulation_id_input.setText("ERROR")
-                self.formulation_id_input.setStyleSheet("background-color: #f8d7da;")
-                self.formulation_id_input_cm.setText("ERROR")
-                self.formulation_id_input_cm.setStyleSheet("background-color: #f8d7da;")
 
         except Exception as e:
             print(f"Error in on_sync_finished: {e}")

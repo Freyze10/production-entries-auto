@@ -1,13 +1,15 @@
 from datetime import datetime
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QThread
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
     QTableWidgetItem
 import qtawesome as fa
 
+from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
+from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
 
 
@@ -540,3 +542,37 @@ class MBManualEntry(QWidget):
 
         self.no_items_label.setText(str(item_count))
         self.total_weight_label.setText(f"{total_weight:.7f}")
+
+
+    def run_production_sync(self):
+        thread = QThread()
+        worker = SyncRM()
+        worker.moveToThread(thread)
+
+        loading_dialog = LoadingDialog("Syncing Production Data", self)
+
+        worker.progress.connect(loading_dialog.update_progress)
+        worker.finished.connect(
+            lambda success, message: self.on_sync_finished(success, message, thread, loading_dialog)
+        )
+
+        thread.started.connect(worker.run)
+        worker.finished.connect(thread.quit)
+        thread.finished.connect(lambda: worker.deleteLater())
+        thread.finished.connect(thread.deleteLater)
+
+        thread.start()
+        loading_dialog.exec()
+
+    def on_sync_finished(self, success, message, thread, loading_dialog, sync_type=None):
+        try:
+            if loading_dialog.isVisible():
+                loading_dialog.accept()
+
+            if success:
+                QMessageBox.information(self, "Sync Complete", message)
+            else:
+                QMessageBox.critical(self, "Sync Error", message)
+
+        except Exception as e:
+            print(f"Error in on_sync_finished: {e}")

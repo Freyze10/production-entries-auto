@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00080" summary="removing customer table">
-      <option name="closed" value="true" />
-      <created>1774235125910</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1774235125910</updated>
-    </task>
     <task id="LOCAL-00081" summary="changed schema: removed customer table">
       <option name="closed" value="true" />
       <created>1774235253778</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774424785813</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="addedd raw material in legacy">
+      <option name="closed" value="true" />
+      <created>1774425385856</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1774425385856</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added format to float function" />
     <MESSAGE value="added date format function" />
     <MESSAGE value="modified format and manual entry ui" />
     <MESSAGE value="changed confirmation date label" />
@@ -527,7 +526,8 @@
     <MESSAGE value="updated table design" />
     <MESSAGE value="added iitem total count" />
     <MESSAGE value="fix button styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix button styling" />
+    <MESSAGE value="addedd raw material in legacy" />
+    <option name="LAST_COMMIT_MESSAGE" value="addedd raw material in legacy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -544,22 +544,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>225</line>
+          <line>227</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>262</line>
+          <line>264</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>457</line>
+          <line>460</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>500</line>
+          <line>503</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
