@@ -2,9 +2,10 @@ from datetime import datetime
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
-    QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton
+    QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox
 import qtawesome as fa
 
+from db.read import get_single_production_data, get_single_production_details
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time
 from workstation.workstation_details import _get_workstation_info
 
@@ -16,6 +17,8 @@ class MBManualEntry(QWidget):
         # self.user_role = user_role
         # self.log_audit_trail = log_audit_trail
         self.prod_id = prod_id
+        self.prod_results = None
+        self.prod_materials = None
         self.work_station = _get_workstation_info()
         # self.user_id = f"{self.work_station['h']} # {self.user_role}"
         # Track current production for edit/view
@@ -24,10 +27,18 @@ class MBManualEntry(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        self.prod_results = []
-        self.prod_materials = []
         if self.prod_id != 0:
-            pass
+            try:
+                self.prod_results = get_single_production_data(self.prod_id)
+                self.prod_materials = get_single_production_details(self.prod_id)
+                if not self.prod_results:
+                    QMessageBox.warning(self, "Not Found",
+                                        f"Production {self.prod_id} not found.")
+                    return False
+                self.display_details()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to load: {e}")
+                return False
 
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(5, 5, 5, 5)
@@ -427,7 +438,6 @@ class MBManualEntry(QWidget):
         main_layout.addLayout(button_layout)
 
 
-
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
         if is_raw:
@@ -446,3 +456,68 @@ class MBManualEntry(QWidget):
             else:
                 if not self.raw_material_check.isChecked():
                     self.non_raw_material_check.setChecked(True)
+
+    def display_details(self):
+        self.wip_no_input.setText(str(self.prod_results['index_no']))
+        self.production_id_input.setText(str(self.prod_results['prod_id']))
+        self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
+        self.product_code_input.setText(str(self.prod_results['prod_code']))
+        self.product_color_input.setText(str(self.prod_results['prod_color']))
+        self.formula_input.setText(str(self.prod_results['form_id']))
+        self.sum_cons_input.setText(f"{self.prod_results['dosage']:.6f}")
+        self.dosage_input.setText(f"{self.prod_results['ld']:.6f}")
+        self.customer_input.setText(str(self.prod_results['customer']))
+        self.lot_no_input.setText(str(self.prod_results['lot_no']))
+        self.order_form_no_input.setText(str(self.prod_results['order_no']))
+        self.colormatch_no_input.setText(str(self.prod_results['colormatch_no']))
+        self.prepared_by_input.setText(str(self.prod_results['prepared_by']))
+        self.notes_input.setPlainText(str(self.prod_results['note']))
+
+        # ------------------------------------------------------------------ #
+        #  Date fields – inline helper to keep the code tidy
+        # ------------------------------------------------------------------ #
+        def _set_date(widget, date_obj):
+            if date_obj:
+                widget.setText(date_obj.strftime("%m/%d/%Y"))
+            else:
+                widget.clear()
+
+        _set_date(self.production_date_input, self.prod_results.get('prod_date'))
+        _set_date(self.confirmation_date_input, self.prod_results.get('inventory_c_date'))
+        _set_date(self.matched_date_input, self.prod_results.get('colormatch_date'))
+
+        self.mixing_time_input.setText(str(self.prod_results['mix_time']))
+        self.machine_no_input.setText(str(self.prod_results['machine_no']))
+        self.qty_required_input.setText(f"{self.prod_results['quantity_req']:.6f}")
+        self.qty_per_batch_input.setText(f"{self.prod_results['quantity_batch']:.6f}")
+
+        self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
+        if self.prod_results.get('encoded_on'):
+            self.production_encoded_display.setText(
+                self.prod_results['encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
+        if self.prod_results.get('confirmation_encoded_on'):
+            self.production_confirmation_display.setText(
+                self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
+
+
+        self.materials_table.setRowCount(0)
+
+        for mat in materials:
+            row = self.materials_table.rowCount()
+            self.materials_table.insertRow(row)
+
+            # Tuple indexing: (material_code, large_scale, small_scale, total_weight)
+            self.materials_table.setItem(row, 0,
+                                         QTableWidgetItem(str(mat[0])))  # material_code
+
+            self.materials_table.setItem(row, 1,
+                                         NumericTableWidgetItem(mat[1], is_float=True))  # large_scale
+
+            self.materials_table.setItem(row, 2,
+                                         NumericTableWidgetItem(mat[2], is_float=True))  # small_scale
+
+            self.materials_table.setItem(row, 3,
+                                         NumericTableWidgetItem(mat[3], is_float=True))  # total_weight
+
+        self.update_totals()
+        return True

@@ -60,8 +60,19 @@ def get_single_production_details(prod_id):  # matrials details
 def get_single_production_data(prod_id):
     conn = get_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT * FROM tbl_production01 WHERE prod_id = %s", (prod_id,))
+
+    cur.execute("""
+        SELECT *
+        FROM tbl_production01 a
+        LEFT JOIN tbl_production_encode e 
+            ON a.prod_id = e.prod_id
+        LEFT JOIN tbl_production_quantity q 
+            ON a.prod_id = q.prod_id
+        WHERE a.prod_id = %s
+    """, (prod_id,))
+
     record = cur.fetchone()
+
     cur.close()
     conn.close()
     return record
