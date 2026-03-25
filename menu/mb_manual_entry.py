@@ -2,7 +2,8 @@ from datetime import datetime
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
-    QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox
+    QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
+    QTableWidgetItem
 import qtawesome as fa
 
 from db.read import get_single_production_data, get_single_production_details
@@ -502,7 +503,7 @@ class MBManualEntry(QWidget):
 
         self.materials_table.setRowCount(0)
 
-        for mat in materials:
+        for mat in self.prod_materials:
             row = self.materials_table.rowCount()
             self.materials_table.insertRow(row)
 

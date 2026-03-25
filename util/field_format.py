@@ -1,7 +1,7 @@
 # util/field_format.py
 import re
 
-from PyQt6.QtWidgets import QMessageBox, QLineEdit
+from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeyEvent
 
@@ -146,3 +146,23 @@ class SmartDateEdit(QLineEdit):
         digits = "".join(ch for ch in date_str if ch.isdigit())
         self._digits = digits[:8]
         self._apply()
+
+
+class NumericTableWidgetItem(QTableWidgetItem):
+    def __init__(self, value, display_text=None, is_float=False):
+        self.value = value
+        self.is_float = is_float
+        if display_text is None:
+            if is_float:
+                display_text = f"{value:.6f}" if value is not None else ""
+            else:
+                display_text = str(value) if value is not None else ""
+        super().__init__(display_text)
+
+    def __lt__(self, other):
+        if isinstance(other, NumericTableWidgetItem):
+            if self.is_float:
+                return float(self.value) < float(other.value)
+            else:
+                return int(self.value) < int(other.value)
+        return super().__lt__(other)
