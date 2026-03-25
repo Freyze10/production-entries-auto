@@ -345,6 +345,7 @@ class MBManualEntry(QWidget):
         self.materials_table.setMinimumHeight(200)
         self.materials_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.materials_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.materials_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         material_layout.addWidget(self.materials_table)
 
         # Totals Display

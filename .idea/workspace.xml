@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00076" summary="updated customer sync">
-      <option name="closed" value="true" />
-      <created>1774233705214</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1774233705214</updated>
-    </task>
     <task id="LOCAL-00077" summary="changed schema">
       <option name="closed" value="true" />
       <created>1774234656750</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774422528131</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="added auto sort">
+      <option name="closed" value="true" />
+      <created>1774423051134</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1774423051134</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added function for search" />
     <MESSAGE value="finished connecting search function" />
     <MESSAGE value="adding manual_entry" />
     <MESSAGE value="adding manual_entry to menu button" />
@@ -527,14 +526,15 @@
     <MESSAGE value="created a new map to manual page" />
     <MESSAGE value="sent prod_id to manual from production page" />
     <MESSAGE value="updated total value" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated total value" />
+    <MESSAGE value="added auto sort" />
+    <option name="LAST_COMMIT_MESSAGE" value="added auto sort" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>489</line>
+          <line>476</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -554,12 +554,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>458</line>
+          <line>459</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>501</line>
+          <line>502</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

@@ -388,28 +388,18 @@ class AppStyles:
             font-size: 13px;
         }}
 
-        QTableView::item {{
+        QTableView::item, QTableWidget::item {{
             padding-left: 5px;
             border: none;
         }}
 
-        QTableView::item:selected {{
+        QTableView::item:selected, QTableWidget::item:selected {{
             background: {TEAL_400};
             color: {SLATE_900};
         }}
 
-        QTableView::item:hover {{
+        QTableView::item:hover, QTableWidget::item:hover {{
             background: rgba(20, 184, 166, 0.07);
-        }}
-
-        /* ── Tabs ──────────────────────────────────────────────────────────── */
-        QTabWidget::pane {{
-            border: 1px solid {SLATE_200};
-            border-top: none;
-            background: white;
-            padding: 16px;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
         }}
 
         QTableWidget {{ 
@@ -448,19 +438,16 @@ class AppStyles:
             border-top-right-radius: 8px; 
             border-right: none; 
         }}
-        QTableWidget::item {{ 
-            padding: 8px; 
-            border: none; 
-            color: {TEXT_SECONDARY}; 
-        }}
-        QTableWidget::item:selected {{ 
-            background-color: {BG_SURFACE}; 
-            color: {TEXT_PRIMARY}; 
-        }}
-        QTableWidget::item:hover {{
-            background-color: rgba(79, 70, 229, 0.08); 
-        }}
         
+        /* ── Tabs ──────────────────────────────────────────────────────────── */
+        QTabWidget::pane {{
+            border: 1px solid {SLATE_200};
+            border-top: none;
+            background: white;
+            padding: 16px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }}
         
         QTabBar::tab {{
             background: {SLATE_100};
