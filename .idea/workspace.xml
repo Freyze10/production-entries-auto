@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00071" summary="update sync position">
-      <option name="closed" value="true" />
-      <created>1774226509313</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1774226509314</updated>
-    </task>
     <task id="LOCAL-00072" summary="updated onclflict sync">
       <option name="closed" value="true" />
       <created>1774226685201</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774408962727</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="added display of materials">
+      <option name="closed" value="true" />
+      <created>1774409141833</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1774409141833</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added display of details per row" />
     <MESSAGE value="fixed table view display on click of rows" />
     <MESSAGE value="added default value 0 on details" />
     <MESSAGE value="added debounce function" />
@@ -527,7 +526,8 @@
     <MESSAGE value="created read of single prod id" />
     <MESSAGE value="fixing display data result" />
     <MESSAGE value="added table widget format numeric" />
-    <option name="LAST_COMMIT_MESSAGE" value="added table widget format numeric" />
+    <MESSAGE value="added display of materials" />
+    <option name="LAST_COMMIT_MESSAGE" value="added display of materials" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
