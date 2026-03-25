@@ -303,6 +303,7 @@ class MBManualEntry(QWidget):
         self.total_weight_input.setPlaceholderText("0.0000000")
         self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
         # self.total_weight_input.returnPressed.connect(self.add_material)
+        self.total_weight_input.installEventFilter(self)
         input_layout.addWidget(QLabel("Total Weight (KG):"), 3, 0)
         input_layout.addWidget(self.total_weight_input, 3, 1, 1, 3)
 
@@ -559,6 +560,22 @@ class MBManualEntry(QWidget):
         current_text = self.material_code_combo.currentText()
         if current_text not in self.rm_list:
             self.material_code_combo.setCurrentIndex(0)
+
+    def eventFilter(self, watched, event):
+        # Check if the event is a key press and specifically the Tab key
+        if watched == self.total_weight_input and event.type() == event.Type.KeyPress:
+            if event.key() == Qt.Key.Key_Tab:
+                # Decide which Material widget to focus based on which is visible
+                if self.material_code_lineedit.isVisible():
+                    self.material_code_lineedit.setFocus()
+                else:
+                    # For editable combos, we focus the internal lineEdit
+                    self.material_code_combo.setFocus()
+                    self.material_code_combo.lineEdit().selectAll()
+
+                return True  # This "consumes" the event so focus doesn't move elsewhere
+
+        return super().eventFilter(watched, event)
 
     def sync_rm(self):
         thread = QThread()

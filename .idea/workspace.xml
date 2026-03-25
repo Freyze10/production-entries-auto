@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00082" summary="changed schema: updated restriction">
-      <option name="closed" value="true" />
-      <created>1774235624658</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1774235624658</updated>
-    </task>
     <task id="LOCAL-00083" summary="updated decimal points">
       <option name="closed" value="true" />
       <created>1774237118179</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774425499556</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="fixed database add rm lstsi">
+      <option name="closed" value="true" />
+      <created>1774426439883</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1774426439883</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified format and manual entry ui" />
     <MESSAGE value="changed confirmation date label" />
     <MESSAGE value="added new color design" />
     <MESSAGE value="changed required color in line edit fields" />
@@ -527,7 +526,8 @@
     <MESSAGE value="fix button styling" />
     <MESSAGE value="addedd raw material in legacy" />
     <MESSAGE value="added sync rm function to call legacy" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sync rm function to call legacy" />
+    <MESSAGE value="fixed database add rm lstsi" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed database add rm lstsi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -554,12 +554,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>460</line>
+          <line>461</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>503</line>
+          <line>504</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
