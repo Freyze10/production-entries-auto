@@ -519,7 +519,8 @@ class MBManualEntry(QWidget):
             self.materials_table.setItem(row, 3,
                                          NumericTableWidgetItem(mat[4], is_float=True))  # total_weight
 
-
+        item_count = self.materials_table.rowCount()
+        self.no_items_label.setText(str(item_count))
         return True
 
     def update_totals(self):
