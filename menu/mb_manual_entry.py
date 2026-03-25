@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayo
 import qtawesome as fa
 
 from db.read import get_single_production_data, get_single_production_details
-from util.field_format import format_to_float, SmartDateEdit, production_mixing_time
+from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from workstation.workstation_details import _get_workstation_info
 
 
@@ -500,7 +500,6 @@ class MBManualEntry(QWidget):
             self.production_confirmation_display.setText(
                 self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
 
-
         self.materials_table.setRowCount(0)
 
         for mat in self.prod_materials:
@@ -509,16 +508,16 @@ class MBManualEntry(QWidget):
 
             # Tuple indexing: (material_code, large_scale, small_scale, total_weight)
             self.materials_table.setItem(row, 0,
-                                         QTableWidgetItem(str(mat[0])))  # material_code
+                                         QTableWidgetItem(str(mat[1])))  # material_code
 
             self.materials_table.setItem(row, 1,
-                                         NumericTableWidgetItem(mat[1], is_float=True))  # large_scale
+                                         NumericTableWidgetItem(mat[2], is_float=True))  # large_scale
 
             self.materials_table.setItem(row, 2,
-                                         NumericTableWidgetItem(mat[2], is_float=True))  # small_scale
+                                         NumericTableWidgetItem(mat[3], is_float=True))  # small_scale
 
             self.materials_table.setItem(row, 3,
-                                         NumericTableWidgetItem(mat[3], is_float=True))  # total_weight
+                                         NumericTableWidgetItem(mat[4], is_float=True))  # total_weight
 
-        self.update_totals()
+        self.update_totals() # gagwin
         return True
