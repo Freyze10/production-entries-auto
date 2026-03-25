@@ -333,3 +333,42 @@ class Sync(QObject):
             trace_info = traceback.format_exc();
             print(f"FORMULA SYNC CRITICAL ERROR: {e}\n{trace_info}")
             self.finished.emit(False, f"An unexpected error occurred during formula sync:\n{e}")
+
+
+class SyncRM(QObject):
+    finished = pyqtSignal(bool, str)
+    progress = pyqtSignal(str)
+
+    def run(self):
+        try:
+            self.progress.emit("Reading warehouse data...")
+
+            # Use a set to store unique RM codes
+            unique_rm_codes = set()
+            dbf = dbfread.DBF(RM_WH, encoding='latin1', char_decode_errors='ignore')
+
+            for r in dbf:
+                # Skip deleted or empty records
+                if r.get('T_DELETED') or not str(r.get('T_MATCODE', '')).strip():
+                    continue
+
+                unique_rm_codes.add(str(r.get('T_MATCODE')).strip())
+
+            if not unique_rm_codes:
+                self.finished.emit(True, "No records found to sync.")
+                return
+
+            # Prepare data for SQLAlchemy (list of dicts)
+            data = [{"rm_code": code} for code in unique_rm_codes]
+
+            self.progress.emit(f"Updating database with {len(data)} materials...")
+            with engine.connect() as conn:
+                with conn.begin():
+                    conn.execute(text("TRUNCATE TABLE tbl_raw_material_list RESTART IDENTITY"))
+                    conn.execute(text("INSERT INTO tbl_raw_material_list (rm_code) VALUES (:rm_code)"), data)
+
+            self.finished.emit(True, f"Sync complete. {len(data)} materials updated.")
+
+        except Exception as e:
+            print(f"RM SYNC ERROR: {e}")
+            self.finished.emit(False, str(e))

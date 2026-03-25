@@ -151,6 +151,13 @@ def create_table():
     """)
 
     cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_raw_material_list(
+            id SERIAL PRIMARY KEY,
+            rm_code VARCHAR(50),
+        )
+    """)
+
+    cursor.execute("""
         CREATE INDEX IF NOT EXISTS idx_prod_id 
         ON tbl_production01(prod_id);
 

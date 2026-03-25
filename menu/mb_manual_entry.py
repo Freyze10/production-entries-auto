@@ -271,15 +271,16 @@ class MBManualEntry(QWidget):
         self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
         self.material_code_lineedit.setVisible(False)  # Hidden by default
 
-        add_btn = QPushButton("Sync")
-        add_btn.setObjectName("SuccessButton")
+        btn_sync_rm = QPushButton("Sync")
+        btn_sync_rm.setObjectName("SuccessButton")
+        btn_sync_rm.clicked.connect(self.sync_rm)
 
         # Add label
         input_layout.addWidget(QLabel("Material Code:"), 0, 0)
         # Add both widgets to the same position (only one will be visible at a time)
         input_layout.addWidget(self.material_code_combo, 0, 1, 1, 2)
         input_layout.addWidget(self.material_code_lineedit, 0, 1, 1, 2)
-        input_layout.addWidget(add_btn, 0, 3)
+        input_layout.addWidget(btn_sync_rm, 0, 3)
 
         # Large Scale
         self.large_scale_input = QLineEdit()
