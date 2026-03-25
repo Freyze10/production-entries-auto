@@ -3,6 +3,7 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
     QHeaderView, QMenu, QMessageBox
 import qtawesome as fa
+from PyQt6.QtCore import pyqtSignal
 
 from db.legacy import Sync
 from db import read
@@ -12,11 +13,11 @@ from util.loading import LoadingDialog
 
 
 class ProductionRecords(QWidget):
+    go_to_manual_entry = pyqtSignal(int)
     def __init__(self, username, user_role):
         super().__init__()
         self.username = username
         self.user_role = user_role
-
         self.init_ui()
 
     def init_ui(self):
@@ -235,22 +236,24 @@ class ProductionRecords(QWidget):
             Qt.ItemDataRole.DisplayRole
         )
 
-    def view_auto(self, index):
+    def view_manual(self, index):
+        # go_to_page(1)
+        # self.display_page.setCurrentIndex(1)
         row_id = self.get_row_id(index)
         print("View row ID:", row_id)
+        self.go_to_manual_entry.emit(index)
+    def view_auto(self, index):
 
-    def view_manual(self, index):
         row_id = self.get_row_id(index)
-        print("Edit row ID:", row_id)
-
-    def view_auto_dc(self, index):
-        row_id = self.get_row_id(index)
-        print("Delete row ID:", row_id)
+        print("View row ID:", row_id)
 
     def view_manual_dc(self, index):
         row_id = self.get_row_id(index)
         print("Delete row ID:", row_id)
 
+    def view_auto_dc(self, index):
+        row_id = self.get_row_id(index)
+        print("Delete row ID:", row_id)
 
     def run_production_sync(self):
         thread = QThread()

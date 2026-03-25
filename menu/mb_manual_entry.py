@@ -18,6 +18,7 @@ class MBManualEntry(QWidget):
         # self.user_role = user_role
         # self.log_audit_trail = log_audit_trail
         self.prod_id = prod_id
+        print(self.prod_id)
         self.prod_results = None
         self.prod_materials = None
         self.work_station = _get_workstation_info()
@@ -458,7 +459,7 @@ class MBManualEntry(QWidget):
                 if not self.raw_material_check.isChecked():
                     self.non_raw_material_check.setChecked(True)
 
-    def display_details(self):
+    def display_details(self, prod_id = 0):
         self.wip_no_input.setText(str(self.prod_results['index_no']))
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
