@@ -230,7 +230,7 @@ class AppStyles:
             border: 1px solid {SLATE_200};
             border-radius: 8px;
             padding: 4px 6px;
-            min-height: 22px;
+            min-height: 20px;
             color: {TEXT_PRIMARY};
             selection-background-color: {TEAL_400};
         }}

@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00063" summary="added loading dialogue">
-      <option name="closed" value="true" />
-      <created>1774072894433</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1774072894433</updated>
-    </task>
     <task id="LOCAL-00064" summary="added details table">
       <option name="closed" value="true" />
       <created>1774073871276</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774342479791</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="removed object name in inut card">
+      <option name="closed" value="true" />
+      <created>1774342803197</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1774342803197</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed prod02 schema" />
     <MESSAGE value="added production in legacy" />
     <MESSAGE value="updated schema" />
     <MESSAGE value="fixing foreign key error with form id" />
@@ -527,7 +526,8 @@
     <MESSAGE value="changed required color in line edit fields" />
     <MESSAGE value="added design for checkbox" />
     <MESSAGE value="added right column for manual entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="added right column for manual entry" />
+    <MESSAGE value="removed object name in inut card" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed object name in inut card" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -549,7 +549,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>259</line>
+          <line>258</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
