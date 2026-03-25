@@ -14,12 +14,14 @@ FORMULA_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula01.dbf')
 FORMULA_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula02.dbf')
 PRODUCTION_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')
 PRODUCTION_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod02.dbf')
+RM_WH = os.path.join(DBF_BASE_PATH, 'tbl_rm_wh.dbf')
 
 try:
     db_url = f"postgresql+psycopg2://{DB_CONFIG['user']}:{DB_CONFIG['password']}@{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['dbname']}"
     engine = create_engine(db_url, pool_pre_ping=True, pool_recycle=3600)
 except Exception as e:
     print(f"CRITICAL: Could not create database engine. Error: {e}")
+
 
 def _to_float(value, default=None):
     if value is None: return default
@@ -33,6 +35,7 @@ def _to_float(value, default=None):
         except (ValueError, TypeError):
             return default
 
+
 def _to_int(value, default=None):
     if value is None: return default
     if isinstance(value, bytes) and value.strip(b'\x00') == b'': return default
@@ -44,7 +47,6 @@ def _to_int(value, default=None):
             return int(float(cleaned_value)) if cleaned_value else default
         except (ValueError, TypeError):
             return default
-
 
 
 class Sync(QObject):

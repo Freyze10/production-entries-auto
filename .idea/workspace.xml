@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00077" summary="changed schema">
-      <option name="closed" value="true" />
-      <created>1774234656750</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1774234656750</updated>
-    </task>
-    <task id="LOCAL-00078" summary="updated legacy">
-      <option name="closed" value="true" />
-      <created>1774234949004</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1774234949004</updated>
-    </task>
     <task id="LOCAL-00079" summary="updated legacy">
       <option name="closed" value="true" />
       <created>1774235100430</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774423051134</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="updated table design">
+      <option name="closed" value="true" />
+      <created>1774423614122</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1774423614122</updated>
+    </task>
+    <task id="LOCAL-00127" summary="added iitem total count">
+      <option name="closed" value="true" />
+      <created>1774423729048</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1774423729048</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="finished connecting search function" />
-    <MESSAGE value="adding manual_entry" />
     <MESSAGE value="adding manual_entry to menu button" />
     <MESSAGE value="added format to float function" />
     <MESSAGE value="added date format function" />
@@ -527,7 +525,9 @@
     <MESSAGE value="sent prod_id to manual from production page" />
     <MESSAGE value="updated total value" />
     <MESSAGE value="added auto sort" />
-    <option name="LAST_COMMIT_MESSAGE" value="added auto sort" />
+    <MESSAGE value="updated table design" />
+    <MESSAGE value="added iitem total count" />
+    <option name="LAST_COMMIT_MESSAGE" value="added iitem total count" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -554,12 +554,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>459</line>
+          <line>457</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>502</line>
+          <line>500</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

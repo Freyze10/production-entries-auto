@@ -271,31 +271,29 @@ class MBManualEntry(QWidget):
         self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
         self.material_code_lineedit.setVisible(False)  # Hidden by default
 
-        # Add label
-        input_layout.addWidget(QLabel("Material Code:"), 0, 0)
-        # Add both widgets to the same position (only one will be visible at a time)
-        input_layout.addWidget(self.material_code_combo, 0, 1)
-        input_layout.addWidget(self.material_code_lineedit, 0, 1)
+        add_btn = QPushButton("Sync")
+        add_btn.setObjectName("SuccessButton")
 
         # Add label
         input_layout.addWidget(QLabel("Material Code:"), 0, 0)
         # Add both widgets to the same position (only one will be visible at a time)
-        input_layout.addWidget(self.material_code_combo, 0, 1)
-        input_layout.addWidget(self.material_code_lineedit, 0, 1)
+        input_layout.addWidget(self.material_code_combo, 0, 1, 1, 2)
+        input_layout.addWidget(self.material_code_lineedit, 0, 1, 1, 2)
+        input_layout.addWidget(add_btn, 0, 3)
 
         # Large Scale
         self.large_scale_input = QLineEdit()
         self.large_scale_input.setPlaceholderText("0.0000000")
         self.large_scale_input.setStyleSheet("background-color: #fff9c4;")
         input_layout.addWidget(QLabel("Large Scale (KG):"), 1, 0)
-        input_layout.addWidget(self.large_scale_input, 1, 1)
+        input_layout.addWidget(self.large_scale_input, 1, 1, 1, 3)
 
         # Small Scale
         self.small_scale_input = QLineEdit()
         self.small_scale_input.setPlaceholderText("0.0000000")
         self.small_scale_input.setStyleSheet("background-color: #fff9c4;")
         input_layout.addWidget(QLabel("Small Scale (G):"), 2, 0)
-        input_layout.addWidget(self.small_scale_input, 2, 1)
+        input_layout.addWidget(self.small_scale_input, 2, 1, 1, 3)
 
         # Total Weight
         self.total_weight_input = QLineEdit()
@@ -303,7 +301,7 @@ class MBManualEntry(QWidget):
         self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
         # self.total_weight_input.returnPressed.connect(self.add_material)
         input_layout.addWidget(QLabel("Total Weight (KG):"), 3, 0)
-        input_layout.addWidget(self.total_weight_input, 3, 1)
+        input_layout.addWidget(self.total_weight_input, 3, 1, 1, 3)
 
         # Action Buttons
         action_layout = QHBoxLayout()
@@ -327,7 +325,7 @@ class MBManualEntry(QWidget):
         remove_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         clear_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
-        input_layout.addLayout(action_layout, 4, 0, 1, 2)
+        input_layout.addLayout(action_layout, 4, 0, 1, 4)
         material_layout.addWidget(input_card)
 
         # Materials Table
