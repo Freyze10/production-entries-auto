@@ -3,6 +3,7 @@ from datetime import datetime
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton
+import qtawesome as fa
 
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time
 from workstation.workstation_details import _get_workstation_info
@@ -338,7 +339,7 @@ class MBManualEntry(QWidget):
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.materials_table.verticalHeader().setVisible(False)
         self.materials_table.setAlternatingRowColors(True)
-        self.materials_table.setMinimumHeight(300)
+        self.materials_table.setMinimumHeight(200)
         self.materials_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.materials_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         material_layout.addWidget(self.materials_table)
@@ -388,14 +389,38 @@ class MBManualEntry(QWidget):
 
         material_layout.addLayout(encoding_layout)
 
-
-
-
         right_column.addWidget(material_card)
         scroll_layout.addLayout(right_column, stretch=1)
 
         scroll.setWidget(scroll_widget)
         main_layout.addWidget(scroll)
+
+        # Bottom Buttons
+        button_layout = QHBoxLayout()
+        button_layout.addStretch()
+
+        self.print_wip_btn = QPushButton("Print with WIP", objectName="InfoButton")
+        self.print_wip_btn.setIcon(fa.icon('fa5s.print', color='white'))
+        # self.print_wip_btn.clicked.connect(self.print_with_wip)
+        button_layout.addWidget(self.print_wip_btn)
+
+        self.print_btn = QPushButton("Print", objectName="SecondaryButton")
+        self.print_btn.setIcon(fa.icon('fa5s.print', color='white'))
+        # self.print_btn.clicked.connect(self.print_production)
+        button_layout.addWidget(self.print_btn)
+
+        self.new_btn = QPushButton("New", objectName="PrimaryButton")
+        self.new_btn.setIcon(fa.icon('fa5s.file', color='white'))
+        # self.new_btn.clicked.connect(self.new_production)
+        button_layout.addWidget(self.new_btn)
+
+        self.save_btn = QPushButton("Save", objectName="SuccessButton")
+        self.save_btn.setIcon(fa.icon('fa5s.save', color='white'))
+        # self.save_btn.clicked.connect(self.save_production)
+        button_layout.addWidget(self.save_btn)
+
+        main_layout.addLayout(button_layout)
+
 
 
     def on_material_type_changed(self, checked, is_raw):
