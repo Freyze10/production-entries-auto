@@ -14,9 +14,6 @@ from workstation.workstation_details import _get_workstation_info
 class MBManualEntry(QWidget):
     def __init__(self, prod_id=0):  # , username, user_role, log_audit_trail
         super().__init__()
-        # self.username = username
-        # self.user_role = user_role
-        # self.log_audit_trail = log_audit_trail
         self.prod_id = prod_id
         print(self.prod_id)
         self.prod_results = None
@@ -29,18 +26,6 @@ class MBManualEntry(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        if self.prod_id != 0:
-            try:
-                self.prod_results = get_single_production_data(self.prod_id)
-                self.prod_materials = get_single_production_details(self.prod_id)
-                if not self.prod_results:
-                    QMessageBox.warning(self, "Not Found",
-                                        f"Production {self.prod_id} not found.")
-                    return False
-                self.display_details()
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to load: {e}")
-                return False
 
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(5, 5, 5, 5)
@@ -439,6 +424,18 @@ class MBManualEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
+        if self.prod_id != 0:
+            try:
+                self.prod_results = get_single_production_data(self.prod_id)
+                self.prod_materials = get_single_production_details(self.prod_id)
+                if not self.prod_results:
+                    QMessageBox.warning(self, "Not Found",
+                                        f"Production {self.prod_id} not found.")
+                    return False
+                self.display_details()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to load: {e}")
+                return False
 
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""

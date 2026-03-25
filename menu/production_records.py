@@ -200,8 +200,18 @@ class ProductionRecords(QWidget):
         except Exception as e:
             print(e)
 
+    def get_selected_row_id(self):
+        index = self.table_records.selectionModel().currentIndex()
 
+        if not index.isValid():
+            return None
 
+        value = self.table_model.data(
+            self.table_model.index(index.row(), 0),
+            Qt.ItemDataRole.DisplayRole
+        )
+
+        return int(value) if value else 0
 
     def show_context_menu(self, position):
         index = self.table_records.indexAt(position)
@@ -209,7 +219,11 @@ class ProductionRecords(QWidget):
         if not index.isValid():
             return
 
+        # Select the row
         self.table_records.selectRow(index.row())
+
+        # Get selected row ID (hidden column 0)
+        prod_id = self.get_selected_row_id()
 
         menu = QMenu()
 
@@ -221,39 +235,29 @@ class ProductionRecords(QWidget):
         action = menu.exec(self.table_records.viewport().mapToGlobal(position))
 
         if action == view_auto_mb:
-            self.view_auto(index)
+            self.view_auto(prod_id)
         elif action == view_manual_mb:
-            self.view_manual(index)
+            self.view_manual(prod_id)
         elif action == view_auto_dc:
-            self.view_auto_dc(index)
+            self.view_auto_dc(prod_id)
         elif action == view_manual_dc:
-            self.view_manual_dc(index)
+            self.view_manual_dc(prod_id)
 
-    def get_row_id(self, index):
-        row = index.row()
-        return self.table_model.data(
-            self.table_model.index(row, 0),  # column 0 = hidden ID
-            Qt.ItemDataRole.DisplayRole
-        )
 
-    def view_manual(self, index):
+    def view_manual(self, prod_id):
         # go_to_page(1)
         # self.display_page.setCurrentIndex(1)
-        row_id = self.get_row_id(index)
-        print("View row ID:", row_id)
-        self.go_to_manual_entry.emit(index)
-    def view_auto(self, index):
+        print("View row ID:", prod_id)
+        self.go_to_manual_entry.emit(prod_id)
+    def view_auto(self, prod_id):
 
-        row_id = self.get_row_id(index)
-        print("View row ID:", row_id)
+        print("View row ID:", prod_id)
 
-    def view_manual_dc(self, index):
-        row_id = self.get_row_id(index)
-        print("Delete row ID:", row_id)
+    def view_manual_dc(self, prod_id):
+        print("Delete row ID:", prod_id)
 
-    def view_auto_dc(self, index):
-        row_id = self.get_row_id(index)
-        print("Delete row ID:", row_id)
+    def view_auto_dc(self, prod_id):
+        print("Delete row ID:", prod_id)
 
     def run_production_sync(self):
         thread = QThread()

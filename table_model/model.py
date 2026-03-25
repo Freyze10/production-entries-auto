@@ -14,8 +14,11 @@ class TableModel(QAbstractTableModel):
         return len(self._headers)
 
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
-        if role == Qt.ItemDataRole.DisplayRole:
-            return str(self._data[index.row()][index.column()])
+        if not index.isValid():
+            return None
+
+        if role in (Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole):
+            return self._data[index.row()][index.column()]
         return None
 
     def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):
