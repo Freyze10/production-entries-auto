@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00065" summary="modifying styl;e">
-      <option name="closed" value="true" />
-      <created>1774074692673</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1774074692673</updated>
-    </task>
     <task id="LOCAL-00066" summary="edited table design">
       <option name="closed" value="true" />
       <created>1774074980922</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774401804999</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="added bottom buttons">
+      <option name="closed" value="true" />
+      <created>1774402065730</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1774402065730</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated schema" />
     <MESSAGE value="fixing foreign key error with form id" />
     <MESSAGE value="fixed legacy database transfee" />
     <MESSAGE value="added call all data function in database" />
@@ -527,14 +526,15 @@
     <MESSAGE value="added right column for manual entry" />
     <MESSAGE value="removed object name in inut card" />
     <MESSAGE value="reduced min-height line label" />
-    <option name="LAST_COMMIT_MESSAGE" value="reduced min-height line label" />
+    <MESSAGE value="added bottom buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added bottom buttons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>451</line>
+          <line>489</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

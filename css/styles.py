@@ -388,18 +388,6 @@ class AppStyles:
             font-size: 13px;
         }}
 
-        QHeaderView::section {{
-            background: {TEXT_TERTIARY};
-            color: {SLATE_100};
-            padding: 6px 0px;
-            border-bottom: 2px solid {TEAL_600};
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            height: 18px;
-        }}
-
         QTableView::item {{
             padding-left: 5px;
             border: none;
@@ -424,6 +412,56 @@ class AppStyles:
             border-bottom-right-radius: 10px;
         }}
 
+        QTableWidget {{ 
+            border: 1px solid {BG_GRAY}; 
+            gridline-color: {BG_BASE}; 
+            background-color: {SLATE_200}; 
+            border-radius: 8px; 
+            alternate-background-color: {BG_BASE}; 
+        }}
+        QHeaderView::section {{
+            background: {TEXT_TERTIARY};
+            color: {SLATE_100};
+            padding: 6px 0px;
+            border-bottom: 2px solid {TEAL_600};
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            height: 18px;
+        }}
+        QHeaderView::section {{ 
+            background-color: {TEXT_TERTIARY}; 
+            padding: 6px 4px; 
+            border: none; 
+            border-bottom: 2px solid {BG_GRAY}; 
+            border-right: 1px solid {BG_GRAY}; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 12px; 
+            letter-spacing: 0.5px; 
+        }}
+        QHeaderView::section:first {{ 
+            border-top-left-radius: 8px; 
+        }}
+        QHeaderView::section:last {{ 
+            border-top-right-radius: 8px; 
+            border-right: none; 
+        }}
+        QTableWidget::item {{ 
+            padding: 8px; 
+            border: none; 
+            color: {TEXT_SECONDARY}; 
+        }}
+        QTableWidget::item:selected {{ 
+            background-color: {BG_SURFACE}; 
+            color: {TEXT_PRIMARY}; 
+        }}
+        QTableWidget::item:hover {{
+            background-color: rgba(79, 70, 229, 0.08); 
+        }}
+        
+        
         QTabBar::tab {{
             background: {SLATE_100};
             border: 1px solid {SLATE_200};
