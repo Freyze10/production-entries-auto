@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00086" summary="updated formulation sync, use latest form id">
-      <option name="closed" value="true" />
-      <created>1774246529355</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1774246529355</updated>
-    </task>
-    <task id="LOCAL-00087" summary="changed prod02 schema">
-      <option name="closed" value="true" />
-      <created>1774247147307</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1774247147307</updated>
-    </task>
     <task id="LOCAL-00088" summary="added production in legacy">
       <option name="closed" value="true" />
       <created>1774254136800</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774488173339</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="added clear material inputs">
+      <option name="closed" value="true" />
+      <created>1774488304570</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1774488304570</updated>
+    </task>
+    <task id="LOCAL-00136" summary="connected add materials">
+      <option name="closed" value="true" />
+      <created>1774488457336</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1774488457336</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added design for checkbox" />
-    <MESSAGE value="added right column for manual entry" />
     <MESSAGE value="removed object name in inut card" />
     <MESSAGE value="reduced min-height line label" />
     <MESSAGE value="added bottom buttons" />
@@ -527,7 +525,9 @@
     <MESSAGE value="set tab order in manual entry" />
     <MESSAGE value="removed print prod_id" />
     <MESSAGE value="added add material function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added add material function" />
+    <MESSAGE value="added clear material inputs" />
+    <MESSAGE value="connected add materials" />
+    <option name="LAST_COMMIT_MESSAGE" value="connected add materials" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -566,10 +566,14 @@ class MBManualEntry(QWidget):
         self.update_totals()
         self.material_code_combo.setFocus()
 
+
+
+
+
     def update_totals(self):
         """Update the total weight and item count displays."""
         total_weight = 0.0
-        item_count = self.materials_table.rowCount()
+        item_count = self.get_valid_row_count()
 
         for row in range(item_count):
             item = self.materials_table.item(row, 3)
@@ -585,6 +589,14 @@ class MBManualEntry(QWidget):
         self.no_items_label.setText(str(item_count))
         self.total_weight_label.setText(f"{total_weight:.7f}")
 
+    def get_valid_row_count(self):
+        valid_count = 0
+        for row in range(self.materials_table.rowCount()):
+            item = self.materials_table.item(row, 0)  # Check the first column
+            if item:  # check if may value ung first item, count if meron
+                if item.text().strip():
+                    valid_count += 1
+        return valid_count
 
     def setup_rm_code_completer(self):
         self.rm_list = get_rm_code_lists()
