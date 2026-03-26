@@ -441,16 +441,16 @@ class MBManualEntry(QWidget):
         if is_raw:
             if checked:
                 self.non_raw_material_check.setChecked(False)
-                # self.material_code_combo.setVisible(True)
-                # self.material_code_lineedit.setVisible(False)
+                self.material_code_combo.setVisible(True)
+                self.material_code_lineedit.setVisible(False)
             else:
                 if not self.non_raw_material_check.isChecked():
                     self.raw_material_check.setChecked(True)
         else:
             if checked:
                 self.raw_material_check.setChecked(False)
-                # self.material_code_combo.setVisible(False)
-                # self.material_code_lineedit.setVisible(True)
+                self.material_code_combo.setVisible(False)
+                self.material_code_lineedit.setVisible(True)
             else:
                 if not self.raw_material_check.isChecked():
                     self.non_raw_material_check.setChecked(True)
