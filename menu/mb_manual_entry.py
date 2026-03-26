@@ -301,7 +301,7 @@ class MBManualEntry(QWidget):
         self.total_weight_input = QLineEdit()
         self.total_weight_input.setPlaceholderText("0.0000000")
         self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
-        # self.total_weight_input.returnPressed.connect(self.add_material)
+        self.total_weight_input.returnPressed.connect(self.add_material)
         self.total_weight_input.installEventFilter(self)
         input_layout.addWidget(QLabel("Total Weight (KG):"), 3, 0)
         input_layout.addWidget(self.total_weight_input, 3, 1, 1, 3)
@@ -312,7 +312,7 @@ class MBManualEntry(QWidget):
 
         add_btn = QPushButton("Add")
         add_btn.setObjectName("SuccessButton")
-        # add_btn.clicked.connect(self.add_material)
+        add_btn.clicked.connect(self.add_material)
         action_layout.addWidget(add_btn)
 
         remove_btn = QPushButton("Remove")
