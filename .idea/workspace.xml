@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00089" summary="updated schema">
-      <option name="closed" value="true" />
-      <created>1774254446066</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1774254446066</updated>
-    </task>
     <task id="LOCAL-00090" summary="fixing foreign key error with form id">
       <option name="closed" value="true" />
       <created>1774256596015</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774489003296</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="removed fg warehouse id">
+      <option name="closed" value="true" />
+      <created>1774490041954</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1774490041954</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="reduced min-height line label" />
     <MESSAGE value="added bottom buttons" />
     <MESSAGE value="added table design" />
     <MESSAGE value="updated default value data" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added clear material inputs" />
     <MESSAGE value="connected add materials" />
     <MESSAGE value="add actual row count value" />
-    <option name="LAST_COMMIT_MESSAGE" value="add actual row count value" />
+    <MESSAGE value="removed fg warehouse id" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed fg warehouse id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -554,12 +554,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>460</line>
+          <line>456</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>503</line>
+          <line>499</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

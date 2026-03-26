@@ -317,7 +317,7 @@ class MBManualEntry(QWidget):
 
         remove_btn = QPushButton("Remove")
         remove_btn.setObjectName("DangerButton")
-        # remove_btn.clicked.connect(self.remove_material)
+        remove_btn.clicked.connect(self.remove_material)
         action_layout.addWidget(remove_btn)
 
         clear_btn = QPushButton("Clear")
@@ -562,7 +562,13 @@ class MBManualEntry(QWidget):
         self.update_totals()
         self.material_code_combo.setFocus()
 
-
+    def remove_material(self):
+        current_row = self.materials_table.currentRow()
+        if current_row >= 0:
+            self.materials_table.removeRow(current_row)
+            self.update_totals()
+        else:
+            QMessageBox.warning(self, "No Selection", "Please select a material to remove.")
 
 
 
