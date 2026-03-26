@@ -501,7 +501,6 @@ class MBManualEntry(QWidget):
         self.materials_table.setRowCount(0)
 
         batches = qty_req / qty_batch if qty_batch > 0 else 1.0
-        print(batches)
         for mat in self.prod_materials:
             # Tuple indexing: (id, material_code, large_scale, small_scale, total_weight)
             mat_code = str(mat[1])
@@ -552,8 +551,8 @@ class MBManualEntry(QWidget):
         except ValueError:
             QMessageBox.warning(self, "Invalid Input", "Please enter valid numbers for scales and weight.")
             return
-
-        table_spacing.handle_batch_break_manual(self.materials_table, large_scale, limit=25.0)
+        batches = float(str(self.qty_required_input)) / float(str(self.qty_per_batch_input))
+        table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches, limit=25.0)
 
         row_position = self.materials_table.rowCount()
         self.materials_table.insertRow(row_position)
