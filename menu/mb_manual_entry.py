@@ -540,9 +540,13 @@ class MBManualEntry(QWidget):
         small_scale_text = self.small_scale_input.text().strip()
         total_weight_text = self.total_weight_input.text().strip()
 
-        if not large_scale_text or not small_scale_text or not total_weight_text:
+        if not total_weight_text:
             QMessageBox.warning(self, "Missing Input", "Please fill in all scale and weight fields.")
             return
+
+        if not large_scale_text or not small_scale_text:
+            large_scale_text = 0.000000
+            small_scale_text = 0.000000
 
         try:
             large_scale = float(large_scale_text)
