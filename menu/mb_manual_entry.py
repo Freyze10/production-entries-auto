@@ -413,7 +413,7 @@ class MBManualEntry(QWidget):
 
         self.new_btn = QPushButton("New", objectName="PrimaryButton")
         self.new_btn.setIcon(fa.icon('fa5s.file', color='white'))
-        # self.new_btn.clicked.connect(self.new_production)
+        self.new_btn.clicked.connect(self.new_production)
         button_layout.addWidget(self.new_btn)
 
         self.save_btn = QPushButton("Save", objectName="SuccessButton")
