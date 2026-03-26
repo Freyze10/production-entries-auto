@@ -576,20 +576,25 @@ class MBManualEntry(QWidget):
         self.update_totals()
 
     def update_totals(self):
-        """Update the total weight and item count displays."""
         total_weight = 0.0
         item_count = self.get_valid_row_count()
 
-        for row in range(item_count):
-            item = self.materials_table.item(row, 3)
+        for row in range(self.materials_table.rowCount()):
+            item = self.materials_table.item(row, 3) # Check column 3 (Weight)
+
             if item:
-                if isinstance(item, NumericTableWidgetItem):
+                if hasattr(item, 'value'):
                     total_weight += float(item.value)
                 else:
-                    try:
-                        total_weight += float(item.text())
-                    except ValueError:
-                        pass
+                    # skip if text is empty
+                    text_val = item.text().strip()
+                    if text_val:  # This avoids ValueError on empty strings ""
+                        try:
+                            # Remove commas if any exist (e.g., "1,200.00")
+                            clean_text = text_val.replace(',', '')
+                            total_weight += float(clean_text)
+                        except ValueError:
+                            pass
 
         self.no_items_label.setText(str(item_count))
         self.total_weight_label.setText(f"{total_weight:.7f}")

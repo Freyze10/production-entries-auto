@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00091" summary="fixed legacy database transfee">
-      <option name="closed" value="true" />
-      <created>1774317413110</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1774317413110</updated>
-    </task>
     <task id="LOCAL-00092" summary="added call all data function in database">
       <option name="closed" value="true" />
       <created>1774319014913</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774490341970</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="added clear materials functioni">
+      <option name="closed" value="true" />
+      <created>1774491215510</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1774491215510</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added table design" />
     <MESSAGE value="updated default value data" />
     <MESSAGE value="created read of single prod id" />
     <MESSAGE value="fixing display data result" />
@@ -527,7 +526,8 @@
     <MESSAGE value="add actual row count value" />
     <MESSAGE value="removed fg warehouse id" />
     <MESSAGE value="added remove row function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added remove row function" />
+    <MESSAGE value="added clear materials functioni" />
+    <option name="LAST_COMMIT_MESSAGE" value="added clear materials functioni" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
