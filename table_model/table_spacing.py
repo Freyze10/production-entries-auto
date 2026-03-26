@@ -31,12 +31,29 @@ def get_last_valid_large_scale(table, break_col=0, sum_col=1):
 def handle_batch_break_manual(table, weight: float, batches: float = 1.0, limit: float = 25.0,
                               break_col: int = 0, sum_col: int = 1):
     """
-    Checks if adding this weight (divided by batches) would exceed the limit.
-    If yes → inserts an empty separator row.
+    Modified logic:
+    - Do NOT insert break row if this will be the first real row in the table.
+    - Otherwise, check if (last_valid_scale + per_batch) > limit → insert empty row.
     """
     if weight <= 0 or batches <= 0:
         return False
 
+    # IMPORTANT: Check if table is empty or only has separator rows
+    if table.rowCount() == 0:
+        return False  # First row → never insert break
+
+    # Check if all existing rows are empty/separator
+    has_real_data = False
+    for row in range(table.rowCount()):
+        break_item = table.item(row, break_col)
+        if break_item and break_item.text().strip():
+            has_real_data = True
+            break
+
+    if not has_real_data:
+        return False  # No real data yet → this is the first row
+
+    # Now do normal logic
     last_valid = get_last_valid_large_scale(table, break_col, sum_col)
     per_batch = weight / batches
 
@@ -44,10 +61,10 @@ def handle_batch_break_manual(table, weight: float, batches: float = 1.0, limit:
         row_pos = table.rowCount()
         table.insertRow(row_pos)
 
-        # Insert empty row across all columns
+        # Insert empty separator row
         for col in range(table.columnCount()):
             table.setItem(row_pos, col, QTableWidgetItem(""))
 
-        return True  # Break row was added
+        return True   # Break row was added
 
     return False
