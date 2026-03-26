@@ -501,21 +501,21 @@ class MBManualEntry(QWidget):
         self.materials_table.setRowCount(0)
 
         for mat in self.prod_materials:
+            # Tuple indexing: (id, material_code, large_scale, small_scale, total_weight)
+            mat_code = str(mat[1])
+            large_scale = float(mat[2])
+            small_scale = float(mat[3])
+            total_weight = float(mat[4])
+
+            table_spacing.handle_batch_break_manual(self.materials_table, large_scale, limit=25.0)
+
             row = self.materials_table.rowCount()
             self.materials_table.insertRow(row)
 
-            # Tuple indexing: (material_code, large_scale, small_scale, total_weight)
-            self.materials_table.setItem(row, 0,
-                                         QTableWidgetItem(str(mat[1])))  # material_code
-
-            self.materials_table.setItem(row, 1,
-                                         NumericTableWidgetItem(mat[2], is_float=True))  # large_scale
-
-            self.materials_table.setItem(row, 2,
-                                         NumericTableWidgetItem(mat[3], is_float=True))  # small_scale
-
-            self.materials_table.setItem(row, 3,
-                                         NumericTableWidgetItem(mat[4], is_float=True))  # total_weight
+            self.materials_table.setItem(row, 0, QTableWidgetItem(mat_code))
+            self.materials_table.setItem(row, 1, NumericTableWidgetItem(large_scale, is_float=True))
+            self.materials_table.setItem(row, 2, NumericTableWidgetItem(small_scale, is_float=True))
+            self.materials_table.setItem(row, 3, NumericTableWidgetItem(total_weight, is_float=True))
 
         item_count = self.materials_table.rowCount()
         self.no_items_label.setText(str(item_count))
