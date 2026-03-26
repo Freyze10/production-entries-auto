@@ -602,6 +602,13 @@ class MBManualEntry(QWidget):
         if current_text not in self.rm_list:
             self.material_code_combo.setCurrentIndex(0)
 
+    def clear_material_inputs(self):
+        self.material_code_combo.setCurrentIndex(0)
+        self.material_code_lineedit.clear()
+        self.large_scale_input.clear()
+        self.small_scale_input.clear()
+        self.total_weight_input.clear()
+
     def get_material_code(self):
         if self.raw_material_check.isChecked():
             return self.material_code_combo.currentText().strip()
