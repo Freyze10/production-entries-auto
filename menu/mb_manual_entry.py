@@ -551,7 +551,13 @@ class MBManualEntry(QWidget):
         except ValueError:
             QMessageBox.warning(self, "Invalid Input", "Please enter valid numbers for scales and weight.")
             return
-        batches = float(str(self.qty_required_input.text())) / float(str(self.qty_per_batch_input.text()))
+
+        qty_required = float(self.qty_required_input.text() or 1)
+        qty_per_batch = float(self.qty_per_batch_input.text() or 1)
+
+        batches = qty_required / qty_per_batch
+
+
         table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches, limit=25.0)
 
         row_position = self.materials_table.rowCount()
