@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00105" summary="added date format function">
-      <option name="closed" value="true" />
-      <created>1774334132704</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1774334132704</updated>
-    </task>
-    <task id="LOCAL-00106" summary="modified format and manual entry ui">
-      <option name="closed" value="true" />
-      <created>1774335620315</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1774335620315</updated>
-    </task>
     <task id="LOCAL-00107" summary="changed confirmation date label">
       <option name="closed" value="true" />
       <created>1774336250409</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774509415254</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="added default value in  the large andsmall scale">
+      <option name="closed" value="true" />
+      <created>1774509618529</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1774509618529</updated>
+    </task>
+    <task id="LOCAL-00155" summary="added a new button function">
+      <option name="closed" value="true" />
+      <created>1774510775432</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1774510775432</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated table design" />
-    <MESSAGE value="added iitem total count" />
     <MESSAGE value="fix button styling" />
     <MESSAGE value="addedd raw material in legacy" />
     <MESSAGE value="added sync rm function to call legacy" />
@@ -527,7 +525,9 @@
     <MESSAGE value="fixed row spacing on add material" />
     <MESSAGE value="added empty value in the index 0 of rm list" />
     <MESSAGE value="initialize btn production to checked" />
-    <option name="LAST_COMMIT_MESSAGE" value="initialize btn production to checked" />
+    <MESSAGE value="added default value in  the large andsmall scale" />
+    <MESSAGE value="added a new button function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a new button function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

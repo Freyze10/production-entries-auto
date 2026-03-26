@@ -92,3 +92,16 @@ def get_rm_code_lists():
         return [row[0] for row in records]
     else:
         return []
+
+def get_latest_prod_id():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""SELECT COALESCE(MAX(prod_id), 0)
+                    FROM tbl_production01""")
+    record = cur.fetchone()
+
+    cur.close()
+    conn.close()
+    return record[0]
+

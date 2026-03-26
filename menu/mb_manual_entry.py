@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayo
 import qtawesome as fa
 
 from db.legacy import SyncRM
-from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists
+from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id
 from table_model import table_spacing
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
@@ -582,6 +582,47 @@ class MBManualEntry(QWidget):
             self.update_totals()
         else:
             QMessageBox.warning(self, "No Selection", "Please select a material to remove.")
+
+    def new_production(self):
+        """Initialize a new production entry."""
+        self.current_production_id = None
+        try:
+            latest_prod = get_latest_prod_id()
+            self.production_id_input.setText(str(latest_prod + 1))
+        except Exception as e:
+            self.production_id_input.setText("1")
+
+        self.form_type_combo.setCurrentIndex(0)
+        self.product_code_input.clear()
+        self.product_color_input.clear()
+        self.formula_input.clear()
+        self.sum_cons_input.clear()
+        self.dosage_input.clear()
+        self.customer_input.clear()
+        self.lot_no_input.clear()
+        self.production_date_input.setText("")
+        self.confirmation_date_input.setText("")
+        self.order_form_no_input.clear()
+        self.colormatch_no_input.clear()
+        self.matched_date_input.setText("")
+        self.mixing_time_input.clear()
+        self.machine_no_input.clear()
+        self.qty_required_input.clear()
+        self.qty_per_batch_input.clear()
+        self.prepared_by_input.clear()
+        self.notes_input.clear()
+
+        self.encoded_by_display.setText(self.work_station['u'])
+        self.production_encoded_display.setText(datetime.now().strftime("%m/%d/%Y %I:%M:%S %p"))
+        self.production_confirmation_display.clear()
+
+        if self.result:
+            self.result = None
+
+        self.materials_table.setRowCount(0)
+        self.clear_material_inputs()
+        self.update_totals()
+        self.enable_fields(enable=True)
 
     def clear_material_table(self):
         self.materials_table.setRowCount(0)
