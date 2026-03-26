@@ -526,6 +526,10 @@ class MBManualEntry(QWidget):
         """Add material to the table."""
         material_code = self.get_material_code().strip()
 
+        if not self.qty_required_input.text() or not self.qty_per_batch_input:
+            QMessageBox.warning(self, "Missing Input", "Please enter the quantity requirements first.")
+            return
+
         if not material_code:
             QMessageBox.warning(self, "Missing Input", "Please enter a material code.")
             return

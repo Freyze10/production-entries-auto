@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00113" summary="reduced min-height line label">
-      <option name="closed" value="true" />
-      <created>1774401804999</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1774401804999</updated>
-    </task>
     <task id="LOCAL-00114" summary="added bottom buttons">
       <option name="closed" value="true" />
       <created>1774402065730</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774512335177</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="change print color">
+      <option name="closed" value="true" />
+      <created>1774514473683</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1774514473683</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added add material function" />
     <MESSAGE value="added clear material inputs" />
     <MESSAGE value="connected add materials" />
     <MESSAGE value="add actual row count value" />
@@ -527,7 +526,8 @@
     <MESSAGE value="changed color of button" />
     <MESSAGE value="added raw and no raw material input" />
     <MESSAGE value="updated table spacing function" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated table spacing function" />
+    <MESSAGE value="change print color" />
+    <option name="LAST_COMMIT_MESSAGE" value="change print color" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
