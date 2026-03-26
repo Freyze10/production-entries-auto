@@ -360,10 +360,6 @@ class MBManualEntry(QWidget):
         self.total_weight_label = QLabel("0.0000000")
         self.total_weight_label.setStyleSheet("font-weight: bold; color: #0078d4;")
         total_layout.addWidget(self.total_weight_label)
-        total_layout.addWidget(QLabel("FG # in 10 (EQR WH) only"))
-        self.fg_label = QLabel("0000000")
-        self.fg_label.setStyleSheet("background-color: #fff9c4; padding: 2px 8px; font-weight: bold;")
-        total_layout.addWidget(self.fg_label)
         material_layout.addLayout(total_layout)
 
         # Encoding Information
