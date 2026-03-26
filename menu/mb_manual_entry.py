@@ -471,14 +471,14 @@ class MBManualEntry(QWidget):
         self.prepared_by_input.setText(str(self.prod_results['prepared_by']))
         self.notes_input.setPlainText(str(self.prod_results['note']))
 
-        # ------------------------------------------------------------------ #
-        #  Date fields – inline helper to keep the code tidy
-        # ------------------------------------------------------------------ #
         def _set_date(widget, date_obj):
             if date_obj:
                 widget.setText(date_obj.strftime("%m/%d/%Y"))
             else:
                 widget.clear()
+
+        qty_req = float(self.prod_results['quantity_req'])
+        qty_batch = float(self.prod_results['quantity_batch'])
 
         _set_date(self.production_date_input, self.prod_results.get('prod_date'))
         _set_date(self.confirmation_date_input, self.prod_results.get('inventory_c_date'))
@@ -486,8 +486,8 @@ class MBManualEntry(QWidget):
 
         self.mixing_time_input.setText(str(self.prod_results['mix_time']))
         self.machine_no_input.setText(str(self.prod_results['machine_no']))
-        self.qty_required_input.setText(f"{self.prod_results['quantity_req']:.6f}")
-        self.qty_per_batch_input.setText(f"{self.prod_results['quantity_batch']:.6f}")
+        self.qty_required_input.setText(f"{qty_req:.6f}")
+        self.qty_per_batch_input.setText(f"{qty_batch:.6f}")
         self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.7f}")
 
         self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
@@ -499,6 +499,7 @@ class MBManualEntry(QWidget):
                 self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
 
         self.materials_table.setRowCount(0)
+
 
         for mat in self.prod_materials:
             # Tuple indexing: (id, material_code, large_scale, small_scale, total_weight)
