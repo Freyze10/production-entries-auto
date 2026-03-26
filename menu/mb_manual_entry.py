@@ -524,6 +524,48 @@ class MBManualEntry(QWidget):
         self.no_items_label.setText(str(item_count))
         return True
 
+    def add_material(self):
+        """Add material to the table."""
+        material_code = self.get_material_code().strip()
+
+        if not material_code:
+            QMessageBox.warning(self, "Missing Input", "Please enter a material code.")
+            return
+
+        if self.raw_material_check.isChecked():
+            if material_code not in self.rm_list:
+                QMessageBox.warning(self, "Invalid Material",
+                                    "Please select a valid raw material code from the list.")
+                return
+
+        large_scale_text = self.large_scale_input.text().strip()
+        small_scale_text = self.small_scale_input.text().strip()
+        total_weight_text = self.total_weight_input.text().strip()
+
+        if not large_scale_text or not small_scale_text or not total_weight_text:
+            QMessageBox.warning(self, "Missing Input", "Please fill in all scale and weight fields.")
+            return
+
+        try:
+            large_scale = float(large_scale_text)
+            small_scale = float(small_scale_text)
+            total_weight = float(total_weight_text)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid Input", "Please enter valid numbers for scales and weight.")
+            return
+
+        row_position = self.materials_table.rowCount()
+        self.materials_table.insertRow(row_position)
+
+        self.materials_table.setItem(row_position, 0, QTableWidgetItem(material_code))
+        self.materials_table.setItem(row_position, 1, NumericTableWidgetItem(large_scale, is_float=True))
+        self.materials_table.setItem(row_position, 2, NumericTableWidgetItem(small_scale, is_float=True))
+        self.materials_table.setItem(row_position, 3, NumericTableWidgetItem(total_weight, is_float=True))
+
+        self.clear_material_inputs()
+        self.update_totals()
+        self.material_code_combo.setFocus()
+
     def update_totals(self):
         """Update the total weight and item count displays."""
         total_weight = 0.0
@@ -559,6 +601,12 @@ class MBManualEntry(QWidget):
         current_text = self.material_code_combo.currentText()
         if current_text not in self.rm_list:
             self.material_code_combo.setCurrentIndex(0)
+
+    def get_material_code(self):
+        if self.raw_material_check.isChecked():
+            return self.material_code_combo.currentText().strip()
+        else:
+            return self.material_code_lineedit.text().strip()
 
     def eventFilter(self, watched, event):
         # Check if the event is a key press and specifically the Tab key
