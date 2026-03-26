@@ -2,13 +2,9 @@ from PyQt6.QtWidgets import QTableWidgetItem
 
 
 def get_last_valid_large_scale(table, break_col=0, sum_col=1):
-    """
-    Returns the most recent non-zero value in the Large Scale column.
-    Stops when it hits an empty row in break_col.
-    Returns 0.0 if no valid value is found.
-    """
+    """Find the most recent non-zero Large Scale value from the bottom."""
     for row in range(table.rowCount() - 1, -1, -1):
-        # Stop at separator row
+        # Stop at separator/empty row
         break_item = table.item(row, break_col)
         if not break_item or not break_item.text().strip():
             break
@@ -32,30 +28,26 @@ def get_last_valid_large_scale(table, break_col=0, sum_col=1):
     return 0.0
 
 
-def handle_batch_break_manual(table, weight: float, batches: float = 1, limit: float = 25.0,
+def handle_batch_break_manual(table, weight: float, batches: float = 1.0, limit: float = 25.0,
                               break_col: int = 0, sum_col: int = 1):
     """
-    New logic:
-    - Gets the last valid (non-zero) large scale
-    - Calculates per_batch = weight / batches
-    - If (last_valid + per_batch) > limit → insert empty break row
+    Checks if adding this weight (divided by batches) would exceed the limit.
+    If yes → inserts an empty separator row.
     """
     if weight <= 0 or batches <= 0:
         return False
 
-    last_valid_scale = get_last_valid_large_scale(table, break_col, sum_col)
+    last_valid = get_last_valid_large_scale(table, break_col, sum_col)
     per_batch = weight / batches
 
-    total_to_check = last_valid_scale + per_batch
-
-    if total_to_check > limit:
+    if (last_valid + per_batch) > limit:
         row_pos = table.rowCount()
         table.insertRow(row_pos)
 
-        # Insert empty separator row across all columns
+        # Insert empty row across all columns
         for col in range(table.columnCount()):
             table.setItem(row_pos, col, QTableWidgetItem(""))
 
-        return True  # Break row was inserted
+        return True  # Break row was added
 
-    return False     # No break needed
+    return False

@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00098" summary="added debounce function">
-      <option name="closed" value="true" />
-      <created>1774323967134</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1774323967134</updated>
-    </task>
     <task id="LOCAL-00099" summary="working on search bar">
       <option name="closed" value="true" />
       <created>1774329676767</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774505218506</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="added empty row on &gt;25 large scale">
+      <option name="closed" value="true" />
+      <created>1774506596903</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1774506596903</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added display of materials" />
     <MESSAGE value="added update totals" />
     <MESSAGE value="created a new map to manual page" />
     <MESSAGE value="sent prod_id to manual from production page" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added calculate batch function for table" />
     <MESSAGE value="added the batch break in displaying of data" />
     <MESSAGE value="removed the current batch computation" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the current batch computation" />
+    <MESSAGE value="added empty row on &gt;25 large scale" />
+    <option name="LAST_COMMIT_MESSAGE" value="added empty row on &gt;25 large scale" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

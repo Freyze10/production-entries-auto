@@ -500,7 +500,7 @@ class MBManualEntry(QWidget):
 
         self.materials_table.setRowCount(0)
 
-        batches = qty_req / qty_batch
+        batches = qty_req / qty_batch if qty_batch > 0 else 1.0
         print(batches)
         for mat in self.prod_materials:
             # Tuple indexing: (id, material_code, large_scale, small_scale, total_weight)
