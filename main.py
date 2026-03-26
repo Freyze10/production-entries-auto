@@ -65,6 +65,8 @@ class MainWindow(QMainWindow):
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
 
+        self.btn_production_records.setChecked(True)
+
     def switch_to_manual_entry(self, prod_id: int):
         self.mb_manual_entry = MBManualEntry(prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
