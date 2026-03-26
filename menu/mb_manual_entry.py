@@ -62,7 +62,7 @@ class MBManualEntry(QWidget):
 
         # Production ID
         self.production_id_input = QLineEdit(objectName='required')
-        self.production_id_input.setPlaceholderText("0098988")
+        self.production_id_input.setPlaceholderText("000000")
         primary_layout.addWidget(QLabel("Production ID:"), row, 0)
         primary_layout.addWidget(self.production_id_input, row, 1)
         row += 1
@@ -616,13 +616,12 @@ class MBManualEntry(QWidget):
         self.production_encoded_display.setText(datetime.now().strftime("%m/%d/%Y %I:%M:%S %p"))
         self.production_confirmation_display.clear()
 
-        if self.result:
-            self.result = None
+        if self.prod_results:
+            self.prod_results = None
 
         self.materials_table.setRowCount(0)
         self.clear_material_inputs()
         self.update_totals()
-        self.enable_fields(enable=True)
 
     def clear_material_table(self):
         self.materials_table.setRowCount(0)

@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00107" summary="changed confirmation date label">
-      <option name="closed" value="true" />
-      <created>1774336250409</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1774336250409</updated>
-    </task>
     <task id="LOCAL-00108" summary="added new color design">
       <option name="closed" value="true" />
       <created>1774337498470</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774510775432</updated>
     </task>
-    <option name="localTasksCounter" value="156" />
+    <task id="LOCAL-00156" summary="added db call latest prod_id">
+      <option name="closed" value="true" />
+      <created>1774510831308</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1774510831308</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix button styling" />
     <MESSAGE value="addedd raw material in legacy" />
     <MESSAGE value="added sync rm function to call legacy" />
     <MESSAGE value="fixed database add rm lstsi" />
@@ -527,7 +526,8 @@
     <MESSAGE value="initialize btn production to checked" />
     <MESSAGE value="added default value in  the large andsmall scale" />
     <MESSAGE value="added a new button function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a new button function" />
+    <MESSAGE value="added db call latest prod_id" />
+    <option name="LAST_COMMIT_MESSAGE" value="added db call latest prod_id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
