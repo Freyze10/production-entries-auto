@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00090" summary="fixing foreign key error with form id">
-      <option name="closed" value="true" />
-      <created>1774256596015</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1774256596015</updated>
-    </task>
     <task id="LOCAL-00091" summary="fixed legacy database transfee">
       <option name="closed" value="true" />
       <created>1774317413110</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774490041954</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="added remove row function">
+      <option name="closed" value="true" />
+      <created>1774490341970</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1774490341970</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added bottom buttons" />
     <MESSAGE value="added table design" />
     <MESSAGE value="updated default value data" />
     <MESSAGE value="created read of single prod id" />
@@ -527,7 +526,8 @@
     <MESSAGE value="connected add materials" />
     <MESSAGE value="add actual row count value" />
     <MESSAGE value="removed fg warehouse id" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed fg warehouse id" />
+    <MESSAGE value="added remove row function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added remove row function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

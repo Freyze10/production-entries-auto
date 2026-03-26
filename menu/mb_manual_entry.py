@@ -322,7 +322,7 @@ class MBManualEntry(QWidget):
 
         clear_btn = QPushButton("Clear")
         clear_btn.setObjectName("SecondaryButton")
-        # clear_btn.clicked.connect(self.clear_material_table)
+        clear_btn.clicked.connect(self.clear_material_table)
         action_layout.addWidget(clear_btn)
 
         remove_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -570,7 +570,10 @@ class MBManualEntry(QWidget):
         else:
             QMessageBox.warning(self, "No Selection", "Please select a material to remove.")
 
-
+    def clear_material_table(self):
+        self.materials_table.setRowCount(0)
+        self.clear_material_inputs()
+        self.update_totals()
 
     def update_totals(self):
         """Update the total weight and item count displays."""
