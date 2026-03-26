@@ -561,7 +561,6 @@ class MBManualEntry(QWidget):
 
         batches = qty_required / qty_per_batch
 
-
         table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches, limit=25.0)
 
         row_position = self.materials_table.rowCount()
