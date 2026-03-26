@@ -34,7 +34,7 @@ def get_batch_sum(table, break_col=0, sum_col=1):
     return current_sum
 
 
-def handle_batch_break(table, new_value, limit=25.0, break_col=0, sum_col=1):
+def handle_batch_break_manual(table, new_value, limit=25.0, break_col=0, sum_col=1):
     """
     Inserts an empty row in the table if the limit is exceeded.
     :param table: The QTableWidget to modify.

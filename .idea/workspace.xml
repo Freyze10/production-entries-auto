@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00093" summary="disabled focus on table">
-      <option name="closed" value="true" />
-      <created>1774319575061</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1774319575061</updated>
-    </task>
-    <task id="LOCAL-00094" summary="modified table model">
-      <option name="closed" value="true" />
-      <created>1774320787641</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1774320787641</updated>
-    </task>
     <task id="LOCAL-00095" summary="added display of details per row">
       <option name="closed" value="true" />
       <created>1774321245453</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774494098958</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="added calculate batch function for table">
+      <option name="closed" value="true" />
+      <created>1774495562198</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1774495562198</updated>
+    </task>
+    <task id="LOCAL-00143" summary="added calculate batch function for table">
+      <option name="closed" value="true" />
+      <created>1774495569324</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1774495569324</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created read of single prod id" />
     <MESSAGE value="fixing display data result" />
     <MESSAGE value="added table widget format numeric" />
     <MESSAGE value="added display of materials" />
@@ -527,7 +526,8 @@
     <MESSAGE value="added remove row function" />
     <MESSAGE value="added clear materials functioni" />
     <MESSAGE value="updated update total" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated update total" />
+    <MESSAGE value="added calculate batch function for table" />
+    <option name="LAST_COMMIT_MESSAGE" value="added calculate batch function for table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -544,22 +544,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>226</line>
+          <line>227</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>263</line>
+          <line>264</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>456</line>
+          <line>457</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>499</line>
+          <line>500</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

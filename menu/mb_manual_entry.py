@@ -8,6 +8,7 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists
+from table_model import table_spacing
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
@@ -549,6 +550,8 @@ class MBManualEntry(QWidget):
         except ValueError:
             QMessageBox.warning(self, "Invalid Input", "Please enter valid numbers for scales and weight.")
             return
+
+        table_spacing.handle_batch_break_manual(self.materials_table, large_scale, limit=25.0)
 
         row_position = self.materials_table.rowCount()
         self.materials_table.insertRow(row_position)
