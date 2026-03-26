@@ -17,7 +17,6 @@ class MBManualEntry(QWidget):
     def __init__(self, prod_id=0):  # , username, user_role, log_audit_trail
         super().__init__()
         self.prod_id = prod_id
-        print(self.prod_id)
         self.prod_results = None
         self.prod_materials = None
         self.work_station = _get_workstation_info()
