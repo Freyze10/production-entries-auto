@@ -372,7 +372,7 @@ class AppStyles:
         QPushButton#DangerButton        {{ background: {RED_500};     color: white; border: none; font-weight: 600; }}
         QPushButton#DangerButton:hover  {{ background: {RED_600};     }}
 
-        QPushButton#WarningButton       {{ background: {AMBER_500};   color: {SLATE_900}; border: none; font-weight: 600; }}
+        QPushButton#WarningButton       {{ background: {AMBER_500};   color: white; border: none; font-weight: 600; }}
         QPushButton#WarningButton:hover {{ background: {AMBER_700};   color: white; }}
 
         QPushButton#InfoButton          {{ background: {BLUE_500};    color: white; border: none; font-weight: 600; }}

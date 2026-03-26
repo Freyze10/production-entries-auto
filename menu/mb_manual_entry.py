@@ -401,7 +401,7 @@ class MBManualEntry(QWidget):
         button_layout = QHBoxLayout()
         button_layout.addStretch()
 
-        self.print_wip_btn = QPushButton("Print with WIP", objectName="InfoButton")
+        self.print_wip_btn = QPushButton("Print with WIP", objectName="WarningButton")
         self.print_wip_btn.setIcon(fa.icon('fa5s.print', color='white'))
         # self.print_wip_btn.clicked.connect(self.print_with_wip)
         button_layout.addWidget(self.print_wip_btn)
@@ -416,7 +416,7 @@ class MBManualEntry(QWidget):
         self.new_btn.clicked.connect(self.new_production)
         button_layout.addWidget(self.new_btn)
 
-        self.save_btn = QPushButton("Save", objectName="SuccessButton")
+        self.save_btn = QPushButton("Save", objectName="InfoButton")
         self.save_btn.setIcon(fa.icon('fa5s.save', color='white'))
         # self.save_btn.clicked.connect(self.save_production)
         button_layout.addWidget(self.save_btn)

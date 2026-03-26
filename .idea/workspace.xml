@@ -95,22 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00108" summary="added new color design">
-      <option name="closed" value="true" />
-      <created>1774337498470</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1774337498470</updated>
-    </task>
-    <task id="LOCAL-00109" summary="changed required color in line edit fields">
-      <option name="closed" value="true" />
-      <created>1774337854150</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1774337854150</updated>
-    </task>
     <task id="LOCAL-00110" summary="added design for checkbox">
       <option name="closed" value="true" />
       <created>1774341358473</created>
@@ -487,7 +471,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774510831308</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="add latest prod id when new btn is clicked">
+      <option name="closed" value="true" />
+      <created>1774511099433</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1774511099433</updated>
+    </task>
+    <task id="LOCAL-00158" summary="connected new btn function">
+      <option name="closed" value="true" />
+      <created>1774511220702</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1774511220702</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="addedd raw material in legacy" />
-    <MESSAGE value="added sync rm function to call legacy" />
     <MESSAGE value="fixed database add rm lstsi" />
     <MESSAGE value="set tab order in manual entry" />
     <MESSAGE value="removed print prod_id" />
@@ -527,7 +525,9 @@
     <MESSAGE value="added default value in  the large andsmall scale" />
     <MESSAGE value="added a new button function" />
     <MESSAGE value="added db call latest prod_id" />
-    <option name="LAST_COMMIT_MESSAGE" value="added db call latest prod_id" />
+    <MESSAGE value="add latest prod id when new btn is clicked" />
+    <MESSAGE value="connected new btn function" />
+    <option name="LAST_COMMIT_MESSAGE" value="connected new btn function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
