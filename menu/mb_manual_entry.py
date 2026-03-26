@@ -500,7 +500,8 @@ class MBManualEntry(QWidget):
 
         self.materials_table.setRowCount(0)
 
-
+        batches = qty_req / qty_batch
+        print(batches)
         for mat in self.prod_materials:
             # Tuple indexing: (id, material_code, large_scale, small_scale, total_weight)
             mat_code = str(mat[1])
@@ -508,7 +509,7 @@ class MBManualEntry(QWidget):
             small_scale = float(mat[3])
             total_weight = float(mat[4])
 
-            table_spacing.handle_batch_break_manual(self.materials_table, large_scale, limit=25.0)
+            table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches , limit=25.0)
 
             row = self.materials_table.rowCount()
             self.materials_table.insertRow(row)

@@ -95,14 +95,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00097" summary="added default value 0 on details">
-      <option name="closed" value="true" />
-      <created>1774323896379</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1774323896379</updated>
-    </task>
     <task id="LOCAL-00098" summary="added debounce function">
       <option name="closed" value="true" />
       <created>1774323967134</created>
@@ -487,7 +479,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774496991281</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="removed the current batch computation">
+      <option name="closed" value="true" />
+      <created>1774505218506</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1774505218506</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added table widget format numeric" />
     <MESSAGE value="added display of materials" />
     <MESSAGE value="added update totals" />
     <MESSAGE value="created a new map to manual page" />
@@ -527,7 +526,8 @@
     <MESSAGE value="updated update total" />
     <MESSAGE value="added calculate batch function for table" />
     <MESSAGE value="added the batch break in displaying of data" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the batch break in displaying of data" />
+    <MESSAGE value="removed the current batch computation" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the current batch computation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
