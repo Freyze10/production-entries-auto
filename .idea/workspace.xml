@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="c93621e93f4c1d11a85b6cfc9ffe8df76daafc3b" />
+        <entry key="$PROJECT_DIR$" value="test-trigger" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,7 +40,7 @@
     "Python.styles.executor": "Run",
     "Python.test_print.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "test-trigger"
+    "git-widget-placeholder": "test-print"
   },
   "keyToStringList": {
     "GitStage.ChangesTree.GroupingKeys": [
@@ -118,22 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00115" summary="added table design">
-      <option name="closed" value="true" />
-      <created>1774403983401</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1774403983401</updated>
-    </task>
-    <task id="LOCAL-00116" summary="updated default value data">
-      <option name="closed" value="true" />
-      <created>1774404148416</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1774404148416</updated>
     </task>
     <task id="LOCAL-00117" summary="created read of single prod id">
       <option name="closed" value="true" />
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774514761135</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="trying print">
+      <option name="closed" value="true" />
+      <created>1774590142765</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1774590142766</updated>
+    </task>
+    <task id="LOCAL-00165" summary="trying print">
+      <option name="closed" value="true" />
+      <created>1774590150411</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1774590150411</updated>
+    </task>
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connected add materials" />
     <MESSAGE value="add actual row count value" />
     <MESSAGE value="removed fg warehouse id" />
     <MESSAGE value="added remove row function" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated table spacing function" />
     <MESSAGE value="change print color" />
     <MESSAGE value="addedd error  message for adding materials" />
-    <option name="LAST_COMMIT_MESSAGE" value="addedd error  message for adding materials" />
+    <MESSAGE value="trying print" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying print" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
