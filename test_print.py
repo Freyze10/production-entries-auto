@@ -1,9 +1,9 @@
 import win32print
 from datetime import datetime
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont
+from PyQt6.QtGui import QFont, QAction
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QComboBox,
-                             QTextEdit, QPushButton, QLabel, QMessageBox, QWidget)
+                             QTextEdit, QPushButton, QLabel, QMessageBox, QWidget, QApplication)
 import qtawesome as fa
 
 
@@ -14,9 +14,10 @@ class ProductionPrintPreview(QDialog):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []
+        self.default_font_size = 10  # Standard starting size
 
         self.setWindowTitle("Sharp Text Preview - Epson LX-310")
-        self.resize(1000, 900)
+        self.resize(1100, 900)
         self.setStyleSheet("background:#f0f0f0;")
 
         self.setup_ui()
@@ -25,33 +26,60 @@ class ProductionPrintPreview(QDialog):
     def setup_ui(self):
         layout = QVBoxLayout(self)
 
-        # Toolbar
+        # --- TOOLBAR ---
         toolbar = QWidget()
         toolbar.setStyleSheet("background:#f8f9fa; border-bottom: 1px solid #ddd; padding: 10px;")
         tb_layout = QHBoxLayout(toolbar)
 
+        # Printer Selection
         tb_layout.addWidget(QLabel("<b>PRINTER:</b>"))
         self.printer_combo = QComboBox()
         self.load_printers()
         tb_layout.addWidget(self.printer_combo, 1)
 
+        tb_layout.addSpacing(20)
+
+        # Zoom Controls
+        tb_layout.addWidget(QLabel("<b>ZOOM:</b>"))
+
+        btn_zoom_in = QPushButton()
+        btn_zoom_in.setIcon(fa.icon('fa5s.search-plus'))
+        btn_zoom_in.setToolTip("Zoom In")
+        btn_zoom_in.clicked.connect(lambda: self.preview_area.zoomIn(1))
+        tb_layout.addWidget(btn_zoom_in)
+
+        btn_zoom_out = QPushButton()
+        btn_zoom_out.setIcon(fa.icon('fa5s.search-minus'))
+        btn_zoom_out.setToolTip("Zoom Out")
+        btn_zoom_out.clicked.connect(lambda: self.preview_area.zoomOut(1))
+        tb_layout.addWidget(btn_zoom_out)
+
+        btn_zoom_reset = QPushButton("100%")
+        btn_zoom_reset.setToolTip("Reset Zoom")
+        btn_zoom_reset.clicked.connect(self.reset_zoom)
+        tb_layout.addWidget(btn_zoom_reset)
+
+        tb_layout.addStretch()
+
+        # Print Button
         btn_print = QPushButton(" START PRINTING ")
         btn_print.setIcon(fa.icon('fa5s.print', color='white'))
         btn_print.setStyleSheet(
             "background:#28a745; color:white; padding:10px 20px; font-weight:bold; border:none; border-radius:4px;")
         btn_print.clicked.connect(self.print_report)
         tb_layout.addWidget(btn_print)
+
         layout.addWidget(toolbar)
 
-        # The Preview Area (Virtual Paper)
+        # --- PREVIEW AREA ---
         self.preview_area = QTextEdit()
         self.preview_area.setReadOnly(True)
-        self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+        self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)  # Keep lines 80 chars wide
 
-        # Fixed-width font is essential for 80-char alignment
-        font = QFont("Courier New", 10)
-        font.setStyleHint(QFont.StyleHint.Monospace)
-        self.preview_area.setFont(font)
+        # Initialize Monospaced Font
+        self.preview_font = QFont("Courier New", self.default_font_size)
+        self.preview_font.setStyleHint(QFont.StyleHint.Monospace)
+        self.preview_area.setFont(self.preview_font)
 
         self.preview_area.setStyleSheet("""
             background-color: white; 
@@ -60,6 +88,12 @@ class ProductionPrintPreview(QDialog):
             padding: 30px;
         """)
         layout.addWidget(self.preview_area)
+
+    def reset_zoom(self):
+        """Sets the font back to the default size."""
+        font = self.preview_area.font()
+        font.setPointSize(self.default_font_size)
+        self.preview_area.setFont(font)
 
     def load_printers(self):
         try:
@@ -76,48 +110,34 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             BOLD_ON, BOLD_OFF = "", ""
         else:
-            # PC437 Hardware Codes for the LX-310
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             BOLD_ON, BOLD_OFF = ESC + 'E', ESC + 'F'
 
-        width = 80  # Total characters for Letter Size
-        box_w = 30  # Width of the right-hand ID box
-        left_w = width - box_w  # Space for the company name on the left (50 chars)
-
+        width = 80
+        box_w = 30
+        left_w = width - box_w
         lines = []
 
-        # --- COMBINED HEADER & ID BOX SECTION ---
-        # Line 1: Company Name + Box Top
+        # Header Block
         l1_text = f"{BOLD_ON}MASTERBATCH PHILIPPINES, INC.{BOLD_OFF}"
-        l1_padding = left_w - len("MASTERBATCH PHILIPPINES, INC.")
-        lines.append(f"{l1_text}{' ' * l1_padding}{TL}{H * (box_w - 2)}{TR}")
+        l1_pad = left_w - len("MASTERBATCH PHILIPPINES, INC.")
+        lines.append(f"{l1_text}{' ' * l1_pad}{TL}{H * (box_w - 2)}{TR}")
 
-        # Line 2: Subtitle + Box Content 1
         l2_text = "PRODUCTION ENTRY"
-        l2_padding = left_w - len(l2_text)
-        content1 = f" PRODUCTION ID   : {self.data.get('prod_id', ''):<8} "
-        lines.append(f"{l2_text}{' ' * l2_padding}{V}{content1}{V}")
+        l2_pad = left_w - len(l2_text)
+        lines.append(f"{l2_text}{' ' * l2_pad}{V} PRODUCTION ID   : {self.data.get('prod_id', ''):<8} {V}")
 
-        # Line 3: Form No + Box Content 2
         l3_text = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
-        l3_padding = left_w - len(l3_text)
-        content2 = f" PRODUCTION DATE : {self.data.get('production_date', ''):<8} "
-        lines.append(f"{l3_text}{' ' * l3_padding}{V}{content2}{V}")
+        l3_pad = left_w - len(l3_text)
+        lines.append(f"{l3_text}{' ' * l3_pad}{V} PRODUCTION DATE : {self.data.get('production_date', ''):<8} {V}")
 
-        # Line 4: Empty + Box Content 3
-        content3 = f" ORDER FORM NO.  : {self.data.get('order_form_no', ''):<8} "
-        lines.append(f"{' ' * left_w}{V}{content3}{V}")
-
-        # Line 5: Empty + Box Content 4
-        content4 = f" FORMULATION NO. : {self.data.get('formulation_id', ''):<8} "
-        lines.append(f"{' ' * left_w}{V}{content4}{V}")
-
-        # Line 6: Empty + Box Bottom
+        lines.append(f"{' ' * left_w}{V} ORDER FORM NO.  : {self.data.get('order_form_no', ''):<8} {V}")
+        lines.append(f"{' ' * left_w}{V} FORMULATION NO. : {self.data.get('formulation_id', ''):<8} {V}")
         lines.append(f"{' ' * left_w}{BL}{H * (box_w - 2)}{BR}")
         lines.append("")
 
-        # --- 2-COLUMN DETAILS SECTION ---
+        # Detail Section
         c1, c2 = 16, 22
 
         def row(k1, v1, k2, v2):
@@ -134,13 +154,11 @@ class ProductionPrintPreview(QDialog):
         lines.append(row('LOT NO.       :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
                          f"{float(self.data.get('qty_produced', 0)):.6f}"))
 
-        # Summary
         summary = self.batch_text()
         lines.append("\n" + BOLD_ON + summary.center(width).upper() + BOLD_OFF + "\n")
 
-        # --- EXPANDED TABLE SECTION (Full 80 Chars) ---
+        # Table Section
         lines.append(H * width)
-        # Column Layout: 25 | 18 | 19 | 18 = 80 total
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
         lines.append(H * width)
 
@@ -155,7 +173,6 @@ class ProductionPrintPreview(QDialog):
         total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary:<44} TOTAL: {BOLD_ON}{total:>18}{BOLD_OFF}\n\n")
 
-        # Footers
         u = "_" * 25
         lines.append(f"{'PREPARED BY: ' + self.data.get('prepared_by', ''):<42} APPROVED BY       : {u}")
         lines.append(
@@ -172,15 +189,12 @@ class ProductionPrintPreview(QDialog):
         try:
             raw_text = self.build_report_map(mode="printer")
             ESC = '\x1b'
-            # Reset + PC437 + NLQ Mode
             init_printer = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
-            full_payload = init_printer + raw_text + '\x0c'  # Add Page Eject
-
+            full_payload = init_printer + raw_text + '\x0c'
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Report", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
-                # latin-1 allows the high-ASCII box characters to pass through correctly
                 win32print.WritePrinter(hPrinter, full_payload.encode('latin-1'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
@@ -200,22 +214,10 @@ class ProductionPrintPreview(QDialog):
 
 if __name__ == "__main__":
     import sys
-    from PyQt6.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
-
-    img_data = {
-        "prod_id": "100502", "production_date": "03/02/26", "order_form_no": "42441", "formulation_id": "16534",
-        "product_code": "BA4756E", "product_color": "BLUE", "dosage": 100.0, "customer": "EVERGOOD PLASTIC",
-        "lot_number": "8755AN", "mixing_time": "3 MINS.", "machine_no": "2", "qty_required": 37.4,
-        "qty_per_batch": 37.4,
-        "qty_produced": 37.4, "prepared_by": "R. MAGSALIN"
-    }
-    img_mats = [
-        {"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65},
-        {"material_code": "FG-6551AN", "large_scale": 12.4, "small_scale": 0, "total_weight": 12.4}
-    ]
-
+    img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4}
+    img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65}]
     dialog = ProductionPrintPreview(img_data, img_mats)
     dialog.show()
     sys.exit(app.exec())

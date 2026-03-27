@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00118" summary="fixing display data result">
-      <option name="closed" value="true" />
-      <created>1774408495972</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1774408495972</updated>
-    </task>
-    <task id="LOCAL-00119" summary="added table widget format numeric">
-      <option name="closed" value="true" />
-      <created>1774408962727</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1774408962727</updated>
-    </task>
     <task id="LOCAL-00120" summary="added display of materials">
       <option name="closed" value="true" />
       <created>1774409141833</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774592023486</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="display raw text on text field">
+      <option name="closed" value="true" />
+      <created>1774593975376</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1774593975376</updated>
+    </task>
+    <task id="LOCAL-00168" summary="updated the box to be on the same line og the masterbatch">
+      <option name="closed" value="true" />
+      <created>1774594112341</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1774594112341</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed fg warehouse id" />
-    <MESSAGE value="added remove row function" />
     <MESSAGE value="added clear materials functioni" />
     <MESSAGE value="updated update total" />
     <MESSAGE value="added calculate batch function for table" />
@@ -551,7 +549,9 @@
     <MESSAGE value="addedd error  message for adding materials" />
     <MESSAGE value="trying print" />
     <MESSAGE value="try reportlab to print using pdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="try reportlab to print using pdf" />
+    <MESSAGE value="display raw text on text field" />
+    <MESSAGE value="updated the box to be on the same line og the masterbatch" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the box to be on the same line og the masterbatch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
