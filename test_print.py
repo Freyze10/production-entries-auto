@@ -1,9 +1,10 @@
 import win32print
 from datetime import datetime
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont, QAction
+from PyQt6.QtGui import QFont, QPalette, QColor
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QComboBox,
-                             QTextEdit, QPushButton, QLabel, QMessageBox, QWidget, QApplication)
+                             QTextEdit, QPushButton, QLabel, QMessageBox,
+                             QWidget, QScrollArea, QFrame)
 import qtawesome as fa
 
 
@@ -14,83 +15,104 @@ class ProductionPrintPreview(QDialog):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []
-        self.default_font_size = 10  # Standard starting size
+        self.default_font_size = 10
 
         self.setWindowTitle("Sharp Text Preview - Epson LX-310")
-        self.resize(1100, 900)
-        self.setStyleSheet("background:#f0f0f0;")
+
+        # --- REQUIREMENT 1: Dialog size slightly bigger than Letter (8.5x11) ---
+        # Letter is ~816px wide. We set dialog to ~1000px to give breathing room.
+        self.resize(1050, 950)
+        self.setStyleSheet("background:#525659;")  # Dark grey background like PDF viewers
 
         self.setup_ui()
         self.refresh_preview()
 
     def setup_ui(self):
-        layout = QVBoxLayout(self)
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
         # --- TOOLBAR ---
         toolbar = QWidget()
-        toolbar.setStyleSheet("background:#f8f9fa; border-bottom: 1px solid #ddd; padding: 10px;")
+        toolbar.setFixedHeight(60)
+        toolbar.setStyleSheet("background:#f8f9fa; border-bottom: 1px solid #ddd; padding: 5px;")
         tb_layout = QHBoxLayout(toolbar)
 
-        # Printer Selection
         tb_layout.addWidget(QLabel("<b>PRINTER:</b>"))
         self.printer_combo = QComboBox()
         self.load_printers()
         tb_layout.addWidget(self.printer_combo, 1)
 
         tb_layout.addSpacing(20)
-
-        # Zoom Controls
         tb_layout.addWidget(QLabel("<b>ZOOM:</b>"))
 
-        btn_zoom_in = QPushButton()
+        btn_zoom_in = QPushButton();
         btn_zoom_in.setIcon(fa.icon('fa5s.search-plus'))
-        btn_zoom_in.setToolTip("Zoom In")
         btn_zoom_in.clicked.connect(lambda: self.preview_area.zoomIn(1))
         tb_layout.addWidget(btn_zoom_in)
 
-        btn_zoom_out = QPushButton()
+        btn_zoom_out = QPushButton();
         btn_zoom_out.setIcon(fa.icon('fa5s.search-minus'))
-        btn_zoom_out.setToolTip("Zoom Out")
         btn_zoom_out.clicked.connect(lambda: self.preview_area.zoomOut(1))
         tb_layout.addWidget(btn_zoom_out)
 
-        btn_zoom_reset = QPushButton("100%")
-        btn_zoom_reset.setToolTip("Reset Zoom")
+        btn_zoom_reset = QPushButton("100%");
         btn_zoom_reset.clicked.connect(self.reset_zoom)
         tb_layout.addWidget(btn_zoom_reset)
 
         tb_layout.addStretch()
 
-        # Print Button
         btn_print = QPushButton(" START PRINTING ")
         btn_print.setIcon(fa.icon('fa5s.print', color='white'))
         btn_print.setStyleSheet(
-            "background:#28a745; color:white; padding:10px 20px; font-weight:bold; border:none; border-radius:4px;")
+            "background:#28a745; color:white; padding:10px 20px; font-weight:bold; border-radius:4px;")
         btn_print.clicked.connect(self.print_report)
         tb_layout.addWidget(btn_print)
 
-        layout.addWidget(toolbar)
+        main_layout.addWidget(toolbar)
 
-        # --- PREVIEW AREA ---
+        # --- REQUIREMENT 2: Center the Preview in the Dialog ---
+        # We use a ScrollArea with a centered widget inside
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setAlignment(Qt.AlignmentFlag.AlignCenter)  # This centers the "Paper"
+        scroll.setStyleSheet("background:#525659; border:none;")
+
+        # This container holds the "Paper" and expands to fill the scroll area
+        container = QWidget()
+        container_layout = QVBoxLayout(container)
+        container_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)  # Inner centering
+        container_layout.setContentsMargins(40, 40, 40, 40)
+
+        # The "Virtual Paper" (QTextEdit)
         self.preview_area = QTextEdit()
         self.preview_area.setReadOnly(True)
-        self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)  # Keep lines 80 chars wide
+        self.preview_area.setUndoRedoEnabled(False)
+        self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
+
+        # Fix the width to simulate 8.5 inches (approx 816 pixels)
+        self.preview_area.setFixedWidth(850)
+        # Letter height is 11 inches (approx 1056 pixels)
+        self.preview_area.setMinimumHeight(1100)
 
         # Initialize Monospaced Font
         self.preview_font = QFont("Courier New", self.default_font_size)
         self.preview_font.setStyleHint(QFont.StyleHint.Monospace)
         self.preview_area.setFont(self.preview_font)
 
+        # Paper Styling (White sheet with shadow effect)
         self.preview_area.setStyleSheet("""
             background-color: white; 
-            color: #333; 
-            border: 2px solid #999; 
-            padding: 30px;
+            color: black; 
+            border: 1px solid #777;
+            padding: 50px;
         """)
-        layout.addWidget(self.preview_area)
+
+        container_layout.addWidget(self.preview_area)
+        scroll.setWidget(container)
+        main_layout.addWidget(scroll)
 
     def reset_zoom(self):
-        """Sets the font back to the default size."""
         font = self.preview_area.font()
         font.setPointSize(self.default_font_size)
         self.preview_area.setFont(font)
@@ -98,14 +120,12 @@ class ProductionPrintPreview(QDialog):
     def load_printers(self):
         try:
             printers = win32print.EnumPrinters(win32print.PRINTER_ENUM_LOCAL | win32print.PRINTER_ENUM_CONNECTIONS)
-            for p in printers:
-                self.printer_combo.addItem(p[2])
+            for p in printers: self.printer_combo.addItem(p[2])
             self.printer_combo.setCurrentText(win32print.GetDefaultPrinter())
         except:
             pass
 
     def build_report_map(self, mode="screen"):
-        # Mode-based character selection
         if mode == "screen":
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             BOLD_ON, BOLD_OFF = "", ""
@@ -137,7 +157,6 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ' * left_w}{BL}{H * (box_w - 2)}{BR}")
         lines.append("")
 
-        # Detail Section
         c1, c2 = 16, 22
 
         def row(k1, v1, k2, v2):
@@ -157,21 +176,18 @@ class ProductionPrintPreview(QDialog):
         summary = self.batch_text()
         lines.append("\n" + BOLD_ON + summary.center(width).upper() + BOLD_OFF + "\n")
 
-        # Table Section
         lines.append(H * width)
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
         lines.append(H * width)
 
         for m in self.mats:
             code = str(m.get('material_code', ''))[:24]
-            l_val = f"{float(m.get('large_scale', 0)):.7f}"
-            s_val = f"{float(m.get('small_scale', 0)):.7f}"
-            w_val = f"{float(m.get('total_weight', 0)):.7f}"
-            lines.append(f"{code:<25} {l_val:>18} {s_val:>19} {w_val:>18}")
+            lines.append(
+                f"{code:<25} {float(m.get('large_scale', 0)):18.7f} {float(m.get('small_scale', 0)):19.7f} {float(m.get('total_weight', 0)):18.7f}")
 
         lines.append(H * width)
-        total = f"{float(self.data.get('qty_produced', 0)):.6f}"
-        lines.append(f"NOTE: {summary:<44} TOTAL: {BOLD_ON}{total:>18}{BOLD_OFF}\n\n")
+        lines.append(
+            f"NOTE: {summary:<44} TOTAL: {BOLD_ON}{float(self.data.get('qty_produced', 0)):>18.6f}{BOLD_OFF}\n\n")
 
         u = "_" * 25
         lines.append(f"{'PREPARED BY: ' + self.data.get('prepared_by', ''):<42} APPROVED BY       : {u}")
@@ -214,6 +230,7 @@ class ProductionPrintPreview(QDialog):
 
 if __name__ == "__main__":
     import sys
+    from PyQt6.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
     img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4}
