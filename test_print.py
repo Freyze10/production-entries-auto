@@ -1,22 +1,9 @@
-import io
-import os
-import tempfile
-import win32api
 import win32print
 from datetime import datetime
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.units import inch
-from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER, TA_LEFT
-
-from PyQt6.QtCore import Qt, pyqtSignal, QBuffer, QIODevice, QSize, QPointF
-from PyQt6.QtGui import QPainter, QPageSize, QAction
-from PyQt6.QtPrintSupport import QPrinter, QPrintDialog
-from PyQt6.QtPdf import QPdfDocument, QPdfDocumentRenderOptions
-from PyQt6.QtPdfWidgets import QPdfView
-from PyQt6.QtWidgets import *
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QComboBox,
+                             QTextEdit, QPushButton, QLabel, QMessageBox)
 import qtawesome as fa
 
 
@@ -28,202 +15,208 @@ class ProductionPrintPreview(QDialog):
         self.data = production_data or {}
         self.mats = materials_data or []
 
-        self.setWindowTitle("Print Preview - Production Entry")
-        self.resize(1100, 950)
-        self.setStyleSheet("background:white;")
-
-        # Generate the PDF in memory for the preview
-        self.pdf_buffer = io.BytesIO()
-        self.generate_pdf(self.pdf_buffer)
-        self.pdf_bytes = self.pdf_buffer.getvalue()
-
-        # Load into the UI Viewer
-        self.qbuffer = QBuffer(self)
-        self.qbuffer.setData(self.pdf_bytes)
-        self.qbuffer.open(QIODevice.OpenModeFlag.ReadOnly)
-        self.pdf_doc = QPdfDocument(self)
-        self.pdf_doc.load(self.qbuffer)
+        self.setWindowTitle("Sharp Text Preview - Epson LX-310")
+        self.resize(900, 850)
+        self.setStyleSheet("background:#f0f0f0;")
 
         self.setup_ui()
+        self.refresh_preview()
 
     def setup_ui(self):
         layout = QVBoxLayout(self)
+
+        # Toolbar
         toolbar = QWidget()
-        toolbar.setStyleSheet("background:#f8f9fa; border-bottom: 1px solid #ddd; padding: 5px;")
+        toolbar.setStyleSheet("background:#f8f9fa; border-bottom: 1px solid #ddd; padding: 10px;")
         tb_layout = QHBoxLayout(toolbar)
 
-        tb_layout.addWidget(QLabel("<b>Preview Zoom:</b>"))
-        self.zoom_combo = QComboBox()
-        self.zoom_combo.addItems(["75%", "100%", "125%", "150%"])
-        self.zoom_combo.setCurrentText("100%")
-        self.zoom_combo.currentTextChanged.connect(self.on_zoom_changed)
-        tb_layout.addWidget(self.zoom_combo)
+        tb_layout.addWidget(QLabel("<b>PRINTER:</b>"))
+        self.printer_combo = QComboBox()
+        self.load_printers()
+        tb_layout.addWidget(self.printer_combo, 1)
 
-        tb_layout.addStretch()
-        btn_print = QPushButton(" PRINT TO SYSTEM ")
+        btn_print = QPushButton(" START PRINTING ")
         btn_print.setIcon(fa.icon('fa5s.print', color='white'))
         btn_print.setStyleSheet(
-            "background:#28a745; color:white; padding:8px 15px; font-weight:bold; border-radius:4px;")
+            "background:#28a745; color:white; padding:10px 20px; font-weight:bold; border:none; border-radius:4px;")
         btn_print.clicked.connect(self.print_report)
         tb_layout.addWidget(btn_print)
         layout.addWidget(toolbar)
 
-        self.pdf_view = QPdfView(self)
-        self.pdf_view.setDocument(self.pdf_doc)
-        layout.addWidget(self.pdf_view)
+        # The Preview Area (Virtual Paper)
+        self.preview_area = QTextEdit()
+        self.preview_area.setReadOnly(True)
+        self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
 
-    def generate_pdf(self, target):
-        """Creates the PDF. target can be a file path or a BytesIO buffer."""
-        # Use thicker lines (1.2) so the LX-310 pins hit more solidly
-        doc = SimpleDocTemplate(target, pagesize=letter, leftMargin=30, rightMargin=30, topMargin=30, bottomMargin=30)
-        styles = getSampleStyleSheet()
+        # Fixed-width font is essential for alignment
+        font = QFont("Courier New", 11)
+        font.setStyleHint(QFont.StyleHint.Monospace)
+        self.preview_area.setFont(font)
 
-        # Use Courier because it aligns perfectly with dot-matrix pins
-        styles.add(ParagraphStyle(name='C', fontName='Courier', fontSize=10, leading=12))
-        styles.add(ParagraphStyle(name='CB', fontName='Courier-Bold', fontSize=10, leading=12))
-        styles.add(ParagraphStyle(name='CB_Center', parent=styles['CB'], alignment=TA_CENTER, fontSize=12))
+        # Styling the preview to look like a dot-matrix sheet
+        self.preview_area.setStyleSheet("""
+            background-color: white; 
+            color: #333; 
+            border: 2px solid #999; 
+            padding: 40px;
+            font-weight: bold;
+        """)
+        layout.addWidget(self.preview_area)
 
-        story = []
+    def load_printers(self):
+        try:
+            printers = win32print.EnumPrinters(win32print.PRINTER_ENUM_LOCAL | win32print.PRINTER_ENUM_CONNECTIONS)
+            for p in printers:
+                self.printer_combo.addItem(p[2])
+            self.printer_combo.setCurrentText(win32print.GetDefaultPrinter())
+        except:
+            pass
 
-        # 1. Header and ID Box
-        title_part = [[Paragraph("MASTERBATCH PHILIPPINES, INC.", styles['CB'])],
-                      [Paragraph("PRODUCTION ENTRY", styles['C'])], [Paragraph("FORM NO. FM00012A1", styles['C'])]]
-        id_part = [
-            [Paragraph("PRODUCTION ID   :", styles['C']), Paragraph(self.data.get('prod_id', ''), styles['CB'])],
-            [Paragraph("PRODUCTION DATE :", styles['C']),
-             Paragraph(self.data.get('production_date', ''), styles['CB'])],
-            [Paragraph("ORDER FORM NO.  :", styles['C']), Paragraph(self.data.get('order_form_no', ''), styles['CB'])],
-            [Paragraph("FORMULATION NO. :", styles['C']), Paragraph(self.data.get('formulation_id', ''), styles['CB'])]
-        ]
+    def build_report_map(self, mode="screen"):
+        """
+        The 'Source of Truth' for the report.
+        mode='screen' returns Unicode for the UI.
+        mode='printer' returns HEX bytes for the LX-310.
+        """
+        # Define characters based on mode
+        if mode == "screen":
+            H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
+            BOLD_ON, BOLD_OFF = "", ""  # HTML/RichText handles bold differently if needed
+        else:
+            # PC437 Hardware Codes for solid lines
+            H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
+            ESC = '\x1b'
+            BOLD_ON, BOLD_OFF = ESC + 'E', ESC + 'F'
 
-        header_table = Table([[Table(title_part), Table(id_part, colWidths=[1.6 * inch, 1.2 * inch])]],
-                             colWidths=[4.2 * inch, 3 * inch])
-        header_table.setStyle(TableStyle([
-            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-            ('BOX', (1, 0), (1, 0), 1.2, colors.black),  # Thicker box for dot-matrix clarity
-        ]))
-        story.append(header_table)
-        story.append(Spacer(1, 15))
+        width = 80
+        lines = []
 
-        # 2. Details
-        details_data = [
-            [Paragraph("PRODUCT CODE  :", styles['C']), Paragraph(self.data.get('product_code', ''), styles['CB']),
-             Paragraph("MIXING TIME   :", styles['C']), Paragraph(self.data.get('mixing_time', ''), styles['CB'])],
-            [Paragraph("PRODUCT COLOR:", styles['C']), Paragraph(self.data.get('product_color', ''), styles['CB']),
-             Paragraph("MACHINE NO:", styles['C']), Paragraph(self.data.get('machine_no', ''), styles['CB'])],
-            [Paragraph("DOSAGE        :", styles['C']),
-             Paragraph(f"{float(self.data.get('dosage', 0)):.6f}", styles['CB']),
-             Paragraph("QTY REQUIRED:", styles['C']),
-             Paragraph(f"{float(self.data.get('qty_required', 0)):.6f}", styles['CB'])],
-            [Paragraph("CUSTOMER :", styles['C']), Paragraph(self.data.get('customer', ''), styles['CB']),
-             Paragraph("QTY PER BATCH:", styles['C']),
-             Paragraph(f"{float(self.data.get('qty_per_batch', 0)):.6f}", styles['CB'])],
-            [Paragraph("LOT NO.:", styles['C']), Paragraph(self.data.get('lot_number', ''), styles['CB']),
-             Paragraph("QTY TO PRODUCE:", styles['C']),
-             Paragraph(f"{float(self.data.get('qty_produced', 0)):.6f}", styles['CB'])]
-        ]
-        story.append(Table(details_data, colWidths=[1.4 * inch, 2.2 * inch, 1.5 * inch, 2.3 * inch]))
-        story.append(Spacer(1, 15))
+        # Header
+        lines.append(f"{BOLD_ON}MASTERBATCH PHILIPPINES, INC.{BOLD_OFF}")
+        lines.append("PRODUCTION ENTRY")
 
-        # 3. Batch Title
-        story.append(Paragraph(self.batch_text().upper(), styles['CB_Center']))
-        story.append(Spacer(1, 10))
+        # Top Box
+        box_w = 28
+        top_border = TL + (H * box_w) + TR
+        bot_border = BL + (H * box_w) + BR
 
-        # 4. Table
-        mat_rows = [["MATERIAL CODE", "LARGE SCALE (Kg.)", "SMALL SCALE (grm.)", "WEIGHT (Kg.)"]]
+        f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1'):<28}"
+        lines.append(f"{f_no}{top_border}")
+
+        def box_row(label, val):
+            content = f" {label:<16} : {val:<8} "
+            return f"{'':<37}{V}{content}{V}"
+
+        lines.append(box_row("PRODUCTION ID", self.data.get('prod_id', '')))
+        lines.append(box_row("PRODUCTION DATE", self.data.get('production_date', '')))
+        lines.append(box_row("ORDER FORM NO.", self.data.get('order_form_no', '')))
+        lines.append(box_row("FORMULATION NO.", self.data.get('formulation_id', '')))
+        lines.append(f"{'':<37}{bot_border}")
+        lines.append("")
+
+        # 2-Column Info
+        c1, c2 = 16, 22
+
+        def l(k1, v1, k2, v2):
+            return f"{k1:<{c1}} {BOLD_ON}{v1:<{c2}}{BOLD_OFF} {k2:<{c1}} {BOLD_ON}{v2}{BOLD_OFF}"
+
+        lines.append(l('PRODUCT CODE  :', self.data.get('product_code', ''), 'MIXING TIME   :',
+                       self.data.get('mixing_time', '')))
+        lines.append(l('PRODUCT COLOR :', self.data.get('product_color', ''), 'MACHINE NO    :',
+                       self.data.get('machine_no', '')))
+        lines.append(l('DOSAGE        :', f"{float(self.data.get('dosage', 0)):.6f}", 'QTY REQUIRED  :',
+                       f"{float(self.data.get('qty_required', 0)):.6f}"))
+        lines.append(l('CUSTOMER      :', self.data.get('customer', '')[:20], 'QTY PER BATCH :',
+                       f"{float(self.data.get('qty_per_batch', 0)):.6f}"))
+        lines.append(l('LOT NO.       :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
+                       f"{float(self.data.get('qty_produced', 0)):.6f}"))
+
+        # Center Summary
+        summary = self.batch_text()
+        lines.append("\n" + BOLD_ON + summary.center(width).upper() + BOLD_OFF + "\n")
+
+        # Table Section
+        lines.append(H * width)
+        lines.append(f"{'MATERIAL CODE':<20} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
+        lines.append(H * width)
+
         for m in self.mats:
-            mat_rows.append([m['material_code'], f"{float(m['large_scale']):.7f}", f"{float(m['small_scale']):.7f}",
-                             f"{float(m['total_weight']):.7f}"])
+            code = str(m.get('material_code', ''))[:20]
+            l_val = f"{float(m.get('large_scale', 0)):.7f}"
+            s_val = f"{float(m.get('small_scale', 0)):.7f}"
+            w_val = f"{float(m.get('total_weight', 0)):.7f}"
+            lines.append(f"{code:<20} {l_val:>18} {s_val:>19} {w_val:>18}")
 
-        m_table = Table(mat_rows, colWidths=[2.2 * inch, 1.8 * inch, 1.8 * inch, 1.6 * inch])
-        m_table.setStyle(TableStyle([
-            ('FONTNAME', (0, 0), (-1, -1), 'Courier'),
-            ('LINEABOVE', (0, 0), (-1, 0), 1.2, colors.black),
-            ('LINEBELOW', (0, 0), (-1, 0), 1.2, colors.black),
-            ('LINEBELOW', (0, -1), (-1, -1), 1.2, colors.black),
-            ('ALIGN', (1, 0), (-1, -1), 'RIGHT'),
-        ]))
-        story.append(m_table)
-        story.append(Spacer(1, 40))
+        lines.append(H * width)
+        total = f"{float(self.data.get('qty_produced', 0)):.6f}"
+        lines.append(f"NOTE: {summary:<40} TOTAL: {BOLD_ON}{total:>18}{BOLD_OFF}\n\n")
 
-        # 5. Signatures
-        sig_data = [
-            [f"PREPARED BY: {self.data.get('prepared_by', '')}", "APPROVED BY       : ____________________"],
-            [f"PRINTED ON : {datetime.now().strftime('%m/%d/%y %I:%M:%S %p')}",
-             "MAT'L RELEASED BY : ____________________"],
-            ["MBPI-SYSTEM-2017", "PROCESSED BY      : ____________________"]
-        ]
-        story.append(Table(sig_data, colWidths=[3.8 * inch, 3.6 * inch]))
+        # Footers
+        u = "_" * 20
+        lines.append(f"{'PREPARED BY: ' + self.data.get('prepared_by', ''):<40} APPROVED BY    : {u}")
+        lines.append(f"{'PRINTED ON : ' + datetime.now().strftime('%m/%d/%y %I:%M:%S %p'):<40} MAT'L RELEASED BY: {u}")
+        lines.append(f"{'MBPI-SYSTEM-2017':<40} PROCESSED BY    : {u}")
 
-        doc.build(story)
+        return "\n".join(lines)
+
+    def refresh_preview(self):
+        screen_text = self.build_report_map(mode="screen")
+        self.preview_area.setPlainText(screen_text)
 
     def print_report(self):
-        """Prints the report directly from memory to avoid file access errors."""
-        # 1. Select Printer
-        printer = QPrinter(QPrinter.PrinterMode.HighResolution)
-        dialog = QPrintDialog(printer, self)
-        if dialog.exec() != QPrintDialog.DialogCode.Accepted:
-            return
-
+        printer_name = self.printer_combo.currentText()
         try:
-            # 2. Use the document already loaded in the preview
-            # It is already in memory, so no temporary file is needed.
-            doc = self.pdf_doc
+            # 1. Generate the RAW Bytes with hardware codes
+            raw_text = self.build_report_map(mode="printer")
 
-            if doc.status() != QPdfDocument.Status.Ready:
-                QMessageBox.warning(self, "Error", "PDF document is not ready.")
-                return
+            # 2. Add ESC/P Initialization codes
+            ESC = '\x1b'
+            # Reset + Select PC437 + Set NLQ (High Quality) mode
+            init_printer = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
+            eject_page = '\x0c'
 
-            painter = QPainter(printer)
+            full_payload = init_printer + raw_text + eject_page
 
-            # --- THE SHARPNESS SETTINGS ---
-            # Disable smoothing to prevent blurry text on dot-matrix pins
-            painter.setRenderHint(QPainter.RenderHint.Antialiasing, False)
-            painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, False)
-
-            # High-density rendering options
-            options = QPdfDocumentRenderOptions()
-
-            for i in range(doc.pageCount()):
-                if i > 0:
-                    printer.newPage()
-
-                # Render the PDF page to a high-resolution image
-                # (Multiplying by 3 ensures the dot-matrix pins have enough 'data' to print clearly)
-                page_size = doc.pagePointSize(i).toSize()
-                image = doc.render(i, page_size * 3, options)
-
-                # Draw the sharp image to the printer page
-                rect = printer.pageRect(QPrinter.Unit.DevicePixel)
-                painter.drawImage(rect, image)
-
-            painter.end()
-
-            # No temporary files to delete = No WinError 32!
-            QMessageBox.information(self, "Success", "Sent to printer!")
-            self.accept()
-
+            # 3. Spool to printer
+            hPrinter = win32print.OpenPrinter(printer_name)
+            try:
+                hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Report", None, "RAW"))
+                win32print.StartPagePrinter(hPrinter)
+                # We use latin-1 because it maps 1:1 with the HEX codes \xda, \xc4, etc.
+                win32print.WritePrinter(hPrinter, full_payload.encode('latin-1'))
+                win32print.EndPagePrinter(hPrinter)
+                win32print.EndDocPrinter(hPrinter)
+                QMessageBox.information(self, "Success", "Report printed perfectly!")
+                self.accept()
+            finally:
+                win32print.ClosePrinter(hPrinter)
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to print: {e}")
-
-    def on_zoom_changed(self, text):
-        val = int(text.replace("%", "")) / 100.0
-        self.pdf_view.setZoomFactor(val)
+            QMessageBox.critical(self, "Printing Error", str(e))
 
     def batch_text(self):
-        req, per = float(self.data.get('qty_required', 0)), float(self.data.get('qty_per_batch', 0))
+        req = float(self.data.get('qty_required', 0))
+        per = float(self.data.get('qty_per_batch', 0))
         n = 1 if per == 0 else int(req / per)
         return f"{n} batch{'es' if n > 1 else ''} by {per:.3f} KG."
 
 
+# --- TEST ---
 if __name__ == "__main__":
     import sys
+    from PyQt6.QtWidgets import QApplication, QWidget
 
     app = QApplication(sys.argv)
-    img_data = {"prod_id": "100502", "production_date": "03/02/26", "product_code": "BA4756E",
-                "customer": "EVERGOOD PLASTIC", "qty_required": 37.4, "qty_per_batch": 37.4,
-                "prepared_by": "R. MAGSALIN"}
-    img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65}]
+
+    img_data = {
+        "prod_id": "100502", "production_date": "03/02/26", "order_form_no": "42441", "formulation_id": "16534",
+        "product_code": "BA4756E", "product_color": "BLUE", "dosage": 100.0, "customer": "EVERGOOD PLASTIC",
+        "lot_number": "8755AN", "mixing_time": "3 MINS.", "machine_no": "2", "qty_required": 37.4,
+        "qty_per_batch": 37.4,
+        "qty_produced": 37.4, "prepared_by": "R. MAGSALIN"
+    }
+    img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65},
+                {"material_code": "B106", "large_scale": 2.25, "small_scale": 0, "total_weight": 0.60}]
+
     dialog = ProductionPrintPreview(img_data, img_mats)
     dialog.show()
     sys.exit(app.exec())
