@@ -409,7 +409,7 @@ class MBManualEntry(QWidget):
 
         self.print_btn = QPushButton("Print", objectName="WarningButton")
         self.print_btn.setIcon(fa.icon('fa5s.print', color='white'))
-        # self.print_btn.clicked.connect(self.print_production)
+        self.print_btn.clicked.connect(self.print_production)
         button_layout.addWidget(self.print_btn)
 
         self.new_btn = QPushButton("New", objectName="PrimaryButton")
@@ -637,8 +637,8 @@ class MBManualEntry(QWidget):
             production_date = ''
 
             # Check if self.result exists and contains the key
-            if self.result and self.result.get('production_date'):
-                production_date = self.result['production_date'].strftime("%m/%d/%y")
+            if self.prod_results and self.prod_results.get('production_date'):
+                production_date = self.prod_results['production_date'].strftime("%m/%d/%y")
             else:
                 # Handle the case where it's missing or None
                 text_date = self.production_date_input.text().strip()
@@ -690,13 +690,13 @@ class MBManualEntry(QWidget):
         preview = ProductionPrintPreview(production_data, materials_data, self)
 
         # Connect audit log
-        def on_printed(prod_id):
-            self.log_audit_trail(
-                "Print Production",
-                f"(Manual) Prod ID: {prod_id} | Production Date: {production_data['production_date']}"
-            )
+        # def on_printed(prod_id):
+        #     self.log_audit_trail(
+        #         "Print Production",
+        #         f"(Manual) Prod ID: {prod_id} | Production Date: {production_data['production_date']}"
+        #     )
 
-        preview.printed.connect(on_printed)
+        # preview.printed.connect(on_printed)
 
         # This blocks until user closes or prints
         preview.exec()
