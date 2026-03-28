@@ -113,7 +113,7 @@ class ProductionPrintPreview(QDialog):
             return f"{V}{' ' * (BOX_W - 2)}{V}"
 
         # --- 1. HEADER (LINES 0 to 8) ---
-        lines.append(f"{' ':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
+        lines.append(f"{'':<{34}}{TL}{H * (BOX_W - 2)}{TR}")
         lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
         lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{box_spacer()}")
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"

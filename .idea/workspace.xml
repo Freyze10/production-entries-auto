@@ -50,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.test_print">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -97,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_print" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test_print" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -118,14 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00136" summary="connected add materials">
-      <option name="closed" value="true" />
-      <created>1774488457336</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1774488457336</updated>
     </task>
     <task id="LOCAL-00137" summary="add actual row count value">
       <option name="closed" value="true" />
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774683374246</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <task id="LOCAL-00185" summary="updated bold usage">
+      <option name="closed" value="true" />
+      <created>1774684076266</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1774684076266</updated>
+    </task>
+    <option name="localTasksCounter" value="186" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add latest prod id when new btn is clicked" />
     <MESSAGE value="connected new btn function" />
     <MESSAGE value="changed color of button" />
     <MESSAGE value="added raw and no raw material input" />
@@ -551,7 +550,8 @@
     <MESSAGE value="fix heading" />
     <MESSAGE value="fix the lines and spacing" />
     <MESSAGE value="fizing spacing in the footer" />
-    <option name="LAST_COMMIT_MESSAGE" value="fizing spacing in the footer" />
+    <MESSAGE value="updated bold usage" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated bold usage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
