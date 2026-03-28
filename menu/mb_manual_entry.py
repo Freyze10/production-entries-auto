@@ -637,7 +637,7 @@ class MBManualEntry(QWidget):
         item_count = self.get_valid_row_count()
 
         for row in range(self.materials_table.rowCount()):
-            item = self.materials_table.item(row, 3) # Check column 3 (Weight)
+            item = self.materials_table.item(row, 3)  # Check column 3 (Weight)
 
             if item:
                 if hasattr(item, 'value'):

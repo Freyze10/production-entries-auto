@@ -157,7 +157,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ' * left_w}{BL}{H * (box_w - 2)}{BR}")
         lines.append("")
 
-        c1, c2 = 16, 22
+        c1, c2 = 16, 24
 
         def row(k1, v1, k2, v2):
             return f"{k1:<{c1}} {BOLD_ON}{v1:<{c2}}{BOLD_OFF} {k2:<{c1}} {BOLD_ON}{v2}{BOLD_OFF}"
@@ -177,13 +177,13 @@ class ProductionPrintPreview(QDialog):
         lines.append("\n" + BOLD_ON + summary.center(width).upper() + BOLD_OFF + "\n")
 
         lines.append(H * width)
-        lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
+        lines.append(f"{'MATERIAL CODE':<24} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>18} {'WEIGHT (Kg.)'}")
         lines.append(H * width)
 
         for m in self.mats:
             code = str(m.get('material_code', ''))[:24]
             lines.append(
-                f"{code:<25} {float(m.get('large_scale', 0)):18.7f} {float(m.get('small_scale', 0)):19.7f} {float(m.get('total_weight', 0)):18.7f}")
+                f"{code:<24} {float(m.get('large_scale', 0)):18.7f} {float(m.get('small_scale', 0)):19.7f} {float(m.get('total_weight', 0)):18.7f}")
 
         lines.append(H * width)
         lines.append(
