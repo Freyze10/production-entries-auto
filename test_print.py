@@ -95,7 +95,7 @@ class ProductionPrintPreview(QDialog):
         # 1. Define characters and Hardware Codes
         if mode == "screen":
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
-            B_ON, B_OFF = "", ""  # Bold handled by UI font weight if needed, or keep empty for alignment
+            B_ON, B_OFF = "<b>", "</b>"
         else:
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
@@ -155,12 +155,25 @@ class ProductionPrintPreview(QDialog):
         lines.append(H * WIDTH)
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
         lines.append(H * WIDTH)
+
         for m in self.mats:
             m_c = str(m.get('material_code', ''))[:24]
-            l_v = f"{float(m.get('large_scale', 0)):.7f}"
-            s_v = f"{float(m.get('small_scale', 0)):.7f}"
-            w_v = f"{float(m.get('total_weight', 0)):.7f}"
-            lines.append(f"{m_c:<25} {l_v:>18} {s_v:>19} {w_v:>18}")
+
+            # 1. Format the numbers to their EXACT column widths FIRST
+            # This ensures the spaces are calculated correctly
+            l_v_padded = f"{float(m.get('large_scale', 0)):18.7f}"
+            s_v_padded = f"{float(m.get('small_scale', 0)):19.7f}"
+            w_v_padded = f"{float(m.get('total_weight', 0)):18.7f}"
+
+            # 2. Now wrap the padded strings in Bold.
+            # The columns will stay perfectly aligned because the tags have 0 visual width.
+            lines.append(
+                f"{m_c:<25} "
+                f"{B_ON}{l_v_padded}{B_OFF} "
+                f"{B_ON}{s_v_padded}{B_OFF} "
+                f"{B_ON}{w_v_padded}{B_OFF}"
+            )
+
         lines.append(H * WIDTH)
 
         # --- 4. TOTAL NOTE ---
@@ -189,39 +202,36 @@ class ProductionPrintPreview(QDialog):
         return "\n".join(lines)
 
     def refresh_preview(self):
-        # 1. Set the text
-        self.preview_area.setPlainText(self.build_report_map(mode="screen"))
+        # 1. Get the map with <b> tags
+        raw_content = self.build_report_map(mode="screen")
 
-        # 2. Get document and total line count
+        # 2. Convert newlines to <br> and wrap in a white-space preserving div
+        # 'white-space: pre' is the secret to keeping your 80-character alignment in HTML
+        html_content = f"""
+        <div style="white-space: pre; font-family: 'Courier New';">
+            {raw_content.replace('\n', '<br>')}
+        </div>
+        """
+        self.preview_area.setHtml(html_content)
+
+        # 3. Re-apply the Line Height (setHtml resets formatting, so we do this last)
         doc = self.preview_area.document()
         total_blocks = doc.blockCount()
-
-        # --- DEFINE YOUR SECTION BOUNDARIES ---
-        header_end = 9  # Lines 0-9
-        # The footer is usually the last 6 lines (3 name lines + 3 underline lines)
+        header_end = 9
         footer_start = total_blocks - 6
 
         for i in range(total_blocks):
             block = doc.findBlockByNumber(i)
             fmt = block.blockFormat()
 
-            # SECTION 1: HEADER & BOX
             if i <= header_end:
-                # 100% spacing so box lines touch and Masterbatch is compact
                 line_h = 100.0
-
-            # SECTION 3: FOOTER
             elif i >= footer_start:
-                # Custom spacing for signatures (e.g., 110% for a slight gap)
                 line_h = 70.0
-
-            # SECTION 2: BODY (Details, Table, Total)
             else:
-                # Wide 150% spacing for the main data
                 line_h = 130.0
 
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
-
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
 
