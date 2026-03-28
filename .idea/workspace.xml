@@ -119,38 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00131" summary="fixed database add rm lstsi">
-      <option name="closed" value="true" />
-      <created>1774426439883</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1774426439883</updated>
-    </task>
-    <task id="LOCAL-00132" summary="set tab order in manual entry">
-      <option name="closed" value="true" />
-      <created>1774426896884</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1774426896884</updated>
-    </task>
-    <task id="LOCAL-00133" summary="removed print prod_id">
-      <option name="closed" value="true" />
-      <created>1774487907070</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1774487907070</updated>
-    </task>
-    <task id="LOCAL-00134" summary="added add material function">
-      <option name="closed" value="true" />
-      <created>1774488173339</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1774488173339</updated>
-    </task>
     <task id="LOCAL-00135" summary="added clear material inputs">
       <option name="closed" value="true" />
       <created>1774488304570</created>
@@ -511,7 +479,39 @@
       <option name="project" value="LOCAL" />
       <updated>1774681301490</updated>
     </task>
-    <option name="localTasksCounter" value="180" />
+    <task id="LOCAL-00180" summary="uses raw text print">
+      <option name="closed" value="true" />
+      <created>1774682748525</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1774682748525</updated>
+    </task>
+    <task id="LOCAL-00181" summary="modified line height spacing">
+      <option name="closed" value="true" />
+      <created>1774682800259</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1774682800259</updated>
+    </task>
+    <task id="LOCAL-00182" summary="fix heading">
+      <option name="closed" value="true" />
+      <created>1774682875588</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1774682875588</updated>
+    </task>
+    <task id="LOCAL-00183" summary="fix the lines and spacing">
+      <option name="closed" value="true" />
+      <created>1774682929661</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1774682929661</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,10 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added empty value in the index 0 of rm list" />
-    <MESSAGE value="initialize btn production to checked" />
-    <MESSAGE value="added default value in  the large andsmall scale" />
-    <MESSAGE value="added a new button function" />
     <MESSAGE value="added db call latest prod_id" />
     <MESSAGE value="add latest prod id when new btn is clicked" />
     <MESSAGE value="connected new btn function" />
@@ -551,7 +547,11 @@
     <MESSAGE value="connected print to button" />
     <MESSAGE value="modifying spaces" />
     <MESSAGE value="uses qpainter" />
-    <option name="LAST_COMMIT_MESSAGE" value="uses qpainter" />
+    <MESSAGE value="uses raw text print" />
+    <MESSAGE value="modified line height spacing" />
+    <MESSAGE value="fix heading" />
+    <MESSAGE value="fix the lines and spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the lines and spacing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

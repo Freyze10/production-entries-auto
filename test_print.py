@@ -176,14 +176,14 @@ class ProductionPrintPreview(QDialog):
         u = "▔" * 24
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
-            return f"{lab_l:<14}{str(val_l)[:22]:<28}{lab_r:<16}{str(val_r)[:22]:<20}"
+            return f"{lab_l:<14}{str(val_l)[:22]:<27}{lab_r:<16}{str(val_r)[:22]:<20}"
 
         lines.append(sig_ln("PREPARED BY :", self.data.get('prepared_by', ''), "APPROVED BY    :",
                             self.data.get('approved_by', '')))
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
-        lines.append(sig_ln("MBPI-SYSTEM-2017", "", "PROCESSED BY   :", ""))
+        lines.append(f"{"MBPI-SYSTEM-2022":<14} {'':<23} {"PROCESSED BY   : ":<16}")
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
 
         return "\n".join(lines)
