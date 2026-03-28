@@ -90,6 +90,11 @@ class ProductionPrintPreview(QDialog):
         self.preview_area.setUndoRedoEnabled(False)
         self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
 
+        font = QFont("Courier New", 10)
+        font.setFixedPitch(True)  # Crucial for alignment
+        font.setStyleHint(QFont.StyleHint.Monospace)
+        self.preview_area.setFont(font)
+
         # Fix the width to simulate 8.5 inches (approx 816 pixels) if 850
         self.preview_area.setFixedWidth(750)
         # Letter height is 11 inches (approx 1056 pixels)
@@ -126,73 +131,100 @@ class ProductionPrintPreview(QDialog):
             pass
 
     def build_report_map(self, mode="screen"):
+        # 1. Define characters
         if mode == "screen":
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
-            BOLD_ON, BOLD_OFF = "", ""
+            B_ON, B_OFF = "", ""  # NO ESCAPE CODES FOR UI
         else:
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
-            ESC = '\x1b'
-            BOLD_ON, BOLD_OFF = ESC + 'E', ESC + 'F'
+            B_ON, B_OFF = '\x1bE', '\x1bF'  # Printer Hardware Bold
 
         width = 80
         box_w = 30
-        left_w = width - box_w
+        left_w = width - box_w  # 50
         lines = []
 
-        # Header Block
-        l1_text = f"{BOLD_ON}MASTERBATCH PHILIPPINES, INC.{BOLD_OFF}"
-        l1_pad = left_w - len("MASTERBATCH PHILIPPINES, INC.")
-        lines.append(f"{l1_text}{' ' * l1_pad}{TL}{H * (box_w - 2)}{TR}")
+        # Helper: Creates a fixed-width row for the ID Box (exactly 30 chars)
+        def make_box_part(label, val):
+            # Label(15) + ":" (2) + Val (7) + Borders/Spaces (6) = 30
+            l_str = label[:15]
+            v_str = str(val)[:7]
+            content = f" {l_str:<15}: {v_str:<7} "
+            return f"{V}{content}{V}"
 
-        l2_text = "PRODUCTION ENTRY"
-        l2_pad = left_w - len(l2_text)
-        lines.append(f"{l2_text}{' ' * l2_pad}{V} PRODUCTION ID   : {self.data.get('prod_id', ''):<8} {V}")
+        # --- HEADER BLOCK (Strict 80 char alignment) ---
+        # Line 1
+        t1 = "MASTERBATCH PHILIPPINES, INC."
+        lines.append(f"{B_ON}{t1:<{left_w}}{B_OFF}{TL}{H * (box_w - 2)}{TR}")
 
-        l3_text = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
-        l3_pad = left_w - len(l3_text)
-        lines.append(f"{l3_text}{' ' * l3_pad}{V} PRODUCTION DATE : {self.data.get('production_date', ''):<8} {V}")
+        # Line 2
+        t2 = "PRODUCTION ENTRY"
+        lines.append(f"{t2:<{left_w}}{make_box_part('PRODUCTION ID', self.data.get('prod_id', ''))}")
 
-        lines.append(f"{' ' * left_w}{V} ORDER FORM NO.  : {self.data.get('order_form_no', ''):<8} {V}")
-        lines.append(f"{' ' * left_w}{V} FORMULATION NO. : {self.data.get('formulation_id', ''):<8} {V}")
-        lines.append(f"{' ' * left_w}{BL}{H * (box_w - 2)}{BR}")
+        # Line 3
+        t3 = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
+        lines.append(f"{t3:<{left_w}}{make_box_part('PRODUCTION DATE', self.data.get('production_date', ''))}")
+
+        # Line 4
+        lines.append(f"{' ':<{left_w}}{make_box_part('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
+
+        # Line 5
+        lines.append(f"{' ':<{left_w}}{make_box_part('FORMULATION NO.', self.data.get('formulation_id', ''))}")
+
+        # Line 6
+        lines.append(f"{' ':<{left_w}}{BL}{H * (box_w - 2)}{BR}")
         lines.append("")
 
-        c1, c2 = 16, 24
+        # --- 2-COLUMN DETAILS (Using f-string formatting for fixed columns) ---
+        # Col width mapping: Label(15) + Space(1) + Data(20) + Label(15) + Space(1) + Data(28) = 80
+        def det_row(k1, v1, k2, v2):
+            # We wrap the data in Bold AFTER padding to keep the grid perfect
+            v1_pad = f"{str(v1)[:20]:<20}"
+            v2_pad = f"{str(v2)[:25]:<25}"
+            return f"{k1:<15} {B_ON}{v1_pad}{B_OFF} {k2:<15} {B_ON}{v2_pad}{B_OFF}"
 
-        def row(k1, v1, k2, v2):
-            return f"{k1:<{c1}} {BOLD_ON}{v1:<{c2}}{BOLD_OFF} {k2:<{c1}} {BOLD_ON}{v2}{BOLD_OFF}"
+        lines.append(det_row('PRODUCT CODE  :', self.data.get('product_code', ''), 'MIXING TIME   :',
+                             self.data.get('mixing_time', '')))
+        lines.append(det_row('PRODUCT COLOR :', self.data.get('product_color', ''), 'MACHINE NO    :',
+                             self.data.get('machine_no', '')))
+        lines.append(det_row('DOSAGE        :', self.data.get('dosage', ''), 'QTY REQUIRED  :',
+                             self.data.get('qty_required', '')))
 
-        lines.append(row('PRODUCT CODE  :', self.data.get('product_code', ''), 'MIXING TIME   :',
-                         self.data.get('mixing_time', '')))
-        lines.append(row('PRODUCT COLOR :', self.data.get('product_color', ''), 'MACHINE NO    :',
-                         self.data.get('machine_no', '')))
-        lines.append(row('DOSAGE        :', f"{float(self.data.get('dosage', 0)):.6f}", 'QTY REQUIRED  :',
-                         f"{float(self.data.get('qty_required', 0)):.6f}"))
-        lines.append(row('CUSTOMER      :', self.data.get('customer', '')[:20], 'QTY PER BATCH :',
-                         f"{float(self.data.get('qty_per_batch', 0)):.6f}"))
-        lines.append(row('LOT NO.       :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
-                         f"{float(self.data.get('qty_produced', 0)):.6f}"))
+        # Handle long Customer Name
+        cust = self.data.get('customer', '')
+        lines.append(det_row('CUSTOMER      :', cust, 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
+        if len(cust) > 20:
+            lines.append(f"{'':<16}{B_ON}{cust[20:50]:<50}{B_OFF}")
 
+        lines.append(det_row('LOT NO.       :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
+                             self.data.get('qty_produced', '')))
+
+        # Batch Text Center
         summary = self.batch_text()
-        lines.append("\n" + BOLD_ON + summary.center(width).upper() + BOLD_OFF + "\n")
+        lines.append("\n" + B_ON + summary.center(width).upper() + B_OFF + "\n")
 
+        # --- TABLE ---
         lines.append(H * width)
-        lines.append(f"{'MATERIAL CODE':<24} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>18} {'WEIGHT (Kg.)':>17}")
+        # Cols: 25, 18, 19, 18
+        lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
         lines.append(H * width)
 
         for m in self.mats:
-            code = str(m.get('material_code', ''))[:24]
-            lines.append(
-                f"{code:<24} {float(m.get('large_scale', 0)):17.6f} {float(m.get('small_scale', 0)):18.6f} {float(m.get('total_weight', 0)):17.6f}")
+            m_code = str(m.get('material_code', ''))[:24]
+            l_val = str(m.get('large_scale', '0.0000000'))
+            s_val = str(m.get('small_scale', '0.0000000'))
+            w_val = str(m.get('total_weight', '0.0000000'))
+            lines.append(f"{m_code:<25} {l_val:>18} {s_val:>19} {w_val:>18}")
 
         lines.append(H * width)
-        lines.append(
-            f"NOTE: {summary:<52} TOTAL: {BOLD_ON}{float(self.data.get('qty_produced', 0)):>10.6f}{BOLD_OFF}\n\n")
+        t_val = str(self.data.get('qty_produced', '0.000000'))
+        lines.append(f"NOTE: {summary:<44} TOTAL: {B_ON}{t_val:>18}{B_OFF}\n\n")
 
-        u = "_" * 17
+        # Footer
+        u = "_" * 20
         lines.append(f"{'PREPARED BY: ' + self.data.get('prepared_by', ''):<42} APPROVED BY       : {u}")
         lines.append(
-            f"{'PRINTED ON : ' + datetime.now().strftime('%m/%d/%y %I:%M:%S %p'):<42} MAT'L RELEASED BY : {u}")
+            f"{'PRINTED ON : ' + datetime.now().strftime('%m/%d/%y %I:%M:%S %p'):<42} MAT'L RELEASED BY  : {u}")
         lines.append(f"{'MBPI-SYSTEM-2017':<42} PROCESSED BY      : {u}")
 
         return "\n".join(lines)

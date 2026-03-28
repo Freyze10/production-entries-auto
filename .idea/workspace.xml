@@ -50,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.test_print">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -97,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.test_print" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -118,14 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00127" summary="added iitem total count">
-      <option name="closed" value="true" />
-      <created>1774423729048</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1774423729048</updated>
     </task>
     <task id="LOCAL-00128" summary="fix button styling">
       <option name="closed" value="true" />
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774662848198</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="connected print to button">
+      <option name="closed" value="true" />
+      <created>1774667179636</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1774667179637</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="convert input to flozat" />
     <MESSAGE value="fixed error on converting" />
     <MESSAGE value="fixed row spacing on add material" />
     <MESSAGE value="added empty value in the index 0 of rm list" />
@@ -551,7 +550,8 @@
     <MESSAGE value="returned the position" />
     <MESSAGE value="chage page size" />
     <MESSAGE value="added print function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added print function" />
+    <MESSAGE value="connected print to button" />
+    <option name="LAST_COMMIT_MESSAGE" value="connected print to button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -572,9 +572,9 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test_print.py</url>
-          <line>159</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/css/styles.py</url>
+          <line>359</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
