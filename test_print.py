@@ -152,16 +152,16 @@ class ProductionPrintPreview(QDialog):
         lines.append("")
 
         # --- 3. MATERIALS TABLE ---
-        lines.append("=" * WIDTH)
+        lines.append(H * WIDTH)
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
-        lines.append("-" * WIDTH)
+        lines.append(H * WIDTH)
         for m in self.mats:
             m_c = str(m.get('material_code', ''))[:24]
             l_v = f"{float(m.get('large_scale', 0)):.7f}"
             s_v = f"{float(m.get('small_scale', 0)):.7f}"
             w_v = f"{float(m.get('total_weight', 0)):.7f}"
             lines.append(f"{m_c:<25} {l_v:>18} {s_v:>19} {w_v:>18}")
-        lines.append("=" * WIDTH)
+        lines.append(H * WIDTH)
 
         # --- 4. TOTAL NOTE ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
@@ -218,7 +218,7 @@ class ProductionPrintPreview(QDialog):
             # SECTION 2: BODY (Details, Table, Total)
             else:
                 # Wide 150% spacing for the main data
-                line_h = 150.0
+                line_h = 130.0
 
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
 
