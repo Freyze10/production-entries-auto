@@ -50,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.test_print">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -97,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.test_print" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -118,14 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00138" summary="removed fg warehouse id">
-      <option name="closed" value="true" />
-      <created>1774490041954</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1774490041954</updated>
     </task>
     <task id="LOCAL-00139" summary="added remove row function">
       <option name="closed" value="true" />
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774684486570</updated>
     </task>
-    <option name="localTasksCounter" value="187" />
+    <task id="LOCAL-00187" summary="fix spacing">
+      <option name="closed" value="true" />
+      <created>1774686408329</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1774686408329</updated>
+    </task>
+    <option name="localTasksCounter" value="188" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed color of button" />
     <MESSAGE value="added raw and no raw material input" />
     <MESSAGE value="updated table spacing function" />
     <MESSAGE value="change print color" />
@@ -551,7 +550,8 @@
     <MESSAGE value="fizing spacing in the footer" />
     <MESSAGE value="updated bold usage" />
     <MESSAGE value="fix spaciung" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix spaciung" />
+    <MESSAGE value="fix spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix spacing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -96,10 +96,14 @@ class ProductionPrintPreview(QDialog):
         if mode == "screen":
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON, B_OFF = "<b>", "</b>"
+            S_ON = '<span style="font-size: 18px; font-weight: bold;">'
+            S_OFF = '</span>'
         else:
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
+            S_ON = ESC + 'W' + '\x01' + ESC + 'E'
+            S_OFF = ESC + 'F' + ESC + 'W' + '\x00'
 
         WIDTH, BOX_W = 80, 34
         LEFT_W = WIDTH - BOX_W
@@ -146,10 +150,13 @@ class ProductionPrintPreview(QDialog):
                              self.data.get('qty_produced', '')))
 
         # Center Summary
-        lines.append("")
         summary = self.batch_text()
-        lines.append(B_ON + summary.center(WIDTH).upper() + B_OFF)
-        lines.append("")
+        if mode == "screen":
+            # We wrap this in a special div to center it visually in HTML
+            lines.append(f'<div align="center">{S_ON}{summary}{S_OFF}</div>')
+        else:
+            # For the printer, we center it in 40 characters because they are double-width
+            lines.append(S_ON + summary.center(40) + S_OFF)
 
         # --- 3. MATERIALS TABLE ---
         lines.append(H * WIDTH)
