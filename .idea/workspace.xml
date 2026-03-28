@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00123" summary="sent prod_id to manual from production page">
-      <option name="closed" value="true" />
-      <created>1774421331869</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1774421331869</updated>
-    </task>
     <task id="LOCAL-00124" summary="updated total value">
       <option name="closed" value="true" />
       <created>1774422528131</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774661571098</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="returned the position">
+      <option name="closed" value="true" />
+      <created>1774662436875</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1774662436875</updated>
+    </task>
+    <option name="localTasksCounter" value="173" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the batch break in displaying of data" />
     <MESSAGE value="removed the current batch computation" />
     <MESSAGE value="added empty row on &gt;25 large scale" />
     <MESSAGE value="convert input to flozat" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added zoom function" />
     <MESSAGE value="preview print and readable" />
     <MESSAGE value="removed weight size" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed weight size" />
+    <MESSAGE value="returned the position" />
+    <option name="LAST_COMMIT_MESSAGE" value="returned the position" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

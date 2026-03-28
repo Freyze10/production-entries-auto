@@ -91,7 +91,7 @@ class ProductionPrintPreview(QDialog):
         self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
 
         # Fix the width to simulate 8.5 inches (approx 816 pixels)
-        self.preview_area.setFixedWidth(850)
+        self.preview_area.setFixedWidth(750)
         # Letter height is 11 inches (approx 1056 pixels)
         self.preview_area.setMinimumHeight(1100)
 
