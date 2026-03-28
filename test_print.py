@@ -71,7 +71,7 @@ class ProductionPrintPreview(QDialog):
         self.preview_area = QTextEdit()
         self.preview_area.setReadOnly(True)
         self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
-        self.preview_area.setFixedWidth(850)
+        self.preview_area.setFixedWidth(750)
         self.preview_area.setMinimumHeight(1100)
 
         font = QFont("Courier New", self.default_font_size)

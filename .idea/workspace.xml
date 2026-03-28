@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00137" summary="add actual row count value">
-      <option name="closed" value="true" />
-      <created>1774489003296</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1774489003296</updated>
-    </task>
     <task id="LOCAL-00138" summary="removed fg warehouse id">
       <option name="closed" value="true" />
       <created>1774490041954</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774684076266</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="fix spaciung">
+      <option name="closed" value="true" />
+      <created>1774684486570</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1774684486570</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connected new btn function" />
     <MESSAGE value="changed color of button" />
     <MESSAGE value="added raw and no raw material input" />
     <MESSAGE value="updated table spacing function" />
@@ -551,7 +550,8 @@
     <MESSAGE value="fix the lines and spacing" />
     <MESSAGE value="fizing spacing in the footer" />
     <MESSAGE value="updated bold usage" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated bold usage" />
+    <MESSAGE value="fix spaciung" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix spaciung" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
