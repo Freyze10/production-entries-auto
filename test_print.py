@@ -177,22 +177,22 @@ class ProductionPrintPreview(QDialog):
         lines.append("\n" + BOLD_ON + summary.center(width).upper() + BOLD_OFF + "\n")
 
         lines.append(H * width)
-        lines.append(f"{'MATERIAL CODE':<24} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>18} {'WEIGHT (Kg.)'}")
+        lines.append(f"{'MATERIAL CODE':<24} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>18} {'WEIGHT (Kg.)':>17}")
         lines.append(H * width)
 
         for m in self.mats:
             code = str(m.get('material_code', ''))[:24]
             lines.append(
-                f"{code:<24} {float(m.get('large_scale', 0)):18.7f} {float(m.get('small_scale', 0)):19.7f} {float(m.get('total_weight', 0)):18.7f}")
+                f"{code:<24} {float(m.get('large_scale', 0)):17.6f} {float(m.get('small_scale', 0)):18.6f} {float(m.get('total_weight', 0)):17.6f}")
 
         lines.append(H * width)
         lines.append(
-            f"NOTE: {summary:<44} TOTAL: {BOLD_ON}{float(self.data.get('qty_produced', 0)):>18.6f}{BOLD_OFF}\n\n")
+            f"NOTE: {summary:<52} TOTAL: {BOLD_ON}{float(self.data.get('qty_produced', 0)):>10.6f}{BOLD_OFF}\n\n")
 
-        u = "_" * 25
+        u = "_" * 17
         lines.append(f"{'PREPARED BY: ' + self.data.get('prepared_by', ''):<42} APPROVED BY       : {u}")
         lines.append(
-            f"{'PRINTED ON : ' + datetime.now().strftime('%m/%d/%y %I:%M:%S %p'):<42} MAT'L RELEASED BY  : {u}")
+            f"{'PRINTED ON : ' + datetime.now().strftime('%m/%d/%y %I:%M:%S %p'):<42} MAT'L RELEASED BY : {u}")
         lines.append(f"{'MBPI-SYSTEM-2017':<42} PROCESSED BY      : {u}")
 
         return "\n".join(lines)
@@ -215,7 +215,7 @@ class ProductionPrintPreview(QDialog):
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully!")
-                self.accept()
+                # self.accept()
             finally:
                 win32print.ClosePrinter(hPrinter)
         except Exception as e:

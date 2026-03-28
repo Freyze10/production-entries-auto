@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00122" summary="created a new map to manual page">
-      <option name="closed" value="true" />
-      <created>1774419096979</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1774419096979</updated>
-    </task>
     <task id="LOCAL-00123" summary="sent prod_id to manual from production page">
       <option name="closed" value="true" />
       <created>1774421331869</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774601788687</updated>
     </task>
-    <option name="localTasksCounter" value="171" />
+    <task id="LOCAL-00171" summary="removed weight size">
+      <option name="closed" value="true" />
+      <created>1774661571098</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1774661571098</updated>
+    </task>
+    <option name="localTasksCounter" value="172" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added calculate batch function for table" />
     <MESSAGE value="added the batch break in displaying of data" />
     <MESSAGE value="removed the current batch computation" />
     <MESSAGE value="added empty row on &gt;25 large scale" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated the box to be on the same line og the masterbatch" />
     <MESSAGE value="added zoom function" />
     <MESSAGE value="preview print and readable" />
-    <option name="LAST_COMMIT_MESSAGE" value="preview print and readable" />
+    <MESSAGE value="removed weight size" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed weight size" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
