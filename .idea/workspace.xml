@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00128" summary="fix button styling">
-      <option name="closed" value="true" />
-      <created>1774424785813</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1774424785813</updated>
-    </task>
     <task id="LOCAL-00129" summary="addedd raw material in legacy">
       <option name="closed" value="true" />
       <created>1774425385856</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774667179637</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="modifying spaces">
+      <option name="closed" value="true" />
+      <created>1774670692947</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1774670692947</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed error on converting" />
     <MESSAGE value="fixed row spacing on add material" />
     <MESSAGE value="added empty value in the index 0 of rm list" />
     <MESSAGE value="initialize btn production to checked" />
@@ -551,7 +550,8 @@
     <MESSAGE value="chage page size" />
     <MESSAGE value="added print function" />
     <MESSAGE value="connected print to button" />
-    <option name="LAST_COMMIT_MESSAGE" value="connected print to button" />
+    <MESSAGE value="modifying spaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifying spaces" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -568,7 +568,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>35</line>
+          <line>54</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
