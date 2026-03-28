@@ -213,7 +213,7 @@ class ProductionPrintPreview(QDialog):
             # SECTION 3: FOOTER
             elif i >= footer_start:
                 # Custom spacing for signatures (e.g., 110% for a slight gap)
-                line_h = 100.0
+                line_h = 70.0
 
             # SECTION 2: BODY (Details, Table, Total)
             else:
