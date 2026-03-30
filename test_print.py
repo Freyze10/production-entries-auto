@@ -62,6 +62,8 @@ class ProductionPrintPreview(QDialog):
         self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
         self.preview_area.setFixedWidth(800)
         self.preview_area.setMinimumHeight(1000)
+        self.preview_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.preview_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         font = QFont("Courier New", self.default_font_size)
         font.setFixedPitch(True)
@@ -206,6 +208,9 @@ class ProductionPrintPreview(QDialog):
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
+
+        content_height = doc.size().height()
+        self.preview_area.setFixedHeight(max(1100, int(content_height) + 120))
 
     def print_report(self):
         self.btn_print.setText(" SENDING... ")
