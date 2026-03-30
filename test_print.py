@@ -102,11 +102,11 @@ class ProductionPrintPreview(QDialog):
         # --- 1. HEADER ---
         lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
         lines.append(
-            f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
-        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+            f"{' ':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
+        lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
-        lines.append(f"{f_no:<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
-        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{f_no:<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
