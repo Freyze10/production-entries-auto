@@ -87,12 +87,16 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON, B_OFF = "<b>", "</b>"
             S_ON, S_OFF = '<span style="font-size: 18px; font-weight: bold;">', '</span>'
+            # Unicode Overline for Screen
+            U_CHAR = "▔"
         else:
-            # FIXED: Raw hardware codes for LX-310 to prevent 'A' symbols
+            # RAW Hardware codes for LX-310 (CP437)
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
             S_ON, S_OFF = ESC + 'W' + '\x01' + ESC + 'E', ESC + 'F' + ESC + 'W' + '\x00'
+            # Hardware Overline (Top block) for Printer
+            U_CHAR = "\xdf"
 
         WIDTH, BOX_W = 80, 34
         LEFT_W = WIDTH - BOX_W
@@ -101,14 +105,14 @@ class ProductionPrintPreview(QDialog):
         def box_ln(label, val):
             return f"{V} {label[:17]:<17} : {str(val)[:10]:<10} {V}"
 
-        # --- 1. HEADER ---
+        # --- 1. HEADER (Lines 0-9) ---
         lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
         lines.append(
-            f"{' ':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
-        lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
-        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
+            f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
+        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
-        lines.append(f"{f_no:<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{f_no:<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
@@ -131,11 +135,10 @@ class ProductionPrintPreview(QDialog):
         cust = str(self.data.get('customer', ''))
         lines.append(det_row('CUSTOMER     :', cust[:34], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
         if len(cust) > 34:
-            lines.append(f"{' ':<15}{B_ON}{cust[34:60]:<60}{B_OFF}")
+            lines.append(f"{' ':<15}{B_ON}{cust[34:68]:<65}{B_OFF}")
         lines.append(det_row('LOT NO.      :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
                              self.data.get('qty_produced', '')))
 
-        # Center Summary
         summary = self.batch_text()
         if mode == "screen":
             lines.append(f'<div align="center">{S_ON}{summary.upper()}{S_OFF}</div>')
@@ -146,40 +149,30 @@ class ProductionPrintPreview(QDialog):
         lines.append(H * WIDTH)
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>17} {'WEIGHT (Kg.)':>15}")
         lines.append(H * WIDTH)
-
         for m in self.mats:
             m_c = str(m.get('material_code', ''))
-
-            # --- THE FIX: Blank Row Detection ---
-            if not m_c or not m_c.strip():
-                # Append a line of 80 spaces so the row has physical width and height
+            if not m_c.strip():
                 lines.append(" " * WIDTH)
                 continue
-            # ------------------------------------
 
-            m_c_fixed = m_c[:24]
-            try:
-                l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.7f}{B_OFF}"
-                s_v = f"{B_ON}{float(m.get('small_scale', 0)):17.7f}{B_OFF}"
-                w_v = f"{B_ON}{float(m.get('total_weight', 0)):15.7f}{B_OFF}"
-                lines.append(f"{m_c_fixed:<25} {l_v} {s_v} {w_v}")
-            except:
-                lines.append(f"{m_c_fixed:<25} {'0.0000000':>18} {'0.0000000':>17} {'0.0000000':>15}")
-
+            l_v_pad = f"{float(m.get('large_scale', 0)):18.7f}"
+            s_v_pad = f"{float(m.get('small_scale', 0)):17.7f}"
+            w_v_pad = f"{float(m.get('total_weight', 0)):15.7f}"
+            lines.append(f"{m_c[:24]:<25} {B_ON}{l_v_pad}{B_OFF} {B_ON}{s_v_pad}{B_OFF} {B_ON}{w_v_pad}{B_OFF}")
         lines.append(H * WIDTH)
 
         # --- 4. TOTAL & GAPS ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-        lines.append(" ")
-        lines.append(" ")
+        lines.append(" ");
+        lines.append(" ");
         lines.append(" ")
 
-        # --- 5. FOOTER ---
-        u = "▔" * 22
+        # --- 5. FOOTER (Centering and Overlines) ---
+        u = U_CHAR * 22
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
-            # FIXED: Centered Approved By name using ^ alignment
+            # 14 (label) + 26 (val) + 16 (label) + 24 (val) = 80 total
             return f"{lab_l:<14}{str(val_l)[:22]:<26}{lab_r:<16}{str(val_r)[:24]:^24}"
 
         lines.append(sig_ln("PREPARED BY :", self.data.get('prepared_by', ''), "APPROVED BY    :",
@@ -187,7 +180,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
-        lines.append(f"{'MBPI-SYSTEM-2022':<14}{' ':<24}{'PROCESSED BY   :'}")
+        lines.append(f"{'MBPI-SYSTEM-2022':<14}{' ':<24}{'PROCESSED BY   :':<16}{' ':^24}")
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
 
         return lines
@@ -211,14 +204,14 @@ class ProductionPrintPreview(QDialog):
             block = doc.findBlockByNumber(i)
             fmt = block.blockFormat()
             text = block.text().upper()
-            if i <= 7:
+            if i <= 9:
                 line_h = 100.0
             elif i >= (total_blocks - 6):
-                line_h = 105.0  # Fixed footer spacing
+                line_h = 95.0  # Tighter for overline touch
             elif "BATCH BY" in text:
                 line_h = 160.0
             else:
-                line_h = 140.0
+                line_h = 135.0
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
@@ -238,23 +231,26 @@ class ProductionPrintPreview(QDialog):
             ESC = '\x1b'
             # Reset + CP437 + NLQ Mode
             init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
+
             parts = raw_text.split('\n')
             header = "\n".join(parts[:10])
             body = "\n".join(parts[10:-6])
             footer = "\n".join(parts[-6:])
 
-            # Spacing: Header(24/216=100%), Body(46/216=130%), Footer(36/216=Standard)
-            payload = (init + (ESC + '3' + '\x18') + header + "\n" + (ESC + '3' + '\x2e') + body + "\n" + (
-                        ESC + '2') + footer + '\x0c')
+            # Hardware Payload
+            payload = (init + (ESC + '3' + '\x18') + header + "\n" +
+                       (ESC + '3' + '\x30') + body + "\n" +
+                       (ESC + '3' + '\x16') + footer + '\x0c')  # ESC 3 22 for tight overlines
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Report", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
+                # CRITICAL: Use CP437 to support \xdf (Overline)
                 win32print.WritePrinter(hPrinter, payload.encode('cp437', 'ignore'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
-                QMessageBox.information(self, "Success", "Sent to printer.")
+                QMessageBox.information(self, "Success", "Printed Successfully.")
                 self.accept()
             finally:
                 win32print.ClosePrinter(hPrinter)
@@ -280,6 +276,4 @@ if __name__ == "__main__":
     img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4,
                 "approved_by": "M. VERDE"}
     img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65}]
-    dialog = ProductionPrintPreview(img_data, img_mats)
-    dialog.show()
-    sys.exit(app.exec())
+    ProductionPrintPreview(img_data, img_mats).exec()
