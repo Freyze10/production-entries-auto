@@ -116,10 +116,10 @@ class ProductionPrintPreview(QDialog):
         lines.append("")  # Line 6 Gap
 
         # --- 2. PRODUCT DETAILS ---
-        c1, c2 = 16, 34
+        c1, c2 = 14, 34
 
         def det_row(k1, v1, k2, v2):
-            return f"{k1:<{c1}} {B_ON}{str(v1)[:38]:<{c2}}{B_OFF} {k2:<{c1}} {B_ON}{str(v2)[:20]:<{c1}}{B_OFF}"
+            return f"{k1:<{c1}} {B_ON}{str(v1)[:34]:<{c2}}{B_OFF} {k2:<{c1}} {B_ON}{str(v2)[:20]:<{c1}}{B_OFF}"
 
         lines.append(det_row('PRODUCT CODE :', self.data.get('product_code', ''), 'MIXING TIME   :',
                              self.data.get('mixing_time', '')))
@@ -128,9 +128,9 @@ class ProductionPrintPreview(QDialog):
         lines.append(det_row('DOSAGE       :', self.data.get('dosage', ''), 'QTY REQUIRED  :',
                              self.data.get('qty_required', '')))
         cust = str(self.data.get('customer', ''))
-        lines.append(det_row('CUSTOMER     :', cust[:20], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
-        if len(cust) > 20:
-            lines.append(f"{' ':<17}{B_ON}{cust[20:60]:<60}{B_OFF}")
+        lines.append(det_row('CUSTOMER     :', cust[:34], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
+        if len(cust) > 34:
+            lines.append(f"{' ':<15}{B_ON}{cust[34:60]:<60}{B_OFF}")
         lines.append(det_row('LOT NO.      :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
                              self.data.get('qty_produced', '')))
 
@@ -156,12 +156,12 @@ class ProductionPrintPreview(QDialog):
         # --- 4. TOTAL & GAPS ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-        lines.append("");
-        lines.append("");
+        lines.append("")
+        lines.append("")
         lines.append("")
 
         # --- 5. FOOTER / SIGNATURES ---
-        u = U_CHAR * 24
+        u = U_CHAR * 22
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
             return f"{lab_l:<14}{str(val_l)[:22]:<27}{lab_r:<16}{str(val_r)[:22]:<20}"
@@ -172,7 +172,8 @@ class ProductionPrintPreview(QDialog):
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
         # FIXED: Removed nested quotes logic causing syntax error
-        lines.append(f"{'MBPI-SYSTEM-2022':<14} {' ':<28} {'PROCESSED BY   : ':<16}")
+        # lines.append(f"{'MBPI-SYSTEM-2022':<14} {' ':<28} {'PROCESSED BY   : ':<16}")
+        lines.append(sig_ln("MBPI-SYSTEM-2022", " ", "PROCESSED BY   :", ""))
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
 
         return lines
