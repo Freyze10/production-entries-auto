@@ -174,7 +174,7 @@ class ProductionPrintPreview(QDialog):
             s_v = f"{float(m.get('small_scale',  0)):17.7f}"
             w_v = f"{float(m.get('total_weight', 0)):15.7f}"
             lines.append(
-                f"{m_c[:24]:<25} {B_ON}{l_v}{B_OFF} {B_ON}{s_v}{B_OFF} {B_ON}{w_v}{B_OFF}")
+                f"{B_ON}{m_c[:24]:<25}{l_v}{s_v}{w_v}{B_OFF}")
         lines.append(H * WIDTH)
 
         # --- 4. TOTAL & GAPS ---
