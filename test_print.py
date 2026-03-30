@@ -113,7 +113,7 @@ class ProductionPrintPreview(QDialog):
         lines  = []
 
         def box_ln(label, val):
-            return f"{V} {label[:17]:<17} : {str(val)[:10]:<10} {V}"
+            return f"{V} {label[:15]:<15} : {str(val)[:12]:<12} {V}"
 
         # --- 1. HEADER ---
         lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
@@ -130,7 +130,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
-        lines.append("")
+        lines.append(" ")
 
         # --- 2. DETAILS ---
         c1, c2 = 14, 34
