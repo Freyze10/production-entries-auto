@@ -677,13 +677,21 @@ class MBManualEntry(QWidget):
         materials_data = []
         for row in range(self.materials_table.rowCount()):
             it0 = self.materials_table.item(row, 0)
-            if not it0 or not it0.text().strip():
-                continue
+            it1 = self.materials_table.item(row, 1)
+            it2 = self.materials_table.item(row, 2)
+            it3 = self.materials_table.item(row, 3)
+
+            # Get text safely. If it's None or empty, we keep it as an empty string.
+            m_code = it0.text().strip() if it0 else ""
+            l_scale = it1.text().strip() if it1 else ""
+            s_scale = it2.text().strip() if it2 else ""
+            t_weight = it3.text().strip() if it3 else ""
+
             materials_data.append({
-                'material_code': it0.text(),
-                'large_scale': self.materials_table.item(row, 1).text() if self.materials_table.item(row, 1) else '0',
-                'small_scale': self.materials_table.item(row, 2).text() if self.materials_table.item(row, 2) else '0',
-                'total_weight': self.materials_table.item(row, 3).text() if self.materials_table.item(row, 3) else '0'
+                'material_code': m_code,
+                'large_scale': l_scale if l_scale else '0',
+                'small_scale': s_scale if s_scale else '0',
+                'total_weight': t_weight if t_weight else '0'
             })
 
         # === Open Preview with exec()===
