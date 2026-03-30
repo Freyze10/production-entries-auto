@@ -160,7 +160,7 @@ class ProductionPrintPreview(QDialog):
         lines.append("")
 
         # --- 5. FOOTER ---
-        u = "_" * 24
+        u = "▔" * 22
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
             # FIXED: Centered Approved By name using ^ alignment
