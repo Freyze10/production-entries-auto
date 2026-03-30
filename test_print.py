@@ -168,9 +168,9 @@ class ProductionPrintPreview(QDialog):
 
             # 1. Format the numbers to their EXACT column widths FIRST
             # This ensures the spaces are calculated correctly
-            l_v_padded = f"{float(m.get('large_scale', 0)):18.7f}"
-            s_v_padded = f"{float(m.get('small_scale', 0)):19.7f}"
-            w_v_padded = f"{float(m.get('total_weight', 0)):18.7f}"
+            l_v_padded = f"{float(m.get('large_scale', 0)):18.6f}"
+            s_v_padded = f"{float(m.get('small_scale', 0)):19.6f}"
+            w_v_padded = f"{float(m.get('total_weight', 0)):18.6f}"
 
             # 2. Now wrap the padded strings in Bold.
             # The columns will stay perfectly aligned because the tags have 0 visual width.
