@@ -28,7 +28,6 @@ class ProductionPrintPreview(QDialog):
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(0, 0, 0, 0)
 
-        # --- Toolbar ---
         toolbar = QWidget()
         toolbar.setFixedHeight(60)
         toolbar.setStyleSheet("background:#f8f9fa; border-bottom: 1px solid #ddd; padding: 5px;")
@@ -40,8 +39,6 @@ class ProductionPrintPreview(QDialog):
         tb_layout.addWidget(self.printer_combo, 1)
 
         tb_layout.addStretch()
-
-        # FIXED: Assigned to self so it can be accessed in print_report
         self.btn_print = QPushButton(" START PRINTING ")
         self.btn_print.setIcon(fa.icon('fa5s.print', color='white'))
         self.btn_print.setStyleSheet(
@@ -50,7 +47,6 @@ class ProductionPrintPreview(QDialog):
         tb_layout.addWidget(self.btn_print)
         main_layout.addWidget(toolbar)
 
-        # --- Scroll Area ---
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -89,13 +85,12 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON, B_OFF = "<b>", "</b>"
             S_ON, S_OFF = '<span style="font-size: 18px; font-weight: bold;">', '</span>'
-            U_CHAR = "_"
         else:
+            # FIXED: Raw hardware codes for LX-310 to prevent 'A' symbols
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
             S_ON, S_OFF = ESC + 'W' + '\x01' + ESC + 'E', ESC + 'F' + ESC + 'W' + '\x00'
-            U_CHAR = "_"
 
         WIDTH, BOX_W = 80, 34
         LEFT_W = WIDTH - BOX_W
@@ -104,18 +99,22 @@ class ProductionPrintPreview(QDialog):
         def box_ln(label, val):
             return f"{V} {label[:17]:<17} : {str(val)[:10]:<10} {V}"
 
-        # --- 1. COMPACT HEADER (Lines 0-5) ---
-        lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
-        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
+        # --- 1. HEADER ---
+        lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
+        lines.append(
+            f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
+        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
         lines.append(f"{f_no:<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
 
-        lines.append("")  # Line 6 Gap
+        lines.append("")
 
-        # --- 2. PRODUCT DETAILS ---
+        # --- 2. DETAILS ---
         c1, c2 = 14, 34
 
         def det_row(k1, v1, k2, v2):
@@ -156,25 +155,24 @@ class ProductionPrintPreview(QDialog):
         # --- 4. TOTAL & GAPS ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-        lines.append("")
-        lines.append("")
+        lines.append("");
+        lines.append("");
         lines.append("")
 
-        # --- 5. FOOTER / SIGNATURES ---
-        u = U_CHAR * 22
+        # --- 5. FOOTER ---
+        u = "_" * 24
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
-            return f"{lab_l:<14}{str(val_l)[:22]:<27}{lab_r:<16}{str(val_r)[:22]:<20}"
+            # FIXED: Centered Approved By name using ^ alignment
+            return f"{lab_l:<14}{str(val_l)[:22]:<26}{lab_r:<16}{str(val_r)[:24]:^24}"
 
         lines.append(sig_ln("PREPARED BY :", self.data.get('prepared_by', ''), "APPROVED BY    :",
                             self.data.get('approved_by', '')))
-        lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
+        lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
-        lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
-        # FIXED: Removed nested quotes logic causing syntax error
-        # lines.append(f"{'MBPI-SYSTEM-2022':<14} {' ':<28} {'PROCESSED BY   : ':<16}")
+        lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
         lines.append(sig_ln("MBPI-SYSTEM-2022", " ", "PROCESSED BY   :", ""))
-        lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
+        lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
 
         return lines
 
@@ -188,26 +186,23 @@ class ProductionPrintPreview(QDialog):
                 clean_line = line.replace(" ", "&nbsp;")
                 html_parts.append(f'<div style="white-space: nowrap;">{clean_line}</div>')
 
-        full_html = f"""<div style="font-family: 'Courier New'; color: black;">{"".join(html_parts)}</div>"""
-        self.preview_area.setHtml(full_html)
+        self.preview_area.setHtml(
+            f"""<div style="font-family: 'Courier New'; color: black;">{"".join(html_parts)}</div>""")
 
         doc = self.preview_area.document()
         total_blocks = doc.blockCount()
-
         for i in range(total_blocks):
             block = doc.findBlockByNumber(i)
             fmt = block.blockFormat()
             text = block.text().upper()
-
-            if i <= 5:  # Header Area
+            if i <= 9:
                 line_h = 100.0
-            elif i >= (total_blocks - 6):  # Footer
-                line_h = 70.0
-            elif "BATCH BY" in text:  # Summary
+            elif i >= (total_blocks - 6):
+                line_h = 105.0  # Fixed footer spacing
+            elif "BATCH BY" in text:
                 line_h = 160.0
-            else:  # Body / Details
+            else:
                 line_h = 130.0
-
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
@@ -222,18 +217,16 @@ class ProductionPrintPreview(QDialog):
             lines = self.build_report_map(mode="printer")
             raw_text = "\n".join(lines)
             ESC = '\x1b'
+            # Reset + CP437 + NLQ Mode
             init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
-
             parts = raw_text.split('\n')
-            header = "\n".join(parts[:6])
-            body = "\n".join(parts[6:-6])
+            header = "\n".join(parts[:10])
+            body = "\n".join(parts[10:-6])
             footer = "\n".join(parts[-6:])
 
-            # Hardware Spacing: 24/216 (100%), 46/216 (130%), 26/216 (110% footer)
-            payload = (init +
-                       (ESC + '3' + '\x18') + header + "\n" +
-                       (ESC + '3' + '\x2e') + body + "\n" +
-                       (ESC + '3' + '\x1a') + footer + '\x0c')
+            # Spacing: Header(24/216=100%), Body(46/216=130%), Footer(36/216=Standard)
+            payload = (init + (ESC + '3' + '\x18') + header + "\n" + (ESC + '3' + '\x2e') + body + "\n" + (
+                        ESC + '2') + footer + '\x0c')
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
@@ -242,7 +235,7 @@ class ProductionPrintPreview(QDialog):
                 win32print.WritePrinter(hPrinter, payload.encode('cp437', 'ignore'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
-                QMessageBox.information(self, "Success", "Printed Successfully.")
+                QMessageBox.information(self, "Success", "Sent to printer.")
                 self.accept()
             finally:
                 win32print.ClosePrinter(hPrinter)
@@ -265,7 +258,8 @@ if __name__ == "__main__":
     import sys
 
     app = QApplication(sys.argv)
-    img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4}
+    img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4,
+                "approved_by": "M. VERDE"}
     img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65}]
     dialog = ProductionPrintPreview(img_data, img_mats)
     dialog.show()
