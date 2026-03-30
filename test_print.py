@@ -155,9 +155,9 @@ class ProductionPrintPreview(QDialog):
         # --- 4. TOTAL & GAPS ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-        lines.append("");
-        lines.append("");
-        lines.append("")
+        lines.append(" ")
+        lines.append(" ")
+        lines.append(" ")
 
         # --- 5. FOOTER ---
         u = "▔" * 22
@@ -195,14 +195,14 @@ class ProductionPrintPreview(QDialog):
             block = doc.findBlockByNumber(i)
             fmt = block.blockFormat()
             text = block.text().upper()
-            if i <= 9:
+            if i <= 7:
                 line_h = 100.0
             elif i >= (total_blocks - 6):
                 line_h = 105.0  # Fixed footer spacing
             elif "BATCH BY" in text:
                 line_h = 160.0
             else:
-                line_h = 130.0
+                line_h = 140.0
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)

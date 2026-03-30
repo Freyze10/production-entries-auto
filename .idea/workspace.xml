@@ -50,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.test_print">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -97,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.test_print" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -118,14 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00148" summary="added empty row on &gt;25 large scale">
-      <option name="closed" value="true" />
-      <created>1774507426629</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1774507426629</updated>
     </task>
     <task id="LOCAL-00149" summary="convert input to flozat">
       <option name="closed" value="true" />
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774852539724</updated>
     </task>
-    <option name="localTasksCounter" value="197" />
+    <task id="LOCAL-00197" summary="added upperline">
+      <option name="closed" value="true" />
+      <created>1774852968223</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1774852968223</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="preview print and readable" />
     <MESSAGE value="removed weight size" />
     <MESSAGE value="returned the position" />
     <MESSAGE value="chage page size" />
@@ -551,7 +550,8 @@
     <MESSAGE value="changed material spacing" />
     <MESSAGE value="changed the  wraping of the customer name" />
     <MESSAGE value="updated thed unicodee" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated thed unicodee" />
+    <MESSAGE value="added upperline" />
+    <option name="LAST_COMMIT_MESSAGE" value="added upperline" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
