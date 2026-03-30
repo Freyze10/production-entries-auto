@@ -681,17 +681,14 @@ class MBManualEntry(QWidget):
             it2 = self.materials_table.item(row, 2)
             it3 = self.materials_table.item(row, 3)
 
-            # Get text safely. If it's None or empty, we keep it as an empty string.
-            m_code = it0.text().strip() if it0 else " "
-            l_scale = it1.text().strip() if it1 else ""
-            s_scale = it2.text().strip() if it2 else ""
-            t_weight = it3.text().strip() if it3 else ""
+            # If the first column is empty, we treat this as a blank separator row
+            m_code = it0.text().strip() if it0 else ""
 
             materials_data.append({
-                'material_code': m_code,
-                'large_scale': l_scale if l_scale else '0',
-                'small_scale': s_scale if s_scale else '0',
-                'total_weight': t_weight if t_weight else '0'
+                'material_code': m_code,  # Keep it as "" if empty
+                'large_scale': it1.text().strip() if it1 else '0',
+                'small_scale': it2.text().strip() if it2 else '0',
+                'total_weight': it3.text().strip() if it3 else '0'
             })
 
         # === Open Preview with exec()===

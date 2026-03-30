@@ -148,24 +148,22 @@ class ProductionPrintPreview(QDialog):
         lines.append(H * WIDTH)
 
         for m in self.mats:
-            m_c = str(m.get('material_code', ' '))
+            m_c = str(m.get('material_code', ''))
 
-            # --- THE FIX FOR EMPTY ROWS ---
-            if not m_c.strip():
-                # If the row is blank, append an empty string to create the gap
-                lines.append("")
+            # --- THE FIX: Blank Row Detection ---
+            if not m_c or not m_c.strip():
+                # Append a line of 80 spaces so the row has physical width and height
+                lines.append(" " * WIDTH)
                 continue
-            # ------------------------------
+            # ------------------------------------
 
-            # Normal Row Logic
             m_c_fixed = m_c[:24]
             try:
                 l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.7f}{B_OFF}"
                 s_v = f"{B_ON}{float(m.get('small_scale', 0)):17.7f}{B_OFF}"
                 w_v = f"{B_ON}{float(m.get('total_weight', 0)):15.7f}{B_OFF}"
                 lines.append(f"{m_c_fixed:<25} {l_v} {s_v} {w_v}")
-            except ValueError:
-                # Fallback if the data isn't a valid number
+            except:
                 lines.append(f"{m_c_fixed:<25} {'0.0000000':>18} {'0.0000000':>17} {'0.0000000':>15}")
 
         lines.append(H * WIDTH)
