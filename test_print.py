@@ -119,7 +119,7 @@ class ProductionPrintPreview(QDialog):
         c1, c2 = 16, 34
 
         def det_row(k1, v1, k2, v2):
-            return f"{k1:<{c1}} {B_ON}{str(v1)[:20]:<{c2}}{B_OFF} {k2:<{c1}} {B_ON}{str(v2)[:20]:<{c1}}{B_OFF}"
+            return f"{k1:<{c1}} {B_ON}{str(v1)[:38]:<{c2}}{B_OFF} {k2:<{c1}} {B_ON}{str(v2)[:20]:<{c1}}{B_OFF}"
 
         lines.append(det_row('PRODUCT CODE :', self.data.get('product_code', ''), 'MIXING TIME   :',
                              self.data.get('mixing_time', '')))
@@ -131,7 +131,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(det_row('CUSTOMER     :', cust[:20], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
         if len(cust) > 20:
             lines.append(f"{' ':<17}{B_ON}{cust[20:60]:<60}{B_OFF}")
-        lines.append(det_row('LOT NO.       :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
+        lines.append(det_row('LOT NO.      :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
                              self.data.get('qty_produced', '')))
 
         # Center Summary
@@ -143,13 +143,13 @@ class ProductionPrintPreview(QDialog):
 
         # --- 3. MATERIALS TABLE ---
         lines.append(H * WIDTH)
-        lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
+        lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>17} {'WEIGHT (Kg.)':>15}")
         lines.append("-" * WIDTH)
         for m in self.mats:
             m_c = str(m.get('material_code', ''))[:24]
             l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.7f}{B_OFF}"
-            s_v = f"{B_ON}{float(m.get('small_scale', 0)):19.7f}{B_OFF}"
-            w_v = f"{B_ON}{float(m.get('total_weight', 0)):18.7f}{B_OFF}"
+            s_v = f"{B_ON}{float(m.get('small_scale', 0)):17.7f}{B_OFF}"
+            w_v = f"{B_ON}{float(m.get('total_weight', 0)):15.7f}{B_OFF}"
             lines.append(f"{m_c:<25} {l_v} {s_v} {w_v}")
         lines.append(H * WIDTH)
 
