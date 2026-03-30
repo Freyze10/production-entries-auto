@@ -116,19 +116,19 @@ class ProductionPrintPreview(QDialog):
         lines.append("")  # Line 6 Gap
 
         # --- 2. PRODUCT DETAILS ---
-        c1, c2 = 16, 22
+        c1, c2 = 16, 34
 
         def det_row(k1, v1, k2, v2):
-            return f"{k1:<{c1}} {B_ON}{str(v1)[:20]:<{c2}}{B_OFF} {k2:<{c1}} {B_ON}{str(v2)[:20]:<{c2}}{B_OFF}"
+            return f"{k1:<{c1}} {B_ON}{str(v1)[:20]:<{c2}}{B_OFF} {k2:<{c1}} {B_ON}{str(v2)[:20]:<{c1}}{B_OFF}"
 
-        lines.append(det_row('PRODUCT CODE  :', self.data.get('product_code', ''), 'MIXING TIME   :',
+        lines.append(det_row('PRODUCT CODE :', self.data.get('product_code', ''), 'MIXING TIME   :',
                              self.data.get('mixing_time', '')))
-        lines.append(det_row('PRODUCT COLOR :', self.data.get('product_color', ''), 'MACHINE NO    :',
+        lines.append(det_row('PRODUCT COLOR:', self.data.get('product_color', ''), 'MACHINE NO    :',
                              self.data.get('machine_no', '')))
-        lines.append(det_row('DOSAGE        :', self.data.get('dosage', ''), 'QTY REQUIRED  :',
+        lines.append(det_row('DOSAGE       :', self.data.get('dosage', ''), 'QTY REQUIRED  :',
                              self.data.get('qty_required', '')))
         cust = str(self.data.get('customer', ''))
-        lines.append(det_row('CUSTOMER      :', cust[:20], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
+        lines.append(det_row('CUSTOMER     :', cust[:20], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
         if len(cust) > 20:
             lines.append(f"{' ':<17}{B_ON}{cust[20:60]:<60}{B_OFF}")
         lines.append(det_row('LOT NO.       :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
