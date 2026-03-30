@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00160" summary="added raw and no raw material input">
-      <option name="closed" value="true" />
-      <created>1774511881170</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1774511881170</updated>
-    </task>
-    <task id="LOCAL-00161" summary="updated table spacing function">
-      <option name="closed" value="true" />
-      <created>1774512335177</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1774512335177</updated>
-    </task>
     <task id="LOCAL-00162" summary="change print color">
       <option name="closed" value="true" />
       <created>1774514473683</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774860045131</updated>
     </task>
-    <option name="localTasksCounter" value="209" />
+    <task id="LOCAL-00209" summary="added empty line on summary">
+      <option name="closed" value="true" />
+      <created>1774860164220</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1774860164220</updated>
+    </task>
+    <task id="LOCAL-00210" summary="BOLD MAT CODE">
+      <option name="closed" value="true" />
+      <created>1774860252761</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1774860252761</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fizing spacing in the footer" />
-    <MESSAGE value="updated bold usage" />
     <MESSAGE value="fix spaciung" />
     <MESSAGE value="fix spacing" />
     <MESSAGE value="added font size on summary" />
@@ -551,7 +549,9 @@
     <MESSAGE value="fixing series of A for lines" />
     <MESSAGE value="printed lines" />
     <MESSAGE value="fixed the box side" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the box side" />
+    <MESSAGE value="added empty line on summary" />
+    <MESSAGE value="BOLD MAT CODE" />
+    <option name="LAST_COMMIT_MESSAGE" value="BOLD MAT CODE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

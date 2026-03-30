@@ -91,7 +91,7 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON,  B_OFF  = "<b>", "</b>"
             S_ON,  S_OFF  = '<span style="font-size:18px; font-weight:bold;">', '</span>'
-            U_CHAR = "‾"
+            U_CHAR = "￣"
         else:
             # ── Hardware bytes for Epson LX-310 ──────────────────────────────
             # These \xNN escapes are Latin-1 codepoints. When the payload is
@@ -180,7 +180,10 @@ class ProductionPrintPreview(QDialog):
         # --- 4. TOTAL & GAPS ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-        lines.append(" "); lines.append(" "); lines.append(" ")
+        lines.append(" ")
+        lines.append(" ")
+        lines.append(" ")
+        lines.append(" ")
 
         # --- 5. FOOTER ---
         u = U_CHAR * 22
@@ -218,10 +221,16 @@ class ProductionPrintPreview(QDialog):
             block = doc.findBlockByNumber(i)
             fmt   = block.blockFormat()
             text  = block.text().upper()
-            if i <= 9:                       line_h = 100.0
-            elif i >= (total_blocks - 6):    line_h = 95.0
-            elif "BATCH BY" in text:         line_h = 160.0
-            else:                            line_h = 135.0
+            if i <= 9:
+                line_h = 110.0
+            elif 18 >= i >= 17:
+                line_h = 90.0
+            elif i >= (total_blocks - 6):
+                line_h = 95.0
+            elif "BATCH BY" in text:
+                line_h = 160.0
+            else:
+                line_h = 145.0
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
