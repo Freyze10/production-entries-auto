@@ -682,7 +682,7 @@ class MBManualEntry(QWidget):
             it3 = self.materials_table.item(row, 3)
 
             # Get text safely. If it's None or empty, we keep it as an empty string.
-            m_code = it0.text().strip() if it0 else ""
+            m_code = it0.text().strip() if it0 else " "
             l_scale = it1.text().strip() if it1 else ""
             s_scale = it2.text().strip() if it2 else ""
             t_weight = it3.text().strip() if it3 else ""
