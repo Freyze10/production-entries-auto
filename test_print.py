@@ -1,20 +1,11 @@
 import win32print
+import qtawesome as fa
 from datetime import datetime
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont, QPalette, QColor, QTextBlockFormat, QTextCursor
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QComboBox,
-                             QTextEdit, QPushButton, QLabel, QMessageBox,
-                             QWidget, QScrollArea, QFrame)
-import qtawesome as fa
-
-import win32print
-from datetime import datetime
-from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont, QTextCursor, QTextBlockFormat
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QComboBox,
-                             QTextEdit, QPushButton, QLabel, QMessageBox,
-                             QWidget, QScrollArea)
-import qtawesome as fa
+from PyQt6.QtGui import QFont, QTextBlockFormat, QTextCursor
+from PyQt6.QtWidgets import (QApplication, QDialog, QVBoxLayout, QHBoxLayout,
+                             QComboBox, QTextEdit, QPushButton, QLabel,
+                             QMessageBox, QWidget, QScrollArea)
 
 
 class ProductionPrintPreview(QDialog):
@@ -49,12 +40,14 @@ class ProductionPrintPreview(QDialog):
         tb_layout.addWidget(self.printer_combo, 1)
 
         tb_layout.addStretch()
-        btn_print = QPushButton(" START PRINTING ")
-        btn_print.setIcon(fa.icon('fa5s.print', color='white'))
-        btn_print.setStyleSheet(
+
+        # FIXED: Assigned to self so it can be accessed in print_report
+        self.btn_print = QPushButton(" START PRINTING ")
+        self.btn_print.setIcon(fa.icon('fa5s.print', color='white'))
+        self.btn_print.setStyleSheet(
             "background:#28a745; color:white; padding:10px 20px; font-weight:bold; border-radius:4px;")
-        btn_print.clicked.connect(self.print_report)
-        tb_layout.addWidget(btn_print)
+        self.btn_print.clicked.connect(self.print_report)
+        tb_layout.addWidget(self.btn_print)
         main_layout.addWidget(toolbar)
 
         # --- Scroll Area ---
@@ -92,45 +85,37 @@ class ProductionPrintPreview(QDialog):
             pass
 
     def build_report_map(self, mode="screen"):
-        # 1. Define characters and Hardware Codes
         if mode == "screen":
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON, B_OFF = "<b>", "</b>"
-            S_ON = '<span style="font-size: 18px; font-weight: bold;">'
-            S_OFF = '</span>'
+            S_ON, S_OFF = '<span style="font-size: 18px; font-weight: bold;">', '</span>'
+            U_CHAR = "_"
         else:
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
-            S_ON = ESC + 'W' + '\x01' + ESC + 'E'
-            S_OFF = ESC + 'F' + ESC + 'W' + '\x00'
+            S_ON, S_OFF = ESC + 'W' + '\x01' + ESC + 'E', ESC + 'F' + ESC + 'W' + '\x00'
+            U_CHAR = "_"
 
         WIDTH, BOX_W = 80, 34
         LEFT_W = WIDTH - BOX_W
         lines = []
 
-        # --- BOX HELPERS ---
         def box_ln(label, val):
             return f"{V} {label[:17]:<17} : {str(val)[:10]:<10} {V}"
 
-        def box_spacer():
-            return f"{V}{' ' * (BOX_W - 2)}{V}"
-
-        # --- 1. HEADER (LINES 0 to 8) ---
-        lines.append(f"{'':<{34}}{TL}{H * (BOX_W - 2)}{TR}")
-        lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
-        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{box_spacer()}")
+        # --- 1. COMPACT HEADER (Lines 0-5) ---
+        lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
+        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
         lines.append(f"{f_no:<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
-        lines.append(f"{' ':<{LEFT_W}}{box_spacer()}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
-        lines.append(f"{' ':<{LEFT_W}}{box_spacer()}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
 
-        # --- 2. PRODUCT DETAILS ---
-        lines.append("")  # Line 9: Gap after header
+        lines.append("")  # Line 6 Gap
 
+        # --- 2. PRODUCT DETAILS ---
         c1, c2 = 16, 22
 
         def det_row(k1, v1, k2, v2):
@@ -152,48 +137,31 @@ class ProductionPrintPreview(QDialog):
         # Center Summary
         summary = self.batch_text()
         if mode == "screen":
-            # We wrap this in a special div to center it visually in HTML
-            lines.append(f'<div align="center">{S_ON}{summary}{S_OFF}</div>')
+            lines.append(f'<div align="center">{S_ON}{summary.upper()}{S_OFF}</div>')
         else:
-            # For the printer, we center it in 40 characters because they are double-width
-            lines.append(S_ON + summary.center(40) + S_OFF)
+            lines.append(S_ON + summary.upper().center(40) + S_OFF)
 
         # --- 3. MATERIALS TABLE ---
         lines.append(H * WIDTH)
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>19} {'WEIGHT (Kg.)':>18}")
-        lines.append(H * WIDTH)
-
+        lines.append("-" * WIDTH)
         for m in self.mats:
             m_c = str(m.get('material_code', ''))[:24]
-
-            # 1. Format the numbers to their EXACT column widths FIRST
-            # This ensures the spaces are calculated correctly
-            l_v_padded = f"{float(m.get('large_scale', 0)):18.6f}"
-            s_v_padded = f"{float(m.get('small_scale', 0)):19.6f}"
-            w_v_padded = f"{float(m.get('total_weight', 0)):18.6f}"
-
-            # 2. Now wrap the padded strings in Bold.
-            # The columns will stay perfectly aligned because the tags have 0 visual width.
-            lines.append(
-                f"{m_c:<25} "
-                f"{B_ON}{l_v_padded}{B_OFF} "
-                f"{B_ON}{s_v_padded}{B_OFF} "
-                f"{B_ON}{w_v_padded}{B_OFF}"
-            )
-
+            l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.7f}{B_OFF}"
+            s_v = f"{B_ON}{float(m.get('small_scale', 0)):19.7f}{B_OFF}"
+            w_v = f"{B_ON}{float(m.get('total_weight', 0)):18.7f}{B_OFF}"
+            lines.append(f"{m_c:<25} {l_v} {s_v} {w_v}")
         lines.append(H * WIDTH)
 
-        # --- 4. TOTAL NOTE ---
+        # --- 4. TOTAL & GAPS ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-
-        # INSERTING NEW LINES AFTER TOTAL
-        lines.append("")  # Blank Line 1
-        lines.append("")  # Blank Line 2
-        lines.append("")  # Blank Line 3
+        lines.append("");
+        lines.append("");
+        lines.append("")
 
         # --- 5. FOOTER / SIGNATURES ---
-        u = "▔" * 24
+        u = U_CHAR * 24
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
             return f"{lab_l:<14}{str(val_l)[:22]:<27}{lab_r:<16}{str(val_r)[:22]:<20}"
@@ -203,39 +171,40 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
-        lines.append(f"{"MBPI-SYSTEM-2022":<14} {'':<23} {"PROCESSED BY   : ":<16}")
+        # FIXED: Removed nested quotes logic causing syntax error
+        lines.append(f"{'MBPI-SYSTEM-2022':<14} {' ':<28} {'PROCESSED BY   : ':<16}")
         lines.append(f"{' ':<14}{' ':<28}{' ':<16}{u}")
 
-        return "\n".join(lines)
+        return lines
 
     def refresh_preview(self):
-        # 1. Get the map with <b> tags
-        raw_content = self.build_report_map(mode="screen")
+        lines = self.build_report_map(mode="screen")
+        html_parts = []
+        for line in lines:
+            if "span style" in line or 'align="center"' in line:
+                html_parts.append(line)
+            else:
+                clean_line = line.replace(" ", "&nbsp;")
+                html_parts.append(f'<div style="white-space: nowrap;">{clean_line}</div>')
 
-        # 2. Convert newlines to <br> and wrap in a white-space preserving div
-        # 'white-space: pre' is the secret to keeping your 80-character alignment in HTML
-        html_content = f"""
-        <div style="white-space: pre; font-family: 'Courier New';">
-            {raw_content.replace('\n', '<br>')}
-        </div>
-        """
-        self.preview_area.setHtml(html_content)
+        full_html = f"""<div style="font-family: 'Courier New'; color: black;">{"".join(html_parts)}</div>"""
+        self.preview_area.setHtml(full_html)
 
-        # 3. Re-apply the Line Height (setHtml resets formatting, so we do this last)
         doc = self.preview_area.document()
         total_blocks = doc.blockCount()
-        header_end = 9
-        footer_start = total_blocks - 6
 
         for i in range(total_blocks):
             block = doc.findBlockByNumber(i)
             fmt = block.blockFormat()
+            text = block.text().upper()
 
-            if i <= header_end:
+            if i <= 5:  # Header Area
                 line_h = 100.0
-            elif i >= footer_start:
+            elif i >= (total_blocks - 6):  # Footer
                 line_h = 70.0
-            else:
+            elif "BATCH BY" in text:  # Summary
+                line_h = 160.0
+            else:  # Body / Details
                 line_h = 130.0
 
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
@@ -243,55 +212,56 @@ class ProductionPrintPreview(QDialog):
             cursor.setBlockFormat(fmt)
 
     def print_report(self):
+        self.btn_print.setText(" SENDING... ")
+        self.btn_print.setEnabled(False)
+        QApplication.processEvents()
+
         printer_name = self.printer_combo.currentText()
         try:
-            raw_text = self.build_report_map(mode="printer")
+            lines = self.build_report_map(mode="printer")
+            raw_text = "\n".join(lines)
             ESC = '\x1b'
+            init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
 
-            # Split text into lines to apply hardware spacing at specific points
-            lines = raw_text.split('\n')
+            parts = raw_text.split('\n')
+            header = "\n".join(parts[:6])
+            body = "\n".join(parts[6:-6])
+            footer = "\n".join(parts[-6:])
 
-            # --- HARDWARE SPACING SETTINGS (n/216 inch) ---
-            # 24 = Tight (100%), 36 = Standard, 54 = Wide (150%), 40 = Neater (110%)
-
-            # 1. Header Section
-            init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01' + (ESC + '3' + '\x18')
-            header = "\n".join(lines[:10])
-
-            # 2. Body Section (Switch to 150%)
-            body_init = ESC + '3' + '\x36'
-            # Footer is the last 6 lines
-            body = "\n".join(lines[10:-6])
-
-            # 3. Footer Section (Switch to 110% / 40 dots)
-            footer_init = ESC + '3' + '\x28'  # \x28 is 40 in decimal
-            footer = "\n".join(lines[-6:])
-
-            final_payload = init + header + body_init + body + footer_init + footer + '\x0c'
+            # Hardware Spacing: 24/216 (100%), 46/216 (130%), 26/216 (110% footer)
+            payload = (init +
+                       (ESC + '3' + '\x18') + header + "\n" +
+                       (ESC + '3' + '\x2e') + body + "\n" +
+                       (ESC + '3' + '\x1a') + footer + '\x0c')
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Report", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
-                win32print.WritePrinter(hPrinter, final_payload.encode('latin-1'))
+                win32print.WritePrinter(hPrinter, payload.encode('cp437', 'ignore'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully.")
+                self.accept()
             finally:
                 win32print.ClosePrinter(hPrinter)
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
+        finally:
+            self.btn_print.setText(" START PRINTING ")
+            self.btn_print.setEnabled(True)
 
     def batch_text(self):
-        req, per = float(self.data.get('qty_required', 0)), float(self.data.get('qty_per_batch', 1))
-        n = int(req / per) if per > 0 else 1
-        return f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
-
+        try:
+            req, per = float(self.data.get('qty_required', 0)), float(self.data.get('qty_per_batch', 1))
+            n = int(req / per) if per > 0 else 1
+            return f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
+        except:
+            return "1 batch by 0.000 KG."
 
 
 if __name__ == "__main__":
     import sys
-    from PyQt6.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
     img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4}
