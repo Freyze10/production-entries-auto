@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00149" summary="convert input to flozat">
-      <option name="closed" value="true" />
-      <created>1774507756948</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1774507756948</updated>
-    </task>
-    <task id="LOCAL-00150" summary="fixed error on converting">
-      <option name="closed" value="true" />
-      <created>1774507785067</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
-      <option name="project" value="LOCAL" />
-      <updated>1774507785067</updated>
-    </task>
     <task id="LOCAL-00151" summary="fixed row spacing on add material">
       <option name="closed" value="true" />
       <created>1774508504727</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774852968223</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="adjusting spaces">
+      <option name="closed" value="true" />
+      <created>1774853154499</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1774853154499</updated>
+    </task>
+    <task id="LOCAL-00199" summary="moved the masterbatch logo">
+      <option name="closed" value="true" />
+      <created>1774853249356</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1774853249357</updated>
+    </task>
+    <option name="localTasksCounter" value="200" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed weight size" />
-    <MESSAGE value="returned the position" />
     <MESSAGE value="chage page size" />
     <MESSAGE value="added print function" />
     <MESSAGE value="connected print to button" />
@@ -551,7 +549,9 @@
     <MESSAGE value="changed the  wraping of the customer name" />
     <MESSAGE value="updated thed unicodee" />
     <MESSAGE value="added upperline" />
-    <option name="LAST_COMMIT_MESSAGE" value="added upperline" />
+    <MESSAGE value="adjusting spaces" />
+    <MESSAGE value="moved the masterbatch logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved the masterbatch logo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

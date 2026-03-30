@@ -171,7 +171,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
-        lines.append(sig_ln("MBPI-SYSTEM-2022", " ", "PROCESSED BY   :", ""))
+        lines.append(f"{'MBPI-SYSTEM-2022':<14}{' ':<24}{'PROCESSED BY   :'}")
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
 
         return lines
