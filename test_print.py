@@ -91,7 +91,7 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON,  B_OFF  = "<b>", "</b>"
             S_ON,  S_OFF  = '<span style="font-size:18px; font-weight:bold;">', '</span>'
-            U_CHAR = "▔"
+            U_CHAR = "‾"
         else:
             # ── Hardware bytes for Epson LX-310 ──────────────────────────────
             # These \xNN escapes are Latin-1 codepoints. When the payload is
@@ -152,7 +152,7 @@ class ProductionPrintPreview(QDialog):
             lines.append(f"{' ':<15}{B_ON}{cust[34:68]:<65}{B_OFF}")
         lines.append(det_row('LOT NO.      :', self.data.get('lot_number',    ''),
                              'QTY TO PRODUCE:', self.data.get('qty_produced',  '')))
-
+        lines.append(" ")
         summary = self.batch_text()
         if mode == "screen":
             lines.append(f'<div align="center">{S_ON}{summary.upper()}{S_OFF}</div>')
