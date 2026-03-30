@@ -211,7 +211,7 @@ class ProductionPrintPreview(QDialog):
             elif "BATCH BY" in text:
                 line_h = 160.0
             else:
-                line_h = 135.0
+                line_h = 175.0
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
