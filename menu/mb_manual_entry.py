@@ -9,7 +9,7 @@ import qtawesome as fa
 from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id
 from table_model import table_spacing
-from test_print import ProductionPrintPreview
+from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
