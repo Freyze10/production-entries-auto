@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00169" summary="added zoom function">
-      <option name="closed" value="true" />
-      <created>1774596738068</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1774596738068</updated>
-    </task>
-    <task id="LOCAL-00170" summary="preview print and readable">
-      <option name="closed" value="true" />
-      <created>1774601788687</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1774601788687</updated>
-    </task>
     <task id="LOCAL-00171" summary="removed weight size">
       <option name="closed" value="true" />
       <created>1774661571098</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774925791070</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL-00218" summary="created new file for printing">
+      <option name="closed" value="true" />
+      <created>1774929848433</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1774929848433</updated>
+    </task>
+    <task id="LOCAL-00219" summary="removed past test print">
+      <option name="closed" value="true" />
+      <created>1774929976923</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1774929976923</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATEd prriont" />
-    <MESSAGE value="changed prod code spacing" />
     <MESSAGE value="changed material spacing" />
     <MESSAGE value="changed the  wraping of the customer name" />
     <MESSAGE value="updated thed unicodee" />
@@ -551,7 +549,9 @@
     <MESSAGE value="changed formatting" />
     <MESSAGE value="adjusted table model for column search" />
     <MESSAGE value="added funtion for column searching" />
-    <option name="LAST_COMMIT_MESSAGE" value="added funtion for column searching" />
+    <MESSAGE value="created new file for printing" />
+    <MESSAGE value="removed past test print" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed past test print" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
