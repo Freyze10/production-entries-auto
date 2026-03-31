@@ -45,20 +45,26 @@ class TableModel(QAbstractTableModel):
         self._data = data[:]
         self.endResetModel()
 
-    def filter_data(self, search_text):
-        """Filter rows based on search text (searches all columns + hidden prod_id)"""
+    def filter_data(self, search_text, col_index=None):
+        """
+        Filter rows by search_text.
+        col_index=None  → search all columns
+        col_index=int   → search only that column
+        """
+        self.beginResetModel()
         if not search_text or not search_text.strip():
-            self._data = self._all_data[:]  # show all
+            self._data = self._all_data[:]
         else:
-            search_text = search_text.lower().strip()
+            kw = search_text.lower().strip()
             self._data = []
             for row in self._all_data:
-                # Convert entire row to string and search
-                row_str = " ".join(str(item).lower() for item in row)
-                if search_text in row_str:
+                if col_index is not None:
+                    # Guard: make sure the column index exists in the row
+                    match = col_index < len(row) and kw in str(row[col_index]).lower()
+                else:
+                    match = any(kw in str(cell).lower() for cell in row)
+                if match:
                     self._data.append(row)
-
-        self.beginResetModel()
         self.endResetModel()
 
     def clear_data(self):

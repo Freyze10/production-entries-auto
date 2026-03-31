@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt, QThread
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
-    QHeaderView, QMenu, QMessageBox
+    QHeaderView, QMenu, QMessageBox, QComboBox
 import qtawesome as fa
 from PyQt6.QtCore import pyqtSignal
 
@@ -39,6 +39,20 @@ class ProductionRecords(QWidget):
 
         header_layout.addStretch()
 
+        self.search_column_combo = QComboBox()
+        self.search_column_combo.setFixedWidth(170)
+        self.search_column_combo.addItems([
+            "All Columns",
+            "Prod ID",
+            "Date",
+            "Customer",
+            "Product Code",
+            "Product Color",
+            "Lot No",
+            "Qty Produced",
+        ])
+        self.search_column_combo.setCurrentIndex(0)
+
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText("Search Productions...")
         self.search_input.setFixedWidth(250)
@@ -49,6 +63,7 @@ class ProductionRecords(QWidget):
         search_btn.setIcon(fa.icon('fa5s.search', color='white'))
         search_btn.clicked.connect(self.filter_production)
 
+        header_layout.addWidget(self.search_column_combo)
         header_layout.addWidget(self.search_input)
         header_layout.addWidget(search_btn)
 
