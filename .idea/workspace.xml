@@ -50,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.test_print">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -97,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_print" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test_print" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -118,14 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00165" summary="trying print">
-      <option name="closed" value="true" />
-      <created>1774590150411</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1774590150411</updated>
     </task>
     <task id="LOCAL-00166" summary="try reportlab to print using pdf">
       <option name="closed" value="true" />
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774918627678</updated>
     </task>
-    <option name="localTasksCounter" value="214" />
+    <task id="LOCAL-00214" summary="changed formatting">
+      <option name="closed" value="true" />
+      <created>1774919412366</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1774919412366</updated>
+    </task>
+    <option name="localTasksCounter" value="215" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed decimal format" />
     <MESSAGE value="changed paper size" />
     <MESSAGE value="changed preview size" />
     <MESSAGE value="UPDATEd prriont" />
@@ -551,7 +550,8 @@
     <MESSAGE value="adjusted line height to match the desired outpt" />
     <MESSAGE value="Changed the Masterbatch name position" />
     <MESSAGE value="changed spacing" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed spacing" />
+    <MESSAGE value="changed formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed formatting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

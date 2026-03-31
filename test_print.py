@@ -115,7 +115,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
 
-        lines.append("")
+        lines.append(" ")
 
         # --- 2. DETAILS ---
         c1, c2 = 14, 34
@@ -152,10 +152,10 @@ class ProductionPrintPreview(QDialog):
                 lines.append(" " * WIDTH)
                 continue
 
-            l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.6f}{B_OFF}"
-            s_v = f"{B_ON}{float(m.get('small_scale', 0)):17.6f}{B_OFF}"
-            w_v = f"{B_ON}{float(m.get('total_weight', 0)):15.6f}{B_OFF}"
-            lines.append(f"{m_c[:24]:<25} {l_v} {s_v} {w_v}")
+            l_v = f"{float(m.get('large_scale', 0)):18.6f}"
+            s_v = f"{float(m.get('small_scale', 0)):17.6f}"
+            w_v = f"{float(m.get('total_weight', 0)):15.6f}"
+            lines.append(f"{B_ON}{m_c[:24]:<25} {l_v} {s_v} {w_v}{B_OFF}")
         lines.append(H * WIDTH)
 
         # --- 4. TOTAL & GAPS ---
@@ -177,7 +177,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
         lines.append(sig_ln("PRINTED ON  :", datetime.now().strftime('%m/%d/%y %I:%M %p'), "MAT'L RELEASED :", ""))
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
-        lines.append(f"{'MBPI-SYSTEM-2022':<14}{' ':<26}{'PROCESSED BY   :':<16}{' ':^24}")
+        lines.append(f"{'MBPI-SYSTEM-2022':<14}{' ':<24}{'PROCESSED BY   :':<16}{' ':^24}")
         lines.append(f"{' ':<14}{' ':<26}{' ':<16}{u}")
 
         return lines
