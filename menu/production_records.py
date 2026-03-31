@@ -161,9 +161,21 @@ class ProductionRecords(QWidget):
         main_layout.addLayout(controls_layout)
 
     def filter_production(self):
-        search_text = self.search_input.text().lower()
-        self.table_model.filter_data(search_text)
+        PRODUCTION_COL_MAP = {
+            "All Columns": None,
+            "Prod ID": 0,
+            "Date": 1,
+            "Customer": 2,
+            "Product Code": 3,
+            "Product Color": 4,
+            "Lot No": 5,
+            "Qty Produced": 6,
+        }
 
+        search_text = self.search_input.text().lower()
+        col_label = self.search_column_combo.currentText()
+        col_index = PRODUCTION_COL_MAP.get(col_label, None)
+        self.table_model.filter_data(search_text, col_index)
 
     def on_row_selected(self):
         index = self.table_records.selectionModel().selectedRows()
