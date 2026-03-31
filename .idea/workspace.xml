@@ -50,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Python.test_print">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -97,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_print" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test_print" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -118,14 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00162" summary="change print color">
-      <option name="closed" value="true" />
-      <created>1774514473683</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1774514473683</updated>
     </task>
     <task id="LOCAL-00163" summary="addedd error  message for adding materials">
       <option name="closed" value="true" />
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774860252761</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="adjusted line height to match the desired outpt">
+      <option name="closed" value="true" />
+      <created>1774861136685</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1774861136685</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix spaciung" />
     <MESSAGE value="fix spacing" />
     <MESSAGE value="added font size on summary" />
     <MESSAGE value="changed decimal format" />
@@ -551,7 +550,8 @@
     <MESSAGE value="fixed the box side" />
     <MESSAGE value="added empty line on summary" />
     <MESSAGE value="BOLD MAT CODE" />
-    <option name="LAST_COMMIT_MESSAGE" value="BOLD MAT CODE" />
+    <MESSAGE value="adjusted line height to match the desired outpt" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted line height to match the desired outpt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
