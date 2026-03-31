@@ -145,16 +145,16 @@ class ProductionPrintPreview(QDialog):
         # --- 3. MATERIALS TABLE ---
         lines.append(H * WIDTH)
         lines.append(f"{'MATERIAL CODE':<25} {'LARGE SCALE (Kg.)':>18} {'SMALL SCALE (grm.)':>17} {'WEIGHT (Kg.)':>15}")
-        lines.append("-" * WIDTH)
+        lines.append(H * WIDTH)
         for m in self.mats:
             m_c = str(m.get('material_code', ''))
             if not m_c.strip():
                 lines.append(" " * WIDTH)
                 continue
 
-            l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.7f}{B_OFF}"
-            s_v = f"{B_ON}{float(m.get('small_scale', 0)):17.7f}{B_OFF}"
-            w_v = f"{B_ON}{float(m.get('total_weight', 0)):15.7f}{B_OFF}"
+            l_v = f"{B_ON}{float(m.get('large_scale', 0)):18.6f}{B_OFF}"
+            s_v = f"{B_ON}{float(m.get('small_scale', 0)):17.6f}{B_OFF}"
+            w_v = f"{B_ON}{float(m.get('total_weight', 0)):15.6f}{B_OFF}"
             lines.append(f"{m_c[:24]:<25} {l_v} {s_v} {w_v}")
         lines.append(H * WIDTH)
 
@@ -206,6 +206,8 @@ class ProductionPrintPreview(QDialog):
             if i <= 9:
                 line_h = 100.0
             # ZONE 3: Footer (Touch name to overline)
+            elif 15 <= i <= 16:
+                line_h = 90
             elif i >= (total_blocks - 6):
                 line_h = 80.0
                 # Summary Line (Room for Big Font)
