@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00194" summary="changed material spacing">
-      <option name="closed" value="true" />
-      <created>1774850876293</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1774850876293</updated>
-    </task>
     <task id="LOCAL-00195" summary="changed the  wraping of the customer name">
       <option name="closed" value="true" />
       <created>1774851484784</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775019618927</updated>
     </task>
-    <option name="localTasksCounter" value="243" />
+    <task id="LOCAL-00243" summary="added temporary calculation">
+      <option name="closed" value="true" />
+      <created>1775025369089</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1775025369089</updated>
+    </task>
+    <option name="localTasksCounter" value="244" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed spacing" />
     <MESSAGE value="changed formatting" />
     <MESSAGE value="adjusted table model for column search" />
     <MESSAGE value="added funtion for column searching" />
@@ -551,7 +550,8 @@
     <MESSAGE value="comment out the double click connection temporary" />
     <MESSAGE value="changed the dialog size" />
     <MESSAGE value="modified table on the selector of formula" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified table on the selector of formula" />
+    <MESSAGE value="added temporary calculation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added temporary calculation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -585,6 +585,11 @@
           <url>file://$PROJECT_DIR$/table_model/model.py</url>
           <line>2</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
+          <line>460</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

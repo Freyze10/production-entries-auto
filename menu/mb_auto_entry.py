@@ -26,6 +26,7 @@ class MBAutoEntry(QWidget):
         # self.user_id = f"{self.work_station['h']} # {self.user_role}"
         # Track current production for edit/view
         self.current_production_id = None
+        self.formulation_details = None
 
         self.setup_ui()
 
@@ -453,6 +454,10 @@ class MBAutoEntry(QWidget):
         self.dosage_input.setText(formula_table.item(row, 5).text())
         self.ld_percent_input.setText(formula_table.item(row, 6).text())
 
+        self.formulation_details = materials_table
+
+
+
         self.materials_table.setRowCount(0)
 
         for mat_row in range(materials_table.rowCount()):
@@ -463,6 +468,8 @@ class MBAutoEntry(QWidget):
             except ValueError:
                 concentration = 0.0
 
+            dosage = float(self.dosage_input.text())
+            masterbatch = 100
             large_scale = concentration * 0.1
             small_scale = concentration * 10
             total_weight = large_scale + (small_scale / 1000)
