@@ -105,3 +105,19 @@ def get_latest_prod_id():
     conn.close()
     return record[0]
 
+def get_formula_select(product_code):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT .index_no, form_id, customer, prod_code, prod_color, dosage, ld
+        FROM formula_primary
+        WHERE product_code = %s 
+        ORDER BY uid DESC
+    """, (product_code,))
+
+    records = cur.fetchall()
+    cur.close()
+    conn.close()
+    return records
+
