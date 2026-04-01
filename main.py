@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar
 
 from css.styles import AppStyles
+from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
 from menu.production_records import ProductionRecords
 from workstation.workstation_details import _get_workstation_info
@@ -59,15 +60,24 @@ class MainWindow(QMainWindow):
     def _init_pages(self):
         self.production_records = ProductionRecords(self.username, self.user_role)
         self.mb_manual_entry = MBManualEntry()
+        self.mb_auto_entry = MBAutoEntry()
 
         self.stacked_widget.addWidget(self.production_records)  # 0
         self.stacked_widget.addWidget(self.mb_manual_entry)   # 1
+        self.stacked_widget.addWidget(self.mb_auto_entry)   # 2
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
 
         self.btn_production_records.setChecked(True)
 
     def switch_to_manual_entry(self, prod_id: int):
+        self.mb_manual_entry = MBManualEntry(prod_id)  # Pass prod_id in constructor
+        self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
+        self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index
+        self.btn_manual_entry.setChecked(True)
+        self.stacked_widget.setCurrentIndex(1)
+
+    def switch_to_auto_entry(self, prod_id: int):
         self.mb_manual_entry = MBManualEntry(prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
         self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index

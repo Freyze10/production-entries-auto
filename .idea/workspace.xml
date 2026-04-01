@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00171" summary="removed weight size">
-      <option name="closed" value="true" />
-      <created>1774661571098</created>
-      <option name="number" value="00171" />
-      <option name="presentableId" value="LOCAL-00171" />
-      <option name="project" value="LOCAL" />
-      <updated>1774661571098</updated>
-    </task>
     <task id="LOCAL-00172" summary="returned the position">
       <option name="closed" value="true" />
       <created>1774662436875</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774929976923</updated>
     </task>
-    <option name="localTasksCounter" value="220" />
+    <task id="LOCAL-00220" summary="removed past test print">
+      <option name="closed" value="true" />
+      <created>1774947868052</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1774947868052</updated>
+    </task>
+    <option name="localTasksCounter" value="221" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
