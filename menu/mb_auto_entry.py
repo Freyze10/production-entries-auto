@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayo
 import qtawesome as fa
 
 from db.legacy import SyncRM
-from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id
+from db.read import get_rm_code_lists, get_latest_prod_id, get_formula_select
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
@@ -336,7 +336,7 @@ class MBAutoEntry(QWidget):
         ])
 
         try:
-            formula_data = db_call.get_formula_select(product_code)
+            formula_data = get_formula_select(product_code)
         except Exception as e:
             QMessageBox.critical(self, "Database Error", f"Failed to fetch formulas: {e}")
             return
@@ -394,14 +394,13 @@ class MBAutoEntry(QWidget):
         dialog.exec()
 
     def display_details(self, prod_id = 0):
-        self.wip_no_input.setText(str(self.prod_results['index_no']))
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
         self.formula_input.setText(str(self.prod_results['form_id']))
-        self.sum_cons_input.setText(f"{self.prod_results['dosage']:.6f}")
-        self.dosage_input.setText(f"{self.prod_results['ld']:.6f}")
+        self.dosage_input.setText(f"{self.prod_results['dosage']:.6f}")
+        self.ld_percent_input.setText(f"{self.prod_results['ld']:.6f}")
         self.customer_input.setText(str(self.prod_results['customer']))
         self.lot_no_input.setText(str(self.prod_results['lot_no']))
         self.order_form_no_input.setText(str(self.prod_results['order_no']))
@@ -460,71 +459,6 @@ class MBAutoEntry(QWidget):
         self.no_items_label.setText(str(item_count))
         return True
 
-    def add_material(self):
-        """Add material to the table."""
-        material_code = self.get_material_code().strip()
-
-        if not self.qty_required_input.text() or not self.qty_per_batch_input:
-            QMessageBox.warning(self, "Missing Input", "Please enter the quantity requirements first.")
-            return
-
-        if not material_code:
-            QMessageBox.warning(self, "Missing Input", "Please enter a material code.")
-            return
-
-        if self.raw_material_check.isChecked():
-            if material_code not in self.rm_list:
-                QMessageBox.warning(self, "Invalid Material",
-                                    "Please select a valid raw material code from the list.")
-                return
-
-        large_scale_text = self.large_scale_input.text().strip()
-        small_scale_text = self.small_scale_input.text().strip()
-        total_weight_text = self.total_weight_input.text().strip()
-
-        if not total_weight_text:
-            QMessageBox.warning(self, "Missing Input", "Please fill in all scale and weight fields.")
-            return
-
-        if not large_scale_text or not small_scale_text:
-            large_scale_text = 0.000000
-            small_scale_text = 0.000000
-
-        try:
-            large_scale = float(large_scale_text)
-            small_scale = float(small_scale_text)
-            total_weight = float(total_weight_text)
-        except ValueError:
-            QMessageBox.warning(self, "Invalid Input", "Please enter valid numbers for scales and weight.")
-            return
-
-        qty_required = float(self.qty_required_input.text() or 1)
-        qty_per_batch = float(self.qty_per_batch_input.text() or 1)
-
-        batches = qty_required / qty_per_batch
-
-        table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches, limit=25.0)
-
-        row_position = self.materials_table.rowCount()
-        self.materials_table.insertRow(row_position)
-
-        self.materials_table.setItem(row_position, 0, QTableWidgetItem(material_code))
-        self.materials_table.setItem(row_position, 1, NumericTableWidgetItem(large_scale, is_float=True))
-        self.materials_table.setItem(row_position, 2, NumericTableWidgetItem(small_scale, is_float=True))
-        self.materials_table.setItem(row_position, 3, NumericTableWidgetItem(total_weight, is_float=True))
-
-        self.clear_material_inputs()
-        self.update_totals()
-        self.material_code_combo.setFocus()
-
-    def remove_material(self):
-        current_row = self.materials_table.currentRow()
-        if current_row >= 0:
-            self.materials_table.removeRow(current_row)
-            self.update_totals()
-        else:
-            QMessageBox.warning(self, "No Selection", "Please select a material to remove.")
-
     def new_production(self):
         """Initialize a new production entry."""
         self.current_production_id = None
@@ -538,8 +472,8 @@ class MBAutoEntry(QWidget):
         self.product_code_input.clear()
         self.product_color_input.clear()
         self.formula_input.clear()
-        self.sum_cons_input.clear()
         self.dosage_input.clear()
+        self.ld_percent_input.clear()
         self.customer_input.clear()
         self.lot_no_input.clear()
         self.production_date_input.setText("")
@@ -680,23 +614,6 @@ class MBAutoEntry(QWidget):
                 if item.text().strip():
                     valid_count += 1
         return valid_count
-
-    def setup_rm_code_completer(self):
-        self.rm_list = get_rm_code_lists()
-        self.rm_list.insert(0, "")
-        self.material_code_combo.clear()
-        self.material_code_combo.addItems(self.rm_list)
-
-        rm_completer = QCompleter(self.rm_list, self.material_code_combo)
-        rm_completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
-        rm_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        self.material_code_combo.setCompleter(rm_completer)
-
-    def validate_rm_code(self):
-        """Prevent invalid input."""
-        current_text = self.material_code_combo.currentText()
-        if current_text not in self.rm_list:
-            self.material_code_combo.setCurrentIndex(0)
 
     def clear_material_inputs(self):
         self.material_code_combo.setCurrentIndex(0)

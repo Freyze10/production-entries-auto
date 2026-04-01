@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00185" summary="updated bold usage">
-      <option name="closed" value="true" />
-      <created>1774684076266</created>
-      <option name="number" value="00185" />
-      <option name="presentableId" value="LOCAL-00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1774684076266</updated>
-    </task>
-    <task id="LOCAL-00186" summary="fix spaciung">
-      <option name="closed" value="true" />
-      <created>1774684486570</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1774684486570</updated>
-    </task>
     <task id="LOCAL-00187" summary="fix spacing">
       <option name="closed" value="true" />
       <created>1774686408329</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775008328138</updated>
     </task>
-    <option name="localTasksCounter" value="234" />
+    <task id="LOCAL-00234" summary="updated legacy to get the customer name">
+      <option name="closed" value="true" />
+      <created>1775008440628</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1775008440628</updated>
+    </task>
+    <task id="LOCAL-00235" summary="updated legacy to get the customer name">
+      <option name="closed" value="true" />
+      <created>1775008860722</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1775008860722</updated>
+    </task>
+    <option name="localTasksCounter" value="236" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixing series of A for lines" />
     <MESSAGE value="printed lines" />
     <MESSAGE value="fixed the box side" />
     <MESSAGE value="added empty line on summary" />
@@ -551,7 +550,8 @@
     <MESSAGE value="removed the fg label" />
     <MESSAGE value="added text color on the total of the materials" />
     <MESSAGE value="added read data from  the database" />
-    <option name="LAST_COMMIT_MESSAGE" value="added read data from  the database" />
+    <MESSAGE value="updated legacy to get the customer name" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated legacy to get the customer name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -560,11 +560,6 @@
           <url>file://$PROJECT_DIR$/css/styles.py</url>
           <line>476</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/table_model/model.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
@@ -585,6 +580,11 @@
           <url>file://$PROJECT_DIR$/css/styles.py</url>
           <line>216</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/table_model/model.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
