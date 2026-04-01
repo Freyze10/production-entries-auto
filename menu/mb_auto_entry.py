@@ -307,6 +307,31 @@ class MBAutoEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
+    def setup_autocompleters(self):
+        """Setup autocompleters for customer and product code using cached data."""
+        # TODO: gawa ng fetching ng customer, prod_code, lot_no, and order_no from tbl_production01
+
+        # list_auto_completer = []
+        #
+        # # Customer autocomplete
+        # customer_completer = QCompleter(global_var.production_customer_lists)
+        # customer_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        # customer_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+        # self.customer_input.setCompleter(customer_completer)
+        #
+        # # Product code autocomplete
+        # product_code_completer = QCompleter(global_var.production_product_code_lists)
+        # product_code_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        # product_code_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+        # self.product_code_input.setCompleter(product_code_completer)
+        #
+        # # Lot number autocomplete
+        # lot_no_completer = QCompleter(global_var.production_lot_no_lists)
+        # lot_no_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        # lot_no_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+        # self.lot_no_input.setCompleter(lot_no_completer)
+
+
 
     def show_formulation_selector(self):
         """Show dialog to select a formulation and populate its materials."""
@@ -490,6 +515,8 @@ class MBAutoEntry(QWidget):
         # self.update_totals()
         dialog.accept()
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
+
+
 
     def display_details(self, prod_id = 0):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
