@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00184" summary="fizing spacing in the footer">
-      <option name="closed" value="true" />
-      <created>1774683374246</created>
-      <option name="number" value="00184" />
-      <option name="presentableId" value="LOCAL-00184" />
-      <option name="project" value="LOCAL" />
-      <updated>1774683374246</updated>
-    </task>
     <task id="LOCAL-00185" summary="updated bold usage">
       <option name="closed" value="true" />
       <created>1774684076266</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775007873765</updated>
     </task>
-    <option name="localTasksCounter" value="233" />
+    <task id="LOCAL-00233" summary="added read data from  the database">
+      <option name="closed" value="true" />
+      <created>1775008328138</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1775008328138</updated>
+    </task>
+    <option name="localTasksCounter" value="234" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the lines" />
     <MESSAGE value="fixing series of A for lines" />
     <MESSAGE value="printed lines" />
     <MESSAGE value="fixed the box side" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added gray bg in the timestamp" />
     <MESSAGE value="removed the fg label" />
     <MESSAGE value="added text color on the total of the materials" />
-    <option name="LAST_COMMIT_MESSAGE" value="added text color on the total of the materials" />
+    <MESSAGE value="added read data from  the database" />
+    <option name="LAST_COMMIT_MESSAGE" value="added read data from  the database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

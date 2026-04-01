@@ -105,6 +105,7 @@ def get_latest_prod_id():
     conn.close()
     return record[0]
 
+
 def get_formula_select(product_code):
     conn = get_connection()
     cur = conn.cursor()

@@ -217,7 +217,7 @@ class Sync(QObject):
                             date_time, is_deleted, is_used
                         )
                         VALUES (
-                            :uid, :formula_index, :formula_date, 1, :product_code, :product_color, :dosage, :total_concentration,
+                            :uid, :formula_index, :formula_date, customer, :product_code, :product_color, :dosage, :total_concentration,
                             :ld, :mix_type, :resin, :application, :cm_num, :cm_date, :remarks, :dbf_updated_on_text, :is_deleted,
                             :is_used
                         )
