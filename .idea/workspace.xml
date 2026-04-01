@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00196" summary="updated thed unicodee">
-      <option name="closed" value="true" />
-      <created>1774852539724</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1774852539724</updated>
-    </task>
     <task id="LOCAL-00197" summary="added upperline">
       <option name="closed" value="true" />
       <created>1774852968223</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775026708819</updated>
     </task>
-    <option name="localTasksCounter" value="245" />
+    <task id="LOCAL-00245" summary="changed icon when choosing formulation">
+      <option name="closed" value="true" />
+      <created>1775031007838</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1775031007838</updated>
+    </task>
+    <option name="localTasksCounter" value="246" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adjusted table model for column search" />
     <MESSAGE value="added funtion for column searching" />
     <MESSAGE value="created new file for printing" />
     <MESSAGE value="removed past test print" />
@@ -551,7 +550,8 @@
     <MESSAGE value="modified table on the selector of formula" />
     <MESSAGE value="added temporary calculation" />
     <MESSAGE value="added formulation details" />
-    <option name="LAST_COMMIT_MESSAGE" value="added formulation details" />
+    <MESSAGE value="changed icon when choosing formulation" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed icon when choosing formulation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -461,33 +461,33 @@ class MBAutoEntry(QWidget):
 
         self.materials_table.setRowCount(0)
 
-        for mat_row in range(materials_table.rowCount()):
-            mat_code = materials_table.item(mat_row, 0).text()
-            conc_str = materials_table.item(mat_row, 1).text()
-            try:
-                concentration = float(conc_str.replace("%", "").strip())
-            except ValueError:
-                concentration = 0.0
-
-            dosage = float(self.dosage_input.text())
-            masterbatch = 100
-            large_scale = concentration * 0.1
-            small_scale = concentration * 10
-            total_weight = large_scale + (small_scale / 1000)
-            total_loss = total_weight * 0.02
-            total_consumption = total_weight + total_loss
-
-            new_row = self.materials_table.rowCount()
-            self.materials_table.insertRow(new_row)
-
-            self.materials_table.setItem(new_row, 0, QTableWidgetItem(mat_code))
-            self.materials_table.setItem(new_row, 1, NumericTableWidgetItem(large_scale, is_float=True))
-            self.materials_table.setItem(new_row, 2, NumericTableWidgetItem(small_scale, is_float=True))
-            self.materials_table.setItem(new_row, 3, NumericTableWidgetItem(total_weight, is_float=True))
-            self.materials_table.setItem(new_row, 4, NumericTableWidgetItem(total_loss, is_float=True))
-            self.materials_table.setItem(new_row, 5, NumericTableWidgetItem(total_consumption, is_float=True))
-
-        self.update_totals()
+        # for mat_row in range(materials_table.rowCount()):
+        #     mat_code = materials_table.item(mat_row, 0).text()
+        #     conc_str = materials_table.item(mat_row, 1).text()
+        #     try:
+        #         concentration = float(conc_str.replace("%", "").strip())
+        #     except ValueError:
+        #         concentration = 0.0
+        #
+        #     dosage = float(self.dosage_input.text())
+        #     masterbatch = 100
+        #     large_scale = concentration * 0.1
+        #     small_scale = concentration * 10
+        #     total_weight = large_scale + (small_scale / 1000)
+        #     total_loss = total_weight * 0.02
+        #     total_consumption = total_weight + total_loss
+        #
+        #     new_row = self.materials_table.rowCount()
+        #     self.materials_table.insertRow(new_row)
+        #
+        #     self.materials_table.setItem(new_row, 0, QTableWidgetItem(mat_code))
+        #     self.materials_table.setItem(new_row, 1, NumericTableWidgetItem(large_scale, is_float=True))
+        #     self.materials_table.setItem(new_row, 2, NumericTableWidgetItem(small_scale, is_float=True))
+        #     self.materials_table.setItem(new_row, 3, NumericTableWidgetItem(total_weight, is_float=True))
+        #     self.materials_table.setItem(new_row, 4, NumericTableWidgetItem(total_loss, is_float=True))
+        #     self.materials_table.setItem(new_row, 5, NumericTableWidgetItem(total_consumption, is_float=True))
+        #
+        # self.update_totals()
         dialog.accept()
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
 
