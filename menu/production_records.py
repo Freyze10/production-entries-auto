@@ -14,6 +14,7 @@ from util.loading import LoadingDialog
 
 class ProductionRecords(QWidget):
     go_to_manual_entry = pyqtSignal(int)
+    go_to_auto_entry = pyqtSignal(int)
     def __init__(self, username, user_role):
         super().__init__()
         self.username = username
@@ -275,7 +276,7 @@ class ProductionRecords(QWidget):
     def view_manual(self, prod_id):
         self.go_to_manual_entry.emit(prod_id)
     def view_auto(self, prod_id):
-        self.go_to_manual_entry.emit(prod_id)
+        self.go_to_auto_entry.emit(prod_id)
 
     def view_manual_dc(self, prod_id):
         print("Delete row ID:", prod_id)
