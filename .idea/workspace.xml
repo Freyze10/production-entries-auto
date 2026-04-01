@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00174" summary="chage page size">
-      <option name="closed" value="true" />
-      <created>1774662558942</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1774662558942</updated>
-    </task>
     <task id="LOCAL-00175" summary="added print function">
       <option name="closed" value="true" />
       <created>1774662848198</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775004471759</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL-00223" summary="connected pyqtsignal emit to auto">
+      <option name="closed" value="true" />
+      <created>1775004537503</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1775004537503</updated>
+    </task>
+    <option name="localTasksCounter" value="224" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

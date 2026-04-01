@@ -79,11 +79,11 @@ class MainWindow(QMainWindow):
         self.stacked_widget.setCurrentIndex(1)
 
     def switch_to_auto_entry(self, prod_id: int):
-        self.mb_manual_entry = MBManualEntry(prod_id)  # Pass prod_id in constructor
-        self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
-        self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index
-        self.btn_manual_entry.setChecked(True)
-        self.stacked_widget.setCurrentIndex(1)
+        self.mb_auto_entry = MBAutoEntry(prod_id)  # Pass prod_id in constructor
+        self.stacked_widget.removeWidget(self.stacked_widget.widget(2))  # remove old one
+        self.stacked_widget.insertWidget(2, self.mb_auto_entry)  # add new one with same index
+        self.btn_auto_entry.setChecked(True)
+        self.stacked_widget.setCurrentIndex(2)
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
