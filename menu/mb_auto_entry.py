@@ -317,7 +317,7 @@ class MBAutoEntry(QWidget):
 
             dialog = QDialog(self)
             dialog.setWindowTitle("Select Formula")
-            dialog.setMinimumSize(1400, 720)
+            dialog.setMinimumSize(900, 640)
 
             layout = QVBoxLayout(dialog)
 
