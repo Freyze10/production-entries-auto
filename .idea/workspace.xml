@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00191" summary="changed preview size">
-      <option name="closed" value="true" />
-      <created>1774848528988</created>
-      <option name="number" value="00191" />
-      <option name="presentableId" value="LOCAL-00191" />
-      <option name="project" value="LOCAL" />
-      <updated>1774848528988</updated>
-    </task>
     <task id="LOCAL-00192" summary="UPDATEd prriont">
       <option name="closed" value="true" />
       <created>1774850201289</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775012202097</updated>
     </task>
-    <option name="localTasksCounter" value="240" />
+    <task id="LOCAL-00240" summary="changed the dialog size">
+      <option name="closed" value="true" />
+      <created>1775012346810</created>
+      <option name="number" value="00240" />
+      <option name="presentableId" value="LOCAL-00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1775012346810</updated>
+    </task>
+    <option name="localTasksCounter" value="241" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adjusted line height to match the desired outpt" />
     <MESSAGE value="Changed the Masterbatch name position" />
     <MESSAGE value="changed spacing" />
     <MESSAGE value="changed formatting" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added read formulation items from database" />
     <MESSAGE value="fix read database for the selected prod code" />
     <MESSAGE value="comment out the double click connection temporary" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment out the double click connection temporary" />
+    <MESSAGE value="changed the dialog size" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the dialog size" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
