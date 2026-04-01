@@ -52,10 +52,8 @@ class MBAutoEntry(QWidget):
         primary_layout.setSpacing(6)
         primary_layout.setContentsMargins(10, 18, 10, 12)
 
-        self.production_id_input = QLineEdit()
-        self.production_id_input.setPlaceholderText("0098886")
-
-        self.production_id_input.setStyleSheet("background-color: #fff9c4;")
+        self.production_id_input = QLineEdit(objectName='required')
+        self.production_id_input.setPlaceholderText("000000")
 
         self.select_formula_btn = QPushButton()
         self.select_formula_btn.setIcon(
@@ -66,7 +64,7 @@ class MBAutoEntry(QWidget):
 
         self.form_type_combo = QComboBox()
         self.form_type_combo.addItems(["", "New", "Correction"])
-        self.form_type_combo.setStyleSheet("background-color: #fff9c4;")
+        self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
 
         select_formula_layout = QHBoxLayout()
 
