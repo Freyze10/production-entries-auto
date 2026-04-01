@@ -309,87 +309,90 @@ class MBAutoEntry(QWidget):
 
     def show_formulation_selector(self):
         """Show dialog to select a formulation and populate its materials."""
-        if not self.product_code_input.text().strip():
-            QMessageBox.warning(self, "No Product Code",
-                                "Please enter a product code and try again.")
-            return
-
-        dialog = QDialog(self)
-        dialog.setWindowTitle("Select Formula")
-        dialog.setMinimumSize(1400, 720)
-
-        layout = QVBoxLayout(dialog)
-
-        product_code = self.product_code_input.text().strip()
-        header = QLabel(f"Product Code: {product_code}")
-        header.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
-        header.setStyleSheet("color: #0078d4; background-color: #e3f2fd; padding: 8px;")
-        layout.addWidget(header)
-
-        self.formula_table = QTableWidget()
-        self.formula_table.setColumnCount(7)
-        self.formula_table.setHorizontalHeaderLabels([
-            "Index No.", "Formula No.", "Customer", "Product Code",
-            "Product Color", "Dosage", "LD (%)"
-        ])
-
         try:
-            formula_data = get_formula_select(product_code)
+            if not self.product_code_input.text().strip():
+                QMessageBox.warning(self, "No Product Code",
+                                    "Please enter a product code and try again.")
+                return
+
+            dialog = QDialog(self)
+            dialog.setWindowTitle("Select Formula")
+            dialog.setMinimumSize(1400, 720)
+
+            layout = QVBoxLayout(dialog)
+
+            product_code = self.product_code_input.text().strip()
+            header = QLabel(f"Product Code: {product_code}")
+            header.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
+            header.setStyleSheet("color: #0078d4; background-color: #e3f2fd; padding: 8px;")
+            layout.addWidget(header)
+
+            self.formula_table = QTableWidget()
+            self.formula_table.setColumnCount(7)
+            self.formula_table.setHorizontalHeaderLabels([
+                "Index No.", "Formula No.", "Customer", "Product Code",
+                "Product Color", "Dosage", "LD (%)"
+            ])
+
+            try:
+                formula_data = get_formula_select(product_code)
+            except Exception as e:
+                QMessageBox.critical(self, "Database Error", f"Failed to fetch formulas: {e}")
+                return
+
+            self.formula_table.setRowCount(len(formula_data))
+
+            for r, row in enumerate(formula_data):
+                row = list(row) + [""] * (7 - len(row))
+                for c, value in enumerate(row[:7]):
+                    item = QTableWidgetItem(str(value))
+                    if r == 2:
+                        item.setBackground(Qt.GlobalColor.cyan)
+                    self.formula_table.setItem(r, c, item)
+
+            self.formula_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            self.formula_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+            self.formula_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+            self.formula_table.itemSelectionChanged.connect(self.show_formulation_selected)
+            # self.formula_table.itemDoubleClicked.connect(
+            #     lambda item: self._on_formula_double_clicked(dialog, item)
+            # )
+
+            layout.addWidget(self.formula_table)
+
+            materials_lbl = QLabel("Materials:")
+            materials_lbl.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
+            layout.addWidget(materials_lbl)
+
+            self.materials_table_selector = QTableWidget()
+            self.materials_table_selector.setColumnCount(2)
+            self.materials_table_selector.setHorizontalHeaderLabels(["Material Code", "Concentration"])
+            self.materials_table_selector.setRowCount(0)
+            self.materials_table_selector.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            layout.addWidget(self.materials_table_selector)
+
+            btn_layout = QHBoxLayout()
+            btn_layout.addStretch()
+
+            ok_btn = QPushButton("OK")
+            ok_btn.setObjectName("SuccessButton")
+            # ok_btn.clicked.connect(
+            #     lambda: self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector))
+            btn_layout.addWidget(ok_btn)
+
+            cancel_btn = QPushButton("CANCEL")
+            cancel_btn.setObjectName("DangerButton")
+            cancel_btn.clicked.connect(dialog.reject)
+            btn_layout.addWidget(cancel_btn)
+
+            layout.addLayout(btn_layout)
+
+            if formula_data:
+                self.formula_table.selectRow(0)
+
+            dialog.exec()
         except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"Failed to fetch formulas: {e}")
-            return
-
-        self.formula_table.setRowCount(len(formula_data))
-
-        for r, row in enumerate(formula_data):
-            row = list(row) + [""] * (7 - len(row))
-            for c, value in enumerate(row[:7]):
-                item = QTableWidgetItem(str(value))
-                if r == 2:
-                    item.setBackground(Qt.GlobalColor.cyan)
-                self.formula_table.setItem(r, c, item)
-
-        self.formula_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        self.formula_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.formula_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-        self.formula_table.itemSelectionChanged.connect(self.show_formulation_selected)
-        self.formula_table.itemDoubleClicked.connect(
-            # lambda item: self._on_formula_double_clicked(dialog, item)
-        )
-
-        layout.addWidget(self.formula_table)
-
-        materials_lbl = QLabel("Materials:")
-        materials_lbl.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
-        layout.addWidget(materials_lbl)
-
-        self.materials_table_selector = QTableWidget()
-        self.materials_table_selector.setColumnCount(2)
-        self.materials_table_selector.setHorizontalHeaderLabels(["Material Code", "Concentration"])
-        self.materials_table_selector.setRowCount(0)
-        self.materials_table_selector.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        layout.addWidget(self.materials_table_selector)
-
-        btn_layout = QHBoxLayout()
-        btn_layout.addStretch()
-
-        ok_btn = QPushButton("OK")
-        ok_btn.setObjectName("SuccessButton")
-        # ok_btn.clicked.connect(
-        #     lambda: self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector))
-        btn_layout.addWidget(ok_btn)
-
-        cancel_btn = QPushButton("CANCEL")
-        cancel_btn.setObjectName("DangerButton")
-        cancel_btn.clicked.connect(dialog.reject)
-        btn_layout.addWidget(cancel_btn)
-
-        layout.addLayout(btn_layout)
-
-        if formula_data:
-            self.formula_table.selectRow(0)
-
-        dialog.exec()
+            print(e)
 
     def show_formulation_selected(self):
         """Fill the materials table for the currently selected formula."""

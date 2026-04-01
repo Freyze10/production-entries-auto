@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00189" summary="changed decimal format">
-      <option name="closed" value="true" />
-      <created>1774843051956</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1774843051957</updated>
-    </task>
     <task id="LOCAL-00190" summary="changed paper size">
       <option name="closed" value="true" />
       <created>1774843130985</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775009604027</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary="fix read database for the selected prod code">
+      <option name="closed" value="true" />
+      <created>1775010326173</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1775010326173</updated>
+    </task>
+    <option name="localTasksCounter" value="239" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added empty line on summary" />
     <MESSAGE value="BOLD MAT CODE" />
     <MESSAGE value="adjusted line height to match the desired outpt" />
     <MESSAGE value="Changed the Masterbatch name position" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated legacy to get the customer name" />
     <MESSAGE value="cleaning code" />
     <MESSAGE value="added read formulation items from database" />
-    <option name="LAST_COMMIT_MESSAGE" value="added read formulation items from database" />
+    <MESSAGE value="fix read database for the selected prod code" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix read database for the selected prod code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
