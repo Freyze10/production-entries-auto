@@ -273,13 +273,9 @@ class ProductionRecords(QWidget):
 
 
     def view_manual(self, prod_id):
-        # go_to_page(1)
-        # self.display_page.setCurrentIndex(1)
-        print("View row ID:", prod_id)
         self.go_to_manual_entry.emit(prod_id)
     def view_auto(self, prod_id):
-
-        print("View row ID:", prod_id)
+        self.go_to_manual_entry.emit(prod_id)
 
     def view_manual_dc(self, prod_id):
         print("Delete row ID:", prod_id)

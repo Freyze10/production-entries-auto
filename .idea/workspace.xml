@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00172" summary="returned the position">
-      <option name="closed" value="true" />
-      <created>1774662436875</created>
-      <option name="number" value="00172" />
-      <option name="presentableId" value="LOCAL-00172" />
-      <option name="project" value="LOCAL" />
-      <updated>1774662436875</updated>
-    </task>
     <task id="LOCAL-00173" summary="chage page size">
       <option name="closed" value="true" />
       <created>1774662548447</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774947868052</updated>
     </task>
-    <option name="localTasksCounter" value="221" />
+    <task id="LOCAL-00221" summary="added auto entry file">
+      <option name="closed" value="true" />
+      <created>1775004424944</created>
+      <option name="number" value="00221" />
+      <option name="presentableId" value="LOCAL-00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1775004424945</updated>
+    </task>
+    <option name="localTasksCounter" value="222" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed material spacing" />
     <MESSAGE value="changed the  wraping of the customer name" />
     <MESSAGE value="updated thed unicodee" />
     <MESSAGE value="added upperline" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added funtion for column searching" />
     <MESSAGE value="created new file for printing" />
     <MESSAGE value="removed past test print" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed past test print" />
+    <MESSAGE value="added auto entry file" />
+    <option name="LAST_COMMIT_MESSAGE" value="added auto entry file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
