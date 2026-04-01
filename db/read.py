@@ -111,16 +111,17 @@ def get_formula_select(product_code):
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT .index_no, form_id, customer, prod_code, prod_color, dosage, ld
-        FROM formula_primary
-        WHERE product_code = %s 
-        ORDER BY uid DESC
+        SELECT index_no, form_id, customer, prod_code, prod_color, dosage, ld
+        FROM tbl_formula01
+        WHERE prod_code = %s 
+        ORDER BY form_id DESC
     """, (product_code,))
 
     records = cur.fetchall()
     cur.close()
     conn.close()
     return records
+
 
 def get_formula_materials(form_id):
     conn = get_connection()
