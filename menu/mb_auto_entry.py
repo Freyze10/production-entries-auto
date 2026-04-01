@@ -68,9 +68,8 @@ class MBAutoEntry(QWidget):
 
         select_formula_layout = QHBoxLayout()
 
-        self.product_code_input = QLineEdit()
+        self.product_code_input = QLineEdit(objectName='required')
         self.product_code_input.setPlaceholderText("Enter product code")
-        self.product_code_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Product Code:"), 0, 0)
         select_formula_layout.addWidget(self.product_code_input)
         select_formula_layout.addWidget(self.select_formula_btn)
@@ -82,9 +81,8 @@ class MBAutoEntry(QWidget):
         primary_layout.addWidget(self.product_color_input, 1, 1)
 
         dosage_layout = QHBoxLayout()
-        self.dosage_input = QLineEdit()
+        self.dosage_input = QLineEdit(objectName='required')
         self.dosage_input.setPlaceholderText("0.000000")
-        self.dosage_input.setStyleSheet("background-color: #fff9c4;")
         self.dosage_input.focusOutEvent = lambda event: format_to_float(self, event, self.dosage_input)
         dosage_layout.addWidget(self.dosage_input)
         dosage_layout.addWidget(QLabel("LD (%)"))
@@ -95,15 +93,13 @@ class MBAutoEntry(QWidget):
         primary_layout.addWidget(QLabel("Dosage:"), 2, 0)
         primary_layout.addLayout(dosage_layout, 2, 1)
 
-        self.customer_input = QLineEdit()
+        self.customer_input = QLineEdit(objectName='required')
         self.customer_input.setPlaceholderText("Enter customer")
-        self.customer_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Customer:"), 3, 0)
         primary_layout.addWidget(self.customer_input, 3, 1)
 
-        self.lot_no_input = QLineEdit()
+        self.lot_no_input = QLineEdit(objectName='required')
         self.lot_no_input.setPlaceholderText("Enter lot number")
-        self.lot_no_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Lot No:"), 4, 0)
         primary_layout.addWidget(self.lot_no_input, 4, 1)
 
@@ -112,7 +108,7 @@ class MBAutoEntry(QWidget):
         # self.production_date_input.setStyleSheet(calendar_design.STYLESHEET)
         self.production_date_input.setDate(QDate.currentDate())
         self.production_date_input.setDisplayFormat("MM/dd/yyyy")
-        self.production_date_input.setStyleSheet("background-color: #fff9c4;")
+        self.production_date_input.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Tentative Production Date:"), 5, 0)
         primary_layout.addWidget(self.production_date_input, 5, 1)
 
@@ -123,7 +119,7 @@ class MBAutoEntry(QWidget):
         self.order_form_no_combo = QComboBox()
         self.order_form_no_combo.setEditable(True)
         self.order_form_no_combo.setPlaceholderText("Enter order form number")
-        self.order_form_no_combo.setStyleSheet("background-color: #fff9c4;")
+        self.order_form_no_combo.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Order Form No:"), 7, 0)
         primary_layout.addWidget(self.order_form_no_combo, 7, 1)
 
@@ -136,10 +132,9 @@ class MBAutoEntry(QWidget):
         primary_layout.addWidget(QLabel("Matched Date:"), 9, 0)
         primary_layout.addWidget(self.matched_date_input, 9, 1)
 
-        self.formulation_id_input = QLineEdit()
+        self.formulation_id_input = QLineEdit(objectName='gray_bg')
         self.formulation_index = QLineEdit()
         self.formulation_id_input.setPlaceholderText("0")
-        self.formulation_id_input.setStyleSheet("background-color: #e9ecef;")
         self.formulation_id_input.setReadOnly(True)
         primary_layout.addWidget(QLabel("Formulation ID:"), 10, 0)
         primary_layout.addWidget(self.formulation_id_input, 10, 1)
@@ -165,27 +160,24 @@ class MBAutoEntry(QWidget):
         qty_layout = QHBoxLayout()
         qty_layout.setSpacing(9)
 
-        self.qty_required_input = QLineEdit()
+        self.qty_required_input = QLineEdit(objectName='required')
         self.qty_required_input.setPlaceholderText("0.000000")
-        self.qty_required_input.setStyleSheet("background-color: #fff9c4;")
         self.qty_required_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_required_input)
         qty_layout.addWidget(self.qty_required_input)
 
         qty_batch_label = QLabel("Qty. Per Batch:")
         qty_layout.addWidget(qty_batch_label)
 
-        self.qty_per_batch_input = QLineEdit()
+        self.qty_per_batch_input = QLineEdit(objectName='required')
         self.qty_per_batch_input.setPlaceholderText("0.000000")
-        self.qty_per_batch_input.setStyleSheet("background-color: #fff9c4;")
         self.qty_per_batch_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_per_batch_input)
         qty_layout.addWidget(self.qty_per_batch_input)
 
         primary_layout.addWidget(QLabel("Qty. Req:"), 12, 0)
         primary_layout.addLayout(qty_layout, 12, 1)
 
-        self.prepared_by_input = QLineEdit()
+        self.prepared_by_input = QLineEdit(objectName='required')
         self.prepared_by_input.setPlaceholderText("Enter preparer name")
-        self.prepared_by_input.setStyleSheet("background-color: #fff9c4;")
         primary_layout.addWidget(QLabel("Prepared By:"), 13, 0)
         primary_layout.addWidget(self.prepared_by_input, 13, 1)
 
@@ -262,9 +254,8 @@ class MBAutoEntry(QWidget):
         encoding_layout.addWidget(QLabel("Encoded By:"), 0, 0)
         encoding_layout.addWidget(self.encoded_by_display, 0, 1)
 
-        self.production_confirmation_display = QLineEdit()
+        self.production_confirmation_display = QLineEdit(objectName='required')
         self.production_confirmation_display.setPlaceholderText("mm/dd/yyyy h:m:s")
-        self.production_confirmation_display.setStyleSheet("background-color: #fff9c4;")
         self.production_confirmation_display.setReadOnly(True)
         encoding_layout.addWidget(QLabel("Production Confirmation Encoded On:"), 1, 0)
         encoding_layout.addWidget(self.production_confirmation_display, 1, 1)
