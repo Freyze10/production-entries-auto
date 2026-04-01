@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00176" summary="connected print to button">
-      <option name="closed" value="true" />
-      <created>1774667179636</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1774667179637</updated>
-    </task>
     <task id="LOCAL-00177" summary="modifying spaces">
       <option name="closed" value="true" />
       <created>1774670692947</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775004649576</updated>
     </task>
-    <option name="localTasksCounter" value="225" />
+    <task id="LOCAL-00225" summary="fix switching tab for auto entry">
+      <option name="closed" value="true" />
+      <created>1775004954169</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1775004954169</updated>
+    </task>
+    <option name="localTasksCounter" value="226" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added upperline" />
     <MESSAGE value="adjusting spaces" />
     <MESSAGE value="moved the masterbatch logo" />
     <MESSAGE value="changed the processed by to match the others" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added auto entry file" />
     <MESSAGE value="connected pyqtsignal emit to auto" />
     <MESSAGE value="fix switching tab for auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix switching tab for auto" />
+    <MESSAGE value="fix switching tab for auto entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix switching tab for auto entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

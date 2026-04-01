@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from PyQt6.QtCore import Qt, QThread
+from PyQt6.QtCore import Qt, QThread, QDate
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
-    QTableWidgetItem, QCompleter
+    QTableWidgetItem, QCompleter, QDateEdit
 import qtawesome as fa
 
 from db.legacy import SyncRM
@@ -47,125 +47,105 @@ class MBAutoEntry(QWidget):
         left_column = QVBoxLayout()
         left_column.setSpacing(6)
 
-        # Production Information Card
         primary_card = QGroupBox("Production Information")
         primary_layout = QGridLayout(primary_card)
-        primary_layout.setSpacing(4)
-        primary_layout.setContentsMargins(8, 12, 8, 4)
+        primary_layout.setSpacing(6)
+        primary_layout.setContentsMargins(10, 18, 10, 12)
 
-        row = 0
+        self.production_id_input = QLineEdit()
+        self.production_id_input.setPlaceholderText("0098886")
 
-        # WIP No (Production ID)
-        self.wip_no_input = QLineEdit(objectName='gray_bg')
-        primary_layout.addWidget(QLabel("WIP No:"), row, 0)
-        primary_layout.addWidget(self.wip_no_input, row, 1)
-        row += 1
+        self.production_id_input.setStyleSheet("background-color: #fff9c4;")
 
-        # Production ID
-        self.production_id_input = QLineEdit(objectName='required')
-        self.production_id_input.setPlaceholderText("000000")
-        primary_layout.addWidget(QLabel("Production ID:"), row, 0)
-        primary_layout.addWidget(self.production_id_input, row, 1)
-        row += 1
+        self.select_formula_btn = QPushButton()
+        self.select_formula_btn.setIcon(
+            fa.icon('mdi.newspaper-variant-multiple-outline', color='#0078d4', scale_factor=1.5))
+        self.select_formula_btn.setFixedSize(36, 36)
+        # self.select_formula_btn.clicked.connect(self.show_formulation_selector)
+        self.select_formula_btn.setToolTip("Select Formula")
 
-        # Form Type
         self.form_type_combo = QComboBox()
         self.form_type_combo.addItems(["", "New", "Correction"])
-        self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
-        primary_layout.addWidget(QLabel("Form Type:"), row, 0)
-        primary_layout.addWidget(self.form_type_combo, row, 1)
-        row += 1
+        self.form_type_combo.setStyleSheet("background-color: #fff9c4;")
 
-        # Product Code
-        self.product_code_input = QLineEdit(objectName='required')
+        select_formula_layout = QHBoxLayout()
+
+        self.product_code_input = QLineEdit()
         self.product_code_input.setPlaceholderText("Enter product code")
-        primary_layout.addWidget(QLabel("Product Code:"), row, 0)
-        primary_layout.addWidget(self.product_code_input, row, 1)
-        row += 1
+        self.product_code_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Product Code:"), 0, 0)
+        select_formula_layout.addWidget(self.product_code_input)
+        select_formula_layout.addWidget(self.select_formula_btn)
+        primary_layout.addLayout(select_formula_layout, 0, 1)
 
-        # Product Color
         self.product_color_input = QLineEdit()
         self.product_color_input.setPlaceholderText("Enter product color")
-        primary_layout.addWidget(QLabel("Product Color:"), row, 0)
-        primary_layout.addWidget(self.product_color_input, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Product Color:"), 1, 0)
+        primary_layout.addWidget(self.product_color_input, 1, 1)
 
-        # Formula
-        self.formula_input = QLineEdit()
-        self.formula_input.setPlaceholderText("0")
-        primary_layout.addWidget(QLabel("Formula:"), row, 0)
-        primary_layout.addWidget(self.formula_input, row, 1)
-        row += 1
-
-        # Sum of Cons and Dosage in one row
-        sum_dosage_layout = QHBoxLayout()
-        sum_dosage_layout.setSpacing(9)
-
-        self.sum_cons_input = QLineEdit()
-        self.sum_cons_input.setPlaceholderText("0.00000")
-        self.sum_cons_input.focusOutEvent = lambda event: format_to_float(self, event, self.sum_cons_input)
-        sum_dosage_layout.addWidget(self.sum_cons_input)
-
-        dosage_label = QLabel("Dosage:")
-        sum_dosage_layout.addWidget(dosage_label)
-
-        self.dosage_input = QLineEdit(objectName='required')
+        dosage_layout = QHBoxLayout()
+        self.dosage_input = QLineEdit()
         self.dosage_input.setPlaceholderText("0.000000")
+        self.dosage_input.setStyleSheet("background-color: #fff9c4;")
         self.dosage_input.focusOutEvent = lambda event: format_to_float(self, event, self.dosage_input)
-        sum_dosage_layout.addWidget(self.dosage_input)
+        dosage_layout.addWidget(self.dosage_input)
+        dosage_layout.addWidget(QLabel("LD (%)"))
+        self.ld_percent_input = QLineEdit()
+        self.ld_percent_input.setPlaceholderText("0.000000")
+        self.ld_percent_input.focusOutEvent = lambda event: format_to_float(self, event, self.ld_percent_input)
+        dosage_layout.addWidget(self.ld_percent_input)
+        primary_layout.addWidget(QLabel("Dosage:"), 2, 0)
+        primary_layout.addLayout(dosage_layout, 2, 1)
 
-        primary_layout.addWidget(QLabel("Sum of Cons:"), row, 0)
-        primary_layout.addLayout(sum_dosage_layout, row, 1)
-        row += 1
-
-        # Customer
-        self.customer_input = QLineEdit(objectName='required')
+        self.customer_input = QLineEdit()
         self.customer_input.setPlaceholderText("Enter customer")
-        primary_layout.addWidget(QLabel("Customer:"), row, 0)
-        primary_layout.addWidget(self.customer_input, row, 1)
-        row += 1
+        self.customer_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Customer:"), 3, 0)
+        primary_layout.addWidget(self.customer_input, 3, 1)
 
-        # Lot No
-        self.lot_no_input = QLineEdit(objectName='required')
+        self.lot_no_input = QLineEdit()
         self.lot_no_input.setPlaceholderText("Enter lot number")
-        primary_layout.addWidget(QLabel("Lot No:"), row, 0)
-        primary_layout.addWidget(self.lot_no_input, row, 1)
-        row += 1
+        self.lot_no_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Lot No:"), 4, 0)
+        primary_layout.addWidget(self.lot_no_input, 4, 1)
 
-        # Production Date
-        self.production_date_input = SmartDateEdit()
-        self.production_date_input.setStyleSheet("background-color: #FDECCE;")
-        primary_layout.addWidget(QLabel("Production Date:"), row, 0)
-        primary_layout.addWidget(self.production_date_input, row, 1)
-        row += 1
+        self.production_date_input = QDateEdit()
+        self.production_date_input.setCalendarPopup(True)
+        # self.production_date_input.setStyleSheet(calendar_design.STYLESHEET)
+        self.production_date_input.setDate(QDate.currentDate())
+        self.production_date_input.setDisplayFormat("MM/dd/yyyy")
+        self.production_date_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Tentative Production Date:"), 5, 0)
+        primary_layout.addWidget(self.production_date_input, 5, 1)
 
-        # Confirmation Date
         self.confirmation_date_input = SmartDateEdit()
-        primary_layout.addWidget(QLabel("Confirmation Date:  <br><span style='font-size: 10px;'>(For Inventory Only)</span>"), row, 0)
-        primary_layout.addWidget(self.confirmation_date_input, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Confirmation Date \n(For Inventory Only):"), 6, 0)
+        primary_layout.addWidget(self.confirmation_date_input, 6, 1)
 
-        # Order Form No
-        self.order_form_no_input = QLineEdit(objectName='required')
-        self.order_form_no_input.setPlaceholderText("Enter order form number")
-        primary_layout.addWidget(QLabel("Order Form No:"), row, 0)
-        primary_layout.addWidget(self.order_form_no_input, row, 1)
-        row += 1
+        self.order_form_no_combo = QComboBox()
+        self.order_form_no_combo.setEditable(True)
+        self.order_form_no_combo.setPlaceholderText("Enter order form number")
+        self.order_form_no_combo.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Order Form No:"), 7, 0)
+        primary_layout.addWidget(self.order_form_no_combo, 7, 1)
 
-        # Colormatch No
         self.colormatch_no_input = QLineEdit()
         self.colormatch_no_input.setPlaceholderText("Enter colormatch number")
-        primary_layout.addWidget(QLabel("Colormatch No:"), row, 0)
-        primary_layout.addWidget(self.colormatch_no_input, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Colormatch No:"), 8, 0)
+        primary_layout.addWidget(self.colormatch_no_input, 8, 1)
 
-        # Matched Date
         self.matched_date_input = SmartDateEdit()
-        primary_layout.addWidget(QLabel("Matched Date:"), row, 0)
-        primary_layout.addWidget(self.matched_date_input, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Matched Date:"), 9, 0)
+        primary_layout.addWidget(self.matched_date_input, 9, 1)
 
-        # Mixing Time and Machine No in one row
+        self.formulation_id_input = QLineEdit()
+        self.formulation_index = QLineEdit()
+        self.formulation_id_input.setPlaceholderText("0")
+        self.formulation_id_input.setStyleSheet("background-color: #e9ecef;")
+        self.formulation_id_input.setReadOnly(True)
+        primary_layout.addWidget(QLabel("Formulation ID:"), 10, 0)
+        primary_layout.addWidget(self.formulation_id_input, 10, 1)
+
         mixing_machine_layout = QHBoxLayout()
         mixing_machine_layout.setSpacing(9)
 
@@ -181,187 +161,96 @@ class MBAutoEntry(QWidget):
         self.machine_no_input.setPlaceholderText("Enter machine number")
         mixing_machine_layout.addWidget(self.machine_no_input)
 
-        primary_layout.addWidget(QLabel("Mixing Time:"), row, 0)
-        primary_layout.addLayout(mixing_machine_layout, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Mixing Time:"), 11, 0)
+        primary_layout.addLayout(mixing_machine_layout, 11, 1)
 
-        # Qty Required and Qty Per Batch in one row
         qty_layout = QHBoxLayout()
         qty_layout.setSpacing(9)
 
-        self.qty_required_input = QLineEdit(objectName='required')
-        self.qty_required_input.setPlaceholderText("0.0000000")
+        self.qty_required_input = QLineEdit()
+        self.qty_required_input.setPlaceholderText("0.000000")
+        self.qty_required_input.setStyleSheet("background-color: #fff9c4;")
         self.qty_required_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_required_input)
         qty_layout.addWidget(self.qty_required_input)
 
         qty_batch_label = QLabel("Qty. Per Batch:")
         qty_layout.addWidget(qty_batch_label)
 
-        self.qty_per_batch_input = QLineEdit(objectName='required')
-        self.qty_per_batch_input.setPlaceholderText("0.0000000")
+        self.qty_per_batch_input = QLineEdit()
+        self.qty_per_batch_input.setPlaceholderText("0.000000")
+        self.qty_per_batch_input.setStyleSheet("background-color: #fff9c4;")
         self.qty_per_batch_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_per_batch_input)
         qty_layout.addWidget(self.qty_per_batch_input)
 
-        primary_layout.addWidget(QLabel("Qty. Required:"), row, 0)
-        primary_layout.addLayout(qty_layout, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Qty. Req:"), 12, 0)
+        primary_layout.addLayout(qty_layout, 12, 1)
 
-        # Prepared By
-        self.prepared_by_input = QLineEdit(objectName='required')
+        self.prepared_by_input = QLineEdit()
         self.prepared_by_input.setPlaceholderText("Enter preparer name")
-        primary_layout.addWidget(QLabel("Prepared By:"), row, 0)
-        primary_layout.addWidget(self.prepared_by_input, row, 1)
-        row += 1
+        self.prepared_by_input.setStyleSheet("background-color: #fff9c4;")
+        primary_layout.addWidget(QLabel("Prepared By:"), 13, 0)
+        primary_layout.addWidget(self.prepared_by_input, 13, 1)
 
-        # Notes
         self.notes_input = QTextEdit()
         self.notes_input.setPlaceholderText("Enter any notes...")
         self.notes_input.setMinimumHeight(30)
         self.notes_input.setMaximumHeight(50)
-        primary_layout.addWidget(QLabel("Notes:"), row, 0)
-        primary_layout.addWidget(self.notes_input, row, 1)
-        row += 1
+        primary_layout.addWidget(QLabel("Notes:"), 14, 0)
+        primary_layout.addWidget(self.notes_input, 14, 1)
 
         left_column.addWidget(primary_card)
+
         scroll_layout.addLayout(left_column, stretch=1)
 
-        # Right Column - Materials
         right_column = QVBoxLayout()
-        right_column.setSpacing(4)
+        right_column.setSpacing(8)
 
-        # Materials Card
         material_card = QGroupBox("Material Composition")
         material_layout = QVBoxLayout(material_card)
-        material_layout.setContentsMargins(8, 12, 8, 4)
-        material_layout.setSpacing(6)
+        material_layout.setContentsMargins(10, 18, 10, 12)
+        material_layout.setSpacing(8)
 
-        # Material Type Selection (Radio-button behavior)
-        material_type_layout = QHBoxLayout()
-        material_type_layout.addWidget(QLabel("Material Used:"))
-        self.raw_material_check = QCheckBox("RAW MATERIAL")
-        self.raw_material_check.setObjectName("RawMaterialCheck")
-        self.raw_material_check.setChecked(True)
-        self.non_raw_material_check = QCheckBox("NON-RAW MATERIAL")
-        self.non_raw_material_check.setObjectName("NonRawMaterialCheck")
+        # Add Production ID and Form Type before the table
+        header_layout = QGridLayout()
+        header_layout.addWidget(QLabel("Production ID:"), 0, 0)
+        header_layout.addWidget(self.production_id_input, 0, 1)
+        header_layout.addWidget(QLabel("Form Type:"), 1, 0)
+        header_layout.addWidget(self.form_type_combo, 1, 1)
+        material_layout.addLayout(header_layout)
 
-        # Make checkboxes behave like radio buttons
-        self.raw_material_check.toggled.connect(lambda checked: self.on_material_type_changed(checked, True))
-        self.non_raw_material_check.toggled.connect(lambda checked: self.on_material_type_changed(checked, False))
-
-        material_type_layout.addWidget(self.raw_material_check)
-        material_type_layout.addWidget(self.non_raw_material_check)
-        material_type_layout.addStretch()
-        material_layout.addLayout(material_type_layout)
-
-        # Material Input Section
-        input_card = QFrame()
-        input_layout = QGridLayout(input_card)
-        input_layout.setSpacing(6)
-
-        # Material Code - Create both QComboBox and QLineEdit
-        self.material_code_combo = QComboBox()
-        self.material_code_combo.setEditable(True)
-        self.material_code_combo.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
-        self.material_code_combo.setPlaceholderText("Enter material code")
-        self.material_code_combo.setStyleSheet("background-color: #FDECCE;")
-        self.material_code_combo.lineEdit().editingFinished.connect(self.validate_rm_code)
-        self.setup_rm_code_completer()
-        self.material_code_combo.setCurrentIndex(0)
-
-        self.material_code_lineedit = QLineEdit()
-        self.material_code_lineedit.setPlaceholderText("Enter material code")
-        self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
-        self.material_code_lineedit.setVisible(False)  # Hidden by default
-
-        btn_sync_rm = QPushButton("Sync")
-        btn_sync_rm.setObjectName("SuccessButton")
-        btn_sync_rm.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        btn_sync_rm.clicked.connect(self.sync_rm)
-
-        # Add label
-        input_layout.addWidget(QLabel("Material Code:"), 0, 0)
-        # Add both widgets to the same position (only one will be visible at a time)
-        input_layout.addWidget(self.material_code_combo, 0, 1, 1, 2)
-        input_layout.addWidget(self.material_code_lineedit, 0, 1, 1, 2)
-        input_layout.addWidget(btn_sync_rm, 0, 3)
-
-        # Large Scale
-        self.large_scale_input = QLineEdit()
-        self.large_scale_input.setPlaceholderText("0.0000000")
-        self.large_scale_input.setStyleSheet("background-color: #fff9c4;")
-        input_layout.addWidget(QLabel("Large Scale (KG):"), 1, 0)
-        input_layout.addWidget(self.large_scale_input, 1, 1, 1, 3)
-
-        # Small Scale
-        self.small_scale_input = QLineEdit()
-        self.small_scale_input.setPlaceholderText("0.0000000")
-        self.small_scale_input.setStyleSheet("background-color: #fff9c4;")
-        input_layout.addWidget(QLabel("Small Scale (G):"), 2, 0)
-        input_layout.addWidget(self.small_scale_input, 2, 1, 1, 3)
-
-        # Total Weight
-        self.total_weight_input = QLineEdit()
-        self.total_weight_input.setPlaceholderText("0.0000000")
-        self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
-        self.total_weight_input.returnPressed.connect(self.add_material)
-        self.total_weight_input.installEventFilter(self)
-        input_layout.addWidget(QLabel("Total Weight (KG):"), 3, 0)
-        input_layout.addWidget(self.total_weight_input, 3, 1, 1, 3)
-
-        # Action Buttons
-        action_layout = QHBoxLayout()
-        action_layout.addStretch()
-
-        add_btn = QPushButton("Add")
-        add_btn.setObjectName("SuccessButton")
-        add_btn.clicked.connect(self.add_material)
-        action_layout.addWidget(add_btn)
-
-        remove_btn = QPushButton("Remove")
-        remove_btn.setObjectName("DangerButton")
-        remove_btn.clicked.connect(self.remove_material)
-        action_layout.addWidget(remove_btn)
-
-        clear_btn = QPushButton("Clear")
-        clear_btn.setObjectName("SecondaryButton")
-        clear_btn.clicked.connect(self.clear_material_table)
-        action_layout.addWidget(clear_btn)
-
-        remove_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        clear_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-
-        input_layout.addLayout(action_layout, 4, 0, 1, 4)
-        material_layout.addWidget(input_card)
-
-        # Materials Table
         self.materials_table = QTableWidget()
-        self.materials_table.setColumnCount(4)
+        self.materials_table.setColumnCount(6)
         self.materials_table.setHorizontalHeaderLabels([
-            "Material Name", "Large Scale (KG)", "Small Scale (G)",
-            "Total Weight (KG)"
+            "Material Name", "Large Scale (KG)", "Small Scale (G)", "Total Weight (KG)", "Total Loss (KG)",
+            "Total Consumption (KG)"
         ])
-        self.materials_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.materials_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
         self.materials_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.materials_table.verticalHeader().setVisible(False)
         self.materials_table.setAlternatingRowColors(True)
-        self.materials_table.setMinimumHeight(200)
+        self.materials_table.setMinimumHeight(300)
+        self.materials_table.setStyleSheet("""
+                   color: #343a40; background-color: transparent;
+               """)
         self.materials_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.materials_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-        self.materials_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         material_layout.addWidget(self.materials_table)
 
-        # Totals Display
         total_layout = QHBoxLayout()
-        total_layout.addWidget(QLabel("No. of Item(s):"))
+        total_layout.addWidget(QLabel("No. of Items:"))
         self.no_items_label = QLabel("0")
-        self.no_items_label.setStyleSheet("font-weight: bold; color: #0078d4;")
+        self.no_items_label.setStyleSheet("font-weight: bold;")
         total_layout.addWidget(self.no_items_label)
         total_layout.addStretch()
         total_layout.addWidget(QLabel("Total Weight:"))
-        self.total_weight_label = QLabel("0.0000000")
-        self.total_weight_label.setStyleSheet("font-weight: bold; color: #0078d4;")
+        self.total_weight_label = QLabel("0.000000")
+        self.total_weight_label.setStyleSheet("font-weight: bold;")
         total_layout.addWidget(self.total_weight_label)
+        total_layout.addWidget(QLabel("FG # in 10 (EQR WH) only"))
+        self.fg_label = QLabel("0000000")
+        self.fg_label.setStyleSheet("background-color: #fff9c4; padding: 2px 8px; font-weight: bold;")
+        total_layout.addWidget(self.fg_label)
         material_layout.addLayout(total_layout)
 
         # Encoding Information
@@ -398,44 +287,43 @@ class MBAutoEntry(QWidget):
         scroll.setWidget(scroll_widget)
         main_layout.addWidget(scroll)
 
-        # Bottom Buttons
         button_layout = QHBoxLayout()
         button_layout.addStretch()
 
-        self.print_wip_btn = QPushButton("Print with WIP", objectName="SecondaryButton")
-        self.print_wip_btn.setIcon(fa.icon('fa5s.print', color='white'))
-        # self.print_wip_btn.clicked.connect(self.print_with_wip)
-        button_layout.addWidget(self.print_wip_btn)
+        generate_btn = QPushButton("Generate", objectName="SuccessButton")
+        generate_btn.setIcon(fa.icon('fa5s.cogs', color='white'))
+        # generate_btn.clicked.connect(self.generate_production)
+        button_layout.addWidget(generate_btn)
 
-        self.print_btn = QPushButton("Print", objectName="WarningButton")
-        self.print_btn.setIcon(fa.icon('fa5s.print', color='white'))
-        self.print_btn.clicked.connect(self.print_production)
-        button_layout.addWidget(self.print_btn)
+        tumbler_btn = QPushButton("Tumbler", objectName="InfoButton")
+        tumbler_btn.setIcon(fa.icon('fa5s.recycle', color='white'))
+        # tumbler_btn.clicked.connect(self.tumbler_function)
+        button_layout.addWidget(tumbler_btn)
 
-        self.new_btn = QPushButton("New", objectName="PrimaryButton")
-        self.new_btn.setIcon(fa.icon('fa5s.file', color='white'))
-        self.new_btn.clicked.connect(self.new_production)
-        button_layout.addWidget(self.new_btn)
+        generate_advance_btn = QPushButton("Generate Advance", objectName="PrimaryButton")
+        generate_advance_btn.setIcon(fa.icon('fa5s.forward', color='white'))
+        # generate_advance_btn.clicked.connect(self.generate_advance)
+        button_layout.addWidget(generate_advance_btn)
 
-        self.save_btn = QPushButton("Save", objectName="InfoButton")
+        print_btn = QPushButton("Print", objectName="SecondaryButton")
+        print_btn.setIcon(fa.icon('fa5s.print', color='white'))
+        print_btn.clicked.connect(self.print_production)
+        button_layout.addWidget(print_btn)
+
+        new_btn = QPushButton("New", objectName="PrimaryButton")
+        new_btn.setIcon(fa.icon('fa5s.file', color='white'))
+        new_btn.clicked.connect(self.new_production)
+        button_layout.addWidget(new_btn)
+
+        self.save_btn = QPushButton("Save", objectName="SuccessButton")
         self.save_btn.setIcon(fa.icon('fa5s.save', color='white'))
         # self.save_btn.clicked.connect(self.save_production)
         button_layout.addWidget(self.save_btn)
 
         main_layout.addLayout(button_layout)
 
-        if self.prod_id != 0:
-            try:
-                self.prod_results = get_single_production_data(self.prod_id)
-                self.prod_materials = get_single_production_details(self.prod_id)
-                if not self.prod_results:
-                    QMessageBox.warning(self, "Not Found",
-                                        f"Production {self.prod_id} not found.")
-                    return False
-                self.display_details()
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Failed to load: {e}")
-                return False
+
+
 
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
