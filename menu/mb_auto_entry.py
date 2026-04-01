@@ -219,10 +219,9 @@ class MBAutoEntry(QWidget):
         material_layout.addLayout(header_layout)
 
         self.materials_table = QTableWidget()
-        self.materials_table.setColumnCount(6)
+        self.materials_table.setColumnCount(4)
         self.materials_table.setHorizontalHeaderLabels([
-            "Material Name", "Large Scale (KG)", "Small Scale (G)", "Total Weight (KG)", "Total Loss (KG)",
-            "Total Consumption (KG)"
+            "Material Name", "Large Scale (KG)", "Small Scale (G)", "Total Weight (KG)"
         ])
         self.materials_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
         self.materials_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
