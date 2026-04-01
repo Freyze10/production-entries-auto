@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00187" summary="fix spacing">
-      <option name="closed" value="true" />
-      <created>1774686408329</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1774686408329</updated>
-    </task>
     <task id="LOCAL-00188" summary="added font size on summary">
       <option name="closed" value="true" />
       <created>1774688946594</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775008860722</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary="cleaning code">
+      <option name="closed" value="true" />
+      <created>1775009093292</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1775009093292</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="printed lines" />
     <MESSAGE value="fixed the box side" />
     <MESSAGE value="added empty line on summary" />
     <MESSAGE value="BOLD MAT CODE" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added text color on the total of the materials" />
     <MESSAGE value="added read data from  the database" />
     <MESSAGE value="updated legacy to get the customer name" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated legacy to get the customer name" />
+    <MESSAGE value="cleaning code" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaning code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

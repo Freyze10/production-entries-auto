@@ -60,7 +60,7 @@ class MBAutoEntry(QWidget):
         self.select_formula_btn.setIcon(
             fa.icon('mdi.newspaper-variant-multiple-outline', color='#0078d4', scale_factor=1.5))
         self.select_formula_btn.setFixedSize(36, 36)
-        # self.select_formula_btn.clicked.connect(self.show_formulation_selector)
+        self.select_formula_btn.clicked.connect(self.show_formulation_selector)
         self.select_formula_btn.setToolTip("Select Formula")
 
         self.form_type_combo = QComboBox()
@@ -307,8 +307,6 @@ class MBAutoEntry(QWidget):
         main_layout.addLayout(button_layout)
 
 
-
-
     def show_formulation_selector(self):
         """Show dialog to select a formulation and populate its materials."""
         if not self.product_code_input.text().strip():
@@ -356,7 +354,7 @@ class MBAutoEntry(QWidget):
         self.formula_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.formula_table.itemSelectionChanged.connect(self.show_formulation_selected)
         self.formula_table.itemDoubleClicked.connect(
-            lambda item: self._on_formula_double_clicked(dialog, item)
+            # lambda item: self._on_formula_double_clicked(dialog, item)
         )
 
         layout.addWidget(self.formula_table)
@@ -377,8 +375,8 @@ class MBAutoEntry(QWidget):
 
         ok_btn = QPushButton("OK")
         ok_btn.setObjectName("SuccessButton")
-        ok_btn.clicked.connect(
-            lambda: self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector))
+        # ok_btn.clicked.connect(
+        #     lambda: self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector))
         btn_layout.addWidget(ok_btn)
 
         cancel_btn = QPushButton("CANCEL")
@@ -392,6 +390,30 @@ class MBAutoEntry(QWidget):
             self.formula_table.selectRow(0)
 
         dialog.exec()
+
+    def show_formulation_selected(self):
+        """Fill the materials table for the currently selected formula."""
+        rows = self.formula_table.selectionModel().selectedRows()
+        if not rows:
+            return
+
+        row_idx = rows[0].row()
+        formula_no_item = self.formula_table.item(row_idx, 1)
+        if not formula_no_item:
+            return
+        formula_no = formula_no_item.text().strip()
+
+        try:
+            materials = get_formula_materials(formula_no)
+        except Exception as e:
+            QMessageBox.critical(self, "Database Error",
+                                 f"Could not load materials for formula {formula_no}: {e}")
+            materials = []
+
+        self.materials_table_selector.setRowCount(len(materials))
+        for r, (mat_code, conc) in enumerate(materials):
+            self.materials_table_selector.setItem(r, 0, QTableWidgetItem(str(mat_code)))
+            self.materials_table_selector.setItem(r, 1, QTableWidgetItem(str(conc)))
 
     def display_details(self, prod_id = 0):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
