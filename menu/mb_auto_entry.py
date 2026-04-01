@@ -436,6 +436,53 @@ class MBAutoEntry(QWidget):
         # Trigger the same logic as the OK button
         self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector)
 
+    def load_selected_formula(self, dialog, formula_table, materials_table):
+        """Copy the selected formula + materials into the main production form."""
+        sel = formula_table.selectionModel().selectedRows()
+        if not sel:
+            QMessageBox.warning(dialog, "No Selection", "Please select a formula first.")
+            return
+
+        row = sel[0].row()
+
+        self.formulation_index.setText(formula_table.item(row, 0).text())
+        self.formulation_id_input.setText(formula_table.item(row, 1).text())
+        self.customer_input.setText(formula_table.item(row, 2).text())
+        self.product_code_input.setText(formula_table.item(row, 3).text())
+        self.product_color_input.setText(formula_table.item(row, 4).text())
+        self.dosage_input.setText(formula_table.item(row, 5).text())
+        self.ld_percent_input.setText(formula_table.item(row, 6).text())
+
+        self.materials_table.setRowCount(0)
+
+        for mat_row in range(materials_table.rowCount()):
+            mat_code = materials_table.item(mat_row, 0).text()
+            conc_str = materials_table.item(mat_row, 1).text()
+            try:
+                concentration = float(conc_str.replace("%", "").strip())
+            except ValueError:
+                concentration = 0.0
+
+            large_scale = concentration * 0.1
+            small_scale = concentration * 10
+            total_weight = large_scale + (small_scale / 1000)
+            total_loss = total_weight * 0.02
+            total_consumption = total_weight + total_loss
+
+            new_row = self.materials_table.rowCount()
+            self.materials_table.insertRow(new_row)
+
+            self.materials_table.setItem(new_row, 0, QTableWidgetItem(mat_code))
+            self.materials_table.setItem(new_row, 1, NumericTableWidgetItem(large_scale, is_float=True))
+            self.materials_table.setItem(new_row, 2, NumericTableWidgetItem(small_scale, is_float=True))
+            self.materials_table.setItem(new_row, 3, NumericTableWidgetItem(total_weight, is_float=True))
+            self.materials_table.setItem(new_row, 4, NumericTableWidgetItem(total_loss, is_float=True))
+            self.materials_table.setItem(new_row, 5, NumericTableWidgetItem(total_consumption, is_float=True))
+
+        self.update_totals()
+        dialog.accept()
+        QMessageBox.information(self, "Success", "Formula loaded successfully!")
+
     def display_details(self, prod_id = 0):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))

@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00193" summary="changed prod code spacing">
-      <option name="closed" value="true" />
-      <created>1774850485260</created>
-      <option name="number" value="00193" />
-      <option name="presentableId" value="LOCAL-00193" />
-      <option name="project" value="LOCAL" />
-      <updated>1774850485260</updated>
-    </task>
     <task id="LOCAL-00194" summary="changed material spacing">
       <option name="closed" value="true" />
       <created>1774850876293</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775012876329</updated>
     </task>
-    <option name="localTasksCounter" value="242" />
+    <task id="LOCAL-00242" summary="modified table on the selector of formula">
+      <option name="closed" value="true" />
+      <created>1775019618927</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1775019618927</updated>
+    </task>
+    <option name="localTasksCounter" value="243" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
