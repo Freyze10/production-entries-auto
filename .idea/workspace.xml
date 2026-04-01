@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00180" summary="uses raw text print">
-      <option name="closed" value="true" />
-      <created>1774682748525</created>
-      <option name="number" value="00180" />
-      <option name="presentableId" value="LOCAL-00180" />
-      <option name="project" value="LOCAL" />
-      <updated>1774682748525</updated>
-    </task>
-    <task id="LOCAL-00181" summary="modified line height spacing">
-      <option name="closed" value="true" />
-      <created>1774682800259</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1774682800259</updated>
-    </task>
     <task id="LOCAL-00182" summary="fix heading">
       <option name="closed" value="true" />
       <created>1774682875588</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775007020024</updated>
     </task>
-    <option name="localTasksCounter" value="229" />
+    <task id="LOCAL-00229" summary="changed backround of the fields">
+      <option name="closed" value="true" />
+      <created>1775007430027</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1775007430027</updated>
+    </task>
+    <task id="LOCAL-00230" summary="added gray bg in the timestamp">
+      <option name="closed" value="true" />
+      <created>1775007570024</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1775007570024</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="edited the textwidget to not have scrollbar" />
-    <MESSAGE value="updated print function to get the empty rows" />
     <MESSAGE value="trying to display the empty lines in the print" />
     <MESSAGE value="display empty rows" />
     <MESSAGE value="fixed the lines" />
@@ -551,7 +549,9 @@
     <MESSAGE value="added ui for the auto entry" />
     <MESSAGE value="reduce the column rows of the materials table" />
     <MESSAGE value="changing backround of the required fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="changing backround of the required fields" />
+    <MESSAGE value="changed backround of the fields" />
+    <MESSAGE value="added gray bg in the timestamp" />
+    <option name="LAST_COMMIT_MESSAGE" value="added gray bg in the timestamp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
