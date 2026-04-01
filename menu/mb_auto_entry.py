@@ -246,10 +246,9 @@ class MBAutoEntry(QWidget):
         encoding_layout = QGridLayout()
         encoding_layout.setSpacing(6)
 
-        self.encoded_by_display = QLineEdit()
+        self.encoded_by_display = QLineEdit(objectName='gray_bg')
         self.encoded_by_display.setReadOnly(True)
         self.encoded_by_display.setText(self.work_station['u'])
-        self.encoded_by_display.setStyleSheet("background-color: #e9ecef;")
 
         encoding_layout.addWidget(QLabel("Encoded By:"), 0, 0)
         encoding_layout.addWidget(self.encoded_by_display, 0, 1)
@@ -260,10 +259,9 @@ class MBAutoEntry(QWidget):
         encoding_layout.addWidget(QLabel("Production Confirmation Encoded On:"), 1, 0)
         encoding_layout.addWidget(self.production_confirmation_display, 1, 1)
 
-        self.production_encoded_display = QLineEdit()
+        self.production_encoded_display = QLineEdit(objectName='gray_bg')
         self.production_encoded_display.setText(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         self.production_encoded_display.setReadOnly(True)
-        self.production_encoded_display.setStyleSheet("background-color: #e9ecef;")
         encoding_layout.addWidget(QLabel("Production Encoded On:"), 2, 0)
         encoding_layout.addWidget(self.production_encoded_display, 2, 1)
 
