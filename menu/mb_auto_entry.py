@@ -358,9 +358,9 @@ class MBAutoEntry(QWidget):
             self.formula_table.setAlternatingRowColors(True)
             self.formula_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
             self.formula_table.itemSelectionChanged.connect(self.show_formulation_selected)
-            # self.formula_table.itemDoubleClicked.connect(
-            #     lambda item: self._on_formula_double_clicked(dialog, item)
-            # )
+            self.formula_table.itemDoubleClicked.connect(
+                lambda item: self._on_formula_double_clicked(dialog, item)
+            )
 
             layout.addWidget(self.formula_table)
 
@@ -427,6 +427,14 @@ class MBAutoEntry(QWidget):
         for r, (mat_code, conc) in enumerate(materials):
             self.materials_table_selector.setItem(r, 0, QTableWidgetItem(str(mat_code)))
             self.materials_table_selector.setItem(r, 1, QTableWidgetItem(str(conc)))
+
+    def _on_formula_double_clicked(self, dialog, item):
+        """Called when user double-clicks a row in the formula selector."""
+        row = item.row()
+        # Ensure the row is selected (in case double-click happens before selection)
+        self.formula_table.selectRow(row)
+        # Trigger the same logic as the OK button
+        self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector)
 
     def display_details(self, prod_id = 0):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
