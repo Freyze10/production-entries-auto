@@ -456,7 +456,8 @@ class MBAutoEntry(QWidget):
 
         self.formulation_details = materials_table
 
-
+        self.select_formula_btn.setIcon(
+            fa.icon('mdi.check-underline', color='#0078d4', scale_factor=1.5))
 
         self.materials_table.setRowCount(0)
 

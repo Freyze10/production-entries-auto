@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00195" summary="changed the  wraping of the customer name">
-      <option name="closed" value="true" />
-      <created>1774851484784</created>
-      <option name="number" value="00195" />
-      <option name="presentableId" value="LOCAL-00195" />
-      <option name="project" value="LOCAL" />
-      <updated>1774851484784</updated>
-    </task>
     <task id="LOCAL-00196" summary="updated thed unicodee">
       <option name="closed" value="true" />
       <created>1774852539724</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775025369089</updated>
     </task>
-    <option name="localTasksCounter" value="244" />
+    <task id="LOCAL-00244" summary="added formulation details">
+      <option name="closed" value="true" />
+      <created>1775026708819</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1775026708819</updated>
+    </task>
+    <option name="localTasksCounter" value="245" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed formatting" />
     <MESSAGE value="adjusted table model for column search" />
     <MESSAGE value="added funtion for column searching" />
     <MESSAGE value="created new file for printing" />
@@ -551,7 +550,8 @@
     <MESSAGE value="changed the dialog size" />
     <MESSAGE value="modified table on the selector of formula" />
     <MESSAGE value="added temporary calculation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added temporary calculation" />
+    <MESSAGE value="added formulation details" />
+    <option name="LAST_COMMIT_MESSAGE" value="added formulation details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>460</line>
+          <line>461</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
