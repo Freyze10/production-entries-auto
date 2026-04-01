@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.mb_auto_entry)   # 2
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
-        self.production_records.go_to_manual_entry.connect(self.switch_to_auto_entry)
+        self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
 
         self.btn_production_records.setChecked(True)
 

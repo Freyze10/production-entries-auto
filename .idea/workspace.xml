@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00175" summary="added print function">
-      <option name="closed" value="true" />
-      <created>1774662848198</created>
-      <option name="number" value="00175" />
-      <option name="presentableId" value="LOCAL-00175" />
-      <option name="project" value="LOCAL" />
-      <updated>1774662848198</updated>
-    </task>
     <task id="LOCAL-00176" summary="connected print to button">
       <option name="closed" value="true" />
       <created>1774667179636</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775004537503</updated>
     </task>
-    <option name="localTasksCounter" value="224" />
+    <task id="LOCAL-00224" summary="fix switching tab for auto">
+      <option name="closed" value="true" />
+      <created>1775004649576</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1775004649576</updated>
+    </task>
+    <option name="localTasksCounter" value="225" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated thed unicodee" />
     <MESSAGE value="added upperline" />
     <MESSAGE value="adjusting spaces" />
     <MESSAGE value="moved the masterbatch logo" />
@@ -551,7 +550,8 @@
     <MESSAGE value="removed past test print" />
     <MESSAGE value="added auto entry file" />
     <MESSAGE value="connected pyqtsignal emit to auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="connected pyqtsignal emit to auto" />
+    <MESSAGE value="fix switching tab for auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix switching tab for auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
