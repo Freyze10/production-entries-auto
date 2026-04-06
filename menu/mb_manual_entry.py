@@ -456,7 +456,7 @@ class MBManualEntry(QWidget):
                 if not self.raw_material_check.isChecked():
                     self.non_raw_material_check.setChecked(True)
 
-    def display_details(self, prod_id = 0):
+    def display_details(self):
         self.wip_no_input.setText(str(self.prod_results['index_no']))
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))

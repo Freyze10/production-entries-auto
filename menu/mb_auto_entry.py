@@ -541,7 +541,7 @@ class MBAutoEntry(QWidget):
 
 
 
-    def display_details(self, prod_id = 0):
+    def display_details(self):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
         self.product_code_input.setText(str(self.prod_results['prod_code']))
