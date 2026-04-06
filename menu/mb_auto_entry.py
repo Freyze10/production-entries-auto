@@ -341,7 +341,7 @@ class MBAutoEntry(QWidget):
         setup_comp(self.customer_input, data['customers'])
         setup_comp(self.product_code_input, data['prod_codes'])
         setup_comp(self.lot_no_input, data['lots'])
-        # setup_comp(self.order_form_no_input, data['orders'])
+        setup_combo_comp(self.order_form_no_combo, data.get('orders'))
 
 
 
