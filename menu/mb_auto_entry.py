@@ -334,6 +334,7 @@ class MBAutoEntry(QWidget):
             completer = combo.completer()
             completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
             completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+            completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
 
             # 4. Set default to the empty string (Index 0)
             combo.setCurrentIndex(0)
