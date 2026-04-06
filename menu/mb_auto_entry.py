@@ -108,8 +108,6 @@ class MBAutoEntry(QWidget):
         primary_layout.addWidget(self.lot_no_input, 4, 1)
 
         self.production_date_input = SmartDateEdit()
-        # self.production_date_input.setCalendarPopup(True)
-        # self.production_date_input.setStyleSheet(calendar_design.STYLESHEET)
         self.production_date_input.setText(QDate.currentDate().toString("MM/dd/yyyy"))
         self.production_date_input.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Tentative Production Date:"), 5, 0)
