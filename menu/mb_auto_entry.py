@@ -643,10 +643,13 @@ class MBAutoEntry(QWidget):
         self.update_totals()
 
     def generate_production(self):
+        quantity_req = float(self.qty_required_input.text())
+        quantity_batch = float(self.qty_per_batch_input.text())
+        batch_size = quantity_req / quantity_batch
         process_formulation_to_table(
             source_table=self.formulation_details,
             target_table=self.materials_table,
-            total_weight=float(total_weight),
+            total_weight=quantity_req,
             batch_divisor=float(batch_size),
             base_divisor=100.0
         )

@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00212" summary="Changed the Masterbatch name position">
-      <option name="closed" value="true" />
-      <created>1774916167074</created>
-      <option name="number" value="00212" />
-      <option name="presentableId" value="LOCAL-00212" />
-      <option name="project" value="LOCAL" />
-      <updated>1774916167075</updated>
-    </task>
     <task id="LOCAL-00213" summary="changed spacing">
       <option name="closed" value="true" />
       <created>1774918627678</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775463576381</updated>
     </task>
-    <option name="localTasksCounter" value="261" />
+    <task id="LOCAL-00261" summary="import the function auto compute">
+      <option name="closed" value="true" />
+      <created>1775463755651</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1775463755651</updated>
+    </task>
+    <option name="localTasksCounter" value="262" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated legacy to get the customer name" />
     <MESSAGE value="cleaning code" />
     <MESSAGE value="added read formulation items from database" />
     <MESSAGE value="fix read database for the selected prod code" />
@@ -551,7 +550,8 @@
     <MESSAGE value="removed the comments on the prod date input" />
     <MESSAGE value="set the default value on the prod date when clicked new" />
     <MESSAGE value="created a function for the auto calculation" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a function for the auto calculation" />
+    <MESSAGE value="import the function auto compute" />
+    <option name="LAST_COMMIT_MESSAGE" value="import the function auto compute" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>506</line>
+          <line>507</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
