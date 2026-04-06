@@ -30,6 +30,7 @@ class MBAutoEntry(QWidget):
         self.formulation_details = None
 
         self.setup_ui()
+        self.setup_auto_completers()
 
     def setup_ui(self):
 
@@ -308,7 +309,7 @@ class MBAutoEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
-    def setup_autocompleters(self):
+    def setup_auto_completers(self):
         """Setup autocompleters for customer and product code using cached data."""
         # TODO: gawa ng fetching ng customer, prod_code, lot_no, and order_no from tbl_production01
 
