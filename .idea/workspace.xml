@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00206" summary="fixing series of A for lines">
-      <option name="closed" value="true" />
-      <created>1774858060602</created>
-      <option name="number" value="00206" />
-      <option name="presentableId" value="LOCAL-00206" />
-      <option name="project" value="LOCAL" />
-      <updated>1774858060602</updated>
-    </task>
-    <task id="LOCAL-00207" summary="printed lines">
-      <option name="closed" value="true" />
-      <created>1774859646064</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1774859646064</updated>
-    </task>
     <task id="LOCAL-00208" summary="fixed the box side">
       <option name="closed" value="true" />
       <created>1774860045131</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775442618903</updated>
     </task>
-    <option name="localTasksCounter" value="255" />
+    <task id="LOCAL-00255" summary="call display details when the prod_id is not 0">
+      <option name="closed" value="true" />
+      <created>1775442960028</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1775442960028</updated>
+    </task>
+    <task id="LOCAL-00256" summary="removed parameter of prod_id in display details">
+      <option name="closed" value="true" />
+      <created>1775443638697</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1775443638697</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changing backround of the required fields" />
-    <MESSAGE value="changed backround of the fields" />
     <MESSAGE value="added gray bg in the timestamp" />
     <MESSAGE value="removed the fg label" />
     <MESSAGE value="added text color on the total of the materials" />
@@ -551,7 +549,9 @@
     <MESSAGE value="created the combo box completer" />
     <MESSAGE value="forces the dropdon to pop up when the user types in the order_no" />
     <MESSAGE value="fix the field name matvhing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the field name matvhing" />
+    <MESSAGE value="call display details when the prod_id is not 0" />
+    <MESSAGE value="removed parameter of prod_id in display details" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed parameter of prod_id in display details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>509</line>
+          <line>508</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

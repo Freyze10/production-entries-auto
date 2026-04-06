@@ -107,11 +107,10 @@ class MBAutoEntry(QWidget):
         primary_layout.addWidget(QLabel("Lot No:"), 4, 0)
         primary_layout.addWidget(self.lot_no_input, 4, 1)
 
-        self.production_date_input = QDateEdit()
-        self.production_date_input.setCalendarPopup(True)
+        self.production_date_input = SmartDateEdit()
+        # self.production_date_input.setCalendarPopup(True)
         # self.production_date_input.setStyleSheet(calendar_design.STYLESHEET)
-        self.production_date_input.setDate(QDate.currentDate())
-        self.production_date_input.setDisplayFormat("MM/dd/yyyy")
+        self.production_date_input.setText(QDate.currentDate().toString("MM/dd/yyyy"))
         self.production_date_input.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Tentative Production Date:"), 5, 0)
         primary_layout.addWidget(self.production_date_input, 5, 1)
@@ -573,7 +572,7 @@ class MBAutoEntry(QWidget):
         self.machine_no_input.setText(str(self.prod_results['machine_no']))
         self.qty_required_input.setText(f"{qty_req:.6f}")
         self.qty_per_batch_input.setText(f"{qty_batch:.6f}")
-        self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.7f}")
+        self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.6f}")
 
         self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
         if self.prod_results.get('encoded_on'):
