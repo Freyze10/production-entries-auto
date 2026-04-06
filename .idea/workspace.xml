@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00200" summary="changed the processed by to match the others">
-      <option name="closed" value="true" />
-      <created>1774853659376</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1774853659376</updated>
-    </task>
-    <task id="LOCAL-00201" summary="edited the textwidget to not have scrollbar">
-      <option name="closed" value="true" />
-      <created>1774854277060</created>
-      <option name="number" value="00201" />
-      <option name="presentableId" value="LOCAL-00201" />
-      <option name="project" value="LOCAL" />
-      <updated>1774854277060</updated>
-    </task>
     <task id="LOCAL-00202" summary="updated print function to get the empty rows">
       <option name="closed" value="true" />
       <created>1774854741493</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775435225463</updated>
     </task>
-    <option name="localTasksCounter" value="249" />
+    <task id="LOCAL-00249" summary="connect the completers to the input fields">
+      <option name="closed" value="true" />
+      <created>1775436977322</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1775436977322</updated>
+    </task>
+    <task id="LOCAL-00250" summary="call the self completer function">
+      <option name="closed" value="true" />
+      <created>1775437059325</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1775437059325</updated>
+    </task>
+    <option name="localTasksCounter" value="251" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added auto entry file" />
-    <MESSAGE value="connected pyqtsignal emit to auto" />
     <MESSAGE value="fix switching tab for auto" />
     <MESSAGE value="fix switching tab for auto entry" />
     <MESSAGE value="added ui for the auto entry" />
@@ -551,7 +549,9 @@
     <MESSAGE value="comment out current display on the materials table" />
     <MESSAGE value="addded to do task" />
     <MESSAGE value="created a query to get the completer distinct data" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a query to get the completer distinct data" />
+    <MESSAGE value="connect the completers to the input fields" />
+    <MESSAGE value="call the self completer function" />
+    <option name="LAST_COMMIT_MESSAGE" value="call the self completer function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>488</line>
+          <line>498</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

@@ -323,6 +323,21 @@ class MBAutoEntry(QWidget):
             completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
             widget.setCompleter(completer)
 
+        def setup_combo_comp(combo, items):
+            if not items: items = []
+            # 1. Create list with empty string at the first index
+            str_items = [""] + [str(i) for i in items if i]
+
+            # 2. Add items to the ComboBox dropdown
+            combo.clear()
+            combo.addItems(str_items)
+            completer = combo.completer()
+            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+            completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+
+            # 4. Set default to the empty string (Index 0)
+            combo.setCurrentIndex(0)
+
         setup_comp(self.customer_input, data['customers'])
         setup_comp(self.product_code_input, data['prod_codes'])
         setup_comp(self.lot_no_input, data['lots'])
