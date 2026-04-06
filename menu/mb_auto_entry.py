@@ -9,7 +9,7 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_rm_code_lists, get_latest_prod_id, get_formula_select, get_formula_materials, \
-    get_all_completer_data
+    get_all_completer_data, get_single_production_details, get_single_production_data
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
@@ -309,10 +309,20 @@ class MBAutoEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
-    def setup_auto_completers(self):
-        """Setup autocompleters for customer and product code using cached data."""
-        # TODO: gawa ng fetching ng customer, prod_code, lot_no, and order_no from tbl_production01
+        if self.prod_id != 0:
+            try:
+                self.prod_results = get_single_production_data(self.prod_id)
+                self.prod_materials = get_single_production_details(self.prod_id)
+                if not self.prod_results:
+                    QMessageBox.warning(self, "Not Found",
+                                        f"Production {self.prod_id} not found.")
+                    return False
+                self.display_details()
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to load: {e}")
+                return False
 
+    def setup_auto_completers(self):
         data = get_all_completer_data()
 
         def setup_comp(widget, items):

@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00205" summary="fixed the lines">
-      <option name="closed" value="true" />
-      <created>1774855890683</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1774855890683</updated>
-    </task>
     <task id="LOCAL-00206" summary="fixing series of A for lines">
       <option name="closed" value="true" />
       <created>1774858060602</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775441732698</updated>
     </task>
-    <option name="localTasksCounter" value="254" />
+    <task id="LOCAL-00254" summary="fix the field name matvhing">
+      <option name="closed" value="true" />
+      <created>1775442618903</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1775442618903</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="reduce the column rows of the materials table" />
     <MESSAGE value="changing backround of the required fields" />
     <MESSAGE value="changed backround of the fields" />
     <MESSAGE value="added gray bg in the timestamp" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added function to setup a combo box completer" />
     <MESSAGE value="created the combo box completer" />
     <MESSAGE value="forces the dropdon to pop up when the user types in the order_no" />
-    <option name="LAST_COMMIT_MESSAGE" value="forces the dropdon to pop up when the user types in the order_no" />
+    <MESSAGE value="fix the field name matvhing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the field name matvhing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>499</line>
+          <line>509</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
