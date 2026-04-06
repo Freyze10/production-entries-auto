@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00198" summary="adjusting spaces">
-      <option name="closed" value="true" />
-      <created>1774853154499</created>
-      <option name="number" value="00198" />
-      <option name="presentableId" value="LOCAL-00198" />
-      <option name="project" value="LOCAL" />
-      <updated>1774853154499</updated>
-    </task>
     <task id="LOCAL-00199" summary="moved the masterbatch logo">
       <option name="closed" value="true" />
       <created>1774853249356</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775031108233</updated>
     </task>
-    <option name="localTasksCounter" value="247" />
+    <task id="LOCAL-00247" summary="addded to do task">
+      <option name="closed" value="true" />
+      <created>1775033597071</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1775033597071</updated>
+    </task>
+    <option name="localTasksCounter" value="248" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created new file for printing" />
     <MESSAGE value="removed past test print" />
     <MESSAGE value="added auto entry file" />
     <MESSAGE value="connected pyqtsignal emit to auto" />
@@ -551,7 +550,8 @@
     <MESSAGE value="added formulation details" />
     <MESSAGE value="changed icon when choosing formulation" />
     <MESSAGE value="comment out current display on the materials table" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment out current display on the materials table" />
+    <MESSAGE value="addded to do task" />
+    <option name="LAST_COMMIT_MESSAGE" value="addded to do task" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>488</line>
+          <line>486</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

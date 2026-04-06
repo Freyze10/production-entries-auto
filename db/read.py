@@ -135,3 +135,27 @@ def get_formula_materials(form_id):
     conn.close()
     return records
 
+
+def get_all_completer_data():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    # This single query gets distinct values for all 4 columns
+    # and returns them as a single dictionary.
+    cur.execute("""
+        SELECT json_build_object(
+            'customers', (SELECT array_agg(DISTINCT customer) FROM tbl_production01 WHERE customer IS NOT NULL),
+            'prod_codes', (SELECT array_agg(DISTINCT prod_code) FROM tbl_production01 WHERE prod_code IS NOT NULL),
+            'lots', (SELECT array_agg(DISTINCT lot_no) FROM tbl_production01 WHERE lot_no IS NOT NULL),
+            'orders', (SELECT array_agg(DISTINCT order_no) FROM tbl_production01 WHERE order_no IS NOT NULL)
+        )
+    """)
+
+    result = cur.fetchone()[0]  # fetches the dict
+
+    cur.close()
+    conn.close()
+    return result
+
+
+
