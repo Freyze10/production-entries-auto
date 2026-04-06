@@ -12,6 +12,7 @@ from db.read import get_rm_code_lists, get_latest_prod_id, get_formula_select, g
     get_all_completer_data, get_single_production_details, get_single_production_data
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
+from table_model.table_auto_compute import process_formulation_to_table
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
@@ -276,7 +277,7 @@ class MBAutoEntry(QWidget):
 
         generate_btn = QPushButton("Generate", objectName="SuccessButton")
         generate_btn.setIcon(fa.icon('fa5s.cogs', color='white'))
-        # generate_btn.clicked.connect(self.generate_production)
+        generate_btn.clicked.connect(self.generate_production)
         button_layout.addWidget(generate_btn)
 
         tumbler_btn = QPushButton("Tumbler", objectName="InfoButton")
@@ -536,8 +537,6 @@ class MBAutoEntry(QWidget):
         dialog.accept()
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
 
-
-
     def display_details(self):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
@@ -642,6 +641,15 @@ class MBAutoEntry(QWidget):
 
         self.materials_table.setRowCount(0)
         self.update_totals()
+
+    def generate_production(self):
+        process_formulation_to_table(
+            source_table=self.formulation_details,
+            target_table=self.materials_table,
+            total_weight=float(total_weight),
+            batch_divisor=float(batch_size),
+            base_divisor=100.0
+        )
 
     def print_production(self):
         if not self.production_id_input.text().strip():
