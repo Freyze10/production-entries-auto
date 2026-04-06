@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00213" summary="changed spacing">
-      <option name="closed" value="true" />
-      <created>1774918627678</created>
-      <option name="number" value="00213" />
-      <option name="presentableId" value="LOCAL-00213" />
-      <option name="project" value="LOCAL" />
-      <updated>1774918627678</updated>
-    </task>
     <task id="LOCAL-00214" summary="changed formatting">
       <option name="closed" value="true" />
       <created>1774919412366</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775463755651</updated>
     </task>
-    <option name="localTasksCounter" value="262" />
+    <task id="LOCAL-00262" summary="call the auto function">
+      <option name="closed" value="true" />
+      <created>1775464002163</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1775464002163</updated>
+    </task>
+    <option name="localTasksCounter" value="263" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cleaning code" />
     <MESSAGE value="added read formulation items from database" />
     <MESSAGE value="fix read database for the selected prod code" />
     <MESSAGE value="comment out the double click connection temporary" />
@@ -551,7 +550,8 @@
     <MESSAGE value="set the default value on the prod date when clicked new" />
     <MESSAGE value="created a function for the auto calculation" />
     <MESSAGE value="import the function auto compute" />
-    <option name="LAST_COMMIT_MESSAGE" value="import the function auto compute" />
+    <MESSAGE value="call the auto function" />
+    <option name="LAST_COMMIT_MESSAGE" value="call the auto function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QTableWidgetItem
 from util.field_format import NumericTableWidgetItem
 
 
-def process_formulation_to_table(self, source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
+def process_formulation_to_table(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
     """
     source_table: self.formulation_details (Material, Concentration)
     target_table: The table to insert into (Material, Large Scale, Small Scale, Weight)
@@ -82,7 +82,4 @@ def process_formulation_to_table(self, source_table, target_table, total_weight,
         target_table.setItem(row_pos, 2, NumericTableWidgetItem(small_scale, is_float=True))
         target_table.setItem(row_pos, 3, NumericTableWidgetItem(calculated_weight, is_float=True))
 
-    # Update totals at the end (using your previous function)
-    if hasattr(self, 'update_totals'):
-        self.update_totals()
 

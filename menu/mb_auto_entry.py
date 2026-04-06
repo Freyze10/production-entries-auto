@@ -654,6 +654,7 @@ class MBAutoEntry(QWidget):
             base_divisor=100.0
         )
 
+
     def print_production(self):
         if not self.production_id_input.text().strip():
             QMessageBox.warning(self, "No Data", "Please create or load a production record first.")
