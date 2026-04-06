@@ -654,6 +654,7 @@ class MBAutoEntry(QWidget):
             base_divisor=100.0
         )
 
+        self.update_totals()
 
     def print_production(self):
         if not self.production_id_input.text().strip():
