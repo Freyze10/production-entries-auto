@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00199" summary="moved the masterbatch logo">
-      <option name="closed" value="true" />
-      <created>1774853249356</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1774853249357</updated>
-    </task>
     <task id="LOCAL-00200" summary="changed the processed by to match the others">
       <option name="closed" value="true" />
       <created>1774853659376</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775033597071</updated>
     </task>
-    <option name="localTasksCounter" value="248" />
+    <task id="LOCAL-00248" summary="created a query to get the completer distinct data">
+      <option name="closed" value="true" />
+      <created>1775435225463</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1775435225463</updated>
+    </task>
+    <option name="localTasksCounter" value="249" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed past test print" />
     <MESSAGE value="added auto entry file" />
     <MESSAGE value="connected pyqtsignal emit to auto" />
     <MESSAGE value="fix switching tab for auto" />
@@ -551,7 +550,8 @@
     <MESSAGE value="changed icon when choosing formulation" />
     <MESSAGE value="comment out current display on the materials table" />
     <MESSAGE value="addded to do task" />
-    <option name="LAST_COMMIT_MESSAGE" value="addded to do task" />
+    <MESSAGE value="created a query to get the completer distinct data" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a query to get the completer distinct data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>486</line>
+          <line>488</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

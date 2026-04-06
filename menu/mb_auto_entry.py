@@ -8,7 +8,8 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayo
 import qtawesome as fa
 
 from db.legacy import SyncRM
-from db.read import get_rm_code_lists, get_latest_prod_id, get_formula_select, get_formula_materials
+from db.read import get_rm_code_lists, get_latest_prod_id, get_formula_select, get_formula_materials, \
+    get_all_completer_data
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
@@ -311,25 +312,20 @@ class MBAutoEntry(QWidget):
         """Setup autocompleters for customer and product code using cached data."""
         # TODO: gawa ng fetching ng customer, prod_code, lot_no, and order_no from tbl_production01
 
-        # list_auto_completer = []
-        #
-        # # Customer autocomplete
-        # customer_completer = QCompleter(global_var.production_customer_lists)
-        # customer_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        # customer_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
-        # self.customer_input.setCompleter(customer_completer)
-        #
-        # # Product code autocomplete
-        # product_code_completer = QCompleter(global_var.production_product_code_lists)
-        # product_code_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        # product_code_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
-        # self.product_code_input.setCompleter(product_code_completer)
-        #
-        # # Lot number autocomplete
-        # lot_no_completer = QCompleter(global_var.production_lot_no_lists)
-        # lot_no_completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        # lot_no_completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
-        # self.lot_no_input.setCompleter(lot_no_completer)
+        data = get_all_completer_data()
+
+        def setup_comp(widget, items):
+            # Convert all items to strings (in case order_no is int)
+            str_items = [str(i) for i in items if i]
+            completer = QCompleter(str_items)
+            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+            completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+            widget.setCompleter(completer)
+
+        setup_comp(self.customer_input, data['customers'])
+        setup_comp(self.product_code_input, data['prod_codes'])
+        setup_comp(self.lot_no_input, data['lots'])
+        # setup_comp(self.order_form_no_input, data['orders'])
 
 
 
