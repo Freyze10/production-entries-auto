@@ -616,14 +616,14 @@ class MBAutoEntry(QWidget):
         self.form_type_combo.setCurrentIndex(0)
         self.product_code_input.clear()
         self.product_color_input.clear()
-        self.formula_input.clear()
+        self.formulation_id_input.clear()
         self.dosage_input.clear()
         self.ld_percent_input.clear()
         self.customer_input.clear()
         self.lot_no_input.clear()
-        self.production_date_input.setText("")
+        self.production_date_input.setText(QDate.currentDate().toString("MM/dd/yyyy"))
         self.confirmation_date_input.setText("")
-        self.order_form_no_input.clear()
+        self.order_form_no_combo.clear()
         self.colormatch_no_input.clear()
         self.matched_date_input.setText("")
         self.mixing_time_input.clear()
@@ -641,7 +641,6 @@ class MBAutoEntry(QWidget):
             self.prod_results = None
 
         self.materials_table.setRowCount(0)
-        self.clear_material_inputs()
         self.update_totals()
 
     def print_production(self):

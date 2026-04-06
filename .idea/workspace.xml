@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00209" summary="added empty line on summary">
-      <option name="closed" value="true" />
-      <created>1774860164220</created>
-      <option name="number" value="00209" />
-      <option name="presentableId" value="LOCAL-00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1774860164220</updated>
-    </task>
     <task id="LOCAL-00210" summary="BOLD MAT CODE">
       <option name="closed" value="true" />
       <created>1774860252761</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775446180358</updated>
     </task>
-    <option name="localTasksCounter" value="258" />
+    <task id="LOCAL-00258" summary="removed the comments on the prod date input">
+      <option name="closed" value="true" />
+      <created>1775446232552</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1775446232552</updated>
+    </task>
+    <option name="localTasksCounter" value="259" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed the fg label" />
     <MESSAGE value="added text color on the total of the materials" />
     <MESSAGE value="added read data from  the database" />
     <MESSAGE value="updated legacy to get the customer name" />
@@ -551,7 +550,8 @@
     <MESSAGE value="call display details when the prod_id is not 0" />
     <MESSAGE value="removed parameter of prod_id in display details" />
     <MESSAGE value="updated the default value of the prod_date_input" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the default value of the prod_date_input" />
+    <MESSAGE value="removed the comments on the prod date input" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the comments on the prod date input" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>508</line>
+          <line>506</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
