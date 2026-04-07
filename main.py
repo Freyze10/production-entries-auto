@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar
 
 from css.styles import AppStyles
+from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
 from menu.production_records import ProductionRecords
@@ -61,10 +62,12 @@ class MainWindow(QMainWindow):
         self.production_records = ProductionRecords(self.username, self.user_role)
         self.mb_manual_entry = MBManualEntry()
         self.mb_auto_entry = MBAutoEntry()
+        self.dc_auto_entry = DCAutoEntry()
 
         self.stacked_widget.addWidget(self.production_records)  # 0
         self.stacked_widget.addWidget(self.mb_manual_entry)   # 1
         self.stacked_widget.addWidget(self.mb_auto_entry)   # 2
+        self.stacked_widget.addWidget(self.dc_auto_entry)   # 3
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
         self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
