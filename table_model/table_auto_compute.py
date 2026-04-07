@@ -47,7 +47,7 @@ def process_formulation_to_table(self, source_table, target_table, total_weight,
 
         # 4. Update Running Totals
         cumulative_raw += weight_per_batch
-        running_physical_total += weight_per_batch
+        running_physical_total += cumulative_raw
 
         # 5. --- GRAM STRIPPING LOGIC (POST-CUMULATIVE) ---
         # We look at the 3rd decimal place and beyond
