@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00224" summary="fix switching tab for auto">
-      <option name="closed" value="true" />
-      <created>1775004649576</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1775004649576</updated>
-    </task>
     <task id="LOCAL-00225" summary="fix switching tab for auto entry">
       <option name="closed" value="true" />
       <created>1775004954169</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775528471010</updated>
     </task>
-    <option name="localTasksCounter" value="273" />
+    <task id="LOCAL-00273" summary="updated the auto compute for the small scale">
+      <option name="closed" value="true" />
+      <created>1775536511555</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1775536511555</updated>
+    </task>
+    <option name="localTasksCounter" value="274" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a query to get the completer distinct data" />
     <MESSAGE value="connect the completers to the input fields" />
     <MESSAGE value="call the self completer function" />
     <MESSAGE value="added function to setup a combo box completer" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated the weight computation in the auto" />
     <MESSAGE value="returned the comulative raw rcount" />
     <MESSAGE value="added a weight valuie" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a weight valuie" />
+    <MESSAGE value="updated the auto compute for the small scale" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the auto compute for the small scale" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
