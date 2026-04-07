@@ -109,7 +109,6 @@ class Sync(QObject):
                 })
 
 
-
             self.progress.emit(f"Phase 1/3: Found {len(items_by_uid)} groups of new active items.")
 
             self.progress.emit("Phase 2/3: Reading Production data...")
