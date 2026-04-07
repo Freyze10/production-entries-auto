@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00237" summary="added read formulation items from database">
-      <option name="closed" value="true" />
-      <created>1775009604027</created>
-      <option name="number" value="00237" />
-      <option name="presentableId" value="LOCAL-00237" />
-      <option name="project" value="LOCAL" />
-      <updated>1775009604027</updated>
-    </task>
     <task id="LOCAL-00238" summary="fix read database for the selected prod code">
       <option name="closed" value="true" />
       <created>1775010326173</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775545533442</updated>
     </task>
-    <option name="localTasksCounter" value="286" />
+    <task id="LOCAL-00286" summary="updated the mb auto text button">
+      <option name="closed" value="true" />
+      <created>1775545775342</created>
+      <option name="number" value="00286" />
+      <option name="presentableId" value="LOCAL-00286" />
+      <option name="project" value="LOCAL" />
+      <updated>1775545775342</updated>
+    </task>
+    <option name="localTasksCounter" value="287" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a function for the auto calculation" />
     <MESSAGE value="import the function auto compute" />
     <MESSAGE value="call the auto function" />
     <MESSAGE value="updated the reusable function, removed self" />
@@ -551,7 +550,8 @@
     <MESSAGE value="addeed emit of sinal in view auto dc" />
     <MESSAGE value="created  a connection to change to dc auto" />
     <MESSAGE value="removed the manual DC button" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the manual DC button" />
+    <MESSAGE value="updated the mb auto text button" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the mb auto text button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
