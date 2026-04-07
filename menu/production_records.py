@@ -15,6 +15,7 @@ from util.loading import LoadingDialog
 class ProductionRecords(QWidget):
     go_to_manual_entry = pyqtSignal(int)
     go_to_auto_entry = pyqtSignal(int)
+    go_to_dc_auto = pyqtSignal(int)
     def __init__(self, username, user_role):
         super().__init__()
         self.username = username
@@ -279,10 +280,10 @@ class ProductionRecords(QWidget):
         self.go_to_auto_entry.emit(prod_id)
 
     def view_manual_dc(self, prod_id):
-        print("Delete row ID:", prod_id)
+        print("DC manual row ID:", prod_id)
 
     def view_auto_dc(self, prod_id):
-        print("Delete row ID:", prod_id)
+        self.go_to_dc_auto.emit(prod_id)
 
     def run_production_sync(self):
         thread = QThread()

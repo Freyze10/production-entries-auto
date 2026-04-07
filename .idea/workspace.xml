@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00232" summary="added text color on the total of the materials">
-      <option name="closed" value="true" />
-      <created>1775007873765</created>
-      <option name="number" value="00232" />
-      <option name="presentableId" value="LOCAL-00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1775007873765</updated>
-    </task>
-    <task id="LOCAL-00233" summary="added read data from  the database">
-      <option name="closed" value="true" />
-      <created>1775008328138</created>
-      <option name="number" value="00233" />
-      <option name="presentableId" value="LOCAL-00233" />
-      <option name="project" value="LOCAL" />
-      <updated>1775008328138</updated>
-    </task>
     <task id="LOCAL-00234" summary="updated legacy to get the customer name">
       <option name="closed" value="true" />
       <created>1775008440628</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775539468119</updated>
     </task>
-    <option name="localTasksCounter" value="281" />
+    <task id="LOCAL-00281" summary="dc auto entry widget">
+      <option name="closed" value="true" />
+      <created>1775543646809</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1775543646810</updated>
+    </task>
+    <task id="LOCAL-00282" summary="adding dc auto entry">
+      <option name="closed" value="true" />
+      <created>1775543807583</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1775543807583</updated>
+    </task>
+    <option name="localTasksCounter" value="283" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="call display details when the prod_id is not 0" />
-    <MESSAGE value="removed parameter of prod_id in display details" />
     <MESSAGE value="updated the default value of the prod_date_input" />
     <MESSAGE value="removed the comments on the prod date input" />
     <MESSAGE value="set the default value on the prod date when clicked new" />
@@ -551,7 +549,9 @@
     <MESSAGE value="removed the generate advanced" />
     <MESSAGE value="fix the unused import" />
     <MESSAGE value="updated print button" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated print button" />
+    <MESSAGE value="dc auto entry widget" />
+    <MESSAGE value="adding dc auto entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding dc auto entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
