@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00235" summary="updated legacy to get the customer name">
-      <option name="closed" value="true" />
-      <created>1775008860722</created>
-      <option name="number" value="00235" />
-      <option name="presentableId" value="LOCAL-00235" />
-      <option name="project" value="LOCAL" />
-      <updated>1775008860722</updated>
-    </task>
     <task id="LOCAL-00236" summary="cleaning code">
       <option name="closed" value="true" />
       <created>1775009093292</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775543896193</updated>
     </task>
-    <option name="localTasksCounter" value="284" />
+    <task id="LOCAL-00284" summary="created  a connection to change to dc auto">
+      <option name="closed" value="true" />
+      <created>1775544364154</created>
+      <option name="number" value="00284" />
+      <option name="presentableId" value="LOCAL-00284" />
+      <option name="project" value="LOCAL" />
+      <updated>1775544364154</updated>
+    </task>
+    <option name="localTasksCounter" value="285" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed the comments on the prod date input" />
     <MESSAGE value="set the default value on the prod date when clicked new" />
     <MESSAGE value="created a function for the auto calculation" />
     <MESSAGE value="import the function auto compute" />
@@ -551,7 +550,8 @@
     <MESSAGE value="dc auto entry widget" />
     <MESSAGE value="adding dc auto entry" />
     <MESSAGE value="addeed emit of sinal in view auto dc" />
-    <option name="LAST_COMMIT_MESSAGE" value="addeed emit of sinal in view auto dc" />
+    <MESSAGE value="created  a connection to change to dc auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="created  a connection to change to dc auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

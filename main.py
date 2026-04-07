@@ -71,7 +71,7 @@ class MainWindow(QMainWindow):
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
         self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
-        self.production_records.go_to_dc_auto.connect(self.switch_to_auto_entry)
+        self.production_records.go_to_dc_auto.connect(self.switch_to_dc_auto)
 
         self.btn_production_records.setChecked(True)
 
@@ -88,6 +88,13 @@ class MainWindow(QMainWindow):
         self.stacked_widget.insertWidget(2, self.mb_auto_entry)  # add new one with same index
         self.btn_auto_entry.setChecked(True)
         self.stacked_widget.setCurrentIndex(2)
+
+    def switch_to_dc_auto(self, prod_id: int):
+        self.dc_auto_entry = DCAutoEntry(prod_id)  # Pass prod_id in constructor
+        self.stacked_widget.removeWidget(self.stacked_widget.widget(3))  # remove old one
+        self.stacked_widget.insertWidget(3, self.dc_auto_entry)  # add new one with same index
+        self.btn_auto_entry_dc.setChecked(True)
+        self.stacked_widget.setCurrentIndex(3)
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
@@ -115,10 +122,10 @@ class MainWindow(QMainWindow):
         self.btn_production_records = self.create_menu_button(" Production Records", "ph.stack", 0)
         self.btn_manual_entry = self.create_menu_button(" Manual Entry", "msc.tools", 1)
         self.btn_auto_entry = self.create_menu_button(" Auto Entry", "mdi.head-cog-outline", 2)
-        self.btn_manual_entry_dc = self.create_menu_button(" Manual Entry - DC", "msc.wrench", 3)
-        self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 4)
+        # self.btn_manual_entry_dc = self.create_menu_button(" Manual Entry - DC", "msc.wrench", 3)
+        self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 3)
 
-        self.btn_audit_trail = self.create_menu_button("  Audit Trail", 'fa5s.history', 5)
+        self.btn_audit_trail = self.create_menu_button("  Audit Trail", 'fa5s.history', 4)
 
         self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color=AppStyles.RED_500))
         self.btn_logout.setStyleSheet(f"""QPushButton {{ color: {AppStyles.RED_500};}}""")
@@ -130,7 +137,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.btn_production_records)
         layout.addWidget(self.btn_manual_entry)
         layout.addWidget(self.btn_auto_entry)
-        layout.addWidget(self.btn_manual_entry_dc)
+        # layout.addWidget(self.btn_manual_entry_dc)
         layout.addWidget(self.btn_auto_entry_dc)
         layout.addWidget(QLabel("System", objectName="MenuLabel"))
         layout.addWidget(self.btn_audit_trail)
