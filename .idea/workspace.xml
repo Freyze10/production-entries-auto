@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00214" summary="changed formatting">
-      <option name="closed" value="true" />
-      <created>1774919412366</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1774919412366</updated>
-    </task>
-    <task id="LOCAL-00215" summary="changed formatting">
-      <option name="closed" value="true" />
-      <created>1774920716234</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1774920716234</updated>
-    </task>
     <task id="LOCAL-00216" summary="adjusted table model for column search">
       <option name="closed" value="true" />
       <created>1774925617086</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775464002163</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <task id="LOCAL-00263" summary="updated the reusable function, removed self">
+      <option name="closed" value="true" />
+      <created>1775464162111</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1775464162111</updated>
+    </task>
+    <task id="LOCAL-00264" summary="addded update totals on table">
+      <option name="closed" value="true" />
+      <created>1775464182053</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1775464182053</updated>
+    </task>
+    <option name="localTasksCounter" value="265" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added read formulation items from database" />
-    <MESSAGE value="fix read database for the selected prod code" />
     <MESSAGE value="comment out the double click connection temporary" />
     <MESSAGE value="changed the dialog size" />
     <MESSAGE value="modified table on the selector of formula" />
@@ -551,7 +549,9 @@
     <MESSAGE value="created a function for the auto calculation" />
     <MESSAGE value="import the function auto compute" />
     <MESSAGE value="call the auto function" />
-    <option name="LAST_COMMIT_MESSAGE" value="call the auto function" />
+    <MESSAGE value="updated the reusable function, removed self" />
+    <MESSAGE value="addded update totals on table" />
+    <option name="LAST_COMMIT_MESSAGE" value="addded update totals on table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
