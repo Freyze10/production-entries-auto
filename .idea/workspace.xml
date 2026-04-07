@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00221" summary="added auto entry file">
-      <option name="closed" value="true" />
-      <created>1775004424944</created>
-      <option name="number" value="00221" />
-      <option name="presentableId" value="LOCAL-00221" />
-      <option name="project" value="LOCAL" />
-      <updated>1775004424945</updated>
-    </task>
     <task id="LOCAL-00222" summary="connected pyqtsignal emit to auto">
       <option name="closed" value="true" />
       <created>1775004471759</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775527516213</updated>
     </task>
-    <option name="localTasksCounter" value="270" />
+    <task id="LOCAL-00270" summary="updated the weight computation in the auto">
+      <option name="closed" value="true" />
+      <created>1775527616410</created>
+      <option name="number" value="00270" />
+      <option name="presentableId" value="LOCAL-00270" />
+      <option name="project" value="LOCAL" />
+      <updated>1775527616410</updated>
+    </task>
+    <option name="localTasksCounter" value="271" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed icon when choosing formulation" />
     <MESSAGE value="comment out current display on the materials table" />
     <MESSAGE value="addded to do task" />
     <MESSAGE value="created a query to get the completer distinct data" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated the function: removed self" />
     <MESSAGE value="updated the materials sequence" />
     <MESSAGE value="chagned the computation for the autp" />
-    <option name="LAST_COMMIT_MESSAGE" value="chagned the computation for the autp" />
+    <MESSAGE value="updated the weight computation in the auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the weight computation in the auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

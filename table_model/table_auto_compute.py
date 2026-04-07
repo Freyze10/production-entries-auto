@@ -11,6 +11,7 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
     """
     target_table.setRowCount(0)
 
+    cumulative_raw = 0.0  # Running total for math
     running_physical_total = 0.0  # Tracker for the 25.0kg scale limit
 
     # Factor to get total weight for the whole job
@@ -30,7 +31,6 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
 
         # 2. Calculate Weight per batch
         # This is the actual physical weight of this specific line item for ONE batch
-        weight_total = factor * concentration
         weight_per_batch = (factor * concentration) / batch_divisor
 
         # 3. Check for 25.0kg Batch Break
@@ -43,15 +43,17 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
 
             # Reset the scale totals for the new physical batch/bag
             running_physical_total = 0.0
+            cumulative_raw = 0.0
 
         # 4. Update Running Totals
-        running_physical_total += weight_per_batch
+        cumulative_raw += weight_per_batch
+        running_physical_total += cumulative_raw
 
         # 5. --- GRAM STRIPPING LOGIC (POST-CUMULATIVE) ---
         # We look at the 3rd decimal place and beyond
         # To get the remainder below 0.010 (two decimal places), we truncate to 2 decimals
-        kilos_fixed = math.floor(running_physical_total * 100) / 100.0
-        gram_remainder_kg = running_physical_total - kilos_fixed
+        kilos_fixed = math.floor(cumulative_raw * 100) / 100.0
+        gram_remainder_kg = cumulative_raw - kilos_fixed
         gram_remainder_actual = gram_remainder_kg * 1000  # Convert to actual grams
 
         display_large_scale = 0.0
@@ -65,7 +67,7 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
             display_small_scale = gram_remainder_actual
         else:
             # Keep it all in Large Scale
-            display_large_scale = running_physical_total
+            display_large_scale = cumulative_raw
             display_small_scale = 0.0
 
         # 6. Insert into Target Table
@@ -81,4 +83,4 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
         target_table.setItem(row_pos, 2, NumericTableWidgetItem(display_small_scale, is_float=True))
 
         # Column 3: Weight (Kg) - Always the raw calculated weight per batch
-        target_table.setItem(row_pos, 3, NumericTableWidgetItem(weight_total, is_float=True))
+        target_table.setItem(row_pos, 3, NumericTableWidgetItem(weight_per_batch, is_float=True))
