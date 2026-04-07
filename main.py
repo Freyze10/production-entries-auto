@@ -71,6 +71,7 @@ class MainWindow(QMainWindow):
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
         self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
+        self.production_records.go_to_dc_auto.connect(self.switch_to_auto_entry)
 
         self.btn_production_records.setChecked(True)
 
