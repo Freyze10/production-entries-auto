@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00230" summary="added gray bg in the timestamp">
-      <option name="closed" value="true" />
-      <created>1775007570024</created>
-      <option name="number" value="00230" />
-      <option name="presentableId" value="LOCAL-00230" />
-      <option name="project" value="LOCAL" />
-      <updated>1775007570024</updated>
-    </task>
     <task id="LOCAL-00231" summary="removed the fg label">
       <option name="closed" value="true" />
       <created>1775007719117</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775538748725</updated>
     </task>
-    <option name="localTasksCounter" value="279" />
+    <task id="LOCAL-00279" summary="fix the unused import">
+      <option name="closed" value="true" />
+      <created>1775538902886</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1775538902889</updated>
+    </task>
+    <option name="localTasksCounter" value="280" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="forces the dropdon to pop up when the user types in the order_no" />
     <MESSAGE value="fix the field name matvhing" />
     <MESSAGE value="call display details when the prod_id is not 0" />
     <MESSAGE value="removed parameter of prod_id in display details" />
@@ -551,7 +550,8 @@
     <MESSAGE value="fixed the dubigging for the small scale and large scale decimal" />
     <MESSAGE value="updated the generate button for auto mb" />
     <MESSAGE value="removed the generate advanced" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the generate advanced" />
+    <MESSAGE value="fix the unused import" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the unused import" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -590,6 +590,11 @@
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
           <line>503</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
+          <line>640</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
