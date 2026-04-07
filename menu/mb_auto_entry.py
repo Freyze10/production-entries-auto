@@ -3,12 +3,12 @@ from datetime import datetime
 from PyQt6.QtCore import Qt, QThread, QDate
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
-    QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
-    QTableWidgetItem, QCompleter, QDateEdit, QDialog
+    QLabel, QComboBox, QTextEdit, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
+    QTableWidgetItem, QCompleter, QDialog
 import qtawesome as fa
 
 from db.legacy import SyncRM
-from db.read import get_rm_code_lists, get_latest_prod_id, get_formula_select, get_formula_materials, \
+from db.read import get_latest_prod_id, get_formula_select, get_formula_materials, \
     get_all_completer_data, get_single_production_details, get_single_production_data
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview

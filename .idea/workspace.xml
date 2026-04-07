@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00228" summary="changing backround of the required fields">
-      <option name="closed" value="true" />
-      <created>1775007020024</created>
-      <option name="number" value="00228" />
-      <option name="presentableId" value="LOCAL-00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1775007020024</updated>
-    </task>
-    <task id="LOCAL-00229" summary="changed backround of the fields">
-      <option name="closed" value="true" />
-      <created>1775007430027</created>
-      <option name="number" value="00229" />
-      <option name="presentableId" value="LOCAL-00229" />
-      <option name="project" value="LOCAL" />
-      <updated>1775007430027</updated>
-    </task>
     <task id="LOCAL-00230" summary="added gray bg in the timestamp">
       <option name="closed" value="true" />
       <created>1775007570024</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775537672228</updated>
     </task>
-    <option name="localTasksCounter" value="277" />
+    <task id="LOCAL-00277" summary="updated the generate button for auto mb">
+      <option name="closed" value="true" />
+      <created>1775538649924</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1775538649924</updated>
+    </task>
+    <task id="LOCAL-00278" summary="removed the generate advanced">
+      <option name="closed" value="true" />
+      <created>1775538748725</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1775538748725</updated>
+    </task>
+    <option name="localTasksCounter" value="279" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added function to setup a combo box completer" />
-    <MESSAGE value="created the combo box completer" />
     <MESSAGE value="forces the dropdon to pop up when the user types in the order_no" />
     <MESSAGE value="fix the field name matvhing" />
     <MESSAGE value="call display details when the prod_id is not 0" />
@@ -551,7 +549,9 @@
     <MESSAGE value="updated the auto compute for the small scale" />
     <MESSAGE value="rounded the cumulative raw first before flooring it to 2 decimal" />
     <MESSAGE value="fixed the dubigging for the small scale and large scale decimal" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the dubigging for the small scale and large scale decimal" />
+    <MESSAGE value="updated the generate button for auto mb" />
+    <MESSAGE value="removed the generate advanced" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the generate advanced" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +588,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>507</line>
+          <line>503</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
