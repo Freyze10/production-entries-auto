@@ -643,18 +643,50 @@ class MBAutoEntry(QWidget):
         self.update_totals()
 
     def generate_production(self):
-        quantity_req = float(self.qty_required_input.text())
-        quantity_batch = float(self.qty_per_batch_input.text())
-        batch_size = quantity_req / quantity_batch
-        process_formulation_to_table(
-            source_table=self.formulation_details,
-            target_table=self.materials_table,
-            total_weight=quantity_req,
-            batch_divisor=float(batch_size),
-            base_divisor=100.0
-        )
+        # Get the input values as text first
+        qty_req_text = self.qty_required_input.text().strip()
+        qty_batch_text = self.qty_per_batch_input.text().strip()
 
-        self.update_totals()
+        if not qty_req_text or not qty_batch_text:
+            QMessageBox.warning(
+                self,
+                "Missing Information",
+                "Please fill out both 'Quantity Required' and 'Quantity per Batch' fields before proceeding.",
+                QMessageBox.Ok
+            )
+            return
+        try:
+            quantity_req = float(qty_req_text)
+            quantity_batch = float(qty_batch_text)
+
+            if quantity_batch == 0:
+                QMessageBox.warning(
+                    self,
+                    "Invalid Value",
+                    "Quantity per Batch cannot be zero.",
+                    QMessageBox.Ok
+                )
+                return
+
+            batch_size = quantity_req / quantity_batch
+
+            process_formulation_to_table(
+                source_table=self.formulation_details,
+                target_table=self.materials_table,
+                total_weight=quantity_req,
+                batch_divisor=float(batch_size),
+                base_divisor=100.0
+            )
+
+            self.update_totals()
+
+        except ValueError:
+            QMessageBox.warning(
+                self,
+                "Invalid Input",
+                "Please enter valid numbers for Quantity Required and Quantity per Batch.",
+                QMessageBox.Ok
+            )
 
     def print_production(self):
         if not self.production_id_input.text().strip():
