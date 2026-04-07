@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00236" summary="cleaning code">
-      <option name="closed" value="true" />
-      <created>1775009093292</created>
-      <option name="number" value="00236" />
-      <option name="presentableId" value="LOCAL-00236" />
-      <option name="project" value="LOCAL" />
-      <updated>1775009093292</updated>
-    </task>
     <task id="LOCAL-00237" summary="added read formulation items from database">
       <option name="closed" value="true" />
       <created>1775009604027</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775544364154</updated>
     </task>
-    <option name="localTasksCounter" value="285" />
+    <task id="LOCAL-00285" summary="removed the manual DC button">
+      <option name="closed" value="true" />
+      <created>1775545533442</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1775545533442</updated>
+    </task>
+    <option name="localTasksCounter" value="286" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set the default value on the prod date when clicked new" />
     <MESSAGE value="created a function for the auto calculation" />
     <MESSAGE value="import the function auto compute" />
     <MESSAGE value="call the auto function" />
@@ -551,7 +550,8 @@
     <MESSAGE value="adding dc auto entry" />
     <MESSAGE value="addeed emit of sinal in view auto dc" />
     <MESSAGE value="created  a connection to change to dc auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="created  a connection to change to dc auto" />
+    <MESSAGE value="removed the manual DC button" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the manual DC button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
