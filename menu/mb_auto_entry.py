@@ -285,10 +285,6 @@ class MBAutoEntry(QWidget):
         # tumbler_btn.clicked.connect(self.tumbler_function)
         button_layout.addWidget(tumbler_btn)
 
-        generate_advance_btn = QPushButton("Generate Advance", objectName="PrimaryButton")
-        generate_advance_btn.setIcon(fa.icon('fa5s.forward', color='white'))
-        # generate_advance_btn.clicked.connect(self.generate_advance)
-        button_layout.addWidget(generate_advance_btn)
 
         print_btn = QPushButton("Print", objectName="SecondaryButton")
         print_btn.setIcon(fa.icon('fa5s.print', color='white'))
