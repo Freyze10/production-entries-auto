@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00220" summary="removed past test print">
-      <option name="closed" value="true" />
-      <created>1774947868052</created>
-      <option name="number" value="00220" />
-      <option name="presentableId" value="LOCAL-00220" />
-      <option name="project" value="LOCAL" />
-      <updated>1774947868052</updated>
-    </task>
     <task id="LOCAL-00221" summary="added auto entry file">
       <option name="closed" value="true" />
       <created>1775004424944</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775527166304</updated>
     </task>
-    <option name="localTasksCounter" value="269" />
+    <task id="LOCAL-00269" summary="chagned the computation for the autp">
+      <option name="closed" value="true" />
+      <created>1775527516213</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1775527516213</updated>
+    </task>
+    <option name="localTasksCounter" value="270" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added formulation details" />
     <MESSAGE value="changed icon when choosing formulation" />
     <MESSAGE value="comment out current display on the materials table" />
     <MESSAGE value="addded to do task" />
@@ -551,7 +550,8 @@
     <MESSAGE value="changed the running physical total" />
     <MESSAGE value="updated the function: removed self" />
     <MESSAGE value="updated the materials sequence" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the materials sequence" />
+    <MESSAGE value="chagned the computation for the autp" />
+    <option name="LAST_COMMIT_MESSAGE" value="chagned the computation for the autp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

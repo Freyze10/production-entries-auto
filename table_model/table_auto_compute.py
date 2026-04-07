@@ -30,7 +30,7 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
 
         # 2. Calculate Weight per batch
         # This is the actual physical weight of this specific line item for ONE batch
-
+        weight_total = factor * concentration
         weight_per_batch = (factor * concentration) / batch_divisor
 
         # 3. Check for 25.0kg Batch Break
@@ -81,4 +81,4 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
         target_table.setItem(row_pos, 2, NumericTableWidgetItem(display_small_scale, is_float=True))
 
         # Column 3: Weight (Kg) - Always the raw calculated weight per batch
-        target_table.setItem(row_pos, 3, NumericTableWidgetItem(running_physical_total, is_float=True))
+        target_table.setItem(row_pos, 3, NumericTableWidgetItem(weight_total, is_float=True))
