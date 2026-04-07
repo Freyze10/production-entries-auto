@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00217" summary="added funtion for column searching">
-      <option name="closed" value="true" />
-      <created>1774925791070</created>
-      <option name="number" value="00217" />
-      <option name="presentableId" value="LOCAL-00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1774925791070</updated>
-    </task>
     <task id="LOCAL-00218" summary="created new file for printing">
       <option name="closed" value="true" />
       <created>1774929848433</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775526562723</updated>
     </task>
-    <option name="localTasksCounter" value="266" />
+    <task id="LOCAL-00266" summary="changed the running physical total">
+      <option name="closed" value="true" />
+      <created>1775526632023</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1775526632024</updated>
+    </task>
+    <option name="localTasksCounter" value="267" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the dialog size" />
     <MESSAGE value="modified table on the selector of formula" />
     <MESSAGE value="added temporary calculation" />
     <MESSAGE value="added formulation details" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated the reusable function, removed self" />
     <MESSAGE value="addded update totals on table" />
     <MESSAGE value="updated the auto compute to seperate the small scale" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the auto compute to seperate the small scale" />
+    <MESSAGE value="changed the running physical total" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the running physical total" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

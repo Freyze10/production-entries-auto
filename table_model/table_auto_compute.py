@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QTableWidgetItem
 from util.field_format import NumericTableWidgetItem
 
 
-def process_formulation_to_table(self, source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
+def process_formulation_to_table(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
     """
     Calculates cumulative Large Scale weight and strips small gram remainders 
     (<= 30g or <= 9g) to the Small Scale column.
@@ -84,7 +84,3 @@ def process_formulation_to_table(self, source_table, target_table, total_weight,
 
         # Column 3: Weight (Kg) - Always the raw calculated weight per batch
         target_table.setItem(row_pos, 3, NumericTableWidgetItem(weight_per_batch, is_float=True))
-
-    # Update UI totals
-    if hasattr(self, 'update_totals'):
-        self.update_totals()
