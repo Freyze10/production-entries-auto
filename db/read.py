@@ -127,7 +127,7 @@ def get_formula_materials(form_id):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT material_code, concentration FROM tbl_formula02 WHERE form_id = %s ORDER BY sequence_no DESC",
+    cur.execute("SELECT material_code, concentration FROM tbl_formula02 WHERE form_id = %s ORDER BY sequence_no ASC",
                 (form_id,))
     records = cur.fetchall()
 
