@@ -66,7 +66,7 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
 
             # 4. --- GRAM STRIPPING LOGIC (POST-CUMULATIVE) ---
             # Truncate to 2 decimal places to see what grams are "left over"
-            kilos_fixed = math.floor(cumulative_raw * 100) / 100.0
+            kilos_fixed = math.floor(round(cumulative_raw, 7) * 100) / 100.0
             print("kg - ", cumulative_raw)
             gram_remainder_actual = (cumulative_raw - kilos_fixed) * 1000
 
