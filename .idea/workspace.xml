@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00231" summary="removed the fg label">
-      <option name="closed" value="true" />
-      <created>1775007719117</created>
-      <option name="number" value="00231" />
-      <option name="presentableId" value="LOCAL-00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1775007719117</updated>
-    </task>
     <task id="LOCAL-00232" summary="added text color on the total of the materials">
       <option name="closed" value="true" />
       <created>1775007873765</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775538902889</updated>
     </task>
-    <option name="localTasksCounter" value="280" />
+    <task id="LOCAL-00280" summary="updated print button">
+      <option name="closed" value="true" />
+      <created>1775539468119</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1775539468119</updated>
+    </task>
+    <option name="localTasksCounter" value="281" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix the field name matvhing" />
     <MESSAGE value="call display details when the prod_id is not 0" />
     <MESSAGE value="removed parameter of prod_id in display details" />
     <MESSAGE value="updated the default value of the prod_date_input" />
@@ -551,7 +550,8 @@
     <MESSAGE value="updated the generate button for auto mb" />
     <MESSAGE value="removed the generate advanced" />
     <MESSAGE value="fix the unused import" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the unused import" />
+    <MESSAGE value="updated print button" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated print button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
