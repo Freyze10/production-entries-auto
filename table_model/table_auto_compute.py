@@ -6,19 +6,20 @@ from util.field_format import NumericTableWidgetItem
 
 def process_formulation_to_table(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
     """
-    Calculates cumulative Large Scale weight and strips small gram remainders 
-    (<= 30g or <= 9g) to the Small Scale column.
+    Calculates weights with dual-mode logic:
+    1. Items <= 30g per batch go straight to Small Scale and don't affect Large Scale cumulative.
+    2. Items > 30g are added to Large Scale cumulative with a 25kg break rule.
+    3. Large Scale cumulative remainders <= 30g are stripped to Small Scale.
     """
     target_table.setRowCount(0)
 
-    cumulative_raw = 0.0  # Running total for math
-    running_physical_total = 0.0  # Tracker for the 25.0kg scale limit
+    cumulative_raw = 0.0  # Running total for the Large Scale column
+    running_physical_total = 0.0  # Tracker for the 25.0kg physical scale limit
 
     # Factor to get total weight for the whole job
     factor = total_weight / base_divisor
 
     for row in range(source_table.rowCount()):
-        # 1. Get Material and Concentration
         mat_item = source_table.item(row, 0)
         con_item = source_table.item(row, 1)
         if not mat_item or not con_item: continue
@@ -29,59 +30,64 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
         except:
             concentration = 0.0
 
-        # 2. Calculate Weight per batch
-        # This is the actual physical weight of this specific line item for ONE batch
-        weight_value = factor * concentration
-        weight_per_batch = (factor * concentration) / batch_divisor
-
-        # 3. Check for 25.0kg Batch Break
-        # If adding this weight exceeds 25kg on the physical scale, we start a new batch
-        if (running_physical_total + weight_per_batch) > 25.0:
-            sep_row = target_table.rowCount()
-            target_table.insertRow(sep_row)
-            for col in range(4):
-                target_table.setItem(sep_row, col, QTableWidgetItem(""))
-
-            # Reset the scale totals for the new physical batch/bag
-            running_physical_total = 0.0
-            cumulative_raw = 0.0
-
-        # 4. Update Running Totals
-        cumulative_raw += weight_per_batch
-        running_physical_total += cumulative_raw
-
-        # 5. --- GRAM STRIPPING LOGIC (POST-CUMULATIVE) ---
-        # We look at the 3rd decimal place and beyond
-        # To get the remainder below 0.010 (two decimal places), we truncate to 2 decimals
-        kilos_fixed = math.floor(cumulative_raw * 100) / 100.0
-        gram_remainder_kg = cumulative_raw - kilos_fixed
-        gram_remainder_actual = gram_remainder_kg * 1000  # Convert to actual grams
+        # 1. Calculate Weights
+        # weight_total: Entire job weight | weight_per_batch: weight for one batch
+        weight_total = factor * concentration
+        weight_per_batch = weight_total / batch_divisor
 
         display_large_scale = 0.0
         display_small_scale = 0.0
 
-        # Check thresholds: if the remainder is 30g or less (which covers 9g or less)
-        if 0.000001 < gram_remainder_actual <= 30.0:
-            # Strip the grams: Large Scale gets the truncated Kilos
-            display_large_scale = kilos_fixed
-            # Small Scale gets the stripped grams
-            display_small_scale = gram_remainder_actual
-        else:
-            # Keep it all in Large Scale
-            display_large_scale = cumulative_raw
-            display_small_scale = 0.0
+        # 2. --- PRE-CHECK: SMALL MATERIAL TRANSFER ---
+        # Requirement: If weight per batch <= 30g (0.030kg), put in Small Scale
+        # and do NOT add to cumulative value.
+        if weight_per_batch <= 0.030 or weight_total < 0.10:
+            display_large_scale = 0.0
+            display_small_scale = weight_per_batch * 1000  # Convert to grams
+            # Skip the Large Scale accumulation logic for this row
 
-        # 6. Insert into Target Table
+        else:
+            # 3. --- BULK MATERIAL ACCUMULATION ---
+
+            # Check for 25.0kg Batch Break (Physical scale limit)
+            if (running_physical_total + weight_per_batch) > 25.0:
+                sep_row = target_table.rowCount()
+                target_table.insertRow(sep_row)
+                for col in range(4):
+                    target_table.setItem(sep_row, col, QTableWidgetItem(""))
+
+                # Reset the scale totals for the new physical container/batch
+                running_physical_total = 0.0
+                cumulative_raw = 0.0
+
+            # Update Running Totals
+            cumulative_raw += weight_per_batch
+            running_physical_total += weight_per_batch
+
+            # 4. --- GRAM STRIPPING LOGIC (POST-CUMULATIVE) ---
+            # Truncate to 2 decimal places to see what grams are "left over"
+            kilos_fixed = math.floor(cumulative_raw * 100) / 100.0
+            gram_remainder_actual = (cumulative_raw - kilos_fixed) * 1000
+
+            # Check thresholds: if the cumulative remainder is 30g or less
+            if 0.000001 < gram_remainder_actual <= 30.0:
+                display_large_scale = kilos_fixed
+                display_small_scale = gram_remainder_actual
+            else:
+                display_large_scale = cumulative_raw
+                display_small_scale = 0.0
+
+        # 5. Insert into Target Table
         row_pos = target_table.rowCount()
         target_table.insertRow(row_pos)
 
         target_table.setItem(row_pos, 0, QTableWidgetItem(material_code))
 
-        # Column 1: Large Scale (Kg) - Stripped of small remainders
+        # Column 1: Large Scale (Kg)
         target_table.setItem(row_pos, 1, NumericTableWidgetItem(display_large_scale, is_float=True))
 
-        # Column 2: Small Scale (grms) - Receives the stripped remainders
+        # Column 2: Small Scale (grms)
         target_table.setItem(row_pos, 2, NumericTableWidgetItem(display_small_scale, is_float=True))
 
-        # Column 3: Weight (Kg) - Always the raw calculated weight per batch
+        # Column 3: Weight (Kg) - Per Batch weight for this material
         target_table.setItem(row_pos, 3, NumericTableWidgetItem(weight_per_batch, is_float=True))

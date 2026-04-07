@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00222" summary="connected pyqtsignal emit to auto">
-      <option name="closed" value="true" />
-      <created>1775004471759</created>
-      <option name="number" value="00222" />
-      <option name="presentableId" value="LOCAL-00222" />
-      <option name="project" value="LOCAL" />
-      <updated>1775004471759</updated>
-    </task>
-    <task id="LOCAL-00223" summary="connected pyqtsignal emit to auto">
-      <option name="closed" value="true" />
-      <created>1775004537503</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1775004537503</updated>
-    </task>
     <task id="LOCAL-00224" summary="fix switching tab for auto">
       <option name="closed" value="true" />
       <created>1775004649576</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775527616410</updated>
     </task>
-    <option name="localTasksCounter" value="271" />
+    <task id="LOCAL-00271" summary="returned the comulative raw rcount">
+      <option name="closed" value="true" />
+      <created>1775528312894</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1775528312894</updated>
+    </task>
+    <task id="LOCAL-00272" summary="added a weight valuie">
+      <option name="closed" value="true" />
+      <created>1775528471010</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1775528471010</updated>
+    </task>
+    <option name="localTasksCounter" value="273" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,8 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="comment out current display on the materials table" />
-    <MESSAGE value="addded to do task" />
     <MESSAGE value="created a query to get the completer distinct data" />
     <MESSAGE value="connect the completers to the input fields" />
     <MESSAGE value="call the self completer function" />
@@ -551,7 +549,9 @@
     <MESSAGE value="updated the materials sequence" />
     <MESSAGE value="chagned the computation for the autp" />
     <MESSAGE value="updated the weight computation in the auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the weight computation in the auto" />
+    <MESSAGE value="returned the comulative raw rcount" />
+    <MESSAGE value="added a weight valuie" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a weight valuie" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
