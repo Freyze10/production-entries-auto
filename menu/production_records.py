@@ -152,7 +152,7 @@ class ProductionRecords(QWidget):
         self.btn_sync.clicked.connect(self.run_production_sync)
         controls_layout.addWidget(self.btn_sync)
 
-        self.btn_refresh = QPushButton("Refresh", objectName="TertiaryButton")
+        self.btn_refresh = QPushButton("Refresh", objectName="InfoButton")
         self.btn_refresh.setIcon(fa.icon('fa5s.redo', color='white'))
         self.btn_refresh.clicked.connect(self.refresh_records)
         controls_layout.addWidget(self.btn_refresh)
