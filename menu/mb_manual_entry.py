@@ -156,14 +156,14 @@ class MBManualEntry(QWidget):
         # Colormatch No
         self.colormatch_no_input = QLineEdit()
         self.colormatch_no_input.setPlaceholderText("Enter colormatch number")
-        primary_layout.addWidget(QLabel("Colormatch No:"), row, 0)
-        primary_layout.addWidget(self.colormatch_no_input, row, 1)
+        # primary_layout.addWidget(QLabel("Colormatch No:"), row, 0)
+        # primary_layout.addWidget(self.colormatch_no_input, row, 1)
         row += 1
 
         # Matched Date
         self.matched_date_input = SmartDateEdit()
-        primary_layout.addWidget(QLabel("Matched Date:"), row, 0)
-        primary_layout.addWidget(self.matched_date_input, row, 1)
+        # primary_layout.addWidget(QLabel("Matched Date:"), row, 0)
+        # primary_layout.addWidget(self.matched_date_input, row, 1)
         row += 1
 
         # Mixing Time and Machine No in one row
