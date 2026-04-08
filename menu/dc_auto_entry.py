@@ -52,7 +52,7 @@ class DCAutoEntry(QWidget):
         left_column = QVBoxLayout()
         left_column.setSpacing(6)
 
-        primary_card = QGroupBox("Production Information")
+        primary_card = QGroupBox("Production Information  -  Dry Color")
         primary_layout = QGridLayout(primary_card)
         primary_layout.setSpacing(6)
         primary_layout.setContentsMargins(10, 18, 10, 12)

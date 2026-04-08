@@ -34,22 +34,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.styles.executor": "Run",
-    "Python.test_print.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
@@ -118,22 +118,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00238" summary="fix read database for the selected prod code">
-      <option name="closed" value="true" />
-      <created>1775010326173</created>
-      <option name="number" value="00238" />
-      <option name="presentableId" value="LOCAL-00238" />
-      <option name="project" value="LOCAL" />
-      <updated>1775010326173</updated>
-    </task>
-    <task id="LOCAL-00239" summary="comment out the double click connection temporary">
-      <option name="closed" value="true" />
-      <created>1775012202097</created>
-      <option name="number" value="00239" />
-      <option name="presentableId" value="LOCAL-00239" />
-      <option name="project" value="LOCAL" />
-      <updated>1775012202097</updated>
     </task>
     <task id="LOCAL-00240" summary="changed the dialog size">
       <option name="closed" value="true" />
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775545775342</updated>
     </task>
-    <option name="localTasksCounter" value="287" />
+    <task id="LOCAL-00287" summary="updated the mb auto text button">
+      <option name="closed" value="true" />
+      <created>1775549764780</created>
+      <option name="number" value="00287" />
+      <option name="presentableId" value="LOCAL-00287" />
+      <option name="project" value="LOCAL" />
+      <updated>1775549764780</updated>
+    </task>
+    <task id="LOCAL-00288" summary="removed trailing spaces in the legacy">
+      <option name="closed" value="true" />
+      <created>1775550483377</created>
+      <option name="number" value="00288" />
+      <option name="presentableId" value="LOCAL-00288" />
+      <option name="project" value="LOCAL" />
+      <updated>1775550483377</updated>
+    </task>
+    <option name="localTasksCounter" value="289" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="import the function auto compute" />
     <MESSAGE value="call the auto function" />
     <MESSAGE value="updated the reusable function, removed self" />
     <MESSAGE value="addded update totals on table" />
@@ -563,7 +562,8 @@
     <MESSAGE value="created  a connection to change to dc auto" />
     <MESSAGE value="removed the manual DC button" />
     <MESSAGE value="updated the mb auto text button" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the mb auto text button" />
+    <MESSAGE value="removed trailing spaces in the legacy" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed trailing spaces in the legacy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
