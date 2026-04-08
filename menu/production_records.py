@@ -123,7 +123,7 @@ class ProductionRecords(QWidget):
         details_layout.addWidget(details_label)
 
         self.details_header = ["prod_id", "Material Name", "Large Scale(kg)", "Small Scale(g)", "Total Weight(kg)"]
-        self.details_row = [["0", "--", "0.00", "0.00", "0.00"]        ]
+        self.details_row = [["0", "--", "0.00", "0.00", "0.00"]]
         self.details_table = QTableView()
         self.details_table_model = TableModel(self.details_row, self.details_header)
         self.details_table.setModel(self.details_table_model)
@@ -154,6 +154,7 @@ class ProductionRecords(QWidget):
 
         self.btn_refresh = QPushButton("Refresh", objectName="TertiaryButton")
         self.btn_refresh.setIcon(fa.icon('fa5s.redo', color='white'))
+        self.btn_refresh.clicked.connect(self.refresh_records)
         controls_layout.addWidget(self.btn_refresh)
 
         self.btn_view = QPushButton("View", objectName="InfoButton")
@@ -284,6 +285,26 @@ class ProductionRecords(QWidget):
 
     def view_auto_dc(self, prod_id):
         self.go_to_dc_auto.emit(prod_id)
+
+    def refresh_records(self):
+        try:
+            self.rows = read.get_all_production_data()
+
+            # 2. Update the main table model
+            self.table_model.set_data(self.rows)
+
+            # 3. Reset the selection in the UI
+            self.table_records.clearSelection()
+            self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
+
+            # 4. Reset the details table to its default empty state
+            self.details_table_model.set_data(self.details_row)
+
+            # 5. Clear search bar if text was entered
+            self.search_input.clear()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
 
     def run_production_sync(self):
         thread = QThread()

@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00257" summary="updated the default value of the prod_date_input">
-      <option name="closed" value="true" />
-      <created>1775446180358</created>
-      <option name="number" value="00257" />
-      <option name="presentableId" value="LOCAL-00257" />
-      <option name="project" value="LOCAL" />
-      <updated>1775446180358</updated>
-    </task>
     <task id="LOCAL-00258" summary="removed the comments on the prod date input">
       <option name="closed" value="true" />
       <created>1775446232552</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775620619505</updated>
     </task>
-    <option name="localTasksCounter" value="306" />
+    <task id="LOCAL-00306" summary="added a auto completer in the field of manual page">
+      <option name="closed" value="true" />
+      <created>1775621199487</created>
+      <option name="number" value="00306" />
+      <option name="presentableId" value="LOCAL-00306" />
+      <option name="project" value="LOCAL" />
+      <updated>1775621199488</updated>
+    </task>
+    <option name="localTasksCounter" value="307" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix the unused import" />
     <MESSAGE value="updated print button" />
     <MESSAGE value="dc auto entry widget" />
     <MESSAGE value="adding dc auto entry" />
@@ -563,7 +562,8 @@
     <MESSAGE value="removed the cm date and no in dc page" />
     <MESSAGE value="call new prod in init of manual entry" />
     <MESSAGE value="removed cm date and no  in manual" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed cm date and no  in manual" />
+    <MESSAGE value="added a auto completer in the field of manual page" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a auto completer in the field of manual page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
