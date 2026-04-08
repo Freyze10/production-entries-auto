@@ -29,11 +29,9 @@ class MBAutoEntry(QWidget):
         # Track current production for edit/view
         self.current_production_id = None
         self.formulation_details = None
-
         self.setup_ui()
         self.setup_auto_completers()
 
-        self.new_production()
     def setup_ui(self):
 
         main_layout = QVBoxLayout(self)
@@ -305,7 +303,7 @@ class MBAutoEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
-        if self.prod_id != 0:
+        if self.prod_id != 0 and self.prod_id is not None:
             try:
                 self.prod_results = get_single_production_data(self.prod_id)
                 self.prod_materials = get_single_production_details(self.prod_id)
@@ -317,7 +315,6 @@ class MBAutoEntry(QWidget):
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to load: {e}")
                 return False
-
     def setup_auto_completers(self):
         data = get_all_completer_data()
 
