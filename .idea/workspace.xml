@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00240" summary="changed the dialog size">
-      <option name="closed" value="true" />
-      <created>1775012346810</created>
-      <option name="number" value="00240" />
-      <option name="presentableId" value="LOCAL-00240" />
-      <option name="project" value="LOCAL" />
-      <updated>1775012346810</updated>
-    </task>
     <task id="LOCAL-00241" summary="modified table on the selector of formula">
       <option name="closed" value="true" />
       <created>1775012876329</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775550483377</updated>
     </task>
-    <option name="localTasksCounter" value="289" />
+    <task id="LOCAL-00289" summary="added ladel text for mb and dc pages">
+      <option name="closed" value="true" />
+      <created>1775616411551</created>
+      <option name="number" value="00289" />
+      <option name="presentableId" value="LOCAL-00289" />
+      <option name="project" value="LOCAL" />
+      <updated>1775616411552</updated>
+    </task>
+    <option name="localTasksCounter" value="290" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="call the auto function" />
     <MESSAGE value="updated the reusable function, removed self" />
     <MESSAGE value="addded update totals on table" />
     <MESSAGE value="updated the auto compute to seperate the small scale" />
@@ -563,7 +562,8 @@
     <MESSAGE value="removed the manual DC button" />
     <MESSAGE value="updated the mb auto text button" />
     <MESSAGE value="removed trailing spaces in the legacy" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed trailing spaces in the legacy" />
+    <MESSAGE value="added ladel text for mb and dc pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="added ladel text for mb and dc pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

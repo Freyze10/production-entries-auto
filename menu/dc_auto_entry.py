@@ -642,6 +642,7 @@ class DCAutoEntry(QWidget):
         # Get the input values as text first
         qty_req_text = self.qty_required_input.text().strip()
         qty_batch_text = self.qty_per_batch_input.text().strip()
+        dosage = self.dosage_input.text().strip()
 
         if not qty_req_text or not qty_batch_text:
             QMessageBox.warning(
