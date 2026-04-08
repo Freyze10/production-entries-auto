@@ -315,6 +315,9 @@ class MBAutoEntry(QWidget):
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to load: {e}")
                 return False
+        else:
+            self.new_production()
+
     def setup_auto_completers(self):
         data = get_all_completer_data()
 

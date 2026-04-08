@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00263" summary="updated the reusable function, removed self">
-      <option name="closed" value="true" />
-      <created>1775464162111</created>
-      <option name="number" value="00263" />
-      <option name="presentableId" value="LOCAL-00263" />
-      <option name="project" value="LOCAL" />
-      <updated>1775464162111</updated>
-    </task>
     <task id="LOCAL-00264" summary="addded update totals on table">
       <option name="closed" value="true" />
       <created>1775464182053</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775629052844</updated>
     </task>
-    <option name="localTasksCounter" value="312" />
+    <task id="LOCAL-00312" summary="debugging display old details">
+      <option name="closed" value="true" />
+      <created>1775630646055</created>
+      <option name="number" value="00312" />
+      <option name="presentableId" value="LOCAL-00312" />
+      <option name="project" value="LOCAL" />
+      <updated>1775630646055</updated>
+    </task>
+    <option name="localTasksCounter" value="313" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created  a connection to change to dc auto" />
     <MESSAGE value="removed the manual DC button" />
     <MESSAGE value="updated the mb auto text button" />
     <MESSAGE value="removed trailing spaces in the legacy" />
@@ -563,7 +562,8 @@
     <MESSAGE value="set the order of data besed on the date" />
     <MESSAGE value="removed the view button on the records" />
     <MESSAGE value="updated the button colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the button colors" />
+    <MESSAGE value="debugging display old details" />
+    <option name="LAST_COMMIT_MESSAGE" value="debugging display old details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -600,12 +600,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>505</line>
+          <line>504</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>645</line>
+          <line>644</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
