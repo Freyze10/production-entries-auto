@@ -27,6 +27,7 @@ class MBManualEntry(QWidget):
         self.current_production_id = None
 
         self.setup_ui()
+        self.new_production()
 
     def setup_ui(self):
 

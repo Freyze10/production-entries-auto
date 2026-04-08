@@ -119,22 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00253" summary="forces the dropdon to pop up when the user types in the order_no">
-      <option name="closed" value="true" />
-      <created>1775441732698</created>
-      <option name="number" value="00253" />
-      <option name="presentableId" value="LOCAL-00253" />
-      <option name="project" value="LOCAL" />
-      <updated>1775441732698</updated>
-    </task>
-    <task id="LOCAL-00254" summary="fix the field name matvhing">
-      <option name="closed" value="true" />
-      <created>1775442618903</created>
-      <option name="number" value="00254" />
-      <option name="presentableId" value="LOCAL-00254" />
-      <option name="project" value="LOCAL" />
-      <updated>1775442618903</updated>
-    </task>
     <task id="LOCAL-00255" summary="call display details when the prod_id is not 0">
       <option name="closed" value="true" />
       <created>1775442960028</created>
@@ -511,7 +495,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775618936282</updated>
     </task>
-    <option name="localTasksCounter" value="302" />
+    <task id="LOCAL-00302" summary="updated the completer for the order number in dc page">
+      <option name="closed" value="true" />
+      <created>1775618982876</created>
+      <option name="number" value="00302" />
+      <option name="presentableId" value="LOCAL-00302" />
+      <option name="project" value="LOCAL" />
+      <updated>1775618982876</updated>
+    </task>
+    <task id="LOCAL-00303" summary="removed the cm date and no in dc page">
+      <option name="closed" value="true" />
+      <created>1775619025589</created>
+      <option name="number" value="00303" />
+      <option name="presentableId" value="LOCAL-00303" />
+      <option name="project" value="LOCAL" />
+      <updated>1775619025589</updated>
+    </task>
+    <option name="localTasksCounter" value="304" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,8 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rounded the cumulative raw first before flooring it to 2 decimal" />
-    <MESSAGE value="fixed the dubigging for the small scale and large scale decimal" />
     <MESSAGE value="updated the generate button for auto mb" />
     <MESSAGE value="removed the generate advanced" />
     <MESSAGE value="fix the unused import" />
@@ -563,7 +561,9 @@
     <MESSAGE value="call new production in the setup ui  in the mb page" />
     <MESSAGE value="removed the colormatch no and date in the mb page" />
     <MESSAGE value="updated the completer for the order number in mb page" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the completer for the order number in mb page" />
+    <MESSAGE value="updated the completer for the order number in dc page" />
+    <MESSAGE value="removed the cm date and no in dc page" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the cm date and no in dc page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
