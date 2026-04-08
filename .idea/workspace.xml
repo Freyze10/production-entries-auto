@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00251" summary="added function to setup a combo box completer">
-      <option name="closed" value="true" />
-      <created>1775441500070</created>
-      <option name="number" value="00251" />
-      <option name="presentableId" value="LOCAL-00251" />
-      <option name="project" value="LOCAL" />
-      <updated>1775441500070</updated>
-    </task>
     <task id="LOCAL-00252" summary="created the combo box completer">
       <option name="closed" value="true" />
       <created>1775441524162</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775617879524</updated>
     </task>
-    <option name="localTasksCounter" value="300" />
+    <task id="LOCAL-00300" summary="removed the colormatch no and date in the mb page">
+      <option name="closed" value="true" />
+      <created>1775618090167</created>
+      <option name="number" value="00300" />
+      <option name="presentableId" value="LOCAL-00300" />
+      <option name="project" value="LOCAL" />
+      <updated>1775618090167</updated>
+    </task>
+    <option name="localTasksCounter" value="301" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a weight valuie" />
     <MESSAGE value="updated the auto compute for the small scale" />
     <MESSAGE value="rounded the cumulative raw first before flooring it to 2 decimal" />
     <MESSAGE value="fixed the dubigging for the small scale and large scale decimal" />
@@ -563,7 +562,8 @@
     <MESSAGE value="set the button to nofocus" />
     <MESSAGE value="set the button to nofocus on dc page" />
     <MESSAGE value="call new production in the setup ui  in the mb page" />
-    <option name="LAST_COMMIT_MESSAGE" value="call new production in the setup ui  in the mb page" />
+    <MESSAGE value="removed the colormatch no and date in the mb page" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the colormatch no and date in the mb page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -600,12 +600,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>505</line>
+          <line>506</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>645</line>
+          <line>646</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

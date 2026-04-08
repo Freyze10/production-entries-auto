@@ -337,10 +337,11 @@ class MBAutoEntry(QWidget):
             # 2. Add items to the ComboBox dropdown
             combo.clear()
             combo.addItems(str_items)
-            completer = combo.completer()
+            completer = QCompleter(str_items)
             completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
             completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
             completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
+            combo.setCompleter(completer)
 
             # 4. Set default to the empty string (Index 0)
             combo.setCurrentIndex(0)
@@ -349,7 +350,7 @@ class MBAutoEntry(QWidget):
         setup_comp(self.product_code_input, data['prod_codes'])
         setup_comp(self.lot_no_input, data['lots'])
         setup_combo_comp(self.order_form_no_combo, data.get('orders'))
-
+        print(data.get('orders'))
 
 
     def show_formulation_selector(self):
