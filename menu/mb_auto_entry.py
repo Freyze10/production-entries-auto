@@ -129,12 +129,12 @@ class MBAutoEntry(QWidget):
 
         self.colormatch_no_input = QLineEdit()
         self.colormatch_no_input.setPlaceholderText("Enter colormatch number")
-        primary_layout.addWidget(QLabel("Colormatch No:"), 8, 0)
-        primary_layout.addWidget(self.colormatch_no_input, 8, 1)
+        # primary_layout.addWidget(QLabel("Colormatch No:"), 8, 0)
+        # primary_layout.addWidget(self.colormatch_no_input, 8, 1)
 
         self.matched_date_input = SmartDateEdit()
-        primary_layout.addWidget(QLabel("Matched Date:"), 9, 0)
-        primary_layout.addWidget(self.matched_date_input, 9, 1)
+        # primary_layout.addWidget(QLabel("Matched Date:"), 9, 0)
+        # primary_layout.addWidget(self.matched_date_input, 9, 1)
 
         self.formulation_id_input = QLineEdit(objectName='gray_bg')
         self.formulation_index = QLineEdit()
