@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00264" summary="addded update totals on table">
-      <option name="closed" value="true" />
-      <created>1775464182053</created>
-      <option name="number" value="00264" />
-      <option name="presentableId" value="LOCAL-00264" />
-      <option name="project" value="LOCAL" />
-      <updated>1775464182053</updated>
-    </task>
     <task id="LOCAL-00265" summary="updated the auto compute to seperate the small scale">
       <option name="closed" value="true" />
       <created>1775526562722</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775630646055</updated>
     </task>
-    <option name="localTasksCounter" value="313" />
+    <task id="LOCAL-00313" summary="call new production only is the prod_id is 0">
+      <option name="closed" value="true" />
+      <created>1775630686143</created>
+      <option name="number" value="00313" />
+      <option name="presentableId" value="LOCAL-00313" />
+      <option name="project" value="LOCAL" />
+      <updated>1775630686143</updated>
+    </task>
+    <option name="localTasksCounter" value="314" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed the manual DC button" />
     <MESSAGE value="updated the mb auto text button" />
     <MESSAGE value="removed trailing spaces in the legacy" />
     <MESSAGE value="added ladel text for mb and dc pages" />
@@ -563,7 +562,8 @@
     <MESSAGE value="removed the view button on the records" />
     <MESSAGE value="updated the button colors" />
     <MESSAGE value="debugging display old details" />
-    <option name="LAST_COMMIT_MESSAGE" value="debugging display old details" />
+    <MESSAGE value="call new production only is the prod_id is 0" />
+    <option name="LAST_COMMIT_MESSAGE" value="call new production only is the prod_id is 0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -600,12 +600,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>504</line>
+          <line>505</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>644</line>
+          <line>645</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
