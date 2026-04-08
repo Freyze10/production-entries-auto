@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00258" summary="removed the comments on the prod date input">
-      <option name="closed" value="true" />
-      <created>1775446232552</created>
-      <option name="number" value="00258" />
-      <option name="presentableId" value="LOCAL-00258" />
-      <option name="project" value="LOCAL" />
-      <updated>1775446232552</updated>
-    </task>
     <task id="LOCAL-00259" summary="set the default value on the prod date when clicked new">
       <option name="closed" value="true" />
       <created>1775447320958</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775621199488</updated>
     </task>
-    <option name="localTasksCounter" value="307" />
+    <task id="LOCAL-00307" summary="added a refresh function">
+      <option name="closed" value="true" />
+      <created>1775627964158</created>
+      <option name="number" value="00307" />
+      <option name="presentableId" value="LOCAL-00307" />
+      <option name="project" value="LOCAL" />
+      <updated>1775627964158</updated>
+    </task>
+    <option name="localTasksCounter" value="308" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated print button" />
     <MESSAGE value="dc auto entry widget" />
     <MESSAGE value="adding dc auto entry" />
     <MESSAGE value="addeed emit of sinal in view auto dc" />
@@ -563,7 +562,8 @@
     <MESSAGE value="call new prod in init of manual entry" />
     <MESSAGE value="removed cm date and no  in manual" />
     <MESSAGE value="added a auto completer in the field of manual page" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a auto completer in the field of manual page" />
+    <MESSAGE value="added a refresh function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a refresh function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

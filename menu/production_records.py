@@ -295,6 +295,7 @@ class ProductionRecords(QWidget):
 
             # 3. Reset the selection in the UI
             self.table_records.clearSelection()
+            self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
             # 4. Reset the details table to its default empty state
