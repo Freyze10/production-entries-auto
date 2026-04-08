@@ -33,6 +33,7 @@ class MBAutoEntry(QWidget):
         self.setup_ui()
         self.setup_auto_completers()
 
+        self.new_production()
     def setup_ui(self):
 
         main_layout = QVBoxLayout(self)

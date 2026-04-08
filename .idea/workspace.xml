@@ -119,30 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00247" summary="addded to do task">
-      <option name="closed" value="true" />
-      <created>1775033597071</created>
-      <option name="number" value="00247" />
-      <option name="presentableId" value="LOCAL-00247" />
-      <option name="project" value="LOCAL" />
-      <updated>1775033597071</updated>
-    </task>
-    <task id="LOCAL-00248" summary="created a query to get the completer distinct data">
-      <option name="closed" value="true" />
-      <created>1775435225463</created>
-      <option name="number" value="00248" />
-      <option name="presentableId" value="LOCAL-00248" />
-      <option name="project" value="LOCAL" />
-      <updated>1775435225463</updated>
-    </task>
-    <task id="LOCAL-00249" summary="connect the completers to the input fields">
-      <option name="closed" value="true" />
-      <created>1775436977322</created>
-      <option name="number" value="00249" />
-      <option name="presentableId" value="LOCAL-00249" />
-      <option name="project" value="LOCAL" />
-      <updated>1775436977322</updated>
-    </task>
     <task id="LOCAL-00250" summary="call the self completer function">
       <option name="closed" value="true" />
       <created>1775437059325</created>
@@ -511,7 +487,31 @@
       <option name="project" value="LOCAL" />
       <updated>1775617565882</updated>
     </task>
-    <option name="localTasksCounter" value="296" />
+    <task id="LOCAL-00296" summary="updated the button icon for formulation when selected a formula in mb auto">
+      <option name="closed" value="true" />
+      <created>1775617609903</created>
+      <option name="number" value="00296" />
+      <option name="presentableId" value="LOCAL-00296" />
+      <option name="project" value="LOCAL" />
+      <updated>1775617609903</updated>
+    </task>
+    <task id="LOCAL-00297" summary="set the button to nofocus">
+      <option name="closed" value="true" />
+      <created>1775617809453</created>
+      <option name="number" value="00297" />
+      <option name="presentableId" value="LOCAL-00297" />
+      <option name="project" value="LOCAL" />
+      <updated>1775617809453</updated>
+    </task>
+    <task id="LOCAL-00298" summary="set the button to nofocus on dc page">
+      <option name="closed" value="true" />
+      <created>1775617830604</created>
+      <option name="number" value="00298" />
+      <option name="presentableId" value="LOCAL-00298" />
+      <option name="project" value="LOCAL" />
+      <updated>1775617830604</updated>
+    </task>
+    <option name="localTasksCounter" value="299" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,9 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the materials sequence" />
-    <MESSAGE value="chagned the computation for the autp" />
-    <MESSAGE value="updated the weight computation in the auto" />
     <MESSAGE value="returned the comulative raw rcount" />
     <MESSAGE value="added a weight valuie" />
     <MESSAGE value="updated the auto compute for the small scale" />
@@ -563,7 +560,10 @@
     <MESSAGE value="added error message if dosage is null" />
     <MESSAGE value="call new production records when load" />
     <MESSAGE value="updated the button icon for formulation when selected a formula" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the button icon for formulation when selected a formula" />
+    <MESSAGE value="updated the button icon for formulation when selected a formula in mb auto" />
+    <MESSAGE value="set the button to nofocus" />
+    <MESSAGE value="set the button to nofocus on dc page" />
+    <option name="LAST_COMMIT_MESSAGE" value="set the button to nofocus on dc page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -600,12 +600,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>503</line>
+          <line>505</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>643</line>
+          <line>645</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
