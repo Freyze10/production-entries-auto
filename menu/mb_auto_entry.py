@@ -64,6 +64,7 @@ class MBAutoEntry(QWidget):
         self.select_formula_btn.setIcon(
             fa.icon('mdi.newspaper-variant-multiple-outline', color='#0078d4', scale_factor=1.5))
         self.select_formula_btn.setFixedSize(36, 36)
+        self.select_formula_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.select_formula_btn.clicked.connect(self.show_formulation_selector)
         self.select_formula_btn.setToolTip("Select Formula")
 
