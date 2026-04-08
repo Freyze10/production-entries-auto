@@ -7,7 +7,8 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayo
 import qtawesome as fa
 
 from db.legacy import SyncRM
-from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id
+from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
+    get_all_completer_data
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
@@ -27,6 +28,7 @@ class MBManualEntry(QWidget):
         self.current_production_id = None
 
         self.setup_ui()
+        self.setup_auto_completers()
         self.new_production()
 
     def setup_ui(self):
@@ -437,6 +439,22 @@ class MBManualEntry(QWidget):
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to load: {e}")
                 return False
+
+    def setup_auto_completers(self):
+        data = get_all_completer_data()
+
+        def setup_comp(widget, items):
+            # Convert all items to strings (in case order_no is int)
+            str_items = [str(i) for i in items if i]
+            completer = QCompleter(str_items)
+            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+            completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+            widget.setCompleter(completer)
+
+        setup_comp(self.customer_input, data['customers'])
+        setup_comp(self.product_code_input, data['prod_codes'])
+        setup_comp(self.lot_no_input, data['lots'])
+        setup_comp(self.order_form_no_input, data.get('orders'))
 
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
