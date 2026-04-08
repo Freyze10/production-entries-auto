@@ -634,6 +634,9 @@ class DCAutoEntry(QWidget):
         self.production_encoded_display.setText(datetime.now().strftime("%m/%d/%Y %I:%M:%S %p"))
         self.production_confirmation_display.clear()
 
+        self.select_formula_btn.setIcon(
+            fa.icon('mdi.newspaper-variant-multiple-outline', color='#0078d4', scale_factor=1.5))
+
         if self.prod_results:
             self.prod_results = None
 
