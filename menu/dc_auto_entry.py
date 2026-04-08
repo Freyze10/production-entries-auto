@@ -642,7 +642,7 @@ class DCAutoEntry(QWidget):
         # Get the input values as text first
         qty_req_text = self.qty_required_input.text().strip()
         qty_batch_text = self.qty_per_batch_input.text().strip()
-        dosage = self.dosage_input.text().strip()
+        dosage_text = self.dosage_input.text().strip()
 
         if not qty_req_text or not qty_batch_text:
             QMessageBox.warning(
@@ -655,12 +655,22 @@ class DCAutoEntry(QWidget):
         try:
             quantity_req = float(qty_req_text)
             quantity_batch = float(qty_batch_text)
+            dosage = float(dosage_text)
 
             if quantity_batch == 0:
                 QMessageBox.warning(
                     self,
                     "Invalid Value",
                     "Quantity per Batch cannot be zero.",
+                    QMessageBox.Ok
+                )
+                return
+
+            if dosage == 0:
+                QMessageBox.warning(
+                    self,
+                    "Invalid Value",
+                    "Dosage cannot be zero.",
                     QMessageBox.Ok
                 )
                 return
@@ -672,7 +682,7 @@ class DCAutoEntry(QWidget):
                 target_table=self.materials_table,
                 total_weight=quantity_req,
                 batch_divisor=float(batch_size),
-                base_divisor=100.0
+                base_divisor=dosage
             )
 
             self.update_totals()
