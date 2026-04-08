@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00242" summary="modified table on the selector of formula">
-      <option name="closed" value="true" />
-      <created>1775019618927</created>
-      <option name="number" value="00242" />
-      <option name="presentableId" value="LOCAL-00242" />
-      <option name="project" value="LOCAL" />
-      <updated>1775019618927</updated>
-    </task>
     <task id="LOCAL-00243" summary="added temporary calculation">
       <option name="closed" value="true" />
       <created>1775025369089</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775616529549</updated>
     </task>
-    <option name="localTasksCounter" value="291" />
+    <task id="LOCAL-00291" summary="convert the dosage to float">
+      <option name="closed" value="true" />
+      <created>1775616684357</created>
+      <option name="number" value="00291" />
+      <option name="presentableId" value="LOCAL-00291" />
+      <option name="project" value="LOCAL" />
+      <updated>1775616684357</updated>
+    </task>
+    <option name="localTasksCounter" value="292" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="addded update totals on table" />
     <MESSAGE value="updated the auto compute to seperate the small scale" />
     <MESSAGE value="changed the running physical total" />
     <MESSAGE value="updated the function: removed self" />
@@ -563,7 +562,8 @@
     <MESSAGE value="removed trailing spaces in the legacy" />
     <MESSAGE value="added ladel text for mb and dc pages" />
     <MESSAGE value="created a dosage value for the dc computation" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a dosage value for the dc computation" />
+    <MESSAGE value="convert the dosage to float" />
+    <option name="LAST_COMMIT_MESSAGE" value="convert the dosage to float" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
