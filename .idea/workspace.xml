@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00260" summary="created a function for the auto calculation">
-      <option name="closed" value="true" />
-      <created>1775463576381</created>
-      <option name="number" value="00260" />
-      <option name="presentableId" value="LOCAL-00260" />
-      <option name="project" value="LOCAL" />
-      <updated>1775463576381</updated>
-    </task>
     <task id="LOCAL-00261" summary="import the function auto compute">
       <option name="closed" value="true" />
       <created>1775463755651</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775628229945</updated>
     </task>
-    <option name="localTasksCounter" value="309" />
+    <task id="LOCAL-00309" summary="removed the view button on the records">
+      <option name="closed" value="true" />
+      <created>1775628352837</created>
+      <option name="number" value="00309" />
+      <option name="presentableId" value="LOCAL-00309" />
+      <option name="project" value="LOCAL" />
+      <updated>1775628352837</updated>
+    </task>
+    <option name="localTasksCounter" value="310" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding dc auto entry" />
     <MESSAGE value="addeed emit of sinal in view auto dc" />
     <MESSAGE value="created  a connection to change to dc auto" />
     <MESSAGE value="removed the manual DC button" />
@@ -563,7 +562,8 @@
     <MESSAGE value="added a auto completer in the field of manual page" />
     <MESSAGE value="added a refresh function" />
     <MESSAGE value="set the order of data besed on the date" />
-    <option name="LAST_COMMIT_MESSAGE" value="set the order of data besed on the date" />
+    <MESSAGE value="removed the view button on the records" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the view button on the records" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -277,12 +277,12 @@ class MBAutoEntry(QWidget):
         button_layout = QHBoxLayout()
         button_layout.addStretch()
 
-        generate_btn = QPushButton("Generate", objectName="SuccessButton")
+        generate_btn = QPushButton("Generate", objectName="PrimaryButton")
         generate_btn.setIcon(fa.icon('fa5s.cogs', color='white'))
         generate_btn.clicked.connect(self.generate_production)
         button_layout.addWidget(generate_btn)
 
-        tumbler_btn = QPushButton("Tumbler", objectName="InfoButton")
+        tumbler_btn = QPushButton("Tumbler", objectName="TertiaryButton")
         tumbler_btn.setIcon(fa.icon('fa5s.recycle', color='white'))
         # tumbler_btn.clicked.connect(self.tumbler_function)
         button_layout.addWidget(tumbler_btn)
@@ -293,7 +293,7 @@ class MBAutoEntry(QWidget):
         print_btn.clicked.connect(self.print_production)
         button_layout.addWidget(print_btn)
 
-        new_btn = QPushButton("New", objectName="PrimaryButton")
+        new_btn = QPushButton("New", objectName="InfoButton")
         new_btn.setIcon(fa.icon('fa5s.file', color='white'))
         new_btn.clicked.connect(self.new_production)
         button_layout.addWidget(new_btn)
