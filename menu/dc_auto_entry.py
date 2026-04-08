@@ -338,10 +338,11 @@ class DCAutoEntry(QWidget):
             # 2. Add items to the ComboBox dropdown
             combo.clear()
             combo.addItems(str_items)
-            completer = combo.completer()
+            completer = QCompleter(str_items)
             completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
             completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
             completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
+            combo.setCompleter(completer)
 
             # 4. Set default to the empty string (Index 0)
             combo.setCurrentIndex(0)
