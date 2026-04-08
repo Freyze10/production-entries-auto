@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00243" summary="added temporary calculation">
-      <option name="closed" value="true" />
-      <created>1775025369089</created>
-      <option name="number" value="00243" />
-      <option name="presentableId" value="LOCAL-00243" />
-      <option name="project" value="LOCAL" />
-      <updated>1775025369089</updated>
-    </task>
     <task id="LOCAL-00244" summary="added formulation details">
       <option name="closed" value="true" />
       <created>1775026708819</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775616684357</updated>
     </task>
-    <option name="localTasksCounter" value="292" />
+    <task id="LOCAL-00292" summary="added error message if dosage is null">
+      <option name="closed" value="true" />
+      <created>1775616741746</created>
+      <option name="number" value="00292" />
+      <option name="presentableId" value="LOCAL-00292" />
+      <option name="project" value="LOCAL" />
+      <updated>1775616741748</updated>
+    </task>
+    <option name="localTasksCounter" value="293" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the auto compute to seperate the small scale" />
     <MESSAGE value="changed the running physical total" />
     <MESSAGE value="updated the function: removed self" />
     <MESSAGE value="updated the materials sequence" />
@@ -563,7 +562,8 @@
     <MESSAGE value="added ladel text for mb and dc pages" />
     <MESSAGE value="created a dosage value for the dc computation" />
     <MESSAGE value="convert the dosage to float" />
-    <option name="LAST_COMMIT_MESSAGE" value="convert the dosage to float" />
+    <MESSAGE value="added error message if dosage is null" />
+    <option name="LAST_COMMIT_MESSAGE" value="added error message if dosage is null" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

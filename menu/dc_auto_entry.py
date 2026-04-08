@@ -644,7 +644,8 @@ class DCAutoEntry(QWidget):
         qty_batch_text = self.qty_per_batch_input.text().strip()
         dosage_text = self.dosage_input.text().strip()
 
-        if not qty_req_text or not qty_batch_text or dosage_text:
+        if not qty_req_text or not qty_batch_text:
+            print(dosage_text)
             QMessageBox.warning(
                 self,
                 "Missing Information",
