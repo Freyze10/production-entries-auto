@@ -277,12 +277,12 @@ class MBAutoEntry(QWidget):
 
         generate_btn = QPushButton("Generate", objectName="PrimaryButton")
         generate_btn.setIcon(fa.icon('fa5s.cogs', color='white'))
-        generate_btn.clicked.connect(self.generate_production)
+        # generate_btn.clicked.connect(self.generate_production)
         button_layout.addWidget(generate_btn)
 
         tumbler_btn = QPushButton("Tumbler", objectName="TertiaryButton")
         tumbler_btn.setIcon(fa.icon('fa5s.recycle', color='white'))
-        # tumbler_btn.clicked.connect(self.tumbler_function)
+        tumbler_btn.clicked.connect(self.tumbler_function)
         button_layout.addWidget(tumbler_btn)
 
 
@@ -643,7 +643,7 @@ class MBAutoEntry(QWidget):
         self.materials_table.setRowCount(0)
         self.update_totals()
 
-    def generate_production(self):
+    def tumbler_function(self):
         # Get the input values as text first
         qty_req_text = self.qty_required_input.text().strip()
         qty_batch_text = self.qty_per_batch_input.text().strip()
