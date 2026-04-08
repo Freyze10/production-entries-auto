@@ -157,10 +157,6 @@ class ProductionRecords(QWidget):
         self.btn_refresh.clicked.connect(self.refresh_records)
         controls_layout.addWidget(self.btn_refresh)
 
-        self.btn_view = QPushButton("View", objectName="InfoButton")
-        self.btn_view.setIcon(fa.icon('fa5s.eye', color='white'))
-        controls_layout.addWidget(self.btn_view)
-
         main_layout.addLayout(controls_layout)
 
     def filter_production(self):
