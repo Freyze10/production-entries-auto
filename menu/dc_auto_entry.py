@@ -320,6 +320,7 @@ class DCAutoEntry(QWidget):
 
     def setup_auto_completers(self):
         data = get_all_completer_data()
+        filtered_prod_codes = [code for code in data['prod_codes'] if code and "-" in str(code)]
 
         def setup_comp(widget, items):
             # Convert all items to strings (in case order_no is int)
@@ -347,8 +348,7 @@ class DCAutoEntry(QWidget):
             combo.setCurrentIndex(0)
 
         setup_comp(self.customer_input, data['customers'])
-        setup_comp(self.product_code_input, data['prod_codes'])
-        setup_comp(self.lot_no_input, data['lots'])
+        setup_comp(self.product_code_input, filtered_prod_codes)
         setup_combo_comp(self.order_form_no_combo, data.get('orders'))
 
 

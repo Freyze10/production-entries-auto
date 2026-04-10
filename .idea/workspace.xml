@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00280" summary="updated print button">
-      <option name="closed" value="true" />
-      <created>1775539468119</created>
-      <option name="number" value="00280" />
-      <option name="presentableId" value="LOCAL-00280" />
-      <option name="project" value="LOCAL" />
-      <updated>1775539468119</updated>
-    </task>
     <task id="LOCAL-00281" summary="dc auto entry widget">
       <option name="closed" value="true" />
       <created>1775543646809</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775802254238</updated>
     </task>
-    <option name="localTasksCounter" value="329" />
+    <task id="LOCAL-00329" summary="removed the lotnumber autofill and add prodcode mb only in autocomplete">
+      <option name="closed" value="true" />
+      <created>1775803528542</created>
+      <option name="number" value="00329" />
+      <option name="presentableId" value="LOCAL-00329" />
+      <option name="project" value="LOCAL" />
+      <updated>1775803528542</updated>
+    </task>
+    <option name="localTasksCounter" value="330" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="call new production in the setup ui  in the mb page" />
     <MESSAGE value="removed the colormatch no and date in the mb page" />
     <MESSAGE value="updated the completer for the order number in mb page" />
     <MESSAGE value="updated the completer for the order number in dc page" />
@@ -564,7 +563,8 @@
     <MESSAGE value="addded requirements.txt" />
     <MESSAGE value="created the function for generating the normal computation" />
     <MESSAGE value="generated a normal generate production form" />
-    <option name="LAST_COMMIT_MESSAGE" value="generated a normal generate production form" />
+    <MESSAGE value="removed the lotnumber autofill and add prodcode mb only in autocomplete" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the lotnumber autofill and add prodcode mb only in autocomplete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,12 +601,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>631</line>
+          <line>630</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>658</line>
+          <line>657</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
