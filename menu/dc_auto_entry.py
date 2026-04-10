@@ -10,9 +10,8 @@ import qtawesome as fa
 from db.legacy import SyncRM
 from db.read import get_latest_prod_id, get_formula_select, get_formula_materials, \
     get_all_completer_data, get_single_production_details, get_single_production_data
-from table_model import table_spacing
+from table_model import table_spacing, table_tumbler_compute
 from print.print_preview import ProductionPrintPreview
-from table_model.table_tumbler_compute import compute_tumbler
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
@@ -685,7 +684,7 @@ class DCAutoEntry(QWidget):
 
             batch_size = quantity_req / quantity_batch
 
-            compute_tumbler(
+            table_tumbler_compute.compute_tumbler(
                 source_table=self.formulation_details,
                 target_table=self.materials_table,
                 total_weight=quantity_req,
