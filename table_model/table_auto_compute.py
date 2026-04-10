@@ -51,10 +51,11 @@ def process_formulation_to_table(source_table, target_table, total_weight, batch
 
             # Check for 25.0kg Batch Break (Physical scale limit)
             if (running_physical_total + weight_per_batch) > 25.0:
-                sep_row = target_table.rowCount()
-                target_table.insertRow(sep_row)
-                for col in range(4):
-                    target_table.setItem(sep_row, col, QTableWidgetItem(""))
+                if target_table.rowCount() > 0:
+                    sep_row = target_table.rowCount()
+                    target_table.insertRow(sep_row)
+                    for col in range(4):
+                        target_table.setItem(sep_row, col, QTableWidgetItem(""))
 
                 # Reset the scale totals for the new physical container/batch
                 running_physical_total = 0.0
