@@ -34,22 +34,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "Python.styles.executor": "Run",
+    "Python.test_print.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
@@ -118,14 +119,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00271" summary="returned the comulative raw rcount">
-      <option name="closed" value="true" />
-      <created>1775528312894</created>
-      <option name="number" value="00271" />
-      <option name="presentableId" value="LOCAL-00271" />
-      <option name="project" value="LOCAL" />
-      <updated>1775528312894</updated>
     </task>
     <task id="LOCAL-00272" summary="added a weight valuie">
       <option name="closed" value="true" />
@@ -511,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775787531262</updated>
     </task>
-    <option name="localTasksCounter" value="320" />
+    <task id="LOCAL-00320" summary="added requirements.txt">
+      <option name="closed" value="true" />
+      <created>1775792606966</created>
+      <option name="number" value="00320" />
+      <option name="presentableId" value="LOCAL-00320" />
+      <option name="project" value="LOCAL" />
+      <updated>1775792606967</updated>
+    </task>
+    <option name="localTasksCounter" value="321" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="convert the dosage to float" />
     <MESSAGE value="added error message if dosage is null" />
     <MESSAGE value="call new production records when load" />
     <MESSAGE value="updated the button icon for formulation when selected a formula" />
@@ -563,7 +563,8 @@
     <MESSAGE value="changed the generate function to tumbler function" />
     <MESSAGE value="added a condition for auto computation: if its not the first row, dont add separator" />
     <MESSAGE value="refactored the tumbler computation" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored the tumbler computation" />
+    <MESSAGE value="added requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="added requirements.txt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
