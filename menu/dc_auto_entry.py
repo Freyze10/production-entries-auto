@@ -172,7 +172,7 @@ class DCAutoEntry(QWidget):
 
         self.qty_per_batch_input = QLineEdit(objectName='required')
         self.qty_per_batch_input.setPlaceholderText("0.000000")
-        self.qty_per_batch_input.focusOutEvent = lambda event: format_to_float(self, event, self.qty_per_batch_input)
+        self.qty_per_batch_input.focusOutEvent = lambda event: (format_to_float(self, event, self.qty_per_batch_input), self.add_batch_text)
         qty_layout.addWidget(self.qty_per_batch_input)
 
         primary_layout.addWidget(QLabel("Qty. Req:"), 12, 0)

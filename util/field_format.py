@@ -5,19 +5,19 @@ from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeyEvent
 
-def format_to_float(self, event, line_edit):
+def format_to_float(self, event, number, ):
     """Format the input to a float with 6 decimal places when focus is lost."""
-    text = line_edit.text().strip()
+    text = number.text().strip()
     try:
         if text:
             value = float(text)
-            line_edit.setText(f"{value:.6f}")
+            number.setText(f"{value:.6f}")
     except ValueError:
         QMessageBox.warning(self, "Invalid Input", "Please enter a valid number.")
-        line_edit.setFocus()
-        line_edit.selectAll()
+        number.setFocus()
+        number.selectAll()
         return
-    QLineEdit.focusOutEvent(line_edit, event)
+    QLineEdit.focusOutEvent(number, event)
 
 
 def production_mixing_time(event, line_edit):

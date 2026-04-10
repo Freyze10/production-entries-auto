@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00282" summary="adding dc auto entry">
-      <option name="closed" value="true" />
-      <created>1775543807583</created>
-      <option name="number" value="00282" />
-      <option name="presentableId" value="LOCAL-00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1775543807583</updated>
-    </task>
     <task id="LOCAL-00283" summary="addeed emit of sinal in view auto dc">
       <option name="closed" value="true" />
       <created>1775543896193</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775803651196</updated>
     </task>
-    <option name="localTasksCounter" value="331" />
+    <task id="LOCAL-00331" summary="added generate function in the dc auto entry">
+      <option name="closed" value="true" />
+      <created>1775803732561</created>
+      <option name="number" value="00331" />
+      <option name="presentableId" value="LOCAL-00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1775803732561</updated>
+    </task>
+    <option name="localTasksCounter" value="332" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the completer for the order number in mb page" />
     <MESSAGE value="updated the completer for the order number in dc page" />
     <MESSAGE value="removed the cm date and no in dc page" />
     <MESSAGE value="call new prod in init of manual entry" />
@@ -564,7 +563,8 @@
     <MESSAGE value="generated a normal generate production form" />
     <MESSAGE value="removed the lotnumber autofill and add prodcode mb only in autocomplete" />
     <MESSAGE value="did the same in the dc auto page" />
-    <option name="LAST_COMMIT_MESSAGE" value="did the same in the dc auto page" />
+    <MESSAGE value="added generate function in the dc auto entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="added generate function in the dc auto entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
