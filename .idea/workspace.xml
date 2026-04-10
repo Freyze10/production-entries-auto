@@ -119,14 +119,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00270" summary="updated the weight computation in the auto">
-      <option name="closed" value="true" />
-      <created>1775527616410</created>
-      <option name="number" value="00270" />
-      <option name="presentableId" value="LOCAL-00270" />
-      <option name="project" value="LOCAL" />
-      <updated>1775527616410</updated>
-    </task>
     <task id="LOCAL-00271" summary="returned the comulative raw rcount">
       <option name="closed" value="true" />
       <created>1775528312894</created>
@@ -511,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775781712447</updated>
     </task>
-    <option name="localTasksCounter" value="319" />
+    <task id="LOCAL-00319" summary="refactored the tumbler computation">
+      <option name="closed" value="true" />
+      <created>1775787531260</created>
+      <option name="number" value="00319" />
+      <option name="presentableId" value="LOCAL-00319" />
+      <option name="project" value="LOCAL" />
+      <updated>1775787531262</updated>
+    </task>
+    <option name="localTasksCounter" value="320" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a dosage value for the dc computation" />
     <MESSAGE value="convert the dosage to float" />
     <MESSAGE value="added error message if dosage is null" />
     <MESSAGE value="call new production records when load" />
@@ -563,7 +562,8 @@
     <MESSAGE value="fixed the calling of new prod" />
     <MESSAGE value="changed the generate function to tumbler function" />
     <MESSAGE value="added a condition for auto computation: if its not the first row, dont add separator" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a condition for auto computation: if its not the first row, dont add separator" />
+    <MESSAGE value="refactored the tumbler computation" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored the tumbler computation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

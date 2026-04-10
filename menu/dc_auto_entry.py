@@ -216,7 +216,7 @@ class DCAutoEntry(QWidget):
         self.materials_table.setHorizontalHeaderLabels([
             "Material Name", "Large Scale (KG)", "Small Scale (G)", "Total Weight (KG)"
         ])
-        self.materials_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+        self.materials_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.materials_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.materials_table.verticalHeader().setVisible(False)
