@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00279" summary="fix the unused import">
-      <option name="closed" value="true" />
-      <created>1775538902886</created>
-      <option name="number" value="00279" />
-      <option name="presentableId" value="LOCAL-00279" />
-      <option name="project" value="LOCAL" />
-      <updated>1775538902889</updated>
-    </task>
     <task id="LOCAL-00280" summary="updated print button">
       <option name="closed" value="true" />
       <created>1775539468119</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775801778271</updated>
     </task>
-    <option name="localTasksCounter" value="328" />
+    <task id="LOCAL-00328" summary="generated a normal generate production form">
+      <option name="closed" value="true" />
+      <created>1775802254238</created>
+      <option name="number" value="00328" />
+      <option name="presentableId" value="LOCAL-00328" />
+      <option name="project" value="LOCAL" />
+      <updated>1775802254238</updated>
+    </task>
+    <option name="localTasksCounter" value="329" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set the button to nofocus on dc page" />
     <MESSAGE value="call new production in the setup ui  in the mb page" />
     <MESSAGE value="removed the colormatch no and date in the mb page" />
     <MESSAGE value="updated the completer for the order number in mb page" />
@@ -564,7 +563,8 @@
     <MESSAGE value="refactor how the function is imported" />
     <MESSAGE value="addded requirements.txt" />
     <MESSAGE value="created the function for generating the normal computation" />
-    <option name="LAST_COMMIT_MESSAGE" value="created the function for generating the normal computation" />
+    <MESSAGE value="generated a normal generate production form" />
+    <option name="LAST_COMMIT_MESSAGE" value="generated a normal generate production form" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,12 +601,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>630</line>
+          <line>631</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>657</line>
+          <line>658</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
