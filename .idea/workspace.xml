@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00278" summary="removed the generate advanced">
-      <option name="closed" value="true" />
-      <created>1775538748725</created>
-      <option name="number" value="00278" />
-      <option name="presentableId" value="LOCAL-00278" />
-      <option name="project" value="LOCAL" />
-      <updated>1775538748725</updated>
-    </task>
     <task id="LOCAL-00279" summary="fix the unused import">
       <option name="closed" value="true" />
       <created>1775538902886</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775800796132</updated>
     </task>
-    <option name="localTasksCounter" value="327" />
+    <task id="LOCAL-00327" summary="created the function for generating the normal computation">
+      <option name="closed" value="true" />
+      <created>1775801778271</created>
+      <option name="number" value="00327" />
+      <option name="presentableId" value="LOCAL-00327" />
+      <option name="project" value="LOCAL" />
+      <updated>1775801778271</updated>
+    </task>
+    <option name="localTasksCounter" value="328" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set the button to nofocus" />
     <MESSAGE value="set the button to nofocus on dc page" />
     <MESSAGE value="call new production in the setup ui  in the mb page" />
     <MESSAGE value="removed the colormatch no and date in the mb page" />
@@ -564,7 +563,8 @@
     <MESSAGE value="changed the function name for  tumbler compute" />
     <MESSAGE value="refactor how the function is imported" />
     <MESSAGE value="addded requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="addded requirements.txt" />
+    <MESSAGE value="created the function for generating the normal computation" />
+    <option name="LAST_COMMIT_MESSAGE" value="created the function for generating the normal computation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,12 +601,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>504</line>
+          <line>630</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>644</line>
+          <line>657</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
