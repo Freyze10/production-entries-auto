@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00283" summary="addeed emit of sinal in view auto dc">
-      <option name="closed" value="true" />
-      <created>1775543896193</created>
-      <option name="number" value="00283" />
-      <option name="presentableId" value="LOCAL-00283" />
-      <option name="project" value="LOCAL" />
-      <updated>1775543896193</updated>
-    </task>
     <task id="LOCAL-00284" summary="created  a connection to change to dc auto">
       <option name="closed" value="true" />
       <created>1775544364154</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775803732561</updated>
     </task>
-    <option name="localTasksCounter" value="332" />
+    <task id="LOCAL-00332" summary="try to add a batch text">
+      <option name="closed" value="true" />
+      <created>1775809229005</created>
+      <option name="number" value="00332" />
+      <option name="presentableId" value="LOCAL-00332" />
+      <option name="project" value="LOCAL" />
+      <updated>1775809229005</updated>
+    </task>
+    <option name="localTasksCounter" value="333" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the completer for the order number in dc page" />
     <MESSAGE value="removed the cm date and no in dc page" />
     <MESSAGE value="call new prod in init of manual entry" />
     <MESSAGE value="removed cm date and no  in manual" />
@@ -564,7 +563,8 @@
     <MESSAGE value="removed the lotnumber autofill and add prodcode mb only in autocomplete" />
     <MESSAGE value="did the same in the dc auto page" />
     <MESSAGE value="added generate function in the dc auto entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="added generate function in the dc auto entry" />
+    <MESSAGE value="try to add a batch text" />
+    <option name="LAST_COMMIT_MESSAGE" value="try to add a batch text" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

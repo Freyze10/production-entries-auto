@@ -318,6 +318,14 @@ class DCAutoEntry(QWidget):
         else:
             self.new_production()
 
+    def add_batch_text(self):
+        try:
+            req, per = float(str(self.qty_required_input)), float(str(self.qty_per_batch_input))
+            n = int(req / per) if per > 0 else 1
+            return f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
+        except:
+            return "1 batch by 0.000 KG."
+
     def setup_auto_completers(self):
         data = get_all_completer_data()
         filtered_prod_codes = [code for code in data['prod_codes'] if code and "-" in str(code)]
