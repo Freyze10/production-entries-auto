@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QTableWidgetItem
 from util.field_format import NumericTableWidgetItem
 
 
-def process_formulation_to_table(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
+def compute_tumbler(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
     """
     Calculates weights with dual-mode logic:
     1. Items <= 30g per batch go straight to Small Scale and don't affect Large Scale cumulative.

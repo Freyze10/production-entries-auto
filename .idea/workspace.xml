@@ -120,22 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00273" summary="updated the auto compute for the small scale">
-      <option name="closed" value="true" />
-      <created>1775536511555</created>
-      <option name="number" value="00273" />
-      <option name="presentableId" value="LOCAL-00273" />
-      <option name="project" value="LOCAL" />
-      <updated>1775536511555</updated>
-    </task>
-    <task id="LOCAL-00274" summary="updated the auto compute for the small scale">
-      <option name="closed" value="true" />
-      <created>1775537046167</created>
-      <option name="number" value="00274" />
-      <option name="presentableId" value="LOCAL-00274" />
-      <option name="project" value="LOCAL" />
-      <updated>1775537046167</updated>
-    </task>
     <task id="LOCAL-00275" summary="rounded the cumulative raw first before flooring it to 2 decimal">
       <option name="closed" value="true" />
       <created>1775537083505</created>
@@ -512,7 +496,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775792958463</updated>
     </task>
-    <option name="localTasksCounter" value="322" />
+    <task id="LOCAL-00322" summary="added requirements.txt">
+      <option name="closed" value="true" />
+      <created>1775800456941</created>
+      <option name="number" value="00322" />
+      <option name="presentableId" value="LOCAL-00322" />
+      <option name="project" value="LOCAL" />
+      <updated>1775800456941</updated>
+    </task>
+    <task id="LOCAL-00323" summary="added generate file">
+      <option name="closed" value="true" />
+      <created>1775800507196</created>
+      <option name="number" value="00323" />
+      <option name="presentableId" value="LOCAL-00323" />
+      <option name="project" value="LOCAL" />
+      <updated>1775800507197</updated>
+    </task>
+    <option name="localTasksCounter" value="324" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added error message if dosage is null" />
     <MESSAGE value="call new production records when load" />
     <MESSAGE value="updated the button icon for formulation when selected a formula" />
     <MESSAGE value="updated the button icon for formulation when selected a formula in mb auto" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added a condition for auto computation: if its not the first row, dont add separator" />
     <MESSAGE value="refactored the tumbler computation" />
     <MESSAGE value="added requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="added requirements.txt" />
+    <MESSAGE value="added generate file" />
+    <option name="LAST_COMMIT_MESSAGE" value="added generate file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
