@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QTableWidgetItem
 from util.field_format import NumericTableWidgetItem
 
 
-def process_formulation_normal(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
+def compute_generate(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
     """
     Normal Generate Function:
     - Splits material rows if they exceed the 25kg limit.
