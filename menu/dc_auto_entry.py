@@ -10,7 +10,7 @@ import qtawesome as fa
 from db.legacy import SyncRM
 from db.read import get_latest_prod_id, get_formula_select, get_formula_materials, \
     get_all_completer_data, get_single_production_details, get_single_production_data
-from table_model import table_spacing, table_tumbler_compute
+from table_model import table_spacing, table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
 from util.loading import LoadingDialog
@@ -643,6 +643,64 @@ class DCAutoEntry(QWidget):
 
         self.materials_table.setRowCount(0)
         self.update_totals()
+
+    def generate_function(self):
+        # Get the input values as text first
+        qty_req_text = self.qty_required_input.text().strip()
+        qty_batch_text = self.qty_per_batch_input.text().strip()
+        dosage_text = self.dosage_input.text().strip()
+
+        if not qty_req_text or not qty_batch_text:
+            print(dosage_text)
+            QMessageBox.warning(
+                self,
+                "Missing Information",
+                "Please fill out all 'Quantity Required', 'Quantity per Batch', and 'Dosage' fields before proceeding.",
+                QMessageBox.Ok
+            )
+            return
+        try:
+            quantity_req = float(qty_req_text)
+            quantity_batch = float(qty_batch_text)
+            dosage = float(dosage_text)
+
+            if quantity_batch == 0:
+                QMessageBox.warning(
+                    self,
+                    "Invalid Value",
+                    "Quantity per Batch cannot be zero.",
+                    QMessageBox.Ok
+                )
+                return
+
+            if dosage == 0:
+                QMessageBox.warning(
+                    self,
+                    "Invalid Value",
+                    "Dosage cannot be zero.",
+                    QMessageBox.Ok
+                )
+                return
+
+            batch_size = quantity_req / quantity_batch
+
+            table_generate_compute.compute_generate(
+                source_table=self.formulation_details,
+                target_table=self.materials_table,
+                total_weight=quantity_req,
+                batch_divisor=float(batch_size),
+                base_divisor=dosage
+            )
+
+            self.update_totals()
+
+        except ValueError:
+            QMessageBox.warning(
+                self,
+                "Invalid Input",
+                "Please enter valid numbers for Quantity Required and Quantity per Batch.",
+                QMessageBox.Ok
+            )
 
     def tumbler_function(self):
         # Get the input values as text first
