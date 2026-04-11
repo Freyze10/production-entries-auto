@@ -140,7 +140,7 @@ def get_all_completer_data():
     conn = get_connection()
     cur = conn.cursor()
 
-    # This single query gets distinct values for all 4 columns
+    # This single query gets distinct values for all 3 columns
     # and returns them as a single dictionary.
     cur.execute("""
         SELECT json_build_object(
@@ -154,7 +154,7 @@ def get_all_completer_data():
 
     cur.close()
     conn.close()
-    return
+    return result
 
 
 def get_lot_no():

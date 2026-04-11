@@ -8,7 +8,7 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
-    get_all_completer_data
+    get_all_completer_data, get_lot_no
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
@@ -132,6 +132,7 @@ class MBManualEntry(QWidget):
         self.lot_no_input = QLineEdit(objectName='required')
         self.lot_no_input.setPlaceholderText("Enter lot number")
         primary_layout.addWidget(QLabel("Lot No:"), row, 0)
+        self.lot_no_input.editingFinished.connect(self.validate_lot_number)
         primary_layout.addWidget(self.lot_no_input, row, 1)
         row += 1
 
@@ -473,14 +474,14 @@ class MBManualEntry(QWidget):
 
         # Get the prefix before the first '-'
         if '-' in lot_text:
-            prefix = lot_text.split('-', 1)[0].strip().upper()
+            first = lot_text.split('-', 1)[0].strip().upper()
         else:
-            prefix = lot_text.strip().upper()
-
+            first = lot_text.strip().upper()
+        print(lot_text, ":  ", first)
         # Your list of allowed prefixes (add all valid ones here)
-        allowed_prefixes = ["ABC", "XYZ", "LOT", "BATCH", "RAW", "FIN"]  # ← Change this
-
-        if prefix in allowed_prefixes:
+        lot_list = get_lot_no()
+        print(lot_list)
+        if first in lot_list:
             QMessageBox.warning(
                 self,
                 "Invalid Lot Number",

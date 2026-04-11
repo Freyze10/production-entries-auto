@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00291" summary="convert the dosage to float">
-      <option name="closed" value="true" />
-      <created>1775616684357</created>
-      <option name="number" value="00291" />
-      <option name="presentableId" value="LOCAL-00291" />
-      <option name="project" value="LOCAL" />
-      <updated>1775616684357</updated>
-    </task>
     <task id="LOCAL-00292" summary="added error message if dosage is null">
       <option name="closed" value="true" />
       <created>1775616741746</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775888810654</updated>
     </task>
-    <option name="localTasksCounter" value="340" />
+    <task id="LOCAL-00340" summary="created a query too call lot numberrs">
+      <option name="closed" value="true" />
+      <created>1775889004982</created>
+      <option name="number" value="00340" />
+      <option name="presentableId" value="LOCAL-00340" />
+      <option name="project" value="LOCAL" />
+      <updated>1775889004982</updated>
+    </task>
+    <option name="localTasksCounter" value="341" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the button colors" />
     <MESSAGE value="debugging display old details" />
     <MESSAGE value="call new production only is the prod_id is 0" />
     <MESSAGE value="fixed the calling of new prod" />
@@ -564,7 +563,8 @@
     <MESSAGE value="connected the mb and dc wuantity fields to batch text" />
     <MESSAGE value="added batch to manual page" />
     <MESSAGE value="added a function to check the lot number if it already exist" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a function to check the lot number if it already exist" />
+    <MESSAGE value="created a query too call lot numberrs" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a query too call lot numberrs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
