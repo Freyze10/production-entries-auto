@@ -146,7 +146,6 @@ def get_all_completer_data():
         SELECT json_build_object(
             'customers', (SELECT array_agg(DISTINCT customer) FROM tbl_production01 WHERE customer IS NOT NULL),
             'prod_codes', (SELECT array_agg(DISTINCT prod_code) FROM tbl_production01 WHERE prod_code IS NOT NULL),
-            'lots', (SELECT array_agg(DISTINCT lot_no) FROM tbl_production01 WHERE lot_no IS NOT NULL),
             'orders', (SELECT array_agg(DISTINCT order_no) FROM tbl_production01 WHERE order_no IS NOT NULL)
         )
     """)
@@ -155,7 +154,26 @@ def get_all_completer_data():
 
     cur.close()
     conn.close()
-    return result
+    return
+
+
+def get_lot_no():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT DISTINCT lot_no 
+        FROM tbl_production01 
+        WHERE lot_no IS NOT NULL
+        ORDER BY lot_no
+    """)
+
+    lot_list = [row[0] for row in cur.fetchall()]
+
+    cur.close()
+    conn.close()
+    return lot_list
+
 
 
 
