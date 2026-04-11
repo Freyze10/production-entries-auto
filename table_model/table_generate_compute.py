@@ -87,6 +87,8 @@ def compute_generate(source_table, target_table, total_weight, batch_divisor, ba
         else:
             d_large, d_small = cumulative_raw, 0.0
 
+        cumulative_raw = d_large
+
         # Insert final row
         insert_production_row(target_table, material_code, d_large, d_small, weight_total_full)
 
