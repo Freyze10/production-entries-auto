@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00287" summary="updated the mb auto text button">
-      <option name="closed" value="true" />
-      <created>1775549764780</created>
-      <option name="number" value="00287" />
-      <option name="presentableId" value="LOCAL-00287" />
-      <option name="project" value="LOCAL" />
-      <updated>1775549764780</updated>
-    </task>
     <task id="LOCAL-00288" summary="removed trailing spaces in the legacy">
       <option name="closed" value="true" />
       <created>1775550483377</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775884600183</updated>
     </task>
-    <option name="localTasksCounter" value="336" />
+    <task id="LOCAL-00336" summary="added a reusable update batch notes in field format">
+      <option name="closed" value="true" />
+      <created>1775885186548</created>
+      <option name="number" value="00336" />
+      <option name="presentableId" value="LOCAL-00336" />
+      <option name="project" value="LOCAL" />
+      <updated>1775885186548</updated>
+    </task>
+    <option name="localTasksCounter" value="337" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a auto completer in the field of manual page" />
     <MESSAGE value="added a refresh function" />
     <MESSAGE value="set the order of data besed on the date" />
     <MESSAGE value="removed the view button on the records" />
@@ -564,7 +563,8 @@
     <MESSAGE value="fixed the sonnection for auto compute of the notes" />
     <MESSAGE value="fixed the computation to use large scale value when the grams is serparated" />
     <MESSAGE value="did the same logic for the normal generate function" />
-    <option name="LAST_COMMIT_MESSAGE" value="did the same logic for the normal generate function" />
+    <MESSAGE value="added a reusable update batch notes in field format" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a reusable update batch notes in field format" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,12 +601,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>630</line>
+          <line>638</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>657</line>
+          <line>665</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

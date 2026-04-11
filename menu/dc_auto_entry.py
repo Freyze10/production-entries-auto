@@ -12,7 +12,8 @@ from db.read import get_latest_prod_id, get_formula_select, get_formula_material
     get_all_completer_data, get_single_production_details, get_single_production_data
 from table_model import table_spacing, table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
-from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
+from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
+    add_batch_text
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
 
@@ -173,7 +174,6 @@ class DCAutoEntry(QWidget):
         self.qty_per_batch_input = QLineEdit(objectName='required')
         self.qty_per_batch_input.setPlaceholderText("0.000000")
         self.qty_per_batch_input.focusOutEvent = lambda event: (format_to_float(self, event, self.qty_per_batch_input))
-        self.qty_per_batch_input.editingFinished.connect(self.add_batch_text)
         qty_layout.addWidget(self.qty_per_batch_input)
 
         primary_layout.addWidget(QLabel("Qty. Req:"), 12, 0)
@@ -190,6 +190,14 @@ class DCAutoEntry(QWidget):
         self.notes_input.setMaximumHeight(50)
         primary_layout.addWidget(QLabel("Notes:"), 14, 0)
         primary_layout.addWidget(self.notes_input, 14, 1)
+
+        self.qty_per_batch_input.editingFinished.connect(
+            lambda: add_batch_text(
+                self.qty_required_input.text(),
+                self.qty_per_batch_input.text(),
+                self.notes_input
+            )
+        )
 
         left_column.addWidget(primary_card)
 
@@ -318,14 +326,6 @@ class DCAutoEntry(QWidget):
                 return False
         else:
             self.new_production()
-
-    def add_batch_text(self):
-        try:
-            req, per = float(self.qty_required_input.text() or 0), float(self.qty_per_batch_input.text() or 0)
-            n = int(req / per) if per > 0 else 1
-            self.notes_input.setText(f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG.")
-        except Exception as e:
-            self.notes_input.setText("1 batch by 0.000 KG.")
 
     def setup_auto_completers(self):
         data = get_all_completer_data()

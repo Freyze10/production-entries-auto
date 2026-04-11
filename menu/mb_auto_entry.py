@@ -12,7 +12,8 @@ from db.read import get_latest_prod_id, get_formula_select, get_formula_material
     get_all_completer_data, get_single_production_details, get_single_production_data
 from table_model import table_spacing, table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
-from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
+from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
+    add_batch_text
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
 
@@ -188,6 +189,13 @@ class MBAutoEntry(QWidget):
         self.notes_input.setMaximumHeight(50)
         primary_layout.addWidget(QLabel("Notes:"), 14, 0)
         primary_layout.addWidget(self.notes_input, 14, 1)
+        self.qty_per_batch_input.editingFinished.connect(
+            lambda: add_batch_text(
+                self.qty_required_input.text(),
+                self.qty_per_batch_input.text(),
+                self.notes_input
+            )
+        )
 
         left_column.addWidget(primary_card)
 

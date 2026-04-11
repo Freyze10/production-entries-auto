@@ -43,7 +43,7 @@ def production_mixing_time(event, line_edit):
         line_edit.setText("5 MINS.")
 
 
-def update_batch_notes(required, per_batch, notes_field):
+def add_batch_text(required, per_batch, notes_field):
     """
     Reusable function to calculate and display batch information.
 
