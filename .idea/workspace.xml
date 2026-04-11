@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00296" summary="updated the button icon for formulation when selected a formula in mb auto">
-      <option name="closed" value="true" />
-      <created>1775617609903</created>
-      <option name="number" value="00296" />
-      <option name="presentableId" value="LOCAL-00296" />
-      <option name="project" value="LOCAL" />
-      <updated>1775617609903</updated>
-    </task>
     <task id="LOCAL-00297" summary="set the button to nofocus">
       <option name="closed" value="true" />
       <created>1775617809453</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775893477636</updated>
     </task>
-    <option name="localTasksCounter" value="345" />
+    <task id="LOCAL-00345" summary="connectd the auto completer in the manual">
+      <option name="closed" value="true" />
+      <created>1775893712766</created>
+      <option name="number" value="00345" />
+      <option name="presentableId" value="LOCAL-00345" />
+      <option name="project" value="LOCAL" />
+      <updated>1775893712766</updated>
+    </task>
+    <option name="localTasksCounter" value="346" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a condition for auto computation: if its not the first row, dont add separator" />
     <MESSAGE value="refactored the tumbler computation" />
     <MESSAGE value="added requirements.txt" />
     <MESSAGE value="added generate file" />
@@ -564,7 +563,8 @@
     <MESSAGE value="updated the reading of lotnumber" />
     <MESSAGE value="use onfocus out to better the validation on the field" />
     <MESSAGE value="created the auto completer outside to be reused" />
-    <option name="LAST_COMMIT_MESSAGE" value="created the auto completer outside to be reused" />
+    <MESSAGE value="connectd the auto completer in the manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="connectd the auto completer in the manual" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

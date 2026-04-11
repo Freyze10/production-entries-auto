@@ -73,19 +73,21 @@ def add_batch_text(required, per_batch, notes_field):
         notes_field.setText("1 batch by 0.000 KG.")
 
 
+lot_list_db = get_lot_no()
+
+
 def setup_auto_completers(customer_widget=None,
                           product_widget=None,
-                          order_widget=None):
+                          order_widget=None,
+                          lot_list=None):  # New parameter
     """
-    Sets up QCompleters for input fields.
-    You can pass any or all widgets.
+    Sets up QCompleters and also returns/updates the lot list.
     """
     data = get_all_completer_data()
 
     def setup_comp(widget, items):
         if not widget or not items:
             return
-        # Convert to string and remove empty values
         str_items = [str(i) for i in items if i]
         if not str_items:
             return
@@ -95,7 +97,7 @@ def setup_auto_completers(customer_widget=None,
         completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
         widget.setCompleter(completer)
 
-    # Apply completers only for the widgets that were passed
+    # Setup completers
     if customer_widget:
         setup_comp(customer_widget, data.get('customers', []))
 
@@ -104,6 +106,18 @@ def setup_auto_completers(customer_widget=None,
 
     if order_widget:
         setup_comp(order_widget, data.get('orders', []))
+
+    # Handle lot list - fetch fresh from database
+    lot_list_from_db = lot_list_db  # This calls the database
+
+    # If user passed a list (by reference), update it
+    if lot_list is not None and isinstance(lot_list, list):
+        lot_list.clear()  # Clear old content
+        lot_list.extend(lot_list_from_db)  # Fill with new data
+        return lot_list  # Return for convenience
+
+    # If no list was passed, just return the fresh list
+    return lot_list_from_db
 
 
 class SmartDateEdit(QLineEdit):

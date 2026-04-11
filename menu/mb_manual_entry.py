@@ -435,12 +435,13 @@ class MBManualEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
-        self.lot_list = get_lot_no()
+        self.lot_list = []
         # call the auto completer
-        setup_auto_completers(
+        self.lot_list = setup_auto_completers(
             customer_widget=self.customer_input,
             product_widget=self.product_code_input,
-            order_widget=self.order_form_no_input
+            order_widget=self.order_form_no_input,
+            lot_list=self.lot_list
         )
 
         if self.prod_id != 0:
