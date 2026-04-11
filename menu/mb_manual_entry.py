@@ -11,7 +11,8 @@ from db.read import get_single_production_data, get_single_production_details, g
     get_all_completer_data
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
-from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem
+from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
+    add_batch_text
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
 
@@ -223,6 +224,14 @@ class MBManualEntry(QWidget):
         primary_layout.addWidget(QLabel("Notes:"), row, 0)
         primary_layout.addWidget(self.notes_input, row, 1)
         row += 1
+
+        self.qty_per_batch_input.editingFinished.connect(
+            lambda: add_batch_text(
+                self.qty_required_input.text(),
+                self.qty_per_batch_input.text(),
+                self.notes_input
+            )
+        )
 
         left_column.addWidget(primary_card)
         scroll_layout.addLayout(left_column, stretch=1)
