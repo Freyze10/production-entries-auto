@@ -278,7 +278,7 @@ class DCAutoEntry(QWidget):
 
         generate_btn = QPushButton("Generate", objectName="PrimaryButton")
         generate_btn.setIcon(fa.icon('fa5s.cogs', color='white'))
-        # generate_btn.clicked.connect(self.generate_production)
+        generate_btn.clicked.connect(self.generate_function)
         button_layout.addWidget(generate_btn)
 
         tumbler_btn = QPushButton("Tumbler", objectName="TertiaryButton")

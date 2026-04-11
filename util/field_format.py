@@ -1,4 +1,5 @@
 # util/field_format.py
+import math
 import re
 
 from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem
@@ -41,6 +42,32 @@ def production_mixing_time(event, line_edit):
         # Optional: revert to default if invalid
         line_edit.setText("5 MINS.")
 
+
+def update_batch_notes(required, per_batch, notes_field):
+    """
+    Reusable function to calculate and display batch information.
+
+    Parameters:
+        required:    Quantity required (can be float, int, or str)
+        per_batch:   Quantity per batch (can be float, int, or str)
+        notes_field: The QLineEdit / QLabel / widget where the text will be shown
+    """
+    try:
+        # Convert inputs to float safely
+        req = float(required) if required is not None else 0.0
+        per = float(per_batch) if per_batch is not None else 0.0
+
+        if per <= 0:
+            raise ValueError("Per batch quantity must be greater than zero")
+
+        # Use math.ceil to round UP (important for batching)
+        n = math.ceil(req / per)
+
+        text = f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
+        notes_field.setText(text)
+
+    except Exception:
+        notes_field.setText("1 batch by 0.000 KG.")
 
 class SmartDateEdit(QLineEdit):
     """
