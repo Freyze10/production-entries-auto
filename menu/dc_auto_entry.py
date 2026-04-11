@@ -172,7 +172,8 @@ class DCAutoEntry(QWidget):
 
         self.qty_per_batch_input = QLineEdit(objectName='required')
         self.qty_per_batch_input.setPlaceholderText("0.000000")
-        self.qty_per_batch_input.focusOutEvent = lambda event: (format_to_float(self, event, self.qty_per_batch_input), self.add_batch_text)
+        self.qty_per_batch_input.focusOutEvent = lambda event: (format_to_float(self, event, self.qty_per_batch_input))
+        self.qty_per_batch_input.editingFinished.connect(self.add_batch_text)
         qty_layout.addWidget(self.qty_per_batch_input)
 
         primary_layout.addWidget(QLabel("Qty. Req:"), 12, 0)
@@ -320,11 +321,11 @@ class DCAutoEntry(QWidget):
 
     def add_batch_text(self):
         try:
-            req, per = float(str(self.qty_required_input)), float(str(self.qty_per_batch_input))
+            req, per = float(self.qty_required_input.text() or 0), float(self.qty_per_batch_input.text() or 0)
             n = int(req / per) if per > 0 else 1
-            return f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
-        except:
-            return "1 batch by 0.000 KG."
+            self.notes_input.setText(f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG.")
+        except Exception as e:
+            self.notes_input.setText("1 batch by 0.000 KG.")
 
     def setup_auto_completers(self):
         data = get_all_completer_data()
