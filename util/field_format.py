@@ -2,9 +2,12 @@
 import math
 import re
 
-from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem
+from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem, QCompleter
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeyEvent
+
+from db.read import get_all_completer_data
+
 
 def format_to_float(self, event, number, ):
     """Format the input to a float with 6 decimal places when focus is lost."""
@@ -68,6 +71,41 @@ def add_batch_text(required, per_batch, notes_field):
 
     except Exception:
         notes_field.setText("1 batch by 0.000 KG.")
+
+
+def setup_auto_completers(self,
+                          customer_widget=None,
+                          product_widget=None,
+                          order_widget=None):
+    """
+    Sets up QCompleters for input fields.
+    You can pass any or all widgets.
+    """
+    data = get_all_completer_data()
+
+    def setup_comp(widget, items):
+        if not widget or not items:
+            return
+        # Convert to string and remove empty values
+        str_items = [str(i) for i in items if i]
+        if not str_items:
+            return
+
+        completer = QCompleter(str_items)
+        completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+        widget.setCompleter(completer)
+
+    # Apply completers only for the widgets that were passed
+    if customer_widget:
+        setup_comp(customer_widget, data.get('customers', []))
+
+    if product_widget:
+        setup_comp(product_widget, data.get('prod_codes', []))
+
+    if order_widget:
+        setup_comp(order_widget, data.get('orders', []))
+
 
 class SmartDateEdit(QLineEdit):
     """

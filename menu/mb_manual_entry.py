@@ -466,6 +466,9 @@ class MBManualEntry(QWidget):
         setup_comp(self.product_code_input, data['prod_codes'])
         setup_comp(self.order_form_no_input, data.get('orders'))
 
+        # Get current list from database
+        self.lot_list = get_lot_no()
+
     def validate_lot_no(self, event):
         """Called every time the lot number field loses focus"""
         lot_text = self.lot_no_input.text().strip()
@@ -480,10 +483,8 @@ class MBManualEntry(QWidget):
         else:
             first_part = lot_text.strip().upper()
 
-        # Get current list from database
-        lot_list = get_lot_no()
 
-        if first_part in lot_list:
+        if first_part in self.lot_list:
             QMessageBox.warning(
                 self,
                 "Duplicate Lot Number",
