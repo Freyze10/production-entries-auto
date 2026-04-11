@@ -84,6 +84,9 @@ def compute_tumbler(source_table, target_table, total_weight, batch_divisor, bas
                 display_large_scale = cumulative_raw
                 display_small_scale = 0.0
 
+            # update the largescale cumulative value when the grams is seperated
+            cumulative_raw = display_large_scale
+
         # 5. Insert into Target Table
         row_pos = target_table.rowCount()
         target_table.insertRow(row_pos)

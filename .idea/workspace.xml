@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00284" summary="created  a connection to change to dc auto">
-      <option name="closed" value="true" />
-      <created>1775544364154</created>
-      <option name="number" value="00284" />
-      <option name="presentableId" value="LOCAL-00284" />
-      <option name="project" value="LOCAL" />
-      <updated>1775544364154</updated>
-    </task>
     <task id="LOCAL-00285" summary="removed the manual DC button">
       <option name="closed" value="true" />
       <created>1775545533442</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775809229005</updated>
     </task>
-    <option name="localTasksCounter" value="333" />
+    <task id="LOCAL-00333" summary="fixed the sonnection for auto compute of the notes">
+      <option name="closed" value="true" />
+      <created>1775877138701</created>
+      <option name="number" value="00333" />
+      <option name="presentableId" value="LOCAL-00333" />
+      <option name="project" value="LOCAL" />
+      <updated>1775877138701</updated>
+    </task>
+    <option name="localTasksCounter" value="334" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed the cm date and no in dc page" />
     <MESSAGE value="call new prod in init of manual entry" />
     <MESSAGE value="removed cm date and no  in manual" />
     <MESSAGE value="added a auto completer in the field of manual page" />
@@ -564,7 +563,8 @@
     <MESSAGE value="did the same in the dc auto page" />
     <MESSAGE value="added generate function in the dc auto entry" />
     <MESSAGE value="try to add a batch text" />
-    <option name="LAST_COMMIT_MESSAGE" value="try to add a batch text" />
+    <MESSAGE value="fixed the sonnection for auto compute of the notes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the sonnection for auto compute of the notes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
