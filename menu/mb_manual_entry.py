@@ -463,8 +463,38 @@ class MBManualEntry(QWidget):
 
         setup_comp(self.customer_input, data['customers'])
         setup_comp(self.product_code_input, data['prod_codes'])
-        setup_comp(self.lot_no_input, data['lots'])
         setup_comp(self.order_form_no_input, data.get('orders'))
+
+    def validate_lot_number(self):
+        lot_text = self.lot_no_input.text().strip()
+
+        if not lot_text:
+            return  # Allow empty for now (or make it required)
+
+        # Get the prefix before the first '-'
+        if '-' in lot_text:
+            prefix = lot_text.split('-', 1)[0].strip().upper()
+        else:
+            prefix = lot_text.strip().upper()
+
+        # Your list of allowed prefixes (add all valid ones here)
+        allowed_prefixes = ["ABC", "XYZ", "LOT", "BATCH", "RAW", "FIN"]  # ← Change this
+
+        if prefix in allowed_prefixes:
+            QMessageBox.warning(
+                self,
+                "Invalid Lot Number",
+                f"Lot number is already used.\n\n"
+                f"",
+                QMessageBox.StandardButton.Ok
+            )
+
+            # Return focus to the field and select all text
+            self.lot_no_input.setFocus()
+            self.lot_no_input.selectAll()
+            return False  # Validation failed
+
+        return True  # Validation passed
 
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
