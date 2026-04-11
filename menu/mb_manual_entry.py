@@ -132,7 +132,7 @@ class MBManualEntry(QWidget):
         self.lot_no_input = QLineEdit(objectName='required')
         self.lot_no_input.setPlaceholderText("Enter lot number")
         primary_layout.addWidget(QLabel("Lot No:"), row, 0)
-        self.lot_no_input.editingFinished.connect(self.validate_lot_number)
+        self.lot_no_input.focusOutEvent = self.validate_lot_no
         primary_layout.addWidget(self.lot_no_input, row, 1)
         row += 1
 
@@ -466,36 +466,42 @@ class MBManualEntry(QWidget):
         setup_comp(self.product_code_input, data['prod_codes'])
         setup_comp(self.order_form_no_input, data.get('orders'))
 
-    def validate_lot_number(self):
+    def validate_lot_no(self, event):
+        """Called every time the lot number field loses focus"""
         lot_text = self.lot_no_input.text().strip()
 
         if not lot_text:
-            return  # Allow empty for now (or make it required)
+            super().focusOutEvent(event)  # Allow leaving if empty
+            return
 
-        # Get the prefix before the first '-'
+        # Get the first part before '-'
         if '-' in lot_text:
-            first = lot_text.split('-', 1)[0].strip().upper()
+            first_part = lot_text.split('-', 1)[0].strip().upper()
         else:
-            first = lot_text.strip().upper()
-        print(lot_text, ":  ", first)
-        # Your list of allowed prefixes (add all valid ones here)
+            first_part = lot_text.strip().upper()
+
+        # Get current list from database
         lot_list = get_lot_no()
-        print(lot_list)
-        if first in lot_list:
+
+        if first_part in lot_list:
             QMessageBox.warning(
                 self,
-                "Invalid Lot Number",
-                f"Lot number is already used.\n\n"
-                f"",
+                "Duplicate Lot Number",
+                f"Lot number '{first_part}' is already used.\n\n"
+                "Please enter a different lot number.",
                 QMessageBox.StandardButton.Ok
             )
 
-            # Return focus to the field and select all text
+            # Force user back to the field
             self.lot_no_input.setFocus()
             self.lot_no_input.selectAll()
-            return False  # Validation failed
 
-        return True  # Validation passed
+            event.ignore()  # ← This blocks Tab / clicking away
+            return
+
+        # If valid → allow leaving the field
+        super().focusOutEvent(event)
+
 
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
