@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00292" summary="added error message if dosage is null">
-      <option name="closed" value="true" />
-      <created>1775616741746</created>
-      <option name="number" value="00292" />
-      <option name="presentableId" value="LOCAL-00292" />
-      <option name="project" value="LOCAL" />
-      <updated>1775616741748</updated>
-    </task>
     <task id="LOCAL-00293" summary="added error message if dosage is null">
       <option name="closed" value="true" />
       <created>1775617286754</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775889004982</updated>
     </task>
-    <option name="localTasksCounter" value="341" />
+    <task id="LOCAL-00341" summary="call the lotnumbers to match in the inserted lotnumber">
+      <option name="closed" value="true" />
+      <created>1775889751237</created>
+      <option name="number" value="00341" />
+      <option name="presentableId" value="LOCAL-00341" />
+      <option name="project" value="LOCAL" />
+      <updated>1775889751237</updated>
+    </task>
+    <option name="localTasksCounter" value="342" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debugging display old details" />
     <MESSAGE value="call new production only is the prod_id is 0" />
     <MESSAGE value="fixed the calling of new prod" />
     <MESSAGE value="changed the generate function to tumbler function" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added batch to manual page" />
     <MESSAGE value="added a function to check the lot number if it already exist" />
     <MESSAGE value="created a query too call lot numberrs" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a query too call lot numberrs" />
+    <MESSAGE value="call the lotnumbers to match in the inserted lotnumber" />
+    <option name="LAST_COMMIT_MESSAGE" value="call the lotnumbers to match in the inserted lotnumber" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -162,10 +162,14 @@ def get_lot_no():
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT DISTINCT lot_no 
-        FROM tbl_production01 
-        WHERE lot_no IS NOT NULL
-        ORDER BY lot_no
+        SELECT DISTINCT trimmed_part
+        FROM (
+            SELECT TRIM(unnest(string_to_array(lot_no, '-'))) AS trimmed_part
+            FROM tbl_production01 
+            WHERE lot_no IS NOT NULL
+        ) sub
+        WHERE trimmed_part != ''
+        ORDER BY trimmed_part
     """)
 
     lot_list = [row[0] for row in cur.fetchall()]
