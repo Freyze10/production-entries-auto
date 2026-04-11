@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem, QCompleter
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QKeyEvent
 
-from db.read import get_all_completer_data
+from db.read import get_all_completer_data, get_lot_no
 
 
 def format_to_float(self, event, number, ):
@@ -73,8 +73,7 @@ def add_batch_text(required, per_batch, notes_field):
         notes_field.setText("1 batch by 0.000 KG.")
 
 
-def setup_auto_completers(self,
-                          customer_widget=None,
+def setup_auto_completers(customer_widget=None,
                           product_widget=None,
                           order_widget=None):
     """

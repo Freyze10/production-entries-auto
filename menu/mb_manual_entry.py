@@ -12,7 +12,7 @@ from db.read import get_single_production_data, get_single_production_details, g
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
-    add_batch_text
+    add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
 
@@ -29,7 +29,6 @@ class MBManualEntry(QWidget):
         self.current_production_id = None
 
         self.setup_ui()
-        self.setup_auto_completers()
 
     def setup_ui(self):
 
@@ -436,6 +435,14 @@ class MBManualEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
+        self.lot_list = get_lot_no()
+        # call the auto completer
+        setup_auto_completers(
+            customer_widget=self.customer_input,
+            product_widget=self.product_code_input,
+            order_widget=self.order_form_no_input
+        )
+
         if self.prod_id != 0:
             try:
                 self.prod_results = get_single_production_data(self.prod_id)
@@ -451,23 +458,6 @@ class MBManualEntry(QWidget):
         else:
             self.new_production()
 
-    def setup_auto_completers(self):
-        data = get_all_completer_data()
-
-        def setup_comp(widget, items):
-            # Convert all items to strings (in case order_no is int)
-            str_items = [str(i) for i in items if i]
-            completer = QCompleter(str_items)
-            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-            completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
-            widget.setCompleter(completer)
-
-        setup_comp(self.customer_input, data['customers'])
-        setup_comp(self.product_code_input, data['prod_codes'])
-        setup_comp(self.order_form_no_input, data.get('orders'))
-
-        # Get current list from database
-        self.lot_list = get_lot_no()
 
     def validate_lot_no(self, event):
         """Called every time the lot number field loses focus"""
