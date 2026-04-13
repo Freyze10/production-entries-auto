@@ -256,7 +256,7 @@ class ProductionRecords(QWidget):
 
         view_manual_mb = menu.addAction(fa.icon('msc.wrench-subaction'), " Manual - MB")
         view_auto_mb = menu.addAction(fa.icon('ph.eye-light'), " Auto - MB")
-        view_manual_dc = menu.addAction(fa.icon('msc.tools'), " Manual - DC")
+        # view_manual_dc = menu.addAction(fa.icon('msc.tools'), " Manual - DC")
         view_auto_dc = menu.addAction(fa.icon('mdi.monitor-eye'), " Auto - DC")
 
         action = menu.exec(self.table_records.viewport().mapToGlobal(position))
@@ -267,8 +267,8 @@ class ProductionRecords(QWidget):
             self.view_manual(prod_id)
         elif action == view_auto_dc:
             self.view_auto_dc(prod_id)
-        elif action == view_manual_dc:
-            self.view_manual_dc(prod_id)
+        # elif action == view_manual_dc:
+        #     self.view_manual_dc(prod_id)
 
 
     def view_manual(self, prod_id):
@@ -276,8 +276,8 @@ class ProductionRecords(QWidget):
     def view_auto(self, prod_id):
         self.go_to_auto_entry.emit(prod_id)
 
-    def view_manual_dc(self, prod_id):
-        print("DC manual row ID:", prod_id)
+    # def view_manual_dc(self, prod_id):
+    #     print("DC manual row ID:", prod_id)
 
     def view_auto_dc(self, prod_id):
         self.go_to_dc_auto.emit(prod_id)

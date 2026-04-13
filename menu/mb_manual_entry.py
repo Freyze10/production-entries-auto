@@ -415,7 +415,7 @@ class MBManualEntry(QWidget):
 
         self.print_wip_btn = QPushButton("Print with WIP", objectName="SecondaryButton")
         self.print_wip_btn.setIcon(fa.icon('fa5s.print', color='white'))
-        # self.print_wip_btn.clicked.connect(self.print_with_wip)
+        self.print_wip_btn.clicked.connect(self.print_with_wip)
         button_layout.addWidget(self.print_wip_btn)
 
         self.print_btn = QPushButton("Print", objectName="WarningButton")
@@ -686,7 +686,7 @@ class MBManualEntry(QWidget):
         self.clear_material_inputs()
         self.update_totals()
 
-    def print_production(self):
+    def print_production(self, with_wip=None):
         if not self.production_id_input.text().strip():
             QMessageBox.warning(self, "No Data", "Please create or load a production record first.")
             return
