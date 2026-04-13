@@ -13,7 +13,7 @@ from db.read import get_latest_prod_id, get_formula_select, get_formula_material
 from table_model import table_spacing, table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
-    add_batch_text
+    add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
 from workstation.workstation_details import _get_workstation_info
 
@@ -30,7 +30,6 @@ class MBAutoEntry(QWidget):
         self.current_production_id = None
         self.formulation_details = None
         self.setup_ui()
-        self.setup_auto_completers()
 
     def setup_ui(self):
 
@@ -118,12 +117,10 @@ class MBAutoEntry(QWidget):
         primary_layout.addWidget(QLabel("Confirmation Date \n(For Inventory Only):"), 6, 0)
         primary_layout.addWidget(self.confirmation_date_input, 6, 1)
 
-        self.order_form_no_combo = QComboBox()
-        self.order_form_no_combo.setEditable(True)
-        self.order_form_no_combo.setPlaceholderText("Enter order form number")
-        self.order_form_no_combo.setStyleSheet("background-color: #FDECCE;")
+        self.order_form_no_input = QLineEdit(objectName='required')
+        self.order_form_no_input.setPlaceholderText("Enter order form number")
         primary_layout.addWidget(QLabel("Order Form No:"), 7, 0)
-        primary_layout.addWidget(self.order_form_no_combo, 7, 1)
+        primary_layout.addWidget(self.order_form_no_input, 7, 1)
 
         self.colormatch_no_input = QLineEdit()
         self.colormatch_no_input.setPlaceholderText("Enter colormatch number")
@@ -310,6 +307,15 @@ class MBAutoEntry(QWidget):
 
         main_layout.addLayout(button_layout)
 
+        self.lot_list = []
+        # call the auto completer
+        self.lot_list = setup_auto_completers(
+            customer_widget=self.customer_input,
+            product_widget=self.product_code_input,
+            order_widget=self.order_form_no_input,
+            lot_list=self.lot_list
+        )
+
         if self.prod_id != 0 and self.prod_id is not None:
             try:
                 self.prod_results = get_single_production_data(self.prod_id)
@@ -324,39 +330,6 @@ class MBAutoEntry(QWidget):
                 return False
         else:
             self.new_production()
-
-    def setup_auto_completers(self):
-        data = get_all_completer_data()
-        filtered_prod_codes = [code for code in data['prod_codes'] if code and "-" not in str(code)]
-
-        def setup_comp(widget, items):
-            # Convert all items to strings (in case order_no is int)
-            str_items = [str(i) for i in items if i]
-            completer = QCompleter(str_items)
-            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-            completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
-            widget.setCompleter(completer)
-
-        def setup_combo_comp(combo, items):
-            if not items: items = []
-            # 1. Create list with empty string at the first index
-            str_items = [""] + [str(i) for i in items if i]
-
-            # 2. Add items to the ComboBox dropdown
-            combo.clear()
-            combo.addItems(str_items)
-            completer = QCompleter(str_items)
-            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-            completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
-            completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
-            combo.setCompleter(completer)
-
-            # 4. Set default to the empty string (Index 0)
-            combo.setCurrentIndex(0)
-
-        setup_comp(self.customer_input, data['customers'])
-        setup_comp(self.product_code_input, filtered_prod_codes)
-        setup_combo_comp(self.order_form_no_combo, data.get('orders'))
 
 
     def show_formulation_selector(self):
@@ -552,7 +525,7 @@ class MBAutoEntry(QWidget):
         self.ld_percent_input.setText(f"{self.prod_results['ld']:.6f}")
         self.customer_input.setText(str(self.prod_results['customer']))
         self.lot_no_input.setText(str(self.prod_results['lot_no']))
-        self.order_form_no_combo.setCurrentText(str(self.prod_results['order_no']))
+        self.order_form_no_input.setText(str(self.prod_results['order_no']))
         self.colormatch_no_input.setText(str(self.prod_results['colormatch_no']))
         self.prepared_by_input.setText(str(self.prod_results['prepared_by']))
         self.notes_input.setPlainText(str(self.prod_results['note']))
@@ -627,7 +600,7 @@ class MBAutoEntry(QWidget):
         self.lot_no_input.clear()
         self.production_date_input.setText(QDate.currentDate().toString("MM/dd/yyyy"))
         self.confirmation_date_input.setText("")
-        self.order_form_no_combo.clear()
+        self.order_form_no_input.setText("")
         self.colormatch_no_input.clear()
         self.matched_date_input.setText("")
         self.mixing_time_input.clear()
@@ -771,7 +744,7 @@ class MBAutoEntry(QWidget):
             'prod_id': self.production_id_input.text().strip(),
             'form_type': self.form_type_combo.currentText(),
             'production_date': production_date,
-            'order_form_no': self.order_form_no_combo.currentText().strip(),
+            'order_form_no': self.order_form_no_input.text().strip(),
             'formulation_id': self.formulation_id_input.text().strip(),
             'product_code': self.product_code_input.text().strip(),
             'product_color': self.product_color_input.text().strip(),
