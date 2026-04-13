@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00310" summary="updated the button colors">
-      <option name="closed" value="true" />
-      <created>1775628668923</created>
-      <option name="number" value="00310" />
-      <option name="presentableId" value="LOCAL-00310" />
-      <option name="project" value="LOCAL" />
-      <updated>1775628668923</updated>
-    </task>
     <task id="LOCAL-00311" summary="updated the button colors">
       <option name="closed" value="true" />
       <created>1775629052844</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776052863807</updated>
     </task>
-    <option name="localTasksCounter" value="359" />
+    <task id="LOCAL-00359" summary="updating print spacingz">
+      <option name="closed" value="true" />
+      <created>1776058547188</created>
+      <option name="number" value="00359" />
+      <option name="presentableId" value="LOCAL-00359" />
+      <option name="project" value="LOCAL" />
+      <updated>1776058547188</updated>
+    </task>
+    <option name="localTasksCounter" value="360" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the sonnection for auto compute of the notes" />
     <MESSAGE value="fixed the computation to use large scale value when the grams is serparated" />
     <MESSAGE value="did the same logic for the normal generate function" />
     <MESSAGE value="added a reusable update batch notes in field format" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added lot input validation for mb and  dc" />
     <MESSAGE value="added a field for lot only for the  dc" />
     <MESSAGE value="added a field for lot only for the  ,b" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a field for lot only for the  ,b" />
+    <MESSAGE value="updating print spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating print spacing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

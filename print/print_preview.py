@@ -122,6 +122,7 @@ class ProductionPrintPreview(QDialog):
         if self.wip_no is True:
             lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
             lines.append(f"{' ':<{LEFT_W}}{box_ln('WIP', self.data.get('wip_no', ''))}")
+            lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
         lines.append(" ")
 
@@ -212,10 +213,10 @@ class ProductionPrintPreview(QDialog):
 
             if self.wip_no is True:
                 # ZONE 1: Header (Touch vertical lines)
-                if i <= 10:
+                if i <= 15:
                     line_h = 50.0
                 # ZONE 3: Footer (Touch name to overline)
-                elif 16 <= i <= 17:
+                elif 23 <= i <= 25:
                     line_h = 90
                 elif i >= (total_blocks - 6):
                     line_h = 80.0
@@ -227,10 +228,10 @@ class ProductionPrintPreview(QDialog):
                     line_h = 135.0
             else:
                 # ZONE 1: Header (Touch vertical lines)
-                if i <= 9:
-                    line_h = 100.0
+                if i <= 13:
+                    line_h = 50.0
                 # ZONE 3: Footer (Touch name to overline)
-                elif 15 <= i <= 16:
+                elif 20 <= i <= 22:
                     line_h = 90
                 elif i >= (total_blocks - 6):
                     line_h = 80.0
