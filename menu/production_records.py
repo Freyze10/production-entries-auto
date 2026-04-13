@@ -144,7 +144,7 @@ class ProductionRecords(QWidget):
 
         self.btn_cancelled = QPushButton("Cancelled", objectName="DangerButton")
         self.btn_cancelled.setIcon(fa.icon('mdi.cancel', color='white'))
-        self.btn_cancelled.clicked.connect(self.cancelled_records())
+        self.btn_cancelled.clicked.connect(self.cancelled_records)
         controls_layout.addWidget(self.btn_cancelled)
 
         controls_layout.addStretch()
@@ -307,7 +307,7 @@ class ProductionRecords(QWidget):
         try:
             cancelled_rows = get_cancelled_production_data()
 
-            self.table_model.set_data(self.rows)
+            self.table_model.set_data(cancelled_rows)
 
             # Reset the selection in the UI
             self.table_records.clearSelection()

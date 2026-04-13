@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00317" summary="changed the generate function to tumbler function">
-      <option name="closed" value="true" />
-      <created>1775633912267</created>
-      <option name="number" value="00317" />
-      <option name="presentableId" value="LOCAL-00317" />
-      <option name="project" value="LOCAL" />
-      <updated>1775633912267</updated>
-    </task>
     <task id="LOCAL-00318" summary="added a condition for auto computation: if its not the first row, dont add separator">
       <option name="closed" value="true" />
       <created>1775781712447</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776064384581</updated>
     </task>
-    <option name="localTasksCounter" value="366" />
+    <task id="LOCAL-00366" summary="add function to get cancelled records">
+      <option name="closed" value="true" />
+      <created>1776065115445</created>
+      <option name="number" value="00366" />
+      <option name="presentableId" value="LOCAL-00366" />
+      <option name="project" value="LOCAL" />
+      <updated>1776065115445</updated>
+    </task>
+    <option name="localTasksCounter" value="367" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a query too call lot numberrs" />
     <MESSAGE value="call the lotnumbers to match in the inserted lotnumber" />
     <MESSAGE value="updated the reading of lotnumber" />
     <MESSAGE value="use onfocus out to better the validation on the field" />
@@ -564,7 +563,8 @@
     <MESSAGE value="update print report to match the spacing og the preview" />
     <MESSAGE value="updated print, but still needs to modify" />
     <MESSAGE value="updated the fetchingof records to only get those not cancelled" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the fetchingof records to only get those not cancelled" />
+    <MESSAGE value="add function to get cancelled records" />
+    <option name="LAST_COMMIT_MESSAGE" value="add function to get cancelled records" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
