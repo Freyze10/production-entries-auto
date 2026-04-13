@@ -320,6 +320,22 @@ class ProductionRecords(QWidget):
             self.table_records.clearSelection()
             self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
+            self.table_records.setStyleSheet("""
+                QTableView {
+                    background-color: #fceaea;   /* Light red background */
+                    alternate-background-color: #f9d5d5;
+                    gridline-color: #e0b1b1;
+                    color: #721c24;              /* Dark red text */
+                    selection-background-color: #b83232;
+                    selection-color: white;
+                }
+                QHeaderView::section {
+                    background-color: #b83232;
+                    color: white;
+                    border: 1px solid #9e2a2a;
+                    padding: 4px;
+                }
+            """)
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
             # Reset the details table to its default empty state
@@ -347,6 +363,7 @@ class ProductionRecords(QWidget):
             self.table_records.clearSelection()
             self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
+            self.table_records.setStyleSheet("")
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
             # Reset the details table to its default empty state
