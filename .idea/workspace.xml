@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00298" summary="set the button to nofocus on dc page">
-      <option name="closed" value="true" />
-      <created>1775617830604</created>
-      <option name="number" value="00298" />
-      <option name="presentableId" value="LOCAL-00298" />
-      <option name="project" value="LOCAL" />
-      <updated>1775617830604</updated>
-    </task>
     <task id="LOCAL-00299" summary="call new production in the setup ui  in the mb page">
       <option name="closed" value="true" />
       <created>1775617879524</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775894282807</updated>
     </task>
-    <option name="localTasksCounter" value="347" />
+    <task id="LOCAL-00347" summary="removed the option for manual dc in the prod records">
+      <option name="closed" value="true" />
+      <created>1776042047575</created>
+      <option name="number" value="00347" />
+      <option name="presentableId" value="LOCAL-00347" />
+      <option name="project" value="LOCAL" />
+      <updated>1776042047575</updated>
+    </task>
+    <option name="localTasksCounter" value="348" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added requirements.txt" />
     <MESSAGE value="added generate file" />
     <MESSAGE value="changed the function name for  tumbler compute" />
     <MESSAGE value="refactor how the function is imported" />
@@ -564,7 +563,8 @@
     <MESSAGE value="created the auto completer outside to be reused" />
     <MESSAGE value="connectd the auto completer in the manual" />
     <MESSAGE value="updated the calling of function to make the database call only once" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the calling of function to make the database call only once" />
+    <MESSAGE value="removed the option for manual dc in the prod records" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the option for manual dc in the prod records" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
