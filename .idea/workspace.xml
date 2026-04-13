@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00306" summary="added a auto completer in the field of manual page">
-      <option name="closed" value="true" />
-      <created>1775621199487</created>
-      <option name="number" value="00306" />
-      <option name="presentableId" value="LOCAL-00306" />
-      <option name="project" value="LOCAL" />
-      <updated>1775621199488</updated>
-    </task>
     <task id="LOCAL-00307" summary="added a refresh function">
       <option name="closed" value="true" />
       <created>1775627964158</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776049821962</updated>
     </task>
-    <option name="localTasksCounter" value="355" />
+    <task id="LOCAL-00355" summary="updated the completer for mb and  dc pages auto">
+      <option name="closed" value="true" />
+      <created>1776050408949</created>
+      <option name="number" value="00355" />
+      <option name="presentableId" value="LOCAL-00355" />
+      <option name="project" value="LOCAL" />
+      <updated>1776050408951</updated>
+    </task>
+    <option name="localTasksCounter" value="356" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed the lotnumber autofill and add prodcode mb only in autocomplete" />
     <MESSAGE value="did the same in the dc auto page" />
     <MESSAGE value="added generate function in the dc auto entry" />
     <MESSAGE value="try to add a batch text" />
@@ -564,7 +563,8 @@
     <MESSAGE value="removed the unsused declaration of variable" />
     <MESSAGE value="making a validate file to reuse" />
     <MESSAGE value="refactor validate lot field to reuse" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor validate lot field to reuse" />
+    <MESSAGE value="updated the completer for mb and  dc pages auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the completer for mb and  dc pages auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,12 +601,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>611</line>
+          <line>597</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>638</line>
+          <line>624</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

@@ -15,6 +15,7 @@ from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
+from util.validate_input import validate_lot_field
 from workstation.workstation_details import _get_workstation_info
 
 
@@ -104,6 +105,7 @@ class MBAutoEntry(QWidget):
 
         self.lot_no_input = QLineEdit(objectName='required')
         self.lot_no_input.setPlaceholderText("Enter lot number")
+        self.lot_no_input.focusOutEvent = self.validate_lot_no
         primary_layout.addWidget(QLabel("Lot No:"), 4, 0)
         primary_layout.addWidget(self.lot_no_input, 4, 1)
 
@@ -485,35 +487,19 @@ class MBAutoEntry(QWidget):
 
         self.materials_table.setRowCount(0)
 
-        # for mat_row in range(materials_table.rowCount()):
-        #     mat_code = materials_table.item(mat_row, 0).text()
-        #     conc_str = materials_table.item(mat_row, 1).text()
-        #     try:
-        #         concentration = float(conc_str.replace("%", "").strip())
-        #     except ValueError:
-        #         concentration = 0.0
-        #
-        #     dosage = float(self.dosage_input.text())
-        #     masterbatch = 100
-        #     large_scale = concentration * 0.1
-        #     small_scale = concentration * 10
-        #     total_weight = large_scale + (small_scale / 1000)
-        #     total_loss = total_weight * 0.02
-        #     total_consumption = total_weight + total_loss
-        #
-        #     new_row = self.materials_table.rowCount()
-        #     self.materials_table.insertRow(new_row)
-        #
-        #     self.materials_table.setItem(new_row, 0, QTableWidgetItem(mat_code))
-        #     self.materials_table.setItem(new_row, 1, NumericTableWidgetItem(large_scale, is_float=True))
-        #     self.materials_table.setItem(new_row, 2, NumericTableWidgetItem(small_scale, is_float=True))
-        #     self.materials_table.setItem(new_row, 3, NumericTableWidgetItem(total_weight, is_float=True))
-        #     self.materials_table.setItem(new_row, 4, NumericTableWidgetItem(total_loss, is_float=True))
-        #     self.materials_table.setItem(new_row, 5, NumericTableWidgetItem(total_consumption, is_float=True))
-        #
-        # self.update_totals()
         dialog.accept()
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
+
+    def validate_lot_no(self, event):
+        if validate_lot_field(
+                parent=self,
+                widget=self.lot_no_input,
+                existing_list=self.lot_list,
+                event=event,
+                title="Duplicate Lot Number",
+                msg_body="Please enter a different lot number."
+        ):
+            super().focusOutEvent(event)
 
     def display_details(self):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
