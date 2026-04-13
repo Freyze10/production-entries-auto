@@ -7,6 +7,7 @@ from PyQt6.QtCore import pyqtSignal
 
 from db.legacy import Sync
 from db import read
+from db.read import get_cancelled_production_data
 from table_model.model import TableModel
 from util.debounce import finished_typing
 from util.loading import LoadingDialog
@@ -143,6 +144,7 @@ class ProductionRecords(QWidget):
 
         self.btn_cancelled = QPushButton("Cancelled", objectName="DangerButton")
         self.btn_cancelled.setIcon(fa.icon('mdi.cancel', color='white'))
+        self.btn_cancelled.clicked.connect(self.cancelled_records())
         controls_layout.addWidget(self.btn_cancelled)
 
         controls_layout.addStretch()
@@ -284,20 +286,38 @@ class ProductionRecords(QWidget):
 
     def refresh_records(self):
         try:
-            self.rows = read.get_all_production_data()
 
-            # 2. Update the main table model
             self.table_model.set_data(self.rows)
 
-            # 3. Reset the selection in the UI
+            # Reset the selection in the UI
             self.table_records.clearSelection()
             self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
-            # 4. Reset the details table to its default empty state
+            # Reset the details table to its default empty state
             self.details_table_model.set_data(self.details_row)
 
-            # 5. Clear search bar if text was entered
+            # Clear search bar if text was entered
+            self.search_input.clear()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
+
+    def cancelled_records(self):
+        try:
+            cancelled_rows = get_cancelled_production_data()
+
+            self.table_model.set_data(self.rows)
+
+            # Reset the selection in the UI
+            self.table_records.clearSelection()
+            self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
+
+            # Reset the details table to its default empty state
+            self.details_table_model.set_data(self.details_row)
+
+            # Clear search bar if text was entered
             self.search_input.clear()
 
         except Exception as e:
