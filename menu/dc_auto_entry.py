@@ -321,7 +321,7 @@ class DCAutoEntry(QWidget):
         )
         self.lot_list = [
             lot for lot in self.lot_list
-            if len(lot) >= 2 and lot[-1].isalpha() and lot[-2].isdigit()
+            if len(lot) >= 3 and lot[-1].isalpha() and lot[-2].isdigit()
         ]
 
         if self.prod_id != 0:

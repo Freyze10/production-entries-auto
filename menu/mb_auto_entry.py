@@ -318,6 +318,11 @@ class MBAutoEntry(QWidget):
             lot_list=self.lot_list
         )
 
+        self.lot_list = [
+            lot for lot in self.lot_list
+            if len(lot) >= 3 and lot[-2:].isalpha() and lot[-3].isdigit()
+        ]
+
         if self.prod_id != 0 and self.prod_id is not None:
             try:
                 self.prod_results = get_single_production_data(self.prod_id)
