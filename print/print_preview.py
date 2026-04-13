@@ -88,13 +88,11 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON, B_OFF = "<b>", "</b>"
             S_ON, S_OFF = '<span style="font-size: 18px; font-weight: bold;">', '</span>'
-            U_CHAR = "▔"
         else:
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
             S_ON, S_OFF = ESC + 'W' + '\x01' + ESC + 'E', ESC + 'F' + ESC + 'W' + '\x00'
-            U_CHAR = "\xdf"  # CP437 Top Block for Overline
 
         WIDTH, BOX_W = 80, 34
         LEFT_W = WIDTH - BOX_W
