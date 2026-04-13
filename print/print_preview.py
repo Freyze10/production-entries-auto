@@ -15,6 +15,7 @@ class ProductionPrintPreview(QDialog):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []
+        self.wip_no = wip_no
         self.default_font_size = 10
 
         self.setWindowTitle("Industrial Sharp Preview - Epson LX-310")
@@ -114,8 +115,9 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
 
-
-
+        if self.wip_no is True:
+            lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+            lines.append(f"{' ':<{LEFT_W}}{box_ln('WIP', self.data.get('wip_no', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
         lines.append(" ")
 
