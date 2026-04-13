@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00309" summary="removed the view button on the records">
-      <option name="closed" value="true" />
-      <created>1775628352837</created>
-      <option name="number" value="00309" />
-      <option name="presentableId" value="LOCAL-00309" />
-      <option name="project" value="LOCAL" />
-      <updated>1775628352837</updated>
-    </task>
     <task id="LOCAL-00310" summary="updated the button colors">
       <option name="closed" value="true" />
       <created>1775628668923</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776052698853</updated>
     </task>
-    <option name="localTasksCounter" value="358" />
+    <task id="LOCAL-00358" summary="added a field for lot only for the  ,b">
+      <option name="closed" value="true" />
+      <created>1776052863807</created>
+      <option name="number" value="00358" />
+      <option name="presentableId" value="LOCAL-00358" />
+      <option name="project" value="LOCAL" />
+      <updated>1776052863807</updated>
+    </task>
+    <option name="localTasksCounter" value="359" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="try to add a batch text" />
     <MESSAGE value="fixed the sonnection for auto compute of the notes" />
     <MESSAGE value="fixed the computation to use large scale value when the grams is serparated" />
     <MESSAGE value="did the same logic for the normal generate function" />
@@ -564,7 +563,8 @@
     <MESSAGE value="updated the completer for mb and  dc pages auto" />
     <MESSAGE value="added lot input validation for mb and  dc" />
     <MESSAGE value="added a field for lot only for the  dc" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a field for lot only for the  dc" />
+    <MESSAGE value="added a field for lot only for the  ,b" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a field for lot only for the  ,b" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

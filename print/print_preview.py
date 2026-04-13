@@ -100,18 +100,24 @@ class ProductionPrintPreview(QDialog):
 
         def box_ln(label, val):
             return f"{V} {label[:15]:<15} : {str(val)[:12]:<12} {V}"
+        #
+        #
 
         # --- 1. HEADER (Rows 0-9) ---
-        lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
-        lines.append(
-            f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
-        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
-        lines.append(f"{f_no:<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
+        lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{'':<{LEFT_W}}{box_ln('PRODUCTION ID', self.data.get('prod_id', ''))}")
+        lines.append(f"{'':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{' ':<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
+        lines.append(f"{f_no:<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
 
         if self.wip_no is True:
             lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
@@ -204,20 +210,36 @@ class ProductionPrintPreview(QDialog):
             fmt = block.blockFormat()
             text = block.text().upper()
 
-            # ZONE 1: Header (Touch vertical lines)
-            if i <= 9:
-                line_h = 100.0
-            # ZONE 3: Footer (Touch name to overline)
-            elif 15 <= i <= 16:
-                line_h = 90
-            elif i >= (total_blocks - 6):
-                line_h = 80.0
-                # Summary Line (Room for Big Font)
-            elif "BATCH BY" in text:
-                line_h = 160.0
-            # ZONE 2: Body (Readable spacing)
+            if self.wip_no is True:
+                # ZONE 1: Header (Touch vertical lines)
+                if i <= 10:
+                    line_h = 50.0
+                # ZONE 3: Footer (Touch name to overline)
+                elif 16 <= i <= 17:
+                    line_h = 90
+                elif i >= (total_blocks - 6):
+                    line_h = 80.0
+                    # Summary Line (Room for Big Font)
+                elif "BATCH BY" in text:
+                    line_h = 160.0
+                # ZONE 2: Body (Readable spacing)
+                else:
+                    line_h = 135.0
             else:
-                line_h = 135.0
+                # ZONE 1: Header (Touch vertical lines)
+                if i <= 9:
+                    line_h = 100.0
+                # ZONE 3: Footer (Touch name to overline)
+                elif 15 <= i <= 16:
+                    line_h = 90
+                elif i >= (total_blocks - 6):
+                    line_h = 80.0
+                    # Summary Line (Room for Big Font)
+                elif "BATCH BY" in text:
+                    line_h = 160.0
+                # ZONE 2: Body (Readable spacing)
+                else:
+                    line_h = 135.0
 
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
