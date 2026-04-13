@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00307" summary="added a refresh function">
-      <option name="closed" value="true" />
-      <created>1775627964158</created>
-      <option name="number" value="00307" />
-      <option name="presentableId" value="LOCAL-00307" />
-      <option name="project" value="LOCAL" />
-      <updated>1775627964158</updated>
-    </task>
     <task id="LOCAL-00308" summary="set the order of data besed on the date">
       <option name="closed" value="true" />
       <created>1775628229945</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776050408951</updated>
     </task>
-    <option name="localTasksCounter" value="356" />
+    <task id="LOCAL-00356" summary="added lot input validation for mb and  dc">
+      <option name="closed" value="true" />
+      <created>1776051414520</created>
+      <option name="number" value="00356" />
+      <option name="presentableId" value="LOCAL-00356" />
+      <option name="project" value="LOCAL" />
+      <updated>1776051414520</updated>
+    </task>
+    <option name="localTasksCounter" value="357" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="did the same in the dc auto page" />
     <MESSAGE value="added generate function in the dc auto entry" />
     <MESSAGE value="try to add a batch text" />
     <MESSAGE value="fixed the sonnection for auto compute of the notes" />
@@ -564,7 +563,8 @@
     <MESSAGE value="making a validate file to reuse" />
     <MESSAGE value="refactor validate lot field to reuse" />
     <MESSAGE value="updated the completer for mb and  dc pages auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the completer for mb and  dc pages auto" />
+    <MESSAGE value="added lot input validation for mb and  dc" />
+    <option name="LAST_COMMIT_MESSAGE" value="added lot input validation for mb and  dc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

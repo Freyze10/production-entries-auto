@@ -319,6 +319,10 @@ class DCAutoEntry(QWidget):
             order_widget=self.order_form_no_input,
             lot_list=self.lot_list
         )
+        self.lot_list = [
+            lot for lot in self.lot_list
+            if len(lot) >= 2 and lot[-1].isalpha() and lot[-2].isdigit()
+        ]
 
         if self.prod_id != 0:
             try:
