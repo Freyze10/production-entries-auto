@@ -14,6 +14,7 @@ from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
+from util.validate_input import validate_lot_field
 from workstation.workstation_details import _get_workstation_info
 
 
@@ -459,40 +460,16 @@ class MBManualEntry(QWidget):
         else:
             self.new_production()
 
-
     def validate_lot_no(self, event):
-        """Called every time the lot number field loses focus"""
-        lot_text = self.lot_no_input.text().strip()
-
-        if not lot_text:
-            super().focusOutEvent(event)  # Allow leaving if empty
-            return
-
-        # Get the first part before '-'
-        if '-' in lot_text:
-            first_part = lot_text.split('-', 1)[0].strip().upper()
-        else:
-            first_part = lot_text.strip().upper()
-
-
-        if first_part in self.lot_list:
-            QMessageBox.warning(
-                self,
-                "Duplicate Lot Number",
-                f"Lot number '{first_part}' is already used.\n\n"
-                "Please enter a different lot number.",
-                QMessageBox.StandardButton.Ok
-            )
-
-            # Force user back to the field
-            self.lot_no_input.setFocus()
-            self.lot_no_input.selectAll()
-
-            event.ignore()  # ← This blocks Tab / clicking away
-            return
-
-        # If valid → allow leaving the field
-        super().focusOutEvent(event)
+        if validate_lot_field(
+                parent=self,
+                widget=self.lot_no_input,
+                existing_list=self.lot_list,
+                event=event,
+                title="Duplicate Lot Number",
+                msg_body="Please enter a different lot number."
+        ):
+            super().focusOutEvent(event)
 
 
     def on_material_type_changed(self, checked, is_raw):

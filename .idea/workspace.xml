@@ -120,30 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00302" summary="updated the completer for the order number in dc page">
-      <option name="closed" value="true" />
-      <created>1775618982876</created>
-      <option name="number" value="00302" />
-      <option name="presentableId" value="LOCAL-00302" />
-      <option name="project" value="LOCAL" />
-      <updated>1775618982876</updated>
-    </task>
-    <task id="LOCAL-00303" summary="removed the cm date and no in dc page">
-      <option name="closed" value="true" />
-      <created>1775619025589</created>
-      <option name="number" value="00303" />
-      <option name="presentableId" value="LOCAL-00303" />
-      <option name="project" value="LOCAL" />
-      <updated>1775619025589</updated>
-    </task>
-    <task id="LOCAL-00304" summary="call new prod in init of manual entry">
-      <option name="closed" value="true" />
-      <created>1775620582276</created>
-      <option name="number" value="00304" />
-      <option name="presentableId" value="LOCAL-00304" />
-      <option name="project" value="LOCAL" />
-      <updated>1775620582276</updated>
-    </task>
     <task id="LOCAL-00305" summary="removed cm date and no  in manual">
       <option name="closed" value="true" />
       <created>1775620619505</created>
@@ -512,7 +488,31 @@
       <option name="project" value="LOCAL" />
       <updated>1776042988154</updated>
     </task>
-    <option name="localTasksCounter" value="351" />
+    <task id="LOCAL-00351" summary="replaced the underline used in the approved by">
+      <option name="closed" value="true" />
+      <created>1776048740827</created>
+      <option name="number" value="00351" />
+      <option name="presentableId" value="LOCAL-00351" />
+      <option name="project" value="LOCAL" />
+      <updated>1776048740827</updated>
+    </task>
+    <task id="LOCAL-00352" summary="removed the unsused declaration of variable">
+      <option name="closed" value="true" />
+      <created>1776048763495</created>
+      <option name="number" value="00352" />
+      <option name="presentableId" value="LOCAL-00352" />
+      <option name="project" value="LOCAL" />
+      <updated>1776048763495</updated>
+    </task>
+    <task id="LOCAL-00353" summary="making a validate file to reuse">
+      <option name="closed" value="true" />
+      <created>1776049392920</created>
+      <option name="number" value="00353" />
+      <option name="presentableId" value="LOCAL-00353" />
+      <option name="project" value="LOCAL" />
+      <updated>1776049392920</updated>
+    </task>
+    <option name="localTasksCounter" value="354" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,9 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor how the function is imported" />
-    <MESSAGE value="addded requirements.txt" />
-    <MESSAGE value="created the function for generating the normal computation" />
     <MESSAGE value="generated a normal generate production form" />
     <MESSAGE value="removed the lotnumber autofill and add prodcode mb only in autocomplete" />
     <MESSAGE value="did the same in the dc auto page" />
@@ -564,7 +561,10 @@
     <MESSAGE value="removed the option for manual dc in the prod records" />
     <MESSAGE value="create a function call for with wip print" />
     <MESSAGE value="fixed the printing preview to fetch the wip no when selected" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the printing preview to fetch the wip no when selected" />
+    <MESSAGE value="replaced the underline used in the approved by" />
+    <MESSAGE value="removed the unsused declaration of variable" />
+    <MESSAGE value="making a validate file to reuse" />
+    <option name="LAST_COMMIT_MESSAGE" value="making a validate file to reuse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -576,7 +576,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>56</line>
+          <line>57</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
