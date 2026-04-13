@@ -256,28 +256,47 @@ class ProductionPrintPreview(QDialog):
         printer_name = self.printer_combo.currentText()
         try:
             lines = self.build_report_map(mode="printer")
-            raw_text = "\n".join(lines)
+            total = len(lines)
             ESC = '\x1b'
             init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
 
-            parts = raw_text.split('\n')
-            header = "\n".join(parts[:10])
-            body = "\n".join(parts[10:-6])
-            footer = "\n".join(parts[-6:])
+            # Mirror the exact same zone logic from refresh_preview
+            # ESC '3' <n>: line spacing = n/216 inch
+            # 50%  preview -> \x0C (12 dots) — header, tight box lines
+            # 90%  preview -> \x16 (22 dots) — footer name rows
+            # 135% preview -> \x28 (40 dots) — body
+            # 160% preview -> \x42 (66 dots) — BATCH BY summary line
+            # 80%  preview -> \x14 (20 dots) — last 6 footer lines
 
-            # Hardware Spacing:
-            # 24 dots = 100% (Header)
-            # 49 dots = ~135% (Body)
-            # 22 dots = ~80% (Footer)
-            payload = (init + (ESC + '3' + '\x18') + header + "\n" +
-                       (ESC + '3' + '\x31') + body + "\n" +
-                       (ESC + '3' + '\x16') + footer + '\x0c')
+            header_limit = 15 if self.wip_no else 13
+            footer_name_start = 23 if self.wip_no else 20
+            footer_name_end = 25 if self.wip_no else 22
+            footer_start = total - 6
+
+            payload = init
+            for i, line in enumerate(lines):
+                text_upper = line.upper()
+
+                if i <= header_limit:
+                    spacing = '\x0C'  # 12 dots  — matches 50% preview
+                elif footer_name_start <= i <= footer_name_end:
+                    spacing = '\x16'  # 22 dots  — matches 90% preview
+                elif i >= footer_start:
+                    spacing = '\x14'  # 20 dots  — matches 80% preview
+                elif "BATCH BY" in text_upper:
+                    spacing = '\x42'  # 66 dots  — matches 160% preview
+                else:
+                    spacing = '\x28'  # 40 dots  — matches 135% preview
+
+                payload += ESC + '3' + spacing + line + '\n'
+
+            payload += '\x0c'  # form feed
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Entry", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
-                win32print.WritePrinter(hPrinter, payload.encode('latin-1'))  # Latin-1 pass-through for Hex
+                win32print.WritePrinter(hPrinter, payload.encode('latin-1'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully.")
