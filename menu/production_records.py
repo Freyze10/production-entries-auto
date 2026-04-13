@@ -144,7 +144,7 @@ class ProductionRecords(QWidget):
 
         self.btn_cancelled = QPushButton("Cancelled", objectName="DangerButton")
         self.btn_cancelled.setIcon(fa.icon('mdi.cancel', color='white'))
-        self.btn_cancelled.clicked.connect(self.cancelled_records)
+        self.btn_cancelled.clicked.connect(self.btn_cancel_clicked)
         controls_layout.addWidget(self.btn_cancelled)
 
         controls_layout.addStretch()
@@ -305,8 +305,10 @@ class ProductionRecords(QWidget):
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
 
     def btn_cancel_clicked(self):
-        if self.btn_cancelled.text() is "Cancelled":
+        if self.btn_cancelled.text() == "Cancelled":
             self.cancelled_records()
+        else:
+            self.production_records()
 
     def cancelled_records(self):
         try:
