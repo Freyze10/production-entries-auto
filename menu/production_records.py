@@ -292,6 +292,7 @@ class ProductionRecords(QWidget):
             # Reset the selection in the UI
             self.table_records.clearSelection()
             self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.table_records.scrollToTop()
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
             # Reset the details table to its default empty state
@@ -303,6 +304,10 @@ class ProductionRecords(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
 
+    def btn_cancel_clicked(self):
+        if self.btn_cancelled.text() is "Cancelled":
+            self.cancelled_records()
+
     def cancelled_records(self):
         try:
             cancelled_rows = get_cancelled_production_data()
@@ -312,6 +317,7 @@ class ProductionRecords(QWidget):
             # Reset the selection in the UI
             self.table_records.clearSelection()
             self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.table_records.scrollToTop()
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
             # Reset the details table to its default empty state
@@ -319,6 +325,40 @@ class ProductionRecords(QWidget):
 
             # Clear search bar if text was entered
             self.search_input.clear()
+
+            #     change name of button
+            self.btn_cancelled.setText("Show Records")
+            self.btn_cancelled.setObjectName("SuccessButton")
+            self.btn_cancelled.setIcon(fa.icon('ri.file-paper-2-fill', color='white'))
+            self.btn_cancelled.style().unpolish(self.btn_cancelled)
+            self.btn_cancelled.style().polish(self.btn_cancelled)
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
+
+    def production_records(self):
+        try:
+
+            self.table_model.set_data(self.rows)
+
+            # Reset the selection in the UI
+            self.table_records.clearSelection()
+            self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.table_records.scrollToTop()
+            self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
+
+            # Reset the details table to its default empty state
+            self.details_table_model.set_data(self.details_row)
+
+            # Clear search bar if text was entered
+            self.search_input.clear()
+
+            #     change name of button
+            self.btn_cancelled.setText("Cancelled")
+            self.btn_cancelled.setObjectName("DangerButton")
+            self.btn_cancelled.setIcon(fa.icon('mdi.cancel', color='white'))
+            self.btn_cancelled.style().unpolish(self.btn_cancelled)
+            self.btn_cancelled.style().polish(self.btn_cancelled)
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
