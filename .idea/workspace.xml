@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00301" summary="updated the completer for the order number in mb page">
-      <option name="closed" value="true" />
-      <created>1775618936282</created>
-      <option name="number" value="00301" />
-      <option name="presentableId" value="LOCAL-00301" />
-      <option name="project" value="LOCAL" />
-      <updated>1775618936282</updated>
-    </task>
     <task id="LOCAL-00302" summary="updated the completer for the order number in dc page">
       <option name="closed" value="true" />
       <created>1775618982876</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776042711228</updated>
     </task>
-    <option name="localTasksCounter" value="350" />
+    <task id="LOCAL-00350" summary="fixed the printing preview to fetch the wip no when selected">
+      <option name="closed" value="true" />
+      <created>1776042988154</created>
+      <option name="number" value="00350" />
+      <option name="presentableId" value="LOCAL-00350" />
+      <option name="project" value="LOCAL" />
+      <updated>1776042988154</updated>
+    </task>
+    <option name="localTasksCounter" value="351" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the function name for  tumbler compute" />
     <MESSAGE value="refactor how the function is imported" />
     <MESSAGE value="addded requirements.txt" />
     <MESSAGE value="created the function for generating the normal computation" />
@@ -564,7 +563,8 @@
     <MESSAGE value="updated the calling of function to make the database call only once" />
     <MESSAGE value="removed the option for manual dc in the prod records" />
     <MESSAGE value="create a function call for with wip print" />
-    <option name="LAST_COMMIT_MESSAGE" value="create a function call for with wip print" />
+    <MESSAGE value="fixed the printing preview to fetch the wip no when selected" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the printing preview to fetch the wip no when selected" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

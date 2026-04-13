@@ -170,7 +170,7 @@ class ProductionPrintPreview(QDialog):
         lines.append(" ")
 
         # --- 5. FOOTER / SIGNATURES ---
-        u = U_CHAR * 24
+        u = H * 24
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
             # Centering Math: 14(label) + 26(val) + 16(label) + 24(val) = 80 total
