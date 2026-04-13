@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00311" summary="updated the button colors">
-      <option name="closed" value="true" />
-      <created>1775629052844</created>
-      <option name="number" value="00311" />
-      <option name="presentableId" value="LOCAL-00311" />
-      <option name="project" value="LOCAL" />
-      <updated>1775629052844</updated>
-    </task>
     <task id="LOCAL-00312" summary="debugging display old details">
       <option name="closed" value="true" />
       <created>1775630646055</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776058547188</updated>
     </task>
-    <option name="localTasksCounter" value="360" />
+    <task id="LOCAL-00360" summary="fixing print spacings">
+      <option name="closed" value="true" />
+      <created>1776059846743</created>
+      <option name="number" value="00360" />
+      <option name="presentableId" value="LOCAL-00360" />
+      <option name="project" value="LOCAL" />
+      <updated>1776059846743</updated>
+    </task>
+    <option name="localTasksCounter" value="361" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the computation to use large scale value when the grams is serparated" />
     <MESSAGE value="did the same logic for the normal generate function" />
     <MESSAGE value="added a reusable update batch notes in field format" />
     <MESSAGE value="connected the mb and dc wuantity fields to batch text" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added a field for lot only for the  dc" />
     <MESSAGE value="added a field for lot only for the  ,b" />
     <MESSAGE value="updating print spacing" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating print spacing" />
+    <MESSAGE value="fixing print spacings" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing print spacings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -608,6 +608,11 @@
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
           <line>629</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/css/styles.py</url>
+          <line>357</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

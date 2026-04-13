@@ -1,5 +1,6 @@
 import win32print
 import qtawesome as fa
+import math
 from datetime import datetime
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QFont, QTextBlockFormat, QTextCursor
@@ -83,13 +84,39 @@ class ProductionPrintPreview(QDialog):
         except:
             pass
 
+    def get_line_params(self, index, text, total_count):
+        """
+        CENTRAL SPACING LOGIC
+        Returns (UI_Proportional_Height, Printer_ESC_Dots)
+        """
+        text = text.upper()
+        header_limit = 16 if self.wip_no else 13
+        material_row = True if self.wip_no else False
+        sig_start = total_count - 6
+
+        if material_row:
+            if 23 <= index <= 25:
+                return 90.0, 28
+        else:
+            if 20 <= index <= 22:
+                return 90.0, 28
+        if index <= header_limit:
+            return 50.0, 15
+        elif "BATCH BY" in text:
+            return 160.0, 48
+        elif index >= sig_start:
+            return 80.0, 22  # Footer is now consistently tighter
+        else:
+            return 135.0, 40
+
     def build_report_map(self, mode="screen"):
         if mode == "screen":
             H, V, TL, TR, BL, BR = "─", "│", "┌", "┐", "└", "┘"
             B_ON, B_OFF = "<b>", "</b>"
             S_ON, S_OFF = '<span style="font-size: 18px; font-weight: bold;">', '</span>'
         else:
-            H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
+            # Using standard ASCII for high-speed dot matrix stability
+            H, V, TL, TR, BL, BR = "-", "|", "+", "+", "+", "+"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
             S_ON, S_OFF = ESC + 'W' + '\x01' + ESC + 'E', ESC + 'F' + ESC + 'W' + '\x00'
@@ -100,10 +127,8 @@ class ProductionPrintPreview(QDialog):
 
         def box_ln(label, val):
             return f"{V} {label[:15]:<15} : {str(val)[:12]:<12} {V}"
-        #
-        #
 
-        # --- 1. HEADER (Rows 0-9) ---
+        # --- 1. HEADER ---
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
         lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
@@ -119,10 +144,11 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
 
-        if self.wip_no is True:
+        if self.wip_no:
             lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
             lines.append(f"{' ':<{LEFT_W}}{box_ln('WIP', self.data.get('wip_no', ''))}")
             lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+
         lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
         lines.append(" ")
 
@@ -158,7 +184,7 @@ class ProductionPrintPreview(QDialog):
         for m in self.mats:
             m_c = str(m.get('material_code', ''))
             if not m_c.strip():
-                lines.append(" " * WIDTH)
+                lines.append(" " * WIDTH)  # Empty row for physical split
                 continue
 
             l_v = f"{float(m.get('large_scale', 0)):18.6f}"
@@ -167,18 +193,16 @@ class ProductionPrintPreview(QDialog):
             lines.append(f"{B_ON}{m_c[:24]:<25} {l_v} {s_v} {w_v}{B_OFF}")
         lines.append(H * WIDTH)
 
-        # --- 4. TOTAL & GAPS ---
+        # --- 4. TOTAL ---
         prod_total = f"{float(self.data.get('qty_produced', 0)):.6f}"
         lines.append(f"NOTE: {summary[:42]:<44} TOTAL: {B_ON}{prod_total:>18}{B_OFF}")
-        lines.append(" ");
-        lines.append(" ");
+        lines.append(" ")
         lines.append(" ")
 
-        # --- 5. FOOTER / SIGNATURES ---
-        u = H * 24
+        # --- 5. FOOTER ---
+        u = H * 24  # Simplified underline for printer
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
-            # Centering Math: 14(label) + 26(val) + 16(label) + 24(val) = 80 total
             return f"{lab_l:<14}{str(val_l)[:22]:<26}{lab_r:<16}{str(val_r)[:24]:^24}"
 
         lines.append(sig_ln("PREPARED BY :", self.data.get('prepared_by', ''), "APPROVED BY    :",
@@ -208,41 +232,10 @@ class ProductionPrintPreview(QDialog):
         total_blocks = doc.blockCount()
         for i in range(total_blocks):
             block = doc.findBlockByNumber(i)
+            ui_height, _ = self.get_line_params(i, block.text(), total_blocks)
+
             fmt = block.blockFormat()
-            text = block.text().upper()
-
-            if self.wip_no is True:
-                # ZONE 1: Header (Touch vertical lines)
-                if i <= 15:
-                    line_h = 50.0
-                # ZONE 3: Footer (Touch name to overline)
-                elif 23 <= i <= 25:
-                    line_h = 90
-                elif i >= (total_blocks - 6):
-                    line_h = 80.0
-                    # Summary Line (Room for Big Font)
-                elif "BATCH BY" in text:
-                    line_h = 160.0
-                # ZONE 2: Body (Readable spacing)
-                else:
-                    line_h = 135.0
-            else:
-                # ZONE 1: Header (Touch vertical lines)
-                if i <= 13:
-                    line_h = 50.0
-                # ZONE 3: Footer (Touch name to overline)
-                elif 20 <= i <= 22:
-                    line_h = 90
-                elif i >= (total_blocks - 6):
-                    line_h = 80.0
-                    # Summary Line (Room for Big Font)
-                elif "BATCH BY" in text:
-                    line_h = 160.0
-                # ZONE 2: Body (Readable spacing)
-                else:
-                    line_h = 135.0
-
-            fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
+            fmt.setLineHeight(ui_height, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
             cursor.setBlockFormat(fmt)
 
@@ -256,28 +249,28 @@ class ProductionPrintPreview(QDialog):
         printer_name = self.printer_combo.currentText()
         try:
             lines = self.build_report_map(mode="printer")
-            raw_text = "\n".join(lines)
             ESC = '\x1b'
-            init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
+            INIT = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
 
-            parts = raw_text.split('\n')
-            header = "\n".join(parts[:10])
-            body = "\n".join(parts[10:-6])
-            footer = "\n".join(parts[-6:])
+            payload = INIT
+            total_count = len(lines)
 
-            # Hardware Spacing:
-            # 24 dots = 100% (Header)
-            # 49 dots = ~135% (Body)
-            # 22 dots = ~80% (Footer)
-            payload = (init + (ESC + '3' + '\x18') + header + "\n" +
-                       (ESC + '3' + '\x31') + body + "\n" +
-                       (ESC + '3' + '\x16') + footer + '\x0c')
+            for i, line in enumerate(lines):
+                # Get the hardware dots for this line index
+                _, dots = self.get_line_params(i, line, total_count)
+
+                # ESC '3' + chr(n) sets line spacing to n/180 inch
+                spacing_cmd = ESC + '3' + chr(dots)
+                payload += spacing_cmd + line + "\n"
+
+            # Reset to standard 1/6" spacing and Form Feed
+            payload += ESC + '2' + '\x0c'
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Entry", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
-                win32print.WritePrinter(hPrinter, payload.encode('latin-1'))  # Latin-1 pass-through for Hex
+                win32print.WritePrinter(hPrinter, payload.encode('latin-1'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully.")
@@ -285,14 +278,15 @@ class ProductionPrintPreview(QDialog):
             finally:
                 win32print.ClosePrinter(hPrinter)
         except Exception as e:
-            QMessageBox.critical(self, "Error", str(e))
+            QMessageBox.critical(self, "Error", f"Print error: {str(e)}")
         finally:
             self.btn_print.setText(" START PRINTING ")
             self.btn_print.setEnabled(True)
 
     def batch_text(self):
         try:
-            req, per = float(self.data.get('qty_required', 0)), float(self.data.get('qty_per_batch', 1))
+            req = float(self.data.get('qty_required', 0))
+            per = float(self.data.get('qty_per_batch', 1))
             n = int(req / per) if per > 0 else 1
             return f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
         except:
@@ -303,7 +297,12 @@ if __name__ == "__main__":
     import sys
 
     app = QApplication(sys.argv)
-    img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4,
-                "approved_by": "M. VERDE"}
-    img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65}]
-    ProductionPrintPreview(img_data, img_mats).exec()
+    # Test Data
+    test_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4,
+                 "qty_per_batch": 37.4, "product_code": "SAMPLE-PROD", "qty_produced": 37.4, "approved_by": "M. VERDE"}
+    test_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65},
+                 {"material_code": "SPLIT-ITEM", "large_scale": 25.0, "small_scale": 0, "total_weight": 25.0},
+                 {"material_code": "", "large_scale": 0, "small_scale": 0, "total_weight": 0},
+                 {"material_code": "SPLIT-ITEM", "large_scale": 10.0, "small_scale": 0, "total_weight": 10.0}]
+
+    ProductionPrintPreview(test_data, test_mats, wip_no=True).exec()
