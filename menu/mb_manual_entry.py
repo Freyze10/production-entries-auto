@@ -712,6 +712,7 @@ class MBManualEntry(QWidget):
             production_date = ""
         # === Collect Data ===
         production_data = {
+            'wip_no': self.wip_no_input.text().strip(),
             'prod_id': self.production_id_input.text().strip(),
             'form_type': self.form_type_combo.currentText(),
             'production_date': production_date,
@@ -751,9 +752,9 @@ class MBManualEntry(QWidget):
 
         # === Open Preview with exec()===
         if with_wip is True:
-            preview = ProductionPrintPreview(production_data, materials_data, self)
+            preview = ProductionPrintPreview(production_data, materials_data, wip_no=True, parent=self)
         else:
-            preview = ProductionPrintPreview(production_data, materials_data, self)
+            preview = ProductionPrintPreview(production_data, materials_data, parent=self)
 
 
         # Connect audit log

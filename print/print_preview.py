@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import (QApplication, QDialog, QVBoxLayout, QHBoxLayout,
 class ProductionPrintPreview(QDialog):
     printed = pyqtSignal(str)
 
-    def __init__(self, production_data: dict, materials_data: list, parent=None):
+    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []
@@ -113,8 +113,10 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
-        lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
 
+
+
+        lines.append(f"{' ':<{LEFT_W}}{BL}{H * (BOX_W - 2)}{BR}")
         lines.append(" ")
 
         # --- 2. DETAILS ---
