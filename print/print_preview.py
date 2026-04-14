@@ -114,10 +114,10 @@ class ProductionPrintPreview(QDialog):
         lines.append(f"{'':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{'MASTERBATCH PHILIPPINES, INC.':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('PRODUCTION DATE', self.data.get('production_date', ''))}")
-        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{'PRODUCTION ENTRY':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
-        lines.append(f"{' ':<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
-        lines.append(f"{f_no:<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
+        lines.append(f"{f_no:<{LEFT_W}}{box_ln('ORDER FORM NO.', self.data.get('order_form_no', ''))}")
+        lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
         lines.append(f"{' ':<{LEFT_W}}{box_ln('FORMULATION NO.', self.data.get('formulation_id', ''))}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
@@ -147,7 +147,7 @@ class ProductionPrintPreview(QDialog):
             lines.append(f"{' ':<15}{B_ON}{cust[34:68]:<65}{B_OFF}")
         lines.append(det_row('LOT NO.      :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
                              self.data.get('qty_produced', '')))
-
+        lines.append(" ")
         summary = self.batch_text()
         if mode == "screen":
             lines.append(f'<div align="center">{S_ON}{summary.upper()}{S_OFF}</div>')
@@ -264,15 +264,17 @@ class ProductionPrintPreview(QDialog):
             init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
 
             parts = raw_text.split('\n')
-            header = "\n".join(parts[:15])
-            body = "\n".join(parts[10:-6])
-            footer = "\n".join(parts[-6:])
 
-            # Hardware Spacing:
-            # 24 dots = 100% (Header)
-            # 49 dots = ~135% (Body)
-            # 22 dots = ~80% (Footer)
-            payload = (init + (ESC + '3' + '\x18') + header + "\n" +
+            # Match the same zone boundaries used in refresh_preview()
+            header_end = 16 if self.wip_no is True else 14  # i <= 15 or i <= 13
+            footer_start = len(parts) - 6
+
+            header = "\n".join(parts[:header_end])
+            body = "\n".join(parts[header_end:footer_start])  # no overlap
+            footer = "\n".join(parts[footer_start:])
+
+            payload = (init +
+                       (ESC + '3' + '\x18') + header + "\n" +
                        (ESC + '3' + '\x31') + body + "\n" +
                        (ESC + '3' + '\x16') + footer + '\x0c')
 
@@ -280,7 +282,7 @@ class ProductionPrintPreview(QDialog):
             try:
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Entry", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
-                win32print.WritePrinter(hPrinter, payload.encode('latin-1'))  # Latin-1 pass-through for Hex
+                win32print.WritePrinter(hPrinter, payload.encode('latin-1'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully.")

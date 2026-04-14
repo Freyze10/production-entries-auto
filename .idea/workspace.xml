@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00343" summary="use onfocus out to better the validation on the field">
-      <option name="closed" value="true" />
-      <created>1775891201896</created>
-      <option name="number" value="00343" />
-      <option name="presentableId" value="LOCAL-00343" />
-      <option name="project" value="LOCAL" />
-      <updated>1775891201896</updated>
-    </task>
     <task id="LOCAL-00344" summary="created the auto completer outside to be reused">
       <option name="closed" value="true" />
       <created>1775893477635</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776151736137</updated>
     </task>
-    <option name="localTasksCounter" value="392" />
+    <task id="LOCAL-00392" summary="added the audit trail in the print amnual">
+      <option name="closed" value="true" />
+      <created>1776154007879</created>
+      <option name="number" value="00392" />
+      <option name="presentableId" value="LOCAL-00392" />
+      <option name="project" value="LOCAL" />
+      <updated>1776154007879</updated>
+    </task>
+    <option name="localTasksCounter" value="393" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add function to get cancelled records" />
     <MESSAGE value="display cancelled records when button is clicked" />
     <MESSAGE value="creating multi con for the cancelled button" />
     <MESSAGE value="connected cancelled button and also revert to normal records when clickked agaain" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added a insert to audit trail query" />
     <MESSAGE value="created first audit trail for login" />
     <MESSAGE value="creating the audit trail for the Manual" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating the audit trail for the Manual" />
+    <MESSAGE value="added the audit trail in the print amnual" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the audit trail in the print amnual" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
