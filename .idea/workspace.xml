@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00338" summary="added batch to manual page">
-      <option name="closed" value="true" />
-      <created>1775888004586</created>
-      <option name="number" value="00338" />
-      <option name="presentableId" value="LOCAL-00338" />
-      <option name="project" value="LOCAL" />
-      <updated>1775888004586</updated>
-    </task>
     <task id="LOCAL-00339" summary="added a function to check the lot number if it already exist">
       <option name="closed" value="true" />
       <created>1775888810654</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776149795757</updated>
     </task>
-    <option name="localTasksCounter" value="387" />
+    <task id="LOCAL-00387" summary="put the username and role getting after the user is registered">
+      <option name="closed" value="true" />
+      <created>1776150012416</created>
+      <option name="number" value="00387" />
+      <option name="presentableId" value="LOCAL-00387" />
+      <option name="project" value="LOCAL" />
+      <updated>1776150012416</updated>
+    </task>
+    <option name="localTasksCounter" value="388" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added spacing for material row" />
     <MESSAGE value="revert to normal" />
     <MESSAGE value="update print report to match the spacing og the preview" />
     <MESSAGE value="updated print, but still needs to modify" />
@@ -564,7 +563,8 @@
     <MESSAGE value="created a query to add a user" />
     <MESSAGE value="created account for new user" />
     <MESSAGE value="created a wuery to get the user role for displaying" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a wuery to get the user role for displaying" />
+    <MESSAGE value="put the username and role getting after the user is registered" />
+    <option name="LAST_COMMIT_MESSAGE" value="put the username and role getting after the user is registered" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -576,7 +576,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>57</line>
+          <line>58</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

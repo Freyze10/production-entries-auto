@@ -17,10 +17,10 @@ class ProductionRecords(QWidget):
     go_to_manual_entry = pyqtSignal(int)
     go_to_auto_entry = pyqtSignal(int)
     go_to_dc_auto = pyqtSignal(int)
-    def __init__(self, username, user_role):
+
+    def __init__(self, mac_address):
         super().__init__()
-        self.username = username
-        self.user_role = user_role
+        self.mac_address = mac_address
         self.init_ui()
 
     def init_ui(self):

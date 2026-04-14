@@ -19,9 +19,10 @@ from workstation.workstation_details import _get_workstation_info
 
 
 class MBManualEntry(QWidget):
-    def __init__(self, prod_id=0):  # , username, user_role, log_audit_trail
+    def __init__(self, mac_address, prod_id=0):
         super().__init__()
         self.prod_id = prod_id
+        self.mac_address = mac_address
         self.prod_results = None
         self.prod_materials = None
         self.work_station = _get_workstation_info()
