@@ -39,8 +39,8 @@ class MainWindow(QMainWindow):
         self.production_auto_entry_dc = None
         self.audit_trail = None
         create_table()
+        self.create_acccount()
         self.init_ui()
-
     def init_ui(self):
         main_widget = QWidget()
         main_layout = QHBoxLayout(main_widget)
@@ -94,6 +94,10 @@ class MainWindow(QMainWindow):
         self.stacked_widget.insertWidget(3, self.dc_auto_entry)  # add new one with same index
         self.btn_auto_entry_dc.setChecked(True)
         self.stacked_widget.setCurrentIndex(3)
+
+    # def log_audit_trail(self, action_type, details):
+    #     log_audit_trail( self.username, action_type, details, self.workstation_info)
+
 
     def create_menu_button(self, text, icon, page_index):
         btn = QPushButton(text, icon=fa.icon(icon, color='#ecf0f1'), checkable=True, autoExclusive=True)
@@ -166,6 +170,10 @@ class MainWindow(QMainWindow):
     def update_time(self):
         self.time_label.setText(f" {datetime.now().strftime('%b %d, %Y  %I:%M:%S %p')}")
 
+    def create_acccount(self):
+        # {'h': 'MBPI-AMIEL', 'i': '192.168.1.184', 'm': '00:50:56:c0:00:08', 'u': 'MBPI-AMIEL\\Brant'}
+        print(self.workstation_info)
+        self.workstation_info['m']
 
 def main():
     app = QApplication(sys.argv)

@@ -11,6 +11,16 @@ def create_table():
             role VARCHAR(10) NOT NULL
         )
     """)
+
+    cursor.execute("""
+        INSERT INTO tbl_role (department, role) VALUES 
+            ('IT Department', 'ADMIN'),
+            ('Production Department', 'Editor'),
+            ('Laboratory Department', 'Viewer')
+        ON CONFLICT DO NOTHING;
+    """)
+
+
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_role_department ON tbl_role(department);")
 
     cursor.execute("""
@@ -18,6 +28,8 @@ def create_table():
             user_id SERIAL PRIMARY KEY,
             role_id INT NOT NULL,
             hostname VARCHAR(36) NOT NULL,
+            ip_address VARCHAR(32),
+            mac_address VARCHAR(32),
             password VARCHAR(36) NOT NULL, 
             FOREIGN KEY (role_id) REFERENCES tbl_role(role_id)
         )
@@ -179,9 +191,6 @@ def create_table():
             user_id INT,
             action_type VARCHAR(32),
             details VARCHAR(62),
-            hostname VARCHAR(32),
-            ip_adress VARCHAR(32),
-            mac_adress VARCHAR(32),
             FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
         )
     """)
