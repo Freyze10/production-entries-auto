@@ -11,6 +11,7 @@ def create_table():
             role VARCHAR(10) NOT NULL
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_role_department ON tbl_role(department);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_user(
@@ -21,6 +22,8 @@ def create_table():
             FOREIGN KEY (role_id) REFERENCES tbl_role(role_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_user_role_id ON tbl_user(role_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_user_hostname ON tbl_user(hostname);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula01(
@@ -44,7 +47,17 @@ def create_table():
             is_used VARCHAR(5) DEFAULT 'False'
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_prod_code ON tbl_formula01(prod_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_customer ON tbl_formula01(customer);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_date ON tbl_formula01(date);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_colormatch_no ON tbl_formula01(colormatch_no);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_is_deleted ON tbl_formula01(is_deleted);")
 
+    cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_formula01_active 
+            ON tbl_formula01(prod_code, customer, date) 
+            WHERE is_deleted = 'False';
+    """)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula_encode(
             encode_id SERIAL PRIMARY KEY,
@@ -55,6 +68,8 @@ def create_table():
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
         )
     """)
+
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula_encode_form_id ON tbl_formula_encode(form_id);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula02(
@@ -67,6 +82,9 @@ def create_table():
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_form_id ON tbl_formula02(form_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_material_code ON tbl_formula02(material_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_form_seq ON tbl_formula02(form_id, sequence_no);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production01(
@@ -90,12 +108,23 @@ def create_table():
             is_deleted VARCHAR(5) DEFAULT 'False',
             is_printed VARCHAR(5) DEFAULT 'False',
             inventory_c_date DATE,
-            form_type VARCHAR(16)
+            form_type VARCHAR(16)   
             )
     """)
-            # removed foreign key connection because of foreign key error 
-            # FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
-    # TODO: for user_id; mag add ng condition na kung convertible sa int, use that id para i connect sa tbl_user
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_prod_date ON tbl_production01(prod_date);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_customer ON tbl_production01(customer);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_prod_code ON tbl_production01(prod_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_form_id ON tbl_production01(form_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_lot_no ON tbl_production01(lot_no);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_order_no ON tbl_production01(order_no);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_is_deleted ON tbl_production01(is_deleted);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_is_printed ON tbl_production01(is_printed);")
+
+    cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_production01_date_customer 
+            ON tbl_production01(prod_date, customer) 
+            WHERE is_deleted = 'False';
+        """)
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production_encode(
@@ -109,6 +138,9 @@ def create_table():
             )
     """)
 
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_encode_prod_id ON tbl_production_encode(prod_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_encode_encoded_on ON tbl_production_encode(encoded_on);")
+
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production_quantity(
             quantity_id SERIAL PRIMARY KEY,
@@ -119,6 +151,7 @@ def create_table():
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_quantity_prod_id ON tbl_production_quantity(prod_id);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production02(
@@ -135,6 +168,12 @@ def create_table():
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_prod_id ON tbl_production02(prod_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_material_code ON tbl_production02(material_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_prod_seq ON tbl_production02(prod_id, sequence_no);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON tbl_audit_trail(timestamp DESC);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_user_id ON tbl_audit_trail(user_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_action_type ON tbl_audit_trail(action_type);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_audit_trail(
@@ -149,6 +188,9 @@ def create_table():
             FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON tbl_audit_trail(timestamp DESC);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_user_id ON tbl_audit_trail(user_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_action_type ON tbl_audit_trail(action_type);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_raw_material_list(
@@ -156,14 +198,12 @@ def create_table():
             rm_code VARCHAR(50)
         )
     """)
+    cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_rm_code_unique ON tbl_raw_material_list(rm_code);")
 
-    cursor.execute("""
-        CREATE INDEX IF NOT EXISTS idx_prod_id 
-        ON tbl_production01(prod_id);
+    # ==================== ADDITIONAL USEFUL INDEXES ====================
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_id ON tbl_production01(prod_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_qty_prod_id ON tbl_production_quantity(prod_id);")
 
-        CREATE INDEX IF NOT EXISTS idx_qty_prod_id 
-        ON tbl_production_quantity(prod_id);
-    """)
 
     con.commit()
     cursor.close()
