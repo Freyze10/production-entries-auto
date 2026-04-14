@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
 
     def _init_pages(self):
         self.production_records = ProductionRecords(self.workstation_info['m'])
-        self.mb_manual_entry = MBManualEntry(self.workstation_info['m'])
+        self.mb_manual_entry = MBManualEntry()
         self.mb_auto_entry = MBAutoEntry()
         self.dc_auto_entry = DCAutoEntry()
 

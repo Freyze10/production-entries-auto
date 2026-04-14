@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import (QApplication, QDialog, QVBoxLayout, QHBoxLayout,
 class ProductionPrintPreview(QDialog):
     printed = pyqtSignal(str)
 
-    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None):
+    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None, audit=None):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []

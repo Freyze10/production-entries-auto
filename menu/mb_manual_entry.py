@@ -19,10 +19,9 @@ from workstation.workstation_details import _get_workstation_info
 
 
 class MBManualEntry(QWidget):
-    def __init__(self, mac_address, prod_id=0):
+    def __init__(self, prod_id=0):
         super().__init__()
         self.prod_id = prod_id
-        self.mac_address = mac_address
         self.prod_results = None
         self.prod_materials = None
         self.work_station = _get_workstation_info()
@@ -728,23 +727,17 @@ class MBManualEntry(QWidget):
                 'total_weight': it3.text().strip() if it3 else '0'
             })
 
+        audit = {
+                "mac": self.work_station['m'],
+                "action": "PRINT",
+                "details":  f"(Manual) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
+            }
         # === Open Preview with exec()===
         if with_wip is True:
-            preview = ProductionPrintPreview(production_data, materials_data, wip_no=True, parent=self)
+            preview = ProductionPrintPreview(production_data, materials_data, wip_no=True, parent=self, audit=audit)
         else:
-            preview = ProductionPrintPreview(production_data, materials_data, parent=self)
+            preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
 
-
-        # Connect audit log
-        # def on_printed(prod_id):
-        #     self.log_audit_trail(
-        #         "Print Production",
-        #         f"(Manual) Prod ID: {prod_id} | Production Date: {production_data['production_date']}"
-        #     )
-
-        # preview.printed.connect(on_printed)
-
-        # This blocks until user closes or prints
         preview.exec()
 
     def clear_material_table(self):
