@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00335" summary="did the same logic for the normal generate function">
-      <option name="closed" value="true" />
-      <created>1775884600183</created>
-      <option name="number" value="00335" />
-      <option name="presentableId" value="LOCAL-00335" />
-      <option name="project" value="LOCAL" />
-      <updated>1775884600183</updated>
-    </task>
     <task id="LOCAL-00336" summary="added a reusable update batch notes in field format">
       <option name="closed" value="true" />
       <created>1775885186548</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776149083790</updated>
     </task>
-    <option name="localTasksCounter" value="384" />
+    <task id="LOCAL-00384" summary="created a query to add a user">
+      <option name="closed" value="true" />
+      <created>1776149093266</created>
+      <option name="number" value="00384" />
+      <option name="presentableId" value="LOCAL-00384" />
+      <option name="project" value="LOCAL" />
+      <updated>1776149093266</updated>
+    </task>
+    <option name="localTasksCounter" value="385" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,6 +613,10 @@
           <url>file://$PROJECT_DIR$/css/styles.py</url>
           <line>357</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/db/read.py</url>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

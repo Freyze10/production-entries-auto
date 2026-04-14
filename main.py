@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
 
 from css.styles import AppStyles
 from db.read import get_all_user_mac
+from db.write import create_current_user
 from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
@@ -176,7 +177,7 @@ class MainWindow(QMainWindow):
         print(self.workstation_info)
         all_user_mac = get_all_user_mac()
         if self.workstation_info['m'] not in all_user_mac:
-            pass
+            create_current_user(self.workstation_info)
 
 
 def main():
