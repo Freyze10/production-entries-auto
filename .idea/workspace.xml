@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00336" summary="added a reusable update batch notes in field format">
-      <option name="closed" value="true" />
-      <created>1775885186548</created>
-      <option name="number" value="00336" />
-      <option name="presentableId" value="LOCAL-00336" />
-      <option name="project" value="LOCAL" />
-      <updated>1775885186548</updated>
-    </task>
     <task id="LOCAL-00337" summary="connected the mb and dc wuantity fields to batch text">
       <option name="closed" value="true" />
       <created>1775885515327</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776149093266</updated>
     </task>
-    <option name="localTasksCounter" value="385" />
+    <task id="LOCAL-00385" summary="created account for new user">
+      <option name="closed" value="true" />
+      <created>1776149454652</created>
+      <option name="number" value="00385" />
+      <option name="presentableId" value="LOCAL-00385" />
+      <option name="project" value="LOCAL" />
+      <updated>1776149454652</updated>
+    </task>
+    <option name="localTasksCounter" value="386" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updating print spacing" />
     <MESSAGE value="fixing print spacings" />
     <MESSAGE value="added spacing for material row" />
     <MESSAGE value="revert to normal" />
@@ -564,7 +563,8 @@
     <MESSAGE value="created a query to check existing users" />
     <MESSAGE value="create a connectio&#10;n to create a user" />
     <MESSAGE value="created a query to add a user" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a query to add a user" />
+    <MESSAGE value="created account for new user" />
+    <option name="LAST_COMMIT_MESSAGE" value="created account for new user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

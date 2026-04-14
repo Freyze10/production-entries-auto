@@ -228,5 +228,24 @@ def get_all_user_mac():
         return []
 
 
+def get_user_role(mac):
+    conn = get_connection()
+    cur = conn.cursor()
 
+    cur.execute("""
+        SELECT r.role 
+        FROM tbl_user u
+        JOIN tbl_role r ON u.role_id = r.role_id
+        WHERE u.mac_address = %s
+        LIMIT 1
+    """, (mac,))
 
+    record = cur.fetchone()
+
+    cur.close()
+    conn.close()
+
+    if record:
+        return record[0]  # Returns the role (e.g. 'ADMIN', 'Editor', 'Viewer')
+    else:
+        return None  # Return None if no user found with that MAC
