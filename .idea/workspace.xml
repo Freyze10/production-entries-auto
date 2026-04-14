@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00340" summary="created a query too call lot numberrs">
-      <option name="closed" value="true" />
-      <created>1775889004982</created>
-      <option name="number" value="00340" />
-      <option name="presentableId" value="LOCAL-00340" />
-      <option name="project" value="LOCAL" />
-      <updated>1775889004982</updated>
-    </task>
     <task id="LOCAL-00341" summary="call the lotnumbers to match in the inserted lotnumber">
       <option name="closed" value="true" />
       <created>1775889751237</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776150401121</updated>
     </task>
-    <option name="localTasksCounter" value="389" />
+    <task id="LOCAL-00389" summary="added a insert to audit trail query">
+      <option name="closed" value="true" />
+      <created>1776150917127</created>
+      <option name="number" value="00389" />
+      <option name="presentableId" value="LOCAL-00389" />
+      <option name="project" value="LOCAL" />
+      <updated>1776150917127</updated>
+    </task>
+    <option name="localTasksCounter" value="390" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update print report to match the spacing og the preview" />
     <MESSAGE value="updated print, but still needs to modify" />
     <MESSAGE value="updated the fetchingof records to only get those not cancelled" />
     <MESSAGE value="add function to get cancelled records" />
@@ -564,7 +563,8 @@
     <MESSAGE value="created a wuery to get the user role for displaying" />
     <MESSAGE value="put the username and role getting after the user is registered" />
     <MESSAGE value="adding mac address accross pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding mac address accross pages" />
+    <MESSAGE value="added a insert to audit trail query" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a insert to audit trail query" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

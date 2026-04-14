@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
 
 from css.styles import AppStyles
 from db.read import get_all_user_mac, get_user_role
-from db.write import create_current_user
+from db.write import create_current_user, log_audit_trail
 from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
         self.username = self.workstation_info['h']
         self.user_role = get_user_role(self.workstation_info['m'])
         self.init_ui()
+        self.log_audit_trail()
 
     def init_ui(self):
         main_widget = QWidget()
@@ -97,8 +98,12 @@ class MainWindow(QMainWindow):
         self.btn_auto_entry_dc.setChecked(True)
         self.stacked_widget.setCurrentIndex(3)
 
-    def log_audit_trail(self, action_type, details):
-        log_audit_trail(self.workstation_info['m'], action_type, details)
+    def log_audit_trail(self):
+        log_audit_trail(
+            mac_address=self.workstation_info['m'],
+            action_type="LOGIN",
+            details="User logged in successfully"
+        )
 
 
     def create_menu_button(self, text, icon, page_index):
