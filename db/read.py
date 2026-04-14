@@ -7,19 +7,19 @@ def get_all_production_data():
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT 
-            a.prod_id, 
-            a.prod_date, 
-            a.customer, 
-            a.prod_code, 
-            a.prod_color, 
-            a.lot_no, 
-            b.quantity_prod 
+        SELECT
+            a.prod_id,
+            a.prod_date,
+            a.customer,
+            a.prod_code,
+            a.prod_color,
+            a.lot_no,
+            b.quantity_prod
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
-        WHERE a.is_deleted='False'
-        ORDER BY a.prod_id ASC
+        WHERE a.is_deleted = 'False'
+        ORDER BY a.prod_id ASC;
     """)
 
     records = cur.fetchall()

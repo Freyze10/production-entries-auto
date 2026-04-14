@@ -200,6 +200,13 @@ def create_table():
     # ==================== ADDITIONAL USEFUL INDEXES ====================
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_id ON tbl_production01(prod_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_qty_prod_id ON tbl_production_quantity(prod_id);")
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_production01_active_id_covering 
+        ON tbl_production01 (is_deleted, prod_id)
+        INCLUDE (prod_date, customer, prod_code, prod_color, lot_no)
+        WHERE is_deleted = 'False';
+    """)
+
 
 
     con.commit()
