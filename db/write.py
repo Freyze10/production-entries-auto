@@ -1,7 +1,7 @@
 from db.connection import get_connection
 
 
-def create_or_get_current_user(self):
+def create_current_user(self):
     con = get_connection()
     cursor = con.cursor()
 
