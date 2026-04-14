@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00331" summary="added generate function in the dc auto entry">
-      <option name="closed" value="true" />
-      <created>1775803732561</created>
-      <option name="number" value="00331" />
-      <option name="presentableId" value="LOCAL-00331" />
-      <option name="project" value="LOCAL" />
-      <updated>1775803732561</updated>
-    </task>
     <task id="LOCAL-00332" summary="try to add a batch text">
       <option name="closed" value="true" />
       <created>1775809229005</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776145666563</updated>
     </task>
-    <option name="localTasksCounter" value="380" />
+    <task id="LOCAL-00380" summary="updated the  audit trail columns">
+      <option name="closed" value="true" />
+      <created>1776148257881</created>
+      <option name="number" value="00380" />
+      <option name="presentableId" value="LOCAL-00380" />
+      <option name="project" value="LOCAL" />
+      <updated>1776148257881</updated>
+    </task>
+    <option name="localTasksCounter" value="381" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the completer for mb and  dc pages auto" />
     <MESSAGE value="added lot input validation for mb and  dc" />
     <MESSAGE value="added a field for lot only for the  dc" />
     <MESSAGE value="added a field for lot only for the  ,b" />
@@ -564,7 +563,8 @@
     <MESSAGE value="updated indexing for database" />
     <MESSAGE value="created a materialized view for lots" />
     <MESSAGE value="changed the query for getting lots ]" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the query for getting lots ]" />
+    <MESSAGE value="updated the  audit trail columns" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the  audit trail columns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

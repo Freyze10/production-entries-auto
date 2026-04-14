@@ -217,18 +217,15 @@ def get_all_user_mac():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        SELECT trimmed_part 
-        FROM mv_lot_parts 
-        ORDER BY trimmed_part;
-    """)
-
-    lot_list = [row[0] for row in cur.fetchall()]
+    cur.execute("SELECT mac_address FROM tbl_user")
+    records = cur.fetchall()
 
     cur.close()
     conn.close()
-    return lot_list
-
+    if records:
+        return [row[0] for row in records]
+    else:
+        return []
 
 
 
