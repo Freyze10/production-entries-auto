@@ -7,7 +7,10 @@ import sqlalchemy
 from PyQt6.QtCore import pyqtSignal, QObject
 from sqlalchemy import text, create_engine
 
-DB_CONFIG = {"host": "localhost", "port": 5433, "dbname": "db_production", "user": "postgres", "password": "password"}
+# localhost
+# DB_CONFIG = {"host": "localhost", "port": 5433, "dbname": "db_production", "user": "postgres", "password": "password"}
+# Server
+DB_CONFIG = {"host": "192.168.1.13", "port": 5432, "dbname": "db_production", "user": "postgres", "password": "mbpi"}
 DBF_BASE_PATH = r'\\system-server\SYSTEM-NEW-OLD'
 CUSTOMER_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_customer01.dbf')
 FORMULA_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula01.dbf')

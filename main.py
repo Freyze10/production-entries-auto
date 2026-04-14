@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
         self.production_manual_entry_dc = None
         self.production_auto_entry_dc = None
         self.audit_trail = None
-
+        create_table()
         self.init_ui()
 
     def init_ui(self):
@@ -54,7 +54,6 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.stacked_widget)
 
         self.setCentralWidget(main_widget)
-        create_table()
         self.set_status_bar()
         self._init_pages()
 
