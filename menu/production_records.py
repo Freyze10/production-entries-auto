@@ -286,7 +286,7 @@ class ProductionRecords(QWidget):
 
     def refresh_records(self):
         try:
-
+            self.rows = read.get_all_production_data()
             self.table_model.set_data(self.rows)
 
             # Reset the selection in the UI

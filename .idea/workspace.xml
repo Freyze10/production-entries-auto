@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00322" summary="added requirements.txt">
-      <option name="closed" value="true" />
-      <created>1775800456941</created>
-      <option name="number" value="00322" />
-      <option name="presentableId" value="LOCAL-00322" />
-      <option name="project" value="LOCAL" />
-      <updated>1775800456941</updated>
-    </task>
     <task id="LOCAL-00323" summary="added generate file">
       <option name="closed" value="true" />
       <created>1775800507196</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776067850147</updated>
     </task>
-    <option name="localTasksCounter" value="371" />
+    <task id="LOCAL-00371" summary="added the connection for the server">
+      <option name="closed" value="true" />
+      <created>1776129147677</created>
+      <option name="number" value="00371" />
+      <option name="presentableId" value="LOCAL-00371" />
+      <option name="project" value="LOCAL" />
+      <updated>1776129147677</updated>
+    </task>
+    <option name="localTasksCounter" value="372" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connectd the auto completer in the manual" />
     <MESSAGE value="updated the calling of function to make the database call only once" />
     <MESSAGE value="removed the option for manual dc in the prod records" />
     <MESSAGE value="create a function call for with wip print" />
@@ -564,7 +563,8 @@
     <MESSAGE value="creating multi con for the cancelled button" />
     <MESSAGE value="connected cancelled button and also revert to normal records when clickked agaain" />
     <MESSAGE value="changed style for the cancelld records" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed style for the cancelld records" />
+    <MESSAGE value="added the connection for the server" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the connection for the server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
