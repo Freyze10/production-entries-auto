@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar
 
 from css.styles import AppStyles
-from db.read import get_all_user_mac
+from db.read import get_all_user_mac, get_user_role
 from db.write import create_current_user
 from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
@@ -22,8 +22,6 @@ class MainWindow(QMainWindow):
         super().__init__()
         # self.login_window = login_window
         self.workstation_info = _get_workstation_info()
-        self.username = self.workstation_info['h']
-        self.user_role = "Admin"
 
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
@@ -35,12 +33,16 @@ class MainWindow(QMainWindow):
         self.production_records = None
         self.production_manual_entry = None
         self.production_auto_entry = None
-        self.production_manual_entry_dc = None
+        # self.production_manual_entry_dc = None
         self.production_auto_entry_dc = None
         self.audit_trail = None
+
         create_table()
         self.create_acccount()
+        self.username = self.workstation_info['h']
+        self.user_role = get_user_role(self.workstation_info['m'])
         self.init_ui()
+
     def init_ui(self):
         main_widget = QWidget()
         main_layout = QHBoxLayout(main_widget)

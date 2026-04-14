@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00337" summary="connected the mb and dc wuantity fields to batch text">
-      <option name="closed" value="true" />
-      <created>1775885515327</created>
-      <option name="number" value="00337" />
-      <option name="presentableId" value="LOCAL-00337" />
-      <option name="project" value="LOCAL" />
-      <updated>1775885515327</updated>
-    </task>
     <task id="LOCAL-00338" summary="added batch to manual page">
       <option name="closed" value="true" />
       <created>1775888004586</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776149454652</updated>
     </task>
-    <option name="localTasksCounter" value="386" />
+    <task id="LOCAL-00386" summary="created a wuery to get the user role for displaying">
+      <option name="closed" value="true" />
+      <created>1776149795757</created>
+      <option name="number" value="00386" />
+      <option name="presentableId" value="LOCAL-00386" />
+      <option name="project" value="LOCAL" />
+      <updated>1776149795757</updated>
+    </task>
+    <option name="localTasksCounter" value="387" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixing print spacings" />
     <MESSAGE value="added spacing for material row" />
     <MESSAGE value="revert to normal" />
     <MESSAGE value="update print report to match the spacing og the preview" />
@@ -564,7 +563,8 @@
     <MESSAGE value="create a connectio&#10;n to create a user" />
     <MESSAGE value="created a query to add a user" />
     <MESSAGE value="created account for new user" />
-    <option name="LAST_COMMIT_MESSAGE" value="created account for new user" />
+    <MESSAGE value="created a wuery to get the user role for displaying" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a wuery to get the user role for displaying" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
