@@ -207,6 +207,21 @@ def create_table():
         WHERE is_deleted = 'False';
     """)
 
+    cursor.execute("""
+        CREATE MATERIALIZED VIEW IF NOT EXISTS mv_lot_parts AS
+        SELECT DISTINCT trimmed_part
+        FROM (
+            SELECT TRIM(unnest(string_to_array(lot_no, '-'))) AS trimmed_part
+            FROM tbl_production01
+            WHERE lot_no IS NOT NULL 
+              AND is_deleted = 'False'        -- add this if you usually filter deleted
+        ) sub
+        WHERE trimmed_part != ''
+        ORDER BY trimmed_part;
+        
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_mv_lot_parts ON mv_lot_parts(trimmed_part);
+    """)
+
 
 
     con.commit()

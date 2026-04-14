@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00328" summary="generated a normal generate production form">
-      <option name="closed" value="true" />
-      <created>1775802254238</created>
-      <option name="number" value="00328" />
-      <option name="presentableId" value="LOCAL-00328" />
-      <option name="project" value="LOCAL" />
-      <updated>1775802254238</updated>
-    </task>
     <task id="LOCAL-00329" summary="removed the lotnumber autofill and add prodcode mb only in autocomplete">
       <option name="closed" value="true" />
       <created>1775803528542</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776139072452</updated>
     </task>
-    <option name="localTasksCounter" value="377" />
+    <task id="LOCAL-00377" summary="updated indexing for database">
+      <option name="closed" value="true" />
+      <created>1776145322430</created>
+      <option name="number" value="00377" />
+      <option name="presentableId" value="LOCAL-00377" />
+      <option name="project" value="LOCAL" />
+      <updated>1776145322430</updated>
+    </task>
+    <option name="localTasksCounter" value="378" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed the unsused declaration of variable" />
     <MESSAGE value="making a validate file to reuse" />
     <MESSAGE value="refactor validate lot field to reuse" />
     <MESSAGE value="updated the completer for mb and  dc pages auto" />
@@ -564,7 +563,8 @@
     <MESSAGE value="changed the location of calling from the database to when the sync happens" />
     <MESSAGE value="put the calling of completers from database inside the function" />
     <MESSAGE value="added setup rm code completer" />
-    <option name="LAST_COMMIT_MESSAGE" value="added setup rm code completer" />
+    <MESSAGE value="updated indexing for database" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated indexing for database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
