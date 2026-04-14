@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00325" summary="refactor how the function is imported">
-      <option name="closed" value="true" />
-      <created>1775800777276</created>
-      <option name="number" value="00325" />
-      <option name="presentableId" value="LOCAL-00325" />
-      <option name="project" value="LOCAL" />
-      <updated>1775800777276</updated>
-    </task>
     <task id="LOCAL-00326" summary="addded requirements.txt">
       <option name="closed" value="true" />
       <created>1775800796132</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776132690729</updated>
     </task>
-    <option name="localTasksCounter" value="374" />
+    <task id="LOCAL-00374" summary="changed the location of calling from the database to when the sync happens">
+      <option name="closed" value="true" />
+      <created>1776135573675</created>
+      <option name="number" value="00374" />
+      <option name="presentableId" value="LOCAL-00374" />
+      <option name="project" value="LOCAL" />
+      <updated>1776135573675</updated>
+    </task>
+    <option name="localTasksCounter" value="375" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create a function call for with wip print" />
     <MESSAGE value="fixed the printing preview to fetch the wip no when selected" />
     <MESSAGE value="replaced the underline used in the approved by" />
     <MESSAGE value="removed the unsused declaration of variable" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added the connection for the server" />
     <MESSAGE value="added call all records on the refresh buttton" />
     <MESSAGE value="added indexing for faster query" />
-    <option name="LAST_COMMIT_MESSAGE" value="added indexing for faster query" />
+    <MESSAGE value="changed the location of calling from the database to when the sync happens" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the location of calling from the database to when the sync happens" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -73,7 +73,6 @@ def add_batch_text(required, per_batch, notes_field):
         notes_field.setText("1 batch by 0.000 KG.")
 
 
-lot_list_db = get_lot_no()
 
 
 def setup_auto_completers(customer_widget=None,
@@ -83,6 +82,7 @@ def setup_auto_completers(customer_widget=None,
     """
     Sets up QCompleters and also returns/updates the lot list.
     """
+    lot_list_db = get_lot_no()
     data = get_all_completer_data()
 
     def setup_comp(widget, items):
