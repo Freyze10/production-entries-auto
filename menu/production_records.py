@@ -286,7 +286,6 @@ class ProductionRecords(QWidget):
 
     def refresh_records(self):
         try:
-            self.rows = read.get_all_production_data()
             self.table_model.set_data(self.rows)
 
             # Reset the selection in the UI
@@ -405,9 +404,11 @@ class ProductionRecords(QWidget):
     def on_sync_finished(self, success, message, thread, loading_dialog, sync_type=None):
         try:
             if loading_dialog.isVisible():
+                self.rows = read.get_all_production_data()
                 loading_dialog.accept()
 
             if success:
+
                 QMessageBox.information(self, "Sync Complete", message)
             else:
                 QMessageBox.critical(self, "Sync Error", message)
