@@ -7,6 +7,8 @@ from PyQt6.QtWidgets import (QApplication, QDialog, QVBoxLayout, QHBoxLayout,
                              QComboBox, QTextEdit, QPushButton, QLabel,
                              QMessageBox, QWidget, QScrollArea)
 
+from db.write import log_audit_trail
+
 
 class ProductionPrintPreview(QDialog):
     printed = pyqtSignal(str)
@@ -16,6 +18,7 @@ class ProductionPrintPreview(QDialog):
         self.data = production_data or {}
         self.mats = materials_data or []
         self.wip_no = wip_no
+        self.audit = audit
         self.default_font_size = 10
 
         self.setWindowTitle("Industrial Sharp Preview - Epson LX-310")
@@ -281,6 +284,7 @@ class ProductionPrintPreview(QDialog):
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully.")
+                log_audit_trail(self.audit['mac'], self.audit['action'], self.audit['details'])
                 self.accept()
             finally:
                 win32print.ClosePrinter(hPrinter)

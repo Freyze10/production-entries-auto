@@ -75,7 +75,6 @@ class Sync(QObject):
 
             for item_rec in dbf_items:
                 uid = _to_int(item_rec.get('T_UID'))
-                # if uid is None or uid <= max_uid: continue
                 if uid is None or uid <= max_form_id:
                     continue
                 new_uids.add(uid)
@@ -87,30 +86,26 @@ class Sync(QObject):
                 })
 
             for item_rec in production_items:
-                # Skip deleted records
                 prod_id = _to_int(item_rec.get('T_PRODID'))
                 if prod_id is None or prod_id <= max_prod_id:
                     continue
 
                 new_prod_ids.add(prod_id)
 
-                # Extract item data (excluding t_prodb and t_labb as requested)
                 items_by_prod_id[prod_id].append({
                     "prod_id": prod_id,
                     "lot_num": str(item_rec.get('T_LOTNUM', '') or '').strip(),
-                    "confirmation_date": item_rec.get('T_CDATE'),  # confirmation date
-                    "production_date": item_rec.get('T_PRODDATE'),  # production date
+                    "confirmation_date": item_rec.get('T_CDATE'),
+                    "production_date": item_rec.get('T_PRODDATE'),
                     "seq": _to_int(item_rec.get('T_SEQ')),
                     "material_code": str(item_rec.get('T_MATCODE', '') or '').strip(),
-                    "large_scale": _to_float(item_rec.get('T_PRODA')),  # Large scale (KG)
-                    "small_scale": _to_float(item_rec.get('T_LABA')),  # Small scale (G)
-                    # t_prodb and t_labb are intentionally excluded
+                    "large_scale": _to_float(item_rec.get('T_PRODA')),
+                    "small_scale": _to_float(item_rec.get('T_LABA')),
                     "is_deleted": str(item_rec.get('T_DELETED', '') or '').strip(),
-                    "total_weight": _to_float(item_rec.get('T_WT')),  # Total weight
-                    "total_loss": _to_float(item_rec.get('T_LOSS')),  # Total loss
-                    "total_consumption": _to_float(item_rec.get('T_CONS'))  # Total consumption
+                    "total_weight": _to_float(item_rec.get('T_WT')),
+                    "total_loss": _to_float(item_rec.get('T_LOSS')),
+                    "total_consumption": _to_float(item_rec.get('T_CONS'))
                 })
-
 
             self.progress.emit(f"Phase 1/3: Found {len(items_by_uid)} groups of new active items.")
 
@@ -124,10 +119,8 @@ class Sync(QObject):
                 uid = _to_int(r.get('T_UID'))
                 if uid is None or uid <= max_form_id:
                     continue
-                # if uid is None or uid <= max_uid: continue
                 dbf_updated_on_text = str(r.get('T_UDATE', '') or '').strip()
                 cm_date = str(r.get('T_CMDATE', '') or '').strip()
-                # If empty → set to None
                 dbf_updated_on = None if not dbf_updated_on_text else dbf_updated_on_text
                 colormatch_date = None if not cm_date else cm_date
                 primary_recs.append({
@@ -151,19 +144,16 @@ class Sync(QObject):
                 })
 
             for r in dbf_prod:
-                # Skip deleted records
                 prod_id = _to_int(r.get('T_PRODID'))
                 if prod_id is None or prod_id <= max_prod_id:
                     continue
                 formula_id = _to_int(r.get('T_FID'))
                 if formula_id is None or formula_id == 0:
                     continue
-                # Concatenate remarks and notes
                 remarks = str(r.get('T_REMARKS', '') or '').strip()
                 notes_raw = str(r.get('T_NOTE', '') or '').strip()
                 note = f"{notes_raw}\n{remarks}".strip() if remarks else notes_raw
 
-                # is_printed: "PRINTED" → True, else False
                 jdone_raw = str(r.get('T_JDONE', '') or '').strip().upper()
                 is_printed = jdone_raw == "PRINTED"
                 prod_recs.append({
@@ -199,8 +189,10 @@ class Sync(QObject):
 
             self.progress.emit(f"Phase 2/3: Found new valid records.")
 
-            if not prod_recs:
-                self.finished.emit(True, f"Sync Info: No new records found to sync."); return
+            # Exit early only if BOTH are empty
+            if not primary_recs and not prod_recs:
+                self.finished.emit(True, "Sync Info: No new records found to sync.")
+                return
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
             all_prod_items_to_insert = [
@@ -212,45 +204,48 @@ class Sync(QObject):
             self.progress.emit("Phase 3/3: Syncing Data...")
             with engine.connect() as conn:
                 with conn.begin():
-                    conn.execute(text("""
-                        INSERT INTO tbl_formula01 (
-                            form_id, index_no, date, customer, prod_code, prod_color, dosage, total_concentration, ld, 
-                            mix_time, resin, application, colormatch_no, colormatch_date, notes,
-                            date_time, is_deleted, is_used
-                        )
-                        VALUES (
-                            :uid, :formula_index, :formula_date, :customer, :product_code, :product_color, :dosage, :total_concentration,
-                            :ld, :mix_type, :resin, :application, :cm_num, :cm_date, :remarks, :dbf_updated_on_text, :is_deleted,
-                            :is_used
-                        )
-                        ON CONFLICT (form_id) DO UPDATE SET
-                            index_no = EXCLUDED.index_no,
-                            date = EXCLUDED.date,
-                            customer = EXCLUDED.customer,
-                            prod_code = EXCLUDED.prod_code,
-                            prod_color = EXCLUDED.prod_color,
-                            dosage = EXCLUDED.dosage,
-                            ld = EXCLUDED.ld,
-                            mix_time = EXCLUDED.mix_time,
-                            resin = EXCLUDED.resin,
-                            application = EXCLUDED.application,
-                            colormatch_no = EXCLUDED.colormatch_no,
-                            colormatch_date = EXCLUDED.colormatch_date,
-                            notes = EXCLUDED.notes,
-                            total_concentration = EXCLUDED.total_concentration,
-                            is_deleted = EXCLUDED.is_deleted,
-                            is_used = EXCLUDED.is_used,
-                            date_time = EXCLUDED.date_time
-                    """), primary_recs)
 
-                    conn.execute(text("""
-                        INSERT INTO tbl_formula_encode (
-                            form_id, match_by, encoded_by, updated_by
-                        )
-                        VALUES (
-                             :uid, :matched_by, :encoded_by, :dbf_updated_by
-                        )
-                    """), primary_recs)
+                    # --- Formula inserts (only if there are new formula records) ---
+                    if primary_recs:
+                        conn.execute(text("""
+                            INSERT INTO tbl_formula01 (
+                                form_id, index_no, date, customer, prod_code, prod_color, dosage, total_concentration, ld, 
+                                mix_time, resin, application, colormatch_no, colormatch_date, notes,
+                                date_time, is_deleted, is_used
+                            )
+                            VALUES (
+                                :uid, :formula_index, :formula_date, :customer, :product_code, :product_color, :dosage, :total_concentration,
+                                :ld, :mix_type, :resin, :application, :cm_num, :cm_date, :remarks, :dbf_updated_on_text, :is_deleted,
+                                :is_used
+                            )
+                            ON CONFLICT (form_id) DO UPDATE SET
+                                index_no = EXCLUDED.index_no,
+                                date = EXCLUDED.date,
+                                customer = EXCLUDED.customer,
+                                prod_code = EXCLUDED.prod_code,
+                                prod_color = EXCLUDED.prod_color,
+                                dosage = EXCLUDED.dosage,
+                                ld = EXCLUDED.ld,
+                                mix_time = EXCLUDED.mix_time,
+                                resin = EXCLUDED.resin,
+                                application = EXCLUDED.application,
+                                colormatch_no = EXCLUDED.colormatch_no,
+                                colormatch_date = EXCLUDED.colormatch_date,
+                                notes = EXCLUDED.notes,
+                                total_concentration = EXCLUDED.total_concentration,
+                                is_deleted = EXCLUDED.is_deleted,
+                                is_used = EXCLUDED.is_used,
+                                date_time = EXCLUDED.date_time
+                        """), primary_recs)
+
+                        conn.execute(text("""
+                            INSERT INTO tbl_formula_encode (
+                                form_id, match_by, encoded_by, updated_by
+                            )
+                            VALUES (
+                                 :uid, :matched_by, :encoded_by, :dbf_updated_by
+                            )
+                        """), primary_recs)
 
                     if all_items_to_insert:
                         conn.execute(text("""
@@ -258,62 +253,62 @@ class Sync(QObject):
                             VALUES (:uid, :seq, :material_code, :concentration, :is_deleted);
                         """), all_items_to_insert)
 
-                    # Production sync
-                    conn.execute(text("""
-                        INSERT INTO tbl_production01 (
-                            prod_id, prod_date, customer, form_id, index_no,
-                            prod_code, prod_color, dosage, ld, lot_no,
-                            order_no, colormatch_no, colormatch_date, mix_time, machine_no,
-                            note, user_id, is_deleted, is_printed, inventory_c_date, form_type
-                        )
-                        VALUES (
-                            :prod_id, :production_date, :customer, :formulation_id, :formula_index,
-                            :product_code, :product_color, :dosage, :ld_percent, :lot_number,
-                            :order_form_no, :colormatch_no, :colormatch_date, :mixing_time, :machine_no,
-                            :note, :user_id, :is_deleted, :is_printed, :confirmation_date, :form_type
-                        )
-                        ON CONFLICT (prod_id) DO UPDATE SET
-                            prod_date = EXCLUDED.prod_date,
-                            customer = EXCLUDED.customer,
-                            form_id = EXCLUDED.form_id,
-                            index_no = EXCLUDED.index_no,
-                            prod_code = EXCLUDED.prod_code,
-                            prod_color = EXCLUDED.prod_color,
-                            dosage = EXCLUDED.dosage,
-                            ld = EXCLUDED.ld,
-                            lot_no = EXCLUDED.lot_no,
-                            order_no = EXCLUDED.order_no,
-                            colormatch_no = EXCLUDED.colormatch_no,
-                            colormatch_date = EXCLUDED.colormatch_date,
-                            mix_time = EXCLUDED.mix_time,
-                            machine_no = EXCLUDED.machine_no,
-                            note = EXCLUDED.note,
-                            user_id = EXCLUDED.user_id,
-                            is_deleted = EXCLUDED.is_deleted,
-                            is_printed = EXCLUDED.is_printed,
-                            inventory_c_date = EXCLUDED.inventory_c_date,
-                            form_type = EXCLUDED.form_type
-                    """), prod_recs)
+                    # --- Production inserts (only if there are new production records) ---
+                    if prod_recs:
+                        conn.execute(text("""
+                            INSERT INTO tbl_production01 (
+                                prod_id, prod_date, customer, form_id, index_no,
+                                prod_code, prod_color, dosage, ld, lot_no,
+                                order_no, colormatch_no, colormatch_date, mix_time, machine_no,
+                                note, user_id, is_deleted, is_printed, inventory_c_date, form_type
+                            )
+                            VALUES (
+                                :prod_id, :production_date, :customer, :formulation_id, :formula_index,
+                                :product_code, :product_color, :dosage, :ld_percent, :lot_number,
+                                :order_form_no, :colormatch_no, :colormatch_date, :mixing_time, :machine_no,
+                                :note, :user_id, :is_deleted, :is_printed, :confirmation_date, :form_type
+                            )
+                            ON CONFLICT (prod_id) DO UPDATE SET
+                                prod_date = EXCLUDED.prod_date,
+                                customer = EXCLUDED.customer,
+                                form_id = EXCLUDED.form_id,
+                                index_no = EXCLUDED.index_no,
+                                prod_code = EXCLUDED.prod_code,
+                                prod_color = EXCLUDED.prod_color,
+                                dosage = EXCLUDED.dosage,
+                                ld = EXCLUDED.ld,
+                                lot_no = EXCLUDED.lot_no,
+                                order_no = EXCLUDED.order_no,
+                                colormatch_no = EXCLUDED.colormatch_no,
+                                colormatch_date = EXCLUDED.colormatch_date,
+                                mix_time = EXCLUDED.mix_time,
+                                machine_no = EXCLUDED.machine_no,
+                                note = EXCLUDED.note,
+                                user_id = EXCLUDED.user_id,
+                                is_deleted = EXCLUDED.is_deleted,
+                                is_printed = EXCLUDED.is_printed,
+                                inventory_c_date = EXCLUDED.inventory_c_date,
+                                form_type = EXCLUDED.form_type
+                        """), prod_recs)
 
-                    conn.execute(text("""
-                        INSERT INTO tbl_production_encode (
-                            prod_id, prepared_by, encoded_by, encoded_on, confirmation_encoded_on
-                        )
-                        VALUES (
-                            :prod_id, :prepared_by, :encoded_by, :encoded_on, :scheduled_date
-                        )
-                    """), prod_recs)
+                        conn.execute(text("""
+                            INSERT INTO tbl_production_encode (
+                                prod_id, prepared_by, encoded_by, encoded_on, confirmation_encoded_on
+                            )
+                            VALUES (
+                                :prod_id, :prepared_by, :encoded_by, :encoded_on, :scheduled_date
+                            )
+                        """), prod_recs)
 
-                    conn.execute(text("""
-                        INSERT INTO tbl_production_quantity (
-                                prod_id, quantity_req , quantity_batch, quantity_prod
-                        )
-                        VALUES (
-                            :prod_id, :qty_required, :qty_per_batch, :qty_produced
-                        )
-                    """), prod_recs)
+                        conn.execute(text("""
+                            INSERT INTO tbl_production_quantity (
+                                    prod_id, quantity_req , quantity_batch, quantity_prod
+                            )
+                            VALUES (
+                                :prod_id, :qty_required, :qty_per_batch, :qty_produced
+                            )
+                        """), prod_recs)
 
-                    # Insert production items (materials)
                     if all_prod_items_to_insert:
                         conn.execute(text("""
                             INSERT INTO tbl_production02 (
@@ -324,15 +319,15 @@ class Sync(QObject):
                                 :prod_id, :seq, :material_code, :large_scale, 
                                 :small_scale, :total_weight, :is_deleted,
                                 :total_loss, :total_consumption
-                            )ON CONFLICT DO NOTHING
+                            ) ON CONFLICT DO NOTHING
                         """), all_prod_items_to_insert)
 
-            self.finished.emit(True,
-                               f"Production sync complete.\n new records items processed.")
+            self.finished.emit(True, f"Production sync complete.\nNew records processed.")
+
         except dbfread.DBFNotFound as e:
             self.finished.emit(False, f"File Not Found: A required formula DBF file is missing.\nDetails: {e}")
         except Exception as e:
-            trace_info = traceback.format_exc();
+            trace_info = traceback.format_exc()
             print(f"FORMULA SYNC CRITICAL ERROR: {e}\n{trace_info}")
             self.finished.emit(False, f"An unexpected error occurred during formula sync:\n{e}")
 
@@ -345,22 +340,18 @@ class SyncRM(QObject):
         try:
             self.progress.emit("Reading warehouse data...")
 
-            # Use a set to store unique RM codes
             unique_rm_codes = set()
             dbf = dbfread.DBF(RM_WH, encoding='latin1', char_decode_errors='ignore')
 
             for r in dbf:
-                # Skip deleted or empty records
                 if r.get('T_DELETED') or not str(r.get('T_MATCODE', '')).strip():
                     continue
-
                 unique_rm_codes.add(str(r.get('T_MATCODE')).strip())
 
             if not unique_rm_codes:
                 self.finished.emit(True, "No records found to sync.")
                 return
 
-            # Prepare data for SQLAlchemy (list of dicts)
             data = [{"rm_code": code} for code in unique_rm_codes]
 
             self.progress.emit(f"Updating database with {len(data)} materials...")

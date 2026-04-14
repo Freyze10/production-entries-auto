@@ -727,15 +727,20 @@ class MBManualEntry(QWidget):
                 'total_weight': it3.text().strip() if it3 else '0'
             })
 
-        audit = {
-                "mac": self.work_station['m'],
-                "action": "PRINT",
-                "details":  f"(Manual) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
-            }
         # === Open Preview with exec()===
         if with_wip is True:
+            audit = {
+                "mac": self.work_station['m'],
+                "action": "PRINT - WIP",
+                "details": f"(Manual) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
+            }
             preview = ProductionPrintPreview(production_data, materials_data, wip_no=True, parent=self, audit=audit)
         else:
+            audit = {
+                "mac": self.work_station['m'],
+                "action": "PRINT",
+                "details": f"(Manual) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
+            }
             preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
 
         preview.exec()
