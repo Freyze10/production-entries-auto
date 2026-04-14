@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00332" summary="try to add a batch text">
-      <option name="closed" value="true" />
-      <created>1775809229005</created>
-      <option name="number" value="00332" />
-      <option name="presentableId" value="LOCAL-00332" />
-      <option name="project" value="LOCAL" />
-      <updated>1775809229005</updated>
-    </task>
     <task id="LOCAL-00333" summary="fixed the sonnection for auto compute of the notes">
       <option name="closed" value="true" />
       <created>1775877138701</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776148257881</updated>
     </task>
-    <option name="localTasksCounter" value="381" />
+    <task id="LOCAL-00381" summary="created a query to check existing users">
+      <option name="closed" value="true" />
+      <created>1776148354633</created>
+      <option name="number" value="00381" />
+      <option name="presentableId" value="LOCAL-00381" />
+      <option name="project" value="LOCAL" />
+      <updated>1776148354633</updated>
+    </task>
+    <option name="localTasksCounter" value="382" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added lot input validation for mb and  dc" />
     <MESSAGE value="added a field for lot only for the  dc" />
     <MESSAGE value="added a field for lot only for the  ,b" />
     <MESSAGE value="updating print spacing" />
@@ -564,7 +563,8 @@
     <MESSAGE value="created a materialized view for lots" />
     <MESSAGE value="changed the query for getting lots ]" />
     <MESSAGE value="updated the  audit trail columns" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the  audit trail columns" />
+    <MESSAGE value="created a query to check existing users" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a query to check existing users" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

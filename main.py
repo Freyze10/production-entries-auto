@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar
 
 from css.styles import AppStyles
+from db.read import get_all_user_mac
 from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
@@ -173,7 +174,10 @@ class MainWindow(QMainWindow):
     def create_acccount(self):
         # {'h': 'MBPI-AMIEL', 'i': '192.168.1.184', 'm': '00:50:56:c0:00:08', 'u': 'MBPI-AMIEL\\Brant'}
         print(self.workstation_info)
-        self.workstation_info['m']
+        all_user_mac = get_all_user_mac()
+        if self.workstation_info['m'] not in all_user_mac:
+            pass
+
 
 def main():
     app = QApplication(sys.argv)
