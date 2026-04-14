@@ -853,6 +853,7 @@ class MBManualEntry(QWidget):
     def on_sync_finished(self, success, message, thread, loading_dialog, sync_type=None):
         try:
             if loading_dialog.isVisible():
+                self.setup_rm_code_completer()
                 loading_dialog.accept()
 
             if success:
