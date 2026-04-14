@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00339" summary="added a function to check the lot number if it already exist">
-      <option name="closed" value="true" />
-      <created>1775888810654</created>
-      <option name="number" value="00339" />
-      <option name="presentableId" value="LOCAL-00339" />
-      <option name="project" value="LOCAL" />
-      <updated>1775888810654</updated>
-    </task>
     <task id="LOCAL-00340" summary="created a query too call lot numberrs">
       <option name="closed" value="true" />
       <created>1775889004982</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776150012416</updated>
     </task>
-    <option name="localTasksCounter" value="388" />
+    <task id="LOCAL-00388" summary="adding mac address accross pages">
+      <option name="closed" value="true" />
+      <created>1776150401121</created>
+      <option name="number" value="00388" />
+      <option name="presentableId" value="LOCAL-00388" />
+      <option name="project" value="LOCAL" />
+      <updated>1776150401121</updated>
+    </task>
+    <option name="localTasksCounter" value="389" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="revert to normal" />
     <MESSAGE value="update print report to match the spacing og the preview" />
     <MESSAGE value="updated print, but still needs to modify" />
     <MESSAGE value="updated the fetchingof records to only get those not cancelled" />
@@ -564,7 +563,8 @@
     <MESSAGE value="created account for new user" />
     <MESSAGE value="created a wuery to get the user role for displaying" />
     <MESSAGE value="put the username and role getting after the user is registered" />
-    <option name="LAST_COMMIT_MESSAGE" value="put the username and role getting after the user is registered" />
+    <MESSAGE value="adding mac address accross pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding mac address accross pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

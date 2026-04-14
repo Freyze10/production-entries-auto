@@ -97,8 +97,8 @@ class MainWindow(QMainWindow):
         self.btn_auto_entry_dc.setChecked(True)
         self.stacked_widget.setCurrentIndex(3)
 
-    # def log_audit_trail(self, action_type, details):
-    #     log_audit_trail( self.username, action_type, details, self.workstation_info)
+    def log_audit_trail(self, action_type, details):
+        log_audit_trail(self.workstation_info['m'], action_type, details)
 
 
     def create_menu_button(self, text, icon, page_index):
