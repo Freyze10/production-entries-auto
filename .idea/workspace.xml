@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00364" summary="updated print, but still needs to modify">
-      <option name="closed" value="true" />
-      <created>1776063973866</created>
-      <option name="number" value="00364" />
-      <option name="presentableId" value="LOCAL-00364" />
-      <option name="project" value="LOCAL" />
-      <updated>1776063973866</updated>
-    </task>
     <task id="LOCAL-00365" summary="updated the fetchingof records to only get those not cancelled">
       <option name="closed" value="true" />
       <created>1776064384581</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776222502169</updated>
     </task>
-    <option name="localTasksCounter" value="413" />
+    <task id="LOCAL-00413" summary="fixing the fields layout">
+      <option name="closed" value="true" />
+      <created>1776223034148</created>
+      <option name="number" value="00413" />
+      <option name="presentableId" value="LOCAL-00413" />
+      <option name="project" value="LOCAL" />
+      <updated>1776223034148</updated>
+    </task>
+    <option name="localTasksCounter" value="414" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a wuery to get the user role for displaying" />
     <MESSAGE value="put the username and role getting after the user is registered" />
     <MESSAGE value="adding mac address accross pages" />
     <MESSAGE value="added a insert to audit trail query" />
@@ -564,7 +563,8 @@
     <MESSAGE value="adding a page for audit" />
     <MESSAGE value="connected the audit trail page to main" />
     <MESSAGE value="fixing spacing of the ui of  auditt" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing spacing of the ui of  auditt" />
+    <MESSAGE value="fixing the fields layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing the fields layout" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

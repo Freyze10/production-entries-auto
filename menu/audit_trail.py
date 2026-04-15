@@ -51,12 +51,7 @@ class AuditTrail(QWidget):
         filter_layout.setContentsMargins(20, 10, 20, 10)
         filter_layout.setSpacing(15)
 
-        filter_title = QLabel("Filters", objectName="table_label")
-        filter_title.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
-        filter_layout.addWidget(filter_title)
-
         fields_layout = QHBoxLayout()
-        fields_layout.addStretch()
 
         self.audit_column_combo = QComboBox()
         self.audit_column_combo.setFixedWidth(170)
@@ -73,9 +68,15 @@ class AuditTrail(QWidget):
 
         self.search_filter = QLineEdit(placeholderText="Enter Text...")
 
+
+        self.reset_btn = QPushButton(" Reset Filters", objectName="InfoButton")
+        self.reset_btn.setIcon(fa.icon('fa5s.redo', color='white'))
+        # self.reset_btn.clicked.connect(self.refresh_page)
+
         fields_layout.addWidget(search_label)
         fields_layout.addWidget(self.audit_column_combo)
         fields_layout.addWidget(self.search_filter)
+        fields_layout.addWidget(self.reset_btn)
 
         filter_layout.addLayout(fields_layout)
 
@@ -83,10 +84,6 @@ class AuditTrail(QWidget):
         filter_btn_layout = QHBoxLayout()
         filter_btn_layout.addStretch()
 
-        self.reset_btn = QPushButton(" Reset Filters", objectName="InfoButton")
-        self.reset_btn.setIcon(fa.icon('fa5s.redo', color='white'))
-        # self.reset_btn.clicked.connect(self.refresh_page)
-        filter_btn_layout.addWidget(self.reset_btn)
 
         filter_layout.addLayout(filter_btn_layout)
 
