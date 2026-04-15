@@ -4,9 +4,11 @@ from datetime import datetime
 from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem,
                              QAbstractItemView, QHeaderView, QMessageBox, QHBoxLayout, QLabel,
-                             QPushButton, QDateEdit, QLineEdit, QFileDialog, QFrame, QGridLayout, QComboBox)
+                             QPushButton, QDateEdit, QLineEdit, QFileDialog, QFrame, QGridLayout, QComboBox, QTableView)
 from PyQt6.QtGui import QFont
 import qtawesome as fa
+
+from table_model.model import TableModel
 
 
 class AuditTrail(QWidget):
@@ -102,15 +104,24 @@ class AuditTrail(QWidget):
 
         results_layout.addLayout(results_header)
 
+        self.headers = ["Timestamp", "Hostname", "Action", "Details", "IP Address", "MAC Address"]
+        # self.rows = get_all_production_data()
+
         # Table
-        self.audit_table = QTableWidget(
-            editTriggers=QAbstractItemView.EditTrigger.NoEditTriggers,
-            selectionBehavior=QAbstractItemView.SelectionBehavior.SelectRows,
-            alternatingRowColors=True
-        )
-        self.audit_table.verticalHeader().setVisible(False)
-        self.audit_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        results_layout.addWidget(self.audit_table)
+        self.table_audit_records = QTableView()
+        self.table_model = TableModel(self.rows, self.headers)
+        self.table_audit_records.setModel(self.table_model)
+        self.table_audit_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table_audit_records.verticalHeader().setVisible(False)  # hide row numbers
+        # self.table_audit_records.setColumnHidden(0, True)
+        self.table_audit_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
+        self.table_audit_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
+        self.table_audit_records.setAlternatingRowColors(True)
+        self.table_audit_records.setSortingEnabled(True)
+        self.table_audit_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.table_audit_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
+
+        results_layout.addWidget(self.table_audit_records)
 
         main_layout.addWidget(results_card, stretch=1)
 

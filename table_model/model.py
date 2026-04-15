@@ -29,6 +29,7 @@ class TableModel(QAbstractTableModel):
                 return str(section+1)
         return None
 
+
     # ── Critical for sorting ──
     def sort(self, column, order):
         self.layoutAboutToBeChanged.emit()

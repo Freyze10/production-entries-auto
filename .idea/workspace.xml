@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00367" summary="display cancelled records when button is clicked">
-      <option name="closed" value="true" />
-      <created>1776065233018</created>
-      <option name="number" value="00367" />
-      <option name="presentableId" value="LOCAL-00367" />
-      <option name="project" value="LOCAL" />
-      <updated>1776065233018</updated>
-    </task>
     <task id="LOCAL-00368" summary="creating multi con for the cancelled button">
       <option name="closed" value="true" />
       <created>1776066126443</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776223702422</updated>
     </task>
-    <option name="localTasksCounter" value="416" />
+    <task id="LOCAL-00416" summary="edited the table to use for audit">
+      <option name="closed" value="true" />
+      <created>1776223921282</created>
+      <option name="number" value="00416" />
+      <option name="presentableId" value="LOCAL-00416" />
+      <option name="project" value="LOCAL" />
+      <updated>1776223921282</updated>
+    </task>
+    <option name="localTasksCounter" value="417" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a insert to audit trail query" />
     <MESSAGE value="created first audit trail for login" />
     <MESSAGE value="creating the audit trail for the Manual" />
     <MESSAGE value="added the audit trail in the print amnual" />
@@ -564,7 +563,8 @@
     <MESSAGE value="fixing the fields layout" />
     <MESSAGE value="make the search filter in one row" />
     <MESSAGE value="fixed the spacing for frames" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the spacing for frames" />
+    <MESSAGE value="edited the table to use for audit" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited the table to use for audit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
