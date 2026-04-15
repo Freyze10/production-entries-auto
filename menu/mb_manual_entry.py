@@ -629,6 +629,35 @@ class MBManualEntry(QWidget):
         else:
             QMessageBox.warning(self, "No Selection", "Please select a material to remove.")
 
+    def cancel_production(self):
+
+        prod_id = self.production_id_input.text().strip()
+        if not prod_id or prod_id == "0":
+            QMessageBox.warning(self, "Selection Required", "Please select a production record from the table first.")
+            return
+
+        msg = f"Are you sure you want to CANCEL Production ID: {prod_id}?\n\nThis action cannot be undone."
+        reply = QMessageBox.question(self, "Confirm Cancellation", msg,
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        # Database Operation
+        try:
+            success, message = cancel_production(prod_id)
+
+            if success:
+                QMessageBox.information(self, "Success", f"Production {prod_id} has been successfully cancelled.")
+
+                self.new_production()  # Clear the input after cancellation
+            else:
+                QMessageBox.warning(self, "Cancellation Failed", f"Database Error: {message}")
+
+        except Exception as e:
+            QMessageBox.critical(self, "System Error", f"An unexpected error occurred: {str(e)}")
+
     def new_production(self):
         """Initialize a new production entry."""
         self.current_production_id = None
