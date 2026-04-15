@@ -62,22 +62,11 @@ class MainWindow(QMainWindow):
         self._init_pages()
 
     def _init_pages(self):
-        self.production_records = ProductionRecords(self.workstation_info['m'])
-        self.mb_manual_entry = MBManualEntry()
-        self.mb_auto_entry = MBAutoEntry()
-        self.dc_auto_entry = DCAutoEntry()
-        self.audit_trail = AuditTrail()
+        for _ in range(5):
+            self.stacked_widget.addWidget(QWidget())
 
-        self.stacked_widget.addWidget(self.production_records)  # 0
-        self.stacked_widget.addWidget(self.mb_manual_entry)   # 1
-        self.stacked_widget.addWidget(self.mb_auto_entry)   # 2
-        self.stacked_widget.addWidget(self.dc_auto_entry)   # 3
-        self.stacked_widget.addWidget(self.audit_trail)   # 4
-
-        self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
-        self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
-        self.production_records.go_to_dc_auto.connect(self.switch_to_dc_auto)
-
+            # Load the first page immediately (Production Records)
+        self.show_page(0)
         self.btn_production_records.setChecked(True)
 
     def switch_to_manual_entry(self, prod_id: int):
@@ -160,6 +149,40 @@ class MainWindow(QMainWindow):
         return menu
 
     def show_page(self, index):
+        # Check if the page is already loaded
+        current_widget = self.stacked_widget.widget(index)
+
+        # If it's a plain QWidget, it hasn't been initialized yet
+        if type(current_widget) == QWidget:
+            if index == 0:
+                self.production_records = ProductionRecords(self.workstation_info['m'])
+                # Connect the signals for the first page
+                self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
+                self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
+                self.production_records.go_to_dc_auto.connect(self.switch_to_dc_auto)
+                new_widget = self.production_records
+
+            elif index == 1:
+                self.mb_manual_entry = MBManualEntry()
+                new_widget = self.mb_manual_entry
+
+            elif index == 2:
+                self.mb_auto_entry = MBAutoEntry()
+                new_widget = self.mb_auto_entry
+
+            elif index == 3:
+                self.dc_auto_entry = DCAutoEntry()
+                new_widget = self.dc_auto_entry
+
+            elif index == 4:
+                self.audit_trail = AuditTrail()
+                new_widget = self.audit_trail
+
+            # Replace the placeholder with the actual loaded page
+            self.stacked_widget.removeWidget(current_widget)
+            self.stacked_widget.insertWidget(index, new_widget)
+
+        # Now show the page
         self.stacked_widget.setCurrentIndex(index)
 
     def set_status_bar(self):
