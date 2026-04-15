@@ -520,7 +520,7 @@ class AppStyles:
             color: {TEXT_PRIMARY};
         }}
         QLabel#light_label {{
-            color: {SLATE_400};
+            color: {SLATE_500};
         }}
         QLineEdit#gray_bg{{
             background-color: {BG_GRAY};

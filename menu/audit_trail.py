@@ -80,31 +80,23 @@ class AuditTrail(QWidget):
 
         filter_layout.addLayout(fields_layout)
 
-        # Filter Buttons
-        filter_btn_layout = QHBoxLayout()
-        filter_btn_layout.addStretch()
-
-
-        filter_layout.addLayout(filter_btn_layout)
-
         main_layout.addWidget(filter_card)
 
         # === Results Card ===
         results_card = QFrame()
         results_card.setObjectName("ContentCard")
         results_layout = QVBoxLayout(results_card)
-        results_layout.setContentsMargins(20, 20, 20, 20)
+        results_layout.setContentsMargins(20, 2, 20, 2)
         results_layout.setSpacing(12)
 
         results_header = QHBoxLayout()
-        results_title = QLabel("Audit Records")
+        results_title = QLabel("Audit Records", objectName="table_label")
         results_title.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
         results_title.setStyleSheet("color: #111827;")
         results_header.addWidget(results_title)
 
-        self.record_count_label = QLabel("0 records")
+        self.record_count_label = QLabel("0 records", objectName="light_label")
         self.record_count_label.setFont(QFont("Segoe UI", 9))
-        self.record_count_label.setStyleSheet("color: #6B7280;")
         results_header.addWidget(self.record_count_label)
         results_header.addStretch()
 
