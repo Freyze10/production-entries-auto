@@ -9,7 +9,7 @@ def get_all_production_data():
     cur.execute("""
         SELECT
             a.prod_id,
-            TO_CHAR(a.prod_date, 'MM/DD/YYYY'),,
+            TO_CHAR(a.prod_date, 'MM/DD/YYYY'),
             a.customer,
             a.prod_code,
             a.prod_color,
@@ -48,7 +48,7 @@ def get_cancelled_production_data():
     cur.execute("""
         SELECT 
             a.prod_id, 
-            TO_CHAR(a.prod_date, 'MM/DD/YYYY'),, 
+            TO_CHAR(a.prod_date, 'MM/DD/YYYY'),
             a.customer, 
             a.prod_code, 
             a.prod_color, 
