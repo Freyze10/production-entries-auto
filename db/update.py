@@ -14,7 +14,6 @@ def print_production(prod_id):
     conn.close()
 
 
-
 def cancel_production(prod_id):
     try:
         conn = get_connection()
