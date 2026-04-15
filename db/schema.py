@@ -8,7 +8,8 @@ def create_table():
         CREATE TABLE IF NOT EXISTS tbl_role(
             role_id SERIAL PRIMARY KEY,
             department VARCHAR(36) NOT NULL,
-            role VARCHAR(10) NOT NULL
+            role VARCHAR(10) NOT NULL,
+            UNIQUE(department, role)
         )
     """)
 
@@ -17,9 +18,8 @@ def create_table():
             ('IT Department', 'ADMIN'),
             ('Production Department', 'Editor'),
             ('Laboratory Department', 'Viewer')
-        ON CONFLICT DO NOTHING;
+        ON CONFLICT (department, role) DO NOTHING; 
     """)
-
 
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_role_department ON tbl_role(department);")
 

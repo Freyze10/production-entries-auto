@@ -21,7 +21,6 @@ from db.schema import create_table
 class MainWindow(QMainWindow):
     def __init__(self):  # , username, user_role, login_window
         super().__init__()
-        self.setWindowIcon(fa.icon('ph.book-bookmark-fill'))
         self.workstation_info = _get_workstation_info()
 
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
