@@ -10,6 +10,8 @@ import qtawesome as fa
 from db.legacy import SyncRM
 from db.read import get_latest_prod_id, get_formula_select, get_formula_materials, \
     get_all_completer_data, get_single_production_details, get_single_production_data
+from db.update import cancel_production
+from db.write import log_audit_trail
 from table_model import table_spacing, table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
@@ -281,6 +283,12 @@ class DCAutoEntry(QWidget):
         main_layout.addWidget(scroll)
 
         button_layout = QHBoxLayout()
+
+        self.btn_cancel = QPushButton("Cancel Record", objectName="DangerButton")
+        self.btn_cancel.setIcon(fa.icon('mdi6.text-box-remove', color='white'))
+        self.btn_cancel.clicked.connect(self.cancel_production)
+        button_layout.addWidget(self.btn_cancel)
+
         button_layout.addStretch()
 
         generate_btn = QPushButton("Generate", objectName="PrimaryButton")
@@ -572,6 +580,41 @@ class DCAutoEntry(QWidget):
         self.no_items_label.setText(str(item_count))
         return True
 
+    def cancel_production(self):
+
+        prod_id = self.production_id_input.text().strip()
+        if not prod_id or prod_id == "0":
+            QMessageBox.warning(self, "Selection Required", "Please select a production record from the table first.")
+            return
+
+        msg = f"Are you sure you want to CANCEL Production ID: {prod_id}?\n\nThis action cannot be undone."
+        reply = QMessageBox.question(self, "Confirm Cancellation", msg,
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        # Database Operation
+        try:
+            success, message = cancel_production(prod_id)
+
+            if success:
+                QMessageBox.information(self, "Success", f"Production {prod_id} has been successfully cancelled.")
+
+                self.new_production()  # Clear the input after cancellation
+                audit = {
+                    "mac": self.work_station['m'],
+                    "action": "DELETE",
+                    "details": f"Prod ID: {prod_id} has been successfully CANCELLED",
+                }
+                log_audit_trail(audit['mac'], audit['action'], audit['details'])
+            else:
+                QMessageBox.warning(self, "Cancellation Failed", f"Database Error: {message}")
+
+        except Exception as e:
+            QMessageBox.critical(self, "System Error", f"An unexpected error occurred: {str(e)}")
+
     def new_production(self):
         """Initialize a new production entry."""
         self.current_production_id = None
@@ -793,19 +836,13 @@ class DCAutoEntry(QWidget):
                 'total_weight': it3.text().strip() if it3 else '0'
             })
 
-        # === Open Preview with exec()===
-        preview = ProductionPrintPreview(production_data, materials_data, self)
+        audit = {
+            "mac": self.work_station['m'],
+            "action": "PRINT",
+            "details": f"(DC-Auto) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
+        }
+        preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
 
-        # Connect audit log
-        # def on_printed(prod_id):
-        #     self.log_audit_trail(
-        #         "Print Production",
-        #         f"(Manual) Prod ID: {prod_id} | Production Date: {production_data['production_date']}"
-        #     )
-
-        # preview.printed.connect(on_printed)
-
-        # This blocks until user closes or prints
         preview.exec()
 
     def clear_material_table(self):
