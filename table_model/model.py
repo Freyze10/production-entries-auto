@@ -47,7 +47,7 @@ class TableModel(QAbstractTableModel):
 
             # 2. Try to sort as a Full Timestamp (Common in Audit Trails)
             try:
-                return datetime.strptime(val, '%%m/%d/%Y %H:%M:%S')
+                return datetime.strptime(val, '%Y-%m-%d %H:%M:%S')
             except (ValueError, TypeError):
                 pass
 
