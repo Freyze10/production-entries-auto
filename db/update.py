@@ -1,6 +1,20 @@
 from db.connection import get_connection
 
 
+def print_production(prod_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+            UPDATE tbl_production01 SET is_printed = "True" WHERE prod_id = %s
+        """, (prod_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+
 def cancel_production(prod_id):
     try:
         conn = get_connection()
@@ -19,3 +33,4 @@ def cancel_production(prod_id):
 
     except Exception as e:
         return False, str(e)
+

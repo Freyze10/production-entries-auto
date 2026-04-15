@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00349" summary="create a function call for with wip print">
-      <option name="closed" value="true" />
-      <created>1776042711228</created>
-      <option name="number" value="00349" />
-      <option name="presentableId" value="LOCAL-00349" />
-      <option name="project" value="LOCAL" />
-      <updated>1776042711228</updated>
-    </task>
     <task id="LOCAL-00350" summary="fixed the printing preview to fetch the wip no when selected">
       <option name="closed" value="true" />
       <created>1776042988154</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776215784523</updated>
     </task>
-    <option name="localTasksCounter" value="398" />
+    <task id="LOCAL-00398" summary="conected the function and the button function">
+      <option name="closed" value="true" />
+      <created>1776215834875</created>
+      <option name="number" value="00398" />
+      <option name="presentableId" value="LOCAL-00398" />
+      <option name="project" value="LOCAL" />
+      <updated>1776215834875</updated>
+    </task>
+    <option name="localTasksCounter" value="399" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the connection for the server" />
     <MESSAGE value="added call all records on the refresh buttton" />
     <MESSAGE value="added indexing for faster query" />
     <MESSAGE value="changed the location of calling from the database to when the sync happens" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added cancel button" />
     <MESSAGE value="added function for cancelling a production" />
     <MESSAGE value="added a database for deleting a  record" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a database for deleting a  record" />
+    <MESSAGE value="conected the function and the button function" />
+    <option name="LAST_COMMIT_MESSAGE" value="conected the function and the button function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
