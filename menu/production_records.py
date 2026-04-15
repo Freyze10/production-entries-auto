@@ -6,8 +6,7 @@ import qtawesome as fa
 from PyQt6.QtCore import pyqtSignal
 
 from db.legacy import Sync
-from db import read
-from db.read import get_cancelled_production_data
+from db.read import get_cancelled_production_data, get_all_production_data, get_single_production_details
 from table_model.model import TableModel
 from util.debounce import finished_typing
 from util.loading import LoadingDialog
@@ -84,7 +83,7 @@ class ProductionRecords(QWidget):
 
         # set of rows
         self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
-        self.rows = read.get_all_production_data()
+        self.rows = get_all_production_data()
 
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
@@ -202,7 +201,7 @@ class ProductionRecords(QWidget):
                 self.details_table_model.clear_data()
                 return
 
-            details = read.get_single_production_details(prod_id)
+            details = get_single_production_details(prod_id)
             if not details:
                 self.details_table_model.clear_data()
                 return
@@ -404,7 +403,7 @@ class ProductionRecords(QWidget):
     def on_sync_finished(self, success, message, thread, loading_dialog, sync_type=None):
         try:
             if loading_dialog.isVisible():
-                self.rows = read.get_all_production_data()
+                self.rows = get_all_production_data()
                 loading_dialog.accept()
 
             if success:
