@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00358" summary="added a field for lot only for the  ,b">
-      <option name="closed" value="true" />
-      <created>1776052863807</created>
-      <option name="number" value="00358" />
-      <option name="presentableId" value="LOCAL-00358" />
-      <option name="project" value="LOCAL" />
-      <updated>1776052863807</updated>
-    </task>
     <task id="LOCAL-00359" summary="updating print spacingz">
       <option name="closed" value="true" />
       <created>1776058547188</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776220172463</updated>
     </task>
-    <option name="localTasksCounter" value="407" />
+    <task id="LOCAL-00407" summary="updated text on audit trail record">
+      <option name="closed" value="true" />
+      <created>1776220237219</created>
+      <option name="number" value="00407" />
+      <option name="presentableId" value="LOCAL-00407" />
+      <option name="project" value="LOCAL" />
+      <updated>1776220237219</updated>
+    </task>
+    <option name="localTasksCounter" value="408" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the query for getting lots ]" />
     <MESSAGE value="updated the  audit trail columns" />
     <MESSAGE value="created a query to check existing users" />
     <MESSAGE value="create a connectio&#10;n to create a user" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added cancel button and audit trail in the mb auto page" />
     <MESSAGE value="added audit trail for printing mb auto" />
     <MESSAGE value="added cancel and audit trail in the dc auto page" />
-    <option name="LAST_COMMIT_MESSAGE" value="added cancel and audit trail in the dc auto page" />
+    <MESSAGE value="updated text on audit trail record" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated text on audit trail record" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

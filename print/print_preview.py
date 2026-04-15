@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import (QApplication, QDialog, QVBoxLayout, QHBoxLayout,
                              QComboBox, QTextEdit, QPushButton, QLabel,
                              QMessageBox, QWidget, QScrollArea)
 
+from db.update import print_production
 from db.write import log_audit_trail
 
 
@@ -287,6 +288,7 @@ class ProductionPrintPreview(QDialog):
                 win32print.EndDocPrinter(hPrinter)
                 QMessageBox.information(self, "Success", "Printed Successfully.")
                 log_audit_trail(self.audit['mac'], self.audit['action'], self.audit['details'])
+                print_production(self.data.get('prod_id'))
                 self.accept()
             finally:
                 win32print.ClosePrinter(hPrinter)
