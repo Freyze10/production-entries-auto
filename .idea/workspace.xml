@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00365" summary="updated the fetchingof records to only get those not cancelled">
-      <option name="closed" value="true" />
-      <created>1776064384581</created>
-      <option name="number" value="00365" />
-      <option name="presentableId" value="LOCAL-00365" />
-      <option name="project" value="LOCAL" />
-      <updated>1776064384581</updated>
-    </task>
     <task id="LOCAL-00366" summary="add function to get cancelled records">
       <option name="closed" value="true" />
       <created>1776065115445</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776223034148</updated>
     </task>
-    <option name="localTasksCounter" value="414" />
+    <task id="LOCAL-00414" summary="make the search filter in one row">
+      <option name="closed" value="true" />
+      <created>1776223437867</created>
+      <option name="number" value="00414" />
+      <option name="presentableId" value="LOCAL-00414" />
+      <option name="project" value="LOCAL" />
+      <updated>1776223437867</updated>
+    </task>
+    <option name="localTasksCounter" value="415" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="put the username and role getting after the user is registered" />
     <MESSAGE value="adding mac address accross pages" />
     <MESSAGE value="added a insert to audit trail query" />
     <MESSAGE value="created first audit trail for login" />
@@ -564,7 +563,8 @@
     <MESSAGE value="connected the audit trail page to main" />
     <MESSAGE value="fixing spacing of the ui of  auditt" />
     <MESSAGE value="fixing the fields layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing the fields layout" />
+    <MESSAGE value="make the search filter in one row" />
+    <option name="LAST_COMMIT_MESSAGE" value="make the search filter in one row" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

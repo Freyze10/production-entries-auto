@@ -24,7 +24,7 @@ class AuditTrail(QWidget):
         header_card = QFrame()
         header_card.setObjectName("HeaderCard")
         header_layout = QHBoxLayout(header_card)
-        header_layout.setContentsMargins(20, 6, 6, 15)
+        header_layout.setContentsMargins(20, 2, 15, 2)
 
         title_label = QLabel("Audit Trail", objectName="table_label")
         title_label.setFont(QFont("Segoe UI", 16, QFont.Weight.Bold))
@@ -48,8 +48,8 @@ class AuditTrail(QWidget):
         filter_card = QFrame()
         filter_card.setObjectName("ContentCard")
         filter_layout = QVBoxLayout(filter_card)
-        filter_layout.setContentsMargins(20, 10, 20, 10)
-        filter_layout.setSpacing(15)
+        filter_layout.setContentsMargins(20, 0, 10, 0)
+        filter_layout.setSpacing(5)
 
         fields_layout = QHBoxLayout()
 
