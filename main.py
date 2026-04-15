@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
 from css.styles import AppStyles
 from db.read import get_all_user_mac, get_user_role
 from db.write import create_current_user, log_audit_trail
+from menu.audit_trail import AuditTrail
 from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
@@ -65,11 +66,13 @@ class MainWindow(QMainWindow):
         self.mb_manual_entry = MBManualEntry()
         self.mb_auto_entry = MBAutoEntry()
         self.dc_auto_entry = DCAutoEntry()
+        self.audit_trail = AuditTrail()
 
         self.stacked_widget.addWidget(self.production_records)  # 0
         self.stacked_widget.addWidget(self.mb_manual_entry)   # 1
         self.stacked_widget.addWidget(self.mb_auto_entry)   # 2
         self.stacked_widget.addWidget(self.dc_auto_entry)   # 3
+        self.stacked_widget.addWidget(self.audit_trail)   # 4
 
         self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
         self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
@@ -178,8 +181,6 @@ class MainWindow(QMainWindow):
         self.time_label.setText(f" {datetime.now().strftime('%b %d, %Y  %I:%M:%S %p')}")
 
     def create_acccount(self):
-        # {'h': 'MBPI-AMIEL', 'i': '192.168.1.184', 'm': '00:50:56:c0:00:08', 'u': 'MBPI-AMIEL\\Brant'}
-        print(self.workstation_info)
         all_user_mac = get_all_user_mac()
         if self.workstation_info['m'] not in all_user_mac:
             create_current_user(self.workstation_info)

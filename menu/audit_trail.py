@@ -9,8 +9,7 @@ from PyQt6.QtGui import QFont
 import qtawesome as fa
 
 
-class AuditTrailPage(QWidget):
-    """A modern page to view, filter, and export audit trail records."""
+class AuditTrail(QWidget):
 
     def __init__(self):
         super().__init__()

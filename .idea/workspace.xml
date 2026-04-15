@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00361" summary="added spacing for material row">
-      <option name="closed" value="true" />
-      <created>1776062545606</created>
-      <option name="number" value="00361" />
-      <option name="presentableId" value="LOCAL-00361" />
-      <option name="project" value="LOCAL" />
-      <updated>1776062545606</updated>
-    </task>
     <task id="LOCAL-00362" summary="revert to normal">
       <option name="closed" value="true" />
       <created>1776062911278</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776220735657</updated>
     </task>
-    <option name="localTasksCounter" value="410" />
+    <task id="LOCAL-00410" summary="adding a page for audit">
+      <option name="closed" value="true" />
+      <created>1776221039488</created>
+      <option name="number" value="00410" />
+      <option name="presentableId" value="LOCAL-00410" />
+      <option name="project" value="LOCAL" />
+      <updated>1776221039488</updated>
+    </task>
+    <option name="localTasksCounter" value="411" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create a connectio&#10;n to create a user" />
     <MESSAGE value="created a query to add a user" />
     <MESSAGE value="created account for new user" />
     <MESSAGE value="created a wuery to get the user role for displaying" />
@@ -564,7 +563,8 @@
     <MESSAGE value="updated text on audit trail record" />
     <MESSAGE value="added update on database when record is printed" />
     <MESSAGE value="created a file for audit trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a file for audit trail" />
+    <MESSAGE value="adding a page for audit" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding a page for audit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
