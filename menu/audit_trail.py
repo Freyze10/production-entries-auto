@@ -16,7 +16,9 @@ class AuditTrail(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.rows = []
         self.setup_ui()
+        self.refresh_records()
 
     def setup_ui(self):
         main_layout = QVBoxLayout(self)
@@ -106,7 +108,6 @@ class AuditTrail(QWidget):
         results_layout.addLayout(results_header)
 
         self.headers = ["Timestamp", "Hostname", "Action", "Details", "IP Address", "MAC Address"]
-        self.rows = get_audit_trail_report()
 
         # Table
         self.table_audit_records = QTableView()
@@ -129,4 +130,20 @@ class AuditTrail(QWidget):
         results_layout.addWidget(self.table_audit_records)
 
         main_layout.addWidget(results_card, stretch=1)
+
+    def refresh_records(self):
+        try:
+            self.rows = get_audit_trail_report()
+            self.table_model.set_data(self.rows)
+
+            # Reset the selection in the UI
+            self.table_audit_records.clearSelection()
+            self.table_audit_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
+            self.table_audit_records.scrollToTop()
+
+            # Clear search bar if text was entered
+            self.search_filter.clear()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
 
