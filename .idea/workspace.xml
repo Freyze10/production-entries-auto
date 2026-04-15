@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00370" summary="changed style for the cancelld records">
-      <option name="closed" value="true" />
-      <created>1776067850147</created>
-      <option name="number" value="00370" />
-      <option name="presentableId" value="LOCAL-00370" />
-      <option name="project" value="LOCAL" />
-      <updated>1776067850147</updated>
-    </task>
     <task id="LOCAL-00371" summary="added the connection for the server">
       <option name="closed" value="true" />
       <created>1776129147677</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776225885780</updated>
     </task>
-    <option name="localTasksCounter" value="419" />
+    <task id="LOCAL-00419" summary="adjusted column width of table audit">
+      <option name="closed" value="true" />
+      <created>1776230269975</created>
+      <option name="number" value="00419" />
+      <option name="presentableId" value="LOCAL-00419" />
+      <option name="project" value="LOCAL" />
+      <updated>1776230269975</updated>
+    </task>
+    <option name="localTasksCounter" value="420" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the audit trail in the print amnual" />
     <MESSAGE value="updated print output fdunction to match the preveiw" />
     <MESSAGE value="added cancel button" />
     <MESSAGE value="added function for cancelling a production" />
@@ -564,7 +563,8 @@
     <MESSAGE value="edited the table to use for audit" />
     <MESSAGE value="created a table for audit trail" />
     <MESSAGE value="fixing table for audit records" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing table for audit records" />
+    <MESSAGE value="adjusted column width of table audit" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted column width of table audit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

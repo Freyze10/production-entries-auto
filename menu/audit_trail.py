@@ -72,7 +72,7 @@ class AuditTrail(QWidget):
         self.search_filter = QLineEdit(placeholderText="Enter Text...")
 
 
-        self.reset_btn = QPushButton(" Reset Filters", objectName="InfoButton")
+        self.reset_btn = QPushButton(" Refresh", objectName="InfoButton")
         self.reset_btn.setIcon(fa.icon('fa5s.redo', color='white'))
         # self.reset_btn.clicked.connect(self.refresh_page)
 
