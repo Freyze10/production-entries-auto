@@ -76,7 +76,7 @@ class AuditTrail(QWidget):
 
         self.reset_btn = QPushButton(" Refresh", objectName="InfoButton")
         self.reset_btn.setIcon(fa.icon('fa5s.redo', color='white'))
-        # self.reset_btn.clicked.connect(self.refresh_page)
+        self.reset_btn.clicked.connect(self.refresh_records)
 
         fields_layout.addWidget(search_label)
         fields_layout.addWidget(self.audit_column_combo)
