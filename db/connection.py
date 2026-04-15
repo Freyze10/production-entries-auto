@@ -14,10 +14,21 @@ import psycopg2
 
 
 # Server
+# def get_connection():
+#     # localhost
+#     return psycopg2.connect(
+#         host="192.168.1.13",
+#         dbname="db_production",
+#         user="postgres",
+#         password="mbpi",
+#         port="5432"
+#     )
+
+# Server localhost
 def get_connection():
     # localhost
     return psycopg2.connect(
-        host="192.168.1.13",
+        host="127.0.0.1",
         dbname="db_production",
         user="postgres",
         password="mbpi",

@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00374" summary="changed the location of calling from the database to when the sync happens">
-      <option name="closed" value="true" />
-      <created>1776135573675</created>
-      <option name="number" value="00374" />
-      <option name="presentableId" value="LOCAL-00374" />
-      <option name="project" value="LOCAL" />
-      <updated>1776135573675</updated>
-    </task>
     <task id="LOCAL-00375" summary="put the calling of completers from database inside the function">
       <option name="closed" value="true" />
       <created>1776137151527</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776231474673</updated>
     </task>
-    <option name="localTasksCounter" value="423" />
+    <task id="LOCAL-00423" summary="added lazy loading for pages">
+      <option name="closed" value="true" />
+      <created>1776232186256</created>
+      <option name="number" value="00423" />
+      <option name="presentableId" value="LOCAL-00423" />
+      <option name="project" value="LOCAL" />
+      <updated>1776232186256</updated>
+    </task>
+    <option name="localTasksCounter" value="424" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a database for deleting a  record" />
     <MESSAGE value="conected the function and the button function" />
     <MESSAGE value="added a database update for printed records" />
     <MESSAGE value="added a audit trail for deleteing a record" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added refresh button" />
     <MESSAGE value="added refresh function" />
     <MESSAGE value="connected refresh function to butoton" />
-    <option name="LAST_COMMIT_MESSAGE" value="connected refresh function to butoton" />
+    <MESSAGE value="added lazy loading for pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="added lazy loading for pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
