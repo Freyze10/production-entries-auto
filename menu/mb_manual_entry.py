@@ -10,6 +10,7 @@ from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
     get_all_completer_data, get_lot_no
 from db.update import cancel_production
+from db.write import log_audit_trail
 from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
@@ -653,6 +654,12 @@ class MBManualEntry(QWidget):
                 QMessageBox.information(self, "Success", f"Production {prod_id} has been successfully cancelled.")
 
                 self.new_production()  # Clear the input after cancellation
+                audit = {
+                    "mac": self.work_station['m'],
+                    "action": "DELETE",
+                    "details": f"Prod ID: {prod_id} has been successfully CANCELLED",
+                }
+                log_audit_trail(audit['mac'], audit['action'], audit['details'])
             else:
                 QMessageBox.warning(self, "Cancellation Failed", f"Database Error: {message}")
 

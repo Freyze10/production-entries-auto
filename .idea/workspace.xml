@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00351" summary="replaced the underline used in the approved by">
-      <option name="closed" value="true" />
-      <created>1776048740827</created>
-      <option name="number" value="00351" />
-      <option name="presentableId" value="LOCAL-00351" />
-      <option name="project" value="LOCAL" />
-      <updated>1776048740827</updated>
-    </task>
     <task id="LOCAL-00352" summary="removed the unsused declaration of variable">
       <option name="closed" value="true" />
       <created>1776048763495</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776215945720</updated>
     </task>
-    <option name="localTasksCounter" value="400" />
+    <task id="LOCAL-00400" summary="added a database update for printed records">
+      <option name="closed" value="true" />
+      <created>1776215983060</created>
+      <option name="number" value="00400" />
+      <option name="presentableId" value="LOCAL-00400" />
+      <option name="project" value="LOCAL" />
+      <updated>1776215983060</updated>
+    </task>
+    <option name="localTasksCounter" value="401" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -576,7 +576,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>58</line>
+          <line>59</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
