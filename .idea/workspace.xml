@@ -120,22 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00347" summary="removed the option for manual dc in the prod records">
-      <option name="closed" value="true" />
-      <created>1776042047575</created>
-      <option name="number" value="00347" />
-      <option name="presentableId" value="LOCAL-00347" />
-      <option name="project" value="LOCAL" />
-      <updated>1776042047575</updated>
-    </task>
-    <task id="LOCAL-00348" summary="create a function call for with wip print">
-      <option name="closed" value="true" />
-      <created>1776042218575</created>
-      <option name="number" value="00348" />
-      <option name="presentableId" value="LOCAL-00348" />
-      <option name="project" value="LOCAL" />
-      <updated>1776042218575</updated>
-    </task>
     <task id="LOCAL-00349" summary="create a function call for with wip print">
       <option name="closed" value="true" />
       <created>1776042711228</created>
@@ -512,7 +496,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776215439960</updated>
     </task>
-    <option name="localTasksCounter" value="396" />
+    <task id="LOCAL-00396" summary="added a database for deleting a  record">
+      <option name="closed" value="true" />
+      <created>1776215775998</created>
+      <option name="number" value="00396" />
+      <option name="presentableId" value="LOCAL-00396" />
+      <option name="project" value="LOCAL" />
+      <updated>1776215775998</updated>
+    </task>
+    <task id="LOCAL-00397" summary="added a database for deleting a  record">
+      <option name="closed" value="true" />
+      <created>1776215784523</created>
+      <option name="number" value="00397" />
+      <option name="presentableId" value="LOCAL-00397" />
+      <option name="project" value="LOCAL" />
+      <updated>1776215784523</updated>
+    </task>
+    <option name="localTasksCounter" value="398" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed style for the cancelld records" />
     <MESSAGE value="added the connection for the server" />
     <MESSAGE value="added call all records on the refresh buttton" />
     <MESSAGE value="added indexing for faster query" />
@@ -564,7 +563,8 @@
     <MESSAGE value="updated print output fdunction to match the preveiw" />
     <MESSAGE value="added cancel button" />
     <MESSAGE value="added function for cancelling a production" />
-    <option name="LAST_COMMIT_MESSAGE" value="added function for cancelling a production" />
+    <MESSAGE value="added a database for deleting a  record" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a database for deleting a  record" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -576,7 +576,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>57</line>
+          <line>58</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

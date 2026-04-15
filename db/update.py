@@ -1,7 +1,7 @@
 from db.connection import get_connection
 
 
-def update_production_status_to_cancelled(prod_id):
+def cancel_production(prod_id):
     try:
         conn = get_connection()
         cursor = conn.cursor()
