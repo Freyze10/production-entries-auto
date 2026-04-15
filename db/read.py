@@ -249,3 +249,48 @@ def get_user_role(mac):
         return record[0]  # Returns the role (e.g. 'ADMIN', 'Editor', 'Viewer')
     else:
         return None  # Return None if no user found with that MAC
+
+
+def get_audit_trail_report():
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        query = """
+            SELECT 
+                a.timestamp, 
+                u.hostname, 
+                a.action_type, 
+                a.details, 
+                u.ip_address, 
+                u.mac_address
+            FROM tbl_audit_trail a
+            INNER JOIN tbl_user u ON a.user_id = u.user_id
+            ORDER BY a.timestamp DESC
+        """
+
+        cursor.execute(query)
+        rows = cursor.fetchall()
+
+        # Format the data for the UI
+        formatted_rows = []
+        for row in rows:
+            # row[0] is the timestamp object from the database
+            ts = row[0].strftime("%Y-%m-%d %I:%M %p") if row[0] else ""
+
+            formatted_rows.append([
+                ts,  # Timestamp
+                row[1],  # Hostname
+                row[2],  # Action (action_type)
+                row[3],  # Details
+                row[4],  # IP Address
+                row[5]  # MAC Address
+            ])
+
+        cursor.close()
+        conn.close()
+        return formatted_rows
+
+    except Exception as e:
+        print(f"Error fetching audit trail: {e}")
+        return []

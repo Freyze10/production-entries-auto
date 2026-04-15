@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetIte
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 
+from db.read import get_audit_trail_report
 from table_model.model import TableModel
 
 
@@ -105,7 +106,7 @@ class AuditTrail(QWidget):
         results_layout.addLayout(results_header)
 
         self.headers = ["Timestamp", "Hostname", "Action", "Details", "IP Address", "MAC Address"]
-        # self.rows = get_all_production_data()
+        self.rows = get_audit_trail_report()
 
         # Table
         self.table_audit_records = QTableView()
