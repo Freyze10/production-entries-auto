@@ -258,7 +258,7 @@ def get_audit_trail_report():
 
         query = """
             SELECT 
-                a.timestamp, 
+                TO_CHAR(a.timestamp, 'MM/DD/YYYY HH24:MI:SS', 
                 u.hostname, 
                 a.action_type, 
                 a.details, 

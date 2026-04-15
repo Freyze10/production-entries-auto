@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from PyQt6.QtCore import Qt, QAbstractTableModel
 
 class TableModel(QAbstractTableModel):
@@ -33,10 +35,39 @@ class TableModel(QAbstractTableModel):
     # ── Critical for sorting ──
     def sort(self, column, order):
         self.layoutAboutToBeChanged.emit()
+
+        def smart_sort_key(row):
+            val = str(row[column])
+
+            # 1. Try to sort as a Date (MM/DD/YYYY - your Production Date)
+            try:
+                return datetime.strptime(val, '%m/%d/%Y')
+            except (ValueError, TypeError):
+                pass
+
+            # 2. Try to sort as a Full Timestamp (Common in Audit Trails)
+            try:
+                return datetime.strptime(val, '%%m/%d/%Y %H:%M:%S')
+            except (ValueError, TypeError):
+                pass
+
+            # 3. Try to sort as a Number (to avoid "10" coming before "2")
+            try:
+                # Clean string of currency symbols or commas if necessary
+                clean_val = val.replace('$', '').replace(',', '')
+                return float(clean_val)
+            except (ValueError, TypeError):
+                pass
+
+            # 4. Fallback to lowercase string
+            return val.lower()
+
+        # Apply the sort using the smart key
         self._data.sort(
-            key=lambda row: row[column],
+            key=smart_sort_key,
             reverse=(order == Qt.SortOrder.DescendingOrder)
         )
+
         self.layoutChanged.emit()
 
     def set_data(self, data):

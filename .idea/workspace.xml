@@ -120,22 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00376" summary="added setup rm code completer">
-      <option name="closed" value="true" />
-      <created>1776139072452</created>
-      <option name="number" value="00376" />
-      <option name="presentableId" value="LOCAL-00376" />
-      <option name="project" value="LOCAL" />
-      <updated>1776139072452</updated>
-    </task>
-    <task id="LOCAL-00377" summary="updated indexing for database">
-      <option name="closed" value="true" />
-      <created>1776145322430</created>
-      <option name="number" value="00377" />
-      <option name="presentableId" value="LOCAL-00377" />
-      <option name="project" value="LOCAL" />
-      <updated>1776145322430</updated>
-    </task>
     <task id="LOCAL-00378" summary="created a materialized view for lots">
       <option name="closed" value="true" />
       <created>1776145462049</created>
@@ -512,7 +496,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776236047403</updated>
     </task>
-    <option name="localTasksCounter" value="425" />
+    <task id="LOCAL-00425" summary="updated the date format in the  prod records">
+      <option name="closed" value="true" />
+      <created>1776240886603</created>
+      <option name="number" value="00425" />
+      <option name="presentableId" value="LOCAL-00425" />
+      <option name="project" value="LOCAL" />
+      <updated>1776240886603</updated>
+    </task>
+    <task id="LOCAL-00426" summary="updated the date format in the  prod records">
+      <option name="closed" value="true" />
+      <created>1776241123808</created>
+      <option name="number" value="00426" />
+      <option name="presentableId" value="LOCAL-00426" />
+      <option name="project" value="LOCAL" />
+      <updated>1776241123808</updated>
+    </task>
+    <option name="localTasksCounter" value="427" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a database update for printed records" />
     <MESSAGE value="added a audit trail for deleteing a record" />
     <MESSAGE value="updated the string in the database update record" />
     <MESSAGE value="updated calling of function from another function" />
@@ -564,7 +563,8 @@
     <MESSAGE value="connected refresh function to butoton" />
     <MESSAGE value="added lazy loading for pages" />
     <MESSAGE value="added server local" />
-    <option name="LAST_COMMIT_MESSAGE" value="added server local" />
+    <MESSAGE value="updated the date format in the  prod records" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the date format in the  prod records" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -596,7 +596,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/table_model/model.py</url>
-          <line>2</line>
+          <line>4</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
