@@ -812,19 +812,12 @@ class MBAutoEntry(QWidget):
                 'total_weight': it3.text().strip() if it3 else '0'
             })
 
-        # === Open Preview with exec()===
-        preview = ProductionPrintPreview(production_data, materials_data, self)
-
-        # Connect audit log
-        # def on_printed(prod_id):
-        #     self.log_audit_trail(
-        #         "Print Production",
-        #         f"(Manual) Prod ID: {prod_id} | Production Date: {production_data['production_date']}"
-        #     )
-
-        # preview.printed.connect(on_printed)
-
-        # This blocks until user closes or prints
+        audit = {
+            "mac": self.work_station['m'],
+            "action": "PRINT",
+            "details": f"(MB-Auto) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
+        }
+        preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
         preview.exec()
 
     def clear_material_table(self):
