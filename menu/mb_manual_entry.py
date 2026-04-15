@@ -412,6 +412,12 @@ class MBManualEntry(QWidget):
 
         # Bottom Buttons
         button_layout = QHBoxLayout()
+
+        self.btn_cancel = QPushButton("Cancel Record", objectName="DangerButton")
+        self.btn_cancel.setIcon(fa.icon('mdi6.text-box-remove', color='white'))
+        self.btn_cancel.clicked.connect(self.cancel_production)
+        button_layout.addWidget(self.btn_cancel)
+
         button_layout.addStretch()
 
         self.print_wip_btn = QPushButton("Print with WIP", objectName="SecondaryButton")
