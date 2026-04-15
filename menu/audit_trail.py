@@ -112,7 +112,11 @@ class AuditTrail(QWidget):
         self.table_audit_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
         self.table_audit_records.setModel(self.table_model)
-        self.table_audit_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table_audit_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
+        # Force the "Details" column (index 3) to stretch and fill empty space
+        self.table_audit_records.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        self.table_audit_records.setColumnWidth(0, 140)
+        self.table_audit_records.setColumnWidth(5, 110)
         self.table_audit_records.verticalHeader().setVisible(False)  # hide row numbers
         # self.table_audit_records.setColumnHidden(0, True)
         self.table_audit_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
