@@ -7,7 +7,7 @@ def print_production(prod_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-            UPDATE tbl_production01 SET is_printed = "True" WHERE prod_id = %s
+            UPDATE tbl_production01 SET is_printed = 'True' WHERE prod_id = %s
         """, (prod_id,))
     conn.commit()
     cursor.close()
@@ -20,7 +20,7 @@ def cancel_production(prod_id):
         cursor = conn.cursor()
 
         cursor.execute("""
-                UPDATE tbl_production01 SET is_deleted = "True" WHERE prod_id = %s
+                UPDATE tbl_production01 SET is_deleted = 'True' WHERE prod_id = %s
             """, (prod_id,))
         conn.commit()
         cursor.close()
