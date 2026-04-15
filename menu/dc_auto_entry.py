@@ -839,7 +839,7 @@ class DCAutoEntry(QWidget):
         audit = {
             "mac": self.work_station['m'],
             "action": "PRINT",
-            "details": f"(DC-Auto) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
+            "details": f"(DC - Auto) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
         }
         preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
 
