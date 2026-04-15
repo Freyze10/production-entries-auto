@@ -17,31 +17,29 @@ class AuditTrail(QWidget):
 
     def setup_ui(self):
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(15, 10, 15, 15)
-        main_layout.setSpacing(12)
+        main_layout.setContentsMargins(15, 10, 15, 10)
+        main_layout.setSpacing(8)
 
         # === Header Section ===
         header_card = QFrame()
         header_card.setObjectName("HeaderCard")
         header_layout = QHBoxLayout(header_card)
-        header_layout.setContentsMargins(20, 15, 20, 15)
+        header_layout.setContentsMargins(20, 6, 6, 15)
 
-        title_label = QLabel("Audit Trail")
+        title_label = QLabel("Audit Trail", objectName="table_label")
         title_label.setFont(QFont("Segoe UI", 16, QFont.Weight.Bold))
-        title_label.setStyleSheet("color: #111827;")
         header_layout.addWidget(title_label)
 
-        subtitle_label = QLabel("Track all system activities and user actions")
+        subtitle_label = QLabel("Track all system activities and user actions", objectName="light_label")
         subtitle_label.setFont(QFont("Segoe UI", 9))
-        subtitle_label.setStyleSheet("color: #6B7280;")
         header_layout.addWidget(subtitle_label)
 
         header_layout.addStretch()
 
         # Export button in header
-        self.export_btn = QPushButton(" Export to CSV", objectName="InfoButton")
+        self.export_btn = QPushButton(" Export to CSV", objectName="PrimaryButton")
         self.export_btn.setIcon(fa.icon('fa5s.file-export', color='white'))
-        self.export_btn.clicked.connect(self.export_to_csv)
+        # self.export_btn.clicked.connect(self.export_to_csv)
         header_layout.addWidget(self.export_btn)
 
         main_layout.addWidget(header_card)
@@ -50,12 +48,11 @@ class AuditTrail(QWidget):
         filter_card = QFrame()
         filter_card.setObjectName("ContentCard")
         filter_layout = QVBoxLayout(filter_card)
-        filter_layout.setContentsMargins(20, 20, 20, 20)
+        filter_layout.setContentsMargins(20, 10, 20, 10)
         filter_layout.setSpacing(15)
 
-        filter_title = QLabel("Filters")
+        filter_title = QLabel("Filters", objectName="table_label")
         filter_title.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
-        filter_title.setStyleSheet("color: #111827;")
         filter_layout.addWidget(filter_title)
 
         # Grid layout for filters
@@ -116,9 +113,9 @@ class AuditTrail(QWidget):
         filter_btn_layout = QHBoxLayout()
         filter_btn_layout.addStretch()
 
-        self.reset_btn = QPushButton(" Reset Filters", objectName="SecondaryButton")
+        self.reset_btn = QPushButton(" Reset Filters", objectName="InfoButton")
         self.reset_btn.setIcon(fa.icon('fa5s.redo', color='white'))
-        self.reset_btn.clicked.connect(self.refresh_page)
+        # self.reset_btn.clicked.connect(self.refresh_page)
         filter_btn_layout.addWidget(self.reset_btn)
 
         filter_layout.addLayout(filter_btn_layout)

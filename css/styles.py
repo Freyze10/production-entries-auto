@@ -519,6 +519,9 @@ class AppStyles:
         QLabel#table_label {{
             color: {TEXT_PRIMARY};
         }}
+        QLabel#light_label {{
+            color: {SLATE_400};
+        }}
         QLineEdit#gray_bg{{
             background-color: {BG_GRAY};
         }}
