@@ -4,7 +4,7 @@ from datetime import datetime
 from PyQt6.QtCore import Qt, QDate
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem,
                              QAbstractItemView, QHeaderView, QMessageBox, QHBoxLayout, QLabel,
-                             QPushButton, QDateEdit, QLineEdit, QFileDialog, QFrame, QGridLayout)
+                             QPushButton, QDateEdit, QLineEdit, QFileDialog, QFrame, QGridLayout, QComboBox)
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 
@@ -55,59 +55,29 @@ class AuditTrail(QWidget):
         filter_title.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
         filter_layout.addWidget(filter_title)
 
-        # Grid layout for filters
-        grid_layout = QGridLayout()
-        grid_layout.setHorizontalSpacing(15)
-        grid_layout.setVerticalSpacing(12)
+        fields_layout = QHBoxLayout()
+        fields_layout.addStretch()
 
-        # Date Range
-        date_label = QLabel("Date Range:")
-        date_label.setFont(QFont("Segoe UI", 9, QFont.Weight.DemiBold))
-        grid_layout.addWidget(date_label, 0, 0)
+        self.audit_column_combo = QComboBox()
+        self.audit_column_combo.setFixedWidth(170)
+        self.audit_column_combo.addItems([
+            "All Columns",
+            "Hostname",
+            "Action Type",
+            "Details",
+        ])
+        self.audit_column_combo.setCurrentIndex(0)
 
-        date_container = QWidget()
-        date_hlayout = QHBoxLayout(date_container)
-        date_hlayout.setContentsMargins(0, 0, 0, 0)
-        date_hlayout.setSpacing(8)
+        search_label = QLabel("Search Record:")
+        search_label.setFont(QFont("Segoe UI", 9, QFont.Weight.DemiBold))
 
-        self.start_date_edit = QDateEdit(calendarPopup=True, displayFormat="yyyy-MM-dd")
-        self.start_date_edit.setMinimumWidth(140)
-        date_hlayout.addWidget(self.start_date_edit)
+        self.search_filter = QLineEdit(placeholderText="Enter Text...")
 
-        date_hlayout.addWidget(QLabel("to"))
+        fields_layout.addWidget(search_label)
+        fields_layout.addWidget(self.audit_column_combo)
+        fields_layout.addWidget(self.search_filter)
 
-        self.end_date_edit = QDateEdit(calendarPopup=True, displayFormat="yyyy-MM-dd")
-        self.end_date_edit.setMinimumWidth(140)
-        date_hlayout.addWidget(self.end_date_edit)
-        date_hlayout.addStretch()
-
-        grid_layout.addWidget(date_container, 0, 1, 1, 3)
-
-        # Username Filter
-        username_label = QLabel("Username:")
-        username_label.setFont(QFont("Segoe UI", 9, QFont.Weight.DemiBold))
-        grid_layout.addWidget(username_label, 1, 0)
-
-        self.username_filter = QLineEdit(placeholderText="Filter by username...")
-        grid_layout.addWidget(self.username_filter, 1, 1)
-
-        # Action Type Filter
-        action_label = QLabel("Action Type:")
-        action_label.setFont(QFont("Segoe UI", 9, QFont.Weight.DemiBold))
-        grid_layout.addWidget(action_label, 1, 2)
-
-        self.action_filter = QLineEdit(placeholderText="e.g., LOGIN, DELETE...")
-        grid_layout.addWidget(self.action_filter, 1, 3)
-
-        # Details Search
-        details_label = QLabel("Details:")
-        details_label.setFont(QFont("Segoe UI", 9, QFont.Weight.DemiBold))
-        grid_layout.addWidget(details_label, 2, 0)
-
-        self.details_filter = QLineEdit(placeholderText="Search in details...")
-        grid_layout.addWidget(self.details_filter, 2, 1, 1, 3)
-
-        filter_layout.addLayout(grid_layout)
+        filter_layout.addLayout(fields_layout)
 
         # Filter Buttons
         filter_btn_layout = QHBoxLayout()
