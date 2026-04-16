@@ -324,6 +324,12 @@ class MBManualEntry(QWidget):
 
         # Action Buttons
         action_layout = QHBoxLayout()
+
+        btn_separator = QPushButton("Separator")
+        btn_separator.setObjectName("TertiaryButton")
+        btn_separator.clicked.connect(self.add_separator)
+        action_layout.addWidget(btn_separator)
+
         action_layout.addStretch()
 
         add_btn = QPushButton("Add")
@@ -628,6 +634,13 @@ class MBManualEntry(QWidget):
         self.clear_material_inputs()
         self.update_totals()
         self.material_code_combo.setFocus()
+
+    def add_separator(self):
+        row_pos = self.materials_table.rowCount()
+        self.materials_table.insertRow(row_pos)
+
+        for col in range(self.materials_table.columnCount()):
+            self.materials_table.setItem(row_pos, col, QTableWidgetItem(""))
 
     def remove_material(self):
         current_row = self.materials_table.currentRow()

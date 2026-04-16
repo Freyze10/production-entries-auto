@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00388" summary="adding mac address accross pages">
-      <option name="closed" value="true" />
-      <created>1776150401121</created>
-      <option name="number" value="00388" />
-      <option name="presentableId" value="LOCAL-00388" />
-      <option name="project" value="LOCAL" />
-      <updated>1776150401121</updated>
-    </task>
     <task id="LOCAL-00389" summary="added a insert to audit trail query">
       <option name="closed" value="true" />
       <created>1776150917127</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776319727849</updated>
     </task>
-    <option name="localTasksCounter" value="437" />
+    <task id="LOCAL-00437" summary="modified tha table column spacing of the production records">
+      <option name="closed" value="true" />
+      <created>1776320761872</created>
+      <option name="number" value="00437" />
+      <option name="presentableId" value="LOCAL-00437" />
+      <option name="project" value="LOCAL" />
+      <updated>1776320761872</updated>
+    </task>
+    <option name="localTasksCounter" value="438" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connected the audit trail page to main" />
     <MESSAGE value="fixing spacing of the ui of  auditt" />
     <MESSAGE value="fixing the fields layout" />
     <MESSAGE value="make the search filter in one row" />
@@ -565,7 +564,8 @@
     <MESSAGE value="revert back the code and added one time only call on the database" />
     <MESSAGE value="uses python to set the validation of the lotnunbers" />
     <MESSAGE value="updated the lot validation function" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the lot validation function" />
+    <MESSAGE value="modified tha table column spacing of the production records" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified tha table column spacing of the production records" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
