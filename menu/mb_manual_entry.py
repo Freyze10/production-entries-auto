@@ -469,15 +469,21 @@ class MBManualEntry(QWidget):
             self.new_production()
 
     def validate_lot_no(self, event):
+        product_code = self.product_code_input.text().strip()
+
+        is_mb_value = "-" not in product_code
+
         if validate_lot_field(
                 parent=self,
                 widget=self.lot_no_input,
                 existing_list=self.lot_list,
                 event=event,
                 title="Duplicate Lot Number",
-                msg_body="Please enter a different lot number."
+                msg_body="Please enter a different lot number.",
+                is_mb=is_mb_value
         ):
-            super().focusOutEvent(event)
+            if hasattr(super(), 'focusOutEvent'):
+                super().focusOutEvent(event)
 
 
     def on_material_type_changed(self, checked, is_raw):

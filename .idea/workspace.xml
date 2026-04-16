@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00381" summary="created a query to check existing users">
-      <option name="closed" value="true" />
-      <created>1776148354633</created>
-      <option name="number" value="00381" />
-      <option name="presentableId" value="LOCAL-00381" />
-      <option name="project" value="LOCAL" />
-      <updated>1776148354633</updated>
-    </task>
     <task id="LOCAL-00382" summary="create a connectio&#10;n to create a user">
       <option name="closed" value="true" />
       <created>1776148501040</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776301420583</updated>
     </task>
-    <option name="localTasksCounter" value="430" />
+    <task id="LOCAL-00430" summary="added the field validation for lot in auto pages">
+      <option name="closed" value="true" />
+      <created>1776303623778</created>
+      <option name="number" value="00430" />
+      <option name="presentableId" value="LOCAL-00430" />
+      <option name="project" value="LOCAL" />
+      <updated>1776303623778</updated>
+    </task>
+    <option name="localTasksCounter" value="431" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added cancel button and audit trail in the mb auto page" />
     <MESSAGE value="added audit trail for printing mb auto" />
     <MESSAGE value="added cancel and audit trail in the dc auto page" />
     <MESSAGE value="updated text on audit trail record" />
@@ -564,7 +563,8 @@
     <MESSAGE value="modify the format of timestamp in audit trail" />
     <MESSAGE value="updated the tablee model" />
     <MESSAGE value="updated the field for lot validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the field for lot validation" />
+    <MESSAGE value="added the field validation for lot in auto pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the field validation for lot in auto pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
