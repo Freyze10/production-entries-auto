@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QMessageBox
 def validate_lot_field(parent, widget, existing_list, event,
                           title="PLEASE CHECK YOUR LOT NUMBER INPUT!",
                           msg_body="This value is already used.",
-                          is_mb=False): # Added is_mb parameter
+                          is_mb=True): # Added is_mb parameter
     """
     Generic validator for Lot Number patterns and duplicate checking.
     """

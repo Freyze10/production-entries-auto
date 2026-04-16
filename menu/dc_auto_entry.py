@@ -325,7 +325,7 @@ class DCAutoEntry(QWidget):
             customer_widget=self.customer_input,
             product_widget=self.product_code_input,
             order_widget=self.order_form_no_input,
-            lot_list=self.lot_list
+            lot_list=self.lot_list,
         )
         self.lot_list = [
             lot for lot in self.lot_list
@@ -510,7 +510,8 @@ class DCAutoEntry(QWidget):
                 existing_list=self.lot_list,
                 event=event,
                 title="Duplicate Lot Number",
-                msg_body="Please enter a different lot number."
+                msg_body="Please enter a different lot number.",
+                is_mb=False
         ):
             super().focusOutEvent(event)
 
