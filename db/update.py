@@ -33,3 +33,15 @@ def cancel_production(prod_id):
     except Exception as e:
         return False, str(e)
 
+
+def refresh_materialized():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("REFRESH MATERIALIZED VIEW mv_lot_parts;")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+

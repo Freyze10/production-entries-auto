@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from psycopg2.extras import RealDictCursor
 from db.connection import get_connection
 
@@ -196,6 +198,7 @@ def get_all_completer_data():
     return result
 
 
+@lru_cache(maxsize=1)
 def get_lot_no():
     conn = get_connection()
     cur = conn.cursor()

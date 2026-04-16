@@ -24,6 +24,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -119,30 +120,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00382" summary="create a connectio&#10;n to create a user">
-      <option name="closed" value="true" />
-      <created>1776148501040</created>
-      <option name="number" value="00382" />
-      <option name="presentableId" value="LOCAL-00382" />
-      <option name="project" value="LOCAL" />
-      <updated>1776148501040</updated>
-    </task>
-    <task id="LOCAL-00383" summary="created a query to add a user">
-      <option name="closed" value="true" />
-      <created>1776149083790</created>
-      <option name="number" value="00383" />
-      <option name="presentableId" value="LOCAL-00383" />
-      <option name="project" value="LOCAL" />
-      <updated>1776149083790</updated>
-    </task>
-    <task id="LOCAL-00384" summary="created a query to add a user">
-      <option name="closed" value="true" />
-      <created>1776149093266</created>
-      <option name="number" value="00384" />
-      <option name="presentableId" value="LOCAL-00384" />
-      <option name="project" value="LOCAL" />
-      <updated>1776149093266</updated>
     </task>
     <task id="LOCAL-00385" summary="created account for new user">
       <option name="closed" value="true" />
@@ -512,7 +489,31 @@
       <option name="project" value="LOCAL" />
       <updated>1776303623778</updated>
     </task>
-    <option name="localTasksCounter" value="431" />
+    <task id="LOCAL-00431" summary="added check of prod code if it is mb or dc then also check the lot if it is for mb or dc">
+      <option name="closed" value="true" />
+      <created>1776316544741</created>
+      <option name="number" value="00431" />
+      <option name="presentableId" value="LOCAL-00431" />
+      <option name="project" value="LOCAL" />
+      <updated>1776316544743</updated>
+    </task>
+    <task id="LOCAL-00432" summary="modified the caling of lot numbers, added calculation of range of lot numbers">
+      <option name="closed" value="true" />
+      <created>1776317295171</created>
+      <option name="number" value="00432" />
+      <option name="presentableId" value="LOCAL-00432" />
+      <option name="project" value="LOCAL" />
+      <updated>1776317295171</updated>
+    </task>
+    <task id="LOCAL-00433" summary="added refresh materialized to update the  lotnumber output">
+      <option name="closed" value="true" />
+      <created>1776317493509</created>
+      <option name="number" value="00433" />
+      <option name="presentableId" value="LOCAL-00433" />
+      <option name="project" value="LOCAL" />
+      <updated>1776317493509</updated>
+    </task>
+    <option name="localTasksCounter" value="434" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,9 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added audit trail for printing mb auto" />
-    <MESSAGE value="added cancel and audit trail in the dc auto page" />
-    <MESSAGE value="updated text on audit trail record" />
     <MESSAGE value="added update on database when record is printed" />
     <MESSAGE value="created a file for audit trail" />
     <MESSAGE value="adding a page for audit" />
@@ -564,7 +562,10 @@
     <MESSAGE value="updated the tablee model" />
     <MESSAGE value="updated the field for lot validation" />
     <MESSAGE value="added the field validation for lot in auto pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the field validation for lot in auto pages" />
+    <MESSAGE value="added check of prod code if it is mb or dc then also check the lot if it is for mb or dc" />
+    <MESSAGE value="modified the caling of lot numbers, added calculation of range of lot numbers" />
+    <MESSAGE value="added refresh materialized to update the  lotnumber output" />
+    <option name="LAST_COMMIT_MESSAGE" value="added refresh materialized to update the  lotnumber output" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

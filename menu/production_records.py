@@ -6,7 +6,7 @@ import qtawesome as fa
 from PyQt6.QtCore import pyqtSignal
 
 from db.legacy import Sync
-from db.read import get_cancelled_production_data, get_all_production_data, get_single_production_details
+from db.read import get_cancelled_production_data, get_all_production_data, get_single_production_details, get_lot_no
 from table_model.model import TableModel
 from util.debounce import finished_typing
 from util.loading import LoadingDialog
@@ -295,6 +295,8 @@ class ProductionRecords(QWidget):
 
             # Reset the details table to its default empty state
             self.details_table_model.set_data(self.details_row)
+
+            get_lot_no.cache_clear()
 
             # Clear search bar if text was entered
             self.search_input.clear()
