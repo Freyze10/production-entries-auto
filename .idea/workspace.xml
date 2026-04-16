@@ -120,14 +120,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00379" summary="changed the query for getting lots ]">
-      <option name="closed" value="true" />
-      <created>1776145666563</created>
-      <option name="number" value="00379" />
-      <option name="presentableId" value="LOCAL-00379" />
-      <option name="project" value="LOCAL" />
-      <updated>1776145666563</updated>
-    </task>
     <task id="LOCAL-00380" summary="updated the  audit trail columns">
       <option name="closed" value="true" />
       <created>1776148257881</created>
@@ -512,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776241973589</updated>
     </task>
-    <option name="localTasksCounter" value="428" />
+    <task id="LOCAL-00428" summary="updated the tablee model">
+      <option name="closed" value="true" />
+      <created>1776242545858</created>
+      <option name="number" value="00428" />
+      <option name="presentableId" value="LOCAL-00428" />
+      <option name="project" value="LOCAL" />
+      <updated>1776242545858</updated>
+    </task>
+    <option name="localTasksCounter" value="429" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +539,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the string in the database update record" />
     <MESSAGE value="updated calling of function from another function" />
     <MESSAGE value="added cancel button and audit trail in the mb auto page" />
     <MESSAGE value="added audit trail for printing mb auto" />
@@ -564,7 +563,8 @@
     <MESSAGE value="added server local" />
     <MESSAGE value="updated the date format in the  prod records" />
     <MESSAGE value="modify the format of timestamp in audit trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify the format of timestamp in audit trail" />
+    <MESSAGE value="updated the tablee model" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the tablee model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,37 +1,53 @@
+import re
 from PyQt6.QtWidgets import QMessageBox
 
-
 def validate_lot_field(parent, widget, existing_list, event,
-                          title="Duplicate Entry",
+                          title="PLEASE CHECK YOUR LOT NUMBER INPUT!",
                           msg_body="This value is already used.",
-                          transform_func=None):
+                          is_mb=False): # Added is_mb parameter
     """
-    Generic validator for QLineEdit focusOut events.
+    Generic validator for Lot Number patterns and duplicate checking.
     """
-    raw_text = widget.text().strip()
+    raw_text = widget.text().strip().upper() # Standardize to uppercase for validation
 
     if not raw_text:
-        return True  # Valid because it's empty (allow leaving)
+        return True
 
-    # Use a custom transformation or the default 'lot' logic
-    if transform_func:
-        check_value = transform_func(raw_text)
+    # 1. --- Pattern Validation Logic ---
+    if is_mb:
+        # Pattern: 4 digits + 2 letters (e.g., 1212ZZ)
+        pattern = r"^\d{4}[A-Z]{2}$"
+        requirement = "FOUR DIGITS followed by TWO LETTERS (A~Z)"
     else:
-        # Default: split by '-' and uppercase
-        check_value = raw_text.split('-', 1)[0].strip().upper()
+        # Pattern: 4 digits + 1 letter (e.g., 1212Z)
+        pattern = r"^\d{4}[A-Z]{1}$"
+        requirement = "FOUR DIGITS followed by ONE CHARACTER (A~Z)"
+
+    if not re.match(pattern, raw_text):
+        QMessageBox.warning(
+            parent,
+            title,
+            f"PLEASE CHECK LOT# {raw_text}.\n"
+            f"NUMERIC VALUE MUST BE {requirement}.",
+            QMessageBox.StandardButton.Ok
+        )
+        widget.setFocus()
+        widget.selectAll()
+        if event:
+            event.ignore()
+        return False
+
+    check_value = raw_text.split('-', 1)[0].strip().upper()
 
     if check_value in existing_list:
         QMessageBox.warning(
             parent,
-            title,
+            "Duplicate Entry",
             f"{msg_body}\n\nValue: '{check_value}'",
             QMessageBox.StandardButton.Ok
         )
-
-        # Force focus back
         widget.setFocus()
         widget.selectAll()
-
         if event:
             event.ignore()
         return False
