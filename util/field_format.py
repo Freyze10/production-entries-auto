@@ -134,7 +134,7 @@ def setup_auto_completers(customer_widget=None,
 
         completer = QCompleter(str_items)
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
+        completer.setFilterMode(Qt.MatchFlag.MatchContains)
         widget.setCompleter(completer)
 
     # Setup completers

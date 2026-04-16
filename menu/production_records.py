@@ -304,7 +304,7 @@ class ProductionRecords(QWidget):
             # Reset the details table to its default empty state
             self.details_table_model.set_data(self.details_row)
 
-            del setup_auto_completers._cached_expanded_lots
+            # del setup_auto_completers._cached_expanded_lots
 
             # Clear search bar if text was entered
             self.search_input.clear()

@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00391" summary="creating the audit trail for the Manual">
-      <option name="closed" value="true" />
-      <created>1776151736137</created>
-      <option name="number" value="00391" />
-      <option name="presentableId" value="LOCAL-00391" />
-      <option name="project" value="LOCAL" />
-      <updated>1776151736137</updated>
-    </task>
     <task id="LOCAL-00392" summary="added the audit trail in the print amnual">
       <option name="closed" value="true" />
       <created>1776154007879</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776321411792</updated>
     </task>
-    <option name="localTasksCounter" value="440" />
+    <task id="LOCAL-00440" summary="clear the cached prod data cancelled when they cancel a new record">
+      <option name="closed" value="true" />
+      <created>1776322415463</created>
+      <option name="number" value="00440" />
+      <option name="presentableId" value="LOCAL-00440" />
+      <option name="project" value="LOCAL" />
+      <updated>1776322415463</updated>
+    </task>
+    <option name="localTasksCounter" value="441" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="make the search filter in one row" />
     <MESSAGE value="fixed the spacing for frames" />
     <MESSAGE value="edited the table to use for audit" />
     <MESSAGE value="created a table for audit trail" />
@@ -565,7 +564,8 @@
     <MESSAGE value="modified tha table column spacing of the production records" />
     <MESSAGE value="added a manual separatorr in manual entry" />
     <MESSAGE value="disconnect the auto add of spoacing in manual table to let them add needed seperator" />
-    <option name="LAST_COMMIT_MESSAGE" value="disconnect the auto add of spoacing in manual table to let them add needed seperator" />
+    <MESSAGE value="clear the cached prod data cancelled when they cancel a new record" />
+    <option name="LAST_COMMIT_MESSAGE" value="clear the cached prod data cancelled when they cancel a new record" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
