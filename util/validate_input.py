@@ -4,52 +4,56 @@ from PyQt6.QtWidgets import QMessageBox
 def validate_lot_field(parent, widget, existing_list, event,
                           title="PLEASE CHECK YOUR LOT NUMBER INPUT!",
                           msg_body="This value is already used.",
-                          is_mb=True): # Added is_mb parameter
+                          is_mb=True):
     """
-    Generic validator for Lot Number patterns and duplicate checking.
+    Validates Lot Numbers, supporting ranges (e.g., 6087AL-6088AL).
+    Checks the first 6 chars for MB or first 5 chars for non-MB.
     """
-    raw_text = widget.text().strip().upper() # Standardize to uppercase for validation
+    raw_text = widget.text().strip().upper()
 
     if not raw_text:
         return True
 
-    # 1. --- Pattern Validation Logic ---
-    if is_mb:
-        # Pattern: 4 digits + 2 letters (e.g., 1212ZZ)
-        pattern = r"^\d{4}[A-Z]{2}$"
-        requirement = "FOUR DIGITS followed by TWO LETTERS (A~Z)"
-    else:
-        # Pattern: 4 digits + 1 letter (e.g., 1212Z)
-        pattern = r"^\d{4}[A-Z]{1}$"
-        requirement = "FOUR DIGITS followed by ONE CHARACTER (A~Z)"
+    # Split by '-' to handle ranges (e.g., '1212ZZ-1215ZZ' becomes ['1212ZZ', '1215ZZ'])
+    # If there is no '-', it just creates a list with one item.
+    lot_parts = [p.strip() for p in raw_text.split('-') if p.strip()]
 
-    if not re.match(pattern, raw_text):
-        QMessageBox.warning(
-            parent,
-            title,
-            f"PLEASE CHECK LOT# {raw_text}.\n"
-            f"NUMERIC VALUE MUST BE {requirement}.",
-            QMessageBox.StandardButton.Ok
-        )
-        widget.setFocus()
-        widget.selectAll()
-        if event:
-            event.ignore()
-        return False
+    # Define validation rules
+    check_len = 6 if is_mb else 5
+    pattern = r"^\d{4}[A-Z]{2}$" if is_mb else r"^\d{4}[A-Z]{1}$"
+    requirement = "4 DIGITS + 2 LETTERS" if is_mb else "4 DIGITS + 1 LETTER"
 
-    check_value = raw_text.split('-', 1)[0].strip().upper()
+    for part in lot_parts:
+        # Extract the prefix to validate (First 6 for MB, First 5 for Non-MB)
+        # Note: If the part is shorter than check_len, prefix will just be the whole part
+        prefix = part[:check_len]
 
-    if check_value in existing_list:
-        QMessageBox.warning(
-            parent,
-            "Duplicate Entry",
-            f"{msg_body}\n\nValue: '{check_value}'",
-            QMessageBox.StandardButton.Ok
-        )
-        widget.setFocus()
-        widget.selectAll()
-        if event:
-            event.ignore()
-        return False
+        # 1. --- Pattern Validation for this part ---
+        if not re.match(pattern, prefix):
+            QMessageBox.warning(
+                parent,
+                title,
+                f"INVALID FORMAT IN: '{part}'\n\n"
+                f"The first {check_len} characters must be {requirement}.",
+                QMessageBox.StandardButton.Ok
+            )
+            widget.setFocus()
+            widget.selectAll()
+            if event: event.ignore()
+            return False
+
+        # 2. --- Duplicate Check for this part ---
+        # We check if the prefix (the specific lot) already exists in your expanded DB list
+        if prefix in existing_list:
+            QMessageBox.warning(
+                parent,
+                "Duplicate Entry",
+                f"{msg_body}\n\nLot Number '{prefix}' already exists in records.",
+                QMessageBox.StandardButton.Ok
+            )
+            widget.setFocus()
+            widget.selectAll()
+            if event: event.ignore()
+            return False
 
     return True
