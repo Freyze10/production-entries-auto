@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00392" summary="added the audit trail in the print amnual">
-      <option name="closed" value="true" />
-      <created>1776154007879</created>
-      <option name="number" value="00392" />
-      <option name="presentableId" value="LOCAL-00392" />
-      <option name="project" value="LOCAL" />
-      <updated>1776154007879</updated>
-    </task>
     <task id="LOCAL-00393" summary="updated print output fdunction to match the preveiw">
       <option name="closed" value="true" />
       <created>1776154741615</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776322415463</updated>
     </task>
-    <option name="localTasksCounter" value="441" />
+    <task id="LOCAL-00441" summary="makke the completter search for what contains not whatt it starts with">
+      <option name="closed" value="true" />
+      <created>1776322883840</created>
+      <option name="number" value="00441" />
+      <option name="presentableId" value="LOCAL-00441" />
+      <option name="project" value="LOCAL" />
+      <updated>1776322883840</updated>
+    </task>
+    <option name="localTasksCounter" value="442" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the spacing for frames" />
     <MESSAGE value="edited the table to use for audit" />
     <MESSAGE value="created a table for audit trail" />
     <MESSAGE value="fixing table for audit records" />
@@ -565,7 +564,8 @@
     <MESSAGE value="added a manual separatorr in manual entry" />
     <MESSAGE value="disconnect the auto add of spoacing in manual table to let them add needed seperator" />
     <MESSAGE value="clear the cached prod data cancelled when they cancel a new record" />
-    <option name="LAST_COMMIT_MESSAGE" value="clear the cached prod data cancelled when they cancel a new record" />
+    <MESSAGE value="makke the completter search for what contains not whatt it starts with" />
+    <option name="LAST_COMMIT_MESSAGE" value="makke the completter search for what contains not whatt it starts with" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

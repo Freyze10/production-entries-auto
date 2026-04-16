@@ -10,6 +10,7 @@ import qtawesome as fa
 
 from db.read import get_audit_trail_report
 from table_model.model import TableModel
+from util.debounce import finished_typing
 
 
 class AuditTrail(QWidget):
@@ -72,6 +73,8 @@ class AuditTrail(QWidget):
         search_label.setFont(QFont("Segoe UI", 9, QFont.Weight.DemiBold))
 
         self.search_filter = QLineEdit(placeholderText="Enter Text...")
+        self.search_filter.returnPressed.connect(self.filter_audit_trail)
+        self.production_search_timer = finished_typing(self.search_filter, self.filter_audit_trail, delay=700)
 
 
         self.reset_btn = QPushButton(" Refresh", objectName="InfoButton")
@@ -146,4 +149,17 @@ class AuditTrail(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
+
+    def filter_audit_trail(self):
+        AUDIT_COL_MAP = {
+            "All Columns": None,
+            "Hostname": 0,
+            "Action Type": 1,
+            "Details": 2,
+        }
+
+        search_text = self.search_filter.text().lower()
+        col_label = self.audit_column_combo.currentText()
+        col_index = AUDIT_COL_MAP.get(col_label, None)
+        self.table_model.filter_data(search_text, col_index)
 
