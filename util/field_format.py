@@ -73,16 +73,56 @@ def add_batch_text(required, per_batch, notes_field):
         notes_field.setText("1 batch by 0.000 KG.")
 
 
+def expand_lot_list(raw_list):
+    expanded = set()  # Use a set to automatically handle duplicates
+
+    for item in raw_list:
+        item = item.strip().upper()
+        if not item: continue
+
+        if '-' in item:
+            try:
+                # Split "1801I-1805I" into "1801I" and "1805I"
+                parts = item.split('-')
+                start_str = parts[0].strip()
+                end_str = parts[1].strip()
+
+                # Use Regex to separate numbers from letters (e.g., '1801', 'I')
+                start_match = re.match(r"(\d+)([A-Z]+)", start_str)
+                end_match = re.match(r"(\d+)([A-Z]+)", end_str)
+
+                if start_match and end_match:
+                    start_num = int(start_match.group(1))
+                    end_num = int(end_match.group(1))
+                    suffix = start_match.group(2)  # Assume suffix is the same (e.g., 'I')
+
+                    # Generate the range
+                    for i in range(start_num, end_num + 1):
+                        # zfill(4) ensures 905 becomes 0905
+                        expanded.add(f"{str(i).zfill(4)}{suffix}")
+                else:
+                    # Fallback if regex fails: just add the raw parts
+                    expanded.add(start_str)
+                    expanded.add(end_str)
+            except Exception:
+                expanded.add(item)  # If something goes wrong, just keep the original
+        else:
+            # No dash, just a single lot like "0905R"
+            expanded.add(item)
+
+    return sorted(list(expanded))
 
 
 def setup_auto_completers(customer_widget=None,
                           product_widget=None,
                           order_widget=None,
                           lot_list=None):  # New parameter
-    """
-    Sets up QCompleters and also returns/updates the lot list.
-    """
-    lot_list_db = get_lot_no()
+    if not hasattr(setup_auto_completers, "_cached_expanded_lots"):
+        # Fetch raw data from DB
+        raw_data = get_lot_no()
+        setup_auto_completers._cached_expanded_lots = expand_lot_list(raw_data)
+
+    lot_list_db = setup_auto_completers._cached_expanded_lots
     data = get_all_completer_data()
 
     def setup_comp(widget, items):

@@ -1,5 +1,3 @@
-from functools import lru_cache
-
 from psycopg2.extras import RealDictCursor
 from db.connection import get_connection
 
@@ -198,16 +196,11 @@ def get_all_completer_data():
     return result
 
 
-@lru_cache(maxsize=1)
 def get_lot_no():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        SELECT trimmed_part 
-        FROM mv_lot_parts 
-        ORDER BY trimmed_part;
-    """)
+    cur.execute("SELECT DISTINCT lot_no FROM tbl_production01 WHERE lot_no IS NOT NULL AND is_deleted = 'False'")
 
     lot_list = [row[0] for row in cur.fetchall()]
 
