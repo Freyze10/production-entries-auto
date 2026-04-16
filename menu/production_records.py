@@ -83,7 +83,7 @@ class ProductionRecords(QWidget):
         records_layout.addWidget(self.table_records_label)
 
         # set of rows
-        self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced"]
+        self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced", "WIP"]
         self.rows = get_all_production_data()
 
         self.table_records = QTableView()
@@ -96,9 +96,13 @@ class ProductionRecords(QWidget):
         self.table_records.setColumnWidth(3, 110)
         self.table_records.setColumnWidth(4, 110)
         self.table_records.setColumnWidth(5, 130)
-
+        self.table_records.setMouseTracking(True)
+        self.table_records.viewport().setMouseTracking(True)
+        # 2. Install the event filter on the VIEWPORT (the actual area where rows are)
+        self.table_records.viewport().installEventFilter(self)
         self.table_records.verticalHeader().setVisible(False)  # hide row numbers
         self.table_records.setColumnHidden(0, True)
+        # self.table_records.setColumnHidden(7, True)
         self.table_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(True)
@@ -191,13 +195,17 @@ class ProductionRecords(QWidget):
             return
 
         row = index[0].row()
+        wip_no = self.table_model._data[row][7]
 
         try:
-            prod_id = self.rows[row][0]  # prod_id
-            customer = self.rows[row][2]  # customer
-            lot_no = self.rows[row][5]  # lot_number
+            prod_id = self.table_model._data[row][0]  # Get from model data directly
+            customer = self.table_model._data[row][2]
+            lot_no = self.table_model._data[row][5]
 
-            self.selected_production_label.setText(f"LOT NO: {lot_no} - {customer}")
+            # --- Update Label with WIP No if it exists ---
+            wip_display = f" | WIP: {wip_no}" if wip_no and str(wip_no).strip() not in ("", "None", "0") else ""
+            self.selected_production_label.setText(f"LOT NO: {lot_no} - {customer}{wip_display}")
+
             self.load_production_details(prod_id)
 
         except IndexError:

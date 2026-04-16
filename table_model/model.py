@@ -19,6 +19,14 @@ class TableModel(QAbstractTableModel):
         if not index.isValid():
             return None
 
+        if role == Qt.ItemDataRole.ToolTipRole:
+            row = index.row()
+            # Ensure row 7 exists in your data
+            if len(self._data[row]) > 7:
+                wip_no = self._data[row][7]
+                if wip_no and str(wip_no).strip() not in ("", "None", "0"):
+                    return f"WIP Number: {wip_no}"
+
         if role in (Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole):
             return self._data[index.row()][index.column()]
         return None

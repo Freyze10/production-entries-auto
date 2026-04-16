@@ -16,7 +16,8 @@ def get_all_production_data():
             a.prod_code,
             a.prod_color,
             a.lot_no,
-            b.quantity_prod
+            b.quantity_prod,
+            a.index_no
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
@@ -38,7 +39,8 @@ def get_all_production_data():
             str(row[3]) if row[3] else "",  # product_code
             str(row[4]) if row[4] else "",  # product_color
             str(row[5]) if row[5] else "",  # lot_number
-            str(row[6]) if row[6] is not None else "0.0"  # qty_produced
+            str(row[6]) if row[6] is not None else "0.0",  # qty_produced
+            str(row[7]) if row[7] else ""  # index_no/wip
         ])
 
     return data
@@ -57,7 +59,8 @@ def get_cancelled_production_data():
             a.prod_code, 
             a.prod_color, 
             a.lot_no, 
-            b.quantity_prod 
+            b.quantity_prod,
+            a.index_no
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
@@ -79,7 +82,8 @@ def get_cancelled_production_data():
             str(row[3]) if row[3] else "",  # product_code
             str(row[4]) if row[4] else "",  # product_color
             str(row[5]) if row[5] else "",  # lot_number
-            str(row[6]) if row[6] is not None else "0.0"  # qty_produced
+            str(row[6]) if row[6] is not None else "0.0",  # qty_produced
+            str(row[7]) if row[7] else ""  # index_no/wip
         ])
 
     return data
