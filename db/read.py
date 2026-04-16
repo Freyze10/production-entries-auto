@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from psycopg2.extras import RealDictCursor
 from db.connection import get_connection
 
@@ -41,6 +43,8 @@ def get_all_production_data():
 
     return data
 
+
+@lru_cache(maxsize=1)
 def get_cancelled_production_data():
     conn = get_connection()
     cur = conn.cursor()
@@ -175,6 +179,7 @@ def get_formula_materials(form_id):
     return records
 
 
+@lru_cache(maxsize=1)
 def get_all_completer_data():
     conn = get_connection()
     cur = conn.cursor()

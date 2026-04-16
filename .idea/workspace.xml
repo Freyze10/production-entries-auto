@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00390" summary="created first audit trail for login">
-      <option name="closed" value="true" />
-      <created>1776151175915</created>
-      <option name="number" value="00390" />
-      <option name="presentableId" value="LOCAL-00390" />
-      <option name="project" value="LOCAL" />
-      <updated>1776151175915</updated>
-    </task>
     <task id="LOCAL-00391" summary="creating the audit trail for the Manual">
       <option name="closed" value="true" />
       <created>1776151736137</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776321311782</updated>
     </task>
-    <option name="localTasksCounter" value="439" />
+    <task id="LOCAL-00439" summary="disconnect the auto add of spoacing in manual table to let them add needed seperator">
+      <option name="closed" value="true" />
+      <created>1776321411792</created>
+      <option name="number" value="00439" />
+      <option name="presentableId" value="LOCAL-00439" />
+      <option name="project" value="LOCAL" />
+      <updated>1776321411792</updated>
+    </task>
+    <option name="localTasksCounter" value="440" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixing the fields layout" />
     <MESSAGE value="make the search filter in one row" />
     <MESSAGE value="fixed the spacing for frames" />
     <MESSAGE value="edited the table to use for audit" />
@@ -565,7 +564,8 @@
     <MESSAGE value="updated the lot validation function" />
     <MESSAGE value="modified tha table column spacing of the production records" />
     <MESSAGE value="added a manual separatorr in manual entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a manual separatorr in manual entry" />
+    <MESSAGE value="disconnect the auto add of spoacing in manual table to let them add needed seperator" />
+    <option name="LAST_COMMIT_MESSAGE" value="disconnect the auto add of spoacing in manual table to let them add needed seperator" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -602,12 +602,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>645</line>
+          <line>648</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>672</line>
+          <line>675</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

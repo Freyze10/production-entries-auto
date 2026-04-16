@@ -8,7 +8,7 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
-    get_all_completer_data, get_lot_no
+    get_cancelled_production_data
 from db.update import cancel_production
 from db.write import log_audit_trail
 from table_model import table_spacing
@@ -671,6 +671,9 @@ class MBManualEntry(QWidget):
 
             if success:
                 QMessageBox.information(self, "Success", f"Production {prod_id} has been successfully cancelled.")
+
+                # clear the cached cancelled records on database call
+                get_cancelled_production_data.cache_clear()
 
                 self.new_production()  # Clear the input after cancellation
                 audit = {
