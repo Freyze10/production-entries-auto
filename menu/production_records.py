@@ -89,7 +89,14 @@ class ProductionRecords(QWidget):
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
         self.table_records.setModel(self.table_model)
-        self.table_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
+        # Force the "Details" column (index 3) to stretch and fill empty space
+        self.table_records.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        self.table_records.setColumnWidth(1, 80)
+        self.table_records.setColumnWidth(3, 110)
+        self.table_records.setColumnWidth(4, 110)
+        self.table_records.setColumnWidth(5, 130)
+
         self.table_records.verticalHeader().setVisible(False)  # hide row numbers
         self.table_records.setColumnHidden(0, True)
         self.table_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
