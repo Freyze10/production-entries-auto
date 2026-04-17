@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
         self.username = self.workstation_info['h']
         self.user_role = get_user_role(self.workstation_info['m'])
         self.init_ui()
-        self.log_audit_trail()
+        # self.log_audit_trail()
 
     def init_ui(self):
         main_widget = QWidget()
