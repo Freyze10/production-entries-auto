@@ -121,22 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00396" summary="added a database for deleting a  record">
-      <option name="closed" value="true" />
-      <created>1776215775998</created>
-      <option name="number" value="00396" />
-      <option name="presentableId" value="LOCAL-00396" />
-      <option name="project" value="LOCAL" />
-      <updated>1776215775998</updated>
-    </task>
-    <task id="LOCAL-00397" summary="added a database for deleting a  record">
-      <option name="closed" value="true" />
-      <created>1776215784523</created>
-      <option name="number" value="00397" />
-      <option name="presentableId" value="LOCAL-00397" />
-      <option name="project" value="LOCAL" />
-      <updated>1776215784523</updated>
-    </task>
     <task id="LOCAL-00398" summary="conected the function and the button function">
       <option name="closed" value="true" />
       <created>1776215834875</created>
@@ -513,7 +497,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776385735738</updated>
     </task>
-    <option name="localTasksCounter" value="445" />
+    <task id="LOCAL-00445" summary="added an icon for the system">
+      <option name="closed" value="true" />
+      <created>1776387435468</created>
+      <option name="number" value="00445" />
+      <option name="presentableId" value="LOCAL-00445" />
+      <option name="project" value="LOCAL" />
+      <updated>1776387435468</updated>
+    </task>
+    <task id="LOCAL-00446" summary="added an icon for the system">
+      <option name="closed" value="true" />
+      <created>1776387446531</created>
+      <option name="number" value="00446" />
+      <option name="presentableId" value="LOCAL-00446" />
+      <option name="project" value="LOCAL" />
+      <updated>1776387446531</updated>
+    </task>
+    <option name="localTasksCounter" value="447" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adjusted column width of table audit" />
     <MESSAGE value="added refresh button" />
     <MESSAGE value="added refresh function" />
     <MESSAGE value="connected refresh function to butoton" />
@@ -565,7 +564,8 @@
     <MESSAGE value="added a dedbounce function on the audit trail records search field" />
     <MESSAGE value="added wip number in the header to know it is from manual" />
     <MESSAGE value="make the okay button clicked connect to the selected formula" />
-    <option name="LAST_COMMIT_MESSAGE" value="make the okay button clicked connect to the selected formula" />
+    <MESSAGE value="added an icon for the system" />
+    <option name="LAST_COMMIT_MESSAGE" value="added an icon for the system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
