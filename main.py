@@ -3,6 +3,7 @@ from datetime import datetime
 
 import qtawesome as fa
 from PyQt6.QtCore import Qt, QSize, QTimer
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVBoxLayout, QLabel, QFrame, QPushButton, \
     QStackedWidget, QStatusBar
 
@@ -14,6 +15,7 @@ from menu.dc_auto_entry import DCAutoEntry
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
 from menu.production_records import ProductionRecords
+from util.absolute_path import resource_path
 from workstation.workstation_details import _get_workstation_info
 from db.schema import create_table
 
@@ -26,7 +28,8 @@ class MainWindow(QMainWindow):
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
         self.setWindowTitle("Production Entry")
-        self.setWindowIcon(fa.icon('mdi.upload-network-outline', color='gray'))
+        icon_path = resource_path("css/img/production_icon.ico")
+        self.setWindowIcon(QIcon(icon_path))
         self.setMinimumSize(1400, 720)
         self.setGeometry(100, 100, 1366, 768)
 
