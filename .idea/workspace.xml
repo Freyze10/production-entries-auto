@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00400" summary="added a database update for printed records">
-      <option name="closed" value="true" />
-      <created>1776215983060</created>
-      <option name="number" value="00400" />
-      <option name="presentableId" value="LOCAL-00400" />
-      <option name="project" value="LOCAL" />
-      <updated>1776215983060</updated>
-    </task>
     <task id="LOCAL-00401" summary="added a audit trail for deleteing a record">
       <option name="closed" value="true" />
       <created>1776216326720</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776388382075</updated>
     </task>
-    <option name="localTasksCounter" value="449" />
+    <task id="LOCAL-00449" summary="added a row count on audit trail">
+      <option name="closed" value="true" />
+      <created>1776388954083</created>
+      <option name="number" value="00449" />
+      <option name="presentableId" value="LOCAL-00449" />
+      <option name="project" value="LOCAL" />
+      <updated>1776388954083</updated>
+    </task>
+    <option name="localTasksCounter" value="450" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connected refresh function to butoton" />
     <MESSAGE value="added lazy loading for pages" />
     <MESSAGE value="added server local" />
     <MESSAGE value="updated the date format in the  prod records" />
@@ -565,7 +564,8 @@
     <MESSAGE value="added an icon for the system" />
     <MESSAGE value="fixed index type in column searching for audit trail" />
     <MESSAGE value="hidden the wip column" />
-    <option name="LAST_COMMIT_MESSAGE" value="hidden the wip column" />
+    <MESSAGE value="added a row count on audit trail" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a row count on audit trail" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

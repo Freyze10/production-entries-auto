@@ -166,3 +166,6 @@ class AuditTrail(QWidget):
         col_index = AUDIT_COL_MAP.get(col_label, None)
         self.table_model.filter_data(search_text, col_index)
 
+        current_count = self.table_model.rowCount()
+        self.record_count_label.setText(f"{current_count} records")
+
