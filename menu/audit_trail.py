@@ -153,9 +153,9 @@ class AuditTrail(QWidget):
     def filter_audit_trail(self):
         AUDIT_COL_MAP = {
             "All Columns": None,
-            "Hostname": 0,
-            "Action Type": 1,
-            "Details": 2,
+            "Hostname": 1,
+            "Action Type": 2,
+            "Details": 3
         }
 
         search_text = self.search_filter.text().lower()
