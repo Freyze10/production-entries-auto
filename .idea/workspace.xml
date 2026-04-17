@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00394" summary="added cancel button">
-      <option name="closed" value="true" />
-      <created>1776214626531</created>
-      <option name="number" value="00394" />
-      <option name="presentableId" value="LOCAL-00394" />
-      <option name="project" value="LOCAL" />
-      <updated>1776214626531</updated>
-    </task>
     <task id="LOCAL-00395" summary="added function for cancelling a production">
       <option name="closed" value="true" />
       <created>1776215439960</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776325275117</updated>
     </task>
-    <option name="localTasksCounter" value="443" />
+    <task id="LOCAL-00443" summary="added wip number in the header to know it is from manual">
+      <option name="closed" value="true" />
+      <created>1776328505555</created>
+      <option name="number" value="00443" />
+      <option name="presentableId" value="LOCAL-00443" />
+      <option name="project" value="LOCAL" />
+      <updated>1776328505555</updated>
+    </task>
+    <option name="localTasksCounter" value="444" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a table for audit trail" />
     <MESSAGE value="fixing table for audit records" />
     <MESSAGE value="adjusted column width of table audit" />
     <MESSAGE value="added refresh button" />
@@ -565,7 +564,8 @@
     <MESSAGE value="clear the cached prod data cancelled when they cancel a new record" />
     <MESSAGE value="makke the completter search for what contains not whatt it starts with" />
     <MESSAGE value="added a dedbounce function on the audit trail records search field" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a dedbounce function on the audit trail records search field" />
+    <MESSAGE value="added wip number in the header to know it is from manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="added wip number in the header to know it is from manual" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
