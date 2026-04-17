@@ -45,7 +45,7 @@ class AuditTrail(QWidget):
         # Export button in header
         self.export_btn = QPushButton(" Export to CSV", objectName="PrimaryButton")
         self.export_btn.setIcon(fa.icon('fa5s.file-export', color='white'))
-        # self.export_btn.clicked.connect(self.export_to_csv)
+        self.export_btn.clicked.connect(self.export_to_csv)
         header_layout.addWidget(self.export_btn)
 
         main_layout.addWidget(header_card)
@@ -169,3 +169,44 @@ class AuditTrail(QWidget):
         current_count = self.table_model.rowCount()
         self.record_count_label.setText(f"{current_count} records")
 
+    def export_to_csv(self):
+        # 1. Check if there is data to export
+        if self.table_model.rowCount() == 0:
+            QMessageBox.warning(self, "Export Error", "No records found to export.")
+            return
+
+        # 2. Open File Dialog
+        # This ensures the file is saved as .csv, which Excel opens perfectly
+        default_name = f"Audit_Trail_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Export Audit Trail",
+            default_name,
+            "CSV Files (*.csv);;All Files (*)"
+        )
+
+        if not file_path:
+            return  # User cancelled
+
+        try:
+            # 3. Write to CSV
+            with open(file_path, mode='w', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+
+                # Write the Headers
+                writer.writerow(self.headers)
+
+                # Write the Data from the Model (this respects the current filter)
+                # We access self.table_model._data directly
+                for row_index in range(self.table_model.rowCount()):
+                    row_data = []
+                    for col_index in range(self.table_model.columnCount()):
+                        # Get value from the model
+                        val = self.table_model.data(self.table_model.index(row_index, col_index))
+                        row_data.append(val)
+                    writer.writerow(row_data)
+
+            QMessageBox.information(self, "Export Successful", f"Data exported successfully to:\n{file_path}")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Export Failed", f"An error occurred while exporting: {e}")
