@@ -139,6 +139,9 @@ class AuditTrail(QWidget):
             self.rows = get_audit_trail_report()
             self.table_model.set_data(self.rows)
 
+            total_count = len(self.rows)
+            self.record_count_label.setText(f"{total_count} records")
+
             # Reset the selection in the UI
             self.table_audit_records.clearSelection()
             self.table_audit_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
