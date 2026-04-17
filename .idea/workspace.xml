@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00402" summary="updated the string in the database update record">
-      <option name="closed" value="true" />
-      <created>1776216562506</created>
-      <option name="number" value="00402" />
-      <option name="presentableId" value="LOCAL-00402" />
-      <option name="project" value="LOCAL" />
-      <updated>1776216562506</updated>
-    </task>
     <task id="LOCAL-00403" summary="updated calling of function from another function">
       <option name="closed" value="true" />
       <created>1776217136337</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776389112364</updated>
     </task>
-    <option name="localTasksCounter" value="451" />
+    <task id="LOCAL-00451" summary="remove the calculation for displaying old records. only use what was recorded even the spacing">
+      <option name="closed" value="true" />
+      <created>1776393011752</created>
+      <option name="number" value="00451" />
+      <option name="presentableId" value="LOCAL-00451" />
+      <option name="project" value="LOCAL" />
+      <updated>1776393011752</updated>
+    </task>
+    <option name="localTasksCounter" value="452" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added server local" />
     <MESSAGE value="updated the date format in the  prod records" />
     <MESSAGE value="modify the format of timestamp in audit trail" />
     <MESSAGE value="updated the tablee model" />
@@ -565,7 +564,8 @@
     <MESSAGE value="hidden the wip column" />
     <MESSAGE value="added a row count on audit trail" />
     <MESSAGE value="added record count even when searching" />
-    <option name="LAST_COMMIT_MESSAGE" value="added record count even when searching" />
+    <MESSAGE value="remove the calculation for displaying old records. only use what was recorded even the spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove the calculation for displaying old records. only use what was recorded even the spacing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -577,7 +577,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>59</line>
+          <line>58</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

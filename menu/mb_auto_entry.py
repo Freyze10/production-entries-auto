@@ -12,7 +12,7 @@ from db.read import get_latest_prod_id, get_formula_select, get_formula_material
     get_all_completer_data, get_single_production_details, get_single_production_data, get_cancelled_production_data
 from db.update import cancel_production
 from db.write import log_audit_trail
-from table_model import table_spacing, table_tumbler_compute, table_generate_compute
+from table_model import table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers

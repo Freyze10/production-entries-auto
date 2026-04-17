@@ -11,7 +11,6 @@ from db.read import get_single_production_data, get_single_production_details, g
     get_cancelled_production_data
 from db.update import cancel_production
 from db.write import log_audit_trail
-from table_model import table_spacing
 from print.print_preview import ProductionPrintPreview
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
@@ -635,13 +634,6 @@ class MBManualEntry(QWidget):
         except ValueError:
             QMessageBox.warning(self, "Invalid Input", "Please enter valid numbers for scales and weight.")
             return
-
-        qty_required = float(self.qty_required_input.text() or 1)
-        qty_per_batch = float(self.qty_per_batch_input.text() or 1)
-
-        batches = qty_required / qty_per_batch
-
-        # table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches, limit=25.0)
 
         row_position = self.materials_table.rowCount()
         self.materials_table.insertRow(row_position)
