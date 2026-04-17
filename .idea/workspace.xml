@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00404" summary="added cancel button and audit trail in the mb auto page">
-      <option name="closed" value="true" />
-      <created>1776217237896</created>
-      <option name="number" value="00404" />
-      <option name="presentableId" value="LOCAL-00404" />
-      <option name="project" value="LOCAL" />
-      <updated>1776217237896</updated>
-    </task>
     <task id="LOCAL-00405" summary="added audit trail for printing mb auto">
       <option name="closed" value="true" />
       <created>1776219152888</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776393125705</updated>
     </task>
-    <option name="localTasksCounter" value="453" />
+    <task id="LOCAL-00453" summary="&#10;added a validation to not generate if there is no formula in dmb">
+      <option name="closed" value="true" />
+      <created>1776393969714</created>
+      <option name="number" value="00453" />
+      <option name="presentableId" value="LOCAL-00453" />
+      <option name="project" value="LOCAL" />
+      <updated>1776393969714</updated>
+    </task>
+    <option name="localTasksCounter" value="454" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modify the format of timestamp in audit trail" />
     <MESSAGE value="updated the tablee model" />
     <MESSAGE value="updated the field for lot validation" />
     <MESSAGE value="added the field validation for lot in auto pages" />
@@ -565,7 +564,8 @@
     <MESSAGE value="added record count even when searching" />
     <MESSAGE value="remove the calculation for displaying old records. only use what was recorded even the spacing" />
     <MESSAGE value="removed the imports of table spacing" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the imports of table spacing" />
+    <MESSAGE value="&#10;added a validation to not generate if there is no formula in dmb" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;added a validation to not generate if there is no formula in dmb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

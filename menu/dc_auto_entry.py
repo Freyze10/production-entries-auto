@@ -696,6 +696,16 @@ class DCAutoEntry(QWidget):
                 QMessageBox.Ok
             )
             return
+
+        if self.formulation_details is None:
+            QMessageBox.warning(
+                self,
+                "Missing Formula",
+                "Please select a formula before proceeding.",
+                QMessageBox.Ok
+            )
+            return
+
         try:
             quantity_req = float(qty_req_text)
             quantity_batch = float(qty_batch_text)
@@ -754,6 +764,16 @@ class DCAutoEntry(QWidget):
                 QMessageBox.Ok
             )
             return
+
+        if self.formulation_details is None:
+            QMessageBox.warning(
+                self,
+                "Missing Formula",
+                "Please select a formula before proceeding.",
+                QMessageBox.Ok
+            )
+            return
+
         try:
             quantity_req = float(qty_req_text)
             quantity_batch = float(qty_batch_text)
