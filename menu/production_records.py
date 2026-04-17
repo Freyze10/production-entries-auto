@@ -102,7 +102,7 @@ class ProductionRecords(QWidget):
         self.table_records.viewport().installEventFilter(self)
         self.table_records.verticalHeader().setVisible(False)  # hide row numbers
         self.table_records.setColumnHidden(0, True)
-        # self.table_records.setColumnHidden(7, True)
+        self.table_records.setColumnHidden(7, True)
         self.table_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(True)
