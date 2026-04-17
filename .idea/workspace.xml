@@ -121,14 +121,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00401" summary="added a audit trail for deleteing a record">
-      <option name="closed" value="true" />
-      <created>1776216326720</created>
-      <option name="number" value="00401" />
-      <option name="presentableId" value="LOCAL-00401" />
-      <option name="project" value="LOCAL" />
-      <updated>1776216326720</updated>
-    </task>
     <task id="LOCAL-00402" summary="updated the string in the database update record">
       <option name="closed" value="true" />
       <created>1776216562506</created>
@@ -513,7 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776388954083</updated>
     </task>
-    <option name="localTasksCounter" value="450" />
+    <task id="LOCAL-00450" summary="added record count even when searching">
+      <option name="closed" value="true" />
+      <created>1776389112364</created>
+      <option name="number" value="00450" />
+      <option name="presentableId" value="LOCAL-00450" />
+      <option name="project" value="LOCAL" />
+      <updated>1776389112364</updated>
+    </task>
+    <option name="localTasksCounter" value="451" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added lazy loading for pages" />
     <MESSAGE value="added server local" />
     <MESSAGE value="updated the date format in the  prod records" />
     <MESSAGE value="modify the format of timestamp in audit trail" />
@@ -565,7 +564,8 @@
     <MESSAGE value="fixed index type in column searching for audit trail" />
     <MESSAGE value="hidden the wip column" />
     <MESSAGE value="added a row count on audit trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a row count on audit trail" />
+    <MESSAGE value="added record count even when searching" />
+    <option name="LAST_COMMIT_MESSAGE" value="added record count even when searching" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -602,12 +602,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>648</line>
+          <line>668</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>675</line>
+          <line>695</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -95,7 +95,7 @@ def get_single_production_details(prod_id):  # matrials details
     cur.execute("""
         SELECT prod_id, material_code, large_scale, small_scale, total_weight
         FROM tbl_production02
-        WHERE material_code != '' AND prod_id = %s
+        WHERE prod_id = %s
         ORDER BY sequence_no ASC;
     """, (prod_id,))
 

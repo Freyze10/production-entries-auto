@@ -559,23 +559,43 @@ class DCAutoEntry(QWidget):
 
         self.materials_table.setRowCount(0)
 
-        batches = qty_req / qty_batch if qty_batch > 0 else 1.0
         for mat in self.prod_materials:
-            # Tuple indexing: (id, material_code, large_scale, small_scale, total_weight)
-            mat_code = str(mat[1])
-            large_scale = float(mat[2])
-            small_scale = float(mat[3])
-            total_weight = float(mat[4])
+            row_idx = self.materials_table.rowCount()
+            self.materials_table.insertRow(row_idx)
 
-            table_spacing.handle_batch_break_manual(self.materials_table, weight=total_weight, batches=batches , limit=25.0)
+            mat_code = str(mat[1]) if mat[1] else ""
 
-            row = self.materials_table.rowCount()
-            self.materials_table.insertRow(row)
+            # Logic for Empty vs. Data row
+            if mat_code.strip() == "":
+                # It's an empty row: Fill all columns with empty strings
+                for col in range(self.materials_table.columnCount()):
+                    self.materials_table.setItem(row_idx, col, QTableWidgetItem(""))
+            else:
+                # It's a data row: Fill with Material and Numeric values
+                try:
+                    large_scale = float(mat[2]) if mat[2] is not None else 0.0
+                    small_scale = float(mat[3]) if mat[3] is not None else 0.0
+                    total_weight = float(mat[4]) if mat[4] is not None else 0.0
+                except (ValueError, TypeError):
+                    large_scale = small_scale = total_weight = 0.0
 
-            self.materials_table.setItem(row, 0, QTableWidgetItem(mat_code))
-            self.materials_table.setItem(row, 1, NumericTableWidgetItem(large_scale, is_float=True))
-            self.materials_table.setItem(row, 2, NumericTableWidgetItem(small_scale, is_float=True))
-            self.materials_table.setItem(row, 3, NumericTableWidgetItem(total_weight, is_float=True))
+                # Set Column 0: Material Code
+                self.materials_table.setItem(row_idx, 0, QTableWidgetItem(mat_code))
+
+                # Set Column 1: Large Scale
+                item_large = NumericTableWidgetItem(large_scale, is_float=True)
+                item_large.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+                self.materials_table.setItem(row_idx, 1, item_large)
+
+                # Set Column 2: Small Scale
+                item_small = NumericTableWidgetItem(small_scale, is_float=True)
+                item_small.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+                self.materials_table.setItem(row_idx, 2, item_small)
+
+                # Set Column 3: Total Weight
+                item_total = NumericTableWidgetItem(total_weight, is_float=True)
+                item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+                self.materials_table.setItem(row_idx, 3, item_total)
 
         item_count = self.materials_table.rowCount()
         self.no_items_label.setText(str(item_count))
