@@ -1,3 +1,4 @@
+from datetime import datetime
 from functools import lru_cache
 
 from psycopg2.extras import RealDictCursor
@@ -299,3 +300,26 @@ def get_audit_trail_report():
     except Exception as e:
         print(f"Error fetching audit trail: {e}")
         return []
+
+
+def get_audit_date_bounds():
+    """Returns (min_date, max_date) as Python date objects."""
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        # Query for the absolute min and max timestamps
+        cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM tbl_audit_trail")
+        res = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        # Fallback to today's date if the table is empty
+        min_date = res[0].date() if res[0] else datetime.now().date()
+        max_date = res[1].date() if res[1] else datetime.now().date()
+
+        return min_date, max_date
+    except Exception as e:
+        print(f"Error getting bounds: {e}")
+        today = datetime.now().date()
+        return today, today
+

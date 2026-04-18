@@ -194,14 +194,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00409" summary="created a file for audit trail">
-      <option name="closed" value="true" />
-      <created>1776220735657</created>
-      <option name="number" value="00409" />
-      <option name="presentableId" value="LOCAL-00409" />
-      <option name="project" value="LOCAL" />
-      <updated>1776220735657</updated>
-    </task>
     <task id="LOCAL-00410" summary="adding a page for audit">
       <option name="closed" value="true" />
       <created>1776221039488</created>
@@ -586,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776478039301</updated>
     </task>
-    <option name="localTasksCounter" value="458" />
+    <task id="LOCAL-00458" summary="added date rasngein the audit trail">
+      <option name="closed" value="true" />
+      <created>1776494197644</created>
+      <option name="number" value="00458" />
+      <option name="presentableId" value="LOCAL-00458" />
+      <option name="project" value="LOCAL" />
+      <updated>1776494197644</updated>
+    </task>
+    <option name="localTasksCounter" value="459" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the caling of lot numbers, added calculation of range of lot numbers" />
     <MESSAGE value="added refresh materialized to update the  lotnumber output" />
     <MESSAGE value="revert back the code and added one time only call on the database" />
     <MESSAGE value="uses python to set the validation of the lotnunbers" />
@@ -638,7 +637,8 @@
     <MESSAGE value="create a export to csv" />
     <MESSAGE value="commented out the log in records on audit trail" />
     <MESSAGE value="added check of production number if existing before cancel" />
-    <option name="LAST_COMMIT_MESSAGE" value="added check of production number if existing before cancel" />
+    <MESSAGE value="added date rasngein the audit trail" />
+    <option name="LAST_COMMIT_MESSAGE" value="added date rasngein the audit trail" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

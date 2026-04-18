@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetIte
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 
-from db.read import get_audit_trail_report
+from db.read import get_audit_trail_report, get_audit_date_bounds
 from table_model.model import TableModel
 from util.debounce import finished_typing
 
@@ -165,6 +165,16 @@ class AuditTrail(QWidget):
 
             # Clear search bar if text was entered
             self.search_filter.clear()
+
+            min_pydate, max_pydate = get_audit_date_bounds()
+
+            # Convert Python date to QDate
+            mindate = QDate(min_pydate.year, min_pydate.month, min_pydate.day)
+            maxdate = QDate(max_pydate.year, max_pydate.month, max_pydate.day)
+
+            # Usually, date_start = oldest (min) and date_end = newest (max)
+            self.date_start.setDate(mindate)
+            self.date_end.setDate(maxdate)
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
