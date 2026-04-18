@@ -194,14 +194,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00408" summary="added update on database when record is printed">
-      <option name="closed" value="true" />
-      <created>1776220493487</created>
-      <option name="number" value="00408" />
-      <option name="presentableId" value="LOCAL-00408" />
-      <option name="project" value="LOCAL" />
-      <updated>1776220493487</updated>
-    </task>
     <task id="LOCAL-00409" summary="created a file for audit trail">
       <option name="closed" value="true" />
       <created>1776220735657</created>
@@ -586,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776398323463</updated>
     </task>
-    <option name="localTasksCounter" value="457" />
+    <task id="LOCAL-00457" summary="added check of production number if existing before cancel">
+      <option name="closed" value="true" />
+      <created>1776478039301</created>
+      <option name="number" value="00457" />
+      <option name="presentableId" value="LOCAL-00457" />
+      <option name="project" value="LOCAL" />
+      <updated>1776478039301</updated>
+    </task>
+    <option name="localTasksCounter" value="458" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added check of prod code if it is mb or dc then also check the lot if it is for mb or dc" />
     <MESSAGE value="modified the caling of lot numbers, added calculation of range of lot numbers" />
     <MESSAGE value="added refresh materialized to update the  lotnumber output" />
     <MESSAGE value="revert back the code and added one time only call on the database" />
@@ -638,7 +637,8 @@
     <MESSAGE value="&#10;added a validation to not generate if there is no formula in dc" />
     <MESSAGE value="create a export to csv" />
     <MESSAGE value="commented out the log in records on audit trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="commented out the log in records on audit trail" />
+    <MESSAGE value="added check of production number if existing before cancel" />
+    <option name="LAST_COMMIT_MESSAGE" value="added check of production number if existing before cancel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -675,12 +675,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>668</line>
+          <line>672</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>705</line>
+          <line>709</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
