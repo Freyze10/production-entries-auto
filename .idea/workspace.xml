@@ -194,14 +194,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00411" summary="connected the audit trail page to main">
-      <option name="closed" value="true" />
-      <created>1776221234807</created>
-      <option name="number" value="00411" />
-      <option name="presentableId" value="LOCAL-00411" />
-      <option name="project" value="LOCAL" />
-      <updated>1776221234807</updated>
-    </task>
     <task id="LOCAL-00412" summary="fixing spacing of the ui of  auditt">
       <option name="closed" value="true" />
       <created>1776222502169</created>
@@ -586,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776494564731</updated>
     </task>
-    <option name="localTasksCounter" value="460" />
+    <task id="LOCAL-00460" summary="added fetch data when the date is changed">
+      <option name="closed" value="true" />
+      <created>1776494895767</created>
+      <option name="number" value="00460" />
+      <option name="presentableId" value="LOCAL-00460" />
+      <option name="project" value="LOCAL" />
+      <updated>1776494895768</updated>
+    </task>
+    <option name="localTasksCounter" value="461" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="revert back the code and added one time only call on the database" />
     <MESSAGE value="uses python to set the validation of the lotnunbers" />
     <MESSAGE value="updated the lot validation function" />
     <MESSAGE value="modified tha table column spacing of the production records" />
@@ -638,7 +637,8 @@
     <MESSAGE value="added check of production number if existing before cancel" />
     <MESSAGE value="added date rasngein the audit trail" />
     <MESSAGE value="added the default value of date range based from the records" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the default value of date range based from the records" />
+    <MESSAGE value="added fetch data when the date is changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="added fetch data when the date is changed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

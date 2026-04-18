@@ -257,11 +257,17 @@ def get_user_role(mac):
         return None  # Return None if no user found with that MAC
 
 
-def get_audit_trail_report():
+def get_audit_trail_report(start_date=None, end_date=None):
+    """
+    Fetches audit trail logs.
+    If start_date and end_date are provided (as Python date objects),
+    the results are filtered to that range.
+    """
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
+        # 1. Base Query
         query = """
             SELECT 
                 a.timestamp, 
@@ -272,10 +278,20 @@ def get_audit_trail_report():
                 u.mac_address
             FROM tbl_audit_trail a
             INNER JOIN tbl_user u ON a.user_id = u.user_id
-            ORDER BY a.timestamp DESC
         """
 
-        cursor.execute(query)
+        params = []
+
+        # 2. Add Date Filtering if parameters are passed
+        # We cast timestamp to ::date to ignore the time part during the range check
+        if start_date and end_date:
+            query += " WHERE a.timestamp::date BETWEEN %s AND %s"
+            params.extend([start_date, end_date])
+
+        # 3. Add Ordering
+        query += " ORDER BY a.timestamp DESC"
+
+        cursor.execute(query, params)
         rows = cursor.fetchall()
 
         # Format the data for the UI
@@ -285,7 +301,7 @@ def get_audit_trail_report():
             ts = row[0].strftime("%Y-%m-%d %I:%M %p") if row[0] else ""
 
             formatted_rows.append([
-                ts,  # Timestamp
+                ts,  # Timestamp (formatted string)
                 row[1],  # Hostname
                 row[2],  # Action (action_type)
                 row[3],  # Details
@@ -298,7 +314,7 @@ def get_audit_trail_report():
         return formatted_rows
 
     except Exception as e:
-        print(f"Error fetching audit trail: {e}")
+        print(f"Database Error in get_audit_trail_report: {e}")
         return []
 
 

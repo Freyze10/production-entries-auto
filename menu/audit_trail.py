@@ -46,6 +46,7 @@ class AuditTrail(QWidget):
         self.date_start.setCalendarPopup(True)
         self.date_start.setDisplayFormat("MM-dd-yyyy")
         self.date_start.setMinimumWidth(130)
+        self.date_start.dateChanged.connect(self.fetch_data)
         header_layout.addWidget(self.date_start)
 
         dash = QLabel(" - ", objectName="table_label")
@@ -56,6 +57,7 @@ class AuditTrail(QWidget):
         self.date_end.setCalendarPopup(True)
         self.date_end.setDisplayFormat("MM-dd-yyyy")
         self.date_end.setMinimumWidth(130)
+        self.date_end.dateChanged.connect(self.fetch_data)
         header_layout.addWidget(self.date_end)
 
         # Export button in header
