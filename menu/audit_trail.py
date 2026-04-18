@@ -152,7 +152,20 @@ class AuditTrail(QWidget):
 
     def refresh_records(self):
         try:
-            self.rows = get_audit_trail_report()
+            min_pydate, max_pydate = get_audit_date_bounds()
+
+            # Convert Python date to QDate
+            mindate = QDate(min_pydate.year, min_pydate.month, min_pydate.day)
+            maxdate = QDate(max_pydate.year, max_pydate.month, max_pydate.day)
+
+            self.date_start.blockSignals(True)
+            self.date_end.blockSignals(True)
+            self.date_start.setDate(mindate)
+            self.date_end.setDate(maxdate)
+            self.date_start.blockSignals(False)
+            self.date_end.blockSignals(False)
+
+            self.rows = get_audit_trail_report(min_pydate, max_pydate)
             self.table_model.set_data(self.rows)
 
             total_count = len(self.rows)
@@ -165,16 +178,6 @@ class AuditTrail(QWidget):
 
             # Clear search bar if text was entered
             self.search_filter.clear()
-
-            min_pydate, max_pydate = get_audit_date_bounds()
-
-            # Convert Python date to QDate
-            mindate = QDate(min_pydate.year, min_pydate.month, min_pydate.day)
-            maxdate = QDate(max_pydate.year, max_pydate.month, max_pydate.day)
-
-            # Usually, date_start = oldest (min) and date_end = newest (max)
-            self.date_start.setDate(mindate)
-            self.date_end.setDate(maxdate)
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
@@ -194,6 +197,27 @@ class AuditTrail(QWidget):
 
         current_count = self.table_model.rowCount()
         self.record_count_label.setText(f"{current_count} records")
+
+    def fetch_data(self):
+        """Fetches data based on the current date widgets without resetting the widgets themselves."""
+        try:
+            # 1. Get dates from widgets and convert to Python dates
+            start_date = self.date_start.date().toPyDate()
+            end_date = self.date_end.date().toPyDate()
+
+            # 2. Fetch only the filtered records
+            self.rows = get_audit_trail_report(start_date, end_date)
+            self.table_model.set_data(self.rows)
+
+            # 3. Update count
+            self.record_count_label.setText(f"{len(self.rows)} records")
+
+            # 4. Apply search filter if there is text in the search bar
+            if self.search_filter.text():
+                self.filter_audit_trail()
+
+        except Exception as e:
+            print(f"Fetch Error: {e}")
 
     def export_to_csv(self):
         # 1. Check if there is data to export
