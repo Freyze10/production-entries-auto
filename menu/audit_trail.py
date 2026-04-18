@@ -42,6 +42,22 @@ class AuditTrail(QWidget):
 
         header_layout.addStretch()
 
+        self.date_start = QDateEdit()
+        self.date_start.setCalendarPopup(True)
+        self.date_start.setDisplayFormat("MM-dd-yyyy")
+        self.date_start.setMinimumWidth(130)
+        header_layout.addWidget(self.date_start)
+
+        dash = QLabel(" - ", objectName="table_label")
+        dash.setFont(QFont("Segoe UI", 16, QFont.Weight.Bold))
+        header_layout.addWidget(dash)
+
+        self.date_end = QDateEdit()
+        self.date_end.setCalendarPopup(True)
+        self.date_end.setDisplayFormat("MM-dd-yyyy")
+        self.date_end.setMinimumWidth(130)
+        header_layout.addWidget(self.date_end)
+
         # Export button in header
         self.export_btn = QPushButton(" Export to CSV", objectName="PrimaryButton")
         self.export_btn.setIcon(fa.icon('fa5s.file-export', color='white'))
