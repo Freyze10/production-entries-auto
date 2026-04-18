@@ -56,7 +56,6 @@ class MBManualEntry(QWidget):
         primary_layout = QGridLayout(primary_card)
         primary_layout.setSpacing(4)
         primary_layout.setContentsMargins(8, 12, 8, 4)
-
         row = 0
 
         # WIP No (Production ID)
@@ -663,10 +662,14 @@ class MBManualEntry(QWidget):
             QMessageBox.warning(self, "No Selection", "Please select a material to remove.")
 
     def cancel_production(self):
-
+        latest_prod = get_latest_prod_id()
         prod_id = self.production_id_input.text().strip()
         if not prod_id or prod_id == "0":
             QMessageBox.warning(self, "Selection Required", "Please select a production record from the table first.")
+            return
+
+        if str(prod_id) >= str(latest_prod + 1):
+            QMessageBox.warning(self, "Selection Required", "Production ID does not Exists.")
             return
 
         msg = f"Are you sure you want to CANCEL Production ID: {prod_id}?\n\nThis action cannot be undone."
