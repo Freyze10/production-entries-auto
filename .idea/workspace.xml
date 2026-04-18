@@ -194,14 +194,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00412" summary="fixing spacing of the ui of  auditt">
-      <option name="closed" value="true" />
-      <created>1776222502169</created>
-      <option name="number" value="00412" />
-      <option name="presentableId" value="LOCAL-00412" />
-      <option name="project" value="LOCAL" />
-      <updated>1776222502169</updated>
-    </task>
     <task id="LOCAL-00413" summary="fixing the fields layout">
       <option name="closed" value="true" />
       <created>1776223034148</created>
@@ -586,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776494895768</updated>
     </task>
-    <option name="localTasksCounter" value="461" />
+    <task id="LOCAL-00461" summary="modify the database query to fetch the date from the date range">
+      <option name="closed" value="true" />
+      <created>1776495081082</created>
+      <option name="number" value="00461" />
+      <option name="presentableId" value="LOCAL-00461" />
+      <option name="project" value="LOCAL" />
+      <updated>1776495081082</updated>
+    </task>
+    <option name="localTasksCounter" value="462" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="uses python to set the validation of the lotnunbers" />
     <MESSAGE value="updated the lot validation function" />
     <MESSAGE value="modified tha table column spacing of the production records" />
     <MESSAGE value="added a manual separatorr in manual entry" />
@@ -638,7 +637,8 @@
     <MESSAGE value="added date rasngein the audit trail" />
     <MESSAGE value="added the default value of date range based from the records" />
     <MESSAGE value="added fetch data when the date is changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="added fetch data when the date is changed" />
+    <MESSAGE value="modify the database query to fetch the date from the date range" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify the database query to fetch the date from the date range" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
