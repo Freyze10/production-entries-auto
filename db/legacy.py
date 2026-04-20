@@ -235,7 +235,7 @@ class Sync(QObject):
             # Exit early only if BOTH are empty
             if not primary_recs and not prod_recs:
                 self.finished.emit(True, "Sync Info: No new records found to sync.")
-                return
+
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
             all_prod_items_to_insert = [
@@ -370,11 +370,20 @@ class Sync(QObject):
                             ) ON CONFLICT DO NOTHING
                         """), all_prod_items_to_insert)
 
+            self.progress.emit("Phase 4/4: Starting RM Incoming sync...")
+            try:
+                count = perform_rm_incoming_sync_logic(engine, self.progress.emit)
+                incoming_msg = f"\n  RM Incoming: {count} records updated."
+            except Exception as e:
+                incoming_msg = f"\n  RM Incoming: Failed ({e})"
+                print(f"RM Incoming Error inside Main Sync: {e}")
+
             self.finished.emit(
                 True,
                 f"Sync complete.\n"
                 f"  Formulas inserted: {len(primary_recs)} record(s), {len(all_items_to_insert)} item(s)\n"
                 f"  Production inserted: {len(prod_recs)} record(s), {len(all_prod_items_to_insert)} item(s)"
+                f"{incoming_msg}"
             )
 
         except dbfread.DBFNotFound as e:
@@ -431,127 +440,62 @@ class SyncRM(QObject):
             self.finished.emit(False, str(e))
 
 
-class SyncRMIncoming(QObject):
+def perform_rm_incoming_sync_logic(engine, progress_callback=None):
     """
-    Syncs tbl_incoming.dbf → tbl_rm_incoming in PostgreSQL.
-
-    Strategy:
-      1. Read ALL records from the DBF file using dbfread (no DBF SQL).
-      2. Clean and validate each row in Python.
-      3. Deduplicate by T_MATCODE: keep only the record with the latest
-         valid T_DATE per material code. Invalid/zero dates (1899-12-30)
-         are ignored; if ALL dates for a material are invalid the record
-         is still kept but with date=None so no data is silently dropped.
-      4. Bulk-upsert the result into PostgreSQL via SQLAlchemy.
+    The core logic of RM Incoming Sync extracted so it can be
+    called by both Sync and SyncRMIncoming classes.
     """
+    print("test")
+    if progress_callback:
+        progress_callback("Phase 4/4: Syncing Incoming Raw Materials...")
 
-    finished = pyqtSignal(bool, str)
-    progress = pyqtSignal(str)
+    dbf = dbfread.DBF(RM_INCOMING, encoding='latin1', char_decode_errors='ignore')
+    latest_by_code = {}
 
-    def run(self):
-        try:
-            # ----------------------------------------------------------------
-            # Phase 1 — Read DBF
-            # ----------------------------------------------------------------
-            dbf = dbfread.DBF(RM_INCOMING, encoding='latin1', char_decode_errors='ignore')
+    for r in dbf:
+        if r.get('T_DELETED'): continue
+        material_code = _to_str(r.get('T_MATCODE'))
+        if not material_code: continue
 
-            total_rows = 0
-            skipped_no_code = 0
-            skipped_deleted = 0
+        raw_date = r.get('T_DATE')
+        date_valid = _is_valid_date(raw_date)
+        incoming_date = raw_date if date_valid else None
+        note = _to_str(r.get('T_NOTE')) or None
 
-            # latest_by_code[material_code] = {
-            #     "material_code": str,
-            #     "note":          str | None,
-            #     "date":          date | None,   ← best valid date seen so far
-            #     "_has_valid_date": bool          ← internal flag, stripped before insert
-            # }
-            latest_by_code: dict = {}
-
-            for r in dbf:
-                total_rows += 1
-
-                # Skip soft-deleted rows
-                if r.get('T_DELETED'):
-                    skipped_deleted += 1
-                    continue
-
-                material_code = _to_str(r.get('T_MATCODE'))
-                if not material_code:
-                    skipped_no_code += 1
-                    continue
-
-                raw_date = r.get('T_DATE')
-                date_valid = _is_valid_date(raw_date)
-                incoming_date = raw_date if date_valid else None
-
-                note = _to_str(r.get('T_NOTE')) or None   # store None instead of ''
-
-                existing = latest_by_code.get(material_code)
-
-                if existing is None:
-                    # First time we see this material code
-                    latest_by_code[material_code] = {
-                        "material_code": material_code,
-                        "note": note,
-                        "date": incoming_date,
-                        "_has_valid_date": date_valid,
-                    }
-                else:
-                    # Keep the record with the latest valid date.
-                    # If the incoming record has a valid date and either:
-                    #   a) the stored record has no valid date, OR
-                    #   b) the incoming date is more recent,
-                    # → replace.
-                    should_replace = False
-                    if date_valid:
-                        if not existing["_has_valid_date"]:
-                            should_replace = True
-                        elif incoming_date > existing["date"]:
-                            should_replace = True
-
-                    if should_replace:
-                        latest_by_code[material_code] = {
-                            "material_code": material_code,
-                            "note": note,
-                            "date": incoming_date,
-                            "_has_valid_date": date_valid,
-                        }
-
-            if not latest_by_code:
-                return
-
-            # ----------------------------------------------------------------
-            # Phase 2 — Build insert payload (strip internal flag)
-            # ----------------------------------------------------------------
-
-            data = [
-                {
-                    "material_code": v["material_code"],
-                    "note":          v["note"],
-                    "date":          v["date"],
+        existing = latest_by_code.get(material_code)
+        if existing is None:
+            latest_by_code[material_code] = {
+                "material_code": material_code, "note": note,
+                "date": incoming_date, "_has_valid_date": date_valid,
+            }
+        else:
+            should_replace = False
+            if date_valid:
+                if not existing["_has_valid_date"]:
+                    should_replace = True
+                elif incoming_date > existing["date"]:
+                    should_replace = True
+            if should_replace:
+                latest_by_code[material_code] = {
+                    "material_code": material_code, "note": note,
+                    "date": incoming_date, "_has_valid_date": date_valid,
                 }
-                for v in latest_by_code.values()
-            ]
 
-            no_date_count = sum(1 for v in latest_by_code.values() if not v["_has_valid_date"])
+    if not latest_by_code:
+        return 0
 
-            # ----------------------------------------------------------------
-            # Phase 3 — Upsert into PostgreSQL
-            # ----------------------------------------------------------------
+    data = [
+        {"material_code": v["material_code"], "note": v["note"], "date": v["date"]}
+        for v in latest_by_code.values()
+    ]
 
-            with engine.connect() as conn:
-                with conn.begin():
-                    conn.execute(text("""
-                        INSERT INTO tbl_rm_incoming (date, material_code, note)
-                        VALUES (:date, :material_code, :note)
-                        ON CONFLICT (material_code) DO UPDATE SET
-                            note = EXCLUDED.note,
-                            date = EXCLUDED.date
-                    """), data)
-
-        except dbfread.DBFNotFound as e:
-            self.finished.emit(False, f"File Not Found: The incoming DBF file is missing.\nDetails: {e}")
-        except Exception as e:
-            trace_info = traceback.format_exc()
-            print(f"RM INCOMING SYNC ERROR: {e}\n{trace_info}")
-            self.finished.emit(False, f"An unexpected error occurred during incoming sync:\n{e}")
+    with engine.connect() as conn:
+        with conn.begin():
+            conn.execute(text("""
+                INSERT INTO tbl_rm_incoming (date, material_code, note)
+                VALUES (:date, :material_code, :note)
+                ON CONFLICT (material_code) DO UPDATE SET
+                    note = EXCLUDED.note,
+                    date = EXCLUDED.date
+            """), data)
+    return len(data)

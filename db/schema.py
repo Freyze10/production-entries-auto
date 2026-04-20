@@ -216,6 +216,16 @@ def create_table():
         WHERE is_deleted = 'False';
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_rm_incoming (
+            id SERIAL PRIMARY KEY,
+            date DATE,
+            material_code VARCHAR(50)  NOT NULL,
+            note TEXT,
+            CONSTRAINT uq_rm_incoming_material_code UNIQUE (material_code)
+        );
+    """)
+
     con.commit()
     cursor.close()
     con.close()
