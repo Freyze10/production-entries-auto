@@ -18,6 +18,7 @@ FORMULA_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula02.dbf')
 PRODUCTION_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')
 PRODUCTION_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod02.dbf')
 RM_WH = os.path.join(DBF_BASE_PATH, 'tbl_rm_wh.dbf')
+RM_INCOMING = os.path.join(DBF_BASE_PATH, 'tbl_incoming.dbf')
 
 try:
     db_url = f"postgresql+psycopg2://{DB_CONFIG['user']}:{DB_CONFIG['password']}@{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['dbname']}"
