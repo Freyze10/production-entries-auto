@@ -195,22 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00421" summary="added refresh function">
-      <option name="closed" value="true" />
-      <created>1776231325084</created>
-      <option name="number" value="00421" />
-      <option name="presentableId" value="LOCAL-00421" />
-      <option name="project" value="LOCAL" />
-      <updated>1776231325084</updated>
-    </task>
-    <task id="LOCAL-00422" summary="connected refresh function to butoton">
-      <option name="closed" value="true" />
-      <created>1776231474673</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1776231474673</updated>
-    </task>
     <task id="LOCAL-00423" summary="added lazy loading for pages">
       <option name="closed" value="true" />
       <created>1776232186256</created>
@@ -587,7 +571,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776665446370</updated>
     </task>
-    <option name="localTasksCounter" value="470" />
+    <task id="LOCAL-00470" summary="added a function to return the bag weight for rm">
+      <option name="closed" value="true" />
+      <created>1776667786568</created>
+      <option name="number" value="00470" />
+      <option name="presentableId" value="LOCAL-00470" />
+      <option name="project" value="LOCAL" />
+      <updated>1776667786569</updated>
+    </task>
+    <task id="LOCAL-00471" summary="added a function to return the bag weight for rm">
+      <option name="closed" value="true" />
+      <created>1776667791495</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1776667791495</updated>
+    </task>
+    <option name="localTasksCounter" value="472" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="make the okay button clicked connect to the selected formula" />
     <MESSAGE value="added an icon for the system" />
     <MESSAGE value="fixed index type in column searching for audit trail" />
     <MESSAGE value="hidden the wip column" />
@@ -639,7 +638,8 @@
     <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
     <MESSAGE value="added the syncing of rm incoming" />
     <MESSAGE value="added the query for getting the note on rm incoming" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the query for getting the note on rm incoming" />
+    <MESSAGE value="added a function to return the bag weight for rm" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a function to return the bag weight for rm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
