@@ -453,8 +453,6 @@ class SyncRMIncoming(QObject):
             # ----------------------------------------------------------------
             # Phase 1 — Read DBF
             # ----------------------------------------------------------------
-            self.progress.emit("Phase 1/3: Reading incoming DBF file...")
-
             dbf = dbfread.DBF(RM_INCOMING, encoding='latin1', char_decode_errors='ignore')
 
             total_rows = 0
@@ -519,22 +517,12 @@ class SyncRMIncoming(QObject):
                             "_has_valid_date": date_valid,
                         }
 
-            self.progress.emit(
-                f"Phase 1/3: Read {total_rows} total row(s). "
-                f"Skipped {skipped_deleted} deleted, {skipped_no_code} blank-code. "
-                f"Unique material codes retained: {len(latest_by_code)}."
-            )
-
             if not latest_by_code:
-                self.finished.emit(True, "Incoming sync: No valid records found to sync.")
                 return
 
             # ----------------------------------------------------------------
             # Phase 2 — Build insert payload (strip internal flag)
             # ----------------------------------------------------------------
-            self.progress.emit(
-                f"Phase 2/3: Preparing {len(latest_by_code)} record(s) for database upsert..."
-            )
 
             data = [
                 {
@@ -546,38 +534,20 @@ class SyncRMIncoming(QObject):
             ]
 
             no_date_count = sum(1 for v in latest_by_code.values() if not v["_has_valid_date"])
-            if no_date_count:
-                self.progress.emit(
-                    f"  Note: {no_date_count} material code(s) had no valid date "
-                    f"(will be inserted with date=NULL)."
-                )
 
             # ----------------------------------------------------------------
             # Phase 3 — Upsert into PostgreSQL
             # ----------------------------------------------------------------
-            self.progress.emit(
-                f"Phase 3/3: Upserting {len(data)} record(s) into tbl_rm_incoming..."
-            )
 
             with engine.connect() as conn:
                 with conn.begin():
                     conn.execute(text("""
-                        INSERT INTO tbl_rm_incoming (material_code, note, date)
-                        VALUES (:material_code, :note, :date)
+                        INSERT INTO tbl_rm_incoming (date, material_code, note)
+                        VALUES (:date, :material_code, :note)
                         ON CONFLICT (material_code) DO UPDATE SET
                             note = EXCLUDED.note,
                             date = EXCLUDED.date
                     """), data)
-
-            self.finished.emit(
-                True,
-                f"Incoming sync complete.\n"
-                f"  Total DBF rows read : {total_rows}\n"
-                f"  Deleted rows skipped: {skipped_deleted}\n"
-                f"  Blank-code skipped  : {skipped_no_code}\n"
-                f"  Unique codes upserted: {len(data)}"
-                + (f"\n  Records with NULL date: {no_date_count}" if no_date_count else "")
-            )
 
         except dbfread.DBFNotFound as e:
             self.finished.emit(False, f"File Not Found: The incoming DBF file is missing.\nDetails: {e}")
