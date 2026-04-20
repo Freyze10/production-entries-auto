@@ -33,7 +33,7 @@ def get_bag_limit(material_code):
             if weight_num > 20:
                 return 25
             else:
-                return 21  # +1kg para sa allowance weight depends kung kasya pa
+                return 20  # +1kg para sa allowance weight depends kung kasya pa
         except ValueError:
             # In case the string can't be converted to a float
             return 25
