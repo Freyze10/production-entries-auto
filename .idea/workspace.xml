@@ -58,7 +58,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Python.format_rm_note">
+  <component name="RunManager" selected="Python.main">
     <configuration name="client_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -171,8 +171,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.format_rm_note" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.format_rm_note" />
         <item itemvalue="Python.print_preview" />
         <item itemvalue="Python.client_test" />
         <item itemvalue="Python.test_print" />
@@ -194,14 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00423" summary="added lazy loading for pages">
-      <option name="closed" value="true" />
-      <created>1776232186256</created>
-      <option name="number" value="00423" />
-      <option name="presentableId" value="LOCAL-00423" />
-      <option name="project" value="LOCAL" />
-      <updated>1776232186256</updated>
     </task>
     <task id="LOCAL-00424" summary="added server local">
       <option name="closed" value="true" />
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776667791495</updated>
     </task>
-    <option name="localTasksCounter" value="472" />
+    <task id="LOCAL-00472" summary="added a helper function to gett the desired bag  weight">
+      <option name="closed" value="true" />
+      <created>1776668169894</created>
+      <option name="number" value="00472" />
+      <option name="presentableId" value="LOCAL-00472" />
+      <option name="project" value="LOCAL" />
+      <updated>1776668169894</updated>
+    </task>
+    <option name="localTasksCounter" value="473" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added an icon for the system" />
     <MESSAGE value="fixed index type in column searching for audit trail" />
     <MESSAGE value="hidden the wip column" />
     <MESSAGE value="added a row count on audit trail" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added the syncing of rm incoming" />
     <MESSAGE value="added the query for getting the note on rm incoming" />
     <MESSAGE value="added a function to return the bag weight for rm" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a function to return the bag weight for rm" />
+    <MESSAGE value="added a helper function to gett the desired bag  weight" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a helper function to gett the desired bag  weight" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
