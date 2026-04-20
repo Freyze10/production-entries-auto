@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Production Entry")
         icon_path = resource_path("css/img/production_icon.ico")
         self.setWindowIcon(QIcon(icon_path))
-        self.setGeometry(100, 100, 1266, 668)
+        self.setGeometry(100, 100, 1320, 668)
         self.showMaximized()
 
         self.production_records = None
