@@ -339,3 +339,29 @@ def get_audit_date_bounds():
         today = datetime.now().date()
         return today, today
 
+
+def get_material_note(material_code):
+    """
+    Fetches the most recent note for a specific material code
+    from the tbl_rm_incoming table.
+    """
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT note 
+        FROM public.tbl_rm_incoming 
+        WHERE material_code = %s
+        ORDER BY date DESC 
+        LIMIT 1
+    """, (material_code,))
+
+    record = cur.fetchone()
+
+    cur.close()
+    conn.close()
+
+    if record:
+        return record[0]
+    else:
+        return None
