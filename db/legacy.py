@@ -235,7 +235,7 @@ class Sync(QObject):
             # Exit early only if BOTH are empty
             if not primary_recs and not prod_recs:
                 self.finished.emit(True, "Sync Info: No new records found to sync.")
-
+                return
 
             all_items_to_insert = [item for rec in primary_recs for item in items_by_uid.get(rec['uid'], [])]
             all_prod_items_to_insert = [
