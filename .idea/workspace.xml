@@ -40,6 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.fastapi.executor": "Run",
+    "Python.format_rm_note.executor": "Run",
     "Python.main.executor": "Run",
     "Python.print.executor": "Run",
     "Python.print_preview.executor": "Run",
@@ -57,29 +58,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProductionSystem" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Brant\PycharmProjects\ProductionSystem\api.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.format_rm_note">
     <configuration name="client_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
@@ -94,6 +73,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="C:\Users\Brant\PycharmProjects\ProductionSystem\client_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="format_rm_note" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProductionSystem" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/util" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util/format_rm_note.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -170,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.format_rm_note" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.print_preview" />
         <item itemvalue="Python.client_test" />
         <item itemvalue="Python.test_print" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -193,14 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00420" summary="added refresh button">
-      <option name="closed" value="true" />
-      <created>1776230686148</created>
-      <option name="number" value="00420" />
-      <option name="presentableId" value="LOCAL-00420" />
-      <option name="project" value="LOCAL" />
-      <updated>1776230686148</updated>
     </task>
     <task id="LOCAL-00421" summary="added refresh function">
       <option name="closed" value="true" />
@@ -586,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776664000892</updated>
     </task>
-    <option name="localTasksCounter" value="469" />
+    <task id="LOCAL-00469" summary="added the query for getting the note on rm incoming">
+      <option name="closed" value="true" />
+      <created>1776665446370</created>
+      <option name="number" value="00469" />
+      <option name="presentableId" value="LOCAL-00469" />
+      <option name="project" value="LOCAL" />
+      <updated>1776665446370</updated>
+    </task>
+    <option name="localTasksCounter" value="470" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added wip number in the header to know it is from manual" />
     <MESSAGE value="make the okay button clicked connect to the selected formula" />
     <MESSAGE value="added an icon for the system" />
     <MESSAGE value="fixed index type in column searching for audit trail" />
@@ -638,7 +638,8 @@
     <MESSAGE value="removed minimum screensize then use auto full screen mode and make it resizeable" />
     <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
     <MESSAGE value="added the syncing of rm incoming" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the syncing of rm incoming" />
+    <MESSAGE value="added the query for getting the note on rm incoming" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the query for getting the note on rm incoming" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
