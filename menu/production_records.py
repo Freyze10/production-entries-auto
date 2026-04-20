@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt, QThread
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTableView, \
-    QHeaderView, QMenu, QMessageBox, QComboBox
+    QHeaderView, QMenu, QMessageBox, QComboBox, QSizePolicy
 import qtawesome as fa
 from PyQt6.QtCore import pyqtSignal
 
@@ -38,7 +38,9 @@ class ProductionRecords(QWidget):
 
         self.selected_production_label = QLabel("INDEX REF. - FORMULATION NO.: No Selection", objectName="card_header")
         self.selected_production_label.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
-        header_layout.addWidget(self.selected_production_label)
+        self.selected_production_label.setMinimumWidth(100)
+        self.selected_production_label.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Preferred)
+        header_layout.addWidget(self.selected_production_label, stretch=1)
 
         header_layout.addStretch()
 
