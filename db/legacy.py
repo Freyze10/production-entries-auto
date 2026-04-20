@@ -53,6 +53,37 @@ def _to_int(value, default=None):
             return default
 
 
+def _to_str(value, default=''):
+    """Safely convert a DBF field value to a clean string."""
+    if value is None:
+        return default
+    if isinstance(value, bytes):
+        value = value.replace(b'\x00', b'').strip()
+        try:
+            return value.decode('latin1').strip() or default
+        except Exception:
+            return default
+    return str(value).replace('\x00', '').strip() or default
+
+
+# Sentinel: dates like 1899-12-30 are VFP's null/zero date equivalent
+_INVALID_DATES = {None}
+
+def _is_valid_date(d):
+    """Return False for None or the VFP default zero-date (1899-12-30)."""
+    if d is None:
+        return False
+    try:
+        import datetime
+        if isinstance(d, (datetime.date, datetime.datetime)):
+            return d.year >= 1900
+        # If it came through as a string (some DBF readers do this)
+        s = str(d).strip()
+        return bool(s) and not s.startswith('1899')
+    except Exception:
+        return False
+
+
 class Sync(QObject):
     finished = pyqtSignal(bool, str)
     progress = pyqtSignal(str)
@@ -63,7 +94,7 @@ class Sync(QObject):
                 max_form_id = conn.execute(text("SELECT COALESCE(MAX(form_id), 0) FROM tbl_formula01")).scalar() or 0
                 max_prod_id = conn.execute(text("SELECT COALESCE(MAX(prod_id), 0) FROM tbl_production01")).scalar() or 0
 
-            self.progress.emit(f"Phase 1/3: Reading local items...")
+            self.progress.emit(f"Phase 1/3: Reading formula items (max form_id in DB: {max_form_id})...")
 
             items_by_uid = collections.defaultdict(list)
             new_uids = set()
@@ -74,6 +105,7 @@ class Sync(QObject):
             production_items = dbfread.DBF(PRODUCTION_ITEMS_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
             dbf_items = dbfread.DBF(FORMULA_ITEMS_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
 
+            formula_item_count = 0
             for item_rec in dbf_items:
                 uid = _to_int(item_rec.get('T_UID'))
                 if uid is None or uid <= max_form_id:
@@ -85,7 +117,9 @@ class Sync(QObject):
                     "concentration": _to_float(item_rec.get('T_CON')),
                     "is_deleted": str(item_rec.get('T_DELETED', '') or '').strip()
                 })
+                formula_item_count += 1
 
+            prod_item_count = 0
             for item_rec in production_items:
                 prod_id = _to_int(item_rec.get('T_PRODID'))
                 if prod_id is None or prod_id <= max_prod_id:
@@ -107,10 +141,15 @@ class Sync(QObject):
                     "total_loss": _to_float(item_rec.get('T_LOSS')),
                     "total_consumption": _to_float(item_rec.get('T_CONS'))
                 })
+                prod_item_count += 1
 
-            self.progress.emit(f"Phase 1/3: Found {len(items_by_uid)} groups of new active items.")
+            self.progress.emit(
+                f"Phase 1/3: Found {formula_item_count} new formula item rows across "
+                f"{len(items_by_uid)} formula groups; "
+                f"{prod_item_count} new production item rows across {len(items_by_prod_id)} production groups."
+            )
 
-            self.progress.emit("Phase 2/3: Reading Production data...")
+            self.progress.emit("Phase 2/3: Reading formula and production primary records...")
             prod_recs = []
             primary_recs = []
             dbf_prod = dbfread.DBF(PRODUCTION_PRIMARY_DBF_PATH, encoding='latin1', char_decode_errors='ignore')
@@ -188,7 +227,10 @@ class Sync(QObject):
                     "form_type": str(r.get('T_FTYPE', '') or '').strip()
                 })
 
-            self.progress.emit(f"Phase 2/3: Found new valid records.")
+            self.progress.emit(
+                f"Phase 2/3: Found {len(primary_recs)} new formula record(s) and "
+                f"{len(prod_recs)} new production record(s)."
+            )
 
             # Exit early only if BOTH are empty
             if not primary_recs and not prod_recs:
@@ -202,7 +244,12 @@ class Sync(QObject):
                 for item in items_by_prod_id.get(rec['prod_id'], [])
             ]
 
-            self.progress.emit("Phase 3/3: Syncing Data...")
+            self.progress.emit(
+                f"Phase 3/3: Inserting {len(primary_recs)} formula record(s) with "
+                f"{len(all_items_to_insert)} item(s), and {len(prod_recs)} production record(s) "
+                f"with {len(all_prod_items_to_insert)} item(s)..."
+            )
+
             with engine.connect() as conn:
                 with conn.begin():
 
@@ -323,7 +370,12 @@ class Sync(QObject):
                             ) ON CONFLICT DO NOTHING
                         """), all_prod_items_to_insert)
 
-            self.finished.emit(True, f"Production sync complete.\nNew records processed.")
+            self.finished.emit(
+                True,
+                f"Sync complete.\n"
+                f"  Formulas inserted: {len(primary_recs)} record(s), {len(all_items_to_insert)} item(s)\n"
+                f"  Production inserted: {len(prod_recs)} record(s), {len(all_prod_items_to_insert)} item(s)"
+            )
 
         except dbfread.DBFNotFound as e:
             self.finished.emit(False, f"File Not Found: A required formula DBF file is missing.\nDetails: {e}")
@@ -339,30 +391,197 @@ class SyncRM(QObject):
 
     def run(self):
         try:
-            self.progress.emit("Reading warehouse data...")
+            self.progress.emit("Reading warehouse DBF file...")
 
             unique_rm_codes = set()
             dbf = dbfread.DBF(RM_WH, encoding='latin1', char_decode_errors='ignore')
 
+            skipped = 0
             for r in dbf:
-                if r.get('T_DELETED') or not str(r.get('T_MATCODE', '')).strip():
+                code = _to_str(r.get('T_MATCODE'))
+                if r.get('T_DELETED') or not code:
+                    skipped += 1
                     continue
-                unique_rm_codes.add(str(r.get('T_MATCODE')).strip())
+                unique_rm_codes.add(code)
+
+            self.progress.emit(
+                f"Read complete: {len(unique_rm_codes)} unique material code(s) found "
+                f"({skipped} deleted/blank row(s) skipped)."
+            )
 
             if not unique_rm_codes:
-                self.finished.emit(True, "No records found to sync.")
+                self.finished.emit(True, "No valid records found to sync.")
                 return
 
             data = [{"rm_code": code} for code in unique_rm_codes]
 
-            self.progress.emit(f"Updating database with {len(data)} materials...")
+            self.progress.emit(f"Truncating and re-inserting {len(data)} material code(s) into database...")
             with engine.connect() as conn:
                 with conn.begin():
                     conn.execute(text("TRUNCATE TABLE tbl_raw_material_list RESTART IDENTITY"))
                     conn.execute(text("INSERT INTO tbl_raw_material_list (rm_code) VALUES (:rm_code)"), data)
 
-            self.finished.emit(True, f"Sync complete. {len(data)} materials updated.")
+            self.finished.emit(True, f"Warehouse sync complete. {len(data)} material code(s) updated.")
 
+        except dbfread.DBFNotFound as e:
+            self.finished.emit(False, f"File Not Found: The warehouse DBF file is missing.\nDetails: {e}")
         except Exception as e:
-            print(f"RM SYNC ERROR: {e}")
+            trace_info = traceback.format_exc()
+            print(f"RM SYNC ERROR: {e}\n{trace_info}")
             self.finished.emit(False, str(e))
+
+
+class SyncRMIncoming(QObject):
+    """
+    Syncs tbl_incoming.dbf → tbl_rm_incoming in PostgreSQL.
+
+    Strategy:
+      1. Read ALL records from the DBF file using dbfread (no DBF SQL).
+      2. Clean and validate each row in Python.
+      3. Deduplicate by T_MATCODE: keep only the record with the latest
+         valid T_DATE per material code. Invalid/zero dates (1899-12-30)
+         are ignored; if ALL dates for a material are invalid the record
+         is still kept but with date=None so no data is silently dropped.
+      4. Bulk-upsert the result into PostgreSQL via SQLAlchemy.
+    """
+
+    finished = pyqtSignal(bool, str)
+    progress = pyqtSignal(str)
+
+    def run(self):
+        try:
+            # ----------------------------------------------------------------
+            # Phase 1 — Read DBF
+            # ----------------------------------------------------------------
+            self.progress.emit("Phase 1/3: Reading incoming DBF file...")
+
+            dbf = dbfread.DBF(RM_INCOMING, encoding='latin1', char_decode_errors='ignore')
+
+            total_rows = 0
+            skipped_no_code = 0
+            skipped_deleted = 0
+
+            # latest_by_code[material_code] = {
+            #     "material_code": str,
+            #     "note":          str | None,
+            #     "date":          date | None,   ← best valid date seen so far
+            #     "_has_valid_date": bool          ← internal flag, stripped before insert
+            # }
+            latest_by_code: dict = {}
+
+            for r in dbf:
+                total_rows += 1
+
+                # Skip soft-deleted rows
+                if r.get('T_DELETED'):
+                    skipped_deleted += 1
+                    continue
+
+                material_code = _to_str(r.get('T_MATCODE'))
+                if not material_code:
+                    skipped_no_code += 1
+                    continue
+
+                raw_date = r.get('T_DATE')
+                date_valid = _is_valid_date(raw_date)
+                incoming_date = raw_date if date_valid else None
+
+                note = _to_str(r.get('T_NOTE')) or None   # store None instead of ''
+
+                existing = latest_by_code.get(material_code)
+
+                if existing is None:
+                    # First time we see this material code
+                    latest_by_code[material_code] = {
+                        "material_code": material_code,
+                        "note": note,
+                        "date": incoming_date,
+                        "_has_valid_date": date_valid,
+                    }
+                else:
+                    # Keep the record with the latest valid date.
+                    # If the incoming record has a valid date and either:
+                    #   a) the stored record has no valid date, OR
+                    #   b) the incoming date is more recent,
+                    # → replace.
+                    should_replace = False
+                    if date_valid:
+                        if not existing["_has_valid_date"]:
+                            should_replace = True
+                        elif incoming_date > existing["date"]:
+                            should_replace = True
+
+                    if should_replace:
+                        latest_by_code[material_code] = {
+                            "material_code": material_code,
+                            "note": note,
+                            "date": incoming_date,
+                            "_has_valid_date": date_valid,
+                        }
+
+            self.progress.emit(
+                f"Phase 1/3: Read {total_rows} total row(s). "
+                f"Skipped {skipped_deleted} deleted, {skipped_no_code} blank-code. "
+                f"Unique material codes retained: {len(latest_by_code)}."
+            )
+
+            if not latest_by_code:
+                self.finished.emit(True, "Incoming sync: No valid records found to sync.")
+                return
+
+            # ----------------------------------------------------------------
+            # Phase 2 — Build insert payload (strip internal flag)
+            # ----------------------------------------------------------------
+            self.progress.emit(
+                f"Phase 2/3: Preparing {len(latest_by_code)} record(s) for database upsert..."
+            )
+
+            data = [
+                {
+                    "material_code": v["material_code"],
+                    "note":          v["note"],
+                    "date":          v["date"],
+                }
+                for v in latest_by_code.values()
+            ]
+
+            no_date_count = sum(1 for v in latest_by_code.values() if not v["_has_valid_date"])
+            if no_date_count:
+                self.progress.emit(
+                    f"  Note: {no_date_count} material code(s) had no valid date "
+                    f"(will be inserted with date=NULL)."
+                )
+
+            # ----------------------------------------------------------------
+            # Phase 3 — Upsert into PostgreSQL
+            # ----------------------------------------------------------------
+            self.progress.emit(
+                f"Phase 3/3: Upserting {len(data)} record(s) into tbl_rm_incoming..."
+            )
+
+            with engine.connect() as conn:
+                with conn.begin():
+                    conn.execute(text("""
+                        INSERT INTO tbl_rm_incoming (material_code, note, date)
+                        VALUES (:material_code, :note, :date)
+                        ON CONFLICT (material_code) DO UPDATE SET
+                            note = EXCLUDED.note,
+                            date = EXCLUDED.date
+                    """), data)
+
+            self.finished.emit(
+                True,
+                f"Incoming sync complete.\n"
+                f"  Total DBF rows read : {total_rows}\n"
+                f"  Deleted rows skipped: {skipped_deleted}\n"
+                f"  Blank-code skipped  : {skipped_no_code}\n"
+                f"  Unique codes upserted: {len(data)}"
+                + (f"\n  Records with NULL date: {no_date_count}" if no_date_count else "")
+            )
+
+        except dbfread.DBFNotFound as e:
+            self.finished.emit(False, f"File Not Found: The incoming DBF file is missing.\nDetails: {e}")
+        except Exception as e:
+            trace_info = traceback.format_exc()
+            print(f"RM INCOMING SYNC ERROR: {e}\n{trace_info}")
+            self.finished.emit(False, f"An unexpected error occurred during incoming sync:\n{e}")
