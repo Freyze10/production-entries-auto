@@ -47,7 +47,7 @@
     "Python.styles.executor": "Run",
     "Python.test_print.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "add-generate-other-logic",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
   "keyToStringList": {
@@ -172,10 +172,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.format_rm_note" />
-        <item itemvalue="Python.print_preview" />
-        <item itemvalue="Python.client_test" />
         <item itemvalue="Python.test_print" />
+        <item itemvalue="Python.print_preview" />
+        <item itemvalue="Python.format_rm_note" />
+        <item itemvalue="Python.client_test" />
       </list>
     </recent_temporary>
   </component>
@@ -194,22 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00429" summary="updated the field for lot validation">
-      <option name="closed" value="true" />
-      <created>1776301420583</created>
-      <option name="number" value="00429" />
-      <option name="presentableId" value="LOCAL-00429" />
-      <option name="project" value="LOCAL" />
-      <updated>1776301420583</updated>
-    </task>
-    <task id="LOCAL-00430" summary="added the field validation for lot in auto pages">
-      <option name="closed" value="true" />
-      <created>1776303623778</created>
-      <option name="number" value="00430" />
-      <option name="presentableId" value="LOCAL-00430" />
-      <option name="project" value="LOCAL" />
-      <updated>1776303623778</updated>
     </task>
     <task id="LOCAL-00431" summary="added check of prod code if it is mb or dc then also check the lot if it is for mb or dc">
       <option name="closed" value="true" />
@@ -587,7 +571,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776732141664</updated>
     </task>
-    <option name="localTasksCounter" value="478" />
+    <task id="LOCAL-00478" summary="added an elipsis in the customer field in printing output to not generate a new line">
+      <option name="closed" value="true" />
+      <created>1776733590467</created>
+      <option name="number" value="00478" />
+      <option name="presentableId" value="LOCAL-00478" />
+      <option name="project" value="LOCAL" />
+      <updated>1776733590467</updated>
+    </task>
+    <task id="LOCAL-00479" summary="added an elipsis in the customer field in printing output to not generate a new line">
+      <option name="closed" value="true" />
+      <created>1776733601335</created>
+      <option name="number" value="00479" />
+      <option name="presentableId" value="LOCAL-00479" />
+      <option name="project" value="LOCAL" />
+      <updated>1776733601335</updated>
+    </task>
+    <option name="localTasksCounter" value="480" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove the calculation for displaying old records. only use what was recorded even the spacing" />
     <MESSAGE value="removed the imports of table spacing" />
     <MESSAGE value="&#10;added a validation to not generate if there is no formula in dmb" />
     <MESSAGE value="&#10;added a validation to not generate if there is no formula in dc" />
@@ -639,7 +638,8 @@
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
     <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="added an elipsis in the customer field in printing output to not generate a new line" />
+    <option name="LAST_COMMIT_MESSAGE" value="added an elipsis in the customer field in printing output to not generate a new line" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

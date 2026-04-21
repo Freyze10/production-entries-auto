@@ -4,20 +4,19 @@ from util.field_format import NumericTableWidgetItem
 from util.format_rm_note import get_bag_limit
 
 
-# from db.logic import get_bag_limit # Ensure this is imported
-
 def compute_generate(source_table, target_table, total_weight, batch_divisor, base_divisor=100.0):
     """
     Generate Function with Priority Splitting and Dynamic Bag Limits:
-    - Checks bag limit (20kg or 25kg) based on material code.
-    - Updates limit whenever a separator (blank row) is inserted.
+    - First and Last rows are NEVER split, even if they exceed the limit.
+    - Other rows are sliced into bag-limit-sized pieces.
     """
     target_table.setRowCount(0)
     cumulative_raw = 0.0
     running_physical_total = 0.0
+    total_rows = source_table.rowCount()
 
     # --- INITIALIZE LIMIT ---
-    if source_table.rowCount() > 0:
+    if total_rows > 0:
         first_mat = source_table.item(0, 0).text().strip()
         current_limit = get_bag_limit(first_mat)
     else:
@@ -25,7 +24,7 @@ def compute_generate(source_table, target_table, total_weight, batch_divisor, ba
 
     factor = total_weight / base_divisor
 
-    for row in range(source_table.rowCount()):
+    for row in range(total_rows):
         mat_item = source_table.item(row, 0)
         con_item = source_table.item(row, 1)
         if not mat_item or not con_item: continue
@@ -45,46 +44,42 @@ def compute_generate(source_table, target_table, total_weight, batch_divisor, ba
             insert_production_row(target_table, material_code, 0.0, weight_per_batch * 1000, weight_total_full)
             continue
 
-        # --- CASE 2: BIG MATERIAL SPLITTING (> current_limit) ---
-        if weight_per_batch > current_limit:
-            # If we were already accumulating, add separator and update limit for this big material
+        # --- CASE 2: BIG MATERIAL SPLITTING ---
+        # Logic: Split if over limit, UNLESS it is the first row or the last row
+        is_first_row = (row == 0)
+        is_last_row = (row == total_rows - 1)
+
+        if weight_per_batch > current_limit and not is_first_row and not is_last_row:
+            # If we were already accumulating, add separator
             if running_physical_total > 0:
                 insert_separator(target_table)
-                current_limit = get_bag_limit(material_code)  # Update to THIS material's limit
+                current_limit = get_bag_limit(material_code)
                 running_physical_total = 0.0
                 cumulative_raw = 0.0
 
             remaining_item_weight = weight_per_batch
 
             while remaining_item_weight > current_limit:
-                # Calculate proportional weight for the slice
                 slice_total = (current_limit / weight_per_batch) * weight_total_full
-
-                # Insert the limit-capped row (20.0 or 25.0)
                 insert_production_row(target_table, material_code, current_limit, 0.0, slice_total)
-
-                # After a full bag row, always add separator
                 insert_separator(target_table)
 
-                # Update limit for the next slice (it stays the same since it's the same material)
                 current_limit = get_bag_limit(material_code)
-
                 remaining_item_weight -= current_limit
                 running_physical_total = 0.0
                 cumulative_raw = 0.0
 
-            # Treat remainder as a normal item for next steps
             weight_total_full = (remaining_item_weight / weight_per_batch) * weight_total_full
             weight_per_batch = remaining_item_weight
 
         # --- CASE 3: NORMAL MATERIAL ACCUMULATION ---
+        # This will still trigger for the first/last row if they are heavy,
+        # which is good (it puts them in their own bag/section).
         if (running_physical_total + weight_per_batch) > current_limit:
             if target_table.rowCount() > 0:
                 insert_separator(target_table)
 
-            # Update limit: The material that caused the break sets the limit for the next batch
             current_limit = get_bag_limit(material_code)
-
             running_physical_total = 0.0
             cumulative_raw = 0.0
 
@@ -104,11 +99,11 @@ def compute_generate(source_table, target_table, total_weight, batch_divisor, ba
 
         cumulative_raw = d_large
 
-        # Insert final row (or remainder row from Case 2)
+        # Insert final row (or the full row if it was first/last)
         insert_production_row(target_table, material_code, d_large, d_small, weight_total_full)
 
 
-# --- HELPERS ---
+# --- HELPERS (Keep these the same) ---
 
 def insert_production_row(table, code, large, small, total):
     row_pos = table.rowCount()
