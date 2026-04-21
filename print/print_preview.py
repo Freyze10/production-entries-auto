@@ -143,9 +143,11 @@ class ProductionPrintPreview(QDialog):
         lines.append(det_row('DOSAGE       :', self.data.get('dosage', ''), 'QTY REQUIRED  :',
                              self.data.get('qty_required', '')))
         cust = str(self.data.get('customer', ''))
-        lines.append(det_row('CUSTOMER     :', cust[:34], 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
         if len(cust) > 34:
-            lines.append(f"{' ':<15}{B_ON}{cust[34:68]:<65}{B_OFF}")
+            display_cust = cust[:31] + "..."
+        else:
+            display_cust = cust
+        lines.append(det_row('CUSTOMER     :', display_cust, 'QTY PER BATCH :', self.data.get('qty_per_batch', '')))
         lines.append(det_row('LOT NO.      :', self.data.get('lot_number', ''), 'QTY TO PRODUCE:',
                              self.data.get('qty_produced', '')))
         lines.append(" ")

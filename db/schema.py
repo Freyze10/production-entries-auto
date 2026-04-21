@@ -19,9 +19,11 @@ def create_table():
             ('Production Department', 'Editor'),
             ('Laboratory Department', 'Viewer')
         ON CONFLICT (department, role) DO NOTHING; 
+        
+        CREATE INDEX IF NOT EXISTS idx_role_department ON tbl_role(department);
     """)
 
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_role_department ON tbl_role(department);")
+    # cursor.execute("CREATE INDEX IF NOT EXISTS idx_role_department ON tbl_role(department);")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_user(

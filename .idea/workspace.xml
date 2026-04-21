@@ -47,7 +47,7 @@
     "Python.styles.executor": "Run",
     "Python.test_print.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "test-rm-sync",
+    "git-widget-placeholder": "main",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
   "keyToStringList": {
@@ -194,14 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00428" summary="updated the tablee model">
-      <option name="closed" value="true" />
-      <created>1776242545858</created>
-      <option name="number" value="00428" />
-      <option name="presentableId" value="LOCAL-00428" />
-      <option name="project" value="LOCAL" />
-      <updated>1776242545858</updated>
     </task>
     <task id="LOCAL-00429" summary="updated the field for lot validation">
       <option name="closed" value="true" />
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776669703493</updated>
     </task>
-    <option name="localTasksCounter" value="477" />
+    <task id="LOCAL-00477" summary="updated">
+      <option name="closed" value="true" />
+      <created>1776732141664</created>
+      <option name="number" value="00477" />
+      <option name="presentableId" value="LOCAL-00477" />
+      <option name="project" value="LOCAL" />
+      <updated>1776732141664</updated>
+    </task>
+    <option name="localTasksCounter" value="478" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -601,7 +601,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="test-old-computation" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added record count even when searching" />
     <MESSAGE value="remove the calculation for displaying old records. only use what was recorded even the spacing" />
     <MESSAGE value="removed the imports of table spacing" />
     <MESSAGE value="&#10;added a validation to not generate if there is no formula in dmb" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
-    <option name="LAST_COMMIT_MESSAGE" value="return early of theres no to sync data" />
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
