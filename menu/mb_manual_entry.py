@@ -512,7 +512,12 @@ class MBManualEntry(QWidget):
     def display_details(self):
         self.wip_no_input.setText(str(self.prod_results['index_no']))
         self.production_id_input.setText(str(self.prod_results['prod_id']))
-        self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
+        form_type_val = str(self.prod_results.get('form_type', '')).strip()
+        idx = self.form_type_combo.findText(form_type_val, Qt.MatchFlag.MatchFixedString)
+        if idx >= 0:
+            self.form_type_combo.setCurrentIndex(idx)
+        else:
+            self.form_type_combo.setCurrentIndex(0)
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
         self.formula_input.setText(str(self.prod_results['form_id']))
