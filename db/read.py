@@ -125,6 +125,7 @@ def get_single_production_data(prod_id):
     conn.close()
     return record
 
+
 def get_rm_code_lists():
     conn = get_connection()
     cur = conn.cursor()
@@ -140,6 +141,22 @@ def get_rm_code_lists():
         return [row[0] for row in records]
     else:
         return []
+
+
+def check_production_exists(prod_id):
+    """Returns True if the ID exists and is NOT deleted."""
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        # We check for the ID and ensure it isn't already deleted
+        cur.execute("SELECT EXISTS(SELECT 1 FROM tbl_production01 WHERE prod_id = %s AND is_deleted = 'False')", (prod_id,))
+        exists = cur.fetchone()[0]
+        cur.close()
+        conn.close()
+        return exists
+    except:
+        return False
+
 
 def get_latest_prod_id():
     conn = get_connection()

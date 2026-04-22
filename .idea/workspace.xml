@@ -27,7 +27,7 @@
     <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -197,14 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00434" summary="revert back the code and added one time only call on the database">
-      <option name="closed" value="true" />
-      <created>1776318532269</created>
-      <option name="number" value="00434" />
-      <option name="presentableId" value="LOCAL-00434" />
-      <option name="project" value="LOCAL" />
-      <updated>1776318532278</updated>
     </task>
     <task id="LOCAL-00435" summary="uses python to set the validation of the lotnunbers">
       <option name="closed" value="true" />
@@ -590,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776836452704</updated>
     </task>
-    <option name="localTasksCounter" value="483" />
+    <task id="LOCAL-00483" summary="did the same for auto entries">
+      <option name="closed" value="true" />
+      <created>1776836733312</created>
+      <option name="number" value="00483" />
+      <option name="presentableId" value="LOCAL-00483" />
+      <option name="project" value="LOCAL" />
+      <updated>1776836733312</updated>
+    </task>
+    <option name="localTasksCounter" value="484" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -617,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create a export to csv" />
     <MESSAGE value="commented out the log in records on audit trail" />
     <MESSAGE value="added check of production number if existing before cancel" />
     <MESSAGE value="added date rasngein the audit trail" />
@@ -642,7 +641,8 @@
     <MESSAGE value="changed the generate  computation to not split the firstt and lastt row" />
     <MESSAGE value="changed the dropdown for the form type into uppercased letter to match the one in the database" />
     <MESSAGE value="added a find current index of the form type value where it will find the same text from the database" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a find current index of the form type value where it will find the same text from the database" />
+    <MESSAGE value="did the same for auto entries" />
+    <option name="LAST_COMMIT_MESSAGE" value="did the same for auto entries" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -691,10 +691,6 @@
           <url>file://$PROJECT_DIR$/css/styles.py</url>
           <line>357</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/db/read.py</url>
-          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
