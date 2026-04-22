@@ -20,7 +20,6 @@ def get_real_mac():
                     # Optional: filter out VMware/VirtualBox
                     if not mac.lower().startswith(("00:50:56", "00:0c:29", "00:05:69")):
                         return mac.replace('-', ':')
-
     return None
 
 
