@@ -71,7 +71,7 @@ class DCAutoEntry(QWidget):
         self.select_formula_btn.setToolTip("Select Formula")
 
         self.form_type_combo = QComboBox()
-        self.form_type_combo.addItems(["", "New", "Correction"])
+        self.form_type_combo.addItems(["", "NEW", "CORRECTION"])
         self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
 
         select_formula_layout = QHBoxLayout()
@@ -517,7 +517,12 @@ class DCAutoEntry(QWidget):
 
     def display_details(self):
         self.production_id_input.setText(str(self.prod_results['prod_id']))
-        self.form_type_combo.setCurrentText(str(self.prod_results['form_type']))
+        form_type_val = str(self.prod_results.get('form_type', '')).strip()
+        idx = self.form_type_combo.findText(form_type_val, Qt.MatchFlag.MatchFixedString)
+        if idx >= 0:
+            self.form_type_combo.setCurrentIndex(idx)
+        else:
+            self.form_type_combo.setCurrentIndex(0)
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
         self.formulation_id_input.setText(str(self.prod_results['form_id']))

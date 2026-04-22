@@ -198,22 +198,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00432" summary="modified the caling of lot numbers, added calculation of range of lot numbers">
-      <option name="closed" value="true" />
-      <created>1776317295171</created>
-      <option name="number" value="00432" />
-      <option name="presentableId" value="LOCAL-00432" />
-      <option name="project" value="LOCAL" />
-      <updated>1776317295171</updated>
-    </task>
-    <task id="LOCAL-00433" summary="added refresh materialized to update the  lotnumber output">
-      <option name="closed" value="true" />
-      <created>1776317493509</created>
-      <option name="number" value="00433" />
-      <option name="presentableId" value="LOCAL-00433" />
-      <option name="project" value="LOCAL" />
-      <updated>1776317493509</updated>
-    </task>
     <task id="LOCAL-00434" summary="revert back the code and added one time only call on the database">
       <option name="closed" value="true" />
       <created>1776318532269</created>
@@ -590,7 +574,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776734777833</updated>
     </task>
-    <option name="localTasksCounter" value="481" />
+    <task id="LOCAL-00481" summary="changed the dropdown for the form type into uppercased letter to match the one in the database">
+      <option name="closed" value="true" />
+      <created>1776836381820</created>
+      <option name="number" value="00481" />
+      <option name="presentableId" value="LOCAL-00481" />
+      <option name="project" value="LOCAL" />
+      <updated>1776836381820</updated>
+    </task>
+    <task id="LOCAL-00482" summary="added a find current index of the form type value where it will find the same text from the database">
+      <option name="closed" value="true" />
+      <created>1776836452704</created>
+      <option name="number" value="00482" />
+      <option name="presentableId" value="LOCAL-00482" />
+      <option name="project" value="LOCAL" />
+      <updated>1776836452704</updated>
+    </task>
+    <option name="localTasksCounter" value="483" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -617,8 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&#10;added a validation to not generate if there is no formula in dmb" />
-    <MESSAGE value="&#10;added a validation to not generate if there is no formula in dc" />
     <MESSAGE value="create a export to csv" />
     <MESSAGE value="commented out the log in records on audit trail" />
     <MESSAGE value="added check of production number if existing before cancel" />
@@ -642,7 +640,9 @@
     <MESSAGE value="updated" />
     <MESSAGE value="added an elipsis in the customer field in printing output to not generate a new line" />
     <MESSAGE value="changed the generate  computation to not split the firstt and lastt row" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the generate  computation to not split the firstt and lastt row" />
+    <MESSAGE value="changed the dropdown for the form type into uppercased letter to match the one in the database" />
+    <MESSAGE value="added a find current index of the form type value where it will find the same text from the database" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a find current index of the form type value where it will find the same text from the database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -679,12 +679,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>672</line>
+          <line>677</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>709</line>
+          <line>714</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
