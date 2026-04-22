@@ -73,7 +73,7 @@ class MBManualEntry(QWidget):
 
         # Form Type
         self.form_type_combo = QComboBox()
-        self.form_type_combo.addItems(["", "New", "Correction"])
+        self.form_type_combo.addItems(["", "NEW", "CORRECTION"])
         self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Form Type:"), row, 0)
         primary_layout.addWidget(self.form_type_combo, row, 1)
