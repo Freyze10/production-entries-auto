@@ -606,16 +606,26 @@ class MBAutoEntry(QWidget):
         return True
 
     def cancel_production(self):
-        latest_prod = get_latest_prod_id()
-        prod_id = self.production_id_input.text().strip()
-        if not prod_id or prod_id == "0":
+        raw_id = self.production_id_input.text().strip()
+
+        # 1. Basic validation
+        if not raw_id or raw_id == "0":
             QMessageBox.warning(self, "Selection Required", "Please select a production record from the table first.")
             return
 
-        if str(prod_id) >= str(latest_prod + 1):
-            QMessageBox.warning(self, "Selection Required", "Production ID does not Exists.")
+        # 2. Convert to integer to match database type
+        try:
+            prod_id = int(raw_id)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid ID", "Production ID must be a number.")
             return
 
+        # 3. Efficient Database Check
+        if not check_production_exists(prod_id):
+            QMessageBox.warning(self, "Error", "Production ID does not exist or is already cancelled.")
+            return
+
+        # 4. Confirmation
         msg = f"Are you sure you want to CANCEL Production ID: {prod_id}?\n\nThis action cannot be undone."
         reply = QMessageBox.question(self, "Confirm Cancellation", msg,
                                      QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
@@ -624,23 +634,23 @@ class MBAutoEntry(QWidget):
         if reply == QMessageBox.StandardButton.No:
             return
 
-        # Database Operation
+        # 5. Database Operation
         try:
-            success, message = cancel_production(prod_id)
+            success, message = cancel_production(prod_id)  # Call your DB update function
 
             if success:
                 QMessageBox.information(self, "Success", f"Production {prod_id} has been successfully cancelled.")
 
-                # clear the cached cancelled records on database call
+                # Clear cache
                 get_cancelled_production_data.cache_clear()
 
-                self.new_production()  # Clear the input after cancellation
-                audit = {
-                    "mac": self.work_station['m'],
-                    "action": "DELETE",
-                    "details": f"Prod ID: {prod_id} has been successfully CANCELLED",
-                }
-                log_audit_trail(audit['mac'], audit['action'], audit['details'])
+                # Clear UI
+                self.new_production()
+
+                # Audit Log
+                audit_details = f"Prod ID: {prod_id} has been successfully CANCELLED"
+                log_audit_trail(self.work_station['m'], "DELETE", audit_details)
+
             else:
                 QMessageBox.warning(self, "Cancellation Failed", f"Database Error: {message}")
 

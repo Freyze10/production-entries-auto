@@ -198,14 +198,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00435" summary="uses python to set the validation of the lotnunbers">
-      <option name="closed" value="true" />
-      <created>1776319286223</created>
-      <option name="number" value="00435" />
-      <option name="presentableId" value="LOCAL-00435" />
-      <option name="project" value="LOCAL" />
-      <updated>1776319286223</updated>
-    </task>
     <task id="LOCAL-00436" summary="updated the lot validation function">
       <option name="closed" value="true" />
       <created>1776319727849</created>
@@ -590,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776836733312</updated>
     </task>
-    <option name="localTasksCounter" value="484" />
+    <task id="LOCAL-00484" summary="add a checking from the database if the prod id exists before cancel">
+      <option name="closed" value="true" />
+      <created>1776837573358</created>
+      <option name="number" value="00484" />
+      <option name="presentableId" value="LOCAL-00484" />
+      <option name="project" value="LOCAL" />
+      <updated>1776837573358</updated>
+    </task>
+    <option name="localTasksCounter" value="485" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -617,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commented out the log in records on audit trail" />
     <MESSAGE value="added check of production number if existing before cancel" />
     <MESSAGE value="added date rasngein the audit trail" />
     <MESSAGE value="added the default value of date range based from the records" />
@@ -642,7 +641,8 @@
     <MESSAGE value="changed the dropdown for the form type into uppercased letter to match the one in the database" />
     <MESSAGE value="added a find current index of the form type value where it will find the same text from the database" />
     <MESSAGE value="did the same for auto entries" />
-    <option name="LAST_COMMIT_MESSAGE" value="did the same for auto entries" />
+    <MESSAGE value="add a checking from the database if the prod id exists before cancel" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a checking from the database if the prod id exists before cancel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -679,12 +679,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>677</line>
+          <line>687</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>714</line>
+          <line>724</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
