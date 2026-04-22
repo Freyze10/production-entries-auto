@@ -9,7 +9,8 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_latest_prod_id, get_formula_select, get_formula_materials, \
-    get_all_completer_data, get_single_production_details, get_single_production_data, get_cancelled_production_data
+    get_all_completer_data, get_single_production_details, get_single_production_data, get_cancelled_production_data, \
+    check_production_exists
 from db.update import cancel_production
 from db.write import log_audit_trail
 from table_model import table_tumbler_compute, table_generate_compute
