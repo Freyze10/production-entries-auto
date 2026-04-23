@@ -67,7 +67,6 @@ class MainWindow(QMainWindow):
         self.audit_trail = None
 
         create_table()
-        self.create_acccount()
         self.username = self.workstation_info['h']
         self.user_role = get_user_role(self.workstation_info['m'])
         self.init_ui()
@@ -230,11 +229,6 @@ class MainWindow(QMainWindow):
 
     def update_time(self):
         self.time_label.setText(f" {datetime.now().strftime('%b %d, %Y  %I:%M:%S %p')}")
-
-    def create_acccount(self):
-        all_user_mac = get_all_user_mac()
-        if self.workstation_info['m'] not in all_user_mac:
-            create_current_user(self.workstation_info)
 
     def handle_logout(self):
         msg = QMessageBox.question(self, "Logout", "Are you sure you want to logout?",

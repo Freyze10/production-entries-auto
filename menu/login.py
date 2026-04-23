@@ -3,8 +3,11 @@ from PyQt6.QtCore import Qt, pyqtSignal, QSize
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 from css.styles import AppStyles
-# from db.read import authenticate_user
+from db.read import get_all_user_mac
+from db.write import create_current_user
 
+
+# from db.read import authenticate_user
 
 class LoginWindow(QDialog):
     login_success = pyqtSignal(str, str)  # Sends (username, role)
@@ -17,6 +20,8 @@ class LoginWindow(QDialog):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         self.setStyleSheet(AppStyles.LOGIN_STYLESHEET)
         self.init_ui()
+
+        self.create_acccount()
 
     def init_ui(self):
         # Translucent container to allow for the shadow effect in CSS
@@ -33,7 +38,8 @@ class LoginWindow(QDialog):
         # Header
         header_icon = QLabel()
         icon_size = 80
-        header_icon.setPixmap(fa.icon('fa5s.user-shield', color=AppStyles.TEAL_500).pixmap(QSize(icon_size, icon_size)))
+        header_icon.setPixmap(
+            fa.icon('fa5s.user-shield', color=AppStyles.TEAL_500).pixmap(QSize(icon_size, icon_size)))
 
         header_icon.setFixedSize(icon_size, icon_size)
 
@@ -62,7 +68,7 @@ class LoginWindow(QDialog):
             return frame, edit
 
         user_frame, self.username_input = create_input_field("Username", "fa5s.user")
-        self.username_input.setText(self.workstation['h']+"\\")  # Default to hostname
+        self.username_input.setText(self.workstation['h'] + "\\")  # Default to hostname
 
         pass_frame, self.password_input = create_input_field("Password", "fa5s.lock", True)
         self.password_input.returnPressed.connect(self.handle_login)
@@ -95,15 +101,48 @@ class LoginWindow(QDialog):
 
         container_layout.addWidget(self.form_frame)
 
+    def create_acccount(self):
+        all_user_mac = get_all_user_mac()
+        if self.workstation['m'] not in all_user_mac:
+            create_current_user(self.workstation)
+
     def handle_login(self):
-        user = self.username_input.text().strip()
+        raw_input = self.username_input.text().strip()
         pw = self.password_input.text().strip()
 
+        # 1. Check for the backslash separator
+        if "\\" not in raw_input:
+            QMessageBox.warning(self, "Format Error",
+                                "Please use the format: HOSTNAME\\Username")
+            return
+
+        # 2. Split the input (split only once to handle potential backslashes in username)
+        parts = raw_input.split("\\", 1)
+        input_hostname = parts[0].strip()
+        actual_username = parts[1].strip()
+
+        # 3. Validate that both parts exist
+        if not input_hostname or not actual_username:
+            QMessageBox.warning(self, "Invalid Input",
+                                "Both Hostname and Username are required.")
+            return
+
+        # 4. Compare Hostname (Case-insensitive check)
+        current_hostname = self.workstation['h']
+        if input_hostname.lower() != current_hostname.lower():
+            msg = (f"Access Denied: Invalid workstation.\n\n"
+                   f"You are currently on '{current_hostname}'.")
+            QMessageBox.critical(self, "Workstation Mismatch", msg)
+            return
+
+        # 5. Perform actual authentication using only the Username part
+        # Replace the hardcoded True with your actual DB call:
+        # success, role = authenticate_user(actual_username, pw)
         success, role = True, "Admin"
-        # success, role = authenticate_user(user, pw)
 
         if success:
-            self.login_success.emit(user, role)
+            # Emit the clean username (without the hostname)
+            self.login_success.emit(actual_username, role)
             self.accept()
         else:
             self.status_label.setText("Invalid username or password")
