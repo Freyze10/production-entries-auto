@@ -8,7 +8,6 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar, QMessageBox
 
 from css.styles import AppStyles
-from db.read import get_all_user_mac, get_user_role
 from db.write import create_current_user, log_audit_trail
 from menu.audit_trail import AuditTrail
 from menu.dc_auto_entry import DCAutoEntry
@@ -67,8 +66,6 @@ class MainWindow(QMainWindow):
         self.audit_trail = None
 
         create_table()
-        self.username = self.workstation_info['h']
-        self.user_role = get_user_role(self.workstation_info['m'])
         self.init_ui()
         self.log_audit_trail()
 
@@ -143,7 +140,7 @@ class MainWindow(QMainWindow):
         user_profile.setContentsMargins(15, 0, 0, 5)
         user_profile.setAlignment(Qt.AlignmentFlag.AlignLeft)
         user_profile.addWidget(QLabel(pixmap=fa.icon('fa5s.user-circle', color="#ecf0f1").pixmap(QSize(40, 40))))
-        user_profile.addWidget(QLabel(f"<b>{self.username}</b><br><font color='#bdc3c7'>{self.user_role}</font>"))
+        user_profile.addWidget(QLabel(f"<b>{self.workstation_info['h']}\\{self.username}</b><br><font color='#bdc3c7'>{self.user_role}</font>"))
 
         sep = QFrame(frameShape=QFrame.Shape.HLine, objectName="Separator")
         sep.setContentsMargins(0, 10, 0, 10)
