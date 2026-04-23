@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton, QLabel, QFrame, QHBoxLayout, QMessageBox
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt, pyqtSignal, QSize
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 from css.styles import AppStyles
@@ -32,8 +32,10 @@ class LoginWindow(QDialog):
 
         # Header
         header_icon = QLabel()
-        header_icon.setPixmap(fa.icon('fa5s.user-shield', color=AppStyles.TEAL_500).pixmap(80, 80))
-        header_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        icon_size = 80
+        header_icon.setPixmap(fa.icon('fa5s.user-shield', color=AppStyles.TEAL_500).pixmap(QSize(icon_size, icon_size)))
+
+        header_icon.setFixedSize(icon_size, icon_size)
 
         title = QLabel("Welcome Back", objectName="LoginTitle")
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -80,7 +82,8 @@ class LoginWindow(QDialog):
         self.btn_exit.clicked.connect(self.close)
 
         # Assemble
-        form_layout.addWidget(header_icon)
+        form_layout.addWidget(header_icon, alignment=Qt.AlignmentFlag.AlignCenter)
+        form_layout.addSpacing(20)
         form_layout.addWidget(title)
         form_layout.addWidget(subtitle)
         form_layout.addSpacing(20)

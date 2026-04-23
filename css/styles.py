@@ -82,6 +82,10 @@ class AppStyles:
             border: 1px solid {SLATE_200};
         }}
 
+        #header_icon {{
+            padding: 80px 0;
+        }}
+
         #LoginTitle {{
             font-size: 28px;
             font-weight: 700;
@@ -105,7 +109,7 @@ class AppStyles:
         QLineEdit {{
             border: none;
             background: transparent;
-            padding: 10px 8px;
+            padding: 2px 4px;
             font-size: 15px;
             color: {TEXT_PRIMARY};
         }}
@@ -120,7 +124,7 @@ class AppStyles:
             color: white;
             border: none;
             border-radius: 12px;
-            padding: 14px 32px;
+            padding: 10px 32px;
             font-weight: 600;
             font-size: 15px;
             min-width: 140px;
@@ -132,8 +136,8 @@ class AppStyles:
         }}
 
         QPushButton#PrimaryButton:pressed {{
-            padding-top: 15px;
-            padding-bottom: 13px;
+            padding-top: 8px;
+            padding-bottom: 10px;
         }}
 
         QPushButton#PrimaryButton:disabled {{

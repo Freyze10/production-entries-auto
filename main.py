@@ -2,16 +2,17 @@ import sys
 from datetime import datetime
 
 import qtawesome as fa
-from PyQt6.QtCore import Qt, QSize, QTimer
+from PyQt6.QtCore import Qt, QSize, QTimer, pyqtSignal
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVBoxLayout, QLabel, QFrame, QPushButton, \
-    QStackedWidget, QStatusBar
+    QStackedWidget, QStatusBar, QMessageBox
 
 from css.styles import AppStyles
 from db.read import get_all_user_mac, get_user_role
 from db.write import create_current_user, log_audit_trail
 from menu.audit_trail import AuditTrail
 from menu.dc_auto_entry import DCAutoEntry
+from menu.login import LoginWindow
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
 from menu.production_records import ProductionRecords
@@ -20,10 +21,35 @@ from workstation.workstation_details import _get_workstation_info
 from db.schema import create_table
 
 
+class AppController:
+    def __init__(self):
+        self.login_window = None
+        self.main_window = None
+        self.workstation_info = _get_workstation_info()
+
+    def show_login(self):
+        if self.main_window:
+            self.main_window.close()
+
+        self.login_window = LoginWindow(self.workstation_info)
+        self.login_window.login_success.connect(self.show_main)
+        self.login_window.show()
+
+    def show_main(self, username, role):
+        self.main_window = MainWindow(username, role)
+        # Connect the logout button signal
+        self.main_window.logout_requested.connect(self.show_login)
+        self.main_window.show()
+
+
 class MainWindow(QMainWindow):
-    def __init__(self):  # , username, user_role, login_window
+    logout_requested = pyqtSignal()  # Add this signal
+
+    def __init__(self, username, user_role):
         super().__init__()
         self.workstation_info = _get_workstation_info()
+        self.username = username
+        self.user_role = user_role
 
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
@@ -133,7 +159,7 @@ class MainWindow(QMainWindow):
 
         self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color=AppStyles.RED_500))
         self.btn_logout.setStyleSheet(f"""QPushButton {{ color: {AppStyles.RED_500};}}""")
-        # self.btn_logout.clicked.connect(self.logout)
+        self.btn_logout.clicked.connect(self.handle_logout)
 
         layout.addWidget(profile)
         layout.addWidget(sep)
@@ -210,11 +236,23 @@ class MainWindow(QMainWindow):
         if self.workstation_info['m'] not in all_user_mac:
             create_current_user(self.workstation_info)
 
+    def handle_logout(self):
+        msg = QMessageBox.question(self, "Logout", "Are you sure you want to logout?",
+                                   QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        if msg == QMessageBox.StandardButton.Yes:
+            log_audit_trail(self.workstation_info['m'], "LOGOUT", "User logged out")
+            self.logout_requested.emit()  # Notify controller to show login again
+
 
 def main():
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
+
+    # Crucial: Prevent app from closing when switching windows
+    app.setQuitOnLastWindowClosed(False)
+
+    controller = AppController()
+    controller.show_login()
+
     sys.exit(app.exec())
 
 
