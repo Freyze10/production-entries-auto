@@ -135,7 +135,7 @@ class LoginWindow(QDialog):
             QMessageBox.critical(self, "Workstation Mismatch", msg)
             return
 
-        success, role = authenticate_user(actual_username, pw)
+        success, role = authenticate_user(actual_username, pw, self.workstation['m'])
 
         if success:
             # Emit the clean username (without the hostname)

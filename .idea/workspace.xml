@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00445" summary="added an icon for the system">
-      <option name="closed" value="true" />
-      <created>1776387435468</created>
-      <option name="number" value="00445" />
-      <option name="presentableId" value="LOCAL-00445" />
-      <option name="project" value="LOCAL" />
-      <updated>1776387435468</updated>
-    </task>
     <task id="LOCAL-00446" summary="added an icon for the system">
       <option name="closed" value="true" />
       <created>1776387446531</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776928294441</updated>
     </task>
-    <option name="localTasksCounter" value="494" />
+    <task id="LOCAL-00494" summary="modified the displayed hostname + username after logging in">
+      <option name="closed" value="true" />
+      <created>1776928619943</created>
+      <option name="number" value="00494" />
+      <option name="presentableId" value="LOCAL-00494" />
+      <option name="project" value="LOCAL" />
+      <updated>1776928619943</updated>
+    </task>
+    <option name="localTasksCounter" value="495" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the legacy database sync" />
     <MESSAGE value="removed minimum screensize then use auto full screen mode and make it resizeable" />
     <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
     <MESSAGE value="added the syncing of rm incoming" />
@@ -643,7 +642,8 @@
     <MESSAGE value="transfer the creation of account in the login page" />
     <MESSAGE value="added username in  the creation of account" />
     <MESSAGE value="added a authentication when log in" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a authentication when log in" />
+    <MESSAGE value="modified the displayed hostname + username after logging in" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the displayed hostname + username after logging in" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -655,7 +655,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_manual_entry.py</url>
-          <line>57</line>
+          <line>60</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

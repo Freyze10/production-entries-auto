@@ -94,7 +94,7 @@ class MainWindow(QMainWindow):
         self.btn_production_records.setChecked(True)
 
     def switch_to_manual_entry(self, prod_id: int):
-        self.mb_manual_entry = MBManualEntry(prod_id)  # Pass prod_id in constructor
+        self.mb_manual_entry = MBManualEntry(self.username,self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
         self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index
         self.btn_manual_entry.setChecked(True)
@@ -187,7 +187,7 @@ class MainWindow(QMainWindow):
                 new_widget = self.production_records
 
             elif index == 1:
-                self.mb_manual_entry = MBManualEntry()
+                self.mb_manual_entry = MBManualEntry(self.username, self.user_role)
                 new_widget = self.mb_manual_entry
 
             elif index == 2:

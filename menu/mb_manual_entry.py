@@ -20,18 +20,21 @@ from workstation.workstation_details import _get_workstation_info
 
 
 class MBManualEntry(QWidget):
-    def __init__(self, prod_id=0):
+    def __init__(self, username, user_role, prod_id=0):
         super().__init__()
         self.prod_id = prod_id
         self.prod_results = None
         self.prod_materials = None
         self.work_station = _get_workstation_info()
-        # self.user_id = f"{self.work_station['h']} # {self.user_role}"
+        self.username = username
+        self.user_role = user_role
         # Track current production for edit/view
         self.current_production_id = None
 
         self.setup_ui()
 
+        if str(self.user_role).upper() == "VIEWER":
+            self.apply_viewer_restrictions()
     def setup_ui(self):
 
         main_layout = QVBoxLayout(self)
@@ -907,6 +910,47 @@ class MBManualEntry(QWidget):
             return self.material_code_combo.currentText().strip()
         else:
             return self.material_code_lineedit.text().strip()
+
+    def apply_viewer_restrictions(self):
+        """Disables all input fields and action buttons for users with 'VIEWER' role."""
+
+        # 1. Handle LineEdits and TextEdits (Set to Read-Only so user can still scroll/copy text)
+        for widget in self.findChildren(QLineEdit):
+            widget.setReadOnly(True)
+            # Optional: change style to look disabled
+            widget.setStyleSheet("background-color: #f8f9fa; color: #6c757d;")
+
+        for widget in self.findChildren(QTextEdit):
+            widget.setReadOnly(True)
+            widget.setStyleSheet("background-color: #f8f9fa; color: #6c757d;")
+
+        # 2. Handle Selection Widgets (ComboBox, CheckBox, DateEdit)
+        # These must be setEnabled(False) because they don't have a 'read-only' mode
+        for widget in self.findChildren(QComboBox):
+            widget.setEnabled(False)
+
+        for widget in self.findChildren(QCheckBox):
+            widget.setEnabled(False)
+
+        # This targets your custom SmartDateEdit
+        for widget in self.findChildren(SmartDateEdit):
+            widget.setEnabled(False)
+
+        # 3. Handle Buttons
+        for btn in self.findChildren(QPushButton):
+            # We typically want to allow Viewers to still see the PRINT preview
+            # But we disable Save, New, Cancel, Add, Remove, Sync, and Separator
+            btn_text = btn.text().upper()
+
+            if "PRINT" in btn_text:
+                btn.setEnabled(True)  # Keep print enabled
+            else:
+                btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
+                btn.setStyleSheet("background-color: #e9ecef; color: #adb5bd; border: 1px solid #dee2e6;")
+
+        # 4. Special case: Disable Table interactions
+        self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
 
     def eventFilter(self, watched, event):
         # Check if the event is a key press and specifically the Tab key

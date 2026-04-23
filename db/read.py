@@ -361,7 +361,7 @@ def get_material_note(material_code):
         return None
 
 
-def authenticate_user(username, password):
+def authenticate_user(username, password, mac_address):
     try:
         conn = get_connection()
         cur = conn.cursor()
@@ -370,9 +370,9 @@ def authenticate_user(username, password):
             SELECT r.role
             FROM tbl_user u
             JOIN tbl_role r ON u.role_id = r.role_id
-            WHERE u.username = %s AND u.password = %s
+            WHERE u.username = %s AND u.password = %s AND u.mac_address = %s
             LIMIT 1
-        """, (username, password))
+        """, (username, password, mac_address))
 
         record = cur.fetchone()
 
