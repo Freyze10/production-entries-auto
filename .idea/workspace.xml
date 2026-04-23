@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00440" summary="clear the cached prod data cancelled when they cancel a new record">
-      <option name="closed" value="true" />
-      <created>1776322415463</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1776322415463</updated>
-    </task>
     <task id="LOCAL-00441" summary="makke the completter search for what contains not whatt it starts with">
       <option name="closed" value="true" />
       <created>1776322883840</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776913309827</updated>
     </task>
-    <option name="localTasksCounter" value="489" />
+    <task id="LOCAL-00489" summary="modified the styling">
+      <option name="closed" value="true" />
+      <created>1776914353520</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1776914353520</updated>
+    </task>
+    <option name="localTasksCounter" value="490" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added fetch data when the date is changed" />
     <MESSAGE value="modify the database query to fetch the date from the date range" />
     <MESSAGE value="return back the log of login inn audit trail" />
     <MESSAGE value="modified the requirements,txt" />
@@ -643,14 +642,15 @@
     <MESSAGE value="addded the same in the  other pages" />
     <MESSAGE value="updated the printing speed" />
     <MESSAGE value="added a log in page" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a log in page" />
+    <MESSAGE value="modified the styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the styling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>480</line>
+          <line>476</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -660,17 +660,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>363</line>
+          <line>359</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>367</line>
+          <line>363</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>220</line>
+          <line>216</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -690,17 +690,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>361</line>
+          <line>357</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>360</line>
+          <line>356</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/css/styles.py</url>
-          <line>436</line>
+          <line>432</line>
           <option name="temporary" value="true" />
           <option name="timeStamp" value="19" />
         </line-breakpoint>

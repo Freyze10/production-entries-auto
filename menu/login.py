@@ -62,7 +62,7 @@ class LoginWindow(QDialog):
             return frame, edit
 
         user_frame, self.username_input = create_input_field("Username", "fa5s.user")
-        self.username_input.setText(self.workstation['h'])  # Default to hostname
+        self.username_input.setText(self.workstation['h']+"\\")  # Default to hostname
 
         pass_frame, self.password_input = create_input_field("Password", "fa5s.lock", True)
         self.password_input.returnPressed.connect(self.handle_login)

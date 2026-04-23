@@ -82,10 +82,6 @@ class AppStyles:
             border: 1px solid {SLATE_200};
         }}
 
-        #header_icon {{
-            padding: 80px 0;
-        }}
-
         #LoginTitle {{
             font-size: 28px;
             font-weight: 700;
