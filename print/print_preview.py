@@ -263,19 +263,27 @@ class ProductionPrintPreview(QDialog):
         try:
             lines = self.build_report_map(mode="printer")
             raw_text = "\n".join(lines)
+
+            # --- ESC/P COMMANDS FOR SPEED ---
             ESC = '\x1b'
-            init = ESC + '@' + ESC + 't\x01' + ESC + 'x\x01'
+            reset = ESC + '@'  # Reset printer
+            draft_mode = ESC + 'x' + '\x00'  # \x00 = Draft (Fast), \x01 = NLQ (Slow)
+            high_speed = ESC + 'k' + '\x00'  # Select Draft typeface
+            font_condensed = '\x0f'  # Optional: ensures 80 column fit
+            bidirectional = ESC + 'U' + '\x00'  # Ensure bidirectional printing (faster)
+
+            # Combine initialization
+            init = reset + draft_mode + high_speed + bidirectional
 
             parts = raw_text.split('\n')
-
-            # Match the same zone boundaries used in refresh_preview()
-            header_end = 16 if self.wip_no is True else 14  # i <= 15 or i <= 13
+            header_end = 16 if self.wip_no is True else 14
             footer_start = len(parts) - 6
 
             header = "\n".join(parts[:header_end])
-            body = "\n".join(parts[header_end:footer_start])  # no overlap
+            body = "\n".join(parts[header_end:footer_start])
             footer = "\n".join(parts[footer_start:])
 
+            # Maintain your exact spacing commands
             payload = (init +
                        (ESC + '3' + '\x18') + header + "\n" +
                        (ESC + '3' + '\x31') + body + "\n" +
@@ -283,11 +291,13 @@ class ProductionPrintPreview(QDialog):
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
+                # Use "RAW" mode to bypass Windows GDI driver processing
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Entry", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
                 win32print.WritePrinter(hPrinter, payload.encode('latin-1'))
                 win32print.EndPagePrinter(hPrinter)
                 win32print.EndDocPrinter(hPrinter)
+
                 QMessageBox.information(self, "Success", "Printed Successfully.")
                 log_audit_trail(self.audit['mac'], self.audit['action'], self.audit['details'])
                 print_production(self.data.get('prod_id'))
