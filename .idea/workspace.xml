@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00446" summary="added an icon for the system">
-      <option name="closed" value="true" />
-      <created>1776387446531</created>
-      <option name="number" value="00446" />
-      <option name="presentableId" value="LOCAL-00446" />
-      <option name="project" value="LOCAL" />
-      <updated>1776387446531</updated>
-    </task>
     <task id="LOCAL-00447" summary="fixed index type in column searching for audit trail">
       <option name="closed" value="true" />
       <created>1776388344523</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776928619943</updated>
     </task>
-    <option name="localTasksCounter" value="495" />
+    <task id="LOCAL-00495" summary="passed the user name and user role to manual page to try disabling based on user role">
+      <option name="closed" value="true" />
+      <created>1776932609685</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1776932609685</updated>
+    </task>
+    <option name="localTasksCounter" value="496" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed minimum screensize then use auto full screen mode and make it resizeable" />
     <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
     <MESSAGE value="added the syncing of rm incoming" />
     <MESSAGE value="added the query for getting the note on rm incoming" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added username in  the creation of account" />
     <MESSAGE value="added a authentication when log in" />
     <MESSAGE value="modified the displayed hostname + username after logging in" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified the displayed hostname + username after logging in" />
+    <MESSAGE value="passed the user name and user role to manual page to try disabling based on user role" />
+    <option name="LAST_COMMIT_MESSAGE" value="passed the user name and user role to manual page to try disabling based on user role" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
