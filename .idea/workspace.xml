@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00442" summary="added a dedbounce function on the audit trail records search field">
-      <option name="closed" value="true" />
-      <created>1776325275117</created>
-      <option name="number" value="00442" />
-      <option name="presentableId" value="LOCAL-00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1776325275117</updated>
-    </task>
     <task id="LOCAL-00443" summary="added wip number in the header to know it is from manual">
       <option name="closed" value="true" />
       <created>1776328505555</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776914665834</updated>
     </task>
-    <option name="localTasksCounter" value="491" />
+    <task id="LOCAL-00491" summary="transfer the creation of account in the login page">
+      <option name="closed" value="true" />
+      <created>1776926460275</created>
+      <option name="number" value="00491" />
+      <option name="presentableId" value="LOCAL-00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1776926460275</updated>
+    </task>
+    <option name="localTasksCounter" value="492" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="return back the log of login inn audit trail" />
     <MESSAGE value="modified the requirements,txt" />
     <MESSAGE value="added the location of the rm incoming" />
     <MESSAGE value="updated the legacy database sync" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added a log in page" />
     <MESSAGE value="modified the styling" />
     <MESSAGE value="fixed the default value for the username to have the hostname included" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the default value for the username to have the hostname included" />
+    <MESSAGE value="transfer the creation of account in the login page" />
+    <option name="LAST_COMMIT_MESSAGE" value="transfer the creation of account in the login page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -9,13 +9,14 @@ def create_current_user(workstation):
     hostname = workstation['h']
     ip_address = workstation['i']
     mac_address = workstation['m']
-    role_id = 2
+    username = "User"
+    role_id = 3
     password = "mbpi"
 
     cursor.execute("""
-        INSERT INTO tbl_user (role_id, hostname, ip_address, mac_address, password)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (role_id, hostname, ip_address, mac_address, password))
+        INSERT INTO tbl_user (role_id, hostname, ip_address, mac_address, username, password)
+        VALUES (%s, %s, %s, %s, %s, %s)
+    """, (role_id, hostname, ip_address, mac_address, username, password))
 
     con.commit()
     cursor.close()
