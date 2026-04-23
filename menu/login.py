@@ -3,7 +3,7 @@ from PyQt6.QtCore import Qt, pyqtSignal, QSize
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 from css.styles import AppStyles
-from db.read import get_all_user_mac
+from db.read import get_all_user_mac, authenticate_user
 from db.write import create_current_user
 
 
@@ -110,24 +110,24 @@ class LoginWindow(QDialog):
         raw_input = self.username_input.text().strip()
         pw = self.password_input.text().strip()
 
-        # 1. Check for the backslash separator
+        # Check for the backslash separator
         if "\\" not in raw_input:
             QMessageBox.warning(self, "Format Error",
                                 "Please use the format: HOSTNAME\\Username")
             return
 
-        # 2. Split the input (split only once to handle potential backslashes in username)
+        # Split the input (split only once to handle potential backslashes in username)
         parts = raw_input.split("\\", 1)
         input_hostname = parts[0].strip()
         actual_username = parts[1].strip()
 
-        # 3. Validate that both parts exist
+        # Validate that both parts exist
         if not input_hostname or not actual_username:
             QMessageBox.warning(self, "Invalid Input",
                                 "Both Hostname and Username are required.")
             return
 
-        # 4. Compare Hostname (Case-insensitive check)
+        # Compare Hostname (Case-insensitive check)
         current_hostname = self.workstation['h']
         if input_hostname.lower() != current_hostname.lower():
             msg = (f"Access Denied: Invalid workstation.\n\n"
@@ -135,10 +135,7 @@ class LoginWindow(QDialog):
             QMessageBox.critical(self, "Workstation Mismatch", msg)
             return
 
-        # 5. Perform actual authentication using only the Username part
-        # Replace the hardcoded True with your actual DB call:
-        # success, role = authenticate_user(actual_username, pw)
-        success, role = True, "Admin"
+        success, role = authenticate_user(actual_username, pw)
 
         if success:
             # Emit the clean username (without the hostname)

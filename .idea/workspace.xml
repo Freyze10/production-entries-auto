@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00443" summary="added wip number in the header to know it is from manual">
-      <option name="closed" value="true" />
-      <created>1776328505555</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1776328505555</updated>
-    </task>
     <task id="LOCAL-00444" summary="make the okay button clicked connect to the selected formula">
       <option name="closed" value="true" />
       <created>1776385735738</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776926460275</updated>
     </task>
-    <option name="localTasksCounter" value="492" />
+    <task id="LOCAL-00492" summary="added username in  the creation of account">
+      <option name="closed" value="true" />
+      <created>1776927794848</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1776927794848</updated>
+    </task>
+    <option name="localTasksCounter" value="493" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the requirements,txt" />
     <MESSAGE value="added the location of the rm incoming" />
     <MESSAGE value="updated the legacy database sync" />
     <MESSAGE value="removed minimum screensize then use auto full screen mode and make it resizeable" />
@@ -643,7 +642,8 @@
     <MESSAGE value="modified the styling" />
     <MESSAGE value="fixed the default value for the username to have the hostname included" />
     <MESSAGE value="transfer the creation of account in the login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="transfer the creation of account in the login page" />
+    <MESSAGE value="added username in  the creation of account" />
+    <option name="LAST_COMMIT_MESSAGE" value="added username in  the creation of account" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

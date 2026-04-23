@@ -382,3 +382,31 @@ def get_material_note(material_code):
         return record[0]
     else:
         return None
+
+
+def authenticate_user(username, password):
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT r.role
+            FROM tbl_user u
+            JOIN tbl_role r ON u.role_id = r.role_id
+            WHERE u.username = %s AND u.password = %s
+            LIMIT 1
+        """, (username, password))
+
+        record = cur.fetchone()
+
+        cur.close()
+        conn.close()
+
+        if record:
+            return True, record[0]  # success, role
+        else:
+            return False, None
+
+    except Exception as e:
+        print(f"Auth Error: {e}")
+        return False, None
