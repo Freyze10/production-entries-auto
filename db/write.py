@@ -23,6 +23,24 @@ def create_current_user(workstation):
     con.close()
 
 
+def update_user_workstation(mac, new_host, new_ip):
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            UPDATE tbl_user 
+            SET hostname = %s, ip_address = %s 
+            WHERE mac_address = %s
+        """, (new_host, new_ip, mac))
+        conn.commit()
+    except Exception as e:
+        print(f"Error updating workstation: {e}")
+        conn.rollback()
+    finally:
+        cur.close()
+        conn.close()
+
+
 def log_audit_trail(mac_address: str, action_type: str, details: str):
     conn = get_connection()
     cur = conn.cursor()

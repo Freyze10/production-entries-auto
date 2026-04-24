@@ -272,6 +272,20 @@ def get_all_user_mac():
         return []
 
 
+def get_user_info_by_mac(mac):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT hostname, ip_address 
+        FROM tbl_user 
+        WHERE mac_address = %s
+    """, (mac,))
+    record = cur.fetchone()
+    cur.close()
+    conn.close()
+    return record  # Returns (hostname, ip_address)
+
+
 def get_audit_trail_report(start_date=None, end_date=None):
     try:
         conn = get_connection()

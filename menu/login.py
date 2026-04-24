@@ -3,9 +3,9 @@ from PyQt6.QtCore import Qt, pyqtSignal, QSize
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 from css.styles import AppStyles
-from db.read import get_all_user_mac, authenticate_user
+from db.read import get_all_user_mac, authenticate_user, get_user_info_by_mac
 from db.schema import create_table
-from db.write import create_current_user
+from db.write import create_current_user, update_user_workstation
 
 
 # from db.read import authenticate_user
@@ -111,8 +111,23 @@ class LoginWindow(QDialog):
 
     def create_acccount(self):
         all_user_mac = get_all_user_mac()
-        if self.workstation['m'] not in all_user_mac:
+        current_mac = self.workstation['m']
+
+        if current_mac not in all_user_mac:
+            # MAC is new: create the user
             create_current_user(self.workstation)
+        else:
+            # MAC exists: check if Hostname or IP has changed
+            existing_data = get_user_info_by_mac(current_mac)
+
+            if existing_data:
+                db_host = existing_data[0]  # hostname from DB
+                db_ip = existing_data[1]  # ip_address from DB
+
+                # Compare with current workstation data
+                if db_host != self.workstation['h'] or db_ip != self.workstation['ip']:
+                    print("Workstation details changed. Updating record...")
+                    update_user_workstation(current_mac, self.workstation['h'], self.workstation['ip'])
 
     def handle_text_changed(self, text):
         """Prevents the user from deleting the hostname prefix."""
