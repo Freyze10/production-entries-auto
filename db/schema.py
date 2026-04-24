@@ -232,7 +232,8 @@ def create_table():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_mac_editor (
             id SERIAL PRIMARY KEY,
-            user_id INT NOT NULL UNIQUE
+            user_id INT NOT NULL UNIQUE,
+            FOREIGN KEY (user_id) REFERENCES tbl_user(user_id) ON DELETE CASCADE;
         );
     """)
 

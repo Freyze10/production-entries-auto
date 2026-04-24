@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00454" summary="&#10;added a validation to not generate if there is no formula in dc">
-      <option name="closed" value="true" />
-      <created>1776394152103</created>
-      <option name="number" value="00454" />
-      <option name="presentableId" value="LOCAL-00454" />
-      <option name="project" value="LOCAL" />
-      <updated>1776394152103</updated>
-    </task>
     <task id="LOCAL-00455" summary="create a export to csv">
       <option name="closed" value="true" />
       <created>1776397164949</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776994786231</updated>
     </task>
-    <option name="localTasksCounter" value="503" />
+    <task id="LOCAL-00503" summary="added a trigger function on the user table when the  role changes to admin or editor. we'll get the mac and add to the mac editor table">
+      <option name="closed" value="true" />
+      <created>1776994934148</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1776994934148</updated>
+    </task>
+    <option name="localTasksCounter" value="504" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="return early of theres no to sync data" />
     <MESSAGE value="updated" />
     <MESSAGE value="added an elipsis in the customer field in printing output to not generate a new line" />
     <MESSAGE value="changed the generate  computation to not split the firstt and lastt row" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added the passing of user role from the auto entries to disable the actual print too" />
     <MESSAGE value="updated the fetching of prod date in the manual entry print" />
     <MESSAGE value="create a table for editing mac addresses only" />
-    <option name="LAST_COMMIT_MESSAGE" value="create a table for editing mac addresses only" />
+    <MESSAGE value="added a trigger function on the user table when the  role changes to admin or editor. we'll get the mac and add to the mac editor table" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a trigger function on the user table when the  role changes to admin or editor. we'll get the mac and add to the mac editor table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
