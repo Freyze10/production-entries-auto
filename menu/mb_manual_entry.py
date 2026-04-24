@@ -832,14 +832,14 @@ class MBManualEntry(QWidget):
                 "action": "PRINT - WIP",
                 "details": f"(Manual) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
             }
-            preview = ProductionPrintPreview(production_data, materials_data, wip_no=True, parent=self, audit=audit)
+            preview = ProductionPrintPreview(production_data, materials_data, wip_no=True, parent=self, audit=audit, role=self.user_role)
         else:
             audit = {
                 "mac": self.work_station['m'],
                 "action": "PRINT",
                 "details": f"(Manual) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
             }
-            preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
+            preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit, role=self.user_role)
 
         preview.exec()
 
@@ -942,11 +942,11 @@ class MBManualEntry(QWidget):
             # But we disable Save, New, Cancel, Add, Remove, Sync, and Separator
             btn_text = btn.text().upper()
 
-            # if "PRINT" in btn_text and "PRINTING" not in btn_text:
-            #     btn.setEnabled(True)  # Keep print enabled
-            # else:
-            btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
-            btn.setStyleSheet("background-color: #e9ecef; color: #adb5bd; border: 1px solid #dee2e6;")
+            if "PRINT" in btn_text and "PRINTING" not in btn_text:
+                btn.setEnabled(True)  # Keep print enabled
+            else:
+                btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
+                btn.setStyleSheet("")
 
         # 4. Special case: Disable Table interactions
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)

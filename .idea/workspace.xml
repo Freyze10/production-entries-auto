@@ -40,28 +40,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.fastapi.executor": "Run",
-    "Python.format_rm_note.executor": "Run",
-    "Python.login.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.print.executor": "Run",
-    "Python.print_preview.executor": "Run",
-    "Python.styles.executor": "Run",
-    "Python.test_print.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.fastapi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.format_rm_note.executor&quot;: &quot;Run&quot;,
+    &quot;Python.login.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_preview.executor&quot;: &quot;Run&quot;,
+    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main">
     <configuration name="format_rm_note" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
@@ -198,14 +198,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00447" summary="fixed index type in column searching for audit trail">
-      <option name="closed" value="true" />
-      <created>1776388344523</created>
-      <option name="number" value="00447" />
-      <option name="presentableId" value="LOCAL-00447" />
-      <option name="project" value="LOCAL" />
-      <updated>1776388344527</updated>
     </task>
     <task id="LOCAL-00448" summary="hidden the wip column">
       <option name="closed" value="true" />
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776932609685</updated>
     </task>
-    <option name="localTasksCounter" value="496" />
+    <task id="LOCAL-00496" summary="disable all the button if the access is viewer">
+      <option name="closed" value="true" />
+      <created>1776932843184</created>
+      <option name="number" value="00496" />
+      <option name="presentableId" value="LOCAL-00496" />
+      <option name="project" value="LOCAL" />
+      <updated>1776932843184</updated>
+    </task>
+    <option name="localTasksCounter" value="497" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
     <MESSAGE value="added the syncing of rm incoming" />
     <MESSAGE value="added the query for getting the note on rm incoming" />
     <MESSAGE value="added a function to return the bag weight for rm" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added a authentication when log in" />
     <MESSAGE value="modified the displayed hostname + username after logging in" />
     <MESSAGE value="passed the user name and user role to manual page to try disabling based on user role" />
-    <option name="LAST_COMMIT_MESSAGE" value="passed the user name and user role to manual page to try disabling based on user role" />
+    <MESSAGE value="disable all the button if the access is viewer" />
+    <option name="LAST_COMMIT_MESSAGE" value="disable all the button if the access is viewer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

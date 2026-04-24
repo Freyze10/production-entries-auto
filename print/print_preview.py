@@ -14,12 +14,13 @@ from db.write import log_audit_trail
 class ProductionPrintPreview(QDialog):
     printed = pyqtSignal(str)
 
-    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None, audit=None):
+    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None, audit=None, role="Editor"):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []
         self.wip_no = wip_no
         self.audit = audit
+        self.user_role = role
         self.default_font_size = 10
 
         self.setWindowTitle("Industrial Sharp Preview - Epson LX-310")
@@ -28,6 +29,8 @@ class ProductionPrintPreview(QDialog):
 
         self.setup_ui()
         self.refresh_preview()
+        if str(self.user_role).upper() == "VIEWER":
+            self.btn_print.setEnabled(False)
 
     def setup_ui(self):
         main_layout = QVBoxLayout(self)

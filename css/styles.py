@@ -551,4 +551,9 @@ class AppStyles:
         QCheckBox#NonRawMaterialCheck::indicator:hover {{
             border: 2px solid {SLATE_600};
         }}
+        #disabled_btn{{
+            background-color: #e9ecef; 
+            color: #adb5bd; 
+            border: 1px solid #dee2e6;
+        }}
     """
