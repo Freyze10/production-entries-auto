@@ -94,21 +94,21 @@ class MainWindow(QMainWindow):
         self.btn_production_records.setChecked(True)
 
     def switch_to_manual_entry(self, prod_id: int):
-        self.mb_manual_entry = MBManualEntry(self.username,self.user_role, prod_id)  # Pass prod_id in constructor
+        self.mb_manual_entry = MBManualEntry(self.username, self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
         self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index
         self.btn_manual_entry.setChecked(True)
         self.stacked_widget.setCurrentIndex(1)
 
     def switch_to_auto_entry(self, prod_id: int):
-        self.mb_auto_entry = MBAutoEntry(prod_id)  # Pass prod_id in constructor
+        self.mb_auto_entry = MBAutoEntry(self.username, self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(2))  # remove old one
         self.stacked_widget.insertWidget(2, self.mb_auto_entry)  # add new one with same index
         self.btn_auto_entry.setChecked(True)
         self.stacked_widget.setCurrentIndex(2)
 
     def switch_to_dc_auto(self, prod_id: int):
-        self.dc_auto_entry = DCAutoEntry(prod_id)  # Pass prod_id in constructor
+        self.dc_auto_entry = DCAutoEntry(self.username, self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(3))  # remove old one
         self.stacked_widget.insertWidget(3, self.dc_auto_entry)  # add new one with same index
         self.btn_auto_entry_dc.setChecked(True)
@@ -191,11 +191,11 @@ class MainWindow(QMainWindow):
                 new_widget = self.mb_manual_entry
 
             elif index == 2:
-                self.mb_auto_entry = MBAutoEntry()
+                self.mb_auto_entry = MBAutoEntry(self.username, self.user_role)
                 new_widget = self.mb_auto_entry
 
             elif index == 3:
-                self.dc_auto_entry = DCAutoEntry()
+                self.dc_auto_entry = DCAutoEntry(self.username, self.user_role)
                 new_widget = self.dc_auto_entry
 
             elif index == 4:

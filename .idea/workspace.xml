@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00449" summary="added a row count on audit trail">
-      <option name="closed" value="true" />
-      <created>1776388954083</created>
-      <option name="number" value="00449" />
-      <option name="presentableId" value="LOCAL-00449" />
-      <option name="project" value="LOCAL" />
-      <updated>1776388954083</updated>
-    </task>
     <task id="LOCAL-00450" summary="added record count even when searching">
       <option name="closed" value="true" />
       <created>1776389112364</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776991047967</updated>
     </task>
-    <option name="localTasksCounter" value="498" />
+    <task id="LOCAL-00498" summary="connected the actual print from the other page to that reusable design">
+      <option name="closed" value="true" />
+      <created>1776991167405</created>
+      <option name="number" value="00498" />
+      <option name="presentableId" value="LOCAL-00498" />
+      <option name="project" value="LOCAL" />
+      <updated>1776991167405</updated>
+    </task>
+    <option name="localTasksCounter" value="499" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the query for getting the note on rm incoming" />
     <MESSAGE value="added a function to return the bag weight for rm" />
     <MESSAGE value="added a helper function to gett the desired bag  weight" />
     <MESSAGE value="added the logic for 20kg in the tumbler" />
@@ -643,7 +642,8 @@
     <MESSAGE value="passed the user name and user role to manual page to try disabling based on user role" />
     <MESSAGE value="disable all the button if the access is viewer" />
     <MESSAGE value="enabled the preview pint but disabled the actual print button for VIEWERS" />
-    <option name="LAST_COMMIT_MESSAGE" value="enabled the preview pint but disabled the actual print button for VIEWERS" />
+    <MESSAGE value="connected the actual print from the other page to that reusable design" />
+    <option name="LAST_COMMIT_MESSAGE" value="connected the actual print from the other page to that reusable design" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -680,12 +680,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>688</line>
+          <line>691</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>725</line>
+          <line>728</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -23,17 +23,20 @@ from workstation.workstation_details import _get_workstation_info
 
 
 class MBAutoEntry(QWidget):
-    def __init__(self, prod_id=0):  # , username, user_role, log_audit_trail
+    def __init__(self, username, user_role, prod_id=0):  # ,
         super().__init__()
         self.prod_id = prod_id
         self.prod_results = None
         self.prod_materials = None
         self.work_station = _get_workstation_info()
-        # self.user_id = f"{self.work_station['h']} # {self.user_role}"
+        self.username = username
+        self.user_role = user_role
         # Track current production for edit/view
         self.current_production_id = None
         self.formulation_details = None
         self.setup_ui()
+        if str(self.user_role).upper() == "VIEWER":
+            self.apply_viewer_restrictions()
 
     def setup_ui(self):
 
@@ -927,27 +930,43 @@ class MBAutoEntry(QWidget):
         self.small_scale_input.clear()
         self.total_weight_input.clear()
 
-    def get_material_code(self):
-        if self.raw_material_check.isChecked():
-            return self.material_code_combo.currentText().strip()
-        else:
-            return self.material_code_lineedit.text().strip()
+    def apply_viewer_restrictions(self):
+        """Disables all input fields and action buttons for users with 'VIEWER' role."""
 
-    def eventFilter(self, watched, event):
-        # Check if the event is a key press and specifically the Tab key
-        if watched == self.total_weight_input and event.type() == event.Type.KeyPress:
-            if event.key() == Qt.Key.Key_Tab:
-                # Decide which Material widget to focus based on which is visible
-                if self.material_code_lineedit.isVisible():
-                    self.material_code_lineedit.setFocus()
-                else:
-                    # For editable combos, we focus the internal lineEdit
-                    self.material_code_combo.setFocus()
-                    self.material_code_combo.lineEdit().selectAll()
+        # 1. Handle LineEdits and TextEdits (Set to Read-Only so user can still scroll/copy text)
+        for widget in self.findChildren(QLineEdit):
+            widget.setReadOnly(True)
+            # Optional: change style to look disabled
+            widget.setStyleSheet("background-color: #f8f9fa; color: #6c757d;")
 
-                return True  # This "consumes" the event so focus doesn't move elsewhere
+        for widget in self.findChildren(QTextEdit):
+            widget.setReadOnly(True)
+            widget.setStyleSheet("background-color: #f8f9fa; color: #6c757d;")
 
-        return super().eventFilter(watched, event)
+        # 2. Handle Selection Widgets (ComboBox, CheckBox, DateEdit)
+        # These must be setEnabled(False) because they don't have a 'read-only' mode
+        for widget in self.findChildren(QComboBox):
+            widget.setEnabled(False)
+
+        # This targets your custom SmartDateEdit
+        for widget in self.findChildren(SmartDateEdit):
+            widget.setEnabled(False)
+
+        # 3. Handle Buttons
+        for btn in self.findChildren(QPushButton):
+            # We typically want to allow Viewers to still see the PRINT preview
+            # But we disable Save, New, Cancel, Add, Remove, Sync, and Separator
+            btn_text = btn.text().upper()
+
+            if "PRINT" in btn_text and "PRINTING" not in btn_text:
+                btn.setEnabled(True)  # Keep print enabled
+            else:
+                btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
+                btn.setObjectName("disabled_btn")
+
+        # 4. Special case: Disable Table interactions
+        self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
 
     def sync_rm(self):
         thread = QThread()
