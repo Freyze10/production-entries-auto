@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00461" summary="modify the database query to fetch the date from the date range">
-      <option name="closed" value="true" />
-      <created>1776495081082</created>
-      <option name="number" value="00461" />
-      <option name="presentableId" value="LOCAL-00461" />
-      <option name="project" value="LOCAL" />
-      <updated>1776495081082</updated>
-    </task>
     <task id="LOCAL-00462" summary="return back the log of login inn audit trail">
       <option name="closed" value="true" />
       <created>1776495729212</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777000006211</updated>
     </task>
-    <option name="localTasksCounter" value="510" />
+    <task id="LOCAL-00510" summary="modified the hostname in username login input to make it not editable">
+      <option name="closed" value="true" />
+      <created>1777001319382</created>
+      <option name="number" value="00510" />
+      <option name="presentableId" value="LOCAL-00510" />
+      <option name="project" value="LOCAL" />
+      <updated>1777001319382</updated>
+    </task>
+    <option name="localTasksCounter" value="511" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a find current index of the form type value where it will find the same text from the database" />
     <MESSAGE value="did the same for auto entries" />
     <MESSAGE value="add a checking from the database if the prod id exists before cancel" />
     <MESSAGE value="addded the same in the  other pages" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added a window title based on the pc status, eg. for viewing only" />
     <MESSAGE value="apply the viewer restriction whenver the pc is not present in the rnablrd mac table" />
     <MESSAGE value="remove the audit trail for those with viewing restriction" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove the audit trail for those with viewing restriction" />
+    <MESSAGE value="modified the hostname in username login input to make it not editable" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the hostname in username login input to make it not editable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

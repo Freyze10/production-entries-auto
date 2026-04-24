@@ -273,20 +273,16 @@ def get_all_user_mac():
 
 
 def get_audit_trail_report(start_date=None, end_date=None):
-    """
-    Fetches audit trail logs.
-    If start_date and end_date are provided (as Python date objects),
-    the results are filtered to that range.
-    """
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
-        # 1. Base Query
+        # 1. Base Query - Added u.username to the selection
         query = """
             SELECT 
                 a.timestamp, 
                 u.hostname, 
+                u.username, 
                 a.action_type, 
                 a.details, 
                 u.ip_address, 
@@ -297,8 +293,7 @@ def get_audit_trail_report(start_date=None, end_date=None):
 
         params = []
 
-        # 2. Add Date Filtering if parameters are passed
-        # We cast timestamp to ::date to ignore the time part during the range check
+        # 2. Add Date Filtering
         if start_date and end_date:
             query += " WHERE a.timestamp::date BETWEEN %s AND %s"
             params.extend([start_date, end_date])
@@ -309,19 +304,19 @@ def get_audit_trail_report(start_date=None, end_date=None):
         cursor.execute(query, params)
         rows = cursor.fetchall()
 
-        # Format the data for the UI
         formatted_rows = []
         for row in rows:
-            # row[0] is the timestamp object from the database
             ts = row[0].strftime("%Y-%m-%d %I:%M %p") if row[0] else ""
 
+            user_display = f"{row[1]}\\{row[2]}"
+
             formatted_rows.append([
-                ts,  # Timestamp (formatted string)
-                row[1],  # Hostname
-                row[2],  # Action (action_type)
-                row[3],  # Details
-                row[4],  # IP Address
-                row[5]  # MAC Address
+                ts,  # Index 0: Timestamp
+                user_display,  # Index 1: Hostname\Username
+                row[3],  # Index 2: Action Type
+                row[4],  # Index 3: Details
+                row[5],  # Index 4: IP Address
+                row[6]  # Index 5: MAC Address
             ])
 
         cursor.close()
@@ -329,7 +324,7 @@ def get_audit_trail_report(start_date=None, end_date=None):
         return formatted_rows
 
     except Exception as e:
-        print(f"Database Error in get_audit_trail_report: {e}")
+        print(f"Database Error: {e}")
         return []
 
 
