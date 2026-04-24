@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00451" summary="remove the calculation for displaying old records. only use what was recorded even the spacing">
-      <option name="closed" value="true" />
-      <created>1776393011752</created>
-      <option name="number" value="00451" />
-      <option name="presentableId" value="LOCAL-00451" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393011752</updated>
-    </task>
     <task id="LOCAL-00452" summary="removed the imports of table spacing">
       <option name="closed" value="true" />
       <created>1776393125705</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776992293460</updated>
     </task>
-    <option name="localTasksCounter" value="500" />
+    <task id="LOCAL-00500" summary="added the passing of user role from the auto entries to disable the actual print too">
+      <option name="closed" value="true" />
+      <created>1776992374820</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1776992374820</updated>
+    </task>
+    <option name="localTasksCounter" value="501" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a helper function to gett the desired bag  weight" />
     <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
@@ -643,7 +642,8 @@
     <MESSAGE value="enabled the preview pint but disabled the actual print button for VIEWERS" />
     <MESSAGE value="connected the actual print from the other page to that reusable design" />
     <MESSAGE value="added the disabled restriction in the other pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the disabled restriction in the other pages" />
+    <MESSAGE value="added the passing of user role from the auto entries to disable the actual print too" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the passing of user role from the auto entries to disable the actual print too" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

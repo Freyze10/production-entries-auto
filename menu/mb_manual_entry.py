@@ -770,8 +770,8 @@ class MBManualEntry(QWidget):
             production_date = ''
 
             # Check if self.result exists and contains the key
-            if self.prod_results and self.prod_results.get('production_date'):
-                production_date = self.prod_results['production_date'].strftime("%m/%d/%y")
+            if self.prod_results and self.prod_results.get('prod_date'):
+                production_date = self.prod_results['prod_date'].strftime("%m/%d/%y")
             else:
                 # Handle the case where it's missing or None
                 text_date = self.production_date_input.text().strip()
