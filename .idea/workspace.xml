@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00467" summary="modified the qlable header text when clicked on the record to not push the other content">
-      <option name="closed" value="true" />
-      <created>1776657398555</created>
-      <option name="number" value="00467" />
-      <option name="presentableId" value="LOCAL-00467" />
-      <option name="project" value="LOCAL" />
-      <updated>1776657398555</updated>
-    </task>
     <task id="LOCAL-00468" summary="added the syncing of rm incoming">
       <option name="closed" value="true" />
       <created>1776664000892</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777013707672</updated>
     </task>
-    <option name="localTasksCounter" value="516" />
+    <task id="LOCAL-00516" summary="added department in the display">
+      <option name="closed" value="true" />
+      <created>1777014020107</created>
+      <option name="number" value="00516" />
+      <option name="presentableId" value="LOCAL-00516" />
+      <option name="project" value="LOCAL" />
+      <updated>1777014020107</updated>
+    </task>
+    <option name="localTasksCounter" value="517" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the styling" />
     <MESSAGE value="fixed the default value for the username to have the hostname included" />
     <MESSAGE value="transfer the creation of account in the login page" />
     <MESSAGE value="added username in  the creation of account" />
@@ -643,7 +642,8 @@
     <MESSAGE value="add a  usermanagement connnection page" />
     <MESSAGE value="created a usermanagement page for admin" />
     <MESSAGE value="updated the design for the user management" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the design for the user management" />
+    <MESSAGE value="added department in the display" />
+    <option name="LAST_COMMIT_MESSAGE" value="added department in the display" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

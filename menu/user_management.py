@@ -159,10 +159,10 @@ class UserManagement(QWidget):
             self.edit_hostname.setText(user_data[2])
             self.edit_ip.setText(user_data[3])
             self.edit_mac.setText(user_data[4])
-            self.edit_password.setText(user_data[6])
+            self.edit_password.setText(user_data[7])
 
             # Set combo box based on role_id (1=Admin, 2=Editor, 3=Viewer)
-            self.role_combo.setCurrentIndex(user_data[7] - 1)
+            self.role_combo.setCurrentIndex(user_data[8] - 1)
 
     def clear_form(self):
         self.selected_user_id = None

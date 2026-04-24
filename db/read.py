@@ -369,7 +369,7 @@ def get_user_management_list():
     cur = conn.cursor()
 
     cur.execute("""
-            SELECT u.user_id, u.hostname, u.username, u.ip_address, u.mac_address, r.role, r.department, u.password
+            SELECT u.user_id, u.hostname, u.username, u.ip_address, u.mac_address, r.role, r.department, u.password, u.role_id
             FROM tbl_user u
             JOIN tbl_role r ON u.role_id = r.role_id
             ORDER BY u.user_id ASC
