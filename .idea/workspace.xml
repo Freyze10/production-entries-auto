@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00458" summary="added date rasngein the audit trail">
-      <option name="closed" value="true" />
-      <created>1776494197644</created>
-      <option name="number" value="00458" />
-      <option name="presentableId" value="LOCAL-00458" />
-      <option name="project" value="LOCAL" />
-      <updated>1776494197644</updated>
-    </task>
     <task id="LOCAL-00459" summary="added the default value of date range based from the records">
       <option name="closed" value="true" />
       <created>1776494564730</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776998277125</updated>
     </task>
-    <option name="localTasksCounter" value="507" />
+    <task id="LOCAL-00507" summary="added a window title based on the pc status, eg. for viewing only">
+      <option name="closed" value="true" />
+      <created>1776998521316</created>
+      <option name="number" value="00507" />
+      <option name="presentableId" value="LOCAL-00507" />
+      <option name="project" value="LOCAL" />
+      <updated>1776998521316</updated>
+    </task>
+    <option name="localTasksCounter" value="508" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added an elipsis in the customer field in printing output to not generate a new line" />
     <MESSAGE value="changed the generate  computation to not split the firstt and lastt row" />
     <MESSAGE value="changed the dropdown for the form type into uppercased letter to match the one in the database" />
     <MESSAGE value="added a find current index of the form type value where it will find the same text from the database" />
@@ -643,7 +642,8 @@
     <MESSAGE value="create a table for editing mac addresses only" />
     <MESSAGE value="added a trigger function on the user table when the  role changes to admin or editor. we'll get the mac and add to the mac editor table" />
     <MESSAGE value="created a  query to checkk if the mac address is existing in the enabled mac table" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a  query to checkk if the mac address is existing in the enabled mac table" />
+    <MESSAGE value="added a window title based on the pc status, eg. for viewing only" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a window title based on the pc status, eg. for viewing only" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

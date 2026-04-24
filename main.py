@@ -50,12 +50,12 @@ class MainWindow(QMainWindow):
         self.workstation_info = _get_workstation_info()
         self.username = username
         self.user_role = user_role
-        self.mac_is_enabled = check_mac_enabled(self.workstation_info['m'])
+        self.is_mac_enabled = check_mac_enabled(self.workstation_info['m'])
 
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
         window_title = "Production Entry"
-        if not self.mac_is_enabled:
+        if not self.is_mac_enabled:
             window_title = "Production Entry  -  This PC is for VIEWING ONLY"
 
         self.setWindowTitle(window_title)
@@ -67,7 +67,6 @@ class MainWindow(QMainWindow):
         self.production_records = None
         self.production_manual_entry = None
         self.production_auto_entry = None
-        # self.production_manual_entry_dc = None
         self.production_auto_entry_dc = None
         self.audit_trail = None
 
@@ -99,21 +98,21 @@ class MainWindow(QMainWindow):
         self.btn_production_records.setChecked(True)
 
     def switch_to_manual_entry(self, prod_id: int):
-        self.mb_manual_entry = MBManualEntry(self.username, self.user_role, prod_id)  # Pass prod_id in constructor
+        self.mb_manual_entry = MBManualEntry(self.is_mac_enabled, self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(1))  # remove old one
         self.stacked_widget.insertWidget(1, self.mb_manual_entry)  # add new one with same index
         self.btn_manual_entry.setChecked(True)
         self.stacked_widget.setCurrentIndex(1)
 
     def switch_to_auto_entry(self, prod_id: int):
-        self.mb_auto_entry = MBAutoEntry(self.username, self.user_role, prod_id)  # Pass prod_id in constructor
+        self.mb_auto_entry = MBAutoEntry(self.is_mac_enabled, self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(2))  # remove old one
         self.stacked_widget.insertWidget(2, self.mb_auto_entry)  # add new one with same index
         self.btn_auto_entry.setChecked(True)
         self.stacked_widget.setCurrentIndex(2)
 
     def switch_to_dc_auto(self, prod_id: int):
-        self.dc_auto_entry = DCAutoEntry(self.username, self.user_role, prod_id)  # Pass prod_id in constructor
+        self.dc_auto_entry = DCAutoEntry(self.is_mac_enabled, self.user_role, prod_id)  # Pass prod_id in constructor
         self.stacked_widget.removeWidget(self.stacked_widget.widget(3))  # remove old one
         self.stacked_widget.insertWidget(3, self.dc_auto_entry)  # add new one with same index
         self.btn_auto_entry_dc.setChecked(True)
@@ -192,15 +191,15 @@ class MainWindow(QMainWindow):
                 new_widget = self.production_records
 
             elif index == 1:
-                self.mb_manual_entry = MBManualEntry(self.username, self.user_role)
+                self.mb_manual_entry = MBManualEntry(self.is_mac_enabled, self.user_role)
                 new_widget = self.mb_manual_entry
 
             elif index == 2:
-                self.mb_auto_entry = MBAutoEntry(self.username, self.user_role)
+                self.mb_auto_entry = MBAutoEntry(self.is_mac_enabled, self.user_role)
                 new_widget = self.mb_auto_entry
 
             elif index == 3:
-                self.dc_auto_entry = DCAutoEntry(self.username, self.user_role)
+                self.dc_auto_entry = DCAutoEntry(self.is_mac_enabled, self.user_role)
                 new_widget = self.dc_auto_entry
 
             elif index == 4:
