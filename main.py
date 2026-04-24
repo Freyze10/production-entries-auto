@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar, QMessageBox
 
 from css.styles import AppStyles
+from db.read import check_mac_enabled
 from db.write import create_current_user, log_audit_trail
 from menu.audit_trail import AuditTrail
 from menu.dc_auto_entry import DCAutoEntry
@@ -49,10 +50,15 @@ class MainWindow(QMainWindow):
         self.workstation_info = _get_workstation_info()
         self.username = username
         self.user_role = user_role
+        self.mac_is_enabled = check_mac_enabled(self.workstation_info['m'])
 
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
-        self.setWindowTitle("Production Entry")
+        pc_status = ""
+        if not self.mac_is_enabled:
+            pc_status = "  -  This PC is for VIEWING ONLY"
+
+        self.setWindowTitle("Production Entry" + pc_status)
         icon_path = resource_path("css/img/production_icon.ico")
         self.setWindowIcon(QIcon(icon_path))
         self.setGeometry(100, 100, 1320, 668)
@@ -65,7 +71,6 @@ class MainWindow(QMainWindow):
         self.production_auto_entry_dc = None
         self.audit_trail = None
 
-        create_table()
         self.init_ui()
         self.log_audit_trail()
 

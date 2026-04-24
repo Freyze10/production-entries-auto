@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00456" summary="commented out the log in records on audit trail">
-      <option name="closed" value="true" />
-      <created>1776398323463</created>
-      <option name="number" value="00456" />
-      <option name="presentableId" value="LOCAL-00456" />
-      <option name="project" value="LOCAL" />
-      <updated>1776398323463</updated>
-    </task>
     <task id="LOCAL-00457" summary="added check of production number if existing before cancel">
       <option name="closed" value="true" />
       <created>1776478039301</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776996985486</updated>
     </task>
-    <option name="localTasksCounter" value="505" />
+    <task id="LOCAL-00505" summary="created a  query to checkk if the mac address is existing in the enabled mac table">
+      <option name="closed" value="true" />
+      <created>1776997264767</created>
+      <option name="number" value="00505" />
+      <option name="presentableId" value="LOCAL-00505" />
+      <option name="project" value="LOCAL" />
+      <updated>1776997264767</updated>
+    </task>
+    <option name="localTasksCounter" value="506" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

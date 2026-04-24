@@ -4,6 +4,7 @@ from PyQt6.QtGui import QFont
 import qtawesome as fa
 from css.styles import AppStyles
 from db.read import get_all_user_mac, authenticate_user
+from db.schema import create_table
 from db.write import create_current_user
 
 
@@ -19,6 +20,8 @@ class LoginWindow(QDialog):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)  # Clean look
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         self.setStyleSheet(AppStyles.LOGIN_STYLESHEET)
+
+        create_table()
         self.init_ui()
 
         self.create_acccount()
