@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00460" summary="added fetch data when the date is changed">
-      <option name="closed" value="true" />
-      <created>1776494895767</created>
-      <option name="number" value="00460" />
-      <option name="presentableId" value="LOCAL-00460" />
-      <option name="project" value="LOCAL" />
-      <updated>1776494895768</updated>
-    </task>
     <task id="LOCAL-00461" summary="modify the database query to fetch the date from the date range">
       <option name="closed" value="true" />
       <created>1776495081082</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776999063042</updated>
     </task>
-    <option name="localTasksCounter" value="509" />
+    <task id="LOCAL-00509" summary="remove the audit trail for those with viewing restriction">
+      <option name="closed" value="true" />
+      <created>1777000006211</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1777000006211</updated>
+    </task>
+    <option name="localTasksCounter" value="510" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the dropdown for the form type into uppercased letter to match the one in the database" />
     <MESSAGE value="added a find current index of the form type value where it will find the same text from the database" />
     <MESSAGE value="did the same for auto entries" />
     <MESSAGE value="add a checking from the database if the prod id exists before cancel" />
@@ -643,7 +642,8 @@
     <MESSAGE value="created a  query to checkk if the mac address is existing in the enabled mac table" />
     <MESSAGE value="added a window title based on the pc status, eg. for viewing only" />
     <MESSAGE value="apply the viewer restriction whenver the pc is not present in the rnablrd mac table" />
-    <option name="LAST_COMMIT_MESSAGE" value="apply the viewer restriction whenver the pc is not present in the rnablrd mac table" />
+    <MESSAGE value="remove the audit trail for those with viewing restriction" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove the audit trail for those with viewing restriction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

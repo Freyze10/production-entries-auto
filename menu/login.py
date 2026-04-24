@@ -71,7 +71,12 @@ class LoginWindow(QDialog):
             return frame, edit
 
         user_frame, self.username_input = create_input_field("Username", "fa5s.user")
-        self.username_input.setText(self.workstation['h'] + "\\")  # Default to hostname
+        self.hostname_prefix = self.workstation['h'].upper() + "\\"
+        self.username_input.setText(self.hostname_prefix)
+
+        # Connect signals to protect the prefix
+        self.username_input.textChanged.connect(self.handle_text_changed)
+        self.username_input.cursorPositionChanged.connect(self.handle_cursor_move)
 
         pass_frame, self.password_input = create_input_field("Password", "fa5s.lock", True)
         self.password_input.returnPressed.connect(self.handle_login)
@@ -109,39 +114,36 @@ class LoginWindow(QDialog):
         if self.workstation['m'] not in all_user_mac:
             create_current_user(self.workstation)
 
+    def handle_text_changed(self, text):
+        """Prevents the user from deleting the hostname prefix."""
+        if not text.startswith(self.hostname_prefix):
+            # Block signals to prevent infinite loop when resetting text
+            self.username_input.blockSignals(True)
+            # This handles cases where they highlight all and press backspace
+            self.username_input.setText(self.hostname_prefix)
+            self.username_input.blockSignals(False)
+
+    def handle_cursor_move(self, old_pos, new_pos):
+        """Prevents the cursor from entering the hostname area."""
+        prefix_len = len(self.hostname_prefix)
+        if new_pos < prefix_len:
+            self.username_input.setCursorPosition(prefix_len)
+
     def handle_login(self):
         raw_input = self.username_input.text().strip()
         pw = self.password_input.text().strip()
 
-        # Check for the backslash separator
-        if "\\" not in raw_input:
-            QMessageBox.warning(self, "Format Error",
-                                "Please use the format: HOSTNAME\\Username")
+        # Since we locked the field, we know the format is [PREFIX][USERNAME]
+        actual_username = raw_input[len(self.hostname_prefix):].strip()
+
+        if not actual_username:
+            QMessageBox.warning(self, "Invalid Input", "Please enter your username.")
             return
 
-        # Split the input (split only once to handle potential backslashes in username)
-        parts = raw_input.split("\\", 1)
-        input_hostname = parts[0].strip()
-        actual_username = parts[1].strip()
-
-        # Validate that both parts exist
-        if not input_hostname or not actual_username:
-            QMessageBox.warning(self, "Invalid Input",
-                                "Both Hostname and Username are required.")
-            return
-
-        # Compare Hostname (Case-insensitive check)
-        current_hostname = self.workstation['h']
-        if input_hostname.lower() != current_hostname.lower():
-            msg = (f"Access Denied: Invalid workstation.\n\n"
-                   f"You are currently on '{current_hostname}'.")
-            QMessageBox.critical(self, "Workstation Mismatch", msg)
-            return
-
+        # Perform authentication
         success, role = authenticate_user(actual_username, pw, self.workstation['m'])
 
         if success:
-            # Emit the clean username (without the hostname)
             self.login_success.emit(actual_username, role)
             self.accept()
         else:
