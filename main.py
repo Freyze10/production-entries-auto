@@ -173,9 +173,10 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.btn_auto_entry_dc)
 
         if str(self.user_role).upper() != "VIEWER" or self.is_mac_enabled:
-            layout.addWidget(QLabel("System", objectName="MenuLabel"))
-            layout.addWidget(self.btn_audit_trail)
+            # pwede ilagay ung audit trail dito para ma view rin ng prod, kaso included sa audit trail even ung pag update ng Admin
             if str(self.user_role).upper() == "ADMIN":
+                layout.addWidget(QLabel("System", objectName="MenuLabel"))
+                layout.addWidget(self.btn_audit_trail)
                 layout.addWidget(self.btn_user_mamagement)
         layout.addStretch(1)
         layout.addWidget(self.btn_logout)
