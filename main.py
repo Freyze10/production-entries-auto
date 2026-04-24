@@ -167,10 +167,11 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.btn_production_records)
         layout.addWidget(self.btn_manual_entry)
         layout.addWidget(self.btn_auto_entry)
-        # layout.addWidget(self.btn_manual_entry_dc)
         layout.addWidget(self.btn_auto_entry_dc)
-        layout.addWidget(QLabel("System", objectName="MenuLabel"))
-        layout.addWidget(self.btn_audit_trail)
+
+        if str(self.user_role).upper() != "VIEWER" or self.is_mac_enabled:
+            layout.addWidget(QLabel("System", objectName="MenuLabel"))
+            layout.addWidget(self.btn_audit_trail)
         layout.addStretch(1)
         layout.addWidget(self.btn_logout)
 

@@ -138,7 +138,7 @@ class AuditTrail(QWidget):
         # Force the "Details" column (index 3) to stretch and fill empty space
         self.table_audit_records.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
         self.table_audit_records.setColumnWidth(0, 140)
-        self.table_audit_records.setColumnWidth(5, 110)
+        self.table_audit_records.setColumnWidth(5, 140)
         self.table_audit_records.verticalHeader().setVisible(False)  # hide row numbers
         # self.table_audit_records.setColumnHidden(0, True)
         self.table_audit_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
