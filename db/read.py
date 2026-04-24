@@ -143,12 +143,19 @@ def get_rm_code_lists():
         return []
 
 
-def check_mac_enabled(user_id):
+def check_mac_enabled(mac):
     """Returns True if the ID exists and is NOT deleted."""
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute("SELECT EXISTS(SELECT 1 FROM tbl_mac_editor WHERE user_id = %s)", (user_id,))
+        cur.execute("""
+            SELECT EXISTS (
+            SELECT 1 
+            FROM tbl_user b
+            JOIN tbl_mac_editor a ON b.user_id = a.user_id 
+            WHERE b.mac_address = %s
+        );""", (mac,))
+
         exists = cur.fetchone()[0]
         cur.close()
         conn.close()
