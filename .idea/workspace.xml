@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00452" summary="removed the imports of table spacing">
-      <option name="closed" value="true" />
-      <created>1776393125705</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393125705</updated>
-    </task>
     <task id="LOCAL-00453" summary="&#10;added a validation to not generate if there is no formula in dmb">
       <option name="closed" value="true" />
       <created>1776393969714</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776992374820</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary="updated the fetching of prod date in the manual entry print">
+      <option name="closed" value="true" />
+      <created>1776992714602</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1776992714602</updated>
+    </task>
+    <option name="localTasksCounter" value="502" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
     <MESSAGE value="updated" />
@@ -643,7 +642,8 @@
     <MESSAGE value="connected the actual print from the other page to that reusable design" />
     <MESSAGE value="added the disabled restriction in the other pages" />
     <MESSAGE value="added the passing of user role from the auto entries to disable the actual print too" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the passing of user role from the auto entries to disable the actual print too" />
+    <MESSAGE value="updated the fetching of prod date in the manual entry print" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the fetching of prod date in the manual entry print" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -229,6 +229,14 @@ def create_table():
         );
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_mac_editor (
+            id SERIAL PRIMARY KEY,
+            user_id INT NOT NULL UNIQUE
+        );
+    """)
+
+
     con.commit()
     cursor.close()
     con.close()
