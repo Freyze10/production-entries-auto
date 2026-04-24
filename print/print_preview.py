@@ -31,6 +31,7 @@ class ProductionPrintPreview(QDialog):
         self.refresh_preview()
         if str(self.user_role).upper() == "VIEWER":
             self.btn_print.setEnabled(False)
+            self.btn_print.setObjectName("disabled_btn")
 
     def setup_ui(self):
         main_layout = QVBoxLayout(self)

@@ -946,7 +946,7 @@ class MBManualEntry(QWidget):
                 btn.setEnabled(True)  # Keep print enabled
             else:
                 btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
-                btn.setStyleSheet("")
+                btn.setObjectName("disabled_btn")
 
         # 4. Special case: Disable Table interactions
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
