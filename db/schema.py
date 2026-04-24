@@ -236,6 +236,37 @@ def create_table():
         );
     """)
 
+    # Create the Trigger Function with Sync (Insert & Delete logic)
+    cursor.execute("""
+        CREATE OR REPLACE FUNCTION fn_sync_editor_list()
+        RETURNS TRIGGER AS $$
+        BEGIN
+            -- If role becomes 1 or 2, add to editor table
+            IF NEW.role_id IN (1, 2) THEN
+                INSERT INTO tbl_mac_editor (user_id)
+                VALUES (NEW.user_id)
+                ON CONFLICT (user_id) DO NOTHING;
+
+            -- If role changes to anything else (e.g., 3), remove from editor table
+            ELSE
+                DELETE FROM tbl_mac_editor WHERE user_id = NEW.user_id;
+            END IF;
+
+            RETURN NEW;
+        END;
+        $$ LANGUAGE plpgsql;
+    """)
+
+    # Create/Update the Trigger on tbl_user Drop muna para hindi magka error pag existing na
+    cursor.execute("DROP TRIGGER IF EXISTS trg_after_user_update ON tbl_user;")
+
+    cursor.execute("""
+        CREATE TRIGGER trg_after_user_update
+        AFTER UPDATE ON tbl_user
+        FOR EACH ROW
+        WHEN (OLD.role_id IS DISTINCT FROM NEW.role_id)
+        EXECUTE FUNCTION fn_sync_editor_list();
+    """)
 
     con.commit()
     cursor.close()
