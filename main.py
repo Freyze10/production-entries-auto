@@ -54,11 +54,11 @@ class MainWindow(QMainWindow):
 
         self.icon_db_ok, self.icon_db_fail = (fa.icon('fa5s.check-circle', color='#4CAF50'),
                                               fa.icon('fa5s.times-circle', color='#D32F2F'))
-        pc_status = ""
+        window_title = "Production Entry"
         if not self.mac_is_enabled:
-            pc_status = "  -  This PC is for VIEWING ONLY"
+            window_title = "Production Entry  -  This PC is for VIEWING ONLY"
 
-        self.setWindowTitle("Production Entry" + pc_status)
+        self.setWindowTitle(window_title)
         icon_path = resource_path("css/img/production_icon.ico")
         self.setWindowIcon(QIcon(icon_path))
         self.setGeometry(100, 100, 1320, 668)
