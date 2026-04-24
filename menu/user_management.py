@@ -8,7 +8,8 @@ import qtawesome as fa
 from css.styles import AppStyles
 from table_model.model import TableModel
 from db.read import get_user_management_list
-from db.write import save_user_changes
+from db.write import save_user_changes, log_audit_trail
+from workstation.workstation_details import _get_workstation_info
 
 
 class UserManagement(QWidget):
@@ -16,6 +17,7 @@ class UserManagement(QWidget):
         super().__init__()
         self.users_raw_data = []
         self.selected_user_id = None
+        self.work_station = _get_workstation_info()
         self.setup_ui()
         self.refresh_data()
 
@@ -195,4 +197,8 @@ class UserManagement(QWidget):
         success = save_user_changes(self.selected_user_id, data)
         if success:
             QMessageBox.information(self, "Success", "User details updated successfully.")
+
+            audit_details = f"Hostname: {data["hostname"]}\\{data["username"]} has been successfully Updated"
+            log_audit_trail(self.work_station['m'], "UPDATE", audit_details)
+
             self.refresh_data()

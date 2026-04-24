@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00470" summary="added a function to return the bag weight for rm">
-      <option name="closed" value="true" />
-      <created>1776667786568</created>
-      <option name="number" value="00470" />
-      <option name="presentableId" value="LOCAL-00470" />
-      <option name="project" value="LOCAL" />
-      <updated>1776667786569</updated>
-    </task>
     <task id="LOCAL-00471" summary="added a function to return the bag weight for rm">
       <option name="closed" value="true" />
       <created>1776667791495</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777014583600</updated>
     </task>
-    <option name="localTasksCounter" value="519" />
+    <task id="LOCAL-00519" summary="hide the audit trail to editor, onlyt visible to the IT">
+      <option name="closed" value="true" />
+      <created>1777018001919</created>
+      <option name="number" value="00519" />
+      <option name="presentableId" value="LOCAL-00519" />
+      <option name="project" value="LOCAL" />
+      <updated>1777018001919</updated>
+    </task>
+    <option name="localTasksCounter" value="520" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added username in  the creation of account" />
     <MESSAGE value="added a authentication when log in" />
     <MESSAGE value="modified the displayed hostname + username after logging in" />
     <MESSAGE value="passed the user name and user role to manual page to try disabling based on user role" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added department in the display" />
     <MESSAGE value="fix the displaying of the data" />
     <MESSAGE value="fix the saving of the updated data" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the saving of the updated data" />
+    <MESSAGE value="hide the audit trail to editor, onlyt visible to the IT" />
+    <option name="LAST_COMMIT_MESSAGE" value="hide the audit trail to editor, onlyt visible to the IT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
