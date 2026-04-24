@@ -56,7 +56,9 @@ class UserManagement(QWidget):
         search_layout = QHBoxLayout()
         self.search_input = QLineEdit(placeholderText="Search username or hostname...")
         self.search_input.textChanged.connect(self.filter_table)
-        search_layout.addWidget(QLabel(fa.icon('fa5s.search', color=AppStyles.SLATE_400).pixmap(16, 16)))
+        search_icon_label = QLabel()
+        search_icon_label.setPixmap(fa.icon('fa5s.search', color=AppStyles.SLATE_400).pixmap(16, 16))
+        search_layout.addWidget(search_icon_label)
         search_layout.addWidget(self.search_input)
         table_v_layout.addLayout(search_layout)
 

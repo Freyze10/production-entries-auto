@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
         self._init_pages()
 
     def _init_pages(self):
-        for _ in range(5):
+        for _ in range(6):
             self.stacked_widget.addWidget(QWidget())
 
             # Load the first page immediately (Production Records)
@@ -175,6 +175,8 @@ class MainWindow(QMainWindow):
         if str(self.user_role).upper() != "VIEWER" or self.is_mac_enabled:
             layout.addWidget(QLabel("System", objectName="MenuLabel"))
             layout.addWidget(self.btn_audit_trail)
+            if str(self.user_role).upper() == "ADMIN":
+                layout.addWidget(self.btn_user_mamagement)
         layout.addStretch(1)
         layout.addWidget(self.btn_logout)
 
@@ -211,8 +213,11 @@ class MainWindow(QMainWindow):
                 new_widget = self.audit_trail
 
             elif index == 5:
-                self.user_management = UserManagement()
-                new_widget = self.user_management
+                try:
+                    self.user_management = UserManagement()
+                    new_widget = self.user_management
+                except Exception as e:
+                    print(e)
 
             # Replace the placeholder with the actual loaded page
             self.stacked_widget.removeWidget(current_widget)
