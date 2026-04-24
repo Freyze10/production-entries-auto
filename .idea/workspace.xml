@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00450" summary="added record count even when searching">
-      <option name="closed" value="true" />
-      <created>1776389112364</created>
-      <option name="number" value="00450" />
-      <option name="presentableId" value="LOCAL-00450" />
-      <option name="project" value="LOCAL" />
-      <updated>1776389112364</updated>
-    </task>
     <task id="LOCAL-00451" summary="remove the calculation for displaying old records. only use what was recorded even the spacing">
       <option name="closed" value="true" />
       <created>1776393011752</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776991167405</updated>
     </task>
-    <option name="localTasksCounter" value="499" />
+    <task id="LOCAL-00499" summary="added the disabled restriction in the other pages">
+      <option name="closed" value="true" />
+      <created>1776992293460</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1776992293460</updated>
+    </task>
+    <option name="localTasksCounter" value="500" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a function to return the bag weight for rm" />
     <MESSAGE value="added a helper function to gett the desired bag  weight" />
     <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
@@ -643,7 +642,8 @@
     <MESSAGE value="disable all the button if the access is viewer" />
     <MESSAGE value="enabled the preview pint but disabled the actual print button for VIEWERS" />
     <MESSAGE value="connected the actual print from the other page to that reusable design" />
-    <option name="LAST_COMMIT_MESSAGE" value="connected the actual print from the other page to that reusable design" />
+    <MESSAGE value="added the disabled restriction in the other pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the disabled restriction in the other pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

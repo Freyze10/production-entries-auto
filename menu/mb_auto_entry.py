@@ -882,7 +882,7 @@ class MBAutoEntry(QWidget):
             "action": "PRINT",
             "details": f"(MB - Auto) Prod ID: {production_data['prod_id']} | Production Date: {production_data['production_date']}",
         }
-        preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit)
+        preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit, role=self.user_role)
         preview.exec()
 
     def clear_material_table(self):
