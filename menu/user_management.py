@@ -155,8 +155,8 @@ class UserManagement(QWidget):
 
         if user_data:
             self.selected_user_id = user_data[0]
-            self.edit_username.setText(user_data[1])
-            self.edit_hostname.setText(user_data[2])
+            self.edit_username.setText(user_data[2])
+            self.edit_hostname.setText(user_data[1])
             self.edit_ip.setText(user_data[3])
             self.edit_mac.setText(user_data[4])
             self.edit_password.setText(user_data[7])
