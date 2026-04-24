@@ -63,7 +63,7 @@ class UserManagement(QWidget):
         table_v_layout.addLayout(search_layout)
 
         self.user_table = QTableView()
-        self.headers = ["ID", "Username", "Hostname", "IP Address", "MAC", "Role"]
+        self.headers = ["ID", "Hostname", "Username", "IP Address", "MAC", "Role", "Department"]
         self.table_model = TableModel([], self.headers)
         self.user_table.setModel(self.table_model)
         self.user_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
@@ -92,7 +92,6 @@ class UserManagement(QWidget):
         # Form Fields
         self.edit_username = QLineEdit()
         self.edit_password = QLineEdit()
-        self.edit_password.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
 
         self.edit_hostname = QLineEdit()
         self.edit_ip = QLineEdit()
@@ -139,7 +138,7 @@ class UserManagement(QWidget):
         self.users_raw_data = get_user_management_list()
 
         # Prepare table display (strip out password and role_id for the view)
-        display_rows = [row[:6] for row in self.users_raw_data]
+        display_rows = [row[:7] for row in self.users_raw_data]
         self.table_model.set_data(display_rows)
         self.clear_form()
 

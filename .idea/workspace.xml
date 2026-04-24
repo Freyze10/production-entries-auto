@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00466" summary="removed minimum screensize then use auto full screen mode and make it resizeable">
-      <option name="closed" value="true" />
-      <created>1776656291265</created>
-      <option name="number" value="00466" />
-      <option name="presentableId" value="LOCAL-00466" />
-      <option name="project" value="LOCAL" />
-      <updated>1776656291265</updated>
-    </task>
     <task id="LOCAL-00467" summary="modified the qlable header text when clicked on the record to not push the other content">
       <option name="closed" value="true" />
       <created>1776657398555</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777012475057</updated>
     </task>
-    <option name="localTasksCounter" value="515" />
+    <task id="LOCAL-00515" summary="updated the design for the user management">
+      <option name="closed" value="true" />
+      <created>1777013707672</created>
+      <option name="number" value="00515" />
+      <option name="presentableId" value="LOCAL-00515" />
+      <option name="project" value="LOCAL" />
+      <updated>1777013707672</updated>
+    </task>
+    <option name="localTasksCounter" value="516" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a log in page" />
     <MESSAGE value="modified the styling" />
     <MESSAGE value="fixed the default value for the username to have the hostname included" />
     <MESSAGE value="transfer the creation of account in the login page" />
@@ -643,7 +642,8 @@
     <MESSAGE value="update the ip or hostname if the user workstation ip/hostname changed" />
     <MESSAGE value="add a  usermanagement connnection page" />
     <MESSAGE value="created a usermanagement page for admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a usermanagement page for admin" />
+    <MESSAGE value="updated the design for the user management" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the design for the user management" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
