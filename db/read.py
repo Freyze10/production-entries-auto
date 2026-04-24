@@ -364,6 +364,23 @@ def get_audit_date_bounds():
         return today, today
 
 
+def get_user_management_list():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+            SELECT u.user_id, u.username, u.hostname, u.ip_address, u.mac_address, r.role_name, u.password, u.role_id
+            FROM tbl_user u
+            JOIN tbl_role r ON u.role_id = r.role_id
+            ORDER BY u.user_id ASC
+        """)
+    records = cur.fetchall()
+
+    cur.close()
+    conn.close()
+    return records
+
+
 def get_material_note(material_code):
     """
     Fetches the most recent note for a specific material code

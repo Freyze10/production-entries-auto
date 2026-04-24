@@ -199,22 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00463" summary="modified the requirements,txt">
-      <option name="closed" value="true" />
-      <created>1776647741542</created>
-      <option name="number" value="00463" />
-      <option name="presentableId" value="LOCAL-00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1776647741542</updated>
-    </task>
-    <task id="LOCAL-00464" summary="added the location of the rm incoming">
-      <option name="closed" value="true" />
-      <created>1776650480563</created>
-      <option name="number" value="00464" />
-      <option name="presentableId" value="LOCAL-00464" />
-      <option name="project" value="LOCAL" />
-      <updated>1776650480563</updated>
-    </task>
     <task id="LOCAL-00465" summary="updated the legacy database sync">
       <option name="closed" value="true" />
       <created>1776653258837</created>
@@ -591,7 +575,23 @@
       <option name="project" value="LOCAL" />
       <updated>1777001643749</updated>
     </task>
-    <option name="localTasksCounter" value="512" />
+    <task id="LOCAL-00512" summary="update the ip or hostname if the user workstation ip/hostname changed">
+      <option name="closed" value="true" />
+      <created>1777009865016</created>
+      <option name="number" value="00512" />
+      <option name="presentableId" value="LOCAL-00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1777009865016</updated>
+    </task>
+    <task id="LOCAL-00513" summary="add a  usermanagement connnection page">
+      <option name="closed" value="true" />
+      <created>1777011590040</created>
+      <option name="number" value="00513" />
+      <option name="presentableId" value="LOCAL-00513" />
+      <option name="project" value="LOCAL" />
+      <updated>1777011590040</updated>
+    </task>
+    <option name="localTasksCounter" value="514" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,8 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add a checking from the database if the prod id exists before cancel" />
-    <MESSAGE value="addded the same in the  other pages" />
     <MESSAGE value="updated the printing speed" />
     <MESSAGE value="added a log in page" />
     <MESSAGE value="modified the styling" />
@@ -643,7 +641,9 @@
     <MESSAGE value="remove the audit trail for those with viewing restriction" />
     <MESSAGE value="modified the hostname in username login input to make it not editable" />
     <MESSAGE value="updated the query in audit trail to get also the hostname and username" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the query in audit trail to get also the hostname and username" />
+    <MESSAGE value="update the ip or hostname if the user workstation ip/hostname changed" />
+    <MESSAGE value="add a  usermanagement connnection page" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a  usermanagement connnection page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -125,9 +125,9 @@ class LoginWindow(QDialog):
                 db_ip = existing_data[1]  # ip_address from DB
 
                 # Compare with current workstation data
-                if db_host != self.workstation['h'] or db_ip != self.workstation['ip']:
+                if db_host != self.workstation['h'] or db_ip != self.workstation['i']:
                     print("Workstation details changed. Updating record...")
-                    update_user_workstation(current_mac, self.workstation['h'], self.workstation['ip'])
+                    update_user_workstation(current_mac, self.workstation['h'], self.workstation['i'])
 
     def handle_text_changed(self, text):
         """Prevents the user from deleting the hostname prefix."""

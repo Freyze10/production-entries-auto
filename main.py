@@ -16,6 +16,7 @@ from menu.login import LoginWindow
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
 from menu.production_records import ProductionRecords
+from menu.user_management import UserManagement
 from util.absolute_path import resource_path
 from workstation.workstation_details import _get_workstation_info
 from db.schema import create_table
@@ -69,6 +70,7 @@ class MainWindow(QMainWindow):
         self.production_auto_entry = None
         self.production_auto_entry_dc = None
         self.audit_trail = None
+        self.user_management = None
 
         self.init_ui()
         self.log_audit_trail()
@@ -156,6 +158,7 @@ class MainWindow(QMainWindow):
         self.btn_auto_entry_dc = self.create_menu_button(" Auto Entry - DC", "mdi.application-cog", 3)
 
         self.btn_audit_trail = self.create_menu_button("  Audit Trail", 'fa5s.history', 4)
+        self.btn_user_mamagement = self.create_menu_button("  User Management", 'ri.user-settings-fill', 5)
 
         self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color=AppStyles.RED_500))
         self.btn_logout.setStyleSheet(f"""QPushButton {{ color: {AppStyles.RED_500};}}""")
@@ -206,6 +209,10 @@ class MainWindow(QMainWindow):
             elif index == 4:
                 self.audit_trail = AuditTrail()
                 new_widget = self.audit_trail
+
+            elif index == 5:
+                self.user_management = UserManagement()
+                new_widget = self.user_management
 
             # Replace the placeholder with the actual loaded page
             self.stacked_widget.removeWidget(current_widget)

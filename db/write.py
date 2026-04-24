@@ -41,6 +41,43 @@ def update_user_workstation(mac, new_host, new_ip):
         conn.close()
 
 
+def save_user_changes(user_id, data):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        query = """
+            UPDATE tbl_user 
+            SET 
+                username = %s, 
+                hostname = %s, 
+                password = %s, 
+                ip_address = %s, 
+                mac_address = %s, 
+                role_id = %s
+            WHERE user_id = %s;
+        """
+
+        cursor.execute(query, (
+            data['username'],
+            data['hostname'],
+            data['password'],
+            data['ip'],
+            data['mac'],
+            data['role_id'],
+            user_id
+        ))
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return True
+
+    except Exception as e:
+        print(f"Error in save_user_changes: {e}")
+        return False
+
+
 def log_audit_trail(mac_address: str, action_type: str, details: str):
     conn = get_connection()
     cur = conn.cursor()
