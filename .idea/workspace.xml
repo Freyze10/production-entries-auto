@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00473" summary="added the logic for 20kg in the tumbler">
-      <option name="closed" value="true" />
-      <created>1776668853695</created>
-      <option name="number" value="00473" />
-      <option name="presentableId" value="LOCAL-00473" />
-      <option name="project" value="LOCAL" />
-      <updated>1776668853695</updated>
-    </task>
     <task id="LOCAL-00474" summary="added the logic for 20kg in the tumbler">
       <option name="closed" value="true" />
       <created>1776668921464</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777087112501</updated>
     </task>
-    <option name="localTasksCounter" value="522" />
+    <task id="LOCAL-00522" summary="updated the database and the design for the permitssion tab">
+      <option name="closed" value="true" />
+      <created>1777087325023</created>
+      <option name="number" value="00522" />
+      <option name="presentableId" value="LOCAL-00522" />
+      <option name="project" value="LOCAL" />
+      <updated>1777087325023</updated>
+    </task>
+    <option name="localTasksCounter" value="523" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="passed the user name and user role to manual page to try disabling based on user role" />
     <MESSAGE value="disable all the button if the access is viewer" />
     <MESSAGE value="enabled the preview pint but disabled the actual print button for VIEWERS" />
     <MESSAGE value="connected the actual print from the other page to that reusable design" />
@@ -643,7 +642,8 @@
     <MESSAGE value="hide the audit trail to editor, onlyt visible to the IT" />
     <MESSAGE value="log in the audit trail who updated the user detailss" />
     <MESSAGE value="addded a tab selection to view the role access" />
-    <option name="LAST_COMMIT_MESSAGE" value="addded a tab selection to view the role access" />
+    <MESSAGE value="updated the database and the design for the permitssion tab" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the database and the design for the permitssion tab" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -438,13 +438,13 @@ def authenticate_user(username, password, mac_address):
 
 def get_all_roles():
     # SELECT role_id, role_name FROM tbl_role ORDER BY role_id
-    pass
+    return []
 
 def get_access_points():
     # SELECT access_id, access_name FROM tbl_access_points ORDER BY access_id
-    pass
+    return []
 
 def get_permission_matrix():
     # SELECT role_id, access_id, is_enabled FROM tbl_role_permissions
     # Convert to a dictionary: {(role_id, access_id): is_enabled}
-    pass
+    return []
