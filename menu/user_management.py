@@ -1,7 +1,8 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QFrame, QLabel,
                              QPushButton, QLineEdit, QComboBox, QTableView,
-                             QHeaderView, QGroupBox, QGridLayout, QMessageBox, QAbstractItemView)
-from PyQt6.QtCore import Qt, pyqtSignal
+                             QHeaderView, QGroupBox, QGridLayout, QMessageBox,
+                             QAbstractItemView, QTabWidget, QTableWidget, QTableWidgetItem, QCheckBox)
+from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 
@@ -12,193 +13,220 @@ from db.write import save_user_changes, log_audit_trail
 from workstation.workstation_details import _get_workstation_info
 
 
-class UserManagement(QWidget):
+class PermissionsManager(QWidget):
     def __init__(self):
         super().__init__()
-        self.users_raw_data = []
-        self.selected_user_id = None
         self.work_station = _get_workstation_info()
         self.setup_ui()
-        self.refresh_data()
 
     def setup_ui(self):
-        main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(20, 20, 20, 20)
-        main_layout.setSpacing(15)
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.setContentsMargins(10, 10, 10, 10)
 
-        # === Header Card ===
-        header_card = QFrame(objectName="HeaderCard")
-        header_layout = QHBoxLayout(header_card)
+        # Tab Widget
+        self.tabs = QTabWidget()
+        self.tabs.setObjectName("MainTabWidget")
 
-        title_container = QVBoxLayout()
-        title_label = QLabel("User Management", objectName="table_label")
-        title_label.setFont(QFont("Segoe UI", 16, QFont.Weight.Bold))
-        subtitle_label = QLabel("Configure system access, roles, and workstation mapping", objectName="light_label")
-        title_container.addWidget(title_label)
-        title_container.addWidget(subtitle_label)
+        # Initialize Tabs
+        self.user_tab = QWidget()
+        self.role_tab = QWidget()
 
-        header_layout.addLayout(title_container)
-        header_layout.addStretch()
+        self.setup_user_management_tab()
+        self.setup_role_management_tab()
 
-        self.btn_refresh = QPushButton(" Refresh List", objectName="SecondaryButton")
-        self.btn_refresh.setIcon(fa.icon('fa5s.sync-alt', color='white'))
-        self.btn_refresh.clicked.connect(self.refresh_data)
-        header_layout.addWidget(self.btn_refresh)
+        self.tabs.addTab(self.user_tab, fa.icon('fa5s.users', color=AppStyles.TEAL_500), " User Management")
+        self.tabs.addTab(self.role_tab, fa.icon('fa5s.user-shield', color=AppStyles.TEAL_500), " Role & Access")
 
-        main_layout.addWidget(header_card)
+        self.main_layout.addWidget(self.tabs)
 
-        # === Content Splitter (Table Left, Form Right) ===
+    # =========================================================================
+    # TAB 1: USER MANAGEMENT
+    # =========================================================================
+    def setup_user_management_tab(self):
+        layout = QVBoxLayout(self.user_tab)
+
+        # Reuse your existing logic here...
         content_layout = QHBoxLayout()
-        content_layout.setSpacing(15)
 
-        # --- LEFT: User List Table ---
+        # --- Left: Table ---
         table_container = QFrame(objectName="ContentCard")
-        table_v_layout = QVBoxLayout(table_container)
+        table_v = QVBoxLayout(table_container)
 
         search_layout = QHBoxLayout()
-        self.search_input = QLineEdit(placeholderText="Search username or hostname...")
-        self.search_input.textChanged.connect(self.filter_table)
-        search_icon_label = QLabel()
-        search_icon_label.setPixmap(fa.icon('fa5s.search', color=AppStyles.SLATE_400).pixmap(16, 16))
-        search_layout.addWidget(search_icon_label)
-        search_layout.addWidget(self.search_input)
-        table_v_layout.addLayout(search_layout)
+        self.user_search = QLineEdit(placeholderText="Search users...")
+        search_icon = QLabel()
+        search_icon.setPixmap(fa.icon('fa5s.search', color=AppStyles.SLATE_400).pixmap(16, 16))
+        search_layout.addWidget(search_icon)
+        search_layout.addWidget(self.user_search)
+        table_v.addLayout(search_layout)
 
         self.user_table = QTableView()
-        self.headers = ["ID", "Hostname", "Username", "IP Address", "MAC", "Role", "Department"]
-        self.table_model = TableModel([], self.headers)
-        self.user_table.setModel(self.table_model)
+        self.user_headers = ["ID", "Hostname", "Username", "IP", "MAC", "Role", "Dept"]
+        self.user_model = TableModel([], self.user_headers)
+        self.user_table.setModel(self.user_model)
+        self.user_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.user_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.user_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.user_table.clicked.connect(self.load_user_to_form)
 
-        # Table Styling
-        header = self.user_table.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        self.user_table.setColumnHidden(0, True)  # Hide User ID
-        self.user_table.verticalHeader().setVisible(False)
-
-        table_v_layout.addWidget(self.user_table)
+        table_v.addWidget(self.user_table)
         content_layout.addWidget(table_container, stretch=2)
 
-        # --- RIGHT: Editor Form ---
+        # --- Right: Form ---
         form_container = QFrame(objectName="ContentCard")
-        form_container.setFixedWidth(400)
-        form_v_layout = QVBoxLayout(form_container)
+        form_container.setFixedWidth(350)
+        form_v = QVBoxLayout(form_container)
 
-        self.form_group = QGroupBox("User Details Editor")
-        grid = QGridLayout(self.form_group)
-        grid.setSpacing(10)
-        grid.setContentsMargins(10, 20, 10, 10)
-
-        # Form Fields
-        self.edit_username = QLineEdit()
-        self.edit_password = QLineEdit()
-
-        self.edit_hostname = QLineEdit()
-        self.edit_ip = QLineEdit()
-        self.edit_mac = QLineEdit()
-
-        self.role_combo = QComboBox()
-        self.role_combo.addItems(["Admin", "Editor", "Viewer"])
-        # Note: Map Admin=1, Editor=2, Viewer=3 based on your DB
+        grid = QGridLayout()
+        self.edit_user = QLineEdit()
+        self.edit_pass = QLineEdit(echoMode=QLineEdit.EchoMode.Password)
+        self.edit_host = QLineEdit()
+        self.edit_role_combo = QComboBox()  # Populate this from DB roles
 
         grid.addWidget(QLabel("Username:"), 0, 0)
-        grid.addWidget(self.edit_username, 0, 1)
+        grid.addWidget(self.edit_user, 0, 1)
         grid.addWidget(QLabel("Password:"), 1, 0)
-        grid.addWidget(self.edit_password, 1, 1)
-        grid.addWidget(QLabel("Hostname:"), 2, 0)
-        grid.addWidget(self.edit_hostname, 2, 1)
-        grid.addWidget(QLabel("IP Address:"), 3, 0)
-        grid.addWidget(self.edit_ip, 3, 1)
-        grid.addWidget(QLabel("MAC Address:"), 4, 0)
-        grid.addWidget(self.edit_mac, 4, 1)
-        grid.addWidget(QLabel("System Role:"), 5, 0)
-        grid.addWidget(self.role_combo, 5, 1)
+        grid.addWidget(self.edit_pass, 1, 1)
+        grid.addWidget(QLabel("Role:"), 2, 0)
+        grid.addWidget(self.edit_role_combo, 2, 1)
 
-        form_v_layout.addWidget(self.form_group)
+        form_v.addLayout(grid)
 
-        # Form Buttons
-        btn_layout = QHBoxLayout()
-        self.btn_clear = QPushButton(" Clear", objectName="TertiaryButton")
-        self.btn_clear.clicked.connect(self.clear_form)
-
-        self.btn_save = QPushButton(" Save Changes", objectName="PrimaryButton")
-        self.btn_save.setIcon(fa.icon('fa5s.save', color='white'))
-        self.btn_save.clicked.connect(self.save_data)
-
-        btn_layout.addWidget(self.btn_clear)
-        btn_layout.addWidget(self.btn_save)
-        form_v_layout.addLayout(btn_layout)
-        form_v_layout.addStretch()
+        self.btn_save_user = QPushButton(" Save User", objectName="PrimaryButton")
+        self.btn_save_user.clicked.connect(self.save_user_data)
+        form_v.addWidget(self.btn_save_user)
+        form_v.addStretch()
 
         content_layout.addWidget(form_container)
-        main_layout.addLayout(content_layout)
+        layout.addLayout(content_layout)
 
-    def refresh_data(self):
-        # Fetch from DB: returns [(id, user, host, ip, mac, role_name, pass, role_id), ...]
-        self.users_raw_data = get_user_management_list()
+        self.refresh_user_list()
 
-        # Prepare table display (strip out password and role_id for the view)
-        display_rows = [row[:7] for row in self.users_raw_data]
-        self.table_model.set_data(display_rows)
-        self.clear_form()
+    # =========================================================================
+    # TAB 2: ROLE & ACCESS MANAGEMENT
+    # =========================================================================
+    def setup_role_management_tab(self):
+        layout = QVBoxLayout(self.role_tab)
+        layout.setSpacing(15)
 
-    def filter_table(self):
-        text = self.search_input.text().lower()
-        self.table_model.filter_data(text)
+        # --- Top Section: Add New Role ---
+        add_role_group = QGroupBox("Add New System Role")
+        add_role_layout = QHBoxLayout(add_role_group)
+
+        self.new_role_name = QLineEdit(placeholderText="e.g., Quality Control")
+        self.new_role_dept = QLineEdit(placeholderText="e.g., Production")
+        btn_add_role = QPushButton(" Create Role", objectName="SuccessButton")
+        btn_add_role.setIcon(fa.icon('fa5s.plus', color='white'))
+        btn_add_role.clicked.connect(self.add_new_role)
+
+        add_role_layout.addWidget(QLabel("Role Name:"))
+        add_role_layout.addWidget(self.new_role_name)
+        add_role_layout.addWidget(QLabel("Department:"))
+        add_role_layout.addWidget(self.new_role_dept)
+        add_role_layout.addWidget(btn_add_role)
+
+        layout.addWidget(add_role_group)
+
+        # --- Middle Section: Permission Matrix ---
+        matrix_container = QFrame(objectName="ContentCard")
+        matrix_v = QVBoxLayout(matrix_container)
+
+        matrix_label = QLabel("Permission Access Matrix", objectName="table_label")
+        matrix_label.setFont(QFont("Segoe UI", 12, QFont.Weight.Bold))
+        matrix_v.addWidget(matrix_label)
+
+        self.perm_table = QTableWidget()
+        self.perm_table.setAlternatingRowColors(True)
+        matrix_v.addWidget(self.perm_table)
+
+        # Bottom Save
+        self.btn_save_perms = QPushButton(" Save All Permission Changes", objectName="PrimaryButton")
+        self.btn_save_perms.setIcon(fa.icon('fa5s.shield-alt', color='white'))
+        self.btn_save_perms.clicked.connect(self.save_permissions)
+        matrix_v.addWidget(self.btn_save_perms, alignment=Qt.AlignmentFlag.AlignRight)
+
+        layout.addWidget(matrix_container)
+        self.refresh_permission_matrix()
+
+    def refresh_permission_matrix(self):
+        """Loads the roles as columns and access items as rows."""
+        try:
+            # roles = get_roles_list()  # [(id, name, dept), ...]
+            # access_items = get_all_access_permissions()  # [(id, name), ...]
+            roles = [1, "admin", "prod", ]  # [(id, name, dept), ...]
+            access_items = []  # [(id, name), ...]
+
+            self.perm_table.setColumnCount(len(roles) + 1)
+            self.perm_table.setRowCount(len(access_items))
+
+            headers = ["Access Description"] + [r[1] for r in roles]
+            self.perm_table.setHorizontalHeaderLabels(headers)
+            self.perm_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+            self.perm_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+
+            for row_idx, access in enumerate(access_items):
+                # Col 0: Access Name
+                self.perm_table.setItem(row_idx, 0, QTableWidgetItem(access[1]))
+
+                for col_idx, role in enumerate(roles):
+                    # Checkbox for permission
+                    container = QWidget()
+                    check_layout = QHBoxLayout(container)
+                    check = QCheckBox()
+                    check.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+                    # Logic: query if role has access
+                    # is_enabled = check_role_access(role[0], access[0])
+                    # check.setChecked(is_enabled)
+
+                    # Store ID data in properties
+                    check.setProperty("role_id", role[0])
+                    check.setProperty("access_id", access[0])
+
+                    check_layout.addWidget(check)
+                    check_layout.setContentsMargins(0, 0, 0, 0)
+                    self.perm_table.setCellWidget(row_idx, col_idx + 1, container)
+
+        except Exception as e:
+            print(f"Matrix Error: {e}")
+
+    def add_new_role(self):
+        name = self.new_role_name.text().strip()
+        dept = self.new_role_dept.text().strip()
+
+        if not name: return
+
+        # if create_new_role(name, dept):
+        #     QMessageBox.information(self, "Success", f"Role '{name}' created.")
+        #     self.new_role_name.clear()
+        #     self.new_role_dept.clear()
+        #     self.refresh_permission_matrix()
+        #     self.refresh_user_list()  # Update combo boxes
+
+    def save_permissions(self):
+        """Collects all checkbox states and saves to DB."""
+        changes = []
+        for row in range(self.perm_table.rowCount()):
+            for col in range(1, self.perm_table.columnCount()):
+                container = self.perm_table.cellWidget(row, col)
+                checkbox = container.findChild(QCheckBox)
+
+                changes.append({
+                    "role_id": checkbox.property("role_id"),
+                    "access_id": checkbox.property("access_id"),
+                    "state": checkbox.isChecked()
+                })
+
+        # if save_role_permissions(changes):
+        #     QMessageBox.information(self, "Saved", "System permissions updated successfully.")
+        #     log_audit_trail(self.work_station['m'], "SECURITY", "Updated Role Access Matrix")
+
+    # --- Utility methods for User Tab (stubs for context) ---
+    def refresh_user_list(self):
+        # Fetch users and roles for combo box
+        pass
 
     def load_user_to_form(self, index):
-        # Find the full row data from the raw data using ID
-        row_idx = index.row()
-        user_id = self.table_model.data(self.table_model.index(row_idx, 0))
+        pass
 
-        user_data = next((u for u in self.users_raw_data if u[0] == user_id), None)
-
-        if user_data:
-            self.selected_user_id = user_data[0]
-            self.edit_username.setText(user_data[2])
-            self.edit_hostname.setText(user_data[1])
-            self.edit_ip.setText(user_data[3])
-            self.edit_mac.setText(user_data[4])
-            self.edit_password.setText(user_data[7])
-
-            # Set combo box based on role_id (1=Admin, 2=Editor, 3=Viewer)
-            self.role_combo.setCurrentIndex(user_data[8] - 1)
-
-    def clear_form(self):
-        self.selected_user_id = None
-        self.edit_username.clear()
-        self.edit_password.clear()
-        self.edit_hostname.clear()
-        self.edit_ip.clear()
-        self.edit_mac.clear()
-        self.role_combo.setCurrentIndex(2)  # Default to Viewer
-
-    def save_data(self):
-        if not self.selected_user_id:
-            QMessageBox.warning(self, "Selection Required", "Please select a user from the list first.")
-            return
-
-        data = {
-            "username": self.edit_username.text().strip(),
-            "hostname": self.edit_hostname.text().strip(),
-            "password": self.edit_password.text().strip(),
-            "ip": self.edit_ip.text().strip(),
-            "mac": self.edit_mac.text().strip(),
-            "role_id": self.role_combo.currentIndex() + 1
-        }
-
-        # Validation
-        if not data["username"] or not data["password"]:
-            QMessageBox.critical(self, "Invalid Data", "Username and Password cannot be empty.")
-            return
-
-        success = save_user_changes(self.selected_user_id, data)
-        if success:
-            QMessageBox.information(self, "Success", "User details updated successfully.")
-
-            audit_details = f"Hostname: {data["hostname"]}\\{data["username"]} has been successfully Updated"
-            log_audit_trail(self.work_station['m'], "UPDATE", audit_details)
-
-            self.refresh_data()
+    def save_user_data(self):
+        pass

@@ -16,7 +16,7 @@ from menu.login import LoginWindow
 from menu.mb_auto_entry import MBAutoEntry
 from menu.mb_manual_entry import MBManualEntry
 from menu.production_records import ProductionRecords
-from menu.user_management import UserManagement
+from menu.user_management import PermissionsManager
 from util.absolute_path import resource_path
 from workstation.workstation_details import _get_workstation_info
 from db.schema import create_table
@@ -215,7 +215,7 @@ class MainWindow(QMainWindow):
 
             elif index == 5:
                 try:
-                    self.user_management = UserManagement()
+                    self.user_management = PermissionsManager()
                     new_widget = self.user_management
                 except Exception as e:
                     print(e)
