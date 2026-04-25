@@ -144,7 +144,7 @@ class PermissionsManager(QWidget):
 
         btn_footer = QHBoxLayout()
         btn_footer.addStretch()
-        btn_refresh_matrix = QPushButton(" Reload Matrix", objectName="SecondaryButton")
+        btn_refresh_matrix = QPushButton(" Reload Matrix", objectName="InfoButton")
         btn_refresh_matrix.clicked.connect(self.refresh_matrix)
         btn_save_matrix = QPushButton(" Save Permissions", objectName="PrimaryButton")
         btn_save_matrix.clicked.connect(self.save_permissions)
