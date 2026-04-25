@@ -71,13 +71,6 @@ class LoginWindow(QDialog):
             return frame, edit
 
         user_frame, self.username_input = create_input_field("Username", "fa5s.user")
-        self.hostname_prefix = self.workstation['h'].upper() + "\\"
-        self.username_input.setText(self.hostname_prefix)
-
-        # Connect signals to protect the prefix
-        self.username_input.textChanged.connect(self.handle_text_changed)
-        self.username_input.cursorPositionChanged.connect(self.handle_cursor_move)
-
         pass_frame, self.password_input = create_input_field("Password", "fa5s.lock", True)
         self.password_input.returnPressed.connect(self.handle_login)
 
@@ -128,21 +121,6 @@ class LoginWindow(QDialog):
                 if db_host != self.workstation['h'] or db_ip != self.workstation['i']:
                     print("Workstation details changed. Updating record...")
                     update_user_workstation(current_mac, self.workstation['h'], self.workstation['i'])
-
-    def handle_text_changed(self, text):
-        """Prevents the user from deleting the hostname prefix."""
-        if not text.startswith(self.hostname_prefix):
-            # Block signals to prevent infinite loop when resetting text
-            self.username_input.blockSignals(True)
-            # This handles cases where they highlight all and press backspace
-            self.username_input.setText(self.hostname_prefix)
-            self.username_input.blockSignals(False)
-
-    def handle_cursor_move(self, old_pos, new_pos):
-        """Prevents the cursor from entering the hostname area."""
-        prefix_len = len(self.hostname_prefix)
-        if new_pos < prefix_len:
-            self.username_input.setCursorPosition(prefix_len)
 
     def handle_login(self):
         raw_input = self.username_input.text().strip()

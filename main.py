@@ -191,6 +191,7 @@ class MainWindow(QMainWindow):
             layout.addWidget(QLabel("System", objectName="MenuLabel"))
             if show_audit:
                 layout.addWidget(self.btn_audit_trail)
+                # display only the  usermanagement page if the mac  address is enabled for when the admin log in
             if show_perms and self.is_mac_enabled:
                 layout.addWidget(self.btn_user_mamagement)
 
