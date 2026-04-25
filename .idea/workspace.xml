@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00476" summary="return early of theres no to sync data">
-      <option name="closed" value="true" />
-      <created>1776669703493</created>
-      <option name="number" value="00476" />
-      <option name="presentableId" value="LOCAL-00476" />
-      <option name="project" value="LOCAL" />
-      <updated>1776669703493</updated>
-    </task>
     <task id="LOCAL-00477" summary="updated">
       <option name="closed" value="true" />
       <created>1776732141664</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777088639860</updated>
     </task>
-    <option name="localTasksCounter" value="525" />
+    <task id="LOCAL-00525" summary="uppdated the fetching of all data">
+      <option name="closed" value="true" />
+      <created>1777089378463</created>
+      <option name="number" value="00525" />
+      <option name="presentableId" value="LOCAL-00525" />
+      <option name="project" value="LOCAL" />
+      <updated>1777089378463</updated>
+    </task>
+    <option name="localTasksCounter" value="526" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connected the actual print from the other page to that reusable design" />
     <MESSAGE value="added the disabled restriction in the other pages" />
     <MESSAGE value="added the passing of user role from the auto entries to disable the actual print too" />
     <MESSAGE value="updated the fetching of prod date in the manual entry print" />
@@ -643,7 +642,8 @@
     <MESSAGE value="updated the database and the design for the permitssion tab" />
     <MESSAGE value="changed the text for the right navigator for permission access" />
     <MESSAGE value="updated the fetching od user roles" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the fetching od user roles" />
+    <MESSAGE value="uppdated the fetching of all data" />
+    <option name="LAST_COMMIT_MESSAGE" value="uppdated the fetching of all data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
