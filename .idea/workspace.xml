@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00481" summary="changed the dropdown for the form type into uppercased letter to match the one in the database">
-      <option name="closed" value="true" />
-      <created>1776836381820</created>
-      <option name="number" value="00481" />
-      <option name="presentableId" value="LOCAL-00481" />
-      <option name="project" value="LOCAL" />
-      <updated>1776836381820</updated>
-    </task>
     <task id="LOCAL-00482" summary="added a find current index of the form type value where it will find the same text from the database">
       <option name="closed" value="true" />
       <created>1776836452704</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777094834717</updated>
     </task>
-    <option name="localTasksCounter" value="530" />
+    <task id="LOCAL-00530" summary="added the disabling/removing the specific page based on the edited user access">
+      <option name="closed" value="true" />
+      <created>1777094995099</created>
+      <option name="number" value="00530" />
+      <option name="presentableId" value="LOCAL-00530" />
+      <option name="project" value="LOCAL" />
+      <updated>1777094995099</updated>
+    </task>
+    <option name="localTasksCounter" value="531" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a trigger function on the user table when the  role changes to admin or editor. we'll get the mac and add to the mac editor table" />
     <MESSAGE value="created a  query to checkk if the mac address is existing in the enabled mac table" />
     <MESSAGE value="added a window title based on the pc status, eg. for viewing only" />
     <MESSAGE value="apply the viewer restriction whenver the pc is not present in the rnablrd mac table" />
@@ -643,7 +642,8 @@
     <MESSAGE value="changed the width of the column  in the table for managemanent" />
     <MESSAGE value="updated the design of the table" />
     <MESSAGE value="add a databse wuery to get only allowed access points based on user Role" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a databse wuery to get only allowed access points based on user Role" />
+    <MESSAGE value="added the disabling/removing the specific page based on the edited user access" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the disabling/removing the specific page based on the edited user access" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

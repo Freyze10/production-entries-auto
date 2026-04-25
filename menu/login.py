@@ -156,7 +156,7 @@ class LoginWindow(QDialog):
             return
 
         # Perform authentication
-        success, role = authenticate_user(actual_username, pw, self.workstation['m'])
+        success, role = authenticate_user(actual_username, pw)
 
         if success:
             self.login_success.emit(actual_username, role)

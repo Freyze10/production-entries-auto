@@ -191,7 +191,7 @@ class MainWindow(QMainWindow):
             layout.addWidget(QLabel("System", objectName="MenuLabel"))
             if show_audit:
                 layout.addWidget(self.btn_audit_trail)
-            if show_perms:
+            if show_perms and self.is_mac_enabled:
                 layout.addWidget(self.btn_user_mamagement)
 
         layout.addStretch(1)
@@ -265,7 +265,6 @@ class MainWindow(QMainWindow):
         msg = QMessageBox.question(self, "Logout", "Are you sure you want to logout?",
                                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         if msg == QMessageBox.StandardButton.Yes:
-            log_audit_trail(self.workstation_info['m'], "LOGOUT", "User logged out")
             self.logout_requested.emit()  # Notify controller to show login again
 
 
