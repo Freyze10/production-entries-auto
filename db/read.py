@@ -478,3 +478,25 @@ def get_permission_matrix():
     except Exception as e:
         print(f"Error get_permission_matrix: {e}")
         return {}
+
+
+def get_allowed_access_points(role_name):
+    """Returns a list of access_names that are enabled for this role."""
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        query = """
+            SELECT a.access_name
+            FROM tbl_role_permissions p
+            JOIN tbl_role r ON p.role_id = r.role_id
+            JOIN tbl_access_points a ON p.access_id = a.access_id
+            WHERE r.role = %s AND p.is_enabled = TRUE
+        """
+        cur.execute(query, (role_name,))
+        allowed = [row[0] for row in cur.fetchall()]
+        cur.close()
+        conn.close()
+        return allowed
+    except Exception as e:
+        print(f"Error fetching permissions: {e}")
+        return []

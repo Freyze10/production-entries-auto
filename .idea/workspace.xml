@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00479" summary="added an elipsis in the customer field in printing output to not generate a new line">
-      <option name="closed" value="true" />
-      <created>1776733601335</created>
-      <option name="number" value="00479" />
-      <option name="presentableId" value="LOCAL-00479" />
-      <option name="project" value="LOCAL" />
-      <updated>1776733601335</updated>
-    </task>
     <task id="LOCAL-00480" summary="changed the generate  computation to not split the firstt and lastt row">
       <option name="closed" value="true" />
       <created>1776734777833</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777093933846</updated>
     </task>
-    <option name="localTasksCounter" value="528" />
+    <task id="LOCAL-00528" summary="updated the design of the table">
+      <option name="closed" value="true" />
+      <created>1777094188298</created>
+      <option name="number" value="00528" />
+      <option name="presentableId" value="LOCAL-00528" />
+      <option name="project" value="LOCAL" />
+      <updated>1777094188298</updated>
+    </task>
+    <option name="localTasksCounter" value="529" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the fetching of prod date in the manual entry print" />
     <MESSAGE value="create a table for editing mac addresses only" />
     <MESSAGE value="added a trigger function on the user table when the  role changes to admin or editor. we'll get the mac and add to the mac editor table" />
     <MESSAGE value="created a  query to checkk if the mac address is existing in the enabled mac table" />
@@ -643,7 +642,8 @@
     <MESSAGE value="uppdated the fetching of all data" />
     <MESSAGE value="updated the save function as well as the table headers" />
     <MESSAGE value="changed the width of the column  in the table for managemanent" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the width of the column  in the table for managemanent" />
+    <MESSAGE value="updated the design of the table" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the design of the table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
