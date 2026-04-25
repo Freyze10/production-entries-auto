@@ -76,25 +76,28 @@ class PermissionsManager(QWidget):
         form_container = QFrame(objectName="ContentCard")
         form_container.setFixedWidth(350)
         form_v = QVBoxLayout(form_container)
-        self.edit_username = QLineEdit();
+        self.edit_username = QLineEdit()
         self.edit_password = QLineEdit()
-        self.edit_hostname = QLineEdit();
-        self.edit_ip = QLineEdit();
+        self.edit_hostname = QLineEdit()
+        self.edit_ip = QLineEdit()
         self.edit_mac = QLineEdit()
+        self.edit_hostname.setReadOnly(True)
+        self.edit_ip.setReadOnly(True)
+        self.edit_mac.setReadOnly(True)
         self.role_combo = QComboBox()
 
         grid = QGridLayout()
-        grid.addWidget(QLabel("Username:"), 0, 0);
+        grid.addWidget(QLabel("Username:"), 0, 0)
         grid.addWidget(self.edit_username, 0, 1)
-        grid.addWidget(QLabel("Password:"), 1, 0);
+        grid.addWidget(QLabel("Password:"), 1, 0)
         grid.addWidget(self.edit_password, 1, 1)
-        grid.addWidget(QLabel("Hostname:"), 2, 0);
+        grid.addWidget(QLabel("Hostname:"), 2, 0)
         grid.addWidget(self.edit_hostname, 2, 1)
-        grid.addWidget(QLabel("IP Address:"), 3, 0);
+        grid.addWidget(QLabel("IP Address:"), 3, 0)
         grid.addWidget(self.edit_ip, 3, 1)
-        grid.addWidget(QLabel("MAC Address:"), 4, 0);
+        grid.addWidget(QLabel("MAC Address:"), 4, 0)
         grid.addWidget(self.edit_mac, 4, 1)
-        grid.addWidget(QLabel("Role:"), 5, 0);
+        grid.addWidget(QLabel("Role:"), 5, 0)
         grid.addWidget(self.role_combo, 5, 1)
         form_v.addLayout(grid)
 
@@ -120,9 +123,9 @@ class PermissionsManager(QWidget):
         self.new_dept_input = QLineEdit(placeholderText="Department")
         btn_add_role = QPushButton(" Add Role", objectName="SuccessButton")
         btn_add_role.clicked.connect(self.handle_add_role)
-        add_role_layout.addWidget(QLabel("Name:"));
+        add_role_layout.addWidget(QLabel("Name:"))
         add_role_layout.addWidget(self.new_role_input)
-        add_role_layout.addWidget(QLabel("Dept:"));
+        add_role_layout.addWidget(QLabel("Dept:"))
         add_role_layout.addWidget(self.new_dept_input)
         add_role_layout.addWidget(btn_add_role)
         layout.addWidget(add_role_group)
@@ -148,9 +151,9 @@ class PermissionsManager(QWidget):
         btn_refresh_matrix.clicked.connect(self.refresh_matrix)
         btn_save_matrix = QPushButton(" Save Permissions", objectName="PrimaryButton")
         btn_save_matrix.clicked.connect(self.save_permissions)
-        btn_footer.addWidget(btn_refresh_matrix);
+        btn_footer.addWidget(btn_refresh_matrix)
         btn_footer.addWidget(btn_save_matrix)
-        layout.addWidget(matrix_group);
+        layout.addWidget(matrix_group)
         layout.addLayout(btn_footer)
 
         self.refresh_matrix()
@@ -209,9 +212,9 @@ class PermissionsManager(QWidget):
         name, dept = self.new_role_input.text().strip(), self.new_dept_input.text().strip()
         if name and dept and add_new_role(name, dept):
             QMessageBox.information(self, "Success", f"Role '{name}' created.")
-            self.new_role_input.clear();
+            self.new_role_input.clear()
             self.new_dept_input.clear()
-            self.refresh_matrix();
+            self.refresh_matrix()
             self.refresh_data()
 
     def refresh_data(self):
@@ -230,9 +233,9 @@ class PermissionsManager(QWidget):
         user_data = next((u for u in self.users_raw_data if u[0] == user_id), None)
         if user_data:
             self.selected_user_id = user_data[0]
-            self.edit_username.setText(user_data[2]);
+            self.edit_username.setText(user_data[2])
             self.edit_hostname.setText(user_data[1])
-            self.edit_ip.setText(user_data[3]);
+            self.edit_ip.setText(user_data[3])
             self.edit_mac.setText(user_data[4])
             self.edit_password.setText(user_data[7])
             self.role_combo.setCurrentText(user_data[5])

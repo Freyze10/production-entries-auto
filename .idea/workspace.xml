@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00487" summary="updated the printing speed">
-      <option name="closed" value="true" />
-      <created>1776912501530</created>
-      <option name="number" value="00487" />
-      <option name="presentableId" value="LOCAL-00487" />
-      <option name="project" value="LOCAL" />
-      <updated>1776912501531</updated>
-    </task>
     <task id="LOCAL-00488" summary="added a log in page">
       <option name="closed" value="true" />
       <created>1776913309827</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777097677777</updated>
     </task>
-    <option name="localTasksCounter" value="536" />
+    <task id="LOCAL-00536" summary="changed the color of the reload button">
+      <option name="closed" value="true" />
+      <created>1777098195674</created>
+      <option name="number" value="00536" />
+      <option name="presentableId" value="LOCAL-00536" />
+      <option name="project" value="LOCAL" />
+      <updated>1777098195674</updated>
+    </task>
+    <option name="localTasksCounter" value="537" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the query in audit trail to get also the hostname and username" />
     <MESSAGE value="update the ip or hostname if the user workstation ip/hostname changed" />
     <MESSAGE value="add a  usermanagement connnection page" />
     <MESSAGE value="created a usermanagement page for admin" />
@@ -643,7 +642,8 @@
     <MESSAGE value="fixed the prefix in the handle log in function" />
     <MESSAGE value="fixed the displaying of tthe  audit trail and user management to only display only on enabled mac" />
     <MESSAGE value="updated the trail  message when the admin Changed the user role matrix" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the trail  message when the admin Changed the user role matrix" />
+    <MESSAGE value="changed the color of the reload button" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the color of the reload button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
