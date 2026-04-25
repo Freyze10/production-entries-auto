@@ -81,10 +81,13 @@ class PermissionsManager(QWidget):
         self.edit_hostname = QLineEdit()
         self.edit_ip = QLineEdit()
         self.edit_mac = QLineEdit()
+        self.role_combo = QComboBox()
+
         self.edit_hostname.setReadOnly(True)
         self.edit_ip.setReadOnly(True)
         self.edit_mac.setReadOnly(True)
-        self.role_combo = QComboBox()
+        self.edit_username.returnPressed.connect(self.save_data)
+        self.edit_password.returnPressed.connect(self.save_data)
 
         grid = QGridLayout()
         grid.addWidget(QLabel("Username:"), 0, 0)
