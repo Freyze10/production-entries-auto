@@ -437,8 +437,19 @@ def authenticate_user(username, password, mac_address):
 
 
 def get_all_roles():
-    # SELECT role_id, role_name FROM tbl_role ORDER BY role_id
-    return []
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+                SELECT role_id, role
+                FROM tbl_role
+                ORDER BY role_id ASC
+            """)
+    records = cur.fetchall()
+
+    cur.close()
+    conn.close()
+    return records
 
 def get_access_points():
     # SELECT access_id, access_name FROM tbl_access_points ORDER BY access_id
