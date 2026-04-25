@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00484" summary="add a checking from the database if the prod id exists before cancel">
-      <option name="closed" value="true" />
-      <created>1776837573358</created>
-      <option name="number" value="00484" />
-      <option name="presentableId" value="LOCAL-00484" />
-      <option name="project" value="LOCAL" />
-      <updated>1776837573358</updated>
-    </task>
     <task id="LOCAL-00485" summary="addded the same in the  other pages">
       <option name="closed" value="true" />
       <created>1776837638271</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777096289237</updated>
     </task>
-    <option name="localTasksCounter" value="533" />
+    <task id="LOCAL-00533" summary="fixed the prefix in the handle log in function">
+      <option name="closed" value="true" />
+      <created>1777096772272</created>
+      <option name="number" value="00533" />
+      <option name="presentableId" value="LOCAL-00533" />
+      <option name="project" value="LOCAL" />
+      <updated>1777096772272</updated>
+    </task>
+    <option name="localTasksCounter" value="534" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="apply the viewer restriction whenver the pc is not present in the rnablrd mac table" />
     <MESSAGE value="remove the audit trail for those with viewing restriction" />
     <MESSAGE value="modified the hostname in username login input to make it not editable" />
     <MESSAGE value="updated the query in audit trail to get also the hostname and username" />
@@ -643,7 +642,8 @@
     <MESSAGE value="added the disabling/removing the specific page based on the edited user access" />
     <MESSAGE value="removed the audit trail  for when the user logged out" />
     <MESSAGE value="removed the user hostname in  the login page, unnecessary for the user to see" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the user hostname in  the login page, unnecessary for the user to see" />
+    <MESSAGE value="fixed the prefix in the handle log in function" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the prefix in the handle log in function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
