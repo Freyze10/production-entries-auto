@@ -237,6 +237,20 @@ def create_table():
         );
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_access_points (
+            access_id SERIAL PRIMARY KEY,
+            access_name VARCHAR(50) UNIQUE -- e.g., 'Manual Entry', 'Audit Trail'
+        );
+        
+        CREATE TABLE IF NOT EXISTS tbl_role_permissions (
+            role_id INT REFERENCES tbl_role(role_id),
+            access_id INT REFERENCES tbl_access_points(access_id),
+            is_enabled BOOLEAN DEFAULT FALSE,
+            PRIMARY KEY (role_id, access_id)
+        );
+    """)
+
     # Create the Trigger Function with Sync (Insert & Delete logic)
     cursor.execute("""
         CREATE OR REPLACE FUNCTION fn_sync_editor_list()

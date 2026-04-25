@@ -44,4 +44,10 @@ def refresh_materialized():
     conn.close()
 
 
+def update_role_permissions(permission_list):
+    # permission_list = [(role_id, access_id, state), ...]
+    # Use: INSERT INTO tbl_role_permissions (role_id, access_id, is_enabled)
+    # VALUES (%s, %s, %s)
+    # ON CONFLICT (role_id, access_id) DO UPDATE SET is_enabled = EXCLUDED.is_enabled
+    pass
 

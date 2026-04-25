@@ -116,3 +116,7 @@ def log_audit_trail(mac_address: str, action_type: str, details: str):
     finally:
         cur.close()
         conn.close()
+
+def add_new_role(name, dept):
+    # INSERT INTO tbl_role (role_name, department) VALUES (%s, %s)
+    pass

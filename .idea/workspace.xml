@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00472" summary="added a helper function to gett the desired bag  weight">
-      <option name="closed" value="true" />
-      <created>1776668169894</created>
-      <option name="number" value="00472" />
-      <option name="presentableId" value="LOCAL-00472" />
-      <option name="project" value="LOCAL" />
-      <updated>1776668169894</updated>
-    </task>
     <task id="LOCAL-00473" summary="added the logic for 20kg in the tumbler">
       <option name="closed" value="true" />
       <created>1776668853695</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777018357089</updated>
     </task>
-    <option name="localTasksCounter" value="521" />
+    <task id="LOCAL-00521" summary="addded a tab selection to view the role access">
+      <option name="closed" value="true" />
+      <created>1777087112501</created>
+      <option name="number" value="00521" />
+      <option name="presentableId" value="LOCAL-00521" />
+      <option name="project" value="LOCAL" />
+      <updated>1777087112501</updated>
+    </task>
+    <option name="localTasksCounter" value="522" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the displayed hostname + username after logging in" />
     <MESSAGE value="passed the user name and user role to manual page to try disabling based on user role" />
     <MESSAGE value="disable all the button if the access is viewer" />
     <MESSAGE value="enabled the preview pint but disabled the actual print button for VIEWERS" />
@@ -643,7 +642,8 @@
     <MESSAGE value="fix the saving of the updated data" />
     <MESSAGE value="hide the audit trail to editor, onlyt visible to the IT" />
     <MESSAGE value="log in the audit trail who updated the user detailss" />
-    <option name="LAST_COMMIT_MESSAGE" value="log in the audit trail who updated the user detailss" />
+    <MESSAGE value="addded a tab selection to view the role access" />
+    <option name="LAST_COMMIT_MESSAGE" value="addded a tab selection to view the role access" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
