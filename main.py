@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar, QMessageBox
 
 from css.styles import AppStyles
-from db.read import check_mac_enabled
+from db.read import check_mac_enabled, get_allowed_access_points
 from db.write import create_current_user, log_audit_trail
 from menu.audit_trail import AuditTrail
 from menu.dc_auto_entry import DCAutoEntry
@@ -71,6 +71,8 @@ class MainWindow(QMainWindow):
         self.production_auto_entry_dc = None
         self.audit_trail = None
         self.user_management = None
+
+        self.allowed_access = get_allowed_access_points(self.user_role)
 
         self.init_ui()
         self.log_audit_trail()
@@ -167,16 +169,31 @@ class MainWindow(QMainWindow):
         layout.addWidget(profile)
         layout.addWidget(sep)
         layout.addWidget(QLabel("Production Entry", objectName="MenuLabel"))
-        layout.addWidget(self.btn_production_records)
-        layout.addWidget(self.btn_manual_entry)
-        layout.addWidget(self.btn_auto_entry)
-        layout.addWidget(self.btn_auto_entry_dc)
 
-        if str(self.user_role).upper() != "VIEWER" or self.is_mac_enabled:
+        # Define mapping: (Button Object, Database Access Name)
+        nav_mapping = [
+            (self.btn_production_records, "Production Records"),
+            (self.btn_manual_entry, "Manual Entry"),
+            (self.btn_auto_entry, "Auto Entry - MB"),
+            (self.btn_auto_entry_dc, "Auto Entry - DC")
+        ]
+
+        for btn, access_name in nav_mapping:
+            if access_name in self.allowed_access:
+                layout.addWidget(btn)
+
+        # 3. Handle System Section
+        # Only show the "System" label if at least one of the system buttons is allowed
+        show_audit = "Audit Trail" in self.allowed_access
+        show_perms = "Permission Access" in self.allowed_access
+
+        if show_audit or show_perms:
             layout.addWidget(QLabel("System", objectName="MenuLabel"))
-            layout.addWidget(self.btn_audit_trail)
-            if str(self.user_role).upper() == "ADMIN":
+            if show_audit:
+                layout.addWidget(self.btn_audit_trail)
+            if show_perms:
                 layout.addWidget(self.btn_user_mamagement)
+
         layout.addStretch(1)
         layout.addWidget(self.btn_logout)
 
