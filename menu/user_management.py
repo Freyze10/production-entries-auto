@@ -2,11 +2,10 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QFrame, QLabel,
                              QPushButton, QLineEdit, QComboBox, QTableView,
                              QHeaderView, QGroupBox, QGridLayout, QMessageBox,
                              QAbstractItemView, QTabWidget, QTableWidget, QCheckBox, QTableWidgetItem)
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 import qtawesome as fa
 
-from css.styles import AppStyles
 from db.update import update_role_permissions
 from table_model.model import TableModel
 from db.read import (get_user_management_list, get_all_roles,
@@ -32,7 +31,6 @@ class PermissionsManager(QWidget):
         self.tabs.addTab(self.create_role_management_tab(), "Role & Access Matrix")
 
         self.main_layout.addWidget(self.tabs)
-        self.setStyleSheet(AppStyles.MAIN_WINDOW_STYLESHEET)
 
     def create_user_management_tab(self):
         tab = QWidget()
@@ -62,7 +60,8 @@ class PermissionsManager(QWidget):
 
         self.user_table = QTableView()
         self.user_table.verticalHeader().setVisible(False)
-        # --- SINGLE ROW SELECTION ONLY ---
+
+        # --- SINGLE ROW SELECTION ---
         self.user_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.user_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
 
@@ -136,14 +135,10 @@ class PermissionsManager(QWidget):
         self.matrix_table.verticalHeader().setVisible(False)
         self.matrix_table.setAlternatingRowColors(True)
 
-        # --- DISABLE SELECTION AND ADD PADDING ---
+        # --- DISABLE SELECTION AND MAKE ROWS BIGGER ---
         self.matrix_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.matrix_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.matrix_table.setStyleSheet("""
-            QTableWidget::item {
-                padding: 12px;
-            }
-        """)
+        self.matrix_table.verticalHeader().setDefaultSectionSize(45)  # Increased row height
 
         matrix_layout.addWidget(self.matrix_table)
 
@@ -174,14 +169,14 @@ class PermissionsManager(QWidget):
 
         # --- EXPAND ACCESS COLUMN WIDTH ---
         self.matrix_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        self.matrix_table.setColumnWidth(0, 250)  # Set a fixed wide width for Access column
         self.matrix_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
+        self.matrix_table.setColumnWidth(0, 300)  # Increased width for the names
 
         self.checkbox_map = {}
 
         for a_idx, ap in enumerate(access_points):
             name_item = QTableWidgetItem(ap[1])
-            name_item.setFlags(Qt.ItemFlag.ItemIsEnabled)  # Text only, no selection/edit
+            name_item.setFlags(Qt.ItemFlag.ItemIsEnabled)
             name_item.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
             self.matrix_table.setItem(a_idx, 0, name_item)
 
@@ -244,18 +239,19 @@ class PermissionsManager(QWidget):
 
     def save_data(self):
         if not self.selected_user_id: return
-        # Logic to find role_id from role name
         roles = get_all_roles()
-        role_id = next(r[0] for r in roles if r[1] == self.role_combo.currentText())
-
-        data = {
-            "username": self.edit_username.text().strip(),
-            "hostname": self.edit_hostname.text().strip(),
-            "password": self.edit_password.text().strip(),
-            "ip": self.edit_ip.text().strip(),
-            "mac": self.edit_mac.text().strip(),
-            "role_id": role_id
-        }
-        if save_user_changes(self.selected_user_id, data):
-            QMessageBox.information(self, "Success", "User details updated.")
-            self.refresh_data()
+        try:
+            role_id = next(r[0] for r in roles if r[1] == self.role_combo.currentText())
+            data = {
+                "username": self.edit_username.text().strip(),
+                "hostname": self.edit_hostname.text().strip(),
+                "password": self.edit_password.text().strip(),
+                "ip": self.edit_ip.text().strip(),
+                "mac": self.edit_mac.text().strip(),
+                "role_id": role_id
+            }
+            if save_user_changes(self.selected_user_id, data):
+                QMessageBox.information(self, "Success", "User details updated.")
+                self.refresh_data()
+        except StopIteration:
+            QMessageBox.critical(self, "Error", "Selected role not found.")
