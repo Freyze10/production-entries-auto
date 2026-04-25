@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00483" summary="did the same for auto entries">
-      <option name="closed" value="true" />
-      <created>1776836733312</created>
-      <option name="number" value="00483" />
-      <option name="presentableId" value="LOCAL-00483" />
-      <option name="project" value="LOCAL" />
-      <updated>1776836733312</updated>
-    </task>
     <task id="LOCAL-00484" summary="add a checking from the database if the prod id exists before cancel">
       <option name="closed" value="true" />
       <created>1776837573358</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777095994657</updated>
     </task>
-    <option name="localTasksCounter" value="532" />
+    <task id="LOCAL-00532" summary="removed the user hostname in  the login page, unnecessary for the user to see">
+      <option name="closed" value="true" />
+      <created>1777096289237</created>
+      <option name="number" value="00532" />
+      <option name="presentableId" value="LOCAL-00532" />
+      <option name="project" value="LOCAL" />
+      <updated>1777096289237</updated>
+    </task>
+    <option name="localTasksCounter" value="533" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a window title based on the pc status, eg. for viewing only" />
     <MESSAGE value="apply the viewer restriction whenver the pc is not present in the rnablrd mac table" />
     <MESSAGE value="remove the audit trail for those with viewing restriction" />
     <MESSAGE value="modified the hostname in username login input to make it not editable" />
@@ -643,7 +642,8 @@
     <MESSAGE value="add a databse wuery to get only allowed access points based on user Role" />
     <MESSAGE value="added the disabling/removing the specific page based on the edited user access" />
     <MESSAGE value="removed the audit trail  for when the user logged out" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the audit trail  for when the user logged out" />
+    <MESSAGE value="removed the user hostname in  the login page, unnecessary for the user to see" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the user hostname in  the login page, unnecessary for the user to see" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

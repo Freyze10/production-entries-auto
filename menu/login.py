@@ -123,11 +123,8 @@ class LoginWindow(QDialog):
                     update_user_workstation(current_mac, self.workstation['h'], self.workstation['i'])
 
     def handle_login(self):
-        raw_input = self.username_input.text().strip()
+        actual_username = self.username_input.text().strip()
         pw = self.password_input.text().strip()
-
-        # Since we locked the field, we know the format is [PREFIX][USERNAME]
-        actual_username = raw_input[len(self.hostname_prefix):].strip()
 
         if not actual_username:
             QMessageBox.warning(self, "Invalid Input", "Please enter your username.")
