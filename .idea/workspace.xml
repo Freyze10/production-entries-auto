@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00477" summary="updated">
-      <option name="closed" value="true" />
-      <created>1776732141664</created>
-      <option name="number" value="00477" />
-      <option name="presentableId" value="LOCAL-00477" />
-      <option name="project" value="LOCAL" />
-      <updated>1776732141664</updated>
-    </task>
     <task id="LOCAL-00478" summary="added an elipsis in the customer field in printing output to not generate a new line">
       <option name="closed" value="true" />
       <created>1776733590467</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777089378463</updated>
     </task>
-    <option name="localTasksCounter" value="526" />
+    <task id="LOCAL-00526" summary="updated the save function as well as the table headers">
+      <option name="closed" value="true" />
+      <created>1777089614509</created>
+      <option name="number" value="00526" />
+      <option name="presentableId" value="LOCAL-00526" />
+      <option name="project" value="LOCAL" />
+      <updated>1777089614509</updated>
+    </task>
+    <option name="localTasksCounter" value="527" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the disabled restriction in the other pages" />
     <MESSAGE value="added the passing of user role from the auto entries to disable the actual print too" />
     <MESSAGE value="updated the fetching of prod date in the manual entry print" />
     <MESSAGE value="create a table for editing mac addresses only" />
@@ -643,7 +642,8 @@
     <MESSAGE value="changed the text for the right navigator for permission access" />
     <MESSAGE value="updated the fetching od user roles" />
     <MESSAGE value="uppdated the fetching of all data" />
-    <option name="LAST_COMMIT_MESSAGE" value="uppdated the fetching of all data" />
+    <MESSAGE value="updated the save function as well as the table headers" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the save function as well as the table headers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

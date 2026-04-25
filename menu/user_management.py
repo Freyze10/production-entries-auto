@@ -25,34 +25,26 @@ class PermissionsManager(QWidget):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
 
-        # Main Tab Widget
         self.tabs = QTabWidget()
         self.tabs.setObjectName("MainTabs")
 
-        # Add Tabs
         self.tabs.addTab(self.create_user_management_tab(), "User Management")
         self.tabs.addTab(self.create_role_management_tab(), "Role & Access Matrix")
 
         self.main_layout.addWidget(self.tabs)
         self.setStyleSheet(AppStyles.MAIN_WINDOW_STYLESHEET)
 
-    # =========================================================================
-    # TAB 1: USER MANAGEMENT
-    # =========================================================================
     def create_user_management_tab(self):
         tab = QWidget()
         layout = QVBoxLayout(tab)
-
         content_container = QWidget()
         content_main_layout = QVBoxLayout(content_container)
 
-        # Header Card
         header_card = QFrame(objectName="HeaderCard")
         header_layout = QHBoxLayout(header_card)
         title_container = QVBoxLayout()
         title_container.addWidget(QLabel("User Access Control", objectName="table_label"))
-        title_container.addWidget(
-            QLabel("Manage specific user credentials and workstation bindings", objectName="light_label"))
+        title_container.addWidget(QLabel("Manage user credentials and workstation bindings", objectName="light_label"))
         header_layout.addLayout(title_container)
         header_layout.addStretch()
         self.btn_refresh = QPushButton(" Refresh List", objectName="SecondaryButton")
@@ -60,10 +52,8 @@ class PermissionsManager(QWidget):
         header_layout.addWidget(self.btn_refresh)
         content_main_layout.addWidget(header_card)
 
-        # Content Splitter
         content_split = QHBoxLayout()
 
-        # Table (Left)
         table_container = QFrame(objectName="ContentCard")
         table_v = QVBoxLayout(table_container)
         self.search_input = QLineEdit(placeholderText="Search user...")
@@ -71,7 +61,11 @@ class PermissionsManager(QWidget):
         table_v.addWidget(self.search_input)
 
         self.user_table = QTableView()
-        self.user_table.verticalHeader().setVisible(False)  # HIDE VERTICAL HEADER
+        self.user_table.verticalHeader().setVisible(False)
+        # --- SINGLE ROW SELECTION ONLY ---
+        self.user_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.user_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+
         self.headers = ["ID", "Hostname", "Username", "IP Address", "MAC", "Role", "Department"]
         self.table_model = TableModel([], self.headers)
         self.user_table.setModel(self.table_model)
@@ -80,7 +74,6 @@ class PermissionsManager(QWidget):
         table_v.addWidget(self.user_table)
         content_split.addWidget(table_container, stretch=2)
 
-        # Form (Right)
         form_container = QFrame(objectName="ContentCard")
         form_container.setFixedWidth(350)
         form_v = QVBoxLayout(form_container)
@@ -118,14 +111,10 @@ class PermissionsManager(QWidget):
         self.refresh_data()
         return tab
 
-    # =========================================================================
-    # TAB 2: ROLE MANAGEMENT
-    # =========================================================================
     def create_role_management_tab(self):
         tab = QWidget()
         layout = QVBoxLayout(tab)
 
-        # --- Top: Add New Role Group ---
         add_role_group = QGroupBox("Create New System Role")
         add_role_layout = QHBoxLayout(add_role_group)
         self.new_role_input = QLineEdit(placeholderText="Role Name")
@@ -139,14 +128,23 @@ class PermissionsManager(QWidget):
         add_role_layout.addWidget(btn_add_role)
         layout.addWidget(add_role_group)
 
-        # --- Middle: Permission Matrix ---
         matrix_group = QFrame(objectName="ContentCard")
         matrix_layout = QVBoxLayout(matrix_group)
         matrix_layout.addWidget(QLabel("Permission Access Matrix", objectName="table_label"))
 
         self.matrix_table = QTableWidget()
-        self.matrix_table.verticalHeader().setVisible(False)  # HIDE VERTICAL HEADER
+        self.matrix_table.verticalHeader().setVisible(False)
         self.matrix_table.setAlternatingRowColors(True)
+
+        # --- DISABLE SELECTION AND ADD PADDING ---
+        self.matrix_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.matrix_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.matrix_table.setStyleSheet("""
+            QTableWidget::item {
+                padding: 12px;
+            }
+        """)
+
         matrix_layout.addWidget(self.matrix_table)
 
         btn_footer = QHBoxLayout()
@@ -164,37 +162,35 @@ class PermissionsManager(QWidget):
         return tab
 
     def refresh_matrix(self):
-        """Fetches Roles and Access Points to build the toggle grid."""
         roles = get_all_roles()
         access_points = get_access_points()
         permissions = get_permission_matrix()
 
         self.matrix_table.setRowCount(len(access_points))
-        self.matrix_table.setColumnCount(len(roles) + 1)  # Column 0 for names
+        self.matrix_table.setColumnCount(len(roles) + 1)
 
-        # Build Headers
         headers = ["ACCESS"] + [r[1] for r in roles]
         self.matrix_table.setHorizontalHeaderLabels(headers)
+
+        # --- EXPAND ACCESS COLUMN WIDTH ---
         self.matrix_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-        self.matrix_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.matrix_table.setColumnWidth(0, 250)  # Set a fixed wide width for Access column
+        self.matrix_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
 
         self.checkbox_map = {}
 
         for a_idx, ap in enumerate(access_points):
-            # 1. Set Access Name in Column 0
             name_item = QTableWidgetItem(ap[1])
-            name_item.setFlags(name_item.flags() ^ Qt.ItemFlag.ItemIsEditable)  # Make read-only
-            name_item.setFont(QFont("Segoe UI", 9, QFont.Weight.Bold))
+            name_item.setFlags(Qt.ItemFlag.ItemIsEnabled)  # Text only, no selection/edit
+            name_item.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
             self.matrix_table.setItem(a_idx, 0, name_item)
 
-            # 2. Set Checkboxes in remaining columns
             for r_idx, role in enumerate(roles):
                 cb = QCheckBox()
                 cb.setObjectName("RawMaterialCheck")
                 state = permissions.get((role[0], ap[0]), False)
                 cb.setChecked(state)
 
-                # Column index is r_idx + 1 because column 0 is the name
                 self.checkbox_map[(role[0], ap[0])] = cb
 
                 cell_widget = QWidget()
@@ -204,9 +200,6 @@ class PermissionsManager(QWidget):
                 cell_layout.setContentsMargins(0, 0, 0, 0)
                 self.matrix_table.setCellWidget(a_idx, r_idx + 1, cell_widget)
 
-    # =========================================================================
-    # (Rest of existing Logic remains the same)
-    # =========================================================================
     def save_permissions(self):
         permission_data = []
         for (role_id, access_id), cb in self.checkbox_map.items():
@@ -251,14 +244,17 @@ class PermissionsManager(QWidget):
 
     def save_data(self):
         if not self.selected_user_id: return
+        # Logic to find role_id from role name
+        roles = get_all_roles()
+        role_id = next(r[0] for r in roles if r[1] == self.role_combo.currentText())
+
         data = {
             "username": self.edit_username.text().strip(),
             "hostname": self.edit_hostname.text().strip(),
             "password": self.edit_password.text().strip(),
             "ip": self.edit_ip.text().strip(),
             "mac": self.edit_mac.text().strip(),
-            # Find the actual role_id by looking it up in the raw roles data
-            "role_id": next(r[0] for r in get_all_roles() if r[1] == self.role_combo.currentText())
+            "role_id": role_id
         }
         if save_user_changes(self.selected_user_id, data):
             QMessageBox.information(self, "Success", "User details updated.")
