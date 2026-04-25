@@ -31,7 +31,7 @@ def create_table():
             role_id INT NOT NULL,
             hostname VARCHAR(36) NOT NULL,
             ip_address VARCHAR(32),
-            mac_address VARCHAR(32),
+            mac_address VARCHAR(32) UNIQUE,
             username VARCHAR(50) NOT NULL,
             password VARCHAR(36) NOT NULL, 
             FOREIGN KEY (role_id) REFERENCES tbl_role(role_id)

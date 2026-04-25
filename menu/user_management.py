@@ -201,7 +201,7 @@ class PermissionsManager(QWidget):
             permission_data.append((role_id, access_id, cb.isChecked()))
         if update_role_permissions(permission_data):
             QMessageBox.information(self, "Success", "Permissions Matrix updated.")
-            log_audit_trail(self.work_station['m'], "SECURITY", "Matrix Modified")
+            log_audit_trail(self.work_station['m'], "SECURITY", "Role Access Matrix Modified")
         else:
             QMessageBox.critical(self, "Error", "Failed to update.")
 
