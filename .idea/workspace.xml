@@ -199,14 +199,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00475" summary="Added the logic pf 20kg to the generate computation but to check">
-      <option name="closed" value="true" />
-      <created>1776669410744</created>
-      <option name="number" value="00475" />
-      <option name="presentableId" value="LOCAL-00475" />
-      <option name="project" value="LOCAL" />
-      <updated>1776669410744</updated>
-    </task>
     <task id="LOCAL-00476" summary="return early of theres no to sync data">
       <option name="closed" value="true" />
       <created>1776669703493</created>
@@ -591,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777088167800</updated>
     </task>
-    <option name="localTasksCounter" value="524" />
+    <task id="LOCAL-00524" summary="updated the fetching od user roles">
+      <option name="closed" value="true" />
+      <created>1777088639860</created>
+      <option name="number" value="00524" />
+      <option name="presentableId" value="LOCAL-00524" />
+      <option name="project" value="LOCAL" />
+      <updated>1777088639860</updated>
+    </task>
+    <option name="localTasksCounter" value="525" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="enabled the preview pint but disabled the actual print button for VIEWERS" />
     <MESSAGE value="connected the actual print from the other page to that reusable design" />
     <MESSAGE value="added the disabled restriction in the other pages" />
     <MESSAGE value="added the passing of user role from the auto entries to disable the actual print too" />
@@ -643,7 +642,8 @@
     <MESSAGE value="addded a tab selection to view the role access" />
     <MESSAGE value="updated the database and the design for the permitssion tab" />
     <MESSAGE value="changed the text for the right navigator for permission access" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the text for the right navigator for permission access" />
+    <MESSAGE value="updated the fetching od user roles" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the fetching od user roles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

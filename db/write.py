@@ -117,6 +117,20 @@ def log_audit_trail(mac_address: str, action_type: str, details: str):
         cur.close()
         conn.close()
 
+
 def add_new_role(name, dept):
-    # INSERT INTO tbl_role (role_name, department) VALUES (%s, %s)
-    pass
+    """Adds a new row to the tbl_role table."""
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+
+        query = "INSERT INTO tbl_role (role, department) VALUES (%s, %s)"
+        cur.execute(query, (name.upper(), dept))
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Error add_new_role: {e}")
+        return False

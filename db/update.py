@@ -45,9 +45,28 @@ def refresh_materialized():
 
 
 def update_role_permissions(permission_list):
-    # permission_list = [(role_id, access_id, state), ...]
-    # Use: INSERT INTO tbl_role_permissions (role_id, access_id, is_enabled)
-    # VALUES (%s, %s, %s)
-    # ON CONFLICT (role_id, access_id) DO UPDATE SET is_enabled = EXCLUDED.is_enabled
-    pass
+    """
+    Saves the states of the checkboxes.
+    permission_list: list of tuples -> [(role_id, access_id, state), ...]
+    """
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+
+        # Upsert: Insert if new, update is_enabled if already exists
+        query = """
+            INSERT INTO tbl_role_permissions (role_id, access_id, is_enabled)
+            VALUES (%s, %s, %s)
+            ON CONFLICT (role_id, access_id) 
+            DO UPDATE SET is_enabled = EXCLUDED.is_enabled;
+        """
+
+        cur.executemany(query, permission_list)
+        conn.commit()
+        cur.close()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Error update_role_permissions: {e}")
+        return False
 

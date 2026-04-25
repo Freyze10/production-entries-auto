@@ -437,25 +437,44 @@ def authenticate_user(username, password, mac_address):
 
 
 def get_all_roles():
-    conn = get_connection()
-    cur = conn.cursor()
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT role_id, role FROM tbl_role ORDER BY role_id ASC")
+        records = cur.fetchall()
+        cur.close()
+        conn.close()
+        return records
+    except Exception as e:
+        print(f"Error get_all_roles: {e}")
+        return []
 
-    cur.execute("""
-                SELECT role_id, role
-                FROM tbl_role
-                ORDER BY role_id ASC
-            """)
-    records = cur.fetchall()
-
-    cur.close()
-    conn.close()
-    return records
 
 def get_access_points():
-    # SELECT access_id, access_name FROM tbl_access_points ORDER BY access_id
-    return []
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT access_id, access_name FROM tbl_access_points ORDER BY access_id ASC")
+        records = cur.fetchall()
+        cur.close()
+        conn.close()
+        return records
+    except Exception as e:
+        print(f"Error get_access_points: {e}")
+        return []
+
 
 def get_permission_matrix():
-    # SELECT role_id, access_id, is_enabled FROM tbl_role_permissions
-    # Convert to a dictionary: {(role_id, access_id): is_enabled}
-    return []
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT role_id, access_id, is_enabled FROM tbl_role_permissions")
+        records = cur.fetchall()
+        cur.close()
+        conn.close()
+
+        # Convert list to dictionary for high-speed lookup in Python
+        return {(row[0], row[1]): row[2] for row in records}
+    except Exception as e:
+        print(f"Error get_permission_matrix: {e}")
+        return {}

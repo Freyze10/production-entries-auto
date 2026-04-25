@@ -250,6 +250,26 @@ def create_table():
             PRIMARY KEY (role_id, access_id)
         );
     """)
+    # INSERT NAVIGATION ACCESS POINTS
+    cursor.execute("""
+            INSERT INTO tbl_access_points (access_name) VALUES 
+                ('Production Records'),
+                ('Manual Entry'),
+                ('Auto Entry - MB'),
+                ('Auto Entry - DC'),
+                ('Audit Trail'),
+                ('Permission Access')
+            ON CONFLICT (access_name) DO NOTHING;
+        """)
+
+    # INITIALIZE DEFAULT PERMISSIONS: ADMIN (Role 1) gets everything TRUE by default
+    cursor.execute("""
+            INSERT INTO tbl_role_permissions (role_id, access_id, is_enabled)
+            SELECT r.role_id, a.access_id, TRUE
+            FROM tbl_role r, tbl_access_points a
+            WHERE r.role = 'ADMIN'
+            ON CONFLICT (role_id, access_id) DO NOTHING;
+        """)
 
     # Create the Trigger Function with Sync (Insert & Delete logic)
     cursor.execute("""
