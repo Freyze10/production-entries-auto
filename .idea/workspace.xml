@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00454" summary="&#10;added a validation to not generate if there is no formula in dc">
-      <option name="closed" value="true" />
-      <created>1776394152103</created>
-      <option name="number" value="00454" />
-      <option name="presentableId" value="LOCAL-00454" />
-      <option name="project" value="LOCAL" />
-      <updated>1776394152103</updated>
-    </task>
     <task id="LOCAL-00455" summary="create a export to csv">
       <option name="closed" value="true" />
       <created>1776397164949</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777271708265</updated>
     </task>
-    <option name="localTasksCounter" value="503" />
+    <task id="LOCAL-00503" summary="updated some of the audit trail message">
+      <option name="closed" value="true" />
+      <created>1777274008204</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1777274008204</updated>
+    </task>
+    <option name="localTasksCounter" value="504" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a helper function to gett the desired bag  weight" />
     <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
@@ -639,7 +638,8 @@
     <MESSAGE value="adjusted the dedfault display of the audit  trail" />
     <MESSAGE value="modified the manual entry" />
     <MESSAGE value="updated the production records to be in order based from prod id" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the production records to be in order based from prod id" />
+    <MESSAGE value="updated some of the audit trail message" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated some of the audit trail message" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
