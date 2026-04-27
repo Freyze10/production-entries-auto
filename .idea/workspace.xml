@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00437" summary="modified tha table column spacing of the production records">
-      <option name="closed" value="true" />
-      <created>1776320761872</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1776320761872</updated>
-    </task>
     <task id="LOCAL-00438" summary="added a manual separatorr in manual entry">
       <option name="closed" value="true" />
       <created>1776321311782</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777260387469</updated>
     </task>
-    <option name="localTasksCounter" value="486" />
+    <task id="LOCAL-00486" summary="upodated thee legacy program to match the new data type in the schema">
+      <option name="closed" value="true" />
+      <created>1777261370963</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1777261370963</updated>
+    </task>
+    <option name="localTasksCounter" value="487" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

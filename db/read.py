@@ -22,7 +22,7 @@ def get_all_production_data():
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
-        WHERE a.is_deleted = 'False'
+        WHERE a.is_deleted = FALSE
         ORDER BY a.prod_id ASC;
     """)
 
@@ -65,7 +65,7 @@ def get_cancelled_production_data():
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
-        WHERE a.is_deleted='True'
+        WHERE a.is_deleted = TRUE
         ORDER BY a.prod_id ASC
     """)
 
@@ -169,8 +169,8 @@ def check_production_exists(prod_id):
     try:
         conn = get_connection()
         cur = conn.cursor()
-        # We check for the ID and ensure it isn't already deleted
-        cur.execute("SELECT EXISTS(SELECT 1 FROM tbl_production01 WHERE prod_id = %s AND is_deleted = 'False')", (prod_id,))
+        # Updated to use native BOOLEAN FALSE
+        cur.execute("SELECT EXISTS(SELECT 1 FROM tbl_production01 WHERE prod_id = %s AND is_deleted = FALSE)", (prod_id,))
         exists = cur.fetchone()[0]
         cur.close()
         conn.close()
@@ -248,7 +248,8 @@ def get_lot_no():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT DISTINCT lot_no FROM tbl_production01 WHERE lot_no IS NOT NULL AND is_deleted = 'False'")
+    # Updated to use native BOOLEAN FALSE
+    cur.execute("SELECT DISTINCT lot_no FROM tbl_production01 WHERE lot_no IS NOT NULL AND is_deleted = FALSE")
 
     lot_list = [row[0] for row in cur.fetchall()]
 
@@ -468,12 +469,14 @@ def get_permission_matrix():
     try:
         conn = get_connection()
         cur = conn.cursor()
+        # Fetches native BOOLEAN
         cur.execute("SELECT role_id, access_id, is_enabled FROM tbl_role_permissions")
         records = cur.fetchall()
         cur.close()
         conn.close()
 
         # Convert list to dictionary for high-speed lookup in Python
+        # row[2] will be a Python True/False object
         return {(row[0], row[1]): row[2] for row in records}
     except Exception as e:
         print(f"Error get_permission_matrix: {e}")
