@@ -514,6 +514,7 @@ class MBManualEntry(QWidget):
                     self.non_raw_material_check.setChecked(True)
 
     def display_details(self):
+        self.wip_no_input.setText(str(self.prod_results['index_no']))
         self.production_id_input.setText(str(self.prod_results['prod_id']))
         form_type_val = str(self.prod_results.get('form_type', '')).strip()
         idx = self.form_type_combo.findText(form_type_val, Qt.MatchFlag.MatchFixedString)
@@ -521,7 +522,6 @@ class MBManualEntry(QWidget):
             self.form_type_combo.setCurrentIndex(idx)
         else:
             self.form_type_combo.setCurrentIndex(0)
-
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
         self.formula_input.setText(str(self.prod_results['form_id']))
@@ -551,7 +551,7 @@ class MBManualEntry(QWidget):
         self.machine_no_input.setText(str(self.prod_results['machine_no']))
         self.qty_required_input.setText(f"{qty_req:.6f}")
         self.qty_per_batch_input.setText(f"{qty_batch:.6f}")
-        self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.6f}")
+        self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.7f}")
 
         self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
         if self.prod_results.get('encoded_on'):
@@ -566,12 +566,16 @@ class MBManualEntry(QWidget):
         for mat in self.prod_materials:
             row_idx = self.materials_table.rowCount()
             self.materials_table.insertRow(row_idx)
+
             mat_code = str(mat[1]) if mat[1] else ""
 
+            # Logic for Empty vs. Data row
             if mat_code.strip() == "":
+                # It's an empty row: Fill all columns with empty strings
                 for col in range(self.materials_table.columnCount()):
                     self.materials_table.setItem(row_idx, col, QTableWidgetItem(""))
             else:
+                # It's a data row: Fill with Material and Numeric values
                 try:
                     large_scale = float(mat[2]) if mat[2] is not None else 0.0
                     small_scale = float(mat[3]) if mat[3] is not None else 0.0
@@ -579,22 +583,25 @@ class MBManualEntry(QWidget):
                 except (ValueError, TypeError):
                     large_scale = small_scale = total_weight = 0.0
 
+                # Set Column 0: Material Code
                 self.materials_table.setItem(row_idx, 0, QTableWidgetItem(mat_code))
 
+                # Set Column 1: Large Scale
                 item_large = NumericTableWidgetItem(large_scale, is_float=True)
                 item_large.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 1, item_large)
 
+                # Set Column 2: Small Scale
                 item_small = NumericTableWidgetItem(small_scale, is_float=True)
                 item_small.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 2, item_small)
 
+                # Set Column 3: Total Weight
                 item_total = NumericTableWidgetItem(total_weight, is_float=True)
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
 
-        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---
-        # We get the value from the dictionary returned by the database
+        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---=
         is_printed = self.prod_results.get('is_printed', False)
 
         if is_printed:
