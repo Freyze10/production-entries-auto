@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from PyQt6.QtCore import Qt, QThread, QDate
+from PyQt6.QtCore import Qt, QThread, QDate, QTimer
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
@@ -15,6 +15,7 @@ from db.update import cancel_production
 from db.write import log_audit_trail
 from table_model import table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
+from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
@@ -527,6 +528,7 @@ class DCAutoEntry(QWidget):
             self.form_type_combo.setCurrentIndex(idx)
         else:
             self.form_type_combo.setCurrentIndex(0)
+
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
         self.formulation_id_input.setText(str(self.prod_results['form_id']))
@@ -571,16 +573,12 @@ class DCAutoEntry(QWidget):
         for mat in self.prod_materials:
             row_idx = self.materials_table.rowCount()
             self.materials_table.insertRow(row_idx)
-
             mat_code = str(mat[1]) if mat[1] else ""
 
-            # Logic for Empty vs. Data row
             if mat_code.strip() == "":
-                # It's an empty row: Fill all columns with empty strings
                 for col in range(self.materials_table.columnCount()):
                     self.materials_table.setItem(row_idx, col, QTableWidgetItem(""))
             else:
-                # It's a data row: Fill with Material and Numeric values
                 try:
                     large_scale = float(mat[2]) if mat[2] is not None else 0.0
                     small_scale = float(mat[3]) if mat[3] is not None else 0.0
@@ -588,23 +586,32 @@ class DCAutoEntry(QWidget):
                 except (ValueError, TypeError):
                     large_scale = small_scale = total_weight = 0.0
 
-                # Set Column 0: Material Code
                 self.materials_table.setItem(row_idx, 0, QTableWidgetItem(mat_code))
 
-                # Set Column 1: Large Scale
                 item_large = NumericTableWidgetItem(large_scale, is_float=True)
                 item_large.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 1, item_large)
 
-                # Set Column 2: Small Scale
                 item_small = NumericTableWidgetItem(small_scale, is_float=True)
                 item_small.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 2, item_small)
 
-                # Set Column 3: Total Weight
                 item_total = NumericTableWidgetItem(total_weight, is_float=True)
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
+
+        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---
+        # We get the value from the dictionary returned by the database
+        is_printed = self.prod_results.get('is_printed', False)
+
+        if is_printed:
+            self.save_btn.setEnabled(False)
+            self.save_btn.setObjectName("disabled_btn")
+            self.save_btn.setToolTip("This record is locked because it has already been printed.")
+            QTimer.singleShot(200, lambda: show_printed_locked_message(self))
+        else:
+            self.save_btn.setEnabled(True)
+            self.save_btn.setToolTip("")
 
         self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()
@@ -703,6 +710,10 @@ class DCAutoEntry(QWidget):
             self.prod_results = None
 
         self.save_btn.setText("Save")
+        self.save_btn.setObjectName("SuccessButton")
+        self.save_btn.style().unpolish(self.save_btn)
+        self.save_btn.style().polish(self.save_btn)
+
         self.materials_table.setRowCount(0)
         self.update_totals()
 

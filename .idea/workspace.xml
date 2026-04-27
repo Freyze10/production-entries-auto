@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00446" summary="added an icon for the system">
-      <option name="closed" value="true" />
-      <created>1776387446531</created>
-      <option name="number" value="00446" />
-      <option name="presentableId" value="LOCAL-00446" />
-      <option name="project" value="LOCAL" />
-      <updated>1776387446531</updated>
-    </task>
     <task id="LOCAL-00447" summary="fixed index type in column searching for audit trail">
       <option name="closed" value="true" />
       <created>1776388344523</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777267425696</updated>
     </task>
-    <option name="localTasksCounter" value="495" />
+    <task id="LOCAL-00495" summary="disable save button when the production is already printed">
+      <option name="closed" value="true" />
+      <created>1777267756966</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267756966</updated>
+    </task>
+    <option name="localTasksCounter" value="496" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the requirements,txt" />
     <MESSAGE value="added the location of the rm incoming" />
     <MESSAGE value="updated the legacy database sync" />
     <MESSAGE value="removed minimum screensize then use auto full screen mode and make it resizeable" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added qmessage to show thatt the production is already printed" />
     <MESSAGE value="added a qmessage for already printed production" />
     <MESSAGE value="returend back the save button when the new entry is clickes" />
-    <option name="LAST_COMMIT_MESSAGE" value="returend back the save button when the new entry is clickes" />
+    <MESSAGE value="disable save button when the production is already printed" />
+    <option name="LAST_COMMIT_MESSAGE" value="disable save button when the production is already printed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
