@@ -34,7 +34,7 @@ def get_all_production_data():
     data = []
     for row in records:
         data.append([
-            str(row[0]),  # prod_id as string
+            int(row[0]),  # prod_id as int
             str(row[1]) if row[1] else "",  # production_date (handle None)
             str(row[2]) if row[2] else "",  # customer
             str(row[3]) if row[3] else "",  # product_code
@@ -77,7 +77,7 @@ def get_cancelled_production_data():
     data = []
     for row in records:
         data.append([
-            str(row[0]),  # prod_id as string
+            int(row[0]),  # prod_id as int
             str(row[1]) if row[1] else "",  # production_date (handle None)
             str(row[2]) if row[2] else "",  # customer
             str(row[3]) if row[3] else "",  # product_code

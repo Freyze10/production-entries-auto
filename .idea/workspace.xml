@@ -171,9 +171,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.test_print" />
         <item itemvalue="Python.print_preview" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.login" />
         <item itemvalue="Python.format_rm_note" />
       </list>
@@ -194,14 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00452" summary="removed the imports of table spacing">
-      <option name="closed" value="true" />
-      <created>1776393125705</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393125705</updated>
     </task>
     <task id="LOCAL-00453" summary="&#10;added a validation to not generate if there is no formula in dmb">
       <option name="closed" value="true" />
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777268618689</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary="modified the manual entry">
+      <option name="closed" value="true" />
+      <created>1777270725039</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1777270725039</updated>
+    </task>
+    <option name="localTasksCounter" value="502" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the query for getting the note on rm incoming" />
     <MESSAGE value="added a function to return the bag weight for rm" />
     <MESSAGE value="added a helper function to gett the desired bag  weight" />
     <MESSAGE value="added the logic for 20kg in the tumbler" />
@@ -639,7 +638,8 @@
     <MESSAGE value="remove the empty form type, there will be  a default &quot;new&quot; value" />
     <MESSAGE value="changed the save button design on the  manual entry" />
     <MESSAGE value="adjusted the dedfault display of the audit  trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted the dedfault display of the audit  trail" />
+    <MESSAGE value="modified the manual entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the manual entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

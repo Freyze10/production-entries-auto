@@ -111,7 +111,7 @@ class ProductionRecords(QWidget):
         self.table_records.setSortingEnabled(True)
         self.table_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
-        self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+        self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
         self.table_records.customContextMenuRequested.connect(self.show_context_menu)
         # Connect to row selection change
         self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)
@@ -307,7 +307,7 @@ class ProductionRecords(QWidget):
 
             # Reset the selection in the UI
             self.table_records.clearSelection()
-            self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
@@ -336,7 +336,7 @@ class ProductionRecords(QWidget):
 
             # Reset the selection in the UI
             self.table_records.clearSelection()
-            self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
             self.table_records.setStyleSheet("""
                 QTableView {
@@ -379,7 +379,7 @@ class ProductionRecords(QWidget):
 
             # Reset the selection in the UI
             self.table_records.clearSelection()
-            self.table_records.sortByColumn(1, Qt.SortOrder.DescendingOrder)
+            self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
             self.table_records.setStyleSheet("")
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
