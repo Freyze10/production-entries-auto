@@ -600,6 +600,9 @@ class MBManualEntry(QWidget):
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
 
+        # btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
+        # btn.setObjectName("disabled_btn")
+
         self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()
         self.no_items_label.setText(str(item_count))
