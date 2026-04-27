@@ -3,7 +3,6 @@ import os
 import traceback
 
 import dbfread
-import sqlalchemy
 from PyQt6.QtCore import pyqtSignal, QObject
 from sqlalchemy import text, create_engine
 
