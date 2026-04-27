@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00455" summary="create a export to csv">
-      <option name="closed" value="true" />
-      <created>1776397164949</created>
-      <option name="number" value="00455" />
-      <option name="presentableId" value="LOCAL-00455" />
-      <option name="project" value="LOCAL" />
-      <updated>1776397164949</updated>
-    </task>
     <task id="LOCAL-00456" summary="commented out the log in records on audit trail">
       <option name="closed" value="true" />
       <created>1776398323463</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777274008204</updated>
     </task>
-    <option name="localTasksCounter" value="504" />
+    <task id="LOCAL-00504" summary="return the connection to server">
+      <option name="closed" value="true" />
+      <created>1777276856434</created>
+      <option name="number" value="00504" />
+      <option name="presentableId" value="LOCAL-00504" />
+      <option name="project" value="LOCAL" />
+      <updated>1777276856435</updated>
+    </task>
+    <option name="localTasksCounter" value="505" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
     <MESSAGE value="updated" />
@@ -639,7 +638,8 @@
     <MESSAGE value="modified the manual entry" />
     <MESSAGE value="updated the production records to be in order based from prod id" />
     <MESSAGE value="updated some of the audit trail message" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated some of the audit trail message" />
+    <MESSAGE value="return the connection to server" />
+    <option name="LAST_COMMIT_MESSAGE" value="return the connection to server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

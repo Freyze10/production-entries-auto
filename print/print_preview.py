@@ -225,8 +225,7 @@ class ProductionPrintPreview(QDialog):
                 # ZONE 1: Header (Touch vertical lines)
                 if i <= 15:
                     line_h = 50.0
-                # ZONE 3: Footer (Touch name to overline)
-                elif 23 <= i <= 25:
+                elif 23 <= i <= 26:
                     line_h = 90
                 elif i >= (total_blocks - 6):
                     line_h = 80.0
@@ -235,13 +234,12 @@ class ProductionPrintPreview(QDialog):
                     line_h = 160.0
                 # ZONE 2: Body (Readable spacing)
                 else:
-                    line_h = 135.0
+                    line_h = 145.0
             else:
                 # ZONE 1: Header (Touch vertical lines)
                 if i <= 13:
                     line_h = 50.0
-                # ZONE 3: Footer (Touch name to overline)
-                elif 20 <= i <= 22:
+                elif 20 <= i <= 23:
                     line_h = 90
                 elif i >= (total_blocks - 6):
                     line_h = 80.0
@@ -250,7 +248,7 @@ class ProductionPrintPreview(QDialog):
                     line_h = 160.0
                 # ZONE 2: Body (Readable spacing)
                 else:
-                    line_h = 135.0
+                    line_h = 145.0
 
             fmt.setLineHeight(line_h, QTextBlockFormat.LineHeightTypes.ProportionalHeight.value)
             cursor = QTextCursor(block)
@@ -266,36 +264,62 @@ class ProductionPrintPreview(QDialog):
         printer_name = self.printer_combo.currentText()
         try:
             lines = self.build_report_map(mode="printer")
-            raw_text = "\n".join(lines)
 
-            # --- ESC/P COMMANDS FOR SPEED ---
+            # --- ESC/P COMMANDS FOR PRECISION ---
             ESC = '\x1b'
             reset = ESC + '@'  # Reset printer
-            draft_mode = ESC + 'x' + '\x00'  # \x00 = Draft (Fast), \x01 = NLQ (Slow)
-            high_speed = ESC + 'k' + '\x00'  # Select Draft typeface
-            font_condensed = '\x0f'  # Optional: ensures 80 column fit
-            bidirectional = ESC + 'U' + '\x00'  # Ensure bidirectional printing (faster)
+            # Font: ESC + 'k' + n (0=Roman, 1=Sans Serif). Roman is closest to Courier New.
+            set_font = ESC + 'k' + '\x00'
+            bidirectional = ESC + 'U' + '\x00'  # Faster
 
-            # Combine initialization
-            init = reset + draft_mode + high_speed + bidirectional
+            # Line Spacing Math (Based on your UI Proportional heights):
+            # Standard is 30/180 (100%).
+            # 50%  -> 15/180 (\x0f)
+            # 80%  -> 24/180 (\x18)
+            # 145% -> 44/180 (\x2c)
+            # 160% -> 48/180 (\x30)
 
-            parts = raw_text.split('\n')
+            CMD_SPACING_HEADER = ESC + '3' + '\x0f'  # 50% height
+            CMD_SPACING_BODY = ESC + '3' + '\x2c'  # 145% height
+            CMD_SPACING_SUMM = ESC + '3' + '\x30'  # 160% height
+            CMD_SPACING_FOOTER = ESC + '3' + '\x18'  # 80% height
+
+            init = reset + set_font + bidirectional
+
             header_end = 16 if self.wip_no is True else 14
-            footer_start = len(parts) - 6
+            footer_start = len(lines) - 6
 
-            header = "\n".join(parts[:header_end])
-            body = "\n".join(parts[header_end:footer_start])
-            footer = "\n".join(parts[footer_start:])
+            # Constructing Payload line by line to ensure "Batch By" gets its unique spacing
+            payload = init + CMD_SPACING_HEADER
 
-            # Maintain your exact spacing commands
-            payload = (init +
-                       (ESC + '3' + '\x18') + header + "\n" +
-                       (ESC + '3' + '\x31') + body + "\n" +
-                       (ESC + '3' + '\x16') + footer + '\x0c')
+            for i, line in enumerate(lines):
+                # Apply Header Spacing
+                if i == 0:
+                    payload += CMD_SPACING_HEADER
+
+                # Apply Body Spacing when header ends
+                elif i == header_end:
+                    payload += CMD_SPACING_BODY
+
+                # Apply Special Summary Spacing (The "Batch By" line)
+                elif "BATCH BY" in line.upper():
+                    payload += CMD_SPACING_SUMM
+
+                # Revert to Body Spacing after Summary
+                elif i == header_end + 6:  # Adjustment to catch lines after batch text
+                    payload += CMD_SPACING_BODY
+
+                # Apply Footer Spacing
+                elif i == footer_start:
+                    payload += CMD_SPACING_FOOTER
+
+                payload += line + "\n"
+
+            # Add Form Feed (Eject Page)
+            payload += '\x0c'
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
-                # Use "RAW" mode to bypass Windows GDI driver processing
                 hJob = win32print.StartDocPrinter(hPrinter, 1, ("Production Entry", None, "RAW"))
                 win32print.StartPagePrinter(hPrinter)
                 win32print.WritePrinter(hPrinter, payload.encode('latin-1'))
