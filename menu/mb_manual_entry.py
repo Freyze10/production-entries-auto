@@ -765,7 +765,7 @@ class MBManualEntry(QWidget):
             self.prod_results = None
 
         self.save_btn.setText("Save")
-        self.save_btn.setObjectName("SuccessButton")
+        self.save_btn.setObjectName("InfoButton")
         self.save_btn.style().unpolish(self.save_btn)
         self.save_btn.style().polish(self.save_btn)
 
