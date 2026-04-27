@@ -710,6 +710,7 @@ class MBAutoEntry(QWidget):
             self.prod_results = None
 
         self.save_btn.setText("Save")
+        self.save_btn.setObjectName("SuccessButton")
 
         self.materials_table.setRowCount(0)
         self.update_totals()
