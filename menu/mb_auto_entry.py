@@ -617,7 +617,6 @@ class MBAutoEntry(QWidget):
         self.no_items_label.setText(str(item_count))
         return True
 
-
     def cancel_production(self):
         raw_id = self.production_id_input.text().strip()
 
@@ -711,6 +710,8 @@ class MBAutoEntry(QWidget):
 
         self.save_btn.setText("Save")
         self.save_btn.setObjectName("SuccessButton")
+        self.save_btn.style().unpolish(self.save_btn)
+        self.save_btn.style().polish(self.save_btn)
 
         self.materials_table.setRowCount(0)
         self.update_totals()
