@@ -600,6 +600,7 @@ class MBManualEntry(QWidget):
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
 
+        self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()
         self.no_items_label.setText(str(item_count))
         return True
@@ -757,6 +758,7 @@ class MBManualEntry(QWidget):
         if self.prod_results:
             self.prod_results = None
 
+        self.save_btn.setText("Save")
         self.materials_table.setRowCount(0)
         self.clear_material_inputs()
         self.update_totals()
