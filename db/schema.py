@@ -40,7 +40,7 @@ def create_table():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_user_role_id ON tbl_user(role_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_user_hostname ON tbl_user(hostname);")
 
-    # 3. Formula Header (is_deleted and is_used converted to BOOLEAN)
+    # 3. Formula Header (Converted to BOOLEAN)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula01(
             form_id SERIAL PRIMARY KEY,
@@ -64,16 +64,31 @@ def create_table():
         )
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_prod_code ON tbl_formula01(prod_code);")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_is_deleted ON tbl_formula01(is_deleted);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_customer ON tbl_formula01(customer);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_date ON tbl_formula01(date);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula01_colormatch_no ON tbl_formula01(colormatch_no);")
 
-    # Updated Partial Index for Booleans
+    # Partial Index for Booleans
     cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_formula01_active 
             ON tbl_formula01(prod_code, customer, date) 
             WHERE is_deleted = FALSE;
     """)
 
-    # 4. Formula Details (is_deleted converted to BOOLEAN)
+    # 4. Formula Encode (Restored)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_formula_encode(
+            encode_id SERIAL PRIMARY KEY,
+            form_id INT,
+            match_by VARCHAR(128),
+            encoded_by VARCHAR(128),
+            updated_by VARCHAR(128),
+            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
+        )
+    """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula_encode_form_id ON tbl_formula_encode(form_id);")
+
+    # 5. Formula Details (Converted to BOOLEAN)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula02(
             id SERIAL PRIMARY KEY,
@@ -85,8 +100,11 @@ def create_table():
             FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_form_id ON tbl_formula02(form_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_material_code ON tbl_formula02(material_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_form_seq ON tbl_formula02(form_id, sequence_no);")
 
-    # 5. Production Header (is_deleted and is_printed converted to BOOLEAN)
+    # 6. Production Header (Converted to BOOLEAN)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production01(
             prod_id SERIAL PRIMARY KEY,
@@ -94,7 +112,7 @@ def create_table():
             customer VARCHAR(62),
             form_id INT,
             index_no VARCHAR(32),
-            prod_code VARCHAR(12),
+            prod_code VARCHAR(32),
             prod_color VARCHAR(62),
             dosage DECIMAL(12,6),
             ld DECIMAL(12,6),
@@ -112,14 +130,49 @@ def create_table():
             form_type VARCHAR(16)   
             )
     """)
-    # Updated Partial Index for Booleans
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_prod_date ON tbl_production01(prod_date);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_customer ON tbl_production01(customer);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_prod_code ON tbl_production01(prod_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_form_id ON tbl_production01(form_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_lot_no ON tbl_production01(lot_no);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_order_no ON tbl_production01(order_no);")
+
+    # Partial Index for Booleans
     cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_production01_date_customer 
             ON tbl_production01(prod_date, customer) 
             WHERE is_deleted = FALSE;
         """)
 
-    # 6. Production Details (is_deleted converted to BOOLEAN)
+    # 7. Production Encoding
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production_encode(
+            encode_id SERIAL PRIMARY KEY,
+            prod_id INT,
+            prepared_by VARCHAR(128),
+            encoded_by VARCHAR(128),
+            encoded_on TIMESTAMP, 
+            confirmation_encoded_on TIMESTAMP, 
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
+            )
+    """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_encode_prod_id ON tbl_production_encode(prod_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_encode_encoded_on ON tbl_production_encode(encoded_on);")
+
+    # 8. Production Quantity
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tbl_production_quantity(
+            quantity_id SERIAL PRIMARY KEY,
+            prod_id INT,
+            quantity_req DECIMAL(12,6),
+            quantity_batch DECIMAL(12,6),
+            quantity_prod DECIMAL(12,6),
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
+        )
+    """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_quantity_prod_id ON tbl_production_quantity(prod_id);")
+
+    # 9. Production Details (Converted to BOOLEAN)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production02(
             id SERIAL PRIMARY KEY,
@@ -135,31 +188,11 @@ def create_table():
             FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_prod_id ON tbl_production02(prod_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_material_code ON tbl_production02(material_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_prod_seq ON tbl_production02(prod_id, sequence_no);")
 
-    # 7. Audit and Mapping tables (Keeping remaining as per your structure)
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_production_encode(
-            encode_id SERIAL PRIMARY KEY,
-            prod_id INT,
-            prepared_by VARCHAR(128),
-            encoded_by VARCHAR(128),
-            encoded_on TIMESTAMP, 
-            confirmation_encoded_on TIMESTAMP, 
-            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
-            )
-    """)
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS tbl_production_quantity(
-            quantity_id SERIAL PRIMARY KEY,
-            prod_id INT,
-            quantity_req DECIMAL(12,6),
-            quantity_batch DECIMAL(12,6),
-            quantity_prod DECIMAL(12,6),
-            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
-        )
-    """)
-
+    # 10. Audit Trail
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_audit_trail(
             id SERIAL PRIMARY KEY,
@@ -170,7 +203,11 @@ def create_table():
             FOREIGN KEY (user_id) REFERENCES tbl_user(user_id)
         )
     """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON tbl_audit_trail(timestamp DESC);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_user_id ON tbl_audit_trail(user_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_audit_action_type ON tbl_audit_trail(action_type);")
 
+    # 11. Support Tables
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_raw_material_list(
             id SERIAL PRIMARY KEY,
@@ -195,7 +232,7 @@ def create_table():
         );
     """)
 
-    # 8. Permissions (Already using BOOLEAN)
+    # 12. Permissions
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_access_points (
             access_id SERIAL PRIMARY KEY,
@@ -226,7 +263,7 @@ def create_table():
             ON CONFLICT (role_id, access_id) DO NOTHING;
         """)
 
-    # 9. Trigger logic
+    # 13. Trigger logic
     cursor.execute("""
         CREATE OR REPLACE FUNCTION fn_sync_editor_list()
         RETURNS TRIGGER AS $$

@@ -195,22 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00435" summary="uses python to set the validation of the lotnunbers">
-      <option name="closed" value="true" />
-      <created>1776319286223</created>
-      <option name="number" value="00435" />
-      <option name="presentableId" value="LOCAL-00435" />
-      <option name="project" value="LOCAL" />
-      <updated>1776319286223</updated>
-    </task>
-    <task id="LOCAL-00436" summary="updated the lot validation function">
-      <option name="closed" value="true" />
-      <created>1776319727849</created>
-      <option name="number" value="00436" />
-      <option name="presentableId" value="LOCAL-00436" />
-      <option name="project" value="LOCAL" />
-      <updated>1776319727849</updated>
-    </task>
     <task id="LOCAL-00437" summary="modified tha table column spacing of the production records">
       <option name="closed" value="true" />
       <created>1776320761872</created>
@@ -587,7 +571,23 @@
       <option name="project" value="LOCAL" />
       <updated>1777259549500</updated>
     </task>
-    <option name="localTasksCounter" value="484" />
+    <task id="LOCAL-00484" summary="updated the shecma datatype to  make a boolean to make it more quicker">
+      <option name="closed" value="true" />
+      <created>1777260361415</created>
+      <option name="number" value="00484" />
+      <option name="presentableId" value="LOCAL-00484" />
+      <option name="project" value="LOCAL" />
+      <updated>1777260361415</updated>
+    </task>
+    <task id="LOCAL-00485" summary="upodated thee legacy program to match the new data type in the schema">
+      <option name="closed" value="true" />
+      <created>1777260387469</created>
+      <option name="number" value="00485" />
+      <option name="presentableId" value="LOCAL-00485" />
+      <option name="project" value="LOCAL" />
+      <updated>1777260387469</updated>
+    </task>
+    <option name="localTasksCounter" value="486" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,8 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create a export to csv" />
-    <MESSAGE value="commented out the log in records on audit trail" />
     <MESSAGE value="added check of production number if existing before cancel" />
     <MESSAGE value="added date rasngein the audit trail" />
     <MESSAGE value="added the default value of date range based from the records" />
@@ -639,7 +637,9 @@
     <MESSAGE value="updated the save button to update when there is a past record loaded into it" />
     <MESSAGE value="updated the save button textt in otherr pages" />
     <MESSAGE value="updated the conection of the legacy system to connect on the changes on the main  connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the conection of the legacy system to connect on the changes on the main  connection" />
+    <MESSAGE value="updated the shecma datatype to  make a boolean to make it more quicker" />
+    <MESSAGE value="upodated thee legacy program to match the new data type in the schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="upodated thee legacy program to match the new data type in the schema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
