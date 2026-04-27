@@ -35,16 +35,6 @@ def cancel_production(prod_id):
         return False, str(e)
 
 
-def refresh_materialized():
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("REFRESH MATERIALIZED VIEW mv_lot_parts;")
-    conn.commit()
-    cursor.close()
-    conn.close()
-
-
 def update_role_permissions(permission_list):
     """
     Saves the states of the checkboxes.
