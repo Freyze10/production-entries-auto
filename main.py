@@ -182,7 +182,7 @@ class MainWindow(QMainWindow):
             if access_name in self.allowed_access:
                 layout.addWidget(btn)
 
-        # 3. Handle System Section
+        # Handle System Section
         # Only show the "System" label if at least one of the system buttons is allowed
         show_audit = "Audit Trail" in self.allowed_access
         show_perms = "Permission Access" in self.allowed_access
@@ -191,7 +191,7 @@ class MainWindow(QMainWindow):
             layout.addWidget(QLabel("System", objectName="MenuLabel"))
             if show_audit:
                 layout.addWidget(self.btn_audit_trail)
-                # display only the  usermanagement page if the mac  address is enabled for when the admin log in
+                # display only the usermanagement page if the mac  address is enabled for when the admin log in
             if show_perms:
                 layout.addWidget(self.btn_user_mamagement)
 
