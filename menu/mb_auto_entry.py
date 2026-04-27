@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from PyQt6.QtCore import Qt, QThread, QDate
+from PyQt6.QtCore import Qt, QThread, QDate, QTimer
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
@@ -603,11 +603,9 @@ class MBAutoEntry(QWidget):
         is_printed = self.prod_results.get('is_printed', False)
 
         if is_printed:
-            QMessageBox.information(self, "Record Locked",
-                                    "This production record is already printed.\n"
-                                    "Editing and Saving are now disabled for this ID.")
             self.save_btn.setEnabled(False)
             self.save_btn.setToolTip("This record is locked because it has already been printed.")
+            QTimer.singleShot(200, lambda: show_printed_locked_message())
         else:
             self.save_btn.setEnabled(True)
             self.save_btn.setToolTip("")
@@ -616,6 +614,7 @@ class MBAutoEntry(QWidget):
         item_count = self.materials_table.rowCount()
         self.no_items_label.setText(str(item_count))
         return True
+
 
     def cancel_production(self):
         raw_id = self.production_id_input.text().strip()

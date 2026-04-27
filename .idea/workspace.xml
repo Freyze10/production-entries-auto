@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00441" summary="makke the completter search for what contains not whatt it starts with">
-      <option name="closed" value="true" />
-      <created>1776322883840</created>
-      <option name="number" value="00441" />
-      <option name="presentableId" value="LOCAL-00441" />
-      <option name="project" value="LOCAL" />
-      <updated>1776322883840</updated>
-    </task>
     <task id="LOCAL-00442" summary="added a dedbounce function on the audit trail records search field">
       <option name="closed" value="true" />
       <created>1776325275117</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777262129115</updated>
     </task>
-    <option name="localTasksCounter" value="490" />
+    <task id="LOCAL-00490" summary="added qmessage to show thatt the production is already printed">
+      <option name="closed" value="true" />
+      <created>1777266899202</created>
+      <option name="number" value="00490" />
+      <option name="presentableId" value="LOCAL-00490" />
+      <option name="project" value="LOCAL" />
+      <updated>1777266899202</updated>
+    </task>
+    <option name="localTasksCounter" value="491" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added fetch data when the date is changed" />
     <MESSAGE value="modify the database query to fetch the date from the date range" />
     <MESSAGE value="return back the log of login inn audit trail" />
     <MESSAGE value="modified the requirements,txt" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated the read quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="removed unused update wuery" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed unused update wuery" />
+    <MESSAGE value="added qmessage to show thatt the production is already printed" />
+    <option name="LAST_COMMIT_MESSAGE" value="added qmessage to show thatt the production is already printed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
