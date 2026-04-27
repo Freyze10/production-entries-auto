@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00442" summary="added a dedbounce function on the audit trail records search field">
-      <option name="closed" value="true" />
-      <created>1776325275117</created>
-      <option name="number" value="00442" />
-      <option name="presentableId" value="LOCAL-00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1776325275117</updated>
-    </task>
     <task id="LOCAL-00443" summary="added wip number in the header to know it is from manual">
       <option name="closed" value="true" />
       <created>1776328505555</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777266899202</updated>
     </task>
-    <option name="localTasksCounter" value="491" />
+    <task id="LOCAL-00491" summary="added a qmessage for already printed production">
+      <option name="closed" value="true" />
+      <created>1777267195391</created>
+      <option name="number" value="00491" />
+      <option name="presentableId" value="LOCAL-00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267195391</updated>
+    </task>
+    <option name="localTasksCounter" value="492" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modify the database query to fetch the date from the date range" />
     <MESSAGE value="return back the log of login inn audit trail" />
     <MESSAGE value="modified the requirements,txt" />
     <MESSAGE value="added the location of the rm incoming" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="removed unused update wuery" />
     <MESSAGE value="added qmessage to show thatt the production is already printed" />
-    <option name="LAST_COMMIT_MESSAGE" value="added qmessage to show thatt the production is already printed" />
+    <MESSAGE value="added a qmessage for already printed production" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a qmessage for already printed production" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

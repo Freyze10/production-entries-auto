@@ -15,6 +15,7 @@ from db.update import cancel_production
 from db.write import log_audit_trail
 from table_model import table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
+from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
@@ -605,7 +606,7 @@ class MBAutoEntry(QWidget):
         if is_printed:
             self.save_btn.setEnabled(False)
             self.save_btn.setToolTip("This record is locked because it has already been printed.")
-            QTimer.singleShot(200, lambda: show_printed_locked_message())
+            QTimer.singleShot(200, lambda: show_printed_locked_message(self))
         else:
             self.save_btn.setEnabled(True)
             self.save_btn.setToolTip("")
