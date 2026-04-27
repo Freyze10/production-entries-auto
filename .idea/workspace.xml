@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00438" summary="added a manual separatorr in manual entry">
-      <option name="closed" value="true" />
-      <created>1776321311782</created>
-      <option name="number" value="00438" />
-      <option name="presentableId" value="LOCAL-00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1776321311782</updated>
-    </task>
     <task id="LOCAL-00439" summary="disconnect the auto add of spoacing in manual table to let them add needed seperator">
       <option name="closed" value="true" />
       <created>1776321411792</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777261370963</updated>
     </task>
-    <option name="localTasksCounter" value="487" />
+    <task id="LOCAL-00487" summary="updated the read quer to remove thhe string calls on boolean datatype">
+      <option name="closed" value="true" />
+      <created>1777261529952</created>
+      <option name="number" value="00487" />
+      <option name="presentableId" value="LOCAL-00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1777261529952</updated>
+    </task>
+    <option name="localTasksCounter" value="488" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added check of production number if existing before cancel" />
     <MESSAGE value="added date rasngein the audit trail" />
     <MESSAGE value="added the default value of date range based from the records" />
     <MESSAGE value="added fetch data when the date is changed" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated the conection of the legacy system to connect on the changes on the main  connection" />
     <MESSAGE value="updated the shecma datatype to  make a boolean to make it more quicker" />
     <MESSAGE value="upodated thee legacy program to match the new data type in the schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="upodated thee legacy program to match the new data type in the schema" />
+    <MESSAGE value="updated the read quer to remove thhe string calls on boolean datatype" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the read quer to remove thhe string calls on boolean datatype" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
