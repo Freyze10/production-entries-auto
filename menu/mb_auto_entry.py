@@ -526,6 +526,7 @@ class MBAutoEntry(QWidget):
             self.form_type_combo.setCurrentIndex(idx)
         else:
             self.form_type_combo.setCurrentIndex(0)
+
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
         self.formulation_id_input.setText(str(self.prod_results['form_id']))
@@ -570,16 +571,12 @@ class MBAutoEntry(QWidget):
         for mat in self.prod_materials:
             row_idx = self.materials_table.rowCount()
             self.materials_table.insertRow(row_idx)
-
             mat_code = str(mat[1]) if mat[1] else ""
 
-            # Logic for Empty vs. Data row
             if mat_code.strip() == "":
-                # It's an empty row: Fill all columns with empty strings
                 for col in range(self.materials_table.columnCount()):
                     self.materials_table.setItem(row_idx, col, QTableWidgetItem(""))
             else:
-                # It's a data row: Fill with Material and Numeric values
                 try:
                     large_scale = float(mat[2]) if mat[2] is not None else 0.0
                     small_scale = float(mat[3]) if mat[3] is not None else 0.0
@@ -587,23 +584,33 @@ class MBAutoEntry(QWidget):
                 except (ValueError, TypeError):
                     large_scale = small_scale = total_weight = 0.0
 
-                # Set Column 0: Material Code
                 self.materials_table.setItem(row_idx, 0, QTableWidgetItem(mat_code))
 
-                # Set Column 1: Large Scale
                 item_large = NumericTableWidgetItem(large_scale, is_float=True)
                 item_large.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 1, item_large)
 
-                # Set Column 2: Small Scale
                 item_small = NumericTableWidgetItem(small_scale, is_float=True)
                 item_small.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 2, item_small)
 
-                # Set Column 3: Total Weight
                 item_total = NumericTableWidgetItem(total_weight, is_float=True)
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
+
+        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---
+        # We get the value from the dictionary returned by the database
+        is_printed = self.prod_results.get('is_printed', False)
+
+        if is_printed:
+            QMessageBox.information(self, "Record Locked",
+                                    "This production record is already printed.\n"
+                                    "Editing and Saving are now disabled for this ID.")
+            self.save_btn.setEnabled(False)
+            self.save_btn.setToolTip("This record is locked because it has already been printed.")
+        else:
+            self.save_btn.setEnabled(True)
+            self.save_btn.setToolTip("")
 
         self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()

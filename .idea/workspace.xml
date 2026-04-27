@@ -37,27 +37,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.fastapi.executor": "Run",
-    "Python.format_rm_note.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.print.executor": "Run",
-    "Python.print_preview.executor": "Run",
-    "Python.styles.executor": "Run",
-    "Python.test_print.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "update-datatype",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.fastapi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.format_rm_note.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_preview.executor&quot;: &quot;Run&quot;,
+    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;update-datatype&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main">
     <configuration name="format_rm_note" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
@@ -194,14 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00440" summary="clear the cached prod data cancelled when they cancel a new record">
-      <option name="closed" value="true" />
-      <created>1776322415463</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1776322415463</updated>
     </task>
     <task id="LOCAL-00441" summary="makke the completter search for what contains not whatt it starts with">
       <option name="closed" value="true" />
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777261660337</updated>
     </task>
-    <option name="localTasksCounter" value="489" />
+    <task id="LOCAL-00489" summary="removed unused update wuery">
+      <option name="closed" value="true" />
+      <created>1777262129115</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1777262129115</updated>
+    </task>
+    <option name="localTasksCounter" value="490" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the default value of date range based from the records" />
     <MESSAGE value="added fetch data when the date is changed" />
     <MESSAGE value="modify the database query to fetch the date from the date range" />
     <MESSAGE value="return back the log of login inn audit trail" />
@@ -639,7 +638,8 @@
     <MESSAGE value="upodated thee legacy program to match the new data type in the schema" />
     <MESSAGE value="updated the read quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the update quer to remove thhe string calls on boolean datatype" />
+    <MESSAGE value="removed unused update wuery" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed unused update wuery" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
