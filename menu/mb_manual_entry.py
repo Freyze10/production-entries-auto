@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from PyQt6.QtCore import Qt, QThread
+from PyQt6.QtCore import Qt, QThread, QTimer
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
     QTableWidgetItem, QCompleter
@@ -12,6 +12,7 @@ from db.read import get_single_production_data, get_single_production_details, g
 from db.update import cancel_production
 from db.write import log_audit_trail
 from print.print_preview import ProductionPrintPreview
+from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
