@@ -605,6 +605,7 @@ class MBAutoEntry(QWidget):
 
         if is_printed:
             self.save_btn.setEnabled(False)
+            self.save_btn.setObjectName("disabled_btn")
             self.save_btn.setToolTip("This record is locked because it has already been printed.")
             QTimer.singleShot(200, lambda: show_printed_locked_message(self))
         else:
@@ -895,11 +896,6 @@ class MBAutoEntry(QWidget):
         preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit, role=self.user_role)
         preview.exec()
 
-    def clear_material_table(self):
-        self.materials_table.setRowCount(0)
-        self.clear_material_inputs()
-        self.update_totals()
-
     def update_totals(self):
         total_weight = 0.0
         item_count = self.get_valid_row_count()
@@ -932,13 +928,6 @@ class MBAutoEntry(QWidget):
                 if item.text().strip():
                     valid_count += 1
         return valid_count
-
-    def clear_material_inputs(self):
-        self.material_code_combo.setCurrentIndex(0)
-        self.material_code_lineedit.clear()
-        self.large_scale_input.clear()
-        self.small_scale_input.clear()
-        self.total_weight_input.clear()
 
     def apply_viewer_restrictions(self):
         """Disables all input fields and action buttons for users with 'VIEWER' role."""

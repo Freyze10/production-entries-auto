@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00443" summary="added wip number in the header to know it is from manual">
-      <option name="closed" value="true" />
-      <created>1776328505555</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1776328505555</updated>
-    </task>
     <task id="LOCAL-00444" summary="make the okay button clicked connect to the selected formula">
       <option name="closed" value="true" />
       <created>1776385735738</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777267195391</updated>
     </task>
-    <option name="localTasksCounter" value="492" />
+    <task id="LOCAL-00492" summary="added a qmessage for already printed production">
+      <option name="closed" value="true" />
+      <created>1777267250110</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267250110</updated>
+    </task>
+    <option name="localTasksCounter" value="493" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
