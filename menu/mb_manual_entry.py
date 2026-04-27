@@ -524,9 +524,9 @@ class MBManualEntry(QWidget):
 
         self.product_code_input.setText(str(self.prod_results['prod_code']))
         self.product_color_input.setText(str(self.prod_results['prod_color']))
-        self.formulation_id_input.setText(str(self.prod_results['form_id']))
-        self.dosage_input.setText(f"{self.prod_results['dosage']:.6f}")
-        self.ld_percent_input.setText(f"{self.prod_results['ld']:.6f}")
+        self.formula_input.setText(str(self.prod_results['form_id']))
+        self.sum_cons_input.setText(f"{self.prod_results['dosage']:.6f}")
+        self.dosage_input.setText(f"{self.prod_results['ld']:.6f}")
         self.customer_input.setText(str(self.prod_results['customer']))
         self.lot_no_input.setText(str(self.prod_results['lot_no']))
         self.order_form_no_input.setText(str(self.prod_results['order_no']))

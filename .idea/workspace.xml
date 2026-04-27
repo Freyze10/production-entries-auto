@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00451" summary="remove the calculation for displaying old records. only use what was recorded even the spacing">
-      <option name="closed" value="true" />
-      <created>1776393011752</created>
-      <option name="number" value="00451" />
-      <option name="presentableId" value="LOCAL-00451" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393011752</updated>
-    </task>
     <task id="LOCAL-00452" summary="removed the imports of table spacing">
       <option name="closed" value="true" />
       <created>1776393125705</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777268187814</updated>
     </task>
-    <option name="localTasksCounter" value="500" />
+    <task id="LOCAL-00500" summary="adjusted the dedfault display of the audit  trail">
+      <option name="closed" value="true" />
+      <created>1777268618689</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1777268618689</updated>
+    </task>
+    <option name="localTasksCounter" value="501" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added the syncing of rm incoming" />
     <MESSAGE value="added the query for getting the note on rm incoming" />
     <MESSAGE value="added a function to return the bag weight for rm" />
     <MESSAGE value="added a helper function to gett the desired bag  weight" />
@@ -639,7 +638,8 @@
     <MESSAGE value="import necessary modules to  mport" />
     <MESSAGE value="remove the empty form type, there will be  a default &quot;new&quot; value" />
     <MESSAGE value="changed the save button design on the  manual entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the save button design on the  manual entry" />
+    <MESSAGE value="adjusted the dedfault display of the audit  trail" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted the dedfault display of the audit  trail" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
