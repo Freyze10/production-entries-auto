@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00450" summary="added record count even when searching">
-      <option name="closed" value="true" />
-      <created>1776389112364</created>
-      <option name="number" value="00450" />
-      <option name="presentableId" value="LOCAL-00450" />
-      <option name="project" value="LOCAL" />
-      <updated>1776389112364</updated>
-    </task>
     <task id="LOCAL-00451" summary="remove the calculation for displaying old records. only use what was recorded even the spacing">
       <option name="closed" value="true" />
       <created>1776393011752</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777268077719</updated>
     </task>
-    <option name="localTasksCounter" value="499" />
+    <task id="LOCAL-00499" summary="changed the save button design on the  manual entry">
+      <option name="closed" value="true" />
+      <created>1777268187814</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1777268187814</updated>
+    </task>
+    <option name="localTasksCounter" value="500" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
     <MESSAGE value="added the syncing of rm incoming" />
     <MESSAGE value="added the query for getting the note on rm incoming" />
     <MESSAGE value="added a function to return the bag weight for rm" />
@@ -639,7 +638,8 @@
     <MESSAGE value="disable save button when the production is already printed in other pages too" />
     <MESSAGE value="import necessary modules to  mport" />
     <MESSAGE value="remove the empty form type, there will be  a default &quot;new&quot; value" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove the empty form type, there will be  a default &quot;new&quot; value" />
+    <MESSAGE value="changed the save button design on the  manual entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the save button design on the  manual entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
