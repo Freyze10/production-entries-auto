@@ -2,12 +2,12 @@ from db.connection import get_connection
 
 
 def print_production(prod_id):
-
     conn = get_connection()
     cursor = conn.cursor()
 
+    # Updated to use native BOOLEAN TRUE
     cursor.execute("""
-            UPDATE tbl_production01 SET is_printed = 'True' WHERE prod_id = %s
+            UPDATE tbl_production01 SET is_printed = TRUE WHERE prod_id = %s
         """, (prod_id,))
     conn.commit()
     cursor.close()
@@ -19,8 +19,9 @@ def cancel_production(prod_id):
         conn = get_connection()
         cursor = conn.cursor()
 
+        # Updated to use native BOOLEAN TRUE
         cursor.execute("""
-                UPDATE tbl_production01 SET is_deleted = 'True' WHERE prod_id = %s
+                UPDATE tbl_production01 SET is_deleted = TRUE WHERE prod_id = %s
             """, (prod_id,))
         conn.commit()
         cursor.close()
@@ -44,6 +45,7 @@ def update_role_permissions(permission_list):
         cur = conn.cursor()
 
         # Upsert: Insert if new, update is_enabled if already exists
+        # This already handles Python True/False objects correctly for BOOLEAN columns
         query = """
             INSERT INTO tbl_role_permissions (role_id, access_id, is_enabled)
             VALUES (%s, %s, %s)
@@ -59,4 +61,3 @@ def update_role_permissions(permission_list):
     except Exception as e:
         print(f"Error update_role_permissions: {e}")
         return False
-

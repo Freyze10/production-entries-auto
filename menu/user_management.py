@@ -258,7 +258,7 @@ class PermissionsManager(QWidget):
             }
             if save_user_changes(self.selected_user_id, data):
                 QMessageBox.information(self, "Success", "User details updated.")
-                log_audit_trail(self.work_station['m'], "UPDATE", f"Hostname: {data['hostname']}\\{data['username']} has been successfully Updated")
+                log_audit_trail(self.work_station['m'], "MODIFY", f"Hostname: {data['hostname']}\\{data['username']} has been successfully updated")
                 self.refresh_data()
         except StopIteration:
             QMessageBox.critical(self, "Error", "Selected role not found.")

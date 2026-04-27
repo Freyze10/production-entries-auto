@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from PyQt6.QtCore import Qt, QThread
+from PyQt6.QtCore import Qt, QThread, QTimer
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
     QTableWidgetItem, QCompleter
@@ -12,6 +12,7 @@ from db.read import get_single_production_data, get_single_production_details, g
 from db.update import cancel_production
 from db.write import log_audit_trail
 from print.print_preview import ProductionPrintPreview
+from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers
 from util.loading import LoadingDialog
@@ -76,7 +77,7 @@ class MBManualEntry(QWidget):
 
         # Form Type
         self.form_type_combo = QComboBox()
-        self.form_type_combo.addItems(["", "NEW", "CORRECTION"])
+        self.form_type_combo.addItems(["NEW", "CORRECTION"])
         self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
         primary_layout.addWidget(QLabel("Form Type:"), row, 0)
         primary_layout.addWidget(self.form_type_combo, row, 1)
@@ -492,7 +493,6 @@ class MBManualEntry(QWidget):
             if hasattr(super(), 'focusOutEvent'):
                 super().focusOutEvent(event)
 
-
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
         if is_raw:
@@ -600,8 +600,17 @@ class MBManualEntry(QWidget):
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
 
-        # btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
-        # btn.setObjectName("disabled_btn")
+        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---=
+        is_printed = self.prod_results.get('is_printed', False)
+
+        if is_printed:
+            self.save_btn.setEnabled(False)
+            self.save_btn.setObjectName("disabled_btn")
+            self.save_btn.setToolTip("This record is locked because it has already been printed.")
+            QTimer.singleShot(200, lambda: show_printed_locked_message(self))
+        else:
+            self.save_btn.setEnabled(True)
+            self.save_btn.setToolTip("")
 
         self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()
@@ -762,6 +771,10 @@ class MBManualEntry(QWidget):
             self.prod_results = None
 
         self.save_btn.setText("Save")
+        self.save_btn.setObjectName("InfoButton")
+        self.save_btn.style().unpolish(self.save_btn)
+        self.save_btn.style().polish(self.save_btn)
+
         self.materials_table.setRowCount(0)
         self.clear_material_inputs()
         self.update_totals()

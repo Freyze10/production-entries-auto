@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main-compute-generate" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,7 +47,7 @@
     &quot;Python.styles.executor&quot;: &quot;Run&quot;,
     &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;update-datatype&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -194,182 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00433" summary="added refresh materialized to update the  lotnumber output">
-      <option name="closed" value="true" />
-      <created>1776317493509</created>
-      <option name="number" value="00433" />
-      <option name="presentableId" value="LOCAL-00433" />
-      <option name="project" value="LOCAL" />
-      <updated>1776317493509</updated>
-    </task>
-    <task id="LOCAL-00434" summary="revert back the code and added one time only call on the database">
-      <option name="closed" value="true" />
-      <created>1776318532269</created>
-      <option name="number" value="00434" />
-      <option name="presentableId" value="LOCAL-00434" />
-      <option name="project" value="LOCAL" />
-      <updated>1776318532278</updated>
-    </task>
-    <task id="LOCAL-00435" summary="uses python to set the validation of the lotnunbers">
-      <option name="closed" value="true" />
-      <created>1776319286223</created>
-      <option name="number" value="00435" />
-      <option name="presentableId" value="LOCAL-00435" />
-      <option name="project" value="LOCAL" />
-      <updated>1776319286223</updated>
-    </task>
-    <task id="LOCAL-00436" summary="updated the lot validation function">
-      <option name="closed" value="true" />
-      <created>1776319727849</created>
-      <option name="number" value="00436" />
-      <option name="presentableId" value="LOCAL-00436" />
-      <option name="project" value="LOCAL" />
-      <updated>1776319727849</updated>
-    </task>
-    <task id="LOCAL-00437" summary="modified tha table column spacing of the production records">
-      <option name="closed" value="true" />
-      <created>1776320761872</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1776320761872</updated>
-    </task>
-    <task id="LOCAL-00438" summary="added a manual separatorr in manual entry">
-      <option name="closed" value="true" />
-      <created>1776321311782</created>
-      <option name="number" value="00438" />
-      <option name="presentableId" value="LOCAL-00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1776321311782</updated>
-    </task>
-    <task id="LOCAL-00439" summary="disconnect the auto add of spoacing in manual table to let them add needed seperator">
-      <option name="closed" value="true" />
-      <created>1776321411792</created>
-      <option name="number" value="00439" />
-      <option name="presentableId" value="LOCAL-00439" />
-      <option name="project" value="LOCAL" />
-      <updated>1776321411792</updated>
-    </task>
-    <task id="LOCAL-00440" summary="clear the cached prod data cancelled when they cancel a new record">
-      <option name="closed" value="true" />
-      <created>1776322415463</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1776322415463</updated>
-    </task>
-    <task id="LOCAL-00441" summary="makke the completter search for what contains not whatt it starts with">
-      <option name="closed" value="true" />
-      <created>1776322883840</created>
-      <option name="number" value="00441" />
-      <option name="presentableId" value="LOCAL-00441" />
-      <option name="project" value="LOCAL" />
-      <updated>1776322883840</updated>
-    </task>
-    <task id="LOCAL-00442" summary="added a dedbounce function on the audit trail records search field">
-      <option name="closed" value="true" />
-      <created>1776325275117</created>
-      <option name="number" value="00442" />
-      <option name="presentableId" value="LOCAL-00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1776325275117</updated>
-    </task>
-    <task id="LOCAL-00443" summary="added wip number in the header to know it is from manual">
-      <option name="closed" value="true" />
-      <created>1776328505555</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1776328505555</updated>
-    </task>
-    <task id="LOCAL-00444" summary="make the okay button clicked connect to the selected formula">
-      <option name="closed" value="true" />
-      <created>1776385735738</created>
-      <option name="number" value="00444" />
-      <option name="presentableId" value="LOCAL-00444" />
-      <option name="project" value="LOCAL" />
-      <updated>1776385735738</updated>
-    </task>
-    <task id="LOCAL-00445" summary="added an icon for the system">
-      <option name="closed" value="true" />
-      <created>1776387435468</created>
-      <option name="number" value="00445" />
-      <option name="presentableId" value="LOCAL-00445" />
-      <option name="project" value="LOCAL" />
-      <updated>1776387435468</updated>
-    </task>
-    <task id="LOCAL-00446" summary="added an icon for the system">
-      <option name="closed" value="true" />
-      <created>1776387446531</created>
-      <option name="number" value="00446" />
-      <option name="presentableId" value="LOCAL-00446" />
-      <option name="project" value="LOCAL" />
-      <updated>1776387446531</updated>
-    </task>
-    <task id="LOCAL-00447" summary="fixed index type in column searching for audit trail">
-      <option name="closed" value="true" />
-      <created>1776388344523</created>
-      <option name="number" value="00447" />
-      <option name="presentableId" value="LOCAL-00447" />
-      <option name="project" value="LOCAL" />
-      <updated>1776388344527</updated>
-    </task>
-    <task id="LOCAL-00448" summary="hidden the wip column">
-      <option name="closed" value="true" />
-      <created>1776388382075</created>
-      <option name="number" value="00448" />
-      <option name="presentableId" value="LOCAL-00448" />
-      <option name="project" value="LOCAL" />
-      <updated>1776388382075</updated>
-    </task>
-    <task id="LOCAL-00449" summary="added a row count on audit trail">
-      <option name="closed" value="true" />
-      <created>1776388954083</created>
-      <option name="number" value="00449" />
-      <option name="presentableId" value="LOCAL-00449" />
-      <option name="project" value="LOCAL" />
-      <updated>1776388954083</updated>
-    </task>
-    <task id="LOCAL-00450" summary="added record count even when searching">
-      <option name="closed" value="true" />
-      <created>1776389112364</created>
-      <option name="number" value="00450" />
-      <option name="presentableId" value="LOCAL-00450" />
-      <option name="project" value="LOCAL" />
-      <updated>1776389112364</updated>
-    </task>
-    <task id="LOCAL-00451" summary="remove the calculation for displaying old records. only use what was recorded even the spacing">
-      <option name="closed" value="true" />
-      <created>1776393011752</created>
-      <option name="number" value="00451" />
-      <option name="presentableId" value="LOCAL-00451" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393011752</updated>
-    </task>
-    <task id="LOCAL-00452" summary="removed the imports of table spacing">
-      <option name="closed" value="true" />
-      <created>1776393125705</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393125705</updated>
-    </task>
-    <task id="LOCAL-00453" summary="&#10;added a validation to not generate if there is no formula in dmb">
-      <option name="closed" value="true" />
-      <created>1776393969714</created>
-      <option name="number" value="00453" />
-      <option name="presentableId" value="LOCAL-00453" />
-      <option name="project" value="LOCAL" />
-      <updated>1776393969714</updated>
-    </task>
-    <task id="LOCAL-00454" summary="&#10;added a validation to not generate if there is no formula in dc">
-      <option name="closed" value="true" />
-      <created>1776394152103</created>
-      <option name="number" value="00454" />
-      <option name="presentableId" value="LOCAL-00454" />
-      <option name="project" value="LOCAL" />
-      <updated>1776394152103</updated>
     </task>
     <task id="LOCAL-00455" summary="create a export to csv">
       <option name="closed" value="true" />
@@ -587,7 +411,183 @@
       <option name="project" value="LOCAL" />
       <updated>1777257827447</updated>
     </task>
-    <option name="localTasksCounter" value="482" />
+    <task id="LOCAL-00482" summary="updated the save button textt in otherr pages">
+      <option name="closed" value="true" />
+      <created>1777259137823</created>
+      <option name="number" value="00482" />
+      <option name="presentableId" value="LOCAL-00482" />
+      <option name="project" value="LOCAL" />
+      <updated>1777259137823</updated>
+    </task>
+    <task id="LOCAL-00483" summary="updated the conection of the legacy system to connect on the changes on the main  connection">
+      <option name="closed" value="true" />
+      <created>1777259549500</created>
+      <option name="number" value="00483" />
+      <option name="presentableId" value="LOCAL-00483" />
+      <option name="project" value="LOCAL" />
+      <updated>1777259549500</updated>
+    </task>
+    <task id="LOCAL-00484" summary="updated the shecma datatype to  make a boolean to make it more quicker">
+      <option name="closed" value="true" />
+      <created>1777260361415</created>
+      <option name="number" value="00484" />
+      <option name="presentableId" value="LOCAL-00484" />
+      <option name="project" value="LOCAL" />
+      <updated>1777260361415</updated>
+    </task>
+    <task id="LOCAL-00485" summary="upodated thee legacy program to match the new data type in the schema">
+      <option name="closed" value="true" />
+      <created>1777260387469</created>
+      <option name="number" value="00485" />
+      <option name="presentableId" value="LOCAL-00485" />
+      <option name="project" value="LOCAL" />
+      <updated>1777260387469</updated>
+    </task>
+    <task id="LOCAL-00486" summary="upodated thee legacy program to match the new data type in the schema">
+      <option name="closed" value="true" />
+      <created>1777261370963</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1777261370963</updated>
+    </task>
+    <task id="LOCAL-00487" summary="updated the read quer to remove thhe string calls on boolean datatype">
+      <option name="closed" value="true" />
+      <created>1777261529952</created>
+      <option name="number" value="00487" />
+      <option name="presentableId" value="LOCAL-00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1777261529952</updated>
+    </task>
+    <task id="LOCAL-00488" summary="updated the update quer to remove thhe string calls on boolean datatype">
+      <option name="closed" value="true" />
+      <created>1777261660337</created>
+      <option name="number" value="00488" />
+      <option name="presentableId" value="LOCAL-00488" />
+      <option name="project" value="LOCAL" />
+      <updated>1777261660337</updated>
+    </task>
+    <task id="LOCAL-00489" summary="removed unused update wuery">
+      <option name="closed" value="true" />
+      <created>1777262129115</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1777262129115</updated>
+    </task>
+    <task id="LOCAL-00490" summary="added qmessage to show thatt the production is already printed">
+      <option name="closed" value="true" />
+      <created>1777266899202</created>
+      <option name="number" value="00490" />
+      <option name="presentableId" value="LOCAL-00490" />
+      <option name="project" value="LOCAL" />
+      <updated>1777266899202</updated>
+    </task>
+    <task id="LOCAL-00491" summary="added a qmessage for already printed production">
+      <option name="closed" value="true" />
+      <created>1777267195391</created>
+      <option name="number" value="00491" />
+      <option name="presentableId" value="LOCAL-00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267195391</updated>
+    </task>
+    <task id="LOCAL-00492" summary="added a qmessage for already printed production">
+      <option name="closed" value="true" />
+      <created>1777267250110</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267250110</updated>
+    </task>
+    <task id="LOCAL-00493" summary="added a qmessage for already printed production">
+      <option name="closed" value="true" />
+      <created>1777267342002</created>
+      <option name="number" value="00493" />
+      <option name="presentableId" value="LOCAL-00493" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267342002</updated>
+    </task>
+    <task id="LOCAL-00494" summary="returend back the save button when the new entry is clickes">
+      <option name="closed" value="true" />
+      <created>1777267425696</created>
+      <option name="number" value="00494" />
+      <option name="presentableId" value="LOCAL-00494" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267425696</updated>
+    </task>
+    <task id="LOCAL-00495" summary="disable save button when the production is already printed">
+      <option name="closed" value="true" />
+      <created>1777267756966</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267756966</updated>
+    </task>
+    <task id="LOCAL-00496" summary="disable save button when the production is already printed in other pages too">
+      <option name="closed" value="true" />
+      <created>1777267831867</created>
+      <option name="number" value="00496" />
+      <option name="presentableId" value="LOCAL-00496" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267831867</updated>
+    </task>
+    <task id="LOCAL-00497" summary="import necessary modules to  mport">
+      <option name="closed" value="true" />
+      <created>1777267850629</created>
+      <option name="number" value="00497" />
+      <option name="presentableId" value="LOCAL-00497" />
+      <option name="project" value="LOCAL" />
+      <updated>1777267850629</updated>
+    </task>
+    <task id="LOCAL-00498" summary="remove the empty form type, there will be  a default &quot;new&quot; value">
+      <option name="closed" value="true" />
+      <created>1777268077719</created>
+      <option name="number" value="00498" />
+      <option name="presentableId" value="LOCAL-00498" />
+      <option name="project" value="LOCAL" />
+      <updated>1777268077719</updated>
+    </task>
+    <task id="LOCAL-00499" summary="changed the save button design on the  manual entry">
+      <option name="closed" value="true" />
+      <created>1777268187814</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1777268187814</updated>
+    </task>
+    <task id="LOCAL-00500" summary="adjusted the dedfault display of the audit  trail">
+      <option name="closed" value="true" />
+      <created>1777268618689</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1777268618689</updated>
+    </task>
+    <task id="LOCAL-00501" summary="modified the manual entry">
+      <option name="closed" value="true" />
+      <created>1777270725039</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1777270725039</updated>
+    </task>
+    <task id="LOCAL-00502" summary="updated the production records to be in order based from prod id">
+      <option name="closed" value="true" />
+      <created>1777271708265</created>
+      <option name="number" value="00502" />
+      <option name="presentableId" value="LOCAL-00502" />
+      <option name="project" value="LOCAL" />
+      <updated>1777271708265</updated>
+    </task>
+    <task id="LOCAL-00503" summary="updated some of the audit trail message">
+      <option name="closed" value="true" />
+      <created>1777274008204</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1777274008204</updated>
+    </task>
+    <option name="localTasksCounter" value="504" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,24 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&#10;added a validation to not generate if there is no formula in dc" />
-    <MESSAGE value="create a export to csv" />
-    <MESSAGE value="commented out the log in records on audit trail" />
-    <MESSAGE value="added check of production number if existing before cancel" />
-    <MESSAGE value="added date rasngein the audit trail" />
-    <MESSAGE value="added the default value of date range based from the records" />
-    <MESSAGE value="added fetch data when the date is changed" />
-    <MESSAGE value="modify the database query to fetch the date from the date range" />
-    <MESSAGE value="return back the log of login inn audit trail" />
-    <MESSAGE value="modified the requirements,txt" />
-    <MESSAGE value="added the location of the rm incoming" />
-    <MESSAGE value="updated the legacy database sync" />
-    <MESSAGE value="removed minimum screensize then use auto full screen mode and make it resizeable" />
-    <MESSAGE value="modified the qlable header text when clicked on the record to not push the other content" />
-    <MESSAGE value="added the syncing of rm incoming" />
-    <MESSAGE value="added the query for getting the note on rm incoming" />
-    <MESSAGE value="added a function to return the bag weight for rm" />
-    <MESSAGE value="added a helper function to gett the desired bag  weight" />
     <MESSAGE value="added the logic for 20kg in the tumbler" />
     <MESSAGE value="Added the logic pf 20kg to the generate computation but to check" />
     <MESSAGE value="return early of theres no to sync data" />
@@ -639,7 +621,25 @@
     <MESSAGE value="fixed the comment for thhe main window" />
     <MESSAGE value="updated the save button to update when there is a past record loaded into it" />
     <MESSAGE value="updated the save button textt in otherr pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the save button textt in otherr pages" />
+    <MESSAGE value="updated the conection of the legacy system to connect on the changes on the main  connection" />
+    <MESSAGE value="updated the shecma datatype to  make a boolean to make it more quicker" />
+    <MESSAGE value="upodated thee legacy program to match the new data type in the schema" />
+    <MESSAGE value="updated the read quer to remove thhe string calls on boolean datatype" />
+    <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
+    <MESSAGE value="removed unused update wuery" />
+    <MESSAGE value="added qmessage to show thatt the production is already printed" />
+    <MESSAGE value="added a qmessage for already printed production" />
+    <MESSAGE value="returend back the save button when the new entry is clickes" />
+    <MESSAGE value="disable save button when the production is already printed" />
+    <MESSAGE value="disable save button when the production is already printed in other pages too" />
+    <MESSAGE value="import necessary modules to  mport" />
+    <MESSAGE value="remove the empty form type, there will be  a default &quot;new&quot; value" />
+    <MESSAGE value="changed the save button design on the  manual entry" />
+    <MESSAGE value="adjusted the dedfault display of the audit  trail" />
+    <MESSAGE value="modified the manual entry" />
+    <MESSAGE value="updated the production records to be in order based from prod id" />
+    <MESSAGE value="updated some of the audit trail message" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated some of the audit trail message" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
