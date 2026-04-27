@@ -493,7 +493,6 @@ class MBManualEntry(QWidget):
             if hasattr(super(), 'focusOutEvent'):
                 super().focusOutEvent(event)
 
-
     def on_material_type_changed(self, checked, is_raw):
         """Handle material type selection like radio buttons and switch input fields."""
         if is_raw:
