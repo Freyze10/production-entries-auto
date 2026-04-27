@@ -75,7 +75,7 @@ class MBAutoEntry(QWidget):
         self.select_formula_btn.setToolTip("Select Formula")
 
         self.form_type_combo = QComboBox()
-        self.form_type_combo.addItems(["", "NEW", "CORRECTION"])
+        self.form_type_combo.addItems(["NEW", "CORRECTION"])
         self.form_type_combo.setStyleSheet("background-color: #FDECCE;")
 
         select_formula_layout = QHBoxLayout()
