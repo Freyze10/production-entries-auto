@@ -600,19 +600,19 @@ class MBAutoEntry(QWidget):
                 self.materials_table.setItem(row_idx, 3, item_total)
 
         # --- CHECK PRINTED STATUS AND DISABLE SAVE ---
-        # We get the value from the dictionary returned by the database
         is_printed = self.prod_results.get('is_printed', False)
-
         if is_printed:
             self.save_btn.setEnabled(False)
             self.save_btn.setObjectName("disabled_btn")
-            self.save_btn.setToolTip("This record is locked because it has already been printed.")
             QTimer.singleShot(200, lambda: show_printed_locked_message(self))
         else:
+            self.save_btn.setText("Update")
             self.save_btn.setEnabled(True)
-            self.save_btn.setToolTip("")
+            self.save_btn.setObjectName("SuccessButton")
 
-        self.save_btn.setText("Update")
+        self.save_btn.style().unpolish(self.save_btn)
+        self.save_btn.style().polish(self.save_btn)
+
         item_count = self.materials_table.rowCount()
         self.no_items_label.setText(str(item_count))
         return True
@@ -710,6 +710,7 @@ class MBAutoEntry(QWidget):
 
         self.save_btn.setText("Save")
         self.save_btn.setObjectName("SuccessButton")
+        self.save_btn.setEnabled(True)
         self.save_btn.style().unpolish(self.save_btn)
         self.save_btn.style().polish(self.save_btn)
 
