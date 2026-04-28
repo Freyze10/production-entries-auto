@@ -804,14 +804,14 @@ class MBManualEntry(QWidget):
         success, message = save_production_record(header, quantity, encode, materials, is_update)
 
         if success:
-            action_verb = "updated" if is_update else "saved"
+            action_verb = "updated" if is_update else "Created"
             QMessageBox.information(self, "Success",
                                     f"Production record {header['prod_id']} has been {action_verb}.")
 
             # 5. Audit Trail
             log_audit_trail(
                 self.work_station['m'],
-                "UPDATE" if is_update else "INSERT",
+                "UPDATE" if is_update else "CREATE",
                 f"Manual Production ID: {header['prod_id']} {action_verb} successfully."
             )
 
