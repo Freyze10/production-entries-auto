@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00462" summary="return back the log of login inn audit trail">
-      <option name="closed" value="true" />
-      <created>1776495729212</created>
-      <option name="number" value="00462" />
-      <option name="presentableId" value="LOCAL-00462" />
-      <option name="project" value="LOCAL" />
-      <updated>1776495729213</updated>
-    </task>
     <task id="LOCAL-00463" summary="modified the requirements,txt">
       <option name="closed" value="true" />
       <created>1776647741542</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777341111473</updated>
     </task>
-    <option name="localTasksCounter" value="511" />
+    <task id="LOCAL-00511" summary="added a save function in the mb auto entry">
+      <option name="closed" value="true" />
+      <created>1777341203125</created>
+      <option name="number" value="00511" />
+      <option name="presentableId" value="LOCAL-00511" />
+      <option name="project" value="LOCAL" />
+      <updated>1777341203126</updated>
+    </task>
+    <option name="localTasksCounter" value="512" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the save button textt in otherr pages" />
     <MESSAGE value="updated the conection of the legacy system to connect on the changes on the main  connection" />
     <MESSAGE value="updated the shecma datatype to  make a boolean to make it more quicker" />
     <MESSAGE value="upodated thee legacy program to match the new data type in the schema" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added a query to make the update or save function work" />
     <MESSAGE value="added a save function in the dc auto entry" />
     <MESSAGE value="updated the updating of the button for save/update" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the updating of the button for save/update" />
+    <MESSAGE value="added a save function in the mb auto entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a save function in the mb auto entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
