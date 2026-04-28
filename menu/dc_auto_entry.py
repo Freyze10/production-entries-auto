@@ -743,13 +743,13 @@ class DCAutoEntry(QWidget):
         success, message = save_production_record(header, quantity, encode, materials, is_update)
 
         if success:
-            action = "updated" if is_update else "saved"
+            action = "updated" if is_update else "created"
             QMessageBox.information(self, "Success", f"Production {header['prod_id']} has been {action} successfully.")
 
             # Audit Trail
             log_audit_trail(
                 self.work_station['m'],
-                "UPDATE" if is_update else "INSERT",
+                "UPDATE" if is_update else "CREATE",
                 f"(DC-Auto) Prod ID: {header['prod_id']} {action}"
             )
 

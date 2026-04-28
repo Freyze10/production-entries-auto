@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00464" summary="added the location of the rm incoming">
-      <option name="closed" value="true" />
-      <created>1776650480563</created>
-      <option name="number" value="00464" />
-      <option name="presentableId" value="LOCAL-00464" />
-      <option name="project" value="LOCAL" />
-      <updated>1776650480563</updated>
-    </task>
     <task id="LOCAL-00465" summary="updated the legacy database sync">
       <option name="closed" value="true" />
       <created>1776653258837</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777357783282</updated>
     </task>
-    <option name="localTasksCounter" value="513" />
+    <task id="LOCAL-00513" summary="changed the audit log  for the save/update in manual">
+      <option name="closed" value="true" />
+      <created>1777359159928</created>
+      <option name="number" value="00513" />
+      <option name="presentableId" value="LOCAL-00513" />
+      <option name="project" value="LOCAL" />
+      <updated>1777359159928</updated>
+    </task>
+    <option name="localTasksCounter" value="514" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the shecma datatype to  make a boolean to make it more quicker" />
     <MESSAGE value="upodated thee legacy program to match the new data type in the schema" />
     <MESSAGE value="updated the read quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated the updating of the button for save/update" />
     <MESSAGE value="added a save function in the mb auto entry" />
     <MESSAGE value="updated the message for already printed record" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the message for already printed record" />
+    <MESSAGE value="changed the audit log  for the save/update in manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the audit log  for the save/update in manual" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

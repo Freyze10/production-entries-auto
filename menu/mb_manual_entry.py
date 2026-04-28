@@ -804,7 +804,7 @@ class MBManualEntry(QWidget):
         success, message = save_production_record(header, quantity, encode, materials, is_update)
 
         if success:
-            action_verb = "updated" if is_update else "Created"
+            action_verb = "updated" if is_update else "created"
             QMessageBox.information(self, "Success",
                                     f"Production record {header['prod_id']} has been {action_verb}.")
 
