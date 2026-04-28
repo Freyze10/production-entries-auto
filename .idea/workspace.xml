@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00458" summary="added date rasngein the audit trail">
-      <option name="closed" value="true" />
-      <created>1776494197644</created>
-      <option name="number" value="00458" />
-      <option name="presentableId" value="LOCAL-00458" />
-      <option name="project" value="LOCAL" />
-      <updated>1776494197644</updated>
-    </task>
     <task id="LOCAL-00459" summary="added the default value of date range based from the records">
       <option name="closed" value="true" />
       <created>1776494564730</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777339937136</updated>
     </task>
-    <option name="localTasksCounter" value="507" />
+    <task id="LOCAL-00507" summary="added a query to make the update or save function work">
+      <option name="closed" value="true" />
+      <created>1777340001049</created>
+      <option name="number" value="00507" />
+      <option name="presentableId" value="LOCAL-00507" />
+      <option name="project" value="LOCAL" />
+      <updated>1777340001050</updated>
+    </task>
+    <option name="localTasksCounter" value="508" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated" />
     <MESSAGE value="fixed the comment for thhe main window" />
     <MESSAGE value="updated the save button to update when there is a past record loaded into it" />
     <MESSAGE value="updated the save button textt in otherr pages" />
@@ -639,7 +638,8 @@
     <MESSAGE value="return the connection to server" />
     <MESSAGE value="updated the print output to match the print preview(to test)" />
     <MESSAGE value="added a function for save/ update in manual" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a function for save/ update in manual" />
+    <MESSAGE value="added a query to make the update or save function work" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a query to make the update or save function work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
