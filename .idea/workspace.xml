@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00461" summary="modify the database query to fetch the date from the date range">
-      <option name="closed" value="true" />
-      <created>1776495081082</created>
-      <option name="number" value="00461" />
-      <option name="presentableId" value="LOCAL-00461" />
-      <option name="project" value="LOCAL" />
-      <updated>1776495081082</updated>
-    </task>
     <task id="LOCAL-00462" summary="return back the log of login inn audit trail">
       <option name="closed" value="true" />
       <created>1776495729212</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777340558679</updated>
     </task>
-    <option name="localTasksCounter" value="510" />
+    <task id="LOCAL-00510" summary="updated the updating of the button for save/update">
+      <option name="closed" value="true" />
+      <created>1777341111472</created>
+      <option name="number" value="00510" />
+      <option name="presentableId" value="LOCAL-00510" />
+      <option name="project" value="LOCAL" />
+      <updated>1777341111473</updated>
+    </task>
+    <option name="localTasksCounter" value="511" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -637,9 +637,9 @@
     <MESSAGE value="updated the print output to match the print preview(to test)" />
     <MESSAGE value="added a function for save/ update in manual" />
     <MESSAGE value="added a query to make the update or save function work" />
-    <MESSAGE value="updated the updating of the button for save/update" />
     <MESSAGE value="added a save function in the dc auto entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a save function in the dc auto entry" />
+    <MESSAGE value="updated the updating of the button for save/update" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the updating of the button for save/update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
