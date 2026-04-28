@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00457" summary="added check of production number if existing before cancel">
-      <option name="closed" value="true" />
-      <created>1776478039301</created>
-      <option name="number" value="00457" />
-      <option name="presentableId" value="LOCAL-00457" />
-      <option name="project" value="LOCAL" />
-      <updated>1776478039301</updated>
-    </task>
     <task id="LOCAL-00458" summary="added date rasngein the audit trail">
       <option name="closed" value="true" />
       <created>1776494197644</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777277897212</updated>
     </task>
-    <option name="localTasksCounter" value="506" />
+    <task id="LOCAL-00506" summary="added a function for save/ update in manual">
+      <option name="closed" value="true" />
+      <created>1777339937134</created>
+      <option name="number" value="00506" />
+      <option name="presentableId" value="LOCAL-00506" />
+      <option name="project" value="LOCAL" />
+      <updated>1777339937136</updated>
+    </task>
+    <option name="localTasksCounter" value="507" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="return early of theres no to sync data" />
     <MESSAGE value="updated" />
     <MESSAGE value="fixed the comment for thhe main window" />
     <MESSAGE value="updated the save button to update when there is a past record loaded into it" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated some of the audit trail message" />
     <MESSAGE value="return the connection to server" />
     <MESSAGE value="updated the print output to match the print preview(to test)" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the print output to match the print preview(to test)" />
+    <MESSAGE value="added a function for save/ update in manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a function for save/ update in manual" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

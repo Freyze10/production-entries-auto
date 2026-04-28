@@ -134,3 +134,79 @@ def add_new_role(name, dept):
     except Exception as e:
         print(f"Error add_new_role: {e}")
         return False
+
+
+def save_production_record(header, quantity, encode, materials, is_update=False):
+    """
+    Saves or Updates a complete production record across 4 tables.
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        if is_update:
+            # 1. Update Header
+            cursor.execute("""
+                UPDATE tbl_production01 SET 
+                    prod_date=%s, customer=%s, form_id=%s, index_no=%s, prod_code=%s, 
+                    prod_color=%s, dosage=%s, ld=%s, lot_no=%s, order_no=%s, 
+                    mix_time=%s, machine_no=%s, note=%s, inventory_c_date=%s, form_type=%s
+                WHERE prod_id = %s
+            """, (header['prod_date'], header['customer'], header['form_id'], header['index_no'],
+                  header['prod_code'], header['prod_color'], header['dosage'], header['ld'],
+                  header['lot_no'], header['order_no'], header['mix_time'], header['machine_no'],
+                  header['note'], header['inventory_c_date'], header['form_type'], header['prod_id']))
+
+            # 2. Update Quantity
+            cursor.execute("""
+                UPDATE tbl_production_quantity SET 
+                    quantity_req=%s, quantity_batch=%s, quantity_prod=%s
+                WHERE prod_id = %s
+            """, (quantity['req'], quantity['batch'], quantity['prod'], header['prod_id']))
+
+            # 3. Update Encode (Usually just confirmation date)
+            cursor.execute("""
+                UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
+            """, (encode['prepared_by'], header['prod_id']))
+
+            # 4. Refresh Materials (Delete old, Insert new is safest for sequences)
+            cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
+
+        else:
+            # --- INSERT MODE ---
+            cursor.execute("""
+                INSERT INTO tbl_production01 (
+                    prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, 
+                    dosage, ld, lot_no, order_no, mix_time, machine_no, note, 
+                    user_id, inventory_c_date, form_type, is_deleted, is_printed
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, FALSE, FALSE)
+            """, (header['prod_id'], header['prod_date'], header['customer'], header['form_id'],
+                  header['index_no'], header['prod_code'], header['prod_color'], header['dosage'],
+                  header['ld'], header['lot_no'], header['order_no'], header['mix_time'],
+                  header['machine_no'], header['note'], header['user_id'], header['inventory_c_date'],
+                  header['form_type']))
+
+            cursor.execute("""
+                INSERT INTO tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod)
+                VALUES (%s, %s, %s, %s)
+            """, (header['prod_id'], quantity['req'], quantity['batch'], quantity['prod']))
+
+            cursor.execute("""
+                INSERT INTO tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on)
+                VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
+            """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
+
+        # 5. Insert Materials (Common for both Insert/Update after cleanup)
+        material_query = """
+            INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
+            VALUES (%s, %s, %s, %s, %s, %s, FALSE)
+        """
+        cursor.executemany(material_query, materials)
+
+        conn.commit()
+        return True, "Success"
+    except Exception as e:
+        conn.rollback()
+        return False, str(e)
+    finally:
+        cursor.close()
+        conn.close()

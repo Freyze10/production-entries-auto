@@ -10,7 +10,7 @@ from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
     get_cancelled_production_data, check_production_exists
 from db.update import cancel_production
-from db.write import log_audit_trail
+from db.write import log_audit_trail, save_production_record
 from print.print_preview import ProductionPrintPreview
 from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
@@ -801,8 +801,6 @@ class MBManualEntry(QWidget):
             QMessageBox.critical(self, "Input Error", f"Please check your numeric fields. Error: {e}")
             return
 
-        # 4. Database Action
-        from db.write import save_production_record
         success, message = save_production_record(header, quantity, encode, materials, is_update)
 
         if success:
