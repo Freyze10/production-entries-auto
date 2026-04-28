@@ -734,6 +734,99 @@ class MBManualEntry(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "System Error", f"An unexpected error occurred: {str(e)}")
 
+    def save_production(self):
+        # 1. Validation
+        prod_id_raw = self.production_id_input.text().strip()
+        if not prod_id_raw or not self.product_code_input.text().strip():
+            QMessageBox.warning(self, "Validation Error", "Production ID and Product Code are required.")
+            return
+
+        if self.materials_table.rowCount() == 0:
+            QMessageBox.warning(self, "Validation Error", "Please add at least one material to the table.")
+            return
+
+        # 2. Determine Mode
+        is_update = (self.save_btn.text() == "Update")
+
+        # 3. Collect Data
+        try:
+            # Header Data
+            header = {
+                'prod_id': int(prod_id_raw),
+                'prod_date': self.production_date_input.text() or None,
+                'customer': self.customer_input.text().strip(),
+                'form_id': int(self.formula_input.text() or 0),
+                'index_no': self.wip_no_input.text().strip(),
+                'prod_code': self.product_code_input.text().strip(),
+                'prod_color': self.product_color_input.text().strip(),
+                'dosage': float(self.sum_cons_input.text() or 0),
+                'ld': float(self.dosage_input.text() or 0),
+                'lot_no': self.lot_no_input.text().strip(),
+                'order_no': self.order_form_no_input.text().strip(),
+                'mix_time': self.mixing_time_input.text().strip(),
+                'machine_no': self.machine_no_input.text().strip(),
+                'note': self.notes_input.toPlainText().strip(),
+                'user_id': self.work_station['u'],
+                'inventory_c_date': self.confirmation_date_input.text() or None,
+                'form_type': self.form_type_combo.currentText()
+            }
+
+            # Quantity Data
+            quantity = {
+                'req': float(self.qty_required_input.text() or 0),
+                'batch': float(self.qty_per_batch_input.text() or 0),
+                'prod': float(self.total_weight_label.text() or 0)
+            }
+
+            # Encode Data
+            encode = {
+                'prepared_by': self.prepared_by_input.text().strip(),
+                'encoded_by': self.work_station['u']
+            }
+
+            # Material List (Looping through Table)
+            materials = []
+            for row in range(self.materials_table.rowCount()):
+                mat_code = self.materials_table.item(row, 0).text()
+                if not mat_code.strip(): continue  # Skip empty rows/separators
+
+                large = float(self.materials_table.item(row, 1).text() or 0)
+                small = float(self.materials_table.item(row, 2).text() or 0)
+                total = float(self.materials_table.item(row, 3).text() or 0)
+
+                # Format: (prod_id, sequence_no, material_code, large, small, total)
+                materials.append((header['prod_id'], row + 1, mat_code, large, small, total))
+
+        except ValueError as e:
+            QMessageBox.critical(self, "Input Error", f"Please check your numeric fields. Error: {e}")
+            return
+
+        # 4. Database Action
+        from db.write import save_production_record
+        success, message = save_production_record(header, quantity, encode, materials, is_update)
+
+        if success:
+            action_verb = "updated" if is_update else "saved"
+            QMessageBox.information(self, "Success",
+                                    f"Production record {header['prod_id']} has been {action_verb}.")
+
+            # 5. Audit Trail
+            log_audit_trail(
+                self.work_station['m'],
+                "UPDATE" if is_update else "INSERT",
+                f"Manual Production ID: {header['prod_id']} {action_verb} successfully."
+            )
+
+            # Optional: Refresh UI or stay on page
+            if not is_update:
+                self.new_production()
+            else:
+                # Reload to show new encoded_on dates if any
+                self.prod_results = get_single_production_data(header['prod_id'])
+                self.display_details()
+        else:
+            QMessageBox.critical(self, "Database Error", f"Failed to save record: {message}")
+
     def new_production(self):
         """Initialize a new production entry."""
         self.current_production_id = None
