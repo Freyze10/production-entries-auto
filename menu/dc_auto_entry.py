@@ -12,7 +12,7 @@ from db.read import get_latest_prod_id, get_formula_select, get_formula_material
     get_single_production_details, get_single_production_data, get_cancelled_production_data, \
     check_production_exists
 from db.update import cancel_production
-from db.write import log_audit_trail
+from db.write import log_audit_trail, save_production_record
 from table_model import table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
 from util.display_print_message import show_printed_locked_message
@@ -670,6 +670,97 @@ class DCAutoEntry(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "System Error", f"An unexpected error occurred: {str(e)}")
+
+    def save_production(self):
+        # 1. Basic Validation
+        prod_id_raw = self.production_id_input.text().strip()
+        if not prod_id_raw or not self.product_code_input.text().strip():
+            QMessageBox.warning(self, "Validation Error", "Production ID and Product Code are required.")
+            return
+
+        if self.materials_table.rowCount() == 0:
+            QMessageBox.warning(self, "Validation Error", "Please generate the materials table first.")
+            return
+
+        # 2. Determine if this is an Update or a New Record
+        is_update = (self.save_btn.text() == "Update")
+
+        try:
+            # 3. Pack Header Data (tbl_production01)
+            # Note: In DC, 'dosage' is dosage_input and 'ld' is ld_percent_input
+            header = {
+                'prod_id': int(prod_id_raw),
+                'prod_date': self.production_date_input.text() if self.production_date_input.text() else None,
+                'customer': self.customer_input.text().strip(),
+                'form_id': int(self.formulation_id_input.text() or 0),
+                'index_no': self.formulation_index.text().strip(),
+                'prod_code': self.product_code_input.text().strip(),
+                'prod_color': self.product_color_input.text().strip(),
+                'dosage': float(self.dosage_input.text() or 0),
+                'ld': float(self.ld_percent_input.text() or 0),
+                'lot_no': self.lot_no_input.text().strip(),
+                'order_no': self.order_form_no_input.text().strip(),
+                'mix_time': self.mixing_time_input.text().strip(),
+                'machine_no': self.machine_no_input.text().strip(),
+                'note': self.notes_input.toPlainText().strip(),
+                'user_id': self.work_station['u'],
+                'inventory_c_date': self.confirmation_date_input.text() if self.confirmation_date_input.text() else None,
+                'form_type': self.form_type_combo.currentText()
+            }
+
+            # 4. Pack Quantity Data (tbl_production_quantity)
+            quantity = {
+                'req': float(self.qty_required_input.text() or 0),
+                'batch': float(self.qty_per_batch_input.text() or 0),
+                'prod': float(self.total_weight_label.text() or 0)
+            }
+
+            # 5. Pack Encode Data (tbl_production_encode)
+            encode = {
+                'prepared_by': self.prepared_by_input.text().strip(),
+                'encoded_by': self.work_station['u']
+            }
+
+            # 6. Pack Materials Data (tbl_production02)
+            materials = []
+            for row in range(self.materials_table.rowCount()):
+                it0 = self.materials_table.item(row, 0)  # Material Name
+                if not it0 or not it0.text().strip():
+                    # Handle Blank Separator Rows
+                    materials.append((header['prod_id'], row + 1, "", 0, 0, 0))
+                    continue
+
+                large = float(self.materials_table.item(row, 1).text().replace(',', '') or 0)
+                small = float(self.materials_table.item(row, 2).text().replace(',', '') or 0)
+                total = float(self.materials_table.item(row, 3).text().replace(',', '') or 0)
+
+                materials.append((header['prod_id'], row + 1, it0.text().strip(), large, small, total))
+
+        except ValueError as e:
+            QMessageBox.critical(self, "Data Error", f"Please check numeric fields. Error: {e}")
+            return
+
+        success, message = save_production_record(header, quantity, encode, materials, is_update)
+
+        if success:
+            action = "updated" if is_update else "saved"
+            QMessageBox.information(self, "Success", f"Production {header['prod_id']} has been {action} successfully.")
+
+            # Audit Trail
+            log_audit_trail(
+                self.work_station['m'],
+                "UPDATE" if is_update else "INSERT",
+                f"(DC-Auto) Prod ID: {header['prod_id']} {action}"
+            )
+
+            # Refresh view to show latest encoded dates or reset for new
+            if is_update:
+                self.prod_results = get_single_production_data(header['prod_id'])
+                self.display_details()
+            else:
+                self.new_production()
+        else:
+            QMessageBox.critical(self, "Database Error", f"Failed to save: {message}")
 
     def new_production(self):
         """Initialize a new production entry."""
