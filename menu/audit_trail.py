@@ -176,7 +176,7 @@ class AuditTrail(QWidget):
 
             # Reset the selection in the UI
             self.table_audit_records.clearSelection()
-            self.table_audit_records.sortByColumn(0, Qt.SortOrder.AscendingOrder)
+            self.table_audit_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
             self.table_audit_records.scrollToTop()
 
             # Clear search bar if text was entered
