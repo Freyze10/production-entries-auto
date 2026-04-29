@@ -200,6 +200,30 @@ class MainWindow(QMainWindow):
         return menu
 
     def show_page(self, index):
+
+        #  Automatically Reload the production page if a new row is added to the database
+        if index == 0:
+            # 1. Get the existing widget at index 0
+            old_widget = self.stacked_widget.widget(0)
+
+            # 2. Remove and delete it to free memory
+            if old_widget:
+                self.stacked_widget.removeWidget(old_widget)
+                old_widget.deleteLater()
+
+            # 3. Re-create the widget from scratch
+            self.production_records = ProductionRecords(self.workstation_info['m'])
+
+            # 4. Re-connect the signals (Crucial: since the object is new)
+            self.production_records.go_to_manual_entry.connect(self.switch_to_manual_entry)
+            self.production_records.go_to_auto_entry.connect(self.switch_to_auto_entry)
+            self.production_records.go_to_dc_auto.connect(self.switch_to_dc_auto)
+
+            # 5. Insert it back at index 0 and show it
+            self.stacked_widget.insertWidget(0, self.production_records)
+            self.stacked_widget.setCurrentIndex(0)
+            return  # Exit early
+
         # Check if the page is already loaded
         current_widget = self.stacked_widget.widget(index)
 

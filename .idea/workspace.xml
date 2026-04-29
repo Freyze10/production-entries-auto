@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00466" summary="removed minimum screensize then use auto full screen mode and make it resizeable">
-      <option name="closed" value="true" />
-      <created>1776656291265</created>
-      <option name="number" value="00466" />
-      <option name="presentableId" value="LOCAL-00466" />
-      <option name="project" value="LOCAL" />
-      <updated>1776656291265</updated>
-    </task>
     <task id="LOCAL-00467" summary="modified the qlable header text when clicked on the record to not push the other content">
       <option name="closed" value="true" />
       <created>1776657398555</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777359254512</updated>
     </task>
-    <option name="localTasksCounter" value="515" />
+    <task id="LOCAL-00515" summary="removed comment">
+      <option name="closed" value="true" />
+      <created>1777441560317</created>
+      <option name="number" value="00515" />
+      <option name="presentableId" value="LOCAL-00515" />
+      <option name="project" value="LOCAL" />
+      <updated>1777441560317</updated>
+    </task>
+    <option name="localTasksCounter" value="516" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the read quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="removed unused update wuery" />
     <MESSAGE value="added qmessage to show thatt the production is already printed" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated the message for already printed record" />
     <MESSAGE value="changed the audit log  for the save/update in manual" />
     <MESSAGE value="changed the audit log  for the save/update in AUTO ENTRIES" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the audit log  for the save/update in AUTO ENTRIES" />
+    <MESSAGE value="removed comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed comment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
