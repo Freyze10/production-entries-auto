@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00467" summary="modified the qlable header text when clicked on the record to not push the other content">
-      <option name="closed" value="true" />
-      <created>1776657398555</created>
-      <option name="number" value="00467" />
-      <option name="presentableId" value="LOCAL-00467" />
-      <option name="project" value="LOCAL" />
-      <updated>1776657398555</updated>
-    </task>
     <task id="LOCAL-00468" summary="added the syncing of rm incoming">
       <option name="closed" value="true" />
       <created>1776664000892</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777441560317</updated>
     </task>
-    <option name="localTasksCounter" value="516" />
+    <task id="LOCAL-00516" summary="add a logic for reloading the whole production page">
+      <option name="closed" value="true" />
+      <created>1777441949815</created>
+      <option name="number" value="00516" />
+      <option name="presentableId" value="LOCAL-00516" />
+      <option name="project" value="LOCAL" />
+      <updated>1777441949815</updated>
+    </task>
+    <option name="localTasksCounter" value="517" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the update quer to remove thhe string calls on boolean datatype" />
     <MESSAGE value="removed unused update wuery" />
     <MESSAGE value="added qmessage to show thatt the production is already printed" />
     <MESSAGE value="added a qmessage for already printed production" />
@@ -639,7 +638,8 @@
     <MESSAGE value="changed the audit log  for the save/update in manual" />
     <MESSAGE value="changed the audit log  for the save/update in AUTO ENTRIES" />
     <MESSAGE value="removed comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed comment" />
+    <MESSAGE value="add a logic for reloading the whole production page" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a logic for reloading the whole production page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

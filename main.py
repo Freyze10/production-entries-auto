@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QApplication, QVB
     QStackedWidget, QStatusBar, QMessageBox
 
 from css.styles import AppStyles
-from db.read import check_mac_enabled, get_allowed_access_points
+from db.read import check_mac_enabled, get_allowed_access_points, get_latest_prod_id
 from db.write import create_current_user, log_audit_trail
 from menu.audit_trail import AuditTrail
 from menu.dc_auto_entry import DCAutoEntry
@@ -96,6 +96,7 @@ class MainWindow(QMainWindow):
         for _ in range(6):
             self.stacked_widget.addWidget(QWidget())
 
+        self.latest_production = get_latest_prod_id()
             # Load the first page immediately (Production Records)
         self.show_page(0)
         self.btn_production_records.setChecked(True)
@@ -200,9 +201,10 @@ class MainWindow(QMainWindow):
         return menu
 
     def show_page(self, index):
+        new_prod_id = get_latest_prod_id()
 
         #  Automatically Reload the production page if a new row is added to the database
-        if index == 0:
+        if index == 0 and self.latest_production != new_prod_id:
             # 1. Get the existing widget at index 0
             old_widget = self.stacked_widget.widget(0)
 
@@ -222,6 +224,8 @@ class MainWindow(QMainWindow):
             # 5. Insert it back at index 0 and show it
             self.stacked_widget.insertWidget(0, self.production_records)
             self.stacked_widget.setCurrentIndex(0)
+            # update the latest id
+            self.latest_production = new_prod_id
             return  # Exit early
 
         # Check if the page is already loaded
