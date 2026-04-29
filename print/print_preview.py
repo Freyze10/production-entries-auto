@@ -1,7 +1,7 @@
 import win32print
 import qtawesome as fa
 from datetime import datetime
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer
 from PyQt6.QtGui import QFont, QTextBlockFormat, QTextCursor
 from PyQt6.QtWidgets import (QApplication, QDialog, QVBoxLayout, QHBoxLayout,
                              QComboBox, QTextEdit, QPushButton, QLabel,
@@ -14,14 +14,16 @@ from db.write import log_audit_trail
 class ProductionPrintPreview(QDialog):
     printed = pyqtSignal(str)
 
-    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None, audit=None, role="Editor"):
+    def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None, audit=None,
+                 role="Editor"):
         super().__init__(parent)
         self.data = production_data or {}
         self.mats = materials_data or []
         self.wip_no = wip_no
         self.audit = audit
         self.user_role = role
-        self.default_font_size = 10
+        # INCREASED FONT SIZE BY 1
+        self.default_font_size = 11
 
         self.setWindowTitle("Industrial Sharp Preview - Epson LX-310")
         self.resize(1100, 950)
@@ -29,6 +31,7 @@ class ProductionPrintPreview(QDialog):
 
         self.setup_ui()
         self.refresh_preview()
+
         if str(self.user_role).upper() == "VIEWER":
             self.btn_print.setEnabled(False)
             self.btn_print.setObjectName("disabled_btn")
@@ -69,7 +72,7 @@ class ProductionPrintPreview(QDialog):
         self.preview_area = QTextEdit()
         self.preview_area.setReadOnly(True)
         self.preview_area.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
-        self.preview_area.setFixedWidth(800)
+        self.preview_area.setFixedWidth(850)  # Widened slightly for font 11
         self.preview_area.setMinimumHeight(1000)
         self.preview_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.preview_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
@@ -100,6 +103,7 @@ class ProductionPrintPreview(QDialog):
             H, V, TL, TR, BL, BR = "\xc4", "\xb3", "\xda", "\xbf", "\xc0", "\xd9"
             ESC = '\x1b'
             B_ON, B_OFF = ESC + 'E', ESC + 'F'
+            # Select 10 CPI (Pica) for slightly larger characters
             S_ON, S_OFF = ESC + 'W' + '\x01' + ESC + 'E', ESC + 'F' + ESC + 'W' + '\x00'
 
         WIDTH, BOX_W = 80, 34
@@ -108,10 +112,8 @@ class ProductionPrintPreview(QDialog):
 
         def box_ln(label, val):
             return f"{V} {label[:15]:<15} : {str(val)[:12]:<12} {V}"
-        #
-        #
 
-        # --- 1. HEADER (Rows 0-9) ---
+        # --- 1. HEADER ---
         f_no = f"FORM NO. {self.data.get('form_no', 'FM00012A1')}"
         lines.append(f"{'':<{LEFT_W}}{TL}{H * (BOX_W - 2)}{TR}")
         lines.append(f"{' ':<{LEFT_W}}{V}{' ' * (BOX_W - 2)}{V}")
@@ -170,7 +172,6 @@ class ProductionPrintPreview(QDialog):
             if not m_c.strip():
                 lines.append(" " * WIDTH)
                 continue
-
             l_v = f"{float(m.get('large_scale', 0)):18.6f}"
             s_v = f"{float(m.get('small_scale', 0)):17.6f}"
             w_v = f"{float(m.get('total_weight', 0)):15.6f}"
@@ -188,7 +189,6 @@ class ProductionPrintPreview(QDialog):
         u = H * 24
 
         def sig_ln(lab_l, val_l, lab_r, val_r):
-            # Centering Math: 14(label) + 26(val) + 16(label) + 24(val) = 80 total
             return f"{lab_l:<14}{str(val_l)[:22]:<26}{lab_r:<16}{str(val_r)[:24]:^24}"
 
         lines.append(sig_ln("PREPARED BY :", self.data.get('prepared_by', ''), "APPROVED BY    :",
@@ -222,31 +222,25 @@ class ProductionPrintPreview(QDialog):
             text = block.text().upper()
 
             if self.wip_no is True:
-                # ZONE 1: Header (Touch vertical lines)
                 if i <= 15:
                     line_h = 50.0
                 elif 23 <= i <= 26:
                     line_h = 90
                 elif i >= (total_blocks - 6):
                     line_h = 80.0
-                    # Summary Line (Room for Big Font)
                 elif "BATCH BY" in text:
                     line_h = 160.0
-                # ZONE 2: Body (Readable spacing)
                 else:
                     line_h = 145.0
             else:
-                # ZONE 1: Header (Touch vertical lines)
                 if i <= 13:
                     line_h = 50.0
                 elif 20 <= i <= 23:
                     line_h = 90
                 elif i >= (total_blocks - 6):
                     line_h = 80.0
-                    # Summary Line (Room for Big Font)
                 elif "BATCH BY" in text:
                     line_h = 160.0
-                # ZONE 2: Body (Readable spacing)
                 else:
                     line_h = 145.0
 
@@ -264,59 +258,40 @@ class ProductionPrintPreview(QDialog):
         printer_name = self.printer_combo.currentText()
         try:
             lines = self.build_report_map(mode="printer")
-
-            # --- ESC/P COMMANDS FOR PRECISION ---
             ESC = '\x1b'
-            reset = ESC + '@'  # Reset printer
-            # Font: ESC + 'k' + n (0=Roman, 1=Sans Serif). Roman is closest to Courier New.
-            set_font = ESC + 'k' + '\x00'
-            bidirectional = ESC + 'U' + '\x00'  # Faster
 
-            # Line Spacing Math (Based on your UI Proportional heights):
-            # Standard is 30/180 (100%).
-            # 50%  -> 15/180 (\x0f)
-            # 80%  -> 24/180 (\x18)
-            # 145% -> 44/180 (\x2c)
-            # 160% -> 48/180 (\x30)
+            # --- HARDWARE INITIALIZATION ---
+            init = (ESC + '@' +  # Reset
+                    ESC + 'x\x00' +  # Draft Mode (Fast)
+                    ESC + 'P' +  # 10 CPI (Largest characters)
+                    ESC + 'U\x00')  # Bidirectional
 
-            CMD_SPACING_HEADER = ESC + '3' + '\x0f'  # 50% height
-            CMD_SPACING_BODY = ESC + '3' + '\x2c'  # 145% height
-            CMD_SPACING_SUMM = ESC + '3' + '\x30'  # 160% height
-            CMD_SPACING_FOOTER = ESC + '3' + '\x18'  # 80% height
-
-            init = reset + set_font + bidirectional
+            # --- INCREASED SPACING DOTS (1/180 inch units) ---
+            DOTS_HEADER = chr(20)  # Was 15
+            DOTS_BODY = chr(54)  # Was 44
+            DOTS_SUMM = chr(64)  # Was 48
+            DOTS_FOOTER = chr(30)  # Was 24
 
             header_end = 16 if self.wip_no is True else 14
             footer_start = len(lines) - 6
 
-            # Constructing Payload line by line to ensure "Batch By" gets its unique spacing
-            payload = init + CMD_SPACING_HEADER
-
+            payload = init
             for i, line in enumerate(lines):
-                # Apply Header Spacing
+                # Set dynamic spacing based on current line zone
                 if i == 0:
-                    payload += CMD_SPACING_HEADER
-
-                # Apply Body Spacing when header ends
+                    payload += ESC + '3' + DOTS_HEADER
                 elif i == header_end:
-                    payload += CMD_SPACING_BODY
-
-                # Apply Special Summary Spacing (The "Batch By" line)
+                    payload += ESC + '3' + DOTS_BODY
                 elif "BATCH BY" in line.upper():
-                    payload += CMD_SPACING_SUMM
-
-                # Revert to Body Spacing after Summary
-                elif i == header_end + 6:  # Adjustment to catch lines after batch text
-                    payload += CMD_SPACING_BODY
-
-                # Apply Footer Spacing
+                    payload += ESC + '3' + DOTS_SUMM
+                elif i == header_end + 6:  # Return to body after summary
+                    payload += ESC + '3' + DOTS_BODY
                 elif i == footer_start:
-                    payload += CMD_SPACING_FOOTER
+                    payload += ESC + '3' + DOTS_FOOTER
 
                 payload += line + "\n"
 
-            # Add Form Feed (Eject Page)
-            payload += '\x0c'
+            payload += '\x0c'  # Form Feed
 
             hPrinter = win32print.OpenPrinter(printer_name)
             try:
@@ -345,13 +320,3 @@ class ProductionPrintPreview(QDialog):
             return f"{n} batch{'es' if n != 1 else ''} by {per:.3f} KG."
         except:
             return "1 batch by 0.000 KG."
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QApplication(sys.argv)
-    img_data = {"prod_id": "100502", "production_date": "03/02/26", "qty_required": 37.4, "qty_per_batch": 37.4,
-                "approved_by": "M. VERDE"}
-    img_mats = [{"material_code": "W35", "large_scale": 1.65, "small_scale": 0, "total_weight": 1.65}]
-    ProductionPrintPreview(img_data, img_mats).exec()
