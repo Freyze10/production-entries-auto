@@ -268,7 +268,7 @@ class ProductionPrintPreview(QDialog):
 
             # --- INCREASED SPACING DOTS (1/180 inch units) ---
             DOTS_HEADER = chr(20)  # Was 15
-            DOTS_BODY = chr(54)  # Was 44
+            DOTS_BODY = chr(44)  # Was 44
             DOTS_SUMM = chr(64)  # Was 48
             DOTS_FOOTER = chr(30)  # Was 24
 

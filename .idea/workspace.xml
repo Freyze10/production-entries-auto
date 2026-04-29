@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00469" summary="added the query for getting the note on rm incoming">
-      <option name="closed" value="true" />
-      <created>1776665446370</created>
-      <option name="number" value="00469" />
-      <option name="presentableId" value="LOCAL-00469" />
-      <option name="project" value="LOCAL" />
-      <updated>1776665446370</updated>
-    </task>
     <task id="LOCAL-00470" summary="added a function to return the bag weight for rm">
       <option name="closed" value="true" />
       <created>1776667786568</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777442399292</updated>
     </task>
-    <option name="localTasksCounter" value="518" />
+    <task id="LOCAL-00518" summary="added a condition so when there is a new production, it will only refresh the production record">
+      <option name="closed" value="true" />
+      <created>1777449749752</created>
+      <option name="number" value="00518" />
+      <option name="presentableId" value="LOCAL-00518" />
+      <option name="project" value="LOCAL" />
+      <updated>1777449749752</updated>
+    </task>
+    <option name="localTasksCounter" value="519" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
