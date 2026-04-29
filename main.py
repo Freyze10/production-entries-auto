@@ -19,7 +19,6 @@ from menu.production_records import ProductionRecords
 from menu.user_management import PermissionsManager
 from util.absolute_path import resource_path
 from workstation.workstation_details import _get_workstation_info
-from db.schema import create_table
 
 
 class AppController:
