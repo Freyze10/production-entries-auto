@@ -268,7 +268,7 @@ class ProductionPrintPreview(QDialog):
 
             # --- INCREASED SPACING DOTS (1/180 inch units) ---
             DOTS_HEADER = chr(20)  # Was 15
-            DOTS_BODY = chr(44)  # Was 44
+            DOTS_BODY = chr(54)  # Was 44
             DOTS_SUMM = chr(64)  # Was 48
             DOTS_FOOTER = chr(30)  # Was 24
 
@@ -286,6 +286,8 @@ class ProductionPrintPreview(QDialog):
                     payload += ESC + '3' + DOTS_SUMM
                 elif i == header_end + 6:  # Return to body after summary
                     payload += ESC + '3' + DOTS_BODY
+                elif i == header_end + 8:  # for the material row header
+                    payload += ESC + '3' + chr(44)
                 elif i == footer_start:
                     payload += ESC + '3' + DOTS_FOOTER
 

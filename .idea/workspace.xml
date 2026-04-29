@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00471" summary="added a function to return the bag weight for rm">
-      <option name="closed" value="true" />
-      <created>1776667791495</created>
-      <option name="number" value="00471" />
-      <option name="presentableId" value="LOCAL-00471" />
-      <option name="project" value="LOCAL" />
-      <updated>1776667791495</updated>
-    </task>
     <task id="LOCAL-00472" summary="added a helper function to gett the desired bag  weight">
       <option name="closed" value="true" />
       <created>1776668169894</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777449953583</updated>
     </task>
-    <option name="localTasksCounter" value="520" />
+    <task id="LOCAL-00520" summary="fixed the audit trail table default recordds view">
+      <option name="closed" value="true" />
+      <created>1777450512001</created>
+      <option name="number" value="00520" />
+      <option name="presentableId" value="LOCAL-00520" />
+      <option name="project" value="LOCAL" />
+      <updated>1777450512001</updated>
+    </task>
+    <option name="localTasksCounter" value="521" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a qmessage for already printed production" />
     <MESSAGE value="returend back the save button when the new entry is clickes" />
     <MESSAGE value="disable save button when the production is already printed" />
     <MESSAGE value="disable save button when the production is already printed in other pages too" />
@@ -639,7 +638,8 @@
     <MESSAGE value="add a logic for reloading the whole production page" />
     <MESSAGE value="added a condition so when there is a new production, it will only refresh the production record" />
     <MESSAGE value="adjusted the spacing of the printed output" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted the spacing of the printed output" />
+    <MESSAGE value="fixed the audit trail table default recordds view" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the audit trail table default recordds view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
