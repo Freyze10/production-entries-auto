@@ -25,7 +25,7 @@ class ProductionPrintPreview(QDialog):
         # INCREASED FONT SIZE BY 1
         self.default_font_size = 11
 
-        self.setWindowTitle("Industrial Sharp Preview - Epson LX-310")
+        self.setWindowTitle("Print Preview")
         self.resize(1100, 950)
         self.setStyleSheet("background:#525659;")
 
