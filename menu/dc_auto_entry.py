@@ -431,8 +431,8 @@ class DCAutoEntry(QWidget):
 
             ok_btn = QPushButton("OK")
             ok_btn.setObjectName("SuccessButton")
-            # ok_btn.clicked.connect(
-            #     lambda: self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector))
+            ok_btn.clicked.connect(
+                lambda: self.load_selected_formula(dialog, self.formula_table, self.materials_table_selector))
             btn_layout.addWidget(ok_btn)
 
             cancel_btn = QPushButton("CANCEL")
