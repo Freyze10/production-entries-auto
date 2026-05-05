@@ -311,7 +311,7 @@ class ProductionPrintPreview(QWidget):
                 QMessageBox.information(self, "Success", "Printed Successfully.")
                 log_audit_trail(self.audit['mac'], self.audit['action'], self.audit['details'])
                 print_production(self.data.get('prod_id'))
-                self.accept()
+                self.close()
             finally:
                 win32print.ClosePrinter(hPrinter)
         except Exception as e:
