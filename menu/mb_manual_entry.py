@@ -950,7 +950,7 @@ class MBManualEntry(QWidget):
             }
             preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit, role=self.user_role)
 
-        preview.exec()
+        preview.show()
 
     def clear_material_table(self):
         self.materials_table.setRowCount(0)
