@@ -1016,7 +1016,7 @@ class DCAutoEntry(QWidget):
         }
         preview = ProductionPrintPreview(production_data, materials_data, parent=self, audit=audit, role=self.user_role)
 
-        preview.exec()
+        preview.show()
 
     def update_totals(self):
         total_weight = 0.0
