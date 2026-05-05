@@ -195,30 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00477" summary="updated">
-      <option name="closed" value="true" />
-      <created>1776732141664</created>
-      <option name="number" value="00477" />
-      <option name="presentableId" value="LOCAL-00477" />
-      <option name="project" value="LOCAL" />
-      <updated>1776732141664</updated>
-    </task>
-    <task id="LOCAL-00478" summary="fixed the comment for thhe main window">
-      <option name="closed" value="true" />
-      <created>1777253231286</created>
-      <option name="number" value="00478" />
-      <option name="presentableId" value="LOCAL-00478" />
-      <option name="project" value="LOCAL" />
-      <updated>1777253231286</updated>
-    </task>
-    <task id="LOCAL-00479" summary="updated the save button to update when there is a past record loaded into it">
-      <option name="closed" value="true" />
-      <created>1777257615825</created>
-      <option name="number" value="00479" />
-      <option name="presentableId" value="LOCAL-00479" />
-      <option name="project" value="LOCAL" />
-      <updated>1777257615825</updated>
-    </task>
     <task id="LOCAL-00480" summary="updated the save button to update when there is a past record loaded into it">
       <option name="closed" value="true" />
       <created>1777257673221</created>
@@ -587,7 +563,31 @@
       <option name="project" value="LOCAL" />
       <updated>1777963314937</updated>
     </task>
-    <option name="localTasksCounter" value="526" />
+    <task id="LOCAL-00526" summary="changed the function to close the widget to .close form .accept">
+      <option name="closed" value="true" />
+      <created>1777963379463</created>
+      <option name="number" value="00526" />
+      <option name="presentableId" value="LOCAL-00526" />
+      <option name="project" value="LOCAL" />
+      <updated>1777963379463</updated>
+    </task>
+    <task id="LOCAL-00527" summary="updated the call for print preview with the right call qwidget">
+      <option name="closed" value="true" />
+      <created>1777963430462</created>
+      <option name="number" value="00527" />
+      <option name="presentableId" value="LOCAL-00527" />
+      <option name="project" value="LOCAL" />
+      <updated>1777963430462</updated>
+    </task>
+    <task id="LOCAL-00528" summary="updated the call for print preview with the right call qwidget">
+      <option name="closed" value="true" />
+      <created>1777963451715</created>
+      <option name="number" value="00528" />
+      <option name="presentableId" value="LOCAL-00528" />
+      <option name="project" value="LOCAL" />
+      <updated>1777963451715</updated>
+    </task>
+    <option name="localTasksCounter" value="529" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,8 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the save button design on the  manual entry" />
-    <MESSAGE value="adjusted the dedfault display of the audit  trail" />
     <MESSAGE value="modified the manual entry" />
     <MESSAGE value="updated the production records to be in order based from prod id" />
     <MESSAGE value="updated some of the audit trail message" />
@@ -639,7 +637,9 @@
     <MESSAGE value="connected the load selected formula in the dc auto entry in  ok buton" />
     <MESSAGE value="changed the window title for  print preview" />
     <MESSAGE value="changed the window to qwidget from qdialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the window to qwidget from qdialog" />
+    <MESSAGE value="changed the function to close the widget to .close form .accept" />
+    <MESSAGE value="updated the call for print preview with the right call qwidget" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the call for print preview with the right call qwidget" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

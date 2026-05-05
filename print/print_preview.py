@@ -30,6 +30,8 @@ class ProductionPrintPreview(QWidget):
                             Qt.WindowType.WindowMaximizeButtonHint |
                             Qt.WindowType.WindowCloseButtonHint)
 
+        self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
+
         self.setWindowTitle("Print Preview")
         self.resize(1100, 950)
         self.setStyleSheet("background:#525659;")
