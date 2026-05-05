@@ -11,7 +11,7 @@ from db.update import print_production
 from db.write import log_audit_trail
 
 
-class ProductionPrintPreview(QDialog):
+class ProductionPrintPreview(QWidget):
     printed = pyqtSignal(str)
 
     def __init__(self, production_data: dict, materials_data: list, wip_no=False, parent=None, audit=None,
@@ -24,6 +24,11 @@ class ProductionPrintPreview(QDialog):
         self.user_role = role
         # INCREASED FONT SIZE BY 1
         self.default_font_size = 11
+
+        self.setWindowFlags(Qt.WindowType.Window |
+                            Qt.WindowType.WindowMinimizeButtonHint |
+                            Qt.WindowType.WindowMaximizeButtonHint |
+                            Qt.WindowType.WindowCloseButtonHint)
 
         self.setWindowTitle("Print Preview")
         self.resize(1100, 950)

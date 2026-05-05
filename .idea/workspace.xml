@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00475" summary="Added the logic pf 20kg to the generate computation but to check">
-      <option name="closed" value="true" />
-      <created>1776669410744</created>
-      <option name="number" value="00475" />
-      <option name="presentableId" value="LOCAL-00475" />
-      <option name="project" value="LOCAL" />
-      <updated>1776669410744</updated>
-    </task>
     <task id="LOCAL-00476" summary="return early of theres no to sync data">
       <option name="closed" value="true" />
       <created>1776669703493</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777873428196</updated>
     </task>
-    <option name="localTasksCounter" value="524" />
+    <task id="LOCAL-00524" summary="changed the window title for  print preview">
+      <option name="closed" value="true" />
+      <created>1777877699217</created>
+      <option name="number" value="00524" />
+      <option name="presentableId" value="LOCAL-00524" />
+      <option name="project" value="LOCAL" />
+      <updated>1777877699217</updated>
+    </task>
+    <option name="localTasksCounter" value="525" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="import necessary modules to  mport" />
     <MESSAGE value="remove the empty form type, there will be  a default &quot;new&quot; value" />
     <MESSAGE value="changed the save button design on the  manual entry" />
     <MESSAGE value="adjusted the dedfault display of the audit  trail" />
@@ -639,7 +638,8 @@
     <MESSAGE value="fixed the  spacing for the material header in computation for print output to be smaller in spacing" />
     <MESSAGE value="fixed the to boolean legacy so when it receives an empty strinng, it will automaticaly use the default value" />
     <MESSAGE value="connected the load selected formula in the dc auto entry in  ok buton" />
-    <option name="LAST_COMMIT_MESSAGE" value="connected the load selected formula in the dc auto entry in  ok buton" />
+    <MESSAGE value="changed the window title for  print preview" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the window title for  print preview" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
