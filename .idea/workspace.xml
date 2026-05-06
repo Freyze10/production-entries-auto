@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00480" summary="updated the save button to update when there is a past record loaded into it">
-      <option name="closed" value="true" />
-      <created>1777257673221</created>
-      <option name="number" value="00480" />
-      <option name="presentableId" value="LOCAL-00480" />
-      <option name="project" value="LOCAL" />
-      <updated>1777257673222</updated>
-    </task>
     <task id="LOCAL-00481" summary="updated the save button textt in otherr pages">
       <option name="closed" value="true" />
       <created>1777257827447</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777963451715</updated>
     </task>
-    <option name="localTasksCounter" value="529" />
+    <task id="LOCAL-00529" summary="added the  delete the widget on clicking x">
+      <option name="closed" value="true" />
+      <created>1777968417656</created>
+      <option name="number" value="00529" />
+      <option name="presentableId" value="LOCAL-00529" />
+      <option name="project" value="LOCAL" />
+      <updated>1777968417656</updated>
+    </task>
+    <option name="localTasksCounter" value="530" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modified the manual entry" />
     <MESSAGE value="updated the production records to be in order based from prod id" />
     <MESSAGE value="updated some of the audit trail message" />
     <MESSAGE value="return the connection to server" />
@@ -639,7 +638,8 @@
     <MESSAGE value="changed the window to qwidget from qdialog" />
     <MESSAGE value="changed the function to close the widget to .close form .accept" />
     <MESSAGE value="updated the call for print preview with the right call qwidget" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the call for print preview with the right call qwidget" />
+    <MESSAGE value="added the  delete the widget on clicking x" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the  delete the widget on clicking x" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
