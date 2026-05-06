@@ -557,3 +557,13 @@ class AppStyles:
             border: 1px solid #dee2e6;
         }}
     """
+
+    ACTION_STYLES = {
+        "SECURITY": "#fee2e2", # Light Red
+        "LOGIN":    "#e0f2fe", # Light Blue
+        "UPDATE":   "#dcfce7", # Light Green
+        "SAVE":     "#dcfce7", # Light Green
+        "MODIFY":   "#fef9c3", # Light Yellow
+        "PRINT":    "#f3e8ff", # Light Purple
+        "DELETE":   "#ffedd5", # Light Orange
+    }

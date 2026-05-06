@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00481" summary="updated the save button textt in otherr pages">
-      <option name="closed" value="true" />
-      <created>1777257827447</created>
-      <option name="number" value="00481" />
-      <option name="presentableId" value="LOCAL-00481" />
-      <option name="project" value="LOCAL" />
-      <updated>1777257827447</updated>
-    </task>
     <task id="LOCAL-00482" summary="updated the save button textt in otherr pages">
       <option name="closed" value="true" />
       <created>1777259137823</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777968417656</updated>
     </task>
-    <option name="localTasksCounter" value="530" />
+    <task id="LOCAL-00530" summary="updated the audit trail text for modifying the user details">
+      <option name="closed" value="true" />
+      <created>1778032373367</created>
+      <option name="number" value="00530" />
+      <option name="presentableId" value="LOCAL-00530" />
+      <option name="project" value="LOCAL" />
+      <updated>1778032373368</updated>
+    </task>
+    <option name="localTasksCounter" value="531" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the production records to be in order based from prod id" />
     <MESSAGE value="updated some of the audit trail message" />
     <MESSAGE value="return the connection to server" />
     <MESSAGE value="updated the print output to match the print preview(to test)" />
@@ -639,7 +638,8 @@
     <MESSAGE value="changed the function to close the widget to .close form .accept" />
     <MESSAGE value="updated the call for print preview with the right call qwidget" />
     <MESSAGE value="added the  delete the widget on clicking x" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the  delete the widget on clicking x" />
+    <MESSAGE value="updated the audit trail text for modifying the user details" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the audit trail text for modifying the user details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
