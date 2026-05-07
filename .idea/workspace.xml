@@ -195,22 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00487" summary="updated the read quer to remove thhe string calls on boolean datatype">
-      <option name="closed" value="true" />
-      <created>1777261529952</created>
-      <option name="number" value="00487" />
-      <option name="presentableId" value="LOCAL-00487" />
-      <option name="project" value="LOCAL" />
-      <updated>1777261529952</updated>
-    </task>
-    <task id="LOCAL-00488" summary="updated the update quer to remove thhe string calls on boolean datatype">
-      <option name="closed" value="true" />
-      <created>1777261660337</created>
-      <option name="number" value="00488" />
-      <option name="presentableId" value="LOCAL-00488" />
-      <option name="project" value="LOCAL" />
-      <updated>1777261660337</updated>
-    </task>
     <task id="LOCAL-00489" summary="removed unused update wuery">
       <option name="closed" value="true" />
       <created>1777262129115</created>
@@ -587,7 +571,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778124527732</updated>
     </task>
-    <option name="localTasksCounter" value="536" />
+    <task id="LOCAL-00536" summary="working change bg color in  audit trail">
+      <option name="closed" value="true" />
+      <created>1778125111975</created>
+      <option name="number" value="00536" />
+      <option name="presentableId" value="LOCAL-00536" />
+      <option name="project" value="LOCAL" />
+      <updated>1778125111975</updated>
+    </task>
+    <task id="LOCAL-00537" summary="remove debug print">
+      <option name="closed" value="true" />
+      <created>1778125134058</created>
+      <option name="number" value="00537" />
+      <option name="presentableId" value="LOCAL-00537" />
+      <option name="project" value="LOCAL" />
+      <updated>1778125134058</updated>
+    </task>
+    <option name="localTasksCounter" value="538" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,8 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a query to make the update or save function work" />
-    <MESSAGE value="added a save function in the dc auto entry" />
     <MESSAGE value="updated the updating of the button for save/update" />
     <MESSAGE value="added a save function in the mb auto entry" />
     <MESSAGE value="updated the message for already printed record" />
@@ -639,7 +637,9 @@
     <MESSAGE value="set the alternating colors of ausit trail to false" />
     <MESSAGE value="changed the background to background coilor in the styles" />
     <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
-    <option name="LAST_COMMIT_MESSAGE" value="debugging print to console to view if the change of bg is workking because it is not displaying" />
+    <MESSAGE value="working change bg color in  audit trail" />
+    <MESSAGE value="remove debug print" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove debug print" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

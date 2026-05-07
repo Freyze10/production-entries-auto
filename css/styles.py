@@ -559,10 +559,10 @@ class AppStyles:
     ACTION_COLORS = {
         "SECURITY": "#FEE2E2",  # Red 100 (Critical/Warning)
         "LOGIN": "#E0F2FE",  # Blue 100 (System Info)
-        "UPDATE": "#D1FAE5",  # Emerald 100 (Success/Positive)
-        "SAVE": "#D1FAE5",  # Emerald 100 (Success/Positive)
+        "UPDATE": "#bff7b5",  # Emerald 100 (Success/Positive)
+        "SAVE": "#6cd9ba",  # Emerald 100 (Success/Positive)
         "MODIFY": "#FEF3C7",  # Amber 100 (Warning/Alert)
-        "PRINT": "#F3E8FF",  # Purple 100 (Output Action)
-        "PRINT - WIP": "#EDE9FE",  # Violet 100 (Output Action)
+        "PRINT": "#eca8ff",  # Purple 100 (Output Action)
+        "PRINT - WIP": "#faaac6",  # Violet 100 (Output Action)
         "DELETE": "#FFEDD5",  # Orange 100 (Destructive Action)
     }
