@@ -383,7 +383,6 @@ class AppStyles:
             border: 1px solid {SLATE_200};
             border-radius: 10px;
             gridline-color: {SLATE_100};
-            alternate-background-color: {SLATE_200};
             font-size: 13px;
         }}
 

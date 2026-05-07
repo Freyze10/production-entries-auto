@@ -26,28 +26,28 @@ class TableModel(QAbstractTableModel):
         row = index.row()
         col = index.column()
 
-        # --- TOOLTIP LOGIC ---
+        # --- 1. BACKGROUND COLOR LOGIC ---
+        if role == Qt.ItemDataRole.BackgroundRole:
+            if len(self._data[row]) > 2:
+                action_type = str(self._data[row][2]).strip().upper()
+                color_hex = AppStyles.ACTION_COLORS.get(action_type)
+                print(f"Row {row}: action='{action_type}', color={color_hex}")  # debug
+                if color_hex:
+                    return QBrush(QColor(color_hex))
+            return None
+
+        # --- 2. TOOLTIP LOGIC ---
         if role == Qt.ItemDataRole.ToolTipRole:
             if len(self._data[row]) > 7:
                 wip_no = self._data[row][7]
                 if wip_no and str(wip_no).strip() not in ("", "None", "0"):
                     return f"WIP Number: {wip_no}"
 
-        # --- BACKGROUND COLOR LOGIC ---
-        if role == Qt.ItemDataRole.BackgroundRole:
-            # Check if this table has enough columns to have an 'Action' column
-            # In your Audit Trail, index 2 is "Action"
-            if len(self._data[row]) > 2:
-                action_type = str(self._data[row][2]).upper().strip()
-
-                color_hex = AppStyles.ACTION_COLORS.get(action_type)
-
-                if color_hex:
-                    return QBrush(QColor(color_hex))
-
-        # --- TEXT DISPLAY LOGIC ---
+        # --- 3. TEXT DISPLAY LOGIC ---
         if role in (Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole):
             return self._data[row][col]
+
+        return None
 
     def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):
         if role == Qt.ItemDataRole.DisplayRole:

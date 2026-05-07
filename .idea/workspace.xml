@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00485" summary="upodated thee legacy program to match the new data type in the schema">
-      <option name="closed" value="true" />
-      <created>1777260387469</created>
-      <option name="number" value="00485" />
-      <option name="presentableId" value="LOCAL-00485" />
-      <option name="project" value="LOCAL" />
-      <updated>1777260387469</updated>
-    </task>
     <task id="LOCAL-00486" summary="upodated thee legacy program to match the new data type in the schema">
       <option name="closed" value="true" />
       <created>1777261370963</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778117165715</updated>
     </task>
-    <option name="localTasksCounter" value="534" />
+    <task id="LOCAL-00534" summary="changed the background to background coilor in the styles">
+      <option name="closed" value="true" />
+      <created>1778117872088</created>
+      <option name="number" value="00534" />
+      <option name="presentableId" value="LOCAL-00534" />
+      <option name="project" value="LOCAL" />
+      <updated>1778117872088</updated>
+    </task>
+    <option name="localTasksCounter" value="535" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the print output to match the print preview(to test)" />
     <MESSAGE value="added a function for save/ update in manual" />
     <MESSAGE value="added a query to make the update or save function work" />
     <MESSAGE value="added a save function in the dc auto entry" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated the audit trail text for modifying the user details" />
     <MESSAGE value="added  colors in the  stylesheet for setting background of the audit trail recorrds for future" />
     <MESSAGE value="set the alternating colors of ausit trail to false" />
-    <option name="LAST_COMMIT_MESSAGE" value="set the alternating colors of ausit trail to false" />
+    <MESSAGE value="changed the background to background coilor in the styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the background to background coilor in the styles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

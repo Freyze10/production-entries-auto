@@ -141,6 +141,7 @@ class AuditTrail(QWidget):
         self.table_audit_records.setColumnWidth(0, 140)
         self.table_audit_records.setColumnWidth(5, 140)
         self.table_audit_records.verticalHeader().setVisible(False)  # hide row numbers
+        self.table_audit_records.setShowGrid(True)
         self.table_audit_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table_audit_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_audit_records.setAlternatingRowColors(False)
