@@ -558,12 +558,13 @@ class AppStyles:
         }}
     """
 
-    ACTION_STYLES = {
-        "SECURITY": "#fee2e2", # Light Red
-        "LOGIN":    "#e0f2fe", # Light Blue
-        "UPDATE":   "#dcfce7", # Light Green
-        "SAVE":     "#dcfce7", # Light Green
-        "MODIFY":   "#fef9c3", # Light Yellow
-        "PRINT":    "#f3e8ff", # Light Purple
-        "DELETE":   "#ffedd5", # Light Orange
+    ACTION_COLORS = {
+        "SECURITY": "#FEE2E2",  # Red 100 (Critical/Warning)
+        "LOGIN": "#E0F2FE",  # Blue 100 (System Info)
+        "UPDATE": "#D1FAE5",  # Emerald 100 (Success/Positive)
+        "SAVE": "#D1FAE5",  # Emerald 100 (Success/Positive)
+        "MODIFY": "#FEF3C7",  # Amber 100 (Warning/Alert)
+        "PRINT": "#F3E8FF",  # Purple 100 (Output Action)
+        "PRINT - WIP": "#EDE9FE",  # Violet 100 (Output Action)
+        "DELETE": "#FFEDD5",  # Orange 100 (Destructive Action)
     }

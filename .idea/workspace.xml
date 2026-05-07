@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00483" summary="updated the conection of the legacy system to connect on the changes on the main  connection">
-      <option name="closed" value="true" />
-      <created>1777259549500</created>
-      <option name="number" value="00483" />
-      <option name="presentableId" value="LOCAL-00483" />
-      <option name="project" value="LOCAL" />
-      <updated>1777259549500</updated>
-    </task>
     <task id="LOCAL-00484" summary="updated the shecma datatype to  make a boolean to make it more quicker">
       <option name="closed" value="true" />
       <created>1777260361415</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778056016889</updated>
     </task>
-    <option name="localTasksCounter" value="532" />
+    <task id="LOCAL-00532" summary="added  colors in the  stylesheet for setting background of the audit trail recorrds for future">
+      <option name="closed" value="true" />
+      <created>1778116349876</created>
+      <option name="number" value="00532" />
+      <option name="presentableId" value="LOCAL-00532" />
+      <option name="project" value="LOCAL" />
+      <updated>1778116349876</updated>
+    </task>
+    <option name="localTasksCounter" value="533" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -646,7 +646,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/table_model/model.py</url>
-          <line>4</line>
+          <line>8</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>

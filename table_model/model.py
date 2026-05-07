@@ -1,6 +1,10 @@
 from datetime import datetime
 
 from PyQt6.QtCore import Qt, QAbstractTableModel
+from PyQt6.QtGui import QBrush, QColor
+
+from css.styles import AppStyles
+
 
 class TableModel(QAbstractTableModel):
     def __init__(self, data, headers):
@@ -19,17 +23,31 @@ class TableModel(QAbstractTableModel):
         if not index.isValid():
             return None
 
+        row = index.row()
+        col = index.column()
+
+        # --- TOOLTIP LOGIC ---
         if role == Qt.ItemDataRole.ToolTipRole:
-            row = index.row()
-            # Ensure row 7 exists in your data
             if len(self._data[row]) > 7:
                 wip_no = self._data[row][7]
                 if wip_no and str(wip_no).strip() not in ("", "None", "0"):
                     return f"WIP Number: {wip_no}"
 
+        # --- BACKGROUND COLOR LOGIC ---
+        if role == Qt.ItemDataRole.BackgroundRole:
+            # Check if this table has enough columns to have an 'Action' column
+            # In your Audit Trail, index 2 is "Action"
+            if len(self._data[row]) > 2:
+                action_type = str(self._data[row][2]).upper().strip()
+
+                color_hex = AppStyles.ACTION_COLORS.get(action_type)
+
+                if color_hex:
+                    return QBrush(QColor(color_hex))
+
+        # --- TEXT DISPLAY LOGIC ---
         if role in (Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole):
-            return self._data[index.row()][index.column()]
-        return None
+            return self._data[row][col]
 
     def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):
         if role == Qt.ItemDataRole.DisplayRole:
