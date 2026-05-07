@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00486" summary="upodated thee legacy program to match the new data type in the schema">
-      <option name="closed" value="true" />
-      <created>1777261370963</created>
-      <option name="number" value="00486" />
-      <option name="presentableId" value="LOCAL-00486" />
-      <option name="project" value="LOCAL" />
-      <updated>1777261370963</updated>
-    </task>
     <task id="LOCAL-00487" summary="updated the read quer to remove thhe string calls on boolean datatype">
       <option name="closed" value="true" />
       <created>1777261529952</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778117872088</updated>
     </task>
-    <option name="localTasksCounter" value="535" />
+    <task id="LOCAL-00535" summary="debugging print to console to view if the change of bg is workking because it is not displaying">
+      <option name="closed" value="true" />
+      <created>1778124527732</created>
+      <option name="number" value="00535" />
+      <option name="presentableId" value="LOCAL-00535" />
+      <option name="project" value="LOCAL" />
+      <updated>1778124527732</updated>
+    </task>
+    <option name="localTasksCounter" value="536" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a function for save/ update in manual" />
     <MESSAGE value="added a query to make the update or save function work" />
     <MESSAGE value="added a save function in the dc auto entry" />
     <MESSAGE value="updated the updating of the button for save/update" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added  colors in the  stylesheet for setting background of the audit trail recorrds for future" />
     <MESSAGE value="set the alternating colors of ausit trail to false" />
     <MESSAGE value="changed the background to background coilor in the styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the background to background coilor in the styles" />
+    <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
+    <option name="LAST_COMMIT_MESSAGE" value="debugging print to console to view if the change of bg is workking because it is not displaying" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

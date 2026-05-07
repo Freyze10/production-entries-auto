@@ -31,7 +31,6 @@ class TableModel(QAbstractTableModel):
             if len(self._data[row]) > 2:
                 action_type = str(self._data[row][2]).strip().upper()
                 color_hex = AppStyles.ACTION_COLORS.get(action_type)
-                print(f"Row {row}: action='{action_type}', color={color_hex}")  # debug
                 if color_hex:
                     return QBrush(QColor(color_hex))
             return None

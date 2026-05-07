@@ -10,6 +10,7 @@ import qtawesome as fa
 
 from db.read import get_audit_trail_report, get_audit_date_bounds
 from table_model.model import TableModel
+from util.audit_record_colors import RowColorDelegate
 from util.debounce import finished_typing
 
 
@@ -148,7 +149,7 @@ class AuditTrail(QWidget):
         self.table_audit_records.setSortingEnabled(True)
         self.table_audit_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.table_audit_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
-
+        self.table_audit_records.setItemDelegate(RowColorDelegate(action_col=2, parent=self.table_audit_records))
         results_layout.addWidget(self.table_audit_records)
 
         main_layout.addWidget(results_card, stretch=1)
