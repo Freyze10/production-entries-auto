@@ -380,7 +380,6 @@ class AppStyles:
 
         /* ── Table ─────────────────────────────────────────────────────────── */
         QTableView {{
-            background: white;
             border: 1px solid {SLATE_200};
             border-radius: 10px;
             gridline-color: {SLATE_100};
@@ -394,12 +393,12 @@ class AppStyles:
         }}
 
         QTableView::item:selected, QTableWidget::item:selected {{
-            background: {TEAL_400};
+            background-color: {TEAL_400};
             color: {SLATE_900};
         }}
 
         QTableView::item:hover, QTableWidget::item:hover {{
-            background: rgba(20, 184, 166, 0.07);
+            background-color: rgba(20, 184, 166, 0.07);
         }}
 
         QTableWidget {{ 
@@ -410,7 +409,7 @@ class AppStyles:
             alternate-background-color: {BG_BASE}; 
         }}
         QHeaderView::section {{
-            background: {TEXT_TERTIARY};
+            background-color: {TEXT_TERTIARY};
             color: {SLATE_100};
             padding: 6px 0px;
             border-bottom: 2px solid {TEAL_600};

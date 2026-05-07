@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00484" summary="updated the shecma datatype to  make a boolean to make it more quicker">
-      <option name="closed" value="true" />
-      <created>1777260361415</created>
-      <option name="number" value="00484" />
-      <option name="presentableId" value="LOCAL-00484" />
-      <option name="project" value="LOCAL" />
-      <updated>1777260361415</updated>
-    </task>
     <task id="LOCAL-00485" summary="upodated thee legacy program to match the new data type in the schema">
       <option name="closed" value="true" />
       <created>1777260387469</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778116349876</updated>
     </task>
-    <option name="localTasksCounter" value="533" />
+    <task id="LOCAL-00533" summary="set the alternating colors of ausit trail to false">
+      <option name="closed" value="true" />
+      <created>1778117165715</created>
+      <option name="number" value="00533" />
+      <option name="presentableId" value="LOCAL-00533" />
+      <option name="project" value="LOCAL" />
+      <updated>1778117165715</updated>
+    </task>
+    <option name="localTasksCounter" value="534" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="return the connection to server" />
     <MESSAGE value="updated the print output to match the print preview(to test)" />
     <MESSAGE value="added a function for save/ update in manual" />
     <MESSAGE value="added a query to make the update or save function work" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added the  delete the widget on clicking x" />
     <MESSAGE value="updated the audit trail text for modifying the user details" />
     <MESSAGE value="added  colors in the  stylesheet for setting background of the audit trail recorrds for future" />
-    <option name="LAST_COMMIT_MESSAGE" value="added  colors in the  stylesheet for setting background of the audit trail recorrds for future" />
+    <MESSAGE value="set the alternating colors of ausit trail to false" />
+    <option name="LAST_COMMIT_MESSAGE" value="set the alternating colors of ausit trail to false" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
