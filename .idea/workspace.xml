@@ -195,22 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00489" summary="removed unused update wuery">
-      <option name="closed" value="true" />
-      <created>1777262129115</created>
-      <option name="number" value="00489" />
-      <option name="presentableId" value="LOCAL-00489" />
-      <option name="project" value="LOCAL" />
-      <updated>1777262129115</updated>
-    </task>
-    <task id="LOCAL-00490" summary="added qmessage to show thatt the production is already printed">
-      <option name="closed" value="true" />
-      <created>1777266899202</created>
-      <option name="number" value="00490" />
-      <option name="presentableId" value="LOCAL-00490" />
-      <option name="project" value="LOCAL" />
-      <updated>1777266899202</updated>
-    </task>
     <task id="LOCAL-00491" summary="added a qmessage for already printed production">
       <option name="closed" value="true" />
       <created>1777267195391</created>
@@ -587,7 +571,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778125134058</updated>
     </task>
-    <option name="localTasksCounter" value="538" />
+    <task id="LOCAL-00538" summary="changed the background color per action">
+      <option name="closed" value="true" />
+      <created>1778125575241</created>
+      <option name="number" value="00538" />
+      <option name="presentableId" value="LOCAL-00538" />
+      <option name="project" value="LOCAL" />
+      <updated>1778125575241</updated>
+    </task>
+    <task id="LOCAL-00539" summary="changed the background color per action">
+      <option name="closed" value="true" />
+      <created>1778126206403</created>
+      <option name="number" value="00539" />
+      <option name="presentableId" value="LOCAL-00539" />
+      <option name="project" value="LOCAL" />
+      <updated>1778126206403</updated>
+    </task>
+    <option name="localTasksCounter" value="540" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the updating of the button for save/update" />
     <MESSAGE value="added a save function in the mb auto entry" />
     <MESSAGE value="updated the message for already printed record" />
     <MESSAGE value="changed the audit log  for the save/update in manual" />
@@ -639,7 +638,8 @@
     <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
     <MESSAGE value="working change bg color in  audit trail" />
     <MESSAGE value="remove debug print" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove debug print" />
+    <MESSAGE value="changed the background color per action" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the background color per action" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import lru_cache
 
 from psycopg2.extras import RealDictCursor
@@ -190,6 +190,34 @@ def get_latest_prod_id():
     cur.close()
     conn.close()
     return record[0]
+
+
+def get_unprinted_reminders():
+    """Fetches unprinted, non-deleted records from 60 to 30 days ago."""
+    conn = get_connection()
+    cur = conn.cursor()
+
+    # Calculate date range
+    today = datetime.now().date()
+    end_date = today - timedelta(days=30)
+    start_date = today - timedelta(days=60)
+
+    query = """
+        SELECT prod_id, customer, lot_no, prod_date 
+        FROM public.tbl_production01 
+        WHERE is_printed = false 
+          AND is_deleted = false
+          AND prod_date BETWEEN %s AND %s
+        ORDER BY prod_date DESC
+    """
+
+    try:
+        cur.execute(query, (start_date, end_date))
+        records = cur.fetchall()
+        return records
+    finally:
+        cur.close()
+        conn.close()
 
 
 def get_formula_select(product_code):
