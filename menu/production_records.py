@@ -26,6 +26,7 @@ class ProductionRecords(QWidget):
 
     def init_ui(self):
         self.setup_ui()
+        self.refresh_records()
 
     def setup_ui(self):
         main_layout = QVBoxLayout(self)
