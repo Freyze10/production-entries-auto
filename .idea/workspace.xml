@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00491" summary="added a qmessage for already printed production">
-      <option name="closed" value="true" />
-      <created>1777267195391</created>
-      <option name="number" value="00491" />
-      <option name="presentableId" value="LOCAL-00491" />
-      <option name="project" value="LOCAL" />
-      <updated>1777267195391</updated>
-    </task>
     <task id="LOCAL-00492" summary="added a qmessage for already printed production">
       <option name="closed" value="true" />
       <created>1777267250110</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778126206403</updated>
     </task>
-    <option name="localTasksCounter" value="540" />
+    <task id="LOCAL-00540" summary="added a query to get the unprinted record that is not yet deeleted from the lasst month">
+      <option name="closed" value="true" />
+      <created>1778211082261</created>
+      <option name="number" value="00540" />
+      <option name="presentableId" value="LOCAL-00540" />
+      <option name="project" value="LOCAL" />
+      <updated>1778211082262</updated>
+    </task>
+    <option name="localTasksCounter" value="541" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a save function in the mb auto entry" />
     <MESSAGE value="updated the message for already printed record" />
     <MESSAGE value="changed the audit log  for the save/update in manual" />
     <MESSAGE value="changed the audit log  for the save/update in AUTO ENTRIES" />
@@ -639,7 +638,8 @@
     <MESSAGE value="working change bg color in  audit trail" />
     <MESSAGE value="remove debug print" />
     <MESSAGE value="changed the background color per action" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the background color per action" />
+    <MESSAGE value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

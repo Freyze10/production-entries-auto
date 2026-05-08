@@ -6,7 +6,8 @@ import qtawesome as fa
 from PyQt6.QtCore import pyqtSignal
 
 from db.legacy import Sync
-from db.read import get_cancelled_production_data, get_all_production_data, get_single_production_details
+from db.read import get_cancelled_production_data, get_all_production_data, get_single_production_details, \
+    get_unprinted_reminders
 from table_model.model import TableModel
 from util.debounce import finished_typing
 from util.field_format import setup_auto_completers
@@ -319,6 +320,37 @@ class ProductionRecords(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
+
+    def check_for_unprinted_alerts(self):
+        """Checks for unprinted records from last month and alerts the user."""
+        try:
+            # 1. Get the records from DB
+            unprinted_list = get_unprinted_reminders()
+
+            if unprinted_list:
+                count = len(unprinted_list)
+
+                # 2. Build a summary string of the first few items
+                # (We don't want to list 100 items in a popup)
+                details = ""
+                for rec in unprinted_list[:5]:  # Show first 5
+                    details += f"• Lot: {rec[2]} ({rec[1]})\n"
+
+                if count > 5:
+                    details += f"...and {count - 5} more."
+
+                # 3. Display the Message Box
+                msg = QMessageBox(self)
+                msg.setIcon(QMessageBox.Icon.Warning)
+                msg.setWindowTitle("Unprinted Records Reminder")
+                msg.setText(f"There are {count} unprinted production records from the past month.")
+                msg.setInformativeText("These records are currently finalized but have not been printed yet.")
+                msg.setDetailedText(f"Target Date Range: 30-60 days ago\n\nRecent Pending:\n{details}")
+                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+                msg.exec()
+
+        except Exception as e:
+            print(f"Alert Check Error: {e}")
 
     def btn_cancel_clicked(self):
         if self.btn_cancelled.text() == "Cancelled":
