@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00492" summary="added a qmessage for already printed production">
-      <option name="closed" value="true" />
-      <created>1777267250110</created>
-      <option name="number" value="00492" />
-      <option name="presentableId" value="LOCAL-00492" />
-      <option name="project" value="LOCAL" />
-      <updated>1777267250110</updated>
-    </task>
     <task id="LOCAL-00493" summary="added a qmessage for already printed production">
       <option name="closed" value="true" />
       <created>1777267342002</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778211082262</updated>
     </task>
-    <option name="localTasksCounter" value="541" />
+    <task id="LOCAL-00541" summary="created a function to call the query and display the message">
+      <option name="closed" value="true" />
+      <created>1778211157668</created>
+      <option name="number" value="00541" />
+      <option name="presentableId" value="LOCAL-00541" />
+      <option name="project" value="LOCAL" />
+      <updated>1778211157668</updated>
+    </task>
+    <option name="localTasksCounter" value="542" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the message for already printed record" />
     <MESSAGE value="changed the audit log  for the save/update in manual" />
     <MESSAGE value="changed the audit log  for the save/update in AUTO ENTRIES" />
     <MESSAGE value="removed comment" />
@@ -639,7 +638,8 @@
     <MESSAGE value="remove debug print" />
     <MESSAGE value="changed the background color per action" />
     <MESSAGE value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
+    <MESSAGE value="created a function to call the query and display the message" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a function to call the query and display the message" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

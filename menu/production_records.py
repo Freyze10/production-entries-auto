@@ -318,6 +318,8 @@ class ProductionRecords(QWidget):
             # Clear search bar if text was entered
             self.search_input.clear()
 
+            self.check_for_unprinted_alerts()
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
 
@@ -334,7 +336,7 @@ class ProductionRecords(QWidget):
                 # (We don't want to list 100 items in a popup)
                 details = ""
                 for rec in unprinted_list[:5]:  # Show first 5
-                    details += f"• Lot: {rec[2]} ({rec[1]})\n"
+                    details += f"•Prod_ID:{rec[0]} - Lot: {rec[2]}   ({rec[1]})\n"
 
                 if count > 5:
                     details += f"...and {count - 5} more."
