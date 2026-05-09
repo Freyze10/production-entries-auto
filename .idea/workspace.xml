@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00494" summary="returend back the save button when the new entry is clickes">
-      <option name="closed" value="true" />
-      <created>1777267425696</created>
-      <option name="number" value="00494" />
-      <option name="presentableId" value="LOCAL-00494" />
-      <option name="project" value="LOCAL" />
-      <updated>1777267425696</updated>
-    </task>
     <task id="LOCAL-00495" summary="disable save button when the production is already printed">
       <option name="closed" value="true" />
       <created>1777267756966</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778212014735</updated>
     </task>
-    <option name="localTasksCounter" value="543" />
+    <task id="LOCAL-00543" summary="call the refresh record first after the set up is loaded">
+      <option name="closed" value="true" />
+      <created>1778226054941</created>
+      <option name="number" value="00543" />
+      <option name="presentableId" value="LOCAL-00543" />
+      <option name="project" value="LOCAL" />
+      <updated>1778226054941</updated>
+    </task>
+    <option name="localTasksCounter" value="544" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the audit log  for the save/update in AUTO ENTRIES" />
     <MESSAGE value="removed comment" />
     <MESSAGE value="add a logic for reloading the whole production page" />
     <MESSAGE value="added a condition so when there is a new production, it will only refresh the production record" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
     <MESSAGE value="created a function to call the query and display the message" />
     <MESSAGE value="updated text display of those unprinted" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated text display of those unprinted" />
+    <MESSAGE value="call the refresh record first after the set up is loaded" />
+    <option name="LAST_COMMIT_MESSAGE" value="call the refresh record first after the set up is loaded" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
