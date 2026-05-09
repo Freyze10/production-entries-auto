@@ -604,9 +604,12 @@ class MBManualEntry(QWidget):
         is_printed = self.prod_results.get('is_printed', False)
 
         if is_printed:
-            self.save_btn.setEnabled(False)
-            self.save_btn.setObjectName("disabled_btn")
             self.save_btn.setToolTip("This record is locked because it has already been printed.")
+            self.apply_viewer_restrictions()
+            self.btn_cancel.setEnabled(True)
+            self.btn_cancel.setObjectName("DangerButton")
+            self.new_btn.setEnabled(True)
+            self.new.setObjectName("PrimaryButton")
             QTimer.singleShot(200, lambda: show_printed_locked_message(self))
         else:
             self.save_btn.setEnabled(True)
