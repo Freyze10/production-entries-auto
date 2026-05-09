@@ -195,22 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00499" summary="changed the save button design on the  manual entry">
-      <option name="closed" value="true" />
-      <created>1777268187814</created>
-      <option name="number" value="00499" />
-      <option name="presentableId" value="LOCAL-00499" />
-      <option name="project" value="LOCAL" />
-      <updated>1777268187814</updated>
-    </task>
-    <task id="LOCAL-00500" summary="adjusted the dedfault display of the audit  trail">
-      <option name="closed" value="true" />
-      <created>1777268618689</created>
-      <option name="number" value="00500" />
-      <option name="presentableId" value="LOCAL-00500" />
-      <option name="project" value="LOCAL" />
-      <updated>1777268618689</updated>
-    </task>
     <task id="LOCAL-00501" summary="modified the manual entry">
       <option name="closed" value="true" />
       <created>1777270725039</created>
@@ -587,7 +571,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778306985973</updated>
     </task>
-    <option name="localTasksCounter" value="548" />
+    <task id="LOCAL-00548" summary="added more restriction on the  records that is already printed in auto entries">
+      <option name="closed" value="true" />
+      <created>1778307295572</created>
+      <option name="number" value="00548" />
+      <option name="presentableId" value="LOCAL-00548" />
+      <option name="project" value="LOCAL" />
+      <updated>1778307295572</updated>
+    </task>
+    <task id="LOCAL-00549" summary="removed the log in record in the audit trail">
+      <option name="closed" value="true" />
+      <created>1778307419223</created>
+      <option name="number" value="00549" />
+      <option name="presentableId" value="LOCAL-00549" />
+      <option name="project" value="LOCAL" />
+      <updated>1778307419223</updated>
+    </task>
+    <option name="localTasksCounter" value="550" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,8 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the audit trail table default recordds view" />
-    <MESSAGE value="fixed the  spacing for the material header in computation for print output to be smaller in spacing" />
     <MESSAGE value="fixed the to boolean legacy so when it receives an empty strinng, it will automaticaly use the default value" />
     <MESSAGE value="connected the load selected formula in the dc auto entry in  ok buton" />
     <MESSAGE value="changed the window title for  print preview" />
@@ -639,7 +637,9 @@
     <MESSAGE value="not printed background not workin" />
     <MESSAGE value="change of background color changing using  imm a am usin iitran Delegate" />
     <MESSAGE value="added more restriction on the  records that is already printed" />
-    <option name="LAST_COMMIT_MESSAGE" value="added more restriction on the  records that is already printed" />
+    <MESSAGE value="added more restriction on the  records that is already printed in auto entries" />
+    <MESSAGE value="removed the log in record in the audit trail" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the log in record in the audit trail" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
