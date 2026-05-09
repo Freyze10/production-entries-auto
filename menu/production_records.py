@@ -9,6 +9,7 @@ from db.legacy import Sync
 from db.read import get_cancelled_production_data, get_all_production_data, get_single_production_details, \
     get_unprinted_reminders
 from table_model.model import TableModel
+from util.audit_record_colors import RowColorDelegate
 from util.debounce import finished_typing
 from util.field_format import setup_auto_completers
 from util.loading import LoadingDialog
@@ -109,11 +110,12 @@ class ProductionRecords(QWidget):
         self.table_records.setColumnHidden(7, True)
         self.table_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
-        self.table_records.setAlternatingRowColors(True)
+        self.table_records.setAlternatingRowColors(False)
         self.table_records.setSortingEnabled(True)
         self.table_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
+        self.table_records.setItemDelegate(RowColorDelegate(mode="production", parent=self))
         self.table_records.customContextMenuRequested.connect(self.show_context_menu)
         # Connect to row selection change
         self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)

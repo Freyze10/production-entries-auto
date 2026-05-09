@@ -28,11 +28,21 @@ class TableModel(QAbstractTableModel):
 
         # --- 1. BACKGROUND COLOR LOGIC ---
         if role == Qt.ItemDataRole.BackgroundRole:
-            if len(self._data[row]) > 2:
+            # A. PRODUCTION RECORDS LOGIC (9 columns total, index 8 is is_printed)
+            if len(self._data[row]) > 8:
+                is_printed = self._data[row][8]
+                if is_printed is False:
+                    # Return Light Amber/Yellow for 'Not Printed'
+                    return QBrush(QColor("#FEF3C7"))  # Tailwind Amber 100
+
+            # B. AUDIT TRAIL LOGIC (Column index 2 is "Action")
+            # We add a guard to ensure it doesn't try to read col 2 if it's a tiny table
+            elif len(self._data[row]) > 2:
                 action_type = str(self._data[row][2]).strip().upper()
                 color_hex = AppStyles.ACTION_COLORS.get(action_type)
                 if color_hex:
                     return QBrush(QColor(color_hex))
+
             return None
 
         # --- 2. TOOLTIP LOGIC ---

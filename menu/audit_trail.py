@@ -149,7 +149,7 @@ class AuditTrail(QWidget):
         self.table_audit_records.setSortingEnabled(True)
         self.table_audit_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.table_audit_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
-        self.table_audit_records.setItemDelegate(RowColorDelegate(action_col=2, parent=self.table_audit_records))
+        self.table_audit_records.setItemDelegate(RowColorDelegate(mode="audit", parent=self))
         results_layout.addWidget(self.table_audit_records)
 
         main_layout.addWidget(results_card, stretch=1)
