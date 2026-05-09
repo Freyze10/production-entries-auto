@@ -88,7 +88,8 @@ class ProductionRecords(QWidget):
         records_layout.addWidget(self.table_records_label)
 
         # set of rows
-        self.headers = ["prod_id", "Date", "Customer", "Product Code", "Product Color", "Lot No", "Qty Produced", "WIP"]
+        self.headers = ["prod_id", "Date", "Customer", "Product Code",
+                        "Product Color", "Lot No", "Qty Produced", "WIP", "is_printed"]
         self.rows = get_all_production_data()
 
         self.table_records = QTableView()
@@ -106,8 +107,11 @@ class ProductionRecords(QWidget):
         # 2. Install the event filter on the VIEWPORT (the actual area where rows are)
         self.table_records.viewport().installEventFilter(self)
         self.table_records.verticalHeader().setVisible(False)  # hide row numbers
+
+        self.table_records.setItemDelegate(RowColorDelegate(mode="production", parent=self))
         self.table_records.setColumnHidden(0, True)
         self.table_records.setColumnHidden(7, True)
+        self.table_records.setColumnHidden(8, True)
         self.table_records.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(False)
@@ -115,7 +119,6 @@ class ProductionRecords(QWidget):
         self.table_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
-        self.table_records.setItemDelegate(RowColorDelegate(mode="production", parent=self))
         self.table_records.customContextMenuRequested.connect(self.show_context_menu)
         # Connect to row selection change
         self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)

@@ -10,24 +10,22 @@ class RowColorDelegate(QStyledItemDelegate):
         self.mode = mode  # "audit" or "production"
 
     def paint(self, painter, option, index):
-        # 1. Determine the background color
         row = index.row()
-        model = index.model()
-        bg_hex = "#FFFFFF"  # Default white
+        bg_hex = "#FFFFFF"
 
         if self.mode == "audit":
-            # Column 2 is "Action Type"
             action_index = index.sibling(row, 2)
-            action_type = str(action_index.data(Qt.ItemDataRole.DisplayRole) or "").strip().upper()
+            action_type = str(action_index.data() or "").strip().upper()
             bg_hex = AppStyles.ACTION_COLORS.get(action_type, "#FFFFFF")
 
         elif self.mode == "production":
-            # Column 8 is "is_printed" (hidden metadata)
+            # Access hidden column 8
             printed_index = index.sibling(row, 8)
-            is_printed = printed_index.data()  # Returns True or False
+            val = printed_index.data()
 
-            if is_printed is False:
-                bg_hex = "#FEF3C7"  # Light Amber/Yellow for unprinted
+            # Check for both Python False and String "False"
+            if val is False or str(val).strip().upper() == "FALSE":
+                bg_hex = "#FEF3C7"  # Amber 100
 
         color = QColor(bg_hex)
 

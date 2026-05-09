@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00496" summary="disable save button when the production is already printed in other pages too">
-      <option name="closed" value="true" />
-      <created>1777267831867</created>
-      <option name="number" value="00496" />
-      <option name="presentableId" value="LOCAL-00496" />
-      <option name="project" value="LOCAL" />
-      <updated>1777267831867</updated>
-    </task>
     <task id="LOCAL-00497" summary="import necessary modules to  mport">
       <option name="closed" value="true" />
       <created>1777267850629</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778304086320</updated>
     </task>
-    <option name="localTasksCounter" value="545" />
+    <task id="LOCAL-00545" summary="not printed background not workin">
+      <option name="closed" value="true" />
+      <created>1778305415900</created>
+      <option name="number" value="00545" />
+      <option name="presentableId" value="LOCAL-00545" />
+      <option name="project" value="LOCAL" />
+      <updated>1778305415900</updated>
+    </task>
+    <option name="localTasksCounter" value="546" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add a logic for reloading the whole production page" />
     <MESSAGE value="added a condition so when there is a new production, it will only refresh the production record" />
     <MESSAGE value="adjusted the spacing of the printed output" />
     <MESSAGE value="fixed the audit trail table default recordds view" />
@@ -639,7 +638,8 @@
     <MESSAGE value="updated text display of those unprinted" />
     <MESSAGE value="call the refresh record first after the set up is loaded" />
     <MESSAGE value="added is_printed query on the get all production data" />
-    <option name="LAST_COMMIT_MESSAGE" value="added is_printed query on the get all production data" />
+    <MESSAGE value="not printed background not workin" />
+    <option name="LAST_COMMIT_MESSAGE" value="not printed background not workin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
