@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
         self.allowed_access = get_allowed_access_points(self.user_role)
 
         self.init_ui()
-        self.log_audit_trail()
+        # self.log_audit_trail()
 
     def init_ui(self):
         main_widget = QWidget()
