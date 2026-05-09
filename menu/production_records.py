@@ -98,9 +98,9 @@ class ProductionRecords(QWidget):
         self.table_records.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         # Force the "Details" column (index 3) to stretch and fill empty space
         self.table_records.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        self.table_records.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
         self.table_records.setColumnWidth(1, 80)
         self.table_records.setColumnWidth(3, 110)
-        self.table_records.setColumnWidth(4, 110)
         self.table_records.setColumnWidth(5, 130)
         self.table_records.setMouseTracking(True)
         self.table_records.viewport().setMouseTracking(True)

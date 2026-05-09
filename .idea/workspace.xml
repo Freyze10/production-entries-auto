@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00501" summary="modified the manual entry">
-      <option name="closed" value="true" />
-      <created>1777270725039</created>
-      <option name="number" value="00501" />
-      <option name="presentableId" value="LOCAL-00501" />
-      <option name="project" value="LOCAL" />
-      <updated>1777270725039</updated>
-    </task>
     <task id="LOCAL-00502" summary="updated the production records to be in order based from prod id">
       <option name="closed" value="true" />
       <created>1777271708265</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778307419223</updated>
     </task>
-    <option name="localTasksCounter" value="550" />
+    <task id="LOCAL-00550" summary="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process">
+      <option name="closed" value="true" />
+      <created>1778309065698</created>
+      <option name="number" value="00550" />
+      <option name="presentableId" value="LOCAL-00550" />
+      <option name="project" value="LOCAL" />
+      <updated>1778309065698</updated>
+    </task>
+    <option name="localTasksCounter" value="551" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed the to boolean legacy so when it receives an empty strinng, it will automaticaly use the default value" />
     <MESSAGE value="connected the load selected formula in the dc auto entry in  ok buton" />
     <MESSAGE value="changed the window title for  print preview" />
     <MESSAGE value="changed the window to qwidget from qdialog" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added more restriction on the  records that is already printed" />
     <MESSAGE value="added more restriction on the  records that is already printed in auto entries" />
     <MESSAGE value="removed the log in record in the audit trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the log in record in the audit trail" />
+    <MESSAGE value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
