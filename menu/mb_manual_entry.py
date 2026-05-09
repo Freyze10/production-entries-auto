@@ -609,7 +609,7 @@ class MBManualEntry(QWidget):
             self.btn_cancel.setEnabled(True)
             self.btn_cancel.setObjectName("DangerButton")
             self.new_btn.setEnabled(True)
-            self.new.setObjectName("PrimaryButton")
+            self.new_btn.setObjectName("PrimaryButton")
             QTimer.singleShot(200, lambda: show_printed_locked_message(self))
         else:
             self.save_btn.setEnabled(True)

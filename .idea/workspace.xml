@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00498" summary="remove the empty form type, there will be  a default &quot;new&quot; value">
-      <option name="closed" value="true" />
-      <created>1777268077719</created>
-      <option name="number" value="00498" />
-      <option name="presentableId" value="LOCAL-00498" />
-      <option name="project" value="LOCAL" />
-      <updated>1777268077719</updated>
-    </task>
     <task id="LOCAL-00499" summary="changed the save button design on the  manual entry">
       <option name="closed" value="true" />
       <created>1777268187814</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778305958957</updated>
     </task>
-    <option name="localTasksCounter" value="547" />
+    <task id="LOCAL-00547" summary="added more restriction on the  records that is already printed">
+      <option name="closed" value="true" />
+      <created>1778306985973</created>
+      <option name="number" value="00547" />
+      <option name="presentableId" value="LOCAL-00547" />
+      <option name="project" value="LOCAL" />
+      <updated>1778306985973</updated>
+    </task>
+    <option name="localTasksCounter" value="548" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adjusted the spacing of the printed output" />
     <MESSAGE value="fixed the audit trail table default recordds view" />
     <MESSAGE value="fixed the  spacing for the material header in computation for print output to be smaller in spacing" />
     <MESSAGE value="fixed the to boolean legacy so when it receives an empty strinng, it will automaticaly use the default value" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added is_printed query on the get all production data" />
     <MESSAGE value="not printed background not workin" />
     <MESSAGE value="change of background color changing using  imm a am usin iitran Delegate" />
-    <option name="LAST_COMMIT_MESSAGE" value="change of background color changing using  imm a am usin iitran Delegate" />
+    <MESSAGE value="added more restriction on the  records that is already printed" />
+    <option name="LAST_COMMIT_MESSAGE" value="added more restriction on the  records that is already printed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

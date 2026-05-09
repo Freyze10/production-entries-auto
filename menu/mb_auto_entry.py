@@ -310,10 +310,10 @@ class MBAutoEntry(QWidget):
         print_btn.clicked.connect(self.print_production)
         button_layout.addWidget(print_btn)
 
-        new_btn = QPushButton("New", objectName="InfoButton")
-        new_btn.setIcon(fa.icon('fa5s.file', color='white'))
-        new_btn.clicked.connect(self.new_production)
-        button_layout.addWidget(new_btn)
+        self.new_btn = QPushButton("New", objectName="InfoButton")
+        self.new_btn.setIcon(fa.icon('fa5s.file', color='white'))
+        self.new_btn.clicked.connect(self.new_production)
+        button_layout.addWidget(self.new_btn)
 
         self.save_btn = QPushButton("Save", objectName="SuccessButton")
         self.save_btn.setIcon(fa.icon('fa5s.save', color='white'))
@@ -602,14 +602,18 @@ class MBAutoEntry(QWidget):
         # --- CHECK PRINTED STATUS AND DISABLE SAVE ---
         is_printed = self.prod_results.get('is_printed', False)
         if is_printed:
-            self.save_btn.setEnabled(False)
-            self.save_btn.setObjectName("disabled_btn")
+            self.save_btn.setToolTip("This record is locked because it has already been printed.")
+            self.apply_viewer_restrictions()
+            self.btn_cancel.setEnabled(True)
+            self.btn_cancel.setObjectName("DangerButton")
+            self.new_btn.setEnabled(True)
+            self.new_btn.setObjectName("PrimaryButton")
             QTimer.singleShot(200, lambda: show_printed_locked_message(self))
         else:
-            self.save_btn.setText("Update")
             self.save_btn.setEnabled(True)
             self.save_btn.setObjectName("SuccessButton")
 
+        self.save_btn.setText("Update")
         self.save_btn.style().unpolish(self.save_btn)
         self.save_btn.style().polish(self.save_btn)
 
