@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00502" summary="updated the production records to be in order based from prod id">
-      <option name="closed" value="true" />
-      <created>1777271708265</created>
-      <option name="number" value="00502" />
-      <option name="presentableId" value="LOCAL-00502" />
-      <option name="project" value="LOCAL" />
-      <updated>1777271708265</updated>
-    </task>
     <task id="LOCAL-00503" summary="updated some of the audit trail message">
       <option name="closed" value="true" />
       <created>1777274008204</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778309065698</updated>
     </task>
-    <option name="localTasksCounter" value="551" />
+    <task id="LOCAL-00551" summary="adjusted the with of the prroduct color to auto resize bast on contents">
+      <option name="closed" value="true" />
+      <created>1778309782820</created>
+      <option name="number" value="00551" />
+      <option name="presentableId" value="LOCAL-00551" />
+      <option name="project" value="LOCAL" />
+      <updated>1778309782820</updated>
+    </task>
+    <option name="localTasksCounter" value="552" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connected the load selected formula in the dc auto entry in  ok buton" />
     <MESSAGE value="changed the window title for  print preview" />
     <MESSAGE value="changed the window to qwidget from qdialog" />
     <MESSAGE value="changed the function to close the widget to .close form .accept" />
@@ -639,7 +638,8 @@
     <MESSAGE value="added more restriction on the  records that is already printed in auto entries" />
     <MESSAGE value="removed the log in record in the audit trail" />
     <MESSAGE value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
+    <MESSAGE value="adjusted the with of the prroduct color to auto resize bast on contents" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted the with of the prroduct color to auto resize bast on contents" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -62,11 +62,12 @@ def get_cancelled_production_data():
             a.prod_color, 
             a.lot_no, 
             b.quantity_prod,
-            a.index_no
+            a.index_no,
+            a.is_printed  -- ADD THIS LINE
         FROM tbl_production01 a
         LEFT JOIN tbl_production_quantity b 
             ON a.prod_id = b.prod_id
-        WHERE a.is_deleted = TRUE
+        WHERE a.is_deleted = TRUE  -- Check if this is BOOLEAN now
         ORDER BY a.prod_id ASC
     """)
 
@@ -74,18 +75,18 @@ def get_cancelled_production_data():
     cur.close()
     conn.close()
 
-    # Convert tuple rows to list of lists (exactly what you need for self.rows)
     data = []
     for row in records:
         data.append([
-            int(row[0]),  # prod_id as int
-            str(row[1]) if row[1] else "",  # production_date (handle None)
-            str(row[2]) if row[2] else "",  # customer
-            str(row[3]) if row[3] else "",  # product_code
-            str(row[4]) if row[4] else "",  # product_color
-            str(row[5]) if row[5] else "",  # lot_number
-            str(row[6]) if row[6] is not None else "0.0",  # qty_produced
-            str(row[7]) if row[7] else ""  # index_no/wip
+            int(row[0]),                    # 0
+            str(row[1]) if row[1] else "",  # 1
+            str(row[2]) if row[2] else "",  # 2
+            str(row[3]) if row[3] else "",  # 3
+            str(row[4]) if row[4] else "",  # 4
+            str(row[5]) if row[5] else "",  # 5
+            str(row[6]) if row[6] is not None else "0.0", # 6
+            str(row[7]) if row[7] else "",  # 7
+            row[8]                          # 8: is_printed (CRITICAL FOR DELEGATE)
         ])
 
     return data
