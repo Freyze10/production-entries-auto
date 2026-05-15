@@ -195,14 +195,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00503" summary="updated some of the audit trail message">
-      <option name="closed" value="true" />
-      <created>1777274008204</created>
-      <option name="number" value="00503" />
-      <option name="presentableId" value="LOCAL-00503" />
-      <option name="project" value="LOCAL" />
-      <updated>1777274008204</updated>
-    </task>
     <task id="LOCAL-00504" summary="return the connection to server">
       <option name="closed" value="true" />
       <created>1777276856434</created>
@@ -587,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778309782820</updated>
     </task>
-    <option name="localTasksCounter" value="552" />
+    <task id="LOCAL-00552" summary="updated database call for cancelled">
+      <option name="closed" value="true" />
+      <created>1778809522890</created>
+      <option name="number" value="00552" />
+      <option name="presentableId" value="LOCAL-00552" />
+      <option name="project" value="LOCAL" />
+      <updated>1778809522891</updated>
+    </task>
+    <option name="localTasksCounter" value="553" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the window title for  print preview" />
     <MESSAGE value="changed the window to qwidget from qdialog" />
     <MESSAGE value="changed the function to close the widget to .close form .accept" />
     <MESSAGE value="updated the call for print preview with the right call qwidget" />
@@ -639,7 +638,8 @@
     <MESSAGE value="removed the log in record in the audit trail" />
     <MESSAGE value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
     <MESSAGE value="adjusted the with of the prroduct color to auto resize bast on contents" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted the with of the prroduct color to auto resize bast on contents" />
+    <MESSAGE value="updated database call for cancelled" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated database call for cancelled" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

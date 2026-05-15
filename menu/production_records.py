@@ -369,29 +369,33 @@ class ProductionRecords(QWidget):
     def cancelled_records(self):
         try:
             cancelled_rows = get_cancelled_production_data()
-
             self.table_model.set_data(cancelled_rows)
 
-            # Reset the selection in the UI
             self.table_records.clearSelection()
             self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
+
+            # --- RE-HIDE METADATA COLUMNS ---
+            self.table_records.setColumnHidden(0, True)
+            self.table_records.setColumnHidden(7, True)
+            self.table_records.setColumnHidden(8, True)  # Ensure index 8 is hidden
+
             self.table_records.setStyleSheet("""
-                QTableView {
-                    background-color: #fceaea;   /* Light red background */
-                    alternate-background-color: #f9d5d5;
-                    gridline-color: #e0b1b1;
-                    color: #721c24;              /* Dark red text */
-                    selection-background-color: #b83232;
-                    selection-color: white;
-                }
-                QHeaderView::section {
-                    background-color: #b83232;
-                    color: white;
-                    border: 1px solid #9e2a2a;
-                    padding: 4px;
-                }
-            """)
+                       QTableView {
+                           background-color: #fceaea;
+                           alternate-background-color: #f9d5d5;
+                           gridline-color: #e0b1b1;
+                           color: #721c24;
+                           selection-background-color: #b83232;
+                           selection-color: white;
+                       }
+                       QHeaderView::section {
+                           background-color: #b83232;
+                           color: white;
+                           border: 1px solid #9e2a2a;
+                           padding: 4px;
+                       }
+                   """)
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
             # Reset the details table to its default empty state

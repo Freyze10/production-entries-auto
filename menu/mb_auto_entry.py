@@ -520,62 +520,80 @@ class MBAutoEntry(QWidget):
             super().focusOutEvent(event)
 
     def display_details(self):
-        self.production_id_input.setText(str(self.prod_results['prod_id']))
+        # 1. Helper to safely handle None values from Database
+        def safe_val(key, default=""):
+            v = self.prod_results.get(key)
+            return str(v) if v is not None else default
+
+        def safe_float_str(key, precision=6):
+            try:
+                val = self.prod_results.get(key)
+                if val is None:
+                    return f"{0.0:.{precision}f}"
+                return f"{float(val):.{precision}f}"
+            except (ValueError, TypeError):
+                return f"{0.0:.{precision}f}"
+
+        # 2. Populate Header Fields
+        self.production_id_input.setText(str(self.prod_results.get('prod_id', '0')))
+
         form_type_val = str(self.prod_results.get('form_type', '')).strip()
         idx = self.form_type_combo.findText(form_type_val, Qt.MatchFlag.MatchFixedString)
-        if idx >= 0:
-            self.form_type_combo.setCurrentIndex(idx)
-        else:
-            self.form_type_combo.setCurrentIndex(0)
+        self.form_type_combo.setCurrentIndex(idx if idx >= 0 else 0)
 
-        self.product_code_input.setText(str(self.prod_results['prod_code']))
-        self.product_color_input.setText(str(self.prod_results['prod_color']))
-        self.formulation_id_input.setText(str(self.prod_results['form_id']))
-        self.dosage_input.setText(f"{self.prod_results['dosage']:.6f}")
-        self.ld_percent_input.setText(f"{self.prod_results['ld']:.6f}")
-        self.customer_input.setText(str(self.prod_results['customer']))
-        self.lot_no_input.setText(str(self.prod_results['lot_no']))
-        self.order_form_no_input.setText(str(self.prod_results['order_no']))
-        self.colormatch_no_input.setText(str(self.prod_results['colormatch_no']))
-        self.prepared_by_input.setText(str(self.prod_results['prepared_by']))
-        self.notes_input.setPlainText(str(self.prod_results['note']))
+        self.product_code_input.setText(safe_val('prod_code'))
+        self.product_color_input.setText(safe_val('prod_color'))
+        self.formulation_id_input.setText(safe_val('form_id'))
 
+        # Use safe float string for dosage and ld
+        self.dosage_input.setText(safe_float_str('dosage'))
+        self.ld_percent_input.setText(safe_float_str('ld'))
+
+        self.customer_input.setText(safe_val('customer'))
+        self.lot_no_input.setText(safe_val('lot_no'))
+        self.order_form_no_input.setText(safe_val('order_no'))
+        self.colormatch_no_input.setText(safe_val('colormatch_no'))
+        self.prepared_by_input.setText(safe_val('prepared_by'))
+        self.notes_input.setPlainText(safe_val('note'))
+
+        # 3. Handle Dates
         def _set_date(widget, date_obj):
             if date_obj:
                 widget.setText(date_obj.strftime("%m/%d/%Y"))
             else:
                 widget.clear()
 
-        qty_req = float(self.prod_results['quantity_req'])
-        qty_batch = float(self.prod_results['quantity_batch'])
-
         _set_date(self.production_date_input, self.prod_results.get('prod_date'))
         _set_date(self.confirmation_date_input, self.prod_results.get('inventory_c_date'))
         _set_date(self.matched_date_input, self.prod_results.get('colormatch_date'))
 
-        self.mixing_time_input.setText(str(self.prod_results['mix_time']))
-        self.machine_no_input.setText(str(self.prod_results['machine_no']))
-        self.qty_required_input.setText(f"{qty_req:.6f}")
-        self.qty_per_batch_input.setText(f"{qty_batch:.6f}")
-        self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.6f}")
+        # 4. Populate Quantities safely
+        self.mixing_time_input.setText(safe_val('mix_time'))
+        self.machine_no_input.setText(safe_val('machine_no'))
 
-        self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
+        self.qty_required_input.setText(safe_float_str('quantity_req'))
+        self.qty_per_batch_input.setText(safe_float_str('quantity_batch'))
+        self.total_weight_label.setText(safe_float_str('quantity_prod'))
+
+        # 5. Handle Encoding Info
+        self.encoded_by_display.setText(safe_val('encoded_by'))
         if self.prod_results.get('encoded_on'):
             self.production_encoded_display.setText(
                 self.prod_results['encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
+
         if self.prod_results.get('confirmation_encoded_on'):
             self.production_confirmation_display.setText(
                 self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
 
+        # 6. Populate Table
         self.materials_table.setRowCount(0)
-
         for mat in self.prod_materials:
             row_idx = self.materials_table.rowCount()
             self.materials_table.insertRow(row_idx)
             mat_code = str(mat[1]) if mat[1] else ""
 
             if mat_code.strip() == "":
-                for col in range(self.materials_table.columnCount()):
+                for col in range(4):
                     self.materials_table.setItem(row_idx, col, QTableWidgetItem(""))
             else:
                 try:
@@ -586,20 +604,11 @@ class MBAutoEntry(QWidget):
                     large_scale = small_scale = total_weight = 0.0
 
                 self.materials_table.setItem(row_idx, 0, QTableWidgetItem(mat_code))
+                self.materials_table.setItem(row_idx, 1, NumericTableWidgetItem(large_scale, is_float=True))
+                self.materials_table.setItem(row_idx, 2, NumericTableWidgetItem(small_scale, is_float=True))
+                self.materials_table.setItem(row_idx, 3, NumericTableWidgetItem(total_weight, is_float=True))
 
-                item_large = NumericTableWidgetItem(large_scale, is_float=True)
-                item_large.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-                self.materials_table.setItem(row_idx, 1, item_large)
-
-                item_small = NumericTableWidgetItem(small_scale, is_float=True)
-                item_small.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-                self.materials_table.setItem(row_idx, 2, item_small)
-
-                item_total = NumericTableWidgetItem(total_weight, is_float=True)
-                item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-                self.materials_table.setItem(row_idx, 3, item_total)
-
-        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---
+        # 7. Check Printed Status and finalize UI
         is_printed = self.prod_results.get('is_printed', False)
         if is_printed:
             self.save_btn.setToolTip("This record is locked because it has already been printed.")
@@ -617,8 +626,7 @@ class MBAutoEntry(QWidget):
         self.save_btn.style().unpolish(self.save_btn)
         self.save_btn.style().polish(self.save_btn)
 
-        item_count = self.materials_table.rowCount()
-        self.no_items_label.setText(str(item_count))
+        self.no_items_label.setText(str(self.materials_table.rowCount()))
         return True
 
     def cancel_production(self):
