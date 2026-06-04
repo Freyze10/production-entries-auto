@@ -70,6 +70,7 @@ class MainWindow(QMainWindow):
         self.production_auto_entry_dc = None
         self.audit_trail = None
         self.user_management = None
+        self.dashboard = None
 
         self.allowed_access = get_allowed_access_points(self.user_role)
 
@@ -161,6 +162,7 @@ class MainWindow(QMainWindow):
 
         self.btn_audit_trail = self.create_menu_button("  Audit Trail", 'fa5s.history', 4)
         self.btn_user_mamagement = self.create_menu_button("  Permission Access", 'ri.user-settings-fill', 5)
+        self.btn_dashboard = self.create_menu_button("  Dashboard", 'mdi.monitor-dashboard', 6)
 
         self.btn_logout = QPushButton("  Logout", icon=fa.icon('fa5s.sign-out-alt', color=AppStyles.RED_500))
         self.btn_logout.setStyleSheet(f"""QPushButton {{ color: {AppStyles.RED_500};}}""")
@@ -168,6 +170,15 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(profile)
         layout.addWidget(sep)
+
+        layout.addWidget(QLabel("Color Match", objectName="MenuLabel"))
+        lab_button_mapping = [
+            (self.btn_dashboard, "Dashboard"),
+        ]
+        for btn, access_name in lab_button_mapping:
+            if access_name in self.allowed_access:
+                layout.addWidget(btn)
+
         layout.addWidget(QLabel("Production Entry", objectName="MenuLabel"))
 
         # Define mapping: (Button Object, Database Access Name)
@@ -258,11 +269,13 @@ class MainWindow(QMainWindow):
                 new_widget = self.audit_trail
 
             elif index == 5:
-                try:
-                    self.user_management = PermissionsManager()
-                    new_widget = self.user_management
-                except Exception as e:
-                    print(e)
+                self.user_management = PermissionsManager()
+                new_widget = self.user_management
+
+            elif index == 6:
+                self.dashboard = Dashboard()
+                new_widget = self.dashboard
+
 
             # Replace the placeholder with the actual loaded page
             self.stacked_widget.removeWidget(current_widget)

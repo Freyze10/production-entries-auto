@@ -196,14 +196,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00506" summary="added a function for save/ update in manual">
-      <option name="closed" value="true" />
-      <created>1777339937134</created>
-      <option name="number" value="00506" />
-      <option name="presentableId" value="LOCAL-00506" />
-      <option name="project" value="LOCAL" />
-      <updated>1777339937136</updated>
-    </task>
     <task id="LOCAL-00507" summary="added a query to make the update or save function work">
       <option name="closed" value="true" />
       <created>1777340001049</created>
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778814933367</updated>
     </task>
-    <option name="localTasksCounter" value="555" />
+    <task id="LOCAL-00555" summary="modified">
+      <option name="closed" value="true" />
+      <created>1780293708092</created>
+      <option name="number" value="00555" />
+      <option name="presentableId" value="LOCAL-00555" />
+      <option name="project" value="LOCAL" />
+      <updated>1780293708092</updated>
+    </task>
+    <option name="localTasksCounter" value="556" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,7 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the function to close the widget to .close form .accept" />
     <MESSAGE value="updated the call for print preview with the right call qwidget" />
     <MESSAGE value="added the  delete the widget on clicking x" />
     <MESSAGE value="updated the audit trail text for modifying the user details" />
@@ -640,7 +639,8 @@
     <MESSAGE value="adjusted the with of the prroduct color to auto resize bast on contents" />
     <MESSAGE value="updated database call for cancelled" />
     <MESSAGE value="updated all display details to accept null values" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated all display details to accept null values" />
+    <MESSAGE value="modified" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
