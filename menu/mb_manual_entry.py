@@ -791,15 +791,31 @@ class MBManualEntry(QWidget):
             # Material List (Looping through Table)
             materials = []
             for row in range(self.materials_table.rowCount()):
-                mat_code = self.materials_table.item(row, 0).text()
-                if not mat_code.strip(): continue  # Skip empty rows/separators
+                it0 = self.materials_table.item(row, 0)
+                it1 = self.materials_table.item(row, 1)
+                it2 = self.materials_table.item(row, 2)
+                it3 = self.materials_table.item(row, 3)
 
-                large = float(self.materials_table.item(row, 1).text() or 0)
-                small = float(self.materials_table.item(row, 2).text() or 0)
-                total = float(self.materials_table.item(row, 3).text() or 0)
+                mat_code = it0.text().strip() if it0 else ""
+
+                if not mat_code:
+                    # It's a separator / blank row
+                    large = 0.0
+                    small = 0.0
+                    total = 0.0
+                else:
+                    try:
+                        large = float(it1.text().strip() if it1 and it1.text().strip() else 0)
+                        small = float(it2.text().strip() if it2 and it2.text().strip() else 0)
+                        total = float(it3.text().strip() if it3 and it3.text().strip() else 0)
+                    except ValueError:
+                        large = 0.0
+                        small = 0.0
+                        total = 0.0
 
                 # Format: (prod_id, sequence_no, material_code, large, small, total)
-                materials.append((header['prod_id'], row + 1, mat_code, large, small, total))
+                # Pass None or "" for material_code depending on database preference (let's use None or "")
+                materials.append((header['prod_id'], row + 1, mat_code if mat_code else "", large, small, total))
 
         except ValueError as e:
             QMessageBox.critical(self, "Input Error", f"Please check your numeric fields. Error: {e}")

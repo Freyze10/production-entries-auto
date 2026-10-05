@@ -138,7 +138,7 @@ def add_new_role(name, dept):
 
 def save_production_record(header, quantity, encode, materials, is_update=False):
     """
-    Saves or Updates a complete production record across 4 tables.
+    Saves or Updates a complete production record across 4 tables, supporting separators.
     """
     conn = get_connection()
     cursor = conn.cursor()
@@ -163,12 +163,12 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
                 WHERE prod_id = %s
             """, (quantity['req'], quantity['batch'], quantity['prod'], header['prod_id']))
 
-            # 3. Update Encode (Usually just confirmation date)
+            # 3. Update Encode
             cursor.execute("""
                 UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
             """, (encode['prepared_by'], header['prod_id']))
 
-            # 4. Refresh Materials (Delete old, Insert new is safest for sequences)
+            # 4. Refresh Materials (Delete old, Insert new including separators)
             cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
 
         else:
@@ -195,7 +195,7 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
             """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
 
-        # 5. Insert Materials (Common for both Insert/Update after cleanup)
+        # 5. Insert Materials & Separators (Maintains sequence numbers completely)
         material_query = """
             INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
             VALUES (%s, %s, %s, %s, %s, %s, FALSE)

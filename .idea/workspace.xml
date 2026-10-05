@@ -196,14 +196,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00511" summary="added a save function in the mb auto entry">
-      <option name="closed" value="true" />
-      <created>1777341203125</created>
-      <option name="number" value="00511" />
-      <option name="presentableId" value="LOCAL-00511" />
-      <option name="project" value="LOCAL" />
-      <updated>1777341203126</updated>
-    </task>
     <task id="LOCAL-00512" summary="updated the message for already printed record">
       <option name="closed" value="true" />
       <created>1777357783282</created>
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790745338871</updated>
     </task>
-    <option name="localTasksCounter" value="560" />
+    <task id="LOCAL-00560" summary="updated the manual new entry button, to re-enable  the fields and button">
+      <option name="closed" value="true" />
+      <created>1791162819969</created>
+      <option name="number" value="00560" />
+      <option name="presentableId" value="LOCAL-00560" />
+      <option name="project" value="LOCAL" />
+      <updated>1791162819969</updated>
+    </task>
+    <option name="localTasksCounter" value="561" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,7 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set the alternating colors of ausit trail to false" />
     <MESSAGE value="changed the background to background coilor in the styles" />
     <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
     <MESSAGE value="working change bg color in  audit trail" />
@@ -640,7 +639,8 @@
     <MESSAGE value="created basic template for the dashboard" />
     <MESSAGE value="returned back to original" />
     <MESSAGE value="updated the connection to server" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the connection to server" />
+    <MESSAGE value="updated the manual new entry button, to re-enable  the fields and button" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the manual new entry button, to re-enable  the fields and button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
