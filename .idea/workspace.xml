@@ -37,30 +37,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.fastapi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.format_rm_note.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.print.executor&quot;: &quot;Run&quot;,
-    &quot;Python.print_preview.executor&quot;: &quot;Run&quot;,
-    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Brant/PycharmProjects/ProductionSystem&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.dashboard.executor": "Run",
+    "Python.fastapi.executor": "Run",
+    "Python.format_rm_note.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.print.executor": "Run",
+    "Python.print_preview.executor": "Run",
+    "Python.styles.executor": "Run",
+    "Python.test_print.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Brant/PycharmProjects/ProductionSystem",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="format_rm_note" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dashboard" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -69,11 +70,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/util" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/menu" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util/format_rm_note.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/menu/dashboard.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,10 +174,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.dashboard" />
         <item itemvalue="Python.test_print" />
         <item itemvalue="Python.print_preview" />
         <item itemvalue="Python.login" />
-        <item itemvalue="Python.format_rm_note" />
       </list>
     </recent_temporary>
   </component>
@@ -195,14 +196,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00516" summary="add a logic for reloading the whole production page">
-      <option name="closed" value="true" />
-      <created>1777441949815</created>
-      <option name="number" value="00516" />
-      <option name="presentableId" value="LOCAL-00516" />
-      <option name="project" value="LOCAL" />
-      <updated>1777441949815</updated>
     </task>
     <task id="LOCAL-00517" summary="added a condition so when there is a new production, it will only refresh the production record">
       <option name="closed" value="true" />
@@ -588,7 +581,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791168653577</updated>
     </task>
-    <option name="localTasksCounter" value="565" />
+    <task id="LOCAL-00565" summary="renoed the hars validation for the lot number even if the fields is readonly">
+      <option name="closed" value="true" />
+      <created>1791169857015</created>
+      <option name="number" value="00565" />
+      <option name="presentableId" value="LOCAL-00565" />
+      <option name="project" value="LOCAL" />
+      <updated>1791169857015</updated>
+    </task>
+    <option name="localTasksCounter" value="566" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,7 +616,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove debug print" />
     <MESSAGE value="changed the background color per action" />
     <MESSAGE value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
     <MESSAGE value="created a function to call the query and display the message" />
@@ -640,16 +640,12 @@
     <MESSAGE value="fix the saving function of the manual entry to also store the seperators" />
     <MESSAGE value="addes a remove viewer restriction on the auto formula entries" />
     <MESSAGE value="fix the saving function of the auto entries to handle correctly the seperator" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the saving function of the auto entries to handle correctly the seperator" />
+    <MESSAGE value="renoed the hars validation for the lot number even if the fields is readonly" />
+    <option name="LAST_COMMIT_MESSAGE" value="renoed the hars validation for the lot number even if the fields is readonly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/table_model/model.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
           <line>114</line>

@@ -116,13 +116,13 @@ class ProductionRecords(QWidget):
         self.table_records.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table_records.setAlternatingRowColors(False)
         self.table_records.setSortingEnabled(True)
-        self.table_records.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.table_records.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.table_records.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
         self.table_records.customContextMenuRequested.connect(self.show_context_menu)
         # Connect to row selection change
-        self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)
-
+        # self.table_records.selectionModel().selectionChanged.connect(self.on_row_selected)
+        self.table_records.selectionModel().currentChanged.connect(self.on_current_row_changed)
         records_layout.addWidget(self.table_records, stretch=1)
         main_layout.addWidget(records_card, stretch=3)
 
@@ -198,12 +198,12 @@ class ProductionRecords(QWidget):
         col_index = PRODUCTION_COL_MAP.get(col_label, None)
         self.table_model.filter_data(search_text, col_index)
 
-    def on_row_selected(self):
-        index = self.table_records.selectionModel().selectedRows()
-        if not index:
+    def on_current_row_changed(self, current, previous):
+        # Ensure the current index is valid
+        if not current.isValid():
             return
 
-        row = index[0].row()
+        row = current.row()
         wip_no = self.table_model._data[row][7]
 
         try:
@@ -234,19 +234,32 @@ class ProductionRecords(QWidget):
             data = []
             for row in details:
                 row_list = []
+
+                # Check if this row is a separator (e.g., material name is 0 or "0" or empty)
+                is_separator = str(row[1]).strip() in ("0", "") if row[1] is not None else True
+
                 for col, value in enumerate(row):
                     if col == 0:
                         try:
                             row_list.append(int(value) if value is not None else 0)
                         except (ValueError, TypeError):
                             row_list.append(0)
+
                     elif col == 1:  # Material name/code
-                        row_list.append(str(value) if value else "")
-                    else:  # Numeric values
-                        try:
-                            row_list.append(float(value) if value is not None else 0.0)
-                        except (ValueError, TypeError):
-                            row_list.append(0.0)
+                        if is_separator:
+                            row_list.append("")  # Blank out the separator text
+                        else:
+                            row_list.append(str(value) if value else "")
+
+                    else:  # Numeric values (Large Scale, Small Scale, Total Weight)
+                        if is_separator:
+                            row_list.append("")  # Display blank instead of 0.0 for separator rows
+                        else:
+                            try:
+                                row_list.append(float(value) if value is not None else 0.0)
+                            except (ValueError, TypeError):
+                                row_list.append(0.0)
+
                 data.append(row_list)
 
             self.details_table_model.set_data(data)
