@@ -732,20 +732,32 @@ class DCAutoEntry(QWidget):
                 'encoded_by': self.work_station['u']
             }
 
-            # 6. Pack Materials Data (tbl_production02)
+            # 6. Pack Materials Data (tbl_production02) with robust separator handling
             materials = []
             for row in range(self.materials_table.rowCount()):
                 it0 = self.materials_table.item(row, 0)  # Material Name
-                if not it0 or not it0.text().strip():
-                    # Handle Blank Separator Rows
-                    materials.append((header['prod_id'], row + 1, "", 0, 0, 0))
-                    continue
+                it1 = self.materials_table.item(row, 1)  # Large Scale
+                it2 = self.materials_table.item(row, 2)  # Small Scale
+                it3 = self.materials_table.item(row, 3)  # Total Weight
 
-                large = float(self.materials_table.item(row, 1).text().replace(',', '') or 0)
-                small = float(self.materials_table.item(row, 2).text().replace(',', '') or 0)
-                total = float(self.materials_table.item(row, 3).text().replace(',', '') or 0)
+                mat_code = it0.text().strip() if (it0 and it0.text()) else ""
 
-                materials.append((header['prod_id'], row + 1, it0.text().strip(), large, small, total))
+                if not mat_code:
+                    # Handle Blank Separator Rows explicitly as blank + 0 values
+                    large = 0.0
+                    small = 0.0
+                    total = 0.0
+                else:
+                    try:
+                        large = float(it1.text().replace(',', '').strip() if (it1 and it1.text()) else 0)
+                        small = float(it2.text().replace(',', '').strip() if (it2 and it2.text()) else 0)
+                        total = float(it3.text().replace(',', '').strip() if (it3 and it3.text()) else 0)
+                    except ValueError:
+                        large = 0.0
+                        small = 0.0
+                        total = 0.0
+
+                materials.append((header['prod_id'], row + 1, mat_code, large, small, total))
 
         except ValueError as e:
             QMessageBox.critical(self, "Data Error", f"Please check numeric fields. Error: {e}")

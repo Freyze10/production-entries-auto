@@ -731,20 +731,33 @@ class MBAutoEntry(QWidget):
                 'encoded_by': self.work_station['u']
             }
 
-            # Materials Data (tbl_production02)
+            # Materials Data (tbl_production02) - Capturing rows properly, including blank rows/separators
             materials = []
             for row in range(self.materials_table.rowCount()):
                 it0 = self.materials_table.item(row, 0)
-                if not it0 or not it0.text().strip():
-                    # Handle separator/empty rows
-                    materials.append((header['prod_id'], row + 1, "", 0.0, 0.0, 0.0))
-                    continue
+                it1 = self.materials_table.item(row, 1)
+                it2 = self.materials_table.item(row, 2)
+                it3 = self.materials_table.item(row, 3)
 
-                large = float(self.materials_table.item(row, 1).text().replace(',', '') or 0)
-                small = float(self.materials_table.item(row, 2).text().replace(',', '') or 0)
-                total = float(self.materials_table.item(row, 3).text().replace(',', '') or 0)
+                mat_code = it0.text().strip() if (it0 and it0.text()) else ""
 
-                materials.append((header['prod_id'], row + 1, it0.text().strip(), large, small, total))
+                if not mat_code:
+                    # Explicitly store blank code and 0 values for separators/empty rows
+                    large = 0.0
+                    small = 0.0
+                    total = 0.0
+                else:
+                    try:
+                        large = float(it1.text().replace(',', '').strip() if (it1 and it1.text()) else 0)
+                        small = float(it2.text().replace(',', '').strip() if (it2 and it2.text()) else 0)
+                        total = float(it3.text().replace(',', '').strip() if (it3 and it3.text()) else 0)
+                    except ValueError:
+                        large = 0.0
+                        small = 0.0
+                        total = 0.0
+
+                # Tuple structure matches backend: (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight)
+                materials.append((header['prod_id'], row + 1, mat_code, large, small, total))
 
         except ValueError as e:
             QMessageBox.critical(self, "Input Error", f"Please check numeric fields. Error: {e}")
