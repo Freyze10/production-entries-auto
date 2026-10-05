@@ -196,14 +196,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00513" summary="changed the audit log  for the save/update in manual">
-      <option name="closed" value="true" />
-      <created>1777359159928</created>
-      <option name="number" value="00513" />
-      <option name="presentableId" value="LOCAL-00513" />
-      <option name="project" value="LOCAL" />
-      <updated>1777359159928</updated>
-    </task>
     <task id="LOCAL-00514" summary="changed the audit log  for the save/update in AUTO ENTRIES">
       <option name="closed" value="true" />
       <created>1777359254512</created>
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791163688610</updated>
     </task>
-    <option name="localTasksCounter" value="562" />
+    <task id="LOCAL-00562" summary="addes a remove viewer restriction on the auto formula entries">
+      <option name="closed" value="true" />
+      <created>1791166078995</created>
+      <option name="number" value="00562" />
+      <option name="presentableId" value="LOCAL-00562" />
+      <option name="project" value="LOCAL" />
+      <updated>1791166078995</updated>
+    </task>
+    <option name="localTasksCounter" value="563" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,7 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
     <MESSAGE value="working change bg color in  audit trail" />
     <MESSAGE value="remove debug print" />
     <MESSAGE value="changed the background color per action" />
@@ -640,7 +639,8 @@
     <MESSAGE value="updated the connection to server" />
     <MESSAGE value="updated the manual new entry button, to re-enable  the fields and button" />
     <MESSAGE value="fix the saving function of the manual entry to also store the seperators" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the saving function of the manual entry to also store the seperators" />
+    <MESSAGE value="addes a remove viewer restriction on the auto formula entries" />
+    <option name="LAST_COMMIT_MESSAGE" value="addes a remove viewer restriction on the auto formula entries" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
