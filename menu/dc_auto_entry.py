@@ -319,7 +319,7 @@ class DCAutoEntry(QWidget):
 
         self.save_btn = QPushButton("Save", objectName="SuccessButton")
         self.save_btn.setIcon(fa.icon('fa5s.save', color='white'))
-        # self.save_btn.clicked.connect(self.save_production)
+        self.save_btn.clicked.connect(self.save_production)
         button_layout.addWidget(self.save_btn)
 
         main_layout.addLayout(button_layout)
@@ -775,6 +775,14 @@ class DCAutoEntry(QWidget):
 
     def new_production(self):
         """Initialize a new production entry."""
+        # --- CHECK IF VIEWER RESTRICTIONS SHOULD BE LIFTED OR MAINTAINED ---
+        if str(self.user_role).upper() == "VIEWER" or not self.is_mac_enabled:
+            self.apply_viewer_restrictions()
+            QMessageBox.warning(self, "Access Denied", "Viewers cannot create new production records.")
+            return
+        else:
+            self.remove_viewer_restrictions()
+
         self.current_production_id = None
         try:
             latest_prod = get_latest_prod_id()
@@ -1099,6 +1107,66 @@ class DCAutoEntry(QWidget):
         # 4. Special case: Disable Table interactions
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+
+    def remove_viewer_restrictions(self):
+        """Restores all input fields and action buttons to an editable/enabled state for DCAutoEntry."""
+
+        # 1. Re-enable LineEdits and TextEdits (Make them writable)
+        for widget in self.findChildren(QLineEdit):
+            widget.setReadOnly(False)
+            widget.setStyleSheet("")  # Clear custom gray styling
+
+        # Re-apply specific gray/read-only backgrounds for fields that are meant to be read-only by default
+        self.formulation_id_input.setReadOnly(True)
+        self.formulation_id_input.setStyleSheet("background-color: #e9ecef;")
+        self.encoded_by_display.setReadOnly(True)
+        self.encoded_by_display.setStyleSheet("background-color: #e9ecef;")
+        self.production_encoded_display.setReadOnly(True)
+        self.production_encoded_display.setStyleSheet("background-color: #e9ecef;")
+        self.production_confirmation_display.setReadOnly(True)
+        self.production_confirmation_display.setStyleSheet("background-color: #fff9c4;")
+
+        for widget in self.findChildren(QTextEdit):
+            widget.setReadOnly(False)
+            widget.setStyleSheet("")
+
+        # 2. Re-enable Selection Widgets (ComboBox, DateEdit)
+        for widget in self.findChildren(QComboBox):
+            widget.setEnabled(True)
+
+        for widget in self.findChildren(SmartDateEdit):
+            widget.setEnabled(True)
+
+        # 3. Re-enable Buttons and assign proper Object Names based on text
+        for btn in self.findChildren(QPushButton):
+            btn.setEnabled(True)
+
+            btn_text = btn.text().upper()
+
+            if "SAVE" in btn_text or "UPDATE" in btn_text:
+                btn.setObjectName("SuccessButton")
+            elif "CANCEL" in btn_text and "WIP" not in btn_text:
+                btn.setObjectName("DangerButton")
+            elif "NEW" in btn_text:
+                btn.setObjectName("InfoButton")
+            elif "GENERATE" in btn_text:
+                btn.setObjectName("PrimaryButton")
+            elif "TUMBLER" in btn_text:
+                btn.setObjectName("TertiaryButton")
+            elif "PRINT" in btn_text:
+                btn.setObjectName("SecondaryButton")
+
+            # Refresh stylesheet dynamically so Qt registers the enabled theme colors
+            btn.style().unpolish(btn)
+            btn.style().polish(btn)
+
+        # 4. Re-enable Table interactions
+        self.materials_table.setEditTriggers(
+            QAbstractItemView.EditTrigger.DoubleClicked |
+            QAbstractItemView.EditTrigger.SelectedClicked |
+            QAbstractItemView.EditTrigger.EditKeyPressed
+        )
+        self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
 
     def sync_rm(self):
         thread = QThread()

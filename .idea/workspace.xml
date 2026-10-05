@@ -196,14 +196,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00512" summary="updated the message for already printed record">
-      <option name="closed" value="true" />
-      <created>1777357783282</created>
-      <option name="number" value="00512" />
-      <option name="presentableId" value="LOCAL-00512" />
-      <option name="project" value="LOCAL" />
-      <updated>1777357783282</updated>
-    </task>
     <task id="LOCAL-00513" summary="changed the audit log  for the save/update in manual">
       <option name="closed" value="true" />
       <created>1777359159928</created>
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791162819969</updated>
     </task>
-    <option name="localTasksCounter" value="561" />
+    <task id="LOCAL-00561" summary="fix the saving function of the manual entry to also store the seperators">
+      <option name="closed" value="true" />
+      <created>1791163688610</created>
+      <option name="number" value="00561" />
+      <option name="presentableId" value="LOCAL-00561" />
+      <option name="project" value="LOCAL" />
+      <updated>1791163688610</updated>
+    </task>
+    <option name="localTasksCounter" value="562" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,7 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the background to background coilor in the styles" />
     <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
     <MESSAGE value="working change bg color in  audit trail" />
     <MESSAGE value="remove debug print" />
@@ -640,7 +639,8 @@
     <MESSAGE value="returned back to original" />
     <MESSAGE value="updated the connection to server" />
     <MESSAGE value="updated the manual new entry button, to re-enable  the fields and button" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the manual new entry button, to re-enable  the fields and button" />
+    <MESSAGE value="fix the saving function of the manual entry to also store the seperators" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the saving function of the manual entry to also store the seperators" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
