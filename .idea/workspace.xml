@@ -197,14 +197,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00517" summary="added a condition so when there is a new production, it will only refresh the production record">
-      <option name="closed" value="true" />
-      <created>1777442399292</created>
-      <option name="number" value="00517" />
-      <option name="presentableId" value="LOCAL-00517" />
-      <option name="project" value="LOCAL" />
-      <updated>1777442399292</updated>
-    </task>
     <task id="LOCAL-00518" summary="added a condition so when there is a new production, it will only refresh the production record">
       <option name="closed" value="true" />
       <created>1777449749752</created>
@@ -589,7 +581,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791169857015</updated>
     </task>
-    <option name="localTasksCounter" value="566" />
+    <task id="LOCAL-00566" summary="changed the display of the production details and the row selection">
+      <option name="closed" value="true" />
+      <created>1791181144139</created>
+      <option name="number" value="00566" />
+      <option name="presentableId" value="LOCAL-00566" />
+      <option name="project" value="LOCAL" />
+      <updated>1791181144139</updated>
+    </task>
+    <option name="localTasksCounter" value="567" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -616,7 +616,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the background color per action" />
     <MESSAGE value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
     <MESSAGE value="created a function to call the query and display the message" />
     <MESSAGE value="updated text display of those unprinted" />
@@ -641,7 +640,8 @@
     <MESSAGE value="addes a remove viewer restriction on the auto formula entries" />
     <MESSAGE value="fix the saving function of the auto entries to handle correctly the seperator" />
     <MESSAGE value="renoed the hars validation for the lot number even if the fields is readonly" />
-    <option name="LAST_COMMIT_MESSAGE" value="renoed the hars validation for the lot number even if the fields is readonly" />
+    <MESSAGE value="changed the display of the production details and the row selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the display of the production details and the row selection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
