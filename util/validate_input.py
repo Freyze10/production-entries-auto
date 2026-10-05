@@ -9,6 +9,11 @@ def validate_lot_field(parent, widget, existing_list, event,
     Validates Lot Numbers, supporting ranges (e.g., 6087AL-6088AL).
     Checks the first 6 chars for MB or first 5 chars for non-MB.
     """
+
+    # 🛑 Skip validation if the widget is disabled or read-only (e.g., Viewer mode)
+    if widget.isReadOnly() or not widget.isEnabled():
+        return True
+
     raw_text = widget.text().strip().upper()
 
     if not raw_text:

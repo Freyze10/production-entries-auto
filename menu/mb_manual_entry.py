@@ -478,6 +478,10 @@ class MBManualEntry(QWidget):
             self.new_production()
 
     def validate_lot_no(self, event):
+        # 🛑 Stop validation completely if the field is read-only or disabled
+        if self.lot_no_input.isReadOnly() or not self.lot_no_input.isEnabled():
+            return
+
         product_code = self.product_code_input.text().strip()
 
         is_mb_value = "-" not in product_code

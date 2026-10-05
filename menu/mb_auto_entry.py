@@ -509,6 +509,8 @@ class MBAutoEntry(QWidget):
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
 
     def validate_lot_no(self, event):
+        if self.lot_no_input.isReadOnly() or not self.lot_no_input.isEnabled():
+            return
         if validate_lot_field(
                 parent=self,
                 widget=self.lot_no_input,
