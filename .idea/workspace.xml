@@ -196,14 +196,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00510" summary="updated the updating of the button for save/update">
-      <option name="closed" value="true" />
-      <created>1777341111472</created>
-      <option name="number" value="00510" />
-      <option name="presentableId" value="LOCAL-00510" />
-      <option name="project" value="LOCAL" />
-      <updated>1777341111473</updated>
-    </task>
     <task id="LOCAL-00511" summary="added a save function in the mb auto entry">
       <option name="closed" value="true" />
       <created>1777341203125</created>
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780544068219</updated>
     </task>
-    <option name="localTasksCounter" value="559" />
+    <task id="LOCAL-00559" summary="updated the connection to server">
+      <option name="closed" value="true" />
+      <created>1790745338871</created>
+      <option name="number" value="00559" />
+      <option name="presentableId" value="LOCAL-00559" />
+      <option name="project" value="LOCAL" />
+      <updated>1790745338871</updated>
+    </task>
+    <option name="localTasksCounter" value="560" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,7 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added  colors in the  stylesheet for setting background of the audit trail recorrds for future" />
     <MESSAGE value="set the alternating colors of ausit trail to false" />
     <MESSAGE value="changed the background to background coilor in the styles" />
     <MESSAGE value="debugging print to console to view if the change of bg is workking because it is not displaying" />
@@ -640,7 +639,8 @@
     <MESSAGE value="added dashboard in the main Navigation" />
     <MESSAGE value="created basic template for the dashboard" />
     <MESSAGE value="returned back to original" />
-    <option name="LAST_COMMIT_MESSAGE" value="returned back to original" />
+    <MESSAGE value="updated the connection to server" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the connection to server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -371,6 +371,7 @@ class MBManualEntry(QWidget):
         self.materials_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.materials_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.materials_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.materials_table.itemChanged.connect(self.update_totals)
         material_layout.addWidget(self.materials_table)
 
         # Totals Display
@@ -830,6 +831,17 @@ class MBManualEntry(QWidget):
 
     def new_production(self):
         """Initialize a new production entry."""
+        # --- CHECK IF VIEWER RESTRICTIONS SHOULD BE LIFTED OR MAINTAINED ---
+        if str(self.user_role).upper() == "VIEWER" or not self.is_mac_enabled:
+            # If they are a strict viewer, they shouldn't be creating new records anyway,
+            # but if they click it, maintain restrictions:
+            self.apply_viewer_restrictions()
+            QMessageBox.warning(self, "Access Denied", "Viewers cannot create new production records.")
+            return
+        else:
+            # Clear restrictions so inputs are fully interactive again!
+            self.remove_viewer_restrictions()
+
         self.current_production_id = None
         try:
             latest_prod = get_latest_prod_id()
@@ -1064,6 +1076,71 @@ class MBManualEntry(QWidget):
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
 
+    def remove_viewer_restrictions(self):
+        """Restores all input fields, action buttons, and tables to an editable/enabled state."""
+
+        # 1. Re-enable LineEdits and TextEdits (Make them writable)
+        for widget in self.findChildren(QLineEdit):
+            widget.setReadOnly(False)
+            widget.setStyleSheet("")  # Clear custom gray styling
+
+        # Re-apply specific gray/read-only backgrounds for fields that are meant to be read-only by default
+        self.encoded_by_display.setReadOnly(True)
+        self.encoded_by_display.setStyleSheet("background-color: #e9ecef;")
+        self.production_encoded_display.setReadOnly(True)
+        self.production_encoded_display.setStyleSheet("background-color: #e9ecef;")
+        self.production_confirmation_display.setReadOnly(True)
+        self.production_confirmation_display.setStyleSheet("background-color: #fff9c4;")
+
+        for widget in self.findChildren(QTextEdit):
+            widget.setReadOnly(False)
+            widget.setStyleSheet("")
+
+        # 2. Re-enable Selection Widgets (ComboBox, CheckBox, DateEdit)
+        for widget in self.findChildren(QComboBox):
+            widget.setEnabled(True)
+
+        for widget in self.findChildren(QCheckBox):
+            widget.setEnabled(True)
+
+        for widget in self.findChildren(SmartDateEdit):
+            widget.setEnabled(True)
+
+        # 3. Re-enable ALL Buttons and assign proper Object Names based on text
+        for btn in self.findChildren(QPushButton):
+            btn.setEnabled(True)
+
+            btn_text = btn.text().upper()
+
+            # Map button text to their respective theme object names
+            if "SAVE" in btn_text or "UPDATE" in btn_text:
+                btn.setObjectName("InfoButton")
+            elif "CANCEL" in btn_text and "WIP" not in btn_text:
+                btn.setObjectName("DangerButton")
+            elif "NEW" in btn_text or "ADD" in btn_text or "SYNC" in btn_text:
+                btn.setObjectName("SuccessButton")
+            elif "PRINT" in btn_text and "WIP" in btn_text:
+                btn.setObjectName("SecondaryButton")
+            elif "PRINT" in btn_text:
+                btn.setObjectName("WarningButton")
+            elif "CLEAR" in btn_text:
+                btn.setObjectName("SecondaryButton")
+            elif "SEPARATOR" in btn_text:
+                btn.setObjectName("TertiaryButton")
+            elif "REMOVE" in btn_text:
+                btn.setObjectName("DangerButton")
+
+            # Refresh stylesheet dynamically so Qt registers the enabled theme colors
+            btn.style().unpolish(btn)
+            btn.style().polish(btn)
+
+        # 4. Re-enable Table interactions and make it editable (Out of the button loop!)
+        self.materials_table.setEditTriggers(
+            QAbstractItemView.EditTrigger.DoubleClicked |
+            QAbstractItemView.EditTrigger.SelectedClicked |
+            QAbstractItemView.EditTrigger.EditKeyPressed
+        )
+        self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
     def eventFilter(self, watched, event):
         # Check if the event is a key press and specifically the Tab key
         if watched == self.total_weight_input and event.type() == event.Type.KeyPress:
