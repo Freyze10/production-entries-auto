@@ -202,22 +202,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00519" summary="adjusted the spacing of the printed output">
-      <option name="closed" value="true" />
-      <created>1777449953582</created>
-      <option name="number" value="00519" />
-      <option name="presentableId" value="LOCAL-00519" />
-      <option name="project" value="LOCAL" />
-      <updated>1777449953583</updated>
-    </task>
-    <task id="LOCAL-00520" summary="fixed the audit trail table default recordds view">
-      <option name="closed" value="true" />
-      <created>1777450512001</created>
-      <option name="number" value="00520" />
-      <option name="presentableId" value="LOCAL-00520" />
-      <option name="project" value="LOCAL" />
-      <updated>1777450512001</updated>
-    </task>
     <task id="LOCAL-00521" summary="fixed the  spacing for the material header in computation for print output to be smaller in spacing">
       <option name="closed" value="true" />
       <created>1777451134751</created>
@@ -594,7 +578,23 @@
       <option name="project" value="LOCAL" />
       <updated>1791182315127</updated>
     </task>
-    <option name="localTasksCounter" value="568" />
+    <task id="LOCAL-00568" summary="added new selection of the material code dialog">
+      <option name="closed" value="true" />
+      <created>1791256209963</created>
+      <option name="number" value="00568" />
+      <option name="presentableId" value="LOCAL-00568" />
+      <option name="project" value="LOCAL" />
+      <updated>1791256209964</updated>
+    </task>
+    <task id="LOCAL-00569" summary="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion">
+      <option name="closed" value="true" />
+      <created>1791256312253</created>
+      <option name="number" value="00569" />
+      <option name="presentableId" value="LOCAL-00569" />
+      <option name="project" value="LOCAL" />
+      <updated>1791256312253</updated>
+    </task>
+    <option name="localTasksCounter" value="570" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -621,8 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created a function to call the query and display the message" />
-    <MESSAGE value="updated text display of those unprinted" />
     <MESSAGE value="call the refresh record first after the set up is loaded" />
     <MESSAGE value="added is_printed query on the get all production data" />
     <MESSAGE value="not printed background not workin" />
@@ -646,7 +644,9 @@
     <MESSAGE value="renoed the hars validation for the lot number even if the fields is readonly" />
     <MESSAGE value="changed the display of the production details and the row selection" />
     <MESSAGE value="modified the getting of the ip address of the workstation" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified the getting of the ip address of the workstation" />
+    <MESSAGE value="added new selection of the material code dialog" />
+    <MESSAGE value="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

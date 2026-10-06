@@ -533,3 +533,44 @@ def get_allowed_access_points(role_name):
     except Exception as e:
         print(f"Error fetching permissions: {e}")
         return []
+
+
+#  In FG Schema
+def get_fginv_passed_records():
+    """Fetches passed finished goods inventory records from schema_fg."""
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            SELECT product_code, lot_number, current_balance, location, bag_box_number
+            FROM schema_fg.view_fginv_passed
+            ORDER BY product_code ASC;
+        """)
+        records = cur.fetchall()
+        return records
+    except Exception as e:
+        print(f"Error fetching passed fginv: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+
+def get_fginv_failed_records():
+    """Fetches failed finished goods inventory records from schema_fg."""
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            SELECT product_code, lot_number, current_balance, location, bag_box_number
+            FROM schema_fg.view_fginv_failed
+            ORDER BY product_code ASC;
+        """)
+        records = cur.fetchall()
+        return records
+    except Exception as e:
+        print(f"Error fetching failed fginv: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
