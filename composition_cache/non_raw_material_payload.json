@@ -1,0 +1,30 @@
+{
+    "composition_info": {
+        "display_material_code": "321",
+        "large_scale": 32.0,
+        "small_scale": 32.0,
+        "total_weight": 32.0
+    },
+    "source_deductions": [
+        {
+            "product_info": "BA12299E (Lot: 4417AG | Bag: )",
+            "deduction_qty": 9.0
+        },
+        {
+            "product_info": "BA11939E (Lot: 1147AO | Bag: )",
+            "deduction_qty": 6.15
+        },
+        {
+            "product_info": "BA10072E (Lot: QCEMB84 | Bag: 9)",
+            "deduction_qty": 0.69
+        },
+        {
+            "product_info": "BA12420E (Lot: 5683AF | Bag: )",
+            "deduction_qty": 2.3
+        },
+        {
+            "product_info": "BA14304E (Lot: 1274AK | Bag: )",
+            "deduction_qty": 13.86
+        }
+    ]
+}
