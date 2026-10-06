@@ -45,7 +45,7 @@ class NonRawMaterialWizard(QDialog):
     PASS_BG = QColor(212, 237, 218)  # Soft green (#d4edda)
     FAIL_BG = QColor(248, 215, 218)  # Soft red (#f8d7da)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, edit_data=None):
         super().__init__(parent)
         self.setWindowTitle("Non-Raw Material Composition Setup")
 
@@ -55,6 +55,7 @@ class NonRawMaterialWizard(QDialog):
         # Data container to store the final compiled output
         self.final_result_data = None
         self.step1_data = {}
+        self.initial_edit_deductions = []  # Track pre-loaded rows for editing
 
         # Main layout using a Stacked Widget to cleanly handle pages/steps
         main_layout = QVBoxLayout(self)
@@ -67,6 +68,17 @@ class NonRawMaterialWizard(QDialog):
 
         self.init_step_one_ui()
         self.init_step_two_ui()
+
+        # --- PRE-LOAD DATA IF WE ARE EDITING ---
+        if edit_data:
+            self.step1_data = edit_data.get("composition_info", {})
+            self.display_mat_code_input.setText(self.step1_data.get("display_material_code", ""))
+            self.large_scale_input.setText(str(self.step1_data.get("large_scale", "")))
+            self.small_scale_input.setText(str(self.step1_data.get("small_scale", "")))
+            self.total_weight_input.setText(str(self.step1_data.get("total_weight", "")))
+
+            # Store source deductions to be loaded after left tables are populated
+            self.initial_edit_deductions = edit_data.get("source_deductions", [])
 
         self.stacked_widget.setCurrentIndex(0)
 
@@ -167,7 +179,68 @@ class NonRawMaterialWizard(QDialog):
 
         self.stacked_widget.setCurrentIndex(1)
         self.load_inventory_data()
+
+        # --- POPULATE RIGHT TABLE IF EDITING ---
+        if self.initial_edit_deductions:
+            self.load_existing_deductions_to_right_table(self.initial_edit_deductions)
+
         self.update_validation_display(0.0)
+
+    def load_existing_deductions_to_right_table(self, deductions):
+        """Populates the right table with previous deductions and highlights left table rows"""
+        self.right_table.blockSignals(True)
+        try:
+            for item_info in deductions:
+                prod_info_str = item_info.get("product_info", "")  # e.g., "BA0188E (Lot: 0198A | Bag: 33)"
+                deduction_qty = item_info.get("deduction_qty", 0.0)
+
+                # Parse out product code and lot number from string format to find matching row on left tables
+                # Format saved was: f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
+                right_row = self.right_table.rowCount()
+                self.right_table.insertRow(right_row)
+
+                self.right_table.setItem(right_row, 0, QTableWidgetItem(prod_info_str))
+
+                # Try to find matching max quantity from left tables to populate column 1 correctly
+                found_max_qty = deduction_qty  # Fallback
+                target_table = self.pass_table  # Check both pass and fail tables
+                for tbl in [self.pass_table, self.fail_table]:
+                    for r in range(tbl.rowCount()):
+                        p_code = tbl.item(r, 0).text() if tbl.item(r, 0) else ""
+                        l_no = tbl.item(r, 1).text() if tbl.item(r, 1) else ""
+                        if p_code in prod_info_str and l_no in prod_info_str:
+                            target_table = tbl
+                            q_str = tbl.item(r, 2).text() if tbl.item(r, 2) else "0"
+                            try:
+                                found_max_qty = float(q_str)
+                            except ValueError:
+                                pass
+
+                            # Highlight row on left table since it's already used
+                            is_pass_tab = (tbl == self.pass_table)
+                            bg_col = self.PASS_BG if is_pass_tab else self.FAIL_BG
+                            for c in range(tbl.columnCount()):
+                                cell = tbl.item(r, c)
+                                if cell:
+                                    cell.setData(Qt.ItemDataRole.BackgroundRole, bg_col)
+                            break
+
+                qty_item = QTableWidgetItem(f"{found_max_qty:.6f}")
+                qty_item.setFlags(qty_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                self.right_table.setItem(right_row, 1, qty_item)
+
+                deduction_item = QTableWidgetItem(f"{deduction_qty:.6f}")
+                self.right_table.setItem(right_row, 2, deduction_item)
+
+                # Style right table row based on pass/fail match context
+                # (defaulting to pass background if origin table matched pass)
+                for c in range(3):
+                    self.right_table.item(right_row, c).setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
+
+        finally:
+            self.right_table.blockSignals(False)
+
+        self.validate_total_deductions_match()
 
     # ==========================================
     # STEP 2: DUAL CONTAINER SELECTION WIZARD
@@ -443,6 +516,7 @@ class NonRawMaterialWizard(QDialog):
         self.validation_status_label.setText(text_msg)
 
     def finalize_and_save(self):
+        """Compiles everything into a clean dictionary payload in-memory and closes dialog"""
         deductions_list = []
         for row in range(self.right_table.rowCount()):
             prod_info = self.right_table.item(row, 0).text()
@@ -452,21 +526,11 @@ class NonRawMaterialWizard(QDialog):
                 "deduction_qty": deduction_val
             })
 
-        complete_payload = {
+        # Final dictionary package
+        self.final_result_data = {
             "composition_info": self.step1_data,
             "source_deductions": deductions_list
         }
 
-        self.final_result_data = complete_payload
-
-        # --- SAVE TO A DEDICATED FOLDER ---
-        folder_name = "composition_cache"
-        os.makedirs(folder_name, exist_ok=True)  # Automatically creates the folder if it doesn't exist
-
-        file_path = os.path.join(folder_name, "non_raw_material_payload.json")
-
-        with open(file_path, "w") as f:
-            json.dump(complete_payload, f, indent=4)
-
-        QMessageBox.information(self, "Success", f"Composition saved to {folder_name}/non_raw_material_payload.json!")
-        self.accept()
+        QMessageBox.information(self, "Success", "Non-raw material composition compiled successfully!")
+        self.accept() # Closes dialog and returns to MBManualEntry

@@ -202,22 +202,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00521" summary="fixed the  spacing for the material header in computation for print output to be smaller in spacing">
-      <option name="closed" value="true" />
-      <created>1777451134751</created>
-      <option name="number" value="00521" />
-      <option name="presentableId" value="LOCAL-00521" />
-      <option name="project" value="LOCAL" />
-      <updated>1777451134751</updated>
-    </task>
-    <task id="LOCAL-00522" summary="fixed the to boolean legacy so when it receives an empty strinng, it will automaticaly use the default value">
-      <option name="closed" value="true" />
-      <created>1777514663191</created>
-      <option name="number" value="00522" />
-      <option name="presentableId" value="LOCAL-00522" />
-      <option name="project" value="LOCAL" />
-      <updated>1777514663192</updated>
-    </task>
     <task id="LOCAL-00523" summary="connected the load selected formula in the dc auto entry in  ok buton">
       <option name="closed" value="true" />
       <created>1777873428195</created>
@@ -594,7 +578,23 @@
       <option name="project" value="LOCAL" />
       <updated>1791256312253</updated>
     </task>
-    <option name="localTasksCounter" value="570" />
+    <task id="LOCAL-00570" summary="added save in json when the user clicks/selects a fg materials">
+      <option name="closed" value="true" />
+      <created>1791268489205</created>
+      <option name="number" value="00570" />
+      <option name="presentableId" value="LOCAL-00570" />
+      <option name="project" value="LOCAL" />
+      <updated>1791268489205</updated>
+    </task>
+    <task id="LOCAL-00571" summary="fix the selection of the materials and successfully adds them in the formula records">
+      <option name="closed" value="true" />
+      <created>1791271394510</created>
+      <option name="number" value="00571" />
+      <option name="presentableId" value="LOCAL-00571" />
+      <option name="project" value="LOCAL" />
+      <updated>1791271394510</updated>
+    </task>
+    <option name="localTasksCounter" value="572" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -621,8 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="call the refresh record first after the set up is loaded" />
-    <MESSAGE value="added is_printed query on the get all production data" />
     <MESSAGE value="not printed background not workin" />
     <MESSAGE value="change of background color changing using  imm a am usin iitran Delegate" />
     <MESSAGE value="added more restriction on the  records that is already printed" />
@@ -646,7 +644,9 @@
     <MESSAGE value="modified the getting of the ip address of the workstation" />
     <MESSAGE value="added new selection of the material code dialog" />
     <MESSAGE value="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion" />
+    <MESSAGE value="added save in json when the user clicks/selects a fg materials" />
+    <MESSAGE value="fix the selection of the materials and successfully adds them in the formula records" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the selection of the materials and successfully adds them in the formula records" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

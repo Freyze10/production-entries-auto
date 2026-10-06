@@ -372,6 +372,7 @@ class MBManualEntry(QWidget):
         self.materials_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.materials_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.materials_table.itemChanged.connect(self.update_totals)
+        self.materials_table.cellDoubleClicked.connect(self.edit_material_composition)
         material_layout.addWidget(self.materials_table)
 
         # Totals Display
@@ -538,24 +539,66 @@ class MBManualEntry(QWidget):
 
     def open_select_dialog(self):
         """Opens the Non-Raw Material multi-step wizard dialog."""
-        from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard  # Import your new file
+        from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard
 
         dialog = NonRawMaterialWizard(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            # Retrieve the structured JSON data once user finishes wizard successfully
             result_data = dialog.final_result_data
 
             if result_data:
-                # 1. Automatically fill the scale/weight fields from Step 1 data
                 comp_info = result_data["composition_info"]
-                self.material_code_lineedit.setText(comp_info["display_material_code"])
+                mat_code = comp_info["display_material_code"]
+
+                # Store payload map in memory so we can edit it later if double-clicked
+                if not hasattr(self, 'non_raw_payloads'):
+                    self.non_raw_payloads = {}
+                self.non_raw_payloads[mat_code] = result_data
+
+                # Fill UI Input fields
+                self.material_code_lineedit.setText(mat_code)
                 self.large_scale_input.setText(f"{comp_info['large_scale']:.6f}")
                 self.small_scale_input.setText(f"{comp_info['small_scale']:.6f}")
                 self.total_weight_input.setText(f"{comp_info['total_weight']:.6f}")
+    # TODO: make the material table to be readonly, the same with the selection
+    def edit_material_composition(self, row, column):
+        """Triggers when a row in the materials table is double-clicked to edit non-raw materials."""
+        item = self.materials_table.item(row, 0)
+        if not item:
+            return
 
-                # 2. You can also process result_data["source_deductions"]
-                # or store it in a class attribute if you need it saved to your DB later!
-                print("Captured Wizard JSON Payload:", result_data)
+        mat_code = item.text().strip()
+
+        # Check if this material has a stored non-raw composition payload dictionary
+        if hasattr(self, 'non_raw_payloads') and mat_code in self.non_raw_payloads:
+            existing_payload = self.non_raw_payloads[mat_code]
+
+            from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard
+
+            # Open wizard and pass existing payload data so source deductions load up
+            dialog = NonRawMaterialWizard(self, edit_data=existing_payload)
+
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                updated_result = dialog.final_result_data
+                if updated_result:
+                    comp_info = updated_result["composition_info"]
+                    new_code = comp_info["display_material_code"]
+
+                    # Update payload storage dictionary
+                    if new_code != mat_code:
+                        del self.non_raw_payloads[mat_code]
+                    self.non_raw_payloads[new_code] = updated_result
+
+                    # Update the existing row values directly in the main screen table
+                    self.materials_table.setItem(row, 0, QTableWidgetItem(new_code))
+                    self.materials_table.setItem(row, 1,
+                                                 NumericTableWidgetItem(comp_info['large_scale'], is_float=True))
+                    self.materials_table.setItem(row, 2,
+                                                 NumericTableWidgetItem(comp_info['small_scale'], is_float=True))
+                    self.materials_table.setItem(row, 3,
+                                                 NumericTableWidgetItem(comp_info['total_weight'], is_float=True))
+
+                    self.update_totals()
+                    QMessageBox.information(self, "Updated", f"Composition for '{new_code}' successfully updated.")
 
     def display_details(self):
         self.wip_no_input.setText(str(self.prod_results['index_no']))
@@ -935,6 +978,8 @@ class MBManualEntry(QWidget):
 
         if self.prod_results:
             self.prod_results = None
+
+        self.non_raw_payloads = {}
 
         self.save_btn.setText("Save")
         self.save_btn.setObjectName("InfoButton")
