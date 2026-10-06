@@ -43,7 +43,7 @@ def create_table():
     # 3. Formula Header (Converted to BOOLEAN)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula01(
-            form_id SERIAL PRIMARY KEY,
+            form_id INT PRIMARY KEY,  
             index_no VARCHAR(22),
             date DATE,
             customer VARCHAR(62),
@@ -75,11 +75,11 @@ def create_table():
             WHERE is_deleted = FALSE;
     """)
 
-    # 4. Formula Encode (Restored)
+    # 4. Formula Encode (Added UNIQUE(form_id) for UPSERT)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula_encode(
             encode_id SERIAL PRIMARY KEY,
-            form_id INT,
+            form_id INT UNIQUE, 
             match_by VARCHAR(128),
             encoded_by VARCHAR(128),
             updated_by VARCHAR(128),
@@ -88,7 +88,7 @@ def create_table():
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula_encode_form_id ON tbl_formula_encode(form_id);")
 
-    # 5. Formula Details (Converted to BOOLEAN)
+    # 5. Formula Details (Added UNIQUE constraint on form_id & sequence_no)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_formula02(
             id SERIAL PRIMARY KEY,
@@ -97,17 +97,18 @@ def create_table():
             material_code VARCHAR(32),
             concentration DECIMAL(12,6),
             is_deleted BOOLEAN DEFAULT FALSE,
-            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id)
+            FOREIGN KEY (form_id) REFERENCES tbl_formula01(form_id),
+            UNIQUE (form_id, sequence_no)
         )
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_form_id ON tbl_formula02(form_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_material_code ON tbl_formula02(material_code);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_formula02_form_seq ON tbl_formula02(form_id, sequence_no);")
 
-    # 6. Production Header (Converted to BOOLEAN)
+    # 6. Production Header
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production01(
-            prod_id SERIAL PRIMARY KEY,
+            prod_id INT PRIMARY KEY,
             prod_date DATE,
             customer VARCHAR(62),
             form_id INT,
@@ -137,18 +138,17 @@ def create_table():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_lot_no ON tbl_production01(lot_no);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_production01_order_no ON tbl_production01(order_no);")
 
-    # Partial Index for Booleans
     cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_production01_date_customer 
             ON tbl_production01(prod_date, customer) 
             WHERE is_deleted = FALSE;
         """)
 
-    # 7. Production Encoding
+    # 7. Production Encoding (Added UNIQUE(prod_id) for UPSERT)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production_encode(
             encode_id SERIAL PRIMARY KEY,
-            prod_id INT,
+            prod_id INT UNIQUE,
             prepared_by VARCHAR(128),
             encoded_by VARCHAR(128),
             encoded_on TIMESTAMP, 
@@ -159,11 +159,11 @@ def create_table():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_encode_prod_id ON tbl_production_encode(prod_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_encode_encoded_on ON tbl_production_encode(encoded_on);")
 
-    # 8. Production Quantity
+    # 8. Production Quantity (Added UNIQUE(prod_id) for UPSERT)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production_quantity(
             quantity_id SERIAL PRIMARY KEY,
-            prod_id INT,
+            prod_id INT UNIQUE,
             quantity_req DECIMAL(12,6),
             quantity_batch DECIMAL(12,6),
             quantity_prod DECIMAL(12,6),
@@ -172,7 +172,7 @@ def create_table():
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_prod_quantity_prod_id ON tbl_production_quantity(prod_id);")
 
-    # 9. Production Details (Converted to BOOLEAN)
+    # 9. Production Details (Added UNIQUE constraint on prod_id & sequence_no)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_production02(
             id SERIAL PRIMARY KEY,
@@ -185,7 +185,8 @@ def create_table():
             is_deleted BOOLEAN DEFAULT FALSE,
             total_loss DECIMAL(12,6),
             total_consumption DECIMAL(12,6),
-            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id)
+            FOREIGN KEY (prod_id) REFERENCES tbl_production01(prod_id),
+            UNIQUE (prod_id, sequence_no)
         )
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_production02_prod_id ON tbl_production02(prod_id);")
@@ -246,8 +247,38 @@ def create_table():
             PRIMARY KEY (role_id, access_id)
         );
     """)
+    # Production 03 Header (Linked to Production 02 item ID)
+    cursor.execute("""
+            CREATE TABLE IF NOT EXISTS tbl_production03_header(
+                id SERIAL PRIMARY KEY,
+                production02_id INT NOT NULL,
+                version_no INT DEFAULT 1,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                created_by VARCHAR(128),
+                modified_by VARCHAR(128),
+                is_cancelled BOOLEAN DEFAULT FALSE,
+                cancel_reason TEXT,
+                FOREIGN KEY (production02_id) REFERENCES tbl_production02(id) ON DELETE CASCADE
+            )
+        """)
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prod03_header_prod02_id ON tbl_production03_header(production02_id);")
 
-    # Data Initialization
+    #  Production 03 Detail (Linked to Production 03 Header ID)
+    cursor.execute("""
+            CREATE TABLE IF NOT EXISTS tbl_production03_detail(
+                id SERIAL PRIMARY KEY,
+                production03_header_id INT NOT NULL,
+                lot_no VARCHAR(128),
+                total_weight DECIMAL(12,6),
+                status VARCHAR(32), -- e.g., 'pass'/'fail'
+                FOREIGN KEY (production03_header_id) REFERENCES tbl_production03_header(id) ON DELETE CASCADE
+            )
+        """)
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_prod03_detail_header_id ON tbl_production03_detail(production03_header_id);")
+
     cursor.execute("""
             INSERT INTO tbl_access_points (access_name) VALUES 
                 ('Production Records'), ('Manual Entry'), ('Auto Entry - MB'),

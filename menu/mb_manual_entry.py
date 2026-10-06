@@ -3,7 +3,7 @@ from datetime import datetime
 from PyQt6.QtCore import Qt, QThread, QTimer
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame, QHBoxLayout, QGroupBox, QGridLayout, QLineEdit, \
     QLabel, QComboBox, QTextEdit, QCheckBox, QTableWidget, QHeaderView, QAbstractItemView, QPushButton, QMessageBox, \
-    QTableWidgetItem, QCompleter
+    QTableWidgetItem, QCompleter, QDialog
 import qtawesome as fa
 
 from db.legacy import SyncRM
@@ -289,17 +289,17 @@ class MBManualEntry(QWidget):
         self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
         self.material_code_lineedit.setVisible(False)  # Hidden by default
 
-        btn_sync_rm = QPushButton("Sync")
-        btn_sync_rm.setObjectName("SuccessButton")
-        btn_sync_rm.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        btn_sync_rm.clicked.connect(self.sync_rm)
+        self.btn_sync_rm = QPushButton("Sync")
+        self.btn_sync_rm.setObjectName("SuccessButton")
+        self.btn_sync_rm.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.btn_sync_rm.clicked.connect(self.sync_rm)  # Default connection
 
         # Add label
         input_layout.addWidget(QLabel("Material Code:"), 0, 0)
         # Add both widgets to the same position (only one will be visible at a time)
         input_layout.addWidget(self.material_code_combo, 0, 1, 1, 2)
         input_layout.addWidget(self.material_code_lineedit, 0, 1, 1, 2)
-        input_layout.addWidget(btn_sync_rm, 0, 3)
+        input_layout.addWidget(self.btn_sync_rm, 0, 3)
 
         # Large Scale
         self.large_scale_input = QLineEdit()
@@ -499,12 +499,19 @@ class MBManualEntry(QWidget):
                 super().focusOutEvent(event)
 
     def on_material_type_changed(self, checked, is_raw):
-        """Handle material type selection like radio buttons and switch input fields."""
+        """Handle material type selection like radio buttons and switch input fields & sync button."""
         if is_raw:
             if checked:
                 self.non_raw_material_check.setChecked(False)
                 self.material_code_combo.setVisible(True)
                 self.material_code_lineedit.setVisible(False)
+
+                # --- CHANGE BUTTON BACK TO SYNC ---
+                self.btn_sync_rm.setText("Sync")
+                self.btn_sync_rm.setObjectName("SuccessButton")
+                self.btn_sync_rm.clicked.disconnect()  # Clear previous connections safely
+                self.btn_sync_rm.clicked.connect(self.sync_rm)
+                self.refresh_button_style(self.btn_sync_rm)
             else:
                 if not self.non_raw_material_check.isChecked():
                     self.raw_material_check.setChecked(True)
@@ -513,9 +520,42 @@ class MBManualEntry(QWidget):
                 self.raw_material_check.setChecked(False)
                 self.material_code_combo.setVisible(False)
                 self.material_code_lineedit.setVisible(True)
+
+                # --- CHANGE BUTTON TO SELECT ---
+                self.btn_sync_rm.setText("Select")
+                self.btn_sync_rm.setObjectName("InfoButton")  # Or whatever theme color you prefer
+                self.btn_sync_rm.clicked.disconnect()  # Clear previous connections safely
+                self.btn_sync_rm.clicked.connect(self.open_select_dialog)  # Hook your custom function here
+                self.refresh_button_style(self.btn_sync_rm)
             else:
                 if not self.raw_material_check.isChecked():
                     self.non_raw_material_check.setChecked(True)
+
+    def refresh_button_style(self, btn):
+        """Helper to force PyQt to re-evaluate stylesheet object names."""
+        btn.style().unpolish(btn)
+        btn.style().polish(btn)
+
+    def open_select_dialog(self):
+        """Opens the Non-Raw Material multi-step wizard dialog."""
+        from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard  # Import your new file
+
+        dialog = NonRawMaterialWizard(self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            # Retrieve the structured JSON data once user finishes wizard successfully
+            result_data = dialog.final_result_data
+
+            if result_data:
+                # 1. Automatically fill the scale/weight fields from Step 1 data
+                comp_info = result_data["composition_info"]
+                self.material_code_lineedit.setText(comp_info["display_material_code"])
+                self.large_scale_input.setText(f"{comp_info['large_scale']:.6f}")
+                self.small_scale_input.setText(f"{comp_info['small_scale']:.6f}")
+                self.total_weight_input.setText(f"{comp_info['total_weight']:.6f}")
+
+                # 2. You can also process result_data["source_deductions"]
+                # or store it in a class attribute if you need it saved to your DB later!
+                print("Captured Wizard JSON Payload:", result_data)
 
     def display_details(self):
         self.wip_no_input.setText(str(self.prod_results['index_no']))

@@ -60,6 +60,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Brant\PycharmProjects\ProductionSystem\menu" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="dashboard" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProductionSystem" />

@@ -12,7 +12,9 @@ class NonRawMaterialWizard(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Non-Raw Material Composition Setup")
-        self.resize(1100, 650)
+
+        # Start smaller for Step 1
+        self.resize(500, 300)
 
         # Data container to store the final compiled output
         self.final_result_data = None
@@ -23,6 +25,9 @@ class NonRawMaterialWizard(QDialog):
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         self.stacked_widget = QStackedWidget()
+        # Listen to step/page changes to dynamically resize the dialog window
+        self.stacked_widget.currentChanged.connect(self.on_step_changed)
+
         main_layout.addWidget(self.stacked_widget)
 
         # Build steps
@@ -31,6 +36,25 @@ class NonRawMaterialWizard(QDialog):
 
         # Start on Step 1
         self.stacked_widget.setCurrentIndex(0)
+
+    def on_step_changed(self, index):
+        """Dynamically resize the dialog depending on which step is active"""
+        if index == 0:
+            # Step 1: Compact size for simple form inputs
+            self.resize(500, 300)
+            self.setMinimumSize(450, 280)
+            self.setMaximumSize(600, 350)
+        else:
+            # Step 2: Large size for side-by-side tables and dual containers
+            self.setMinimumSize(900, 500)
+            self.setMaximumSize(16777215, 16777215)  # Remove maximum limits
+            self.resize(1100, 650)
+
+        # Center the window nicely whenever size adjusts
+        if self.parent():
+            self.move(
+                self.parent().geometry().center() - self.rect().center()
+            )
 
     # ==========================================
     # STEP 1: INITIAL INPUT DIALOG
@@ -42,7 +66,7 @@ class NonRawMaterialWizard(QDialog):
         layout.setSpacing(15)
 
         # Title/Info Label
-        info_label = QLabel("Write what to display in the production material code")
+        info_label = QLabel("Write what to display in the production material name")
         info_label.setFont(QFont("Segoe UI", 11, QFont.Weight.Bold))
         info_label.setStyleSheet("color: #333;")
         layout.addWidget(info_label)
