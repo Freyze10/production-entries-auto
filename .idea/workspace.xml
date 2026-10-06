@@ -197,14 +197,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00518" summary="added a condition so when there is a new production, it will only refresh the production record">
-      <option name="closed" value="true" />
-      <created>1777449749752</created>
-      <option name="number" value="00518" />
-      <option name="presentableId" value="LOCAL-00518" />
-      <option name="project" value="LOCAL" />
-      <updated>1777449749752</updated>
-    </task>
     <task id="LOCAL-00519" summary="adjusted the spacing of the printed output">
       <option name="closed" value="true" />
       <created>1777449953582</created>
@@ -589,7 +581,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791181144139</updated>
     </task>
-    <option name="localTasksCounter" value="567" />
+    <task id="LOCAL-00567" summary="modified the getting of the ip address of the workstation">
+      <option name="closed" value="true" />
+      <created>1791182315126</created>
+      <option name="number" value="00567" />
+      <option name="presentableId" value="LOCAL-00567" />
+      <option name="project" value="LOCAL" />
+      <updated>1791182315127</updated>
+    </task>
+    <option name="localTasksCounter" value="568" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -616,7 +616,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added a query to get the unprinted record that is not yet deeleted from the lasst month" />
     <MESSAGE value="created a function to call the query and display the message" />
     <MESSAGE value="updated text display of those unprinted" />
     <MESSAGE value="call the refresh record first after the set up is loaded" />
@@ -641,7 +640,8 @@
     <MESSAGE value="fix the saving function of the auto entries to handle correctly the seperator" />
     <MESSAGE value="renoed the hars validation for the lot number even if the fields is readonly" />
     <MESSAGE value="changed the display of the production details and the row selection" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the display of the production details and the row selection" />
+    <MESSAGE value="modified the getting of the ip address of the workstation" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the getting of the ip address of the workstation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
