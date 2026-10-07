@@ -140,8 +140,8 @@ def add_new_role(name, dept):
 
 def save_production_record(header, quantity, encode, materials, is_update=False, non_raw_payloads=None):
     """
-    Saves or Updates a complete production record across production tables
-    and links non-raw material breakdowns to schema_fg.tbl_production03_header & detail.
+    Saves or Updates a complete production record using an intelligent upsert/sync strategy
+    for tbl_production02 to protect primary key IDs and maintain foreign key links.
     """
     if non_raw_payloads is None:
         non_raw_payloads = {}
@@ -149,7 +149,6 @@ def save_production_record(header, quantity, encode, materials, is_update=False,
     conn = get_connection()
     cursor = conn.cursor()
     try:
-        # Get workstation details for created_by / modified_by fields
         workstation = _get_workstation_info()
         user_full_name = workstation['u']  # format: hostname\username
 
@@ -178,8 +177,19 @@ def save_production_record(header, quantity, encode, materials, is_update=False,
                 UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
             """, (encode['prepared_by'], header['prod_id']))
 
-            # 4. Refresh Materials (Delete old production02. Note: Cascade will auto-delete linked schema_fg production03 headers/details if foreign key has ON DELETE CASCADE)
-            cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
+            # 4. INTELLIGENT MATERIALS SYNC (Instead of wiping all of tbl_production02)
+            # Find all current sequence numbers present in the incoming form UI table
+            incoming_sequences = [mat[1] for mat in materials]
+
+            # Delete only the material rows that were removed by the user on the UI screen
+            if incoming_sequences:
+                cursor.execute("""
+                    DELETE FROM tbl_production02 
+                    WHERE prod_id = %s AND sequence_no NOT IN %s
+                """, (header['prod_id'], tuple(incoming_sequences)))
+            else:
+                # If table is completely empty of materials
+                cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
 
         else:
             # --- INSERT MODE ---
@@ -205,52 +215,73 @@ def save_production_record(header, quantity, encode, materials, is_update=False,
                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
             """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
 
-        # 5. Insert Materials & Separators into tbl_production02 and RETURNING their IDs
-        # We loop and insert individually to capture the auto-generated `id` for each row
+        # 5. UPSERT Materials & Separators into tbl_production02
+        # If the (prod_id, sequence_no) already exists, it updates it (protecting the primary key `id`).
+        # If it's new, it inserts it.
         for mat in materials:
-            # mat format from loop: (prod_id, sequence_no, material_code, large, small, total)
+            # mat format: (prod_id, sequence_no, material_code, large, small, total)
             cursor.execute("""
                 INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
                 VALUES (%s, %s, %s, %s, %s, %s, FALSE)
+                ON CONFLICT (prod_id, sequence_no) DO UPDATE SET 
+                    material_code = EXCLUDED.material_code,
+                    large_scale = EXCLUDED.large_scale,
+                    small_scale = EXCLUDED.small_scale,
+                    total_weight = EXCLUDED.total_weight,
+                    is_deleted = FALSE
                 RETURNING id;
             """, (mat[0], mat[1], mat[2], mat[3], mat[4], mat[5]))
 
             prod02_id = cursor.fetchone()[0]
             mat_code = mat[2]
 
-            # 6. If this material has breakdown details in non_raw_payloads, save them to schema_fg tables!
+            # 6. Handle schema_fg production03 breakdowns for Non-Raw materials
             if mat_code in non_raw_payloads:
                 payload = non_raw_payloads[mat_code]
                 source_deductions = payload.get("source_deductions", [])
 
                 if source_deductions:
-                    # Insert into schema_fg.tbl_production03_header
+                    # Check if a production03 header already exists for this specific production02 row ID
                     cursor.execute("""
-                        INSERT INTO schema_fg.tbl_production03_header (
-                            production02_id, version_no, created_at, updated_at, 
-                            created_by, modified_by, is_cancelled, cancel_reason
-                        ) VALUES (%s, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
-                        RETURNING id;
-                    """, (prod02_id, user_full_name, user_full_name))
+                        SELECT id FROM schema_fg.tbl_production03_header WHERE production02_id = %s
+                    """, (prod02_id,))
+                    existing_header = cursor.fetchone()
 
-                    header_03_id = cursor.fetchone()[0]
+                    if existing_header:
+                        header_03_id = existing_header[0]
+                        # Update header metadata
+                        cursor.execute("""
+                            UPDATE schema_fg.tbl_production03_header 
+                            SET updated_at = CURRENT_TIMESTAMP, modified_by = %s 
+                            WHERE id = %s
+                        """, (user_full_name, header_03_id))
+
+                        # Clear out old detail breakdowns and re-insert current ones cleanly
+                        cursor.execute("""
+                            DELETE FROM schema_fg.tbl_production03_detail WHERE production03_header_id = %s
+                        """, (header_03_id,))
+                    else:
+                        # Insert a brand new production03 header if it didn't exist yet
+                        cursor.execute("""
+                            INSERT INTO schema_fg.tbl_production03_header (
+                                production02_id, version_no, created_at, updated_at, 
+                                created_by, modified_by, is_cancelled, cancel_reason
+                            ) VALUES (%s, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
+                            RETURNING id;
+                        """, (prod02_id, user_full_name, user_full_name))
+                        header_03_id = cursor.fetchone()[0]
 
                     # Insert breakdown details into schema_fg.tbl_production03_detail
                     for deduction in source_deductions:
                         prod_info = deduction.get("product_info", "")
                         deduction_qty = deduction.get("deduction_qty", 0.0)
-                        row_status = deduction.get("status", "Passed")  # Pulls "Passed" or "Failed" from wizard payload
+                        row_status = deduction.get("status", "Passed")
 
                         cursor.execute("""
-                                              INSERT INTO schema_fg.tbl_production03_detail (
-                                                  production03_header_id, lot_no, total_weight, status
-                                              ) VALUES (%s, %s, %s, %s);
-                                          """, (
-                            header_03_id,
-                            prod_info,
-                            deduction_qty,
-                            row_status  # <--- Saved accurately here!
-                        ))
+                            INSERT INTO schema_fg.tbl_production03_detail (
+                                production03_header_id, lot_no, total_weight, status
+                            ) VALUES (%s, %s, %s, %s);
+                        """, (header_03_id, prod_info, deduction_qty, row_status))
 
         conn.commit()
         return True, "Success"
