@@ -202,14 +202,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00525" summary="changed the window to qwidget from qdialog">
-      <option name="closed" value="true" />
-      <created>1777963314937</created>
-      <option name="number" value="00525" />
-      <option name="presentableId" value="LOCAL-00525" />
-      <option name="project" value="LOCAL" />
-      <updated>1777963314937</updated>
-    </task>
     <task id="LOCAL-00526" summary="changed the function to close the widget to .close form .accept">
       <option name="closed" value="true" />
       <created>1777963379463</created>
@@ -594,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791335571371</updated>
     </task>
-    <option name="localTasksCounter" value="574" />
+    <task id="LOCAL-00574" summary="modified the raw material and non raw material field to change dynamically">
+      <option name="closed" value="true" />
+      <created>1791337238921</created>
+      <option name="number" value="00574" />
+      <option name="presentableId" value="LOCAL-00574" />
+      <option name="project" value="LOCAL" />
+      <updated>1791337238921</updated>
+    </task>
+    <option name="localTasksCounter" value="575" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -621,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change of background color changing using  imm a am usin iitran Delegate" />
     <MESSAGE value="added more restriction on the  records that is already printed" />
     <MESSAGE value="added more restriction on the  records that is already printed in auto entries" />
     <MESSAGE value="removed the log in record in the audit trail" />
@@ -646,7 +645,8 @@
     <MESSAGE value="added save in json when the user clicks/selects a fg materials" />
     <MESSAGE value="fix the selection of the materials and successfully adds them in the formula records" />
     <MESSAGE value="make the tables to be read only so edit in un allowed fields is not possible" />
-    <option name="LAST_COMMIT_MESSAGE" value="make the tables to be read only so edit in un allowed fields is not possible" />
+    <MESSAGE value="modified the raw material and non raw material field to change dynamically" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the raw material and non raw material field to change dynamically" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

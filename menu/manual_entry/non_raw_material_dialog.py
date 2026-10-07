@@ -191,23 +191,27 @@ class NonRawMaterialWizard(QDialog):
         self.right_table.blockSignals(True)
         try:
             for item_info in deductions:
-                prod_info_str = item_info.get("product_info", "")  # e.g., "BA0188E (Lot: 0198A | Bag: 33)"
+                prod_info_str = item_info.get("product_info", "")
                 deduction_qty = item_info.get("deduction_qty", 0.0)
+                saved_status = item_info.get("status", "Passed")  # Read status from payload
 
-                # Parse out product code and lot number from string format to find matching row on left tables
                 right_row = self.right_table.rowCount()
                 self.right_table.insertRow(right_row)
 
                 # --- Column 0: Product Code (NON-EDITABLE) ---
                 code_item = QTableWidgetItem(prod_info_str)
                 code_item.setFlags(code_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-                code_item.setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
+                code_item.setData(Qt.ItemDataRole.UserRole, saved_status)  # Store status in UserRole
+
+                # Determine background color based on saved status
+                is_pass_status = (saved_status.lower() == "passed")
+                bg_col = self.PASS_BG if is_pass_status else self.FAIL_BG
+
+                code_item.setData(Qt.ItemDataRole.BackgroundRole, bg_col)
                 self.right_table.setItem(right_row, 0, code_item)
 
-                # Try to find matching max quantity from left tables to populate column 1 correctly
-                found_max_qty = deduction_qty  # Fallback
-                matched_is_passed = True  # Context tracker for styling right table
-
+                # Match against left inventory tables to find max quantity limit
+                found_max_qty = deduction_qty
                 for tbl in [self.pass_table, self.fail_table]:
                     for r in range(tbl.rowCount()):
                         p_code = tbl.item(r, 0).text() if tbl.item(r, 0) else ""
@@ -218,27 +222,17 @@ class NonRawMaterialWizard(QDialog):
                                 found_max_qty = float(q_str)
                             except ValueError:
                                 pass
-
-                            # Track whether this came from Pass or Fail table for color coding
-                            matched_is_passed = (tbl == self.pass_table)
-                            bg_col = self.PASS_BG if matched_is_passed else self.FAIL_BG
-
-                            # Highlight row on left table since it's already used
-                            for c in range(tbl.columnCount()):
-                                cell = tbl.item(r, c)
-                                if cell:
-                                    cell.setData(Qt.ItemDataRole.BackgroundRole, bg_col)
                             break
 
                 # --- Column 1: Qty (NON-EDITABLE) ---
                 qty_item = QTableWidgetItem(f"{found_max_qty:.6f}")
                 qty_item.setFlags(qty_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-                qty_item.setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
+                qty_item.setData(Qt.ItemDataRole.BackgroundRole, bg_col)
                 self.right_table.setItem(right_row, 1, qty_item)
 
                 # --- Column 2: Total Deduction (EDITABLE) ---
                 deduction_item = QTableWidgetItem(f"{deduction_qty:.6f}")
-                deduction_item.setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
+                deduction_item.setData(Qt.ItemDataRole.BackgroundRole, bg_col)
                 self.right_table.setItem(right_row, 2, deduction_item)
 
         finally:
@@ -411,7 +405,7 @@ class NonRawMaterialWizard(QDialog):
 
     def move_selected_record_to_right(self):
         current_tab_idx = self.tab_widget.currentIndex()
-        is_passed = current_tab_idx == 0
+        is_passed = (current_tab_idx == 0) # Tab 0 is Pass Records, Tab 1 is Failed Records
         active_table = self.pass_table if is_passed else self.fail_table
 
         row = active_table.currentRow()
@@ -436,8 +430,7 @@ class NonRawMaterialWizard(QDialog):
         for r in range(self.right_table.rowCount()):
             existing_item = self.right_table.item(r, 0)
             if existing_item and prod_code in existing_item.text() and lot_no in existing_item.text():
-                QMessageBox.warning(self, "Duplicate",
-                                    "This specific product and lot is already included in the deduction list.")
+                QMessageBox.warning(self, "Duplicate", "This specific product and lot is already included in the deduction list.")
                 return
 
         bg_color = self.PASS_BG if is_passed else self.FAIL_BG
@@ -448,25 +441,21 @@ class NonRawMaterialWizard(QDialog):
             self.right_table.insertRow(right_row)
 
             display_text = f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
-
-            # --- Column 0: Product Code (NON-EDITABLE) ---
             code_item = QTableWidgetItem(display_text)
             code_item.setFlags(code_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-            code_item.setBackground(bg_color)
-            self.right_table.setItem(right_row, 0, code_item)
 
-            # --- Column 1: Qty (NON-EDITABLE) ---
             qty_item = QTableWidgetItem(f"{max_qty:.6f}")
             qty_item.setFlags(qty_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
-            qty_item.setBackground(bg_color)
-            self.right_table.setItem(right_row, 1, qty_item)
 
-            # --- Column 2: Total Deduction (EDITABLE) ---
             deduction_item = QTableWidgetItem("0.00")
-            # We DO NOT remove ItemIsEditable here, so user can edit it freely!
-            deduction_item.setBackground(bg_color)
-            self.right_table.setItem(right_row, 2, deduction_item)
 
+            # Store the status context directly inside the row's item data using UserRole!
+            status_context = "Passed" if is_passed else "Failed"
+            code_item.setData(Qt.ItemDataRole.UserRole, status_context)
+
+            for col, item in enumerate((code_item, qty_item, deduction_item)):
+                item.setBackground(bg_color)
+                self.right_table.setItem(right_row, col, item)
         finally:
             self.right_table.blockSignals(False)
 
@@ -531,18 +520,24 @@ class NonRawMaterialWizard(QDialog):
         """Compiles everything into a clean dictionary payload in-memory and closes dialog"""
         deductions_list = []
         for row in range(self.right_table.rowCount()):
-            prod_info = self.right_table.item(row, 0).text()
-            deduction_val = float(self.right_table.item(row, 2).text())
+            code_item = self.right_table.item(row, 0)
+            prod_info = code_item.text() if code_item else ""
+
+            # Retrieve the Pass/Fail status we stored in UserRole
+            status_val = code_item.data(Qt.ItemDataRole.UserRole) if code_item else "Passed"
+
+            deduction_val = float(self.right_table.item(row, 2).text() or 0.0)
+
             deductions_list.append({
                 "product_info": prod_info,
-                "deduction_qty": deduction_val
+                "deduction_qty": deduction_val,
+                "status": status_val  # <-- Included in payload!
             })
 
-        # Final dictionary package
         self.final_result_data = {
             "composition_info": self.step1_data,
             "source_deductions": deductions_list
         }
 
         QMessageBox.information(self, "Success", "Non-raw material composition compiled successfully!")
-        self.accept() # Closes dialog and returns to MBManualEntry
+        self.accept()

@@ -1,6 +1,8 @@
 from db.connection import get_connection
 from datetime import datetime
 
+from workstation.workstation_details import _get_workstation_info
+
 
 def create_current_user(workstation):
     con = get_connection()
@@ -136,13 +138,21 @@ def add_new_role(name, dept):
         return False
 
 
-def save_production_record(header, quantity, encode, materials, is_update=False):
+def save_production_record(header, quantity, encode, materials, is_update=False, non_raw_payloads=None):
     """
-    Saves or Updates a complete production record across 4 tables, supporting separators.
+    Saves or Updates a complete production record across production tables
+    and links non-raw material breakdowns to schema_fg.tbl_production03_header & detail.
     """
+    if non_raw_payloads is None:
+        non_raw_payloads = {}
+
     conn = get_connection()
     cursor = conn.cursor()
     try:
+        # Get workstation details for created_by / modified_by fields
+        workstation = _get_workstation_info()
+        user_full_name = workstation['u']  # format: hostname\username
+
         if is_update:
             # 1. Update Header
             cursor.execute("""
@@ -168,7 +178,7 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
                 UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
             """, (encode['prepared_by'], header['prod_id']))
 
-            # 4. Refresh Materials (Delete old, Insert new including separators)
+            # 4. Refresh Materials (Delete old production02. Note: Cascade will auto-delete linked schema_fg production03 headers/details if foreign key has ON DELETE CASCADE)
             cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
 
         else:
@@ -195,17 +205,59 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
             """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
 
-        # 5. Insert Materials & Separators (Maintains sequence numbers completely)
-        material_query = """
-            INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
-            VALUES (%s, %s, %s, %s, %s, %s, FALSE)
-        """
-        cursor.executemany(material_query, materials)
+        # 5. Insert Materials & Separators into tbl_production02 and RETURNING their IDs
+        # We loop and insert individually to capture the auto-generated `id` for each row
+        for mat in materials:
+            # mat format from loop: (prod_id, sequence_no, material_code, large, small, total)
+            cursor.execute("""
+                INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
+                VALUES (%s, %s, %s, %s, %s, %s, FALSE)
+                RETURNING id;
+            """, (mat[0], mat[1], mat[2], mat[3], mat[4], mat[5]))
+
+            prod02_id = cursor.fetchone()[0]
+            mat_code = mat[2]
+
+            # 6. If this material has breakdown details in non_raw_payloads, save them to schema_fg tables!
+            if mat_code in non_raw_payloads:
+                payload = non_raw_payloads[mat_code]
+                source_deductions = payload.get("source_deductions", [])
+
+                if source_deductions:
+                    # Insert into schema_fg.tbl_production03_header
+                    cursor.execute("""
+                        INSERT INTO schema_fg.tbl_production03_header (
+                            production02_id, version_no, created_at, updated_at, 
+                            created_by, modified_by, is_cancelled, cancel_reason
+                        ) VALUES (%s, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
+                        RETURNING id;
+                    """, (prod02_id, user_full_name, user_full_name))
+
+                    header_03_id = cursor.fetchone()[0]
+
+                    # Insert breakdown details into schema_fg.tbl_production03_detail
+                    for deduction in source_deductions:
+                        prod_info = deduction.get("product_info", "")
+                        deduction_qty = deduction.get("deduction_qty", 0.0)
+                        row_status = deduction.get("status", "Passed")  # Pulls "Passed" or "Failed" from wizard payload
+
+                        cursor.execute("""
+                                              INSERT INTO schema_fg.tbl_production03_detail (
+                                                  production03_header_id, lot_no, total_weight, status
+                                              ) VALUES (%s, %s, %s, %s);
+                                          """, (
+                            header_03_id,
+                            prod_info,
+                            deduction_qty,
+                            row_status  # <--- Saved accurately here!
+                        ))
 
         conn.commit()
         return True, "Success"
     except Exception as e:
         conn.rollback()
+        import traceback
+        traceback.print_exc()
         return False, str(e)
     finally:
         cursor.close()

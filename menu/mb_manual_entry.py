@@ -927,7 +927,10 @@ class MBManualEntry(QWidget):
             QMessageBox.critical(self, "Input Error", f"Please check your numeric fields. Error: {e}")
             return
 
-        success, message = save_production_record(header, quantity, encode, materials, is_update)
+        # Pass self.non_raw_payloads along so database can map breakdowns to tbl_production03
+        non_raw_payloads = getattr(self, 'non_raw_payloads', {})
+
+        success, message = save_production_record(header, quantity, encode, materials, is_update, non_raw_payloads)
 
         if success:
             action_verb = "updated" if is_update else "created"
