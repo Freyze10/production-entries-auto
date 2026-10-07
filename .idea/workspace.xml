@@ -202,14 +202,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00523" summary="connected the load selected formula in the dc auto entry in  ok buton">
-      <option name="closed" value="true" />
-      <created>1777873428195</created>
-      <option name="number" value="00523" />
-      <option name="presentableId" value="LOCAL-00523" />
-      <option name="project" value="LOCAL" />
-      <updated>1777873428196</updated>
-    </task>
     <task id="LOCAL-00524" summary="changed the window title for  print preview">
       <option name="closed" value="true" />
       <created>1777877699217</created>
@@ -594,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791271394510</updated>
     </task>
-    <option name="localTasksCounter" value="572" />
+    <task id="LOCAL-00572" summary="fix the selection of the materials and successfully adds them in the formula records">
+      <option name="closed" value="true" />
+      <created>1791271440716</created>
+      <option name="number" value="00572" />
+      <option name="presentableId" value="LOCAL-00572" />
+      <option name="project" value="LOCAL" />
+      <updated>1791271440716</updated>
+    </task>
+    <option name="localTasksCounter" value="573" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
