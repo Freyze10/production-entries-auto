@@ -684,6 +684,55 @@ class DCAutoEntry(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "System Error", f"An unexpected error occurred: {str(e)}")
 
+    def generate_detailed_audit_details(self, header, quantity, encode, materials, is_update):
+        """Generates audit details containing ONLY the fields that were modified (DC-Auto)."""
+        if not is_update:
+            mat_summary = ", ".join([m[2] for m in materials if m[2]])
+            return (
+                f"(DC-Auto) Created Production ID: {header['prod_id']} | "
+                f"Customer: {header['customer']} | Product: {header['prod_code']} | "
+                f"Lot: {header['lot_no']} | Qty: {quantity['prod']} | Materials: [{mat_summary}]"
+            )
+
+        # --- UPDATE MODE (STRICT DIFF) ---
+        changes = []
+
+        if self.prod_results:
+            fields_to_check = [
+                ('Customer', str(self.prod_results.get('customer') or '').strip(),
+                 str(header['customer'] or '').strip()),
+                ('Product Code', str(self.prod_results.get('prod_code') or '').strip(),
+                 str(header['prod_code'] or '').strip()),
+                ('Product Color', str(self.prod_results.get('prod_color') or '').strip(),
+                 str(header['prod_color'] or '').strip()),
+                ('Lot No', str(self.prod_results.get('lot_no') or '').strip(), str(header['lot_no'] or '').strip()),
+                ('Order No', str(self.prod_results.get('order_no') or '').strip(),
+                 str(header['order_no'] or '').strip()),
+                ('Form Type', str(self.prod_results.get('form_type') or '').strip(),
+                 str(header['form_type'] or '').strip()),
+                ('Machine No', str(self.prod_results.get('machine_no') or '').strip(),
+                 str(header['machine_no'] or '').strip()),
+                ('Mix Time', str(self.prod_results.get('mix_time') or '').strip(),
+                 str(header['mix_time'] or '').strip()),
+                ('Notes', str(self.prod_results.get('note') or '').strip(), str(header['note'] or '').strip()),
+                ('Prepared By', str(self.prod_results.get('prepared_by') or '').strip(),
+                 str(encode.get('prepared_by') or '').strip()),
+                ('Dosage', float(self.prod_results.get('dosage') or 0.0), float(header['dosage'] or 0.0)),
+                ('LD', float(self.prod_results.get('ld') or 0.0), float(header['ld'] or 0.0)),
+                ('Qty Required', float(self.prod_results.get('quantity_req') or 0.0), float(quantity['req'] or 0.0)),
+                ('Qty Batch', float(self.prod_results.get('quantity_batch') or 0.0), float(quantity['batch'] or 0.0)),
+                ('Qty Produced', float(self.prod_results.get('quantity_prod') or 0.0), float(quantity['prod'] or 0.0)),
+            ]
+
+            for label, old_val, new_val in fields_to_check:
+                if old_val != new_val:
+                    changes.append(f"{label}: '{old_val}' -> '{new_val}'")
+
+        if not changes:
+            return f"(DC-Auto) Updated Production ID: {header['prod_id']} (No data attribute fields altered)"
+
+        return f"(DC-Auto) Updated Prod ID {header['prod_id']} -> " + " | ".join(changes)
+
     def save_production(self):
         # 1. Basic Validation
         prod_id_raw = self.production_id_input.text().strip()
@@ -771,11 +820,13 @@ class DCAutoEntry(QWidget):
             action = "updated" if is_update else "created"
             QMessageBox.information(self, "Success", f"Production {header['prod_id']} has been {action} successfully.")
 
-            # Audit Trail
+            # Audit Trail (Pass encode here)
+            audit_details = self.generate_detailed_audit_details(header, quantity, encode, materials, is_update)
+
             log_audit_trail(
                 self.work_station['m'],
                 "UPDATE" if is_update else "CREATE",
-                f"(DC-Auto) Prod ID: {header['prod_id']} {action}"
+                audit_details
             )
 
             # Refresh view to show latest encoded dates or reset for new
