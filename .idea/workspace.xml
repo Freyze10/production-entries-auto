@@ -202,14 +202,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00527" summary="updated the call for print preview with the right call qwidget">
-      <option name="closed" value="true" />
-      <created>1777963430462</created>
-      <option name="number" value="00527" />
-      <option name="presentableId" value="LOCAL-00527" />
-      <option name="project" value="LOCAL" />
-      <updated>1777963430462</updated>
-    </task>
     <task id="LOCAL-00528" summary="updated the call for print preview with the right call qwidget">
       <option name="closed" value="true" />
       <created>1777963451715</created>
@@ -594,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791341182801</updated>
     </task>
-    <option name="localTasksCounter" value="576" />
+    <task id="LOCAL-00576" summary="updated the current sving updatess into database. no deleteing of old">
+      <option name="closed" value="true" />
+      <created>1791343221162</created>
+      <option name="number" value="00576" />
+      <option name="presentableId" value="LOCAL-00576" />
+      <option name="project" value="LOCAL" />
+      <updated>1791343221162</updated>
+    </task>
+    <option name="localTasksCounter" value="577" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -621,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added more restriction on the  records that is already printed in auto entries" />
     <MESSAGE value="removed the log in record in the audit trail" />
     <MESSAGE value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
     <MESSAGE value="adjusted the with of the prroduct color to auto resize bast on contents" />
@@ -646,7 +645,8 @@
     <MESSAGE value="make the tables to be read only so edit in un allowed fields is not possible" />
     <MESSAGE value="modified the raw material and non raw material field to change dynamically" />
     <MESSAGE value="fix the saving of the material and the breakdown of the materials" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the saving of the material and the breakdown of the materials" />
+    <MESSAGE value="updated the current sving updatess into database. no deleteing of old" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the current sving updatess into database. no deleteing of old" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

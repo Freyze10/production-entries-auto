@@ -138,7 +138,83 @@ def add_new_role(name, dept):
         return False
 
 
-def save_production_record(header, quantity, encode, materials, is_update=False, non_raw_payloads=None):
+def save_production_record(header, quantity, encode, materials, is_update=False):
+    """
+    Saves or Updates a complete production record across 4 tables, supporting separators.
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        if is_update:
+            # 1. Update Header
+            cursor.execute("""
+                UPDATE tbl_production01 SET 
+                    prod_date=%s, customer=%s, form_id=%s, index_no=%s, prod_code=%s, 
+                    prod_color=%s, dosage=%s, ld=%s, lot_no=%s, order_no=%s, 
+                    mix_time=%s, machine_no=%s, note=%s, inventory_c_date=%s, form_type=%s
+                WHERE prod_id = %s
+            """, (header['prod_date'], header['customer'], header['form_id'], header['index_no'],
+                  header['prod_code'], header['prod_color'], header['dosage'], header['ld'],
+                  header['lot_no'], header['order_no'], header['mix_time'], header['machine_no'],
+                  header['note'], header['inventory_c_date'], header['form_type'], header['prod_id']))
+
+            # 2. Update Quantity
+            cursor.execute("""
+                UPDATE tbl_production_quantity SET 
+                    quantity_req=%s, quantity_batch=%s, quantity_prod=%s
+                WHERE prod_id = %s
+            """, (quantity['req'], quantity['batch'], quantity['prod'], header['prod_id']))
+
+            # 3. Update Encode
+            cursor.execute("""
+                UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
+            """, (encode['prepared_by'], header['prod_id']))
+
+            # 4. Refresh Materials (Delete old, Insert new including separators)
+            cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
+
+        else:
+            # --- INSERT MODE ---
+            cursor.execute("""
+                INSERT INTO tbl_production01 (
+                    prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, 
+                    dosage, ld, lot_no, order_no, mix_time, machine_no, note, 
+                    user_id, inventory_c_date, form_type, is_deleted, is_printed
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, FALSE, FALSE)
+            """, (header['prod_id'], header['prod_date'], header['customer'], header['form_id'],
+                  header['index_no'], header['prod_code'], header['prod_color'], header['dosage'],
+                  header['ld'], header['lot_no'], header['order_no'], header['mix_time'],
+                  header['machine_no'], header['note'], header['user_id'], header['inventory_c_date'],
+                  header['form_type']))
+
+            cursor.execute("""
+                INSERT INTO tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod)
+                VALUES (%s, %s, %s, %s)
+            """, (header['prod_id'], quantity['req'], quantity['batch'], quantity['prod']))
+
+            cursor.execute("""
+                INSERT INTO tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on)
+                VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
+            """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
+
+        # 5. Insert Materials & Separators (Maintains sequence numbers completely)
+        material_query = """
+            INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
+            VALUES (%s, %s, %s, %s, %s, %s, FALSE)
+        """
+        cursor.executemany(material_query, materials)
+
+        conn.commit()
+        return True, "Success"
+    except Exception as e:
+        conn.rollback()
+        return False, str(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def save_manual_production_record(header, quantity, encode, materials, is_update=False, non_raw_payloads=None):
     """
     Saves or Updates a complete production record using an intelligent upsert/sync strategy
     for tbl_production02 to protect primary key IDs and maintain foreign key links.
@@ -235,53 +311,83 @@ def save_production_record(header, quantity, encode, materials, is_update=False,
             prod02_id = cursor.fetchone()[0]
             mat_code = mat[2]
 
-            # 6. Handle schema_fg production03 breakdowns for Non-Raw materials
+            # 6. Handle production03 breakdowns for Non-Raw materials with Versioning Control
             if mat_code in non_raw_payloads:
                 payload = non_raw_payloads[mat_code]
                 source_deductions = payload.get("source_deductions", [])
+                change_reason = payload.get("change_reason", "")
 
                 if source_deductions:
-                    # Check if a production03 header already exists for this specific production02 row ID
+                    # Check if an active header already exists in the database for this specific production02 row ID
                     cursor.execute("""
-                        SELECT id FROM schema_fg.tbl_production03_header WHERE production02_id = %s
-                    """, (prod02_id,))
-                    existing_header = cursor.fetchone()
+                                    SELECT id, version_no, created_at, created_by 
+                                    FROM tbl_production03_header 
+                                    WHERE production02_id = %s AND is_cancelled = FALSE
+                                """, (prod02_id,))
+                    active_header = cursor.fetchone()
 
-                    if existing_header:
-                        header_03_id = existing_header[0]
-                        # Update header metadata
-                        cursor.execute("""
-                            UPDATE schema_fg.tbl_production03_header 
-                            SET updated_at = CURRENT_TIMESTAMP, modified_by = %s 
-                            WHERE id = %s
-                        """, (user_full_name, header_03_id))
+                    # VERSIONING LOGIC: Only trigger version archiving if it ALREADY existed in the database and user provided a change reason
+                    if active_header and is_update and change_reason:
+                        old_header_id = active_header[0]
+                        old_version = active_header[1]
+                        original_created_at = active_header[2]
+                        original_created_by = active_header[3]
 
-                        # Clear out old detail breakdowns and re-insert current ones cleanly
+                        # 1. Invalidate old version (Mark old header as cancelled with the reason provided)
                         cursor.execute("""
-                            DELETE FROM schema_fg.tbl_production03_detail WHERE production03_header_id = %s
-                        """, (header_03_id,))
-                    else:
-                        # Insert a brand new production03 header if it didn't exist yet
+                                        UPDATE tbl_production03_header 
+                                        SET is_cancelled = TRUE, 
+                                            cancel_reason = %s, 
+                                            updated_at = CURRENT_TIMESTAMP, 
+                                            modified_by = %s 
+                                        WHERE id = %s
+                                    """, (change_reason, user_full_name, old_header_id))
+
+                        # 2. Insert new version header (increment version number, keep original creation metadata)
                         cursor.execute("""
-                            INSERT INTO schema_fg.tbl_production03_header (
-                                production02_id, version_no, created_at, updated_at, 
-                                created_by, modified_by, is_cancelled, cancel_reason
-                            ) VALUES (%s, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
-                            RETURNING id;
-                        """, (prod02_id, user_full_name, user_full_name))
+                                        INSERT INTO tbl_production03_header (
+                                            production02_id, version_no, created_at, updated_at, 
+                                            created_by, modified_by, is_cancelled, cancel_reason
+                                    ) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
+                                        RETURNING id;
+                                    """, (
+                        prod02_id, old_version + 1, original_created_at, original_created_by, user_full_name))
                         header_03_id = cursor.fetchone()[0]
 
-                    # Insert breakdown details into schema_fg.tbl_production03_detail
+                    elif active_header:
+                        # If it exists in DB but no change reason was typed, just update timestamp and refresh details in place
+                        header_03_id = active_header[0]
+                        cursor.execute("""
+                                        UPDATE tbl_production03_header 
+                                        SET updated_at = CURRENT_TIMESTAMP, modified_by = %s 
+                                        WHERE id = %s
+                                    """, (user_full_name, header_03_id))
+
+                        cursor.execute("""
+                                        DELETE FROM tbl_production03_detail WHERE production03_header_id = %s
+                                    """, (header_03_id,))
+                    else:
+                        # BRAND NEW ENTRY: Does not exist in database yet (Version 1) -> No change reason required!
+                        cursor.execute("""
+                                        INSERT INTO tbl_production03_header (
+                                            production02_id, version_no, created_at, updated_at, 
+                                            created_by, modified_by, is_cancelled, cancel_reason
+                                        ) VALUES (%s, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
+                                        RETURNING id;
+                                    """, (prod02_id, user_full_name, user_full_name))
+                        header_03_id = cursor.fetchone()[0]
+
+                    # Insert breakdown details into tbl_production03_detail
                     for deduction in source_deductions:
                         prod_info = deduction.get("product_info", "")
                         deduction_qty = deduction.get("deduction_qty", 0.0)
                         row_status = deduction.get("status", "Passed")
 
                         cursor.execute("""
-                            INSERT INTO schema_fg.tbl_production03_detail (
-                                production03_header_id, lot_no, total_weight, status
-                            ) VALUES (%s, %s, %s, %s);
-                        """, (header_03_id, prod_info, deduction_qty, row_status))
+                                        INSERT INTO tbl_production03_detail (
+                                            production03_header_id, lot_no, total_weight, status
+                                        ) VALUES (%s, %s, %s, %s);
+                                    """, (header_03_id, prod_info, deduction_qty, row_status))
 
         conn.commit()
         return True, "Success"

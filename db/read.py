@@ -128,6 +128,67 @@ def get_single_production_data(prod_id):
     return record
 
 
+def get_non_raw_breakdowns_for_production(prod_id):
+    """
+    Fetches active (non-cancelled) version 3 header and detail breakdowns
+    for all materials belonging to a given production ID.
+    Returns a dictionary mapping material_code -> payload structure.
+    """
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        # Query gets active headers and their breakdown items for the specific production record
+        cur.execute("""
+            SELECT 
+                p2.material_code,
+                h.id AS header_id,
+                h.version_no,
+                d.lot_no,
+                d.total_weight,
+                d.status,
+                p2.large_scale,
+                p2.small_scale,
+                p2.total_weight AS mat_total_weight
+            FROM tbl_production02 p2
+            JOIN tbl_production03_header h ON p2.id = h.production02_id
+            JOIN tbl_production03_detail d ON h.id = d.production03_header_id
+            WHERE p2.prod_id = %s 
+              AND h.is_cancelled = FALSE
+            ORDER BY p2.sequence_no ASC, d.id ASC;
+        """, (prod_id,))
+
+        rows = cur.fetchall()
+
+        # Group rows by material code into the wizard's expected payload structure
+        payloads_map = {}
+        for row in rows:
+            mat_code = row[0]
+            if mat_code not in payloads_map:
+                payloads_map[mat_code] = {
+                    "composition_info": {
+                        "display_material_code": mat_code,
+                        "large_scale": float(row[6] or 0.0),
+                        "small_scale": float(row[7] or 0.0),
+                        "total_weight": float(row[8] or 0.0)
+                    },
+                    "source_deductions": []
+                }
+
+            payloads_map[mat_code]["source_deductions"].append({
+                "product_info": row[3],  # lot_no column holds product info string
+                "deduction_qty": float(row[4] or 0.0),
+                "status": row[5]  # 'Passed' or 'Failed'
+            })
+
+        return payloads_map
+    except Exception as e:
+        print(f"Error fetching production breakdowns: {e}")
+        return {}
+    finally:
+        cur.close()
+        conn.close()
+
+
 def get_rm_code_lists():
     conn = get_connection()
     cur = conn.cursor()

@@ -8,9 +8,9 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
-    get_cancelled_production_data, check_production_exists
+    get_cancelled_production_data, check_production_exists, get_non_raw_breakdowns_for_production
 from db.update import cancel_production
-from db.write import log_audit_trail, save_production_record
+from db.write import log_audit_trail, save_manual_production_record
 from print.print_preview import ProductionPrintPreview
 from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
@@ -471,6 +471,8 @@ class MBManualEntry(QWidget):
             try:
                 self.prod_results = get_single_production_data(self.prod_id)
                 self.prod_materials = get_single_production_details(self.prod_id)
+                self.non_raw_payloads = get_non_raw_breakdowns_for_production(self.prod_id)
+
                 if not self.prod_results:
                     QMessageBox.warning(self, "Not Found",
                                         f"Production {self.prod_id} not found.")
@@ -557,10 +559,11 @@ class MBManualEntry(QWidget):
         btn.style().polish(btn)
 
     def open_select_dialog(self):
-        """Opens the Non-Raw Material multi-step wizard dialog."""
+        """Opens the Non-Raw Material multi-step wizard dialog for a NEW material entry."""
         from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard
 
-        dialog = NonRawMaterialWizard(self)
+        # Pass is_edit=False because this is a brand new material line
+        dialog = NonRawMaterialWizard(self, edit_data=None, is_edit=False)
         if dialog.exec() == QDialog.DialogCode.Accepted:
             result_data = dialog.final_result_data
 
@@ -568,12 +571,10 @@ class MBManualEntry(QWidget):
                 comp_info = result_data["composition_info"]
                 mat_code = comp_info["display_material_code"]
 
-                # Store payload map in memory so we can edit it later if double-clicked
                 if not hasattr(self, 'non_raw_payloads'):
                     self.non_raw_payloads = {}
                 self.non_raw_payloads[mat_code] = result_data
 
-                # Fill UI Input fields
                 self.material_code_lineedit.setText(mat_code)
                 self.large_scale_input.setText(f"{comp_info['large_scale']:.6f}")
                 self.small_scale_input.setText(f"{comp_info['small_scale']:.6f}")
@@ -587,14 +588,19 @@ class MBManualEntry(QWidget):
 
         mat_code = item.text().strip()
 
-        # Check if this material has a stored non-raw composition payload dictionary
         if hasattr(self, 'non_raw_payloads') and mat_code in self.non_raw_payloads:
             existing_payload = self.non_raw_payloads[mat_code]
 
+            # Check if this material actually exists in the database or if it was just added in memory during this session.
+            # We can check if self.prod_id != 0 AND the payload has an active database header reference,
+            # or simply check if this material code came from the initial DB load!
+            # To keep it robust, let's track which materials came from the DB when display_details ran.
+            is_from_db = mat_code in getattr(self, 'db_loaded_materials', set())
+
             from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard
 
-            # Open wizard and pass existing payload data so source deductions load up
-            dialog = NonRawMaterialWizard(self, edit_data=existing_payload)
+            # Pass is_edit based on whether it originated from the database
+            dialog = NonRawMaterialWizard(self, edit_data=existing_payload, is_edit=is_from_db)
 
             if dialog.exec() == QDialog.DialogCode.Accepted:
                 updated_result = dialog.final_result_data
@@ -602,12 +608,14 @@ class MBManualEntry(QWidget):
                     comp_info = updated_result["composition_info"]
                     new_code = comp_info["display_material_code"]
 
-                    # Update payload storage dictionary
                     if new_code != mat_code:
                         del self.non_raw_payloads[mat_code]
+                        if mat_code in getattr(self, 'db_loaded_materials', set()):
+                            self.db_loaded_materials.remove(mat_code)
+                            self.db_loaded_materials.add(new_code)
+
                     self.non_raw_payloads[new_code] = updated_result
 
-                    # Update the existing row values directly in the main screen table
                     self.materials_table.setItem(row, 0, QTableWidgetItem(new_code))
                     self.materials_table.setItem(row, 1,
                                                  NumericTableWidgetItem(comp_info['large_scale'], is_float=True))
@@ -666,6 +674,9 @@ class MBManualEntry(QWidget):
         if self.prod_results.get('confirmation_encoded_on'):
             self.production_confirmation_display.setText(
                 self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
+
+        # --- TRACK WHICH MATERIALS CAME FROM DB ---
+        self.db_loaded_materials = set(self.non_raw_payloads.keys())
 
         self.materials_table.setRowCount(0)
 
@@ -930,7 +941,7 @@ class MBManualEntry(QWidget):
         # Pass self.non_raw_payloads along so database can map breakdowns to tbl_production03
         non_raw_payloads = getattr(self, 'non_raw_payloads', {})
 
-        success, message = save_production_record(header, quantity, encode, materials, is_update, non_raw_payloads)
+        success, message = save_manual_production_record(header, quantity, encode, materials, is_update, non_raw_payloads)
 
         if success:
             action_verb = "updated" if is_update else "created"

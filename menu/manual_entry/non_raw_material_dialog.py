@@ -45,7 +45,7 @@ class NonRawMaterialWizard(QDialog):
     PASS_BG = QColor(212, 237, 218)  # Soft green (#d4edda)
     FAIL_BG = QColor(248, 215, 218)  # Soft red (#f8d7da)
 
-    def __init__(self, parent=None, edit_data=None):
+    def __init__(self, parent=None, edit_data=None, is_edit=False): # Added is_edit parameter
         super().__init__(parent)
         self.setWindowTitle("Non-Raw Material Composition Setup")
 
@@ -55,7 +55,8 @@ class NonRawMaterialWizard(QDialog):
         # Data container to store the final compiled output
         self.final_result_data = None
         self.step1_data = {}
-        self.initial_edit_deductions = []  # Track pre-loaded rows for editing
+        self.initial_edit_deductions = []
+        self.is_edit_mode = is_edit # Store flag
 
         # Main layout using a Stacked Widget to cleanly handle pages/steps
         main_layout = QVBoxLayout(self)
@@ -77,8 +78,15 @@ class NonRawMaterialWizard(QDialog):
             self.small_scale_input.setText(str(self.step1_data.get("small_scale", "")))
             self.total_weight_input.setText(str(self.step1_data.get("total_weight", "")))
 
-            # Store source deductions to be loaded after left tables are populated
             self.initial_edit_deductions = edit_data.get("source_deductions", [])
+
+        # --- CONTROL REASON BOX VISIBILITY ---
+        if self.is_edit_mode:
+            self.has_original_edits = True
+            self.reason_frame.setVisible(True)  # Only show if editing an item from the database!
+        else:
+            self.has_original_edits = False
+            self.reason_frame.setVisible(False) # Hidden for brand new entries / version 1 items
 
         self.stacked_widget.setCurrentIndex(0)
 
@@ -239,7 +247,6 @@ class NonRawMaterialWizard(QDialog):
             self.right_table.blockSignals(False)
 
         self.validate_total_deductions_match()
-
     # ==========================================
     # STEP 2: DUAL CONTAINER SELECTION WIZARD
     # ==========================================
@@ -325,6 +332,20 @@ class NonRawMaterialWizard(QDialog):
         step2_btn_layout.addWidget(self.final_add_btn)
 
         right_layout.addLayout(step2_btn_layout)
+
+        # Change Reason Input Area (Only visible or required during edits)
+        self.reason_frame = QFrame()
+        reason_layout = QVBoxLayout(self.reason_frame)
+        reason_layout.setContentsMargins(0, 0, 0, 0)
+        reason_layout.addWidget(QLabel("<b style='color: #d9534f;'>Reason for Changes / Revision:</b>"))
+
+        self.change_reason_input = QLineEdit()
+        self.change_reason_input.setPlaceholderText("Enter reason for modifying this composition...")
+        self.change_reason_input.setStyleSheet("background-color: #fff3cd; border: 1px solid #ffeeba;")
+        reason_layout.addWidget(self.change_reason_input)
+
+        right_layout.addWidget(self.reason_frame)
+        self.reason_frame.setVisible(False)  # Hidden by default, shown if editing
 
         splitter.addWidget(right_frame)
         splitter.setSizes([750, 600])
@@ -517,27 +538,31 @@ class NonRawMaterialWizard(QDialog):
         self.validation_status_label.setText(text_msg)
 
     def finalize_and_save(self):
-        """Compiles everything into a clean dictionary payload in-memory and closes dialog"""
+        reason_text = self.change_reason_input.text().strip() if hasattr(self, 'change_reason_input') else ""
+
+        if self.has_original_edits and not reason_text:
+            QMessageBox.warning(self, "Reason Required",
+                                "Please provide a reason for modifying this non-raw material composition.")
+            return
+
         deductions_list = []
         for row in range(self.right_table.rowCount()):
             code_item = self.right_table.item(row, 0)
             prod_info = code_item.text() if code_item else ""
-
-            # Retrieve the Pass/Fail status we stored in UserRole
             status_val = code_item.data(Qt.ItemDataRole.UserRole) if code_item else "Passed"
-
             deduction_val = float(self.right_table.item(row, 2).text() or 0.0)
 
             deductions_list.append({
                 "product_info": prod_info,
                 "deduction_qty": deduction_val,
-                "status": status_val  # <-- Included in payload!
+                "status": status_val
             })
 
         self.final_result_data = {
             "composition_info": self.step1_data,
-            "source_deductions": deductions_list
+            "source_deductions": deductions_list,
+            "change_reason": reason_text  # Pass reason up to parent!
         }
 
-        QMessageBox.information(self, "Success", "Non-raw material composition compiled successfully!")
+        QMessageBox.information(self, "Success", "Non-raw material composition updated successfully!")
         self.accept()
