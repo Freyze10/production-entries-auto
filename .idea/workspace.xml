@@ -37,29 +37,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.dashboard.executor": "Run",
-    "Python.fastapi.executor": "Run",
-    "Python.format_rm_note.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.print.executor": "Run",
-    "Python.print_preview.executor": "Run",
-    "Python.styles.executor": "Run",
-    "Python.test_print.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Brant/PycharmProjects/ProductionSystem",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.dashboard.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fastapi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.format_rm_note.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_preview.executor&quot;: &quot;Run&quot;,
+    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Brant/PycharmProjects/ProductionSystem&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Brant\PycharmProjects\ProductionSystem\menu" />
@@ -201,14 +201,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00524" summary="changed the window title for  print preview">
-      <option name="closed" value="true" />
-      <created>1777877699217</created>
-      <option name="number" value="00524" />
-      <option name="presentableId" value="LOCAL-00524" />
-      <option name="project" value="LOCAL" />
-      <updated>1777877699217</updated>
     </task>
     <task id="LOCAL-00525" summary="changed the window to qwidget from qdialog">
       <option name="closed" value="true" />
@@ -594,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791271440716</updated>
     </task>
-    <option name="localTasksCounter" value="573" />
+    <task id="LOCAL-00573" summary="make the tables to be read only so edit in un allowed fields is not possible">
+      <option name="closed" value="true" />
+      <created>1791335571370</created>
+      <option name="number" value="00573" />
+      <option name="presentableId" value="LOCAL-00573" />
+      <option name="project" value="LOCAL" />
+      <updated>1791335571371</updated>
+    </task>
+    <option name="localTasksCounter" value="574" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -621,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="not printed background not workin" />
     <MESSAGE value="change of background color changing using  imm a am usin iitran Delegate" />
     <MESSAGE value="added more restriction on the  records that is already printed" />
     <MESSAGE value="added more restriction on the  records that is already printed in auto entries" />
@@ -646,7 +645,8 @@
     <MESSAGE value="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion" />
     <MESSAGE value="added save in json when the user clicks/selects a fg materials" />
     <MESSAGE value="fix the selection of the materials and successfully adds them in the formula records" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the selection of the materials and successfully adds them in the formula records" />
+    <MESSAGE value="make the tables to be read only so edit in un allowed fields is not possible" />
+    <option name="LAST_COMMIT_MESSAGE" value="make the tables to be read only so edit in un allowed fields is not possible" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

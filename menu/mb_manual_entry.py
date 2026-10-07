@@ -285,8 +285,10 @@ class MBManualEntry(QWidget):
         self.material_code_combo.setCurrentIndex(0)
 
         self.material_code_lineedit = QLineEdit()
-        self.material_code_lineedit.setPlaceholderText("Enter material code")
-        self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
+        self.material_code_lineedit.setPlaceholderText("Click Select to add material code")
+        # self.material_code_lineedit.setStyleSheet("background-color: #FDECCE;")
+        self.material_code_lineedit.setReadOnly(True)
+        self.material_code_lineedit.setStyleSheet("background-color: #e9ecef; color: #495057;")
         self.material_code_lineedit.setVisible(False)  # Hidden by default
 
         self.btn_sync_rm = QPushButton("Sync")
@@ -318,7 +320,9 @@ class MBManualEntry(QWidget):
         # Total Weight
         self.total_weight_input = QLineEdit()
         self.total_weight_input.setPlaceholderText("0.0000000")
-        self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
+        # self.total_weight_input.setStyleSheet("background-color: #fff9c4;")
+        self.total_weight_input.setReadOnly(True)
+        self.total_weight_input.setStyleSheet("background-color: #e9ecef; color: #495057;")
         self.total_weight_input.returnPressed.connect(self.add_material)
         self.total_weight_input.installEventFilter(self)
         input_layout.addWidget(QLabel("Total Weight (KG):"), 3, 0)
@@ -500,14 +504,20 @@ class MBManualEntry(QWidget):
                 super().focusOutEvent(event)
 
     def on_material_type_changed(self, checked, is_raw):
-        """Handle material type selection like radio buttons and switch input fields & sync button."""
+        """Handle material type selection like radio buttons and switch input fields, sync button, and field restrictions."""
         if is_raw:
             if checked:
                 self.non_raw_material_check.setChecked(False)
                 self.material_code_combo.setVisible(True)
                 self.material_code_lineedit.setVisible(False)
 
-                # --- CHANGE BUTTON BACK TO SYNC ---
+                # --- WHEN RAW MATERIAL IS CHECKED: ---
+                # 1. Make Total Weight editable again (so user can type custom weights manually)
+                self.total_weight_input.setReadOnly(False)
+                self.total_weight_input.setStyleSheet(
+                    "background-color: #fff9c4;")  # Revert to your yellow editing style
+
+                # 2. Change button back to Sync
                 self.btn_sync_rm.setText("Sync")
                 self.btn_sync_rm.setObjectName("SuccessButton")
                 self.btn_sync_rm.clicked.disconnect()  # Clear previous connections safely
@@ -522,11 +532,20 @@ class MBManualEntry(QWidget):
                 self.material_code_combo.setVisible(False)
                 self.material_code_lineedit.setVisible(True)
 
-                # --- CHANGE BUTTON TO SELECT ---
+                # Force Material Code line edit to be read-only
+                self.material_code_lineedit.setReadOnly(True)
+                self.material_code_lineedit.setStyleSheet("background-color: #e9ecef; color: #495057;")
+
+                # --- WHEN NON-RAW MATERIAL IS CHECKED: ---
+                # 1. Force Total Weight to be Read-Only (locked, populated only by the wizard)
+                self.total_weight_input.setReadOnly(True)
+                self.total_weight_input.setStyleSheet("background-color: #e9ecef; color: #495057;")
+
+                # 2. Change button to Select
                 self.btn_sync_rm.setText("Select")
-                self.btn_sync_rm.setObjectName("InfoButton")  # Or whatever theme color you prefer
+                self.btn_sync_rm.setObjectName("InfoButton")
                 self.btn_sync_rm.clicked.disconnect()  # Clear previous connections safely
-                self.btn_sync_rm.clicked.connect(self.open_select_dialog)  # Hook your custom function here
+                self.btn_sync_rm.clicked.connect(self.open_select_dialog)
                 self.refresh_button_style(self.btn_sync_rm)
             else:
                 if not self.raw_material_check.isChecked():
@@ -559,7 +578,7 @@ class MBManualEntry(QWidget):
                 self.large_scale_input.setText(f"{comp_info['large_scale']:.6f}")
                 self.small_scale_input.setText(f"{comp_info['small_scale']:.6f}")
                 self.total_weight_input.setText(f"{comp_info['total_weight']:.6f}")
-    # TODO: make the material table to be readonly, the same with the selection
+
     def edit_material_composition(self, row, column):
         """Triggers when a row in the materials table is double-clicked to edit non-raw materials."""
         item = self.materials_table.item(row, 0)
@@ -1239,12 +1258,8 @@ class MBManualEntry(QWidget):
             btn.style().unpolish(btn)
             btn.style().polish(btn)
 
-        # 4. Re-enable Table interactions and make it editable (Out of the button loop!)
-        self.materials_table.setEditTriggers(
-            QAbstractItemView.EditTrigger.DoubleClicked |
-            QAbstractItemView.EditTrigger.SelectedClicked |
-            QAbstractItemView.EditTrigger.EditKeyPressed
-        )
+        # Keep table cells non-editable so they can only view or trigger the wizard double-click
+        self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.materials_table.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
     def eventFilter(self, watched, event):
         # Check if the event is a key press and specifically the Tab key

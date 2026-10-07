@@ -195,47 +195,51 @@ class NonRawMaterialWizard(QDialog):
                 deduction_qty = item_info.get("deduction_qty", 0.0)
 
                 # Parse out product code and lot number from string format to find matching row on left tables
-                # Format saved was: f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
                 right_row = self.right_table.rowCount()
                 self.right_table.insertRow(right_row)
 
-                self.right_table.setItem(right_row, 0, QTableWidgetItem(prod_info_str))
+                # --- Column 0: Product Code (NON-EDITABLE) ---
+                code_item = QTableWidgetItem(prod_info_str)
+                code_item.setFlags(code_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                code_item.setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
+                self.right_table.setItem(right_row, 0, code_item)
 
                 # Try to find matching max quantity from left tables to populate column 1 correctly
                 found_max_qty = deduction_qty  # Fallback
-                target_table = self.pass_table  # Check both pass and fail tables
+                matched_is_passed = True  # Context tracker for styling right table
+
                 for tbl in [self.pass_table, self.fail_table]:
                     for r in range(tbl.rowCount()):
                         p_code = tbl.item(r, 0).text() if tbl.item(r, 0) else ""
                         l_no = tbl.item(r, 1).text() if tbl.item(r, 1) else ""
                         if p_code in prod_info_str and l_no in prod_info_str:
-                            target_table = tbl
                             q_str = tbl.item(r, 2).text() if tbl.item(r, 2) else "0"
                             try:
                                 found_max_qty = float(q_str)
                             except ValueError:
                                 pass
 
+                            # Track whether this came from Pass or Fail table for color coding
+                            matched_is_passed = (tbl == self.pass_table)
+                            bg_col = self.PASS_BG if matched_is_passed else self.FAIL_BG
+
                             # Highlight row on left table since it's already used
-                            is_pass_tab = (tbl == self.pass_table)
-                            bg_col = self.PASS_BG if is_pass_tab else self.FAIL_BG
                             for c in range(tbl.columnCount()):
                                 cell = tbl.item(r, c)
                                 if cell:
                                     cell.setData(Qt.ItemDataRole.BackgroundRole, bg_col)
                             break
 
+                # --- Column 1: Qty (NON-EDITABLE) ---
                 qty_item = QTableWidgetItem(f"{found_max_qty:.6f}")
                 qty_item.setFlags(qty_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                qty_item.setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
                 self.right_table.setItem(right_row, 1, qty_item)
 
+                # --- Column 2: Total Deduction (EDITABLE) ---
                 deduction_item = QTableWidgetItem(f"{deduction_qty:.6f}")
+                deduction_item.setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
                 self.right_table.setItem(right_row, 2, deduction_item)
-
-                # Style right table row based on pass/fail match context
-                # (defaulting to pass background if origin table matched pass)
-                for c in range(3):
-                    self.right_table.item(right_row, c).setData(Qt.ItemDataRole.BackgroundRole, self.PASS_BG)
 
         finally:
             self.right_table.blockSignals(False)
@@ -444,17 +448,25 @@ class NonRawMaterialWizard(QDialog):
             self.right_table.insertRow(right_row)
 
             display_text = f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
+
+            # --- Column 0: Product Code (NON-EDITABLE) ---
             code_item = QTableWidgetItem(display_text)
             code_item.setFlags(code_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            code_item.setBackground(bg_color)
+            self.right_table.setItem(right_row, 0, code_item)
 
+            # --- Column 1: Qty (NON-EDITABLE) ---
             qty_item = QTableWidgetItem(f"{max_qty:.6f}")
             qty_item.setFlags(qty_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            qty_item.setBackground(bg_color)
+            self.right_table.setItem(right_row, 1, qty_item)
 
+            # --- Column 2: Total Deduction (EDITABLE) ---
             deduction_item = QTableWidgetItem("0.00")
+            # We DO NOT remove ItemIsEditable here, so user can edit it freely!
+            deduction_item.setBackground(bg_color)
+            self.right_table.setItem(right_row, 2, deduction_item)
 
-            for col, item in enumerate((code_item, qty_item, deduction_item)):
-                item.setBackground(bg_color)
-                self.right_table.setItem(right_row, col, item)
         finally:
             self.right_table.blockSignals(False)
 
