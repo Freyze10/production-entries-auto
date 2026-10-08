@@ -130,20 +130,19 @@ def get_single_production_data(prod_id):
 
 def get_non_raw_breakdowns_for_production(prod_id):
     """
-    Fetches active (non-cancelled) version 3 header and detail breakdowns
-    for all materials belonging to a given production ID.
-    Returns a dictionary mapping material_code -> payload structure.
+    Fetches active breakdowns and formats them back into the wizard's payload structure.
     """
     conn = get_connection()
     cur = conn.cursor()
     try:
-        # Query gets active headers and their breakdown items for the specific production record
         cur.execute("""
             SELECT 
                 p2.material_code,
                 h.id AS header_id,
                 h.version_no,
+                d.prod_code,
                 d.lot_no,
+                d.container_no,
                 d.total_weight,
                 d.status,
                 p2.large_scale,
@@ -159,25 +158,31 @@ def get_non_raw_breakdowns_for_production(prod_id):
 
         rows = cur.fetchall()
 
-        # Group rows by material code into the wizard's expected payload structure
         payloads_map = {}
         for row in rows:
             mat_code = row[0]
+            p_code = row[3] or ""
+            l_no = row[4] or ""
+            b_no = str(row[5]) if row[5] is not None else ""
+
+            # Reconstruct string format: f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
+            formatted_prod_info = f"{p_code} (Lot: {l_no} | Bag: {b_no})"
+
             if mat_code not in payloads_map:
                 payloads_map[mat_code] = {
                     "composition_info": {
                         "display_material_code": mat_code,
-                        "large_scale": float(row[6] or 0.0),
-                        "small_scale": float(row[7] or 0.0),
-                        "total_weight": float(row[8] or 0.0)
+                        "large_scale": float(row[8] or 0.0),
+                        "small_scale": float(row[9] or 0.0),
+                        "total_weight": float(row[10] or 0.0)
                     },
                     "source_deductions": []
                 }
 
             payloads_map[mat_code]["source_deductions"].append({
-                "product_info": row[3],  # lot_no column holds product info string
-                "deduction_qty": float(row[4] or 0.0),
-                "status": row[5]  # 'Passed' or 'Failed'
+                "product_info": formatted_prod_info,
+                "deduction_qty": float(row[6] or 0.0),
+                "status": row[7]
             })
 
         return payloads_map
