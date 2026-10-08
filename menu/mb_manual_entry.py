@@ -10,7 +10,7 @@ from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
     get_cancelled_production_data, check_production_exists, get_non_raw_breakdowns_for_production
 from db.update import cancel_production
-from db.write import log_audit_trail, save_manual_production_record
+from db.write import log_audit_trail, save_manual_production_record, confirm_production_record_in_db
 from print.print_preview import ProductionPrintPreview
 from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
@@ -436,6 +436,11 @@ class MBManualEntry(QWidget):
 
         button_layout.addStretch()
 
+        self.btn_confirm = QPushButton("Confirm Prod Form", objectName="SuccessButton")
+        self.btn_confirm.setIcon(fa.icon('fa5s.check-circle', color='white'))
+        self.btn_confirm.clicked.connect(self.confirm_production_form)
+        button_layout.addWidget(self.btn_confirm)
+
         self.print_wip_btn = QPushButton("Print with WIP", objectName="SecondaryButton")
         self.print_wip_btn.setIcon(fa.icon('fa5s.print', color='white'))
         self.print_wip_btn.clicked.connect(lambda: self.print_production(with_wip=True))
@@ -627,6 +632,54 @@ class MBManualEntry(QWidget):
                     self.update_totals()
                     QMessageBox.information(self, "Updated", f"Composition for '{new_code}' successfully updated.")
 
+    def confirm_production_form(self):
+        """Validates, confirms, and updates the production confirmation timestamp."""
+        raw_id = self.production_id_input.text().strip()
+
+        # 1. Basic validation
+        if not raw_id or raw_id == "0":
+            QMessageBox.warning(self, "Selection Required", "Please enter or select a production ID first.")
+            return
+
+        try:
+            prod_id = int(raw_id)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid ID", "Production ID must be a number.")
+            return
+
+        # 2. Check if Production ID exists in the database
+        if not check_production_exists(prod_id):
+            QMessageBox.warning(self, "Not Saved", f"Production ID {prod_id} is not yet saved in the database.")
+            return
+
+        # 3. Get current timestamp for confirmation message and display
+        current_timestamp_str = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+
+        # 4. Ask for confirmation
+        msg = (f"Are you sure you want to confirm Production ID: {prod_id}?\n\n"
+               f"Confirmation Timestamp: {current_timestamp_str}")
+        reply = QMessageBox.question(self, "Confirm Production Form", msg,
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        # 5. Database Update via write.py function & Audit Trail
+        success, message = confirm_production_record_in_db(prod_id)
+
+        if success:
+            # Update UI field instantly to reflect the confirmation timestamp
+            self.production_confirmation_display.setText(current_timestamp_str)
+
+            # Log audit trail with action "CONFIRM"
+            audit_details = f"Production ID: {prod_id} has been CONFIRMED"
+            log_audit_trail(self.work_station['m'], "CONFIRM", audit_details)
+
+            QMessageBox.information(self, "Success", f"Production ID {prod_id} successfully confirmed.")
+        else:
+            QMessageBox.critical(self, "Database Error", f"Failed to confirm production form: {message}")
+
     def display_details(self):
         self.wip_no_input.setText(str(self.prod_results['index_no']))
         self.production_id_input.setText(str(self.prod_results['prod_id']))
@@ -672,8 +725,17 @@ class MBManualEntry(QWidget):
             self.production_encoded_display.setText(
                 self.prod_results['encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
         if self.prod_results.get('confirmation_encoded_on'):
-            self.production_confirmation_display.setText(
-                self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
+            conf_time_str = self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p")
+            self.production_confirmation_display.setText(conf_time_str)
+
+            # --- HIDE CONFIRM BUTTON IF ALREADY CONFIRMED ---
+            if hasattr(self, 'btn_confirm'):
+                self.btn_confirm.setVisible(False)
+        else:
+            self.production_confirmation_display.clear()
+            # --- SHOW CONFIRM BUTTON IF NOT YET CONFIRMED ---
+            if hasattr(self, 'btn_confirm'):
+                self.btn_confirm.setVisible(True)
 
         # --- TRACK WHICH MATERIALS CAME FROM DB ---
         self.db_loaded_materials = set(self.non_raw_payloads.keys())
@@ -1066,6 +1128,9 @@ class MBManualEntry(QWidget):
         self.production_encoded_display.setText(datetime.now().strftime("%m/%d/%Y %I:%M:%S %p"))
         self.production_confirmation_display.clear()
 
+        if hasattr(self, 'btn_confirm'):
+            self.btn_confirm.setVisible(True)
+
         if self.prod_results:
             self.prod_results = None
 
@@ -1266,6 +1331,9 @@ class MBManualEntry(QWidget):
             else:
                 btn.setEnabled(False)  # Disable Save, New, Cancel, Add, Sync, etc.
                 btn.setObjectName("disabled_btn")
+        # confirm button is disabled for viewers
+        if hasattr(self, 'btn_confirm'):
+            self.btn_confirm.setEnabled(False)
 
         # 4. Special case: Disable Table interactions
         self.materials_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
@@ -1324,6 +1392,11 @@ class MBManualEntry(QWidget):
                 btn.setObjectName("TertiaryButton")
             elif "REMOVE" in btn_text:
                 btn.setObjectName("DangerButton")
+            elif "CONFIRM" in btn_text:
+                btn.setObjectName("SuccessButton")
+                # Keep it hidden if the record was already confirmed from DB details
+                if self.prod_results and self.prod_results.get('confirmation_encoded_on'):
+                    btn.setVisible(False)
 
             # Refresh stylesheet dynamically so Qt registers the enabled theme colors
             btn.style().unpolish(btn)

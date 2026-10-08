@@ -407,3 +407,26 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
     finally:
         cursor.close()
         conn.close()
+
+
+def confirm_production_record_in_db(prod_id):
+    """
+    Updates the confirmation_encoded_on timestamp for a given production ID.
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            UPDATE tbl_production_encode 
+            SET confirmation_encoded_on = CURRENT_TIMESTAMP 
+            WHERE prod_id = %s
+        """, (prod_id,))
+
+        conn.commit()
+        return True, "Success"
+    except Exception as e:
+        conn.rollback()
+        return False, str(e)
+    finally:
+        cursor.close()
+        conn.close()

@@ -204,14 +204,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00533" summary="set the alternating colors of ausit trail to false">
-      <option name="closed" value="true" />
-      <created>1778117165715</created>
-      <option name="number" value="00533" />
-      <option name="presentableId" value="LOCAL-00533" />
-      <option name="project" value="LOCAL" />
-      <updated>1778117165715</updated>
-    </task>
     <task id="LOCAL-00534" summary="changed the background to background coilor in the styles">
       <option name="closed" value="true" />
       <created>1778117872088</created>
@@ -596,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791430634537</updated>
     </task>
-    <option name="localTasksCounter" value="582" />
+    <task id="LOCAL-00582" summary="fixed the date saving of the producttion">
+      <option name="closed" value="true" />
+      <created>1791438134023</created>
+      <option name="number" value="00582" />
+      <option name="presentableId" value="LOCAL-00582" />
+      <option name="project" value="LOCAL" />
+      <updated>1791438134023</updated>
+    </task>
+    <option name="localTasksCounter" value="583" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated all display details to accept null values" />
     <MESSAGE value="modified" />
     <MESSAGE value="added dashboard in the main Navigation" />
     <MESSAGE value="created basic template for the dashboard" />
@@ -649,7 +648,8 @@
     <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
     <MESSAGE value="created a installer for  the generated app" />
     <MESSAGE value="updated the saving and displaying of break down lot from fg" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the saving and displaying of break down lot from fg" />
+    <MESSAGE value="fixed the date saving of the producttion" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the date saving of the producttion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
