@@ -324,7 +324,7 @@ class ProductionRecords(QWidget):
     def refresh_records(self):
         try:
             self.table_model.set_data(self.rows)
-
+            # get_all_production_data()
             # Reset the selection in the UI
             self.table_records.clearSelection()
             self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)

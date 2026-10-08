@@ -14,7 +14,7 @@ from db.write import log_audit_trail, save_manual_production_record
 from print.print_preview import ProductionPrintPreview
 from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
-    add_batch_text, setup_auto_completers
+    add_batch_text, setup_auto_completers, parse_date_to_sql
 from util.loading import LoadingDialog
 from util.validate_input import validate_lot_field
 from workstation.workstation_details import _get_workstation_info
@@ -929,7 +929,7 @@ class MBManualEntry(QWidget):
             # Header Data
             header = {
                 'prod_id': int(prod_id_raw),
-                'prod_date': self.production_date_input.text() or None,
+                'prod_date': parse_date_to_sql(self.production_date_input.text()),
                 'customer': self.customer_input.text().strip(),
                 'form_id': int(self.formula_input.text() or 0),
                 'index_no': self.wip_no_input.text().strip(),
@@ -943,7 +943,7 @@ class MBManualEntry(QWidget):
                 'machine_no': self.machine_no_input.text().strip(),
                 'note': self.notes_input.toPlainText().strip(),
                 'user_id': self.work_station['u'],
-                'inventory_c_date': self.confirmation_date_input.text() or None,
+                'inventory_c_date': parse_date_to_sql(self.confirmation_date_input.text()),
                 'form_type': self.form_type_combo.currentText()
             }
 

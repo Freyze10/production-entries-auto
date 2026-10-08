@@ -204,14 +204,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00532" summary="added  colors in the  stylesheet for setting background of the audit trail recorrds for future">
-      <option name="closed" value="true" />
-      <created>1778116349876</created>
-      <option name="number" value="00532" />
-      <option name="presentableId" value="LOCAL-00532" />
-      <option name="project" value="LOCAL" />
-      <updated>1778116349876</updated>
-    </task>
     <task id="LOCAL-00533" summary="set the alternating colors of ausit trail to false">
       <option name="closed" value="true" />
       <created>1778117165715</created>
@@ -596,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791426531202</updated>
     </task>
-    <option name="localTasksCounter" value="581" />
+    <task id="LOCAL-00581" summary="updated the saving and displaying of break down lot from fg">
+      <option name="closed" value="true" />
+      <created>1791430634537</created>
+      <option name="number" value="00581" />
+      <option name="presentableId" value="LOCAL-00581" />
+      <option name="project" value="LOCAL" />
+      <updated>1791430634537</updated>
+    </task>
+    <option name="localTasksCounter" value="582" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated database call for cancelled" />
     <MESSAGE value="updated all display details to accept null values" />
     <MESSAGE value="modified" />
     <MESSAGE value="added dashboard in the main Navigation" />
@@ -649,7 +648,8 @@
     <MESSAGE value="updated the save and update function of the production materials" />
     <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
     <MESSAGE value="created a installer for  the generated app" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a installer for  the generated app" />
+    <MESSAGE value="updated the saving and displaying of break down lot from fg" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the saving and displaying of break down lot from fg" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
