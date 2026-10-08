@@ -204,14 +204,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00534" summary="changed the background to background coilor in the styles">
-      <option name="closed" value="true" />
-      <created>1778117872088</created>
-      <option name="number" value="00534" />
-      <option name="presentableId" value="LOCAL-00534" />
-      <option name="project" value="LOCAL" />
-      <updated>1778117872088</updated>
-    </task>
     <task id="LOCAL-00535" summary="debugging print to console to view if the change of bg is workking because it is not displaying">
       <option name="closed" value="true" />
       <created>1778124527732</created>
@@ -596,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791438134023</updated>
     </task>
-    <option name="localTasksCounter" value="583" />
+    <task id="LOCAL-00583" summary="updated the  saving of the confirm of production form in the manual entry">
+      <option name="closed" value="true" />
+      <created>1791443938815</created>
+      <option name="number" value="00583" />
+      <option name="presentableId" value="LOCAL-00583" />
+      <option name="project" value="LOCAL" />
+      <updated>1791443938816</updated>
+    </task>
+    <option name="localTasksCounter" value="584" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="modified" />
     <MESSAGE value="added dashboard in the main Navigation" />
     <MESSAGE value="created basic template for the dashboard" />
     <MESSAGE value="returned back to original" />
@@ -649,7 +648,8 @@
     <MESSAGE value="created a installer for  the generated app" />
     <MESSAGE value="updated the saving and displaying of break down lot from fg" />
     <MESSAGE value="fixed the date saving of the producttion" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the date saving of the producttion" />
+    <MESSAGE value="updated the  saving of the confirm of production form in the manual entry" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated the  saving of the confirm of production form in the manual entry" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

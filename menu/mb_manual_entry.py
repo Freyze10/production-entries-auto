@@ -8,7 +8,8 @@ import qtawesome as fa
 
 from db.legacy import SyncRM
 from db.read import get_single_production_data, get_single_production_details, get_rm_code_lists, get_latest_prod_id, \
-    get_cancelled_production_data, check_production_exists, get_non_raw_breakdowns_for_production
+    get_cancelled_production_data, check_production_exists, get_non_raw_breakdowns_for_production, \
+    get_production_confirmed_by
 from db.update import cancel_production
 from db.write import log_audit_trail, save_manual_production_record, confirm_production_record_in_db
 from print.print_preview import ProductionPrintPreview
@@ -396,14 +397,31 @@ class MBManualEntry(QWidget):
         encoding_layout = QGridLayout()
         encoding_layout.setSpacing(6)
 
+        # Side-by-side row layout for Encoded By and Confirmed By
+        enc_conf_layout = QHBoxLayout()
+        enc_conf_layout.setSpacing(6)
+
+        # 1. Encoded By Field
         self.encoded_by_display = QLineEdit()
         self.encoded_by_display.setReadOnly(True)
         self.encoded_by_display.setText(self.work_station['u'])
         self.encoded_by_display.setStyleSheet("background-color: #e9ecef;")
 
-        encoding_layout.addWidget(QLabel("Encoded By:"), 0, 0)
-        encoding_layout.addWidget(self.encoded_by_display, 0, 1)
+        enc_conf_layout.addWidget(QLabel("Encoded By:"))
+        enc_conf_layout.addWidget(self.encoded_by_display)
 
+        # 2. Confirmed By Field
+        self.confirmed_by_display = QLineEdit()
+        self.confirmed_by_display.setReadOnly(True)
+        self.confirmed_by_display.setStyleSheet("background-color: #e9ecef;")
+
+        enc_conf_layout.addWidget(QLabel("Confirmed By:"))
+        enc_conf_layout.addWidget(self.confirmed_by_display)
+
+        # Add the side-by-side layout into Row 0 of the main QGridLayout
+        encoding_layout.addLayout(enc_conf_layout, 0, 0, 1, 2)
+
+        # 3. Production Confirmation Encoded On (Row 1)
         self.production_confirmation_display = QLineEdit()
         self.production_confirmation_display.setPlaceholderText("mm/dd/yyyy h:m:s")
         self.production_confirmation_display.setStyleSheet("background-color: #fff9c4;")
@@ -411,6 +429,7 @@ class MBManualEntry(QWidget):
         encoding_layout.addWidget(QLabel("Production Confirmation Encoded On:"), 1, 0)
         encoding_layout.addWidget(self.production_confirmation_display, 1, 1)
 
+        # 4. Production Encoded On (Row 2)
         self.production_encoded_display = QLineEdit()
         self.production_encoded_display.setText(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         self.production_encoded_display.setReadOnly(True)
@@ -721,6 +740,10 @@ class MBManualEntry(QWidget):
         self.total_weight_label.setText(f"{self.prod_results['quantity_prod']:.7f}")
 
         self.encoded_by_display.setText(str(self.prod_results['encoded_by']))
+        # Populate Confirmed By from Audit Trail lookup
+        conf_by_user = get_production_confirmed_by(self.prod_id)
+        self.confirmed_by_display.setText(conf_by_user)
+
         if self.prod_results.get('encoded_on'):
             self.production_encoded_display.setText(
                 self.prod_results['encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
@@ -1127,6 +1150,8 @@ class MBManualEntry(QWidget):
         self.encoded_by_display.setText(self.work_station['u'])
         self.production_encoded_display.setText(datetime.now().strftime("%m/%d/%Y %I:%M:%S %p"))
         self.production_confirmation_display.clear()
+        self.encoded_by_display.setText(self.work_station['u'])
+        self.confirmed_by_display.clear()
 
         if hasattr(self, 'btn_confirm'):
             self.btn_confirm.setVisible(True)

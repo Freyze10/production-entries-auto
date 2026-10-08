@@ -601,6 +601,38 @@ def get_allowed_access_points(role_name):
         return []
 
 
+def get_production_confirmed_by(prod_id):
+    """
+    Finds who confirmed the given production ID from the audit trail
+    and returns 'Hostname\\Username', or an empty string if not found.
+    """
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        # Searches for audit logs where action_type is 'CONFIRM' and details mention the production ID
+        cur.execute("""
+            SELECT u.hostname, u.username
+            FROM tbl_audit_trail a
+            JOIN tbl_user u ON a.user_id = u.user_id
+            WHERE a.action_type = 'CONFIRM' 
+              AND a.details LIKE %s
+            ORDER BY a.timestamp DESC
+            LIMIT 1;
+        """, (f"%Production ID: {prod_id}%",))
+
+        row = cur.fetchone()
+        if row:
+            hostname, username = row
+            return f"{hostname}\\{username}"
+        return ""
+    except Exception as e:
+        print(f"Error fetching production confirmer: {e}")
+        return ""
+    finally:
+        cur.close()
+        conn.close()
+
+
 #  In FG Schema
 def get_fginv_passed_records():
     """Fetches passed finished goods inventory records from schema_fg."""
