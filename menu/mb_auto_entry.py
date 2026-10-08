@@ -10,9 +10,9 @@ import qtawesome as fa
 from db.legacy import SyncRM
 from db.read import get_latest_prod_id, get_formula_select, get_formula_materials, \
     get_all_completer_data, get_single_production_details, get_single_production_data, get_cancelled_production_data, \
-    check_production_exists
+    check_production_exists, get_production_confirmed_by
 from db.update import cancel_production
-from db.write import log_audit_trail, save_production_record
+from db.write import log_audit_trail, save_production_record, confirm_production_record_in_db
 from table_model import table_tumbler_compute, table_generate_compute
 from print.print_preview import ProductionPrintPreview
 from util.display_print_message import show_printed_locked_message
@@ -258,22 +258,38 @@ class MBAutoEntry(QWidget):
         encoding_layout = QGridLayout()
         encoding_layout.setSpacing(6)
 
-        self.encoded_by_display = QLineEdit(objectName='gray_bg')
+        # Side-by-side row layout for Encoded By and Confirmed By
+        enc_conf_layout = QHBoxLayout()
+        enc_conf_layout.setSpacing(6)
+
+        self.encoded_by_display = QLineEdit()
         self.encoded_by_display.setReadOnly(True)
         self.encoded_by_display.setText(self.work_station['u'])
+        self.encoded_by_display.setStyleSheet("background-color: #e9ecef;")
 
-        encoding_layout.addWidget(QLabel("Encoded By:"), 0, 0)
-        encoding_layout.addWidget(self.encoded_by_display, 0, 1)
+        enc_conf_layout.addWidget(QLabel("Encoded By:"))
+        enc_conf_layout.addWidget(self.encoded_by_display)
 
-        self.production_confirmation_display = QLineEdit(objectName='required')
+        self.confirmed_by_display = QLineEdit()
+        self.confirmed_by_display.setReadOnly(True)
+        self.confirmed_by_display.setStyleSheet("background-color: #e9ecef; color: #495057;")
+
+        enc_conf_layout.addWidget(QLabel("Confirmed By:"))
+        enc_conf_layout.addWidget(self.confirmed_by_display)
+
+        encoding_layout.addLayout(enc_conf_layout, 0, 0, 1, 2)
+
+        self.production_confirmation_display = QLineEdit()
         self.production_confirmation_display.setPlaceholderText("mm/dd/yyyy h:m:s")
+        self.production_confirmation_display.setStyleSheet("background-color: #fff9c4;")
         self.production_confirmation_display.setReadOnly(True)
         encoding_layout.addWidget(QLabel("Production Confirmation Encoded On:"), 1, 0)
         encoding_layout.addWidget(self.production_confirmation_display, 1, 1)
 
-        self.production_encoded_display = QLineEdit(objectName='gray_bg')
+        self.production_encoded_display = QLineEdit()
         self.production_encoded_display.setText(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         self.production_encoded_display.setReadOnly(True)
+        self.production_encoded_display.setStyleSheet("background-color: #e9ecef;")
         encoding_layout.addWidget(QLabel("Production Encoded On:"), 2, 0)
         encoding_layout.addWidget(self.production_encoded_display, 2, 1)
 
@@ -293,6 +309,11 @@ class MBAutoEntry(QWidget):
         button_layout.addWidget(self.btn_cancel)
 
         button_layout.addStretch()
+
+        self.btn_confirm = QPushButton("Confirm Prod Form", objectName="SuccessButton")
+        self.btn_confirm.setIcon(fa.icon('fa5s.check-circle', color='white'))
+        self.btn_confirm.clicked.connect(self.confirm_production_form)
+        button_layout.addWidget(self.btn_confirm)
 
         generate_btn = QPushButton("Generate", objectName="PrimaryButton")
         generate_btn.setIcon(fa.icon('fa5s.cogs', color='white'))
@@ -508,6 +529,49 @@ class MBAutoEntry(QWidget):
         dialog.accept()
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
 
+    def confirm_production_form(self):
+        """Validates, confirms, and updates the production confirmation timestamp."""
+        raw_id = self.production_id_input.text().strip()
+
+        if not raw_id or raw_id == "0":
+            QMessageBox.warning(self, "Selection Required", "Please enter or select a production ID first.")
+            return
+
+        try:
+            prod_id = int(raw_id)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid ID", "Production ID must be a number.")
+            return
+
+        if not check_production_exists(prod_id):
+            QMessageBox.warning(self, "Not Saved", f"Production ID {prod_id} is not yet saved in the database.")
+            return
+
+        current_timestamp_str = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+
+        msg = (f"Are you sure you want to confirm Production ID: {prod_id}?\n\n"
+               f"Confirmation Timestamp: {current_timestamp_str}")
+        reply = QMessageBox.question(self, "Confirm Production Form", msg,
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        success, message = confirm_production_record_in_db(prod_id)
+
+        if success:
+            self.production_confirmation_display.setText(current_timestamp_str)
+
+            audit_details = f"(MB-Auto) Production ID: {prod_id} has been CONFIRMED"
+            log_audit_trail(self.work_station['m'], "CONFIRM", audit_details)
+
+            QMessageBox.information(self, "Success", f"Production ID {prod_id} successfully confirmed.")
+            if hasattr(self, 'btn_confirm'):
+                self.btn_confirm.setVisible(False)
+        else:
+            QMessageBox.critical(self, "Database Error", f"Failed to confirm production form: {message}")
+
     def validate_lot_no(self, event):
         if self.lot_no_input.isReadOnly() or not self.lot_no_input.isEnabled():
             return
@@ -579,6 +643,10 @@ class MBAutoEntry(QWidget):
 
         # 5. Handle Encoding Info
         self.encoded_by_display.setText(safe_val('encoded_by'))
+        # Populate Confirmed By
+        conf_by_user = get_production_confirmed_by(self.prod_id)
+        self.confirmed_by_display.setText(conf_by_user)
+
         if self.prod_results.get('encoded_on'):
             self.production_encoded_display.setText(
                 self.prod_results['encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
@@ -586,6 +654,12 @@ class MBAutoEntry(QWidget):
         if self.prod_results.get('confirmation_encoded_on'):
             self.production_confirmation_display.setText(
                 self.prod_results['confirmation_encoded_on'].strftime("%m/%d/%Y %I:%M:%S %p"))
+            if hasattr(self, 'btn_confirm'):
+                self.btn_confirm.setVisible(False)
+        else:
+            self.production_confirmation_display.clear()
+            if hasattr(self, 'btn_confirm'):
+                self.btn_confirm.setVisible(True)
 
         # 6. Populate Table
         self.materials_table.setRowCount(0)
@@ -732,6 +806,96 @@ class MBAutoEntry(QWidget):
 
         return f"(MB-Auto) Updated Prod ID {header['prod_id']} -> " + " | ".join(changes)
 
+    def confirm_production_form(self):
+        """Validates, confirms, and updates the production confirmation timestamp."""
+        raw_id = self.production_id_input.text().strip()
+
+        if not raw_id or raw_id == "0":
+            QMessageBox.warning(self, "Selection Required", "Please enter or select a production ID first.")
+            return
+
+        try:
+            prod_id = int(raw_id)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid ID", "Production ID must be a number.")
+            return
+
+        if not check_production_exists(prod_id):
+            QMessageBox.warning(self, "Not Saved", f"Production ID {prod_id} is not yet saved in the database.")
+            return
+
+        current_timestamp_str = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+
+        msg = (f"Are you sure you want to confirm Production ID: {prod_id}?\n\n"
+               f"Confirmation Timestamp: {current_timestamp_str}")
+        reply = QMessageBox.question(self, "Confirm Production Form", msg,
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        success, message = confirm_production_record_in_db(prod_id)
+
+        if success:
+            self.production_confirmation_display.setText(current_timestamp_str)
+
+            audit_details = f"(MB-Auto) Production ID: {prod_id} has been CONFIRMED"
+            log_audit_trail(self.work_station['m'], "CONFIRM", audit_details)
+
+            QMessageBox.information(self, "Success", f"Production ID {prod_id} successfully confirmed.")
+            if hasattr(self, 'btn_confirm'):
+                self.btn_confirm.setVisible(False)
+        else:
+            QMessageBox.critical(self, "Database Error", f"Failed to confirm production form: {message}")
+
+    def generate_detailed_audit_details(self, header, quantity, encode, materials, is_update):
+        """Generates audit details containing ONLY the fields modified for MB-Auto."""
+        if not is_update:
+            mat_summary = ", ".join([m[2] for m in materials if m[2]])
+            return (
+                f"(MB-Auto) Created Production ID: {header['prod_id']} | "
+                f"Customer: {header['customer']} | Product: {header['prod_code']} | "
+                f"Lot: {header['lot_no']} | Qty: {quantity['prod']} | Materials: [{mat_summary}]"
+            )
+
+        changes = []
+        if self.prod_results:
+            fields_to_check = [
+                ('Customer', str(self.prod_results.get('customer') or '').strip(),
+                 str(header['customer'] or '').strip()),
+                ('Product Code', str(self.prod_results.get('prod_code') or '').strip(),
+                 str(header['prod_code'] or '').strip()),
+                ('Product Color', str(self.prod_results.get('prod_color') or '').strip(),
+                 str(header['prod_color'] or '').strip()),
+                ('Lot No', str(self.prod_results.get('lot_no') or '').strip(), str(header['lot_no'] or '').strip()),
+                ('Order No', str(self.prod_results.get('order_no') or '').strip(),
+                 str(header['order_no'] or '').strip()),
+                ('Form Type', str(self.prod_results.get('form_type') or '').strip(),
+                 str(header['form_type'] or '').strip()),
+                ('Machine No', str(self.prod_results.get('machine_no') or '').strip(),
+                 str(header['machine_no'] or '').strip()),
+                ('Mix Time', str(self.prod_results.get('mix_time') or '').strip(),
+                 str(header['mix_time'] or '').strip()),
+                ('Notes', str(self.prod_results.get('note') or '').strip(), str(header['note'] or '').strip()),
+                ('Prepared By', str(self.prod_results.get('prepared_by') or '').strip(),
+                 str(encode.get('prepared_by') or '').strip()),
+                ('Dosage', float(self.prod_results.get('dosage') or 0.0), float(header['dosage'] or 0.0)),
+                ('LD', float(self.prod_results.get('ld') or 0.0), float(header['ld'] or 0.0)),
+                ('Qty Required', float(self.prod_results.get('quantity_req') or 0.0), float(quantity['req'] or 0.0)),
+                ('Qty Batch', float(self.prod_results.get('quantity_batch') or 0.0), float(quantity['batch'] or 0.0)),
+                ('Qty Produced', float(self.prod_results.get('quantity_prod') or 0.0), float(quantity['prod'] or 0.0)),
+            ]
+
+            for label, old_val, new_val in fields_to_check:
+                if old_val != new_val:
+                    changes.append(f"{label}: '{old_val}' -> '{new_val}'")
+
+        if not changes:
+            return f"(MB-Auto) Updated Production ID: {header['prod_id']} (No data attribute fields altered)"
+
+        return f"(MB-Auto) Updated Prod ID {header['prod_id']} -> " + " | ".join(changes)
+
     def save_production(self):
         # 1. Validation
         prod_id_raw = self.production_id_input.text().strip()
@@ -817,11 +981,10 @@ class MBAutoEntry(QWidget):
         success, message = save_production_record(header, quantity, encode, materials, is_update)
 
         if success:
-            action_verb = "updated" if is_update else "created"
-            QMessageBox.information(self, "Success",
-                                    f"Production {header['prod_id']} has been {action_verb} successfully.")
+            action = "updated" if is_update else "created"
+            QMessageBox.information(self, "Success", f"Production {header['prod_id']} has been {action} successfully.")
 
-            # 5. Audit Trail (Pass encode here)
+            # Audit Trail
             audit_details = self.generate_detailed_audit_details(header, quantity, encode, materials, is_update)
 
             log_audit_trail(
@@ -830,7 +993,6 @@ class MBAutoEntry(QWidget):
                 audit_details
             )
 
-            # 6. UI Refresh
             if is_update:
                 self.prod_results = get_single_production_data(header['prod_id'])
                 self.display_details()
@@ -878,6 +1040,13 @@ class MBAutoEntry(QWidget):
         self.notes_input.clear()
 
         self.encoded_by_display.setText(self.work_station['u'])
+        self.confirmed_by_display.clear()
+        self.production_encoded_display.setText(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        self.production_confirmation_display.clear()
+
+        if hasattr(self, 'btn_confirm'):
+            self.btn_confirm.setVisible(True)
+
         self.production_encoded_display.setText(datetime.now().strftime("%m/%d/%Y %I:%M:%S %p"))
         self.production_confirmation_display.clear()
 
@@ -1196,6 +1365,10 @@ class MBAutoEntry(QWidget):
                 btn.setObjectName("TertiaryButton")
             elif "PRINT" in btn_text:
                 btn.setObjectName("SecondaryButton")
+            elif "CONFIRM" in btn_text:
+                btn.setObjectName("SuccessButton")
+                if self.prod_results and self.prod_results.get('confirmation_encoded_on'):
+                    btn.setVisible(False)
 
             # Refresh stylesheet dynamically so Qt registers the enabled theme colors
             btn.style().unpolish(btn)
