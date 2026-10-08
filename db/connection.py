@@ -1,15 +1,15 @@
 import psycopg2
 
 # V2 debug
-def get_connection():
-    # localhost
-    return psycopg2.connect(
-        host="localhost",
-        dbname="db_production_v2",
-        user="postgres",
-        password="password",
-        port="5433"
-    )
+# def get_connection():
+#     # localhost
+#     return psycopg2.connect(
+#         host="localhost",
+#         dbname="db_production_v2",
+#         user="postgres",
+#         password="password",
+#         port="5433"
+#     )
 
 # localhost
 # def get_connection():
@@ -34,4 +34,13 @@ def get_connection():
 #         port="5432"
 #     )
 
-#
+# Server V2
+def get_connection():
+    # localhost
+    return psycopg2.connect(
+        host="localhost",
+        dbname="db_production_v2",
+        user="postgres",
+        password="password",
+        port="5433"
+    )

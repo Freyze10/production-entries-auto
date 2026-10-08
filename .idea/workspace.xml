@@ -31,35 +31,37 @@
 }</component>
   <component name="ProjectId" id="3B6HdQNpihd3fXj3reICoWI9Cx9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="2" id="Remove" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.dashboard.executor&quot;: &quot;Run&quot;,
-    &quot;Python.fastapi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.format_rm_note.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.print.executor&quot;: &quot;Run&quot;,
-    &quot;Python.print_preview.executor&quot;: &quot;Run&quot;,
-    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Brant/PycharmProjects/ProductionSystem&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.dashboard.executor": "Run",
+    "Python.fastapi.executor": "Run",
+    "Python.format_rm_note.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.print.executor": "Run",
+    "Python.print_preview.executor": "Run",
+    "Python.styles.executor": "Run",
+    "Python.test_print.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Brant/PycharmProjects/ProductionSystem",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Brant\PycharmProjects\ProductionSystem\menu" />
@@ -201,22 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00529" summary="added the  delete the widget on clicking x">
-      <option name="closed" value="true" />
-      <created>1777968417656</created>
-      <option name="number" value="00529" />
-      <option name="presentableId" value="LOCAL-00529" />
-      <option name="project" value="LOCAL" />
-      <updated>1777968417656</updated>
-    </task>
-    <task id="LOCAL-00530" summary="updated the audit trail text for modifying the user details">
-      <option name="closed" value="true" />
-      <created>1778032373367</created>
-      <option name="number" value="00530" />
-      <option name="presentableId" value="LOCAL-00530" />
-      <option name="project" value="LOCAL" />
-      <updated>1778032373368</updated>
     </task>
     <task id="LOCAL-00531" summary="added  colors in the  stylesheet for setting background of the audit trail recorrds for future">
       <option name="closed" value="true" />
@@ -594,7 +580,23 @@
       <option name="project" value="LOCAL" />
       <updated>1791355775047</updated>
     </task>
-    <option name="localTasksCounter" value="578" />
+    <task id="LOCAL-00578" summary="updated the logginng of the audit trail for more detailed log">
+      <option name="closed" value="true" />
+      <created>1791358134561</created>
+      <option name="number" value="00578" />
+      <option name="presentableId" value="LOCAL-00578" />
+      <option name="project" value="LOCAL" />
+      <updated>1791358134561</updated>
+    </task>
+    <task id="LOCAL-00579" summary="created a installer for  the generated app">
+      <option name="closed" value="true" />
+      <created>1791423209704</created>
+      <option name="number" value="00579" />
+      <option name="presentableId" value="LOCAL-00579" />
+      <option name="project" value="LOCAL" />
+      <updated>1791423209704</updated>
+    </task>
+    <option name="localTasksCounter" value="580" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -621,8 +623,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the function to mirror legacy database, to get the updated record from the old database based from the is_printed. to maintain integrity and keep the fastness of the syncing process" />
-    <MESSAGE value="adjusted the with of the prroduct color to auto resize bast on contents" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="updated database call for cancelled" />
     <MESSAGE value="updated all display details to accept null values" />
     <MESSAGE value="modified" />
@@ -646,7 +647,9 @@
     <MESSAGE value="fix the saving of the material and the breakdown of the materials" />
     <MESSAGE value="updated the current sving updatess into database. no deleteing of old" />
     <MESSAGE value="updated the save and update function of the production materials" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the save and update function of the production materials" />
+    <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
+    <MESSAGE value="created a installer for  the generated app" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a installer for  the generated app" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
