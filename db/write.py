@@ -379,23 +379,30 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
 
                         lot_num = ""
                         bag_num = None
+                        loc_val = None
 
                         match_lot = re.search(r"Lot:\s*([^\|]+)", prod_info)
                         if match_lot:
                             lot_num = match_lot.group(1).strip()
 
-                        match_bag = re.search(r"Bag:\s*([^)]+)", prod_info)
+                        match_bag = re.search(r"Bag:\s*([^\|]+)", prod_info)
                         if match_bag:
                             bag_str = match_bag.group(1).strip()
                             if bag_str.isdigit():
                                 bag_num = int(bag_str)
 
-                        # Insert into normalized columns
+                        # Extract Location (Loc: WH5)
+                        match_loc = re.search(r"Loc:\s*([^\)]+)", prod_info)
+                        if match_loc:
+                            loc_val = match_loc.group(1).strip()
+
+                        # Insert into normalized columns including location
                         cursor.execute("""
-                            INSERT INTO tbl_production03_detail (
-                                production03_header_id, prod_code, lot_no, container_no, total_weight, status
-                            ) VALUES (%s, %s, %s, %s, %s, %s);
-                        """, (header_03_id, parsed_code, lot_num, bag_num, deduction_qty, row_status))
+                                                    INSERT INTO tbl_production03_detail (
+                                                        production03_header_id, prod_code, lot_no, container_no, location, total_weight, status
+                                                    ) VALUES (%s, %s, %s, %s, %s, %s, %s);
+                                                """, (
+                        header_03_id, parsed_code, lot_num, bag_num, loc_val, deduction_qty, row_status))
 
         conn.commit()
         return True, "Success"

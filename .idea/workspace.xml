@@ -38,30 +38,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.dashboard.executor": "Run",
-    "Python.fastapi.executor": "Run",
-    "Python.format_rm_note.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.print.executor": "Run",
-    "Python.print_preview.executor": "Run",
-    "Python.styles.executor": "Run",
-    "Python.test_print.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Brant/PycharmProjects/ProductionSystem",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.dashboard.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fastapi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.format_rm_note.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_preview.executor&quot;: &quot;Run&quot;,
+    &quot;Python.styles.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Brant/PycharmProjects/ProductionSystem&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Brant\PycharmProjects\ProductionSystem\menu" />
@@ -203,14 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00536" summary="working change bg color in  audit trail">
-      <option name="closed" value="true" />
-      <created>1778125111975</created>
-      <option name="number" value="00536" />
-      <option name="presentableId" value="LOCAL-00536" />
-      <option name="project" value="LOCAL" />
-      <updated>1778125111975</updated>
     </task>
     <task id="LOCAL-00537" summary="remove debug print">
       <option name="closed" value="true" />
@@ -596,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791446539327</updated>
     </task>
-    <option name="localTasksCounter" value="585" />
+    <task id="LOCAL-00585" summary="added the detailed audit trail and the confirmatino function in the auto entries">
+      <option name="closed" value="true" />
+      <created>1791447631811</created>
+      <option name="number" value="00585" />
+      <option name="presentableId" value="LOCAL-00585" />
+      <option name="project" value="LOCAL" />
+      <updated>1791447631811</updated>
+    </task>
+    <option name="localTasksCounter" value="586" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="created basic template for the dashboard" />
     <MESSAGE value="returned back to original" />
     <MESSAGE value="updated the connection to server" />
     <MESSAGE value="updated the manual new entry button, to re-enable  the fields and button" />
@@ -649,7 +648,8 @@
     <MESSAGE value="fixed the date saving of the producttion" />
     <MESSAGE value="updated the  saving of the confirm of production form in the manual entry" />
     <MESSAGE value="added display of confirmed by in the production form" />
-    <option name="LAST_COMMIT_MESSAGE" value="added display of confirmed by in the production form" />
+    <MESSAGE value="added the detailed audit trail and the confirmatino function in the auto entries" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the detailed audit trail and the confirmatino function in the auto entries" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

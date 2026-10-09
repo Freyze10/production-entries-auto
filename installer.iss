@@ -5,7 +5,7 @@
 ; MyIcon: the .ico path, para sa icon ng installer/SetUp (remove kung default)
 
 #define MyAppName "MBPI Production"
-#define MyAppVersion "2.0.0"
+#define MyAppVersion "2.0.1"
 #define MyAppId "MBPI_Production_System"
 #define MyAppExe "main.exe"
 #define MySourceDir "output\main"

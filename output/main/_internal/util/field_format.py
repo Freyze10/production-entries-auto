@@ -1,6 +1,7 @@
 # util/field_format.py
 import math
 import re
+from datetime import datetime
 
 from PyQt6.QtWidgets import QMessageBox, QLineEdit, QTableWidgetItem, QCompleter
 from PyQt6.QtCore import Qt
@@ -284,3 +285,25 @@ class NumericTableWidgetItem(QTableWidgetItem):
             else:
                 return int(self.value) < int(other.value)
         return super().__lt__(other)
+
+
+def parse_date_to_sql(date_text):
+    """
+    Takes a date string from SmartDateEdit (e.g., '10/05/2026' -> MM/DD/YYYY)
+    and converts it into PostgreSQL format ('2026-10-05' -> YYYY-MM-DD).
+    """
+    if not date_text:
+        return None
+
+    date_text = str(date_text).strip()
+    try:
+        # Explicitly parse using MM/DD/YYYY format
+        dt = datetime.strptime(date_text, "%m/%d/%Y")
+        return dt.strftime("%Y-%m-%d")
+    except ValueError:
+        try:
+            # Fallback if it's already YYYY-MM-DD
+            dt = datetime.strptime(date_text, "%Y-%m-%d")
+            return dt.strftime("%Y-%m-%d")
+        except ValueError:
+            return None

@@ -273,6 +273,7 @@ def create_table():
                 prod_code VARCHAR(100),
                 lot_no VARCHAR(128),
                 container_no INT,
+                location VARCHAR(7),
                 total_weight DECIMAL(12,6),
                 status VARCHAR(32), 
                 FOREIGN KEY (production03_header_id) REFERENCES tbl_production03_header(id) ON DELETE CASCADE

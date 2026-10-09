@@ -426,7 +426,7 @@ class NonRawMaterialWizard(QDialog):
 
     def move_selected_record_to_right(self):
         current_tab_idx = self.tab_widget.currentIndex()
-        is_passed = (current_tab_idx == 0) # Tab 0 is Pass Records, Tab 1 is Failed Records
+        is_passed = (current_tab_idx == 0)
         active_table = self.pass_table if is_passed else self.fail_table
 
         row = active_table.currentRow()
@@ -441,7 +441,8 @@ class NonRawMaterialWizard(QDialog):
         prod_code = cell_text(0)
         lot_no = cell_text(1)
         qty_str = cell_text(2, "0")
-        bag_no = cell_text(4)
+        warehouse = cell_text(3)  # Warehouse # / Location (e.g., WH5)
+        bag_no = cell_text(4)     # Bag No.
 
         try:
             max_qty = float(qty_str)
@@ -461,7 +462,8 @@ class NonRawMaterialWizard(QDialog):
             right_row = self.right_table.rowCount()
             self.right_table.insertRow(right_row)
 
-            display_text = f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
+            # Format displaying product, lot, bag, and location
+            display_text = f"{prod_code} (Lot: {lot_no} | Bag: {bag_no} | Loc: {warehouse})"
             code_item = QTableWidgetItem(display_text)
             code_item.setFlags(code_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
@@ -470,7 +472,6 @@ class NonRawMaterialWizard(QDialog):
 
             deduction_item = QTableWidgetItem("0.00")
 
-            # Store the status context directly inside the row's item data using UserRole!
             status_context = "Passed" if is_passed else "Failed"
             code_item.setData(Qt.ItemDataRole.UserRole, status_context)
 
