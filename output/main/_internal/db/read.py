@@ -129,9 +129,6 @@ def get_single_production_data(prod_id):
 
 
 def get_non_raw_breakdowns_for_production(prod_id):
-    """
-    Fetches active breakdowns and formats them back into the wizard's payload structure.
-    """
     conn = get_connection()
     cur = conn.cursor()
     try:
@@ -143,6 +140,7 @@ def get_non_raw_breakdowns_for_production(prod_id):
                 d.prod_code,
                 d.lot_no,
                 d.container_no,
+                d.location,
                 d.total_weight,
                 d.status,
                 p2.large_scale,
@@ -164,25 +162,26 @@ def get_non_raw_breakdowns_for_production(prod_id):
             p_code = row[3] or ""
             l_no = row[4] or ""
             b_no = str(row[5]) if row[5] is not None else ""
+            loc = row[6] or ""
 
-            # Reconstruct string format: f"{prod_code} (Lot: {lot_no} | Bag: {bag_no})"
-            formatted_prod_info = f"{p_code} (Lot: {l_no} | Bag: {b_no})"
+            # Reconstruct string format including location: f"{prod_code} (Lot: {lot_no} | Bag: {bag_no} | Loc: {warehouse})"
+            formatted_prod_info = f"{p_code} (Lot: {l_no} | Bag: {b_no} | Loc: {loc})"
 
             if mat_code not in payloads_map:
                 payloads_map[mat_code] = {
                     "composition_info": {
                         "display_material_code": mat_code,
-                        "large_scale": float(row[8] or 0.0),
-                        "small_scale": float(row[9] or 0.0),
-                        "total_weight": float(row[10] or 0.0)
+                        "large_scale": float(row[9] or 0.0),
+                        "small_scale": float(row[10] or 0.0),
+                        "total_weight": float(row[11] or 0.0)
                     },
                     "source_deductions": []
                 }
 
             payloads_map[mat_code]["source_deductions"].append({
                 "product_info": formatted_prod_info,
-                "deduction_qty": float(row[6] or 0.0),
-                "status": row[7]
+                "deduction_qty": float(row[7] or 0.0),
+                "status": row[8]
             })
 
         return payloads_map
