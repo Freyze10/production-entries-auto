@@ -204,14 +204,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00539" summary="changed the background color per action">
-      <option name="closed" value="true" />
-      <created>1778126206403</created>
-      <option name="number" value="00539" />
-      <option name="presentableId" value="LOCAL-00539" />
-      <option name="project" value="LOCAL" />
-      <updated>1778126206403</updated>
-    </task>
     <task id="LOCAL-00540" summary="added a query to get the unprinted record that is not yet deeleted from the lasst month">
       <option name="closed" value="true" />
       <created>1778211082261</created>
@@ -596,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791522267901</updated>
     </task>
-    <option name="localTasksCounter" value="588" />
+    <task id="LOCAL-00588" summary="creasted the installer">
+      <option name="closed" value="true" />
+      <created>1791523246860</created>
+      <option name="number" value="00588" />
+      <option name="presentableId" value="LOCAL-00588" />
+      <option name="project" value="LOCAL" />
+      <updated>1791523246860</updated>
+    </task>
+    <option name="localTasksCounter" value="589" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated the connection to server" />
     <MESSAGE value="updated the manual new entry button, to re-enable  the fields and button" />
     <MESSAGE value="fix the saving function of the manual entry to also store the seperators" />
     <MESSAGE value="addes a remove viewer restriction on the auto formula entries" />
@@ -649,7 +648,8 @@
     <MESSAGE value="added display of confirmed by in the production form" />
     <MESSAGE value="added the detailed audit trail and the confirmatino function in the auto entries" />
     <MESSAGE value="added the warehouse location in the database for the selected breakdown of the prod materials" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the warehouse location in the database for the selected breakdown of the prod materials" />
+    <MESSAGE value="creasted the installer" />
+    <option name="LAST_COMMIT_MESSAGE" value="creasted the installer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

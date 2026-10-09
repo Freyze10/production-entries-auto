@@ -13,7 +13,7 @@ from db.read import get_single_production_data, get_single_production_details, g
 from db.update import cancel_production
 from db.write import log_audit_trail, save_manual_production_record, confirm_production_record_in_db
 from print.print_preview import ProductionPrintPreview
-from util.display_print_message import show_printed_locked_message
+from util.display_print_message import show_printed_locked_message, show_confirmed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers, parse_date_to_sql
 from util.loading import LoadingDialog
@@ -803,20 +803,24 @@ class MBManualEntry(QWidget):
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
 
-        # --- CHECK PRINTED STATUS AND DISABLE SAVE ---=
-        is_printed = self.prod_results.get('is_printed', False)
+                # --- CHECK CONFIRMATION STATUS AND LOCK RECORD ---
+                conf_encoded_on = self.prod_results.get('confirmation_encoded_on')
+                is_confirmed = conf_encoded_on is not None and str(conf_encoded_on).strip() != ""
 
-        if is_printed:
-            self.save_btn.setToolTip("This record is locked because it has already been printed.")
-            self.apply_viewer_restrictions()
-            self.btn_cancel.setEnabled(True)
-            self.btn_cancel.setObjectName("DangerButton")
-            self.new_btn.setEnabled(True)
-            self.new_btn.setObjectName("PrimaryButton")
-            QTimer.singleShot(200, lambda: show_printed_locked_message(self))
-        else:
-            self.save_btn.setEnabled(True)
-            self.save_btn.setToolTip("")
+                if is_confirmed:
+                    self.save_btn.setToolTip("This record is locked because it has already been confirmed.")
+                    self.apply_viewer_restrictions()
+                    self.btn_cancel.setEnabled(True)
+                    self.btn_cancel.setObjectName("DangerButton")
+                    self.new_btn.setEnabled(True)
+                    self.new_btn.setObjectName("PrimaryButton")
+
+                    # Optional: Customize the locked message popup message if desired,
+                    # or keep show_printed_locked_message(self)
+                    QTimer.singleShot(200, lambda: show_confirmed_locked_message(self))
+                else:
+                    self.save_btn.setEnabled(True)
+                    self.save_btn.setToolTip("")
 
         self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()
