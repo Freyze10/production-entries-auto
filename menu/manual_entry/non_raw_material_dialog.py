@@ -45,7 +45,7 @@ class NonRawMaterialWizard(QDialog):
     PASS_BG = QColor(212, 237, 218)  # Soft green (#d4edda)
     FAIL_BG = QColor(248, 215, 218)  # Soft red (#f8d7da)
 
-    def __init__(self, parent=None, edit_data=None, is_edit=False): # Added is_edit parameter
+    def __init__(self, parent=None, edit_data=None, is_edit=False, read_only=False): # Added is_edit parameter
         super().__init__(parent)
         self.setWindowTitle("Non-Raw Material Composition Setup")
 
@@ -57,6 +57,7 @@ class NonRawMaterialWizard(QDialog):
         self.step1_data = {}
         self.initial_edit_deductions = []
         self.is_edit_mode = is_edit # Store flag
+        self.is_read_only = read_only
 
         # Main layout using a Stacked Widget to cleanly handle pages/steps
         main_layout = QVBoxLayout(self)
@@ -193,6 +194,7 @@ class NonRawMaterialWizard(QDialog):
             self.load_existing_deductions_to_right_table(self.initial_edit_deductions)
 
         self.update_validation_display(0.0)
+        self.validate_total_deductions_match()
 
     def load_existing_deductions_to_right_table(self, deductions):
         """Populates the right table with previous deductions and highlights left table rows"""
@@ -329,7 +331,14 @@ class NonRawMaterialWizard(QDialog):
         self.final_add_btn.setObjectName("PrimaryButton")
         self.final_add_btn.setEnabled(False)
         self.final_add_btn.clicked.connect(self.finalize_and_save)
+
+
         step2_btn_layout.addWidget(self.final_add_btn)
+        # --- IF VIEW ONLY / READ ONLY, DISABLE COMPLETELY ---
+        if self.is_read_only:
+            self.final_add_btn.setEnabled(False)
+            self.final_add_btn.setToolTip("Locked: View-only mode active.")
+            self.select_row_btn.setEnabled(False)
 
         right_layout.addLayout(step2_btn_layout)
 
@@ -510,8 +519,10 @@ class NonRawMaterialWizard(QDialog):
                     deduction_cell.setText("0.00")
 
                 if deduction_val > qty_val:
-                    QMessageBox.warning(self, "Exceeds Quantity",
-                                        f"Deduction cannot exceed available quantity ({qty_val}).")
+                    # Do not fire warning popups if it's read-only view mode
+                    if not getattr(self, 'is_read_only', False):
+                        QMessageBox.warning(self, "Exceeds Quantity",
+                                            f"Deduction cannot exceed available quantity ({qty_val}).")
                     deduction_val = qty_val
                     deduction_cell.setText(f"{qty_val:.6f}")
                 elif deduction_val < 0:
@@ -524,6 +535,11 @@ class NonRawMaterialWizard(QDialog):
 
         target_weight = self.step1_data.get("total_weight", 0.0)
         self.update_validation_display(total_deduction_sum)
+
+        # --- RESPECT READ-ONLY MODE ---
+        if getattr(self, 'is_read_only', False):
+            self.final_add_btn.setEnabled(False)
+            return
 
         if abs(total_deduction_sum - target_weight) < 0.000001 and self.right_table.rowCount() > 0:
             self.final_add_btn.setEnabled(True)

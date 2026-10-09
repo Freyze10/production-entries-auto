@@ -621,10 +621,17 @@ class MBManualEntry(QWidget):
             # To keep it robust, let's track which materials came from the DB when display_details ran.
             is_from_db = mat_code in getattr(self, 'db_loaded_materials', set())
 
+            # Check if user is a viewer OR if the form is locked/confirmed
+            is_viewer = str(self.user_role).upper() == "VIEWER" or not self.is_mac_enabled
+            is_confirmed = self.prod_results and bool(self.prod_results.get('confirmation_encoded_on'))
+            is_printed = self.prod_results and bool(self.prod_results.get('is_printed'))
+
+            should_be_readonly = is_viewer or is_confirmed or is_printed
+
             from menu.manual_entry.non_raw_material_dialog import NonRawMaterialWizard
 
             # Pass is_edit based on whether it originated from the database
-            dialog = NonRawMaterialWizard(self, edit_data=existing_payload, is_edit=is_from_db)
+            dialog = NonRawMaterialWizard(self, edit_data=existing_payload, is_edit=is_from_db, read_only=should_be_readonly)
 
             if dialog.exec() == QDialog.DialogCode.Accepted:
                 updated_result = dialog.final_result_data
@@ -803,24 +810,24 @@ class MBManualEntry(QWidget):
                 item_total.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
                 self.materials_table.setItem(row_idx, 3, item_total)
 
-                # --- CHECK CONFIRMATION STATUS AND LOCK RECORD ---
-                conf_encoded_on = self.prod_results.get('confirmation_encoded_on')
-                is_confirmed = conf_encoded_on is not None and str(conf_encoded_on).strip() != ""
+        # --- CHECK CONFIRMATION STATUS AND LOCK RECORD ---
+        conf_encoded_on = self.prod_results.get('confirmation_encoded_on')
+        is_confirmed = conf_encoded_on is not None and str(conf_encoded_on).strip() != ""
 
-                if is_confirmed:
-                    self.save_btn.setToolTip("This record is locked because it has already been confirmed.")
-                    self.apply_viewer_restrictions()
-                    self.btn_cancel.setEnabled(True)
-                    self.btn_cancel.setObjectName("DangerButton")
-                    self.new_btn.setEnabled(True)
-                    self.new_btn.setObjectName("PrimaryButton")
+        if is_confirmed:
+            self.save_btn.setToolTip("This record is locked because it has already been confirmed.")
+            self.apply_viewer_restrictions()
+            self.btn_cancel.setEnabled(True)
+            self.btn_cancel.setObjectName("DangerButton")
+            self.new_btn.setEnabled(True)
+            self.new_btn.setObjectName("PrimaryButton")
 
-                    # Optional: Customize the locked message popup message if desired,
-                    # or keep show_printed_locked_message(self)
-                    QTimer.singleShot(200, lambda: show_confirmed_locked_message(self))
-                else:
-                    self.save_btn.setEnabled(True)
-                    self.save_btn.setToolTip("")
+            # Optional: Customize the locked message popup message if desired,
+            # or keep show_printed_locked_message(self)
+            QTimer.singleShot(200, lambda: show_confirmed_locked_message(self))
+        else:
+            self.save_btn.setEnabled(True)
+            self.save_btn.setToolTip("")
 
         self.save_btn.setText("Update")
         item_count = self.materials_table.rowCount()
