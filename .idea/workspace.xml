@@ -205,30 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00543" summary="call the refresh record first after the set up is loaded">
-      <option name="closed" value="true" />
-      <created>1778226054941</created>
-      <option name="number" value="00543" />
-      <option name="presentableId" value="LOCAL-00543" />
-      <option name="project" value="LOCAL" />
-      <updated>1778226054941</updated>
-    </task>
-    <task id="LOCAL-00544" summary="added is_printed query on the get all production data">
-      <option name="closed" value="true" />
-      <created>1778304086320</created>
-      <option name="number" value="00544" />
-      <option name="presentableId" value="LOCAL-00544" />
-      <option name="project" value="LOCAL" />
-      <updated>1778304086320</updated>
-    </task>
-    <task id="LOCAL-00545" summary="not printed background not workin">
-      <option name="closed" value="true" />
-      <created>1778305415900</created>
-      <option name="number" value="00545" />
-      <option name="presentableId" value="LOCAL-00545" />
-      <option name="project" value="LOCAL" />
-      <updated>1778305415900</updated>
-    </task>
     <task id="LOCAL-00546" summary="change of background color changing using  imm a am usin iitran Delegate">
       <option name="closed" value="true" />
       <created>1778305958957</created>
@@ -597,7 +573,31 @@
       <option name="project" value="LOCAL" />
       <updated>1791597839803</updated>
     </task>
-    <option name="localTasksCounter" value="592" />
+    <task id="LOCAL-00592" summary="added .env in the git ignore">
+      <option name="closed" value="true" />
+      <created>1792381991153</created>
+      <option name="number" value="00592" />
+      <option name="presentableId" value="LOCAL-00592" />
+      <option name="project" value="LOCAL" />
+      <updated>1792381991153</updated>
+    </task>
+    <task id="LOCAL-00593" summary="added .env in the git ignore">
+      <option name="closed" value="true" />
+      <created>1792382009605</created>
+      <option name="number" value="00593" />
+      <option name="presentableId" value="LOCAL-00593" />
+      <option name="project" value="LOCAL" />
+      <updated>1792382009605</updated>
+    </task>
+    <task id="LOCAL-00594" summary="modified the connection to use dotenv for more secure and more easier change in connection">
+      <option name="closed" value="true" />
+      <created>1792382048061</created>
+      <option name="number" value="00594" />
+      <option name="presentableId" value="LOCAL-00594" />
+      <option name="project" value="LOCAL" />
+      <updated>1792382048061</updated>
+    </task>
+    <option name="localTasksCounter" value="595" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -625,8 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix the saving function of the auto entries to handle correctly the seperator" />
-    <MESSAGE value="renoed the hars validation for the lot number even if the fields is readonly" />
     <MESSAGE value="changed the display of the production details and the row selection" />
     <MESSAGE value="modified the getting of the ip address of the workstation" />
     <MESSAGE value="added new selection of the material code dialog" />
@@ -650,7 +648,9 @@
     <MESSAGE value="changed the locking of production form based on confirmation in manual" />
     <MESSAGE value="update the initial total display in the breakdown and not enable the update if the form is already confirmed" />
     <MESSAGE value="merge main" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge main" />
+    <MESSAGE value="added .env in the git ignore" />
+    <MESSAGE value="modified the connection to use dotenv for more secure and more easier change in connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified the connection to use dotenv for more secure and more easier change in connection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

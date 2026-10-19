@@ -65,3 +65,7 @@ def get_connection():
 
 def get_fg_schema():
     return os.environ.get('FG_SCHEMA')
+
+
+def get_rm_endpint():
+    return os.environ.get('RM_ENDPOINT')
