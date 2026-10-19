@@ -1,13 +1,13 @@
-from db.connection import get_connection
+from db.connection import get_connection, get_production_schema
 
-
+schema = get_production_schema() or "public"
 def print_production(prod_id):
     conn = get_connection()
     cursor = conn.cursor()
 
     # Updated to use native BOOLEAN TRUE
-    cursor.execute("""
-            UPDATE tbl_production01 SET is_printed = TRUE WHERE prod_id = %s
+    cursor.execute(f"""
+            UPDATE {schema}.tbl_production01 SET is_printed = TRUE WHERE prod_id = %s
         """, (prod_id,))
     conn.commit()
     cursor.close()
@@ -20,8 +20,8 @@ def cancel_production(prod_id):
         cursor = conn.cursor()
 
         # Updated to use native BOOLEAN TRUE
-        cursor.execute("""
-                UPDATE tbl_production01 SET is_deleted = TRUE WHERE prod_id = %s
+        cursor.execute(f"""
+                UPDATE {schema}.tbl_production01 SET is_deleted = TRUE WHERE prod_id = %s
             """, (prod_id,))
         conn.commit()
         cursor.close()
@@ -46,8 +46,8 @@ def update_role_permissions(permission_list):
 
         # Upsert: Insert if new, update is_enabled if already exists
         # This already handles Python True/False objects correctly for BOOLEAN columns
-        query = """
-            INSERT INTO tbl_role_permissions (role_id, access_id, is_enabled)
+        query = f"""
+            INSERT INTO {schema}.tbl_role_permissions (role_id, access_id, is_enabled)
             VALUES (%s, %s, %s)
             ON CONFLICT (role_id, access_id) 
             DO UPDATE SET is_enabled = EXCLUDED.is_enabled;

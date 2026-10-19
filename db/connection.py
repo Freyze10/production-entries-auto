@@ -62,6 +62,8 @@ def get_connection():
         password=os.environ.get('DB_PASSWORD'),
         port=os.environ.get('DB_PORT')
     )
+def get_production_schema():
+    return os.environ.get('PRODUCTION_SCHEMA')
 
 def get_fg_schema():
     return os.environ.get('FG_SCHEMA')

@@ -7,7 +7,7 @@ import dbfread
 from PyQt6.QtCore import pyqtSignal, QObject
 from sqlalchemy import text, create_engine
 
-from db.connection import get_connection
+from db.connection import get_connection, get_production_schema
 
 # --- Database Connection Config ---
 temp_conn = get_connection()
@@ -27,6 +27,8 @@ PRODUCTION_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')
 PRODUCTION_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod02.dbf')
 RM_WH = os.path.join(DBF_BASE_PATH, 'tbl_rm_wh.dbf')
 RM_INCOMING = os.path.join(DBF_BASE_PATH, 'tbl_incoming.dbf')
+
+schema = get_production_schema() or "public"
 
 try:
     db_url = f"postgresql+psycopg2://{DB_CONFIG['user']}:{DB_CONFIG['password']}@{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['dbname']}"
@@ -180,15 +182,15 @@ class Sync(QObject):
                     # --- 1. FORMULA SYNC ---
                     if primary_recs:
                         # Headers (UPSERT)
-                        conn.execute(text("""
-                            INSERT INTO tbl_formula01 (form_id, index_no, date, customer, prod_code, prod_color, dosage, total_concentration, ld, mix_time, resin, application, colormatch_no, colormatch_date, notes, date_time, is_deleted, is_used)
+                        conn.execute(text(f"""
+                            INSERT INTO {schema}.tbl_formula01 (form_id, index_no, date, customer, prod_code, prod_color, dosage, total_concentration, ld, mix_time, resin, application, colormatch_no, colormatch_date, notes, date_time, is_deleted, is_used)
                             VALUES (:uid, :index_no, :date, :customer, :prod_code, :prod_color, :dosage, :total_concentration, :ld, :mix_time, :resin, :application, :cm_num, :cm_date, :notes, :date_time, :is_deleted, :is_used)
                             ON CONFLICT (form_id) DO UPDATE SET customer=EXCLUDED.customer, is_deleted=EXCLUDED.is_deleted, is_used=EXCLUDED.is_used, notes=EXCLUDED.notes;
                         """), primary_recs)
 
                         # Formula Encode Sub-table (UPSERT instead of DELETE-INSERT)
-                        conn.execute(text("""
-                            INSERT INTO tbl_formula_encode (form_id, match_by, encoded_by, updated_by) 
+                        conn.execute(text(f"""
+                            INSERT INTO {schema}.tbl_formula_encode (form_id, match_by, encoded_by, updated_by) 
                             VALUES (:uid, :matched_by, :encoded_by, :updated_by)
                             ON CONFLICT (form_id) DO UPDATE 
                             SET match_by = EXCLUDED.match_by, encoded_by = EXCLUDED.encoded_by, updated_by = EXCLUDED.updated_by;
@@ -197,8 +199,8 @@ class Sync(QObject):
                         # Formula Details Sub-table (UPSERT instead of DELETE-INSERT)
                         all_f_items = [i for r in primary_recs for i in items_by_uid.get(r['uid'], [])]
                         if all_f_items:
-                            conn.execute(text("""
-                                INSERT INTO tbl_formula02 (form_id, sequence_no, material_code, concentration, is_deleted) 
+                            conn.execute(text(f"""
+                                INSERT INTO {schema}.tbl_formula02 (form_id, sequence_no, material_code, concentration, is_deleted) 
                                 VALUES (:uid, :seq, :material_code, :concentration, :is_deleted)
                                 ON CONFLICT (form_id, sequence_no) DO UPDATE 
                                 SET material_code = EXCLUDED.material_code, concentration = EXCLUDED.concentration, is_deleted = EXCLUDED.is_deleted;
@@ -207,15 +209,15 @@ class Sync(QObject):
                     # --- 2. PRODUCTION SYNC ---
                     if prod_recs:
                         # Headers (UPSERT)
-                        conn.execute(text("""
-                            INSERT INTO tbl_production01 (prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, dosage, ld, lot_no, order_no, colormatch_no, colormatch_date, mix_time, machine_no, note, user_id, is_deleted, is_printed, inventory_c_date, form_type)
+                        conn.execute(text(f"""
+                            INSERT INTO {schema}.tbl_production01 (prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, dosage, ld, lot_no, order_no, colormatch_no, colormatch_date, mix_time, machine_no, note, user_id, is_deleted, is_printed, inventory_c_date, form_type)
                             VALUES (:prod_id, :prod_date, :customer, :form_id, :index_no, :prod_code, :prod_color, :dosage, :ld, :lot_no, :order_no, :colormatch_no, :colormatch_date, :mix_time, :machine_no, :note, :user_id, :is_deleted, :is_printed, :inventory_c_date, :form_type)
                             ON CONFLICT (prod_id) DO UPDATE SET customer=EXCLUDED.customer, lot_no=EXCLUDED.lot_no, is_deleted=EXCLUDED.is_deleted, is_printed=EXCLUDED.is_printed, note=EXCLUDED.note;
                         """), prod_recs)
 
                         # Production Encode Sub-table (UPSERT instead of DELETE-INSERT)
-                        conn.execute(text("""
-                            INSERT INTO tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on, confirmation_encoded_on) 
+                        conn.execute(text(f"""
+                            INSERT INTO {schema}.tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on, confirmation_encoded_on) 
                             VALUES (:prod_id, :prepared_by, :encoded_by, :encoded_on, :conf_encoded_on)
                             ON CONFLICT (prod_id) DO UPDATE 
                             SET prepared_by = EXCLUDED.prepared_by, encoded_by = EXCLUDED.encoded_by, 
@@ -223,8 +225,8 @@ class Sync(QObject):
                         """), prod_recs)
 
                         # Production Quantity Sub-table (UPSERT instead of DELETE-INSERT)
-                        conn.execute(text("""
-                            INSERT INTO tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod) 
+                        conn.execute(text(f"""
+                            INSERT INTO {schema}.tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod) 
                             VALUES (:prod_id, :qty_req, :qty_batch, :qty_prod)
                             ON CONFLICT (prod_id) DO UPDATE 
                             SET quantity_req = EXCLUDED.quantity_req, quantity_batch = EXCLUDED.quantity_batch, quantity_prod = EXCLUDED.quantity_prod;
@@ -236,8 +238,8 @@ class Sync(QObject):
                             for item in all_p_items:
                                 item['is_deleted'] = bool(item['is_deleted'])
 
-                            conn.execute(text("""
-                                INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted, total_loss, total_consumption)
+                            conn.execute(text(f"""
+                                INSERT INTO {schema}.tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted, total_loss, total_consumption)
                                 VALUES (:prod_id, :seq, :material_code, :large_scale, :small_scale, :total_weight, :is_deleted, :total_loss, :total_consumption)
                                 ON CONFLICT (prod_id, sequence_no) DO UPDATE 
                                 SET material_code = EXCLUDED.material_code, large_scale = EXCLUDED.large_scale, 
@@ -270,8 +272,8 @@ class SyncRM(QObject):
             data = [{"rm_code": code} for code in unique_rm_codes]
             with engine.connect() as conn:
                 with conn.begin():
-                    conn.execute(text("TRUNCATE TABLE tbl_raw_material_list RESTART IDENTITY CASCADE"))
-                    conn.execute(text("INSERT INTO tbl_raw_material_list (rm_code) VALUES (:rm_code)"), data)
+                    conn.execute(text(f"TRUNCATE TABLE {schema}.tbl_raw_material_list RESTART IDENTITY CASCADE"))
+                    conn.execute(text(f"INSERT INTO {schema}.tbl_raw_material_list (rm_code) VALUES (:rm_code)"), data)
             self.finished.emit(True, "Raw Material list mirrored.")
         except Exception as e:
             self.finished.emit(False, str(e))
@@ -296,7 +298,7 @@ def perform_rm_incoming_sync_logic(engine, progress_callback=None):
     with engine.connect() as conn:
         with conn.begin():
             conn.execute(text("""
-                INSERT INTO tbl_rm_incoming (date, material_code, note)
+                INSERT INTO {schema}.tbl_rm_incoming (date, material_code, note)
                 VALUES (:date, :material_code, :note)
                 ON CONFLICT (material_code) DO UPDATE SET note = EXCLUDED.note, date = EXCLUDED.date
             """), data)

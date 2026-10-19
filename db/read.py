@@ -2,14 +2,15 @@ from datetime import datetime, timedelta
 from functools import lru_cache
 import requests
 from psycopg2.extras import RealDictCursor
-from db.connection import get_connection, get_fg_schema, get_rm_endpint
+from db.connection import get_connection, get_fg_schema, get_rm_endpint, get_production_schema
 
-
+schema = get_production_schema() or "public"
 def get_all_production_data():
+
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
+    cur.execute(f"""
         SELECT
             a.prod_id,
             TO_CHAR(a.prod_date, 'MM/DD/YYYY'),
@@ -20,8 +21,8 @@ def get_all_production_data():
             b.quantity_prod,
             a.index_no,
             a.is_printed  -- ADDED THIS
-        FROM tbl_production01 a
-        LEFT JOIN tbl_production_quantity b 
+        FROM {schema}.tbl_production01 a
+        LEFT JOIN {schema}.tbl_production_quantity b 
             ON a.prod_id = b.prod_id
         WHERE a.is_deleted = FALSE
         ORDER BY a.prod_id ASC;
@@ -53,7 +54,7 @@ def get_cancelled_production_data():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
+    cur.execute(f"""
         SELECT 
             a.prod_id, 
             TO_CHAR(a.prod_date, 'MM/DD/YYYY'),
@@ -64,8 +65,8 @@ def get_cancelled_production_data():
             b.quantity_prod,
             a.index_no,
             a.is_printed  -- ADD THIS LINE
-        FROM tbl_production01 a
-        LEFT JOIN tbl_production_quantity b 
+        FROM {schema}.tbl_production01 a
+        LEFT JOIN {schema}.tbl_production_quantity b 
             ON a.prod_id = b.prod_id
         WHERE a.is_deleted = TRUE  -- Check if this is BOOLEAN now
         ORDER BY a.prod_id ASC
@@ -95,9 +96,9 @@ def get_single_production_details(prod_id):  # matrials details
     conn = get_connection()
     cur = conn.cursor()
     # , total_loss, total_consumption
-    cur.execute("""
+    cur.execute(f"""
         SELECT prod_id, material_code, large_scale, small_scale, total_weight
-        FROM tbl_production02
+        FROM {schema}.tbl_production02
         WHERE prod_id = %s
         ORDER BY sequence_no ASC;
     """, (prod_id,))
@@ -111,12 +112,12 @@ def get_single_production_data(prod_id):
     conn = get_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
-    cur.execute("""
+    cur.execute(f"""
         SELECT *
-        FROM tbl_production01 a
-        LEFT JOIN tbl_production_encode e 
+        FROM {schema}.tbl_production01 a
+        LEFT JOIN {schema}.tbl_production_encode e 
             ON a.prod_id = e.prod_id
-        LEFT JOIN tbl_production_quantity q 
+        LEFT JOIN {schema}.tbl_production_quantity q 
             ON a.prod_id = q.prod_id
         WHERE a.prod_id = %s
     """, (prod_id,))
@@ -132,7 +133,7 @@ def get_non_raw_breakdowns_for_production(prod_id):
     conn = get_connection()
     cur = conn.cursor()
     try:
-        cur.execute("""
+        cur.execute(f"""
             SELECT 
                 p2.material_code,
                 h.id AS header_id,
@@ -146,9 +147,9 @@ def get_non_raw_breakdowns_for_production(prod_id):
                 p2.large_scale,
                 p2.small_scale,
                 p2.total_weight AS mat_total_weight
-            FROM tbl_production02 p2
-            JOIN tbl_production03_header h ON p2.id = h.production02_id
-            JOIN tbl_production03_detail d ON h.id = d.production03_header_id
+            FROM {schema}.tbl_production02 p2
+            JOIN {schema}.tbl_production03_header h ON p2.id = h.production02_id
+            JOIN {schema}.tbl_production03_detail d ON h.id = d.production03_header_id
             WHERE p2.prod_id = %s 
               AND h.is_cancelled = FALSE
             ORDER BY p2.sequence_no ASC, d.id ASC;
@@ -214,9 +215,9 @@ def get_rm_code_lists():
     conn = get_connection()
     cur = conn.cursor()
     try:
-        cur.execute("""
+        cur.execute(f"""
             SELECT rm_code
-            FROM tbl_raw_material_list
+            FROM {schema}.tbl_raw_material_list
             ORDER BY rm_code ASC
         """)
         records = cur.fetchall()
@@ -231,11 +232,11 @@ def check_mac_enabled(mac):
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute("""
+        cur.execute(f"""
             SELECT EXISTS (
             SELECT 1 
-            FROM tbl_user b
-            JOIN tbl_mac_editor a ON b.user_id = a.user_id 
+            FROM {schema}.tbl_user b
+            JOIN {schema}.tbl_mac_editor a ON b.user_id = a.user_id 
             WHERE b.mac_address = %s
         );""", (mac,))
 
@@ -253,7 +254,7 @@ def check_production_exists(prod_id):
         conn = get_connection()
         cur = conn.cursor()
         # Updated to use native BOOLEAN FALSE
-        cur.execute("SELECT EXISTS(SELECT 1 FROM tbl_production01 WHERE prod_id = %s AND is_deleted = FALSE)", (prod_id,))
+        cur.execute(f"SELECT EXISTS(SELECT 1 FROM {schema}.tbl_production01 WHERE prod_id = %s AND is_deleted = FALSE)", (prod_id,))
         exists = cur.fetchone()[0]
         cur.close()
         conn.close()
@@ -266,8 +267,8 @@ def get_latest_prod_id():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""SELECT COALESCE(MAX(prod_id), 0)
-                    FROM tbl_production01""")
+    cur.execute(f"""SELECT COALESCE(MAX(prod_id), 0)
+                    FROM {schema}.tbl_production01""")
     record = cur.fetchone()
 
     cur.close()
@@ -285,9 +286,9 @@ def get_unprinted_reminders():
     end_date = today - timedelta(days=30)
     start_date = today - timedelta(days=60)
 
-    query = """
+    query = f"""
         SELECT prod_id, customer, lot_no, prod_date 
-        FROM public.tbl_production01 
+        FROM {schema}.tbl_production01 
         WHERE is_printed = false 
           AND is_deleted = false
           AND prod_date BETWEEN %s AND %s
@@ -307,9 +308,9 @@ def get_formula_select(product_code):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
+    cur.execute(f"""
         SELECT index_no, form_id, customer, prod_code, prod_color, dosage, ld
-        FROM tbl_formula01
+        FROM {schema}.tbl_formula01
         WHERE prod_code = %s 
         ORDER BY form_id DESC
     """, (product_code,))
@@ -324,7 +325,7 @@ def get_formula_materials(form_id):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT material_code, concentration FROM tbl_formula02 WHERE form_id = %s ORDER BY sequence_no ASC",
+    cur.execute(f"SELECT material_code, concentration FROM {schema}.tbl_formula02 WHERE form_id = %s ORDER BY sequence_no ASC",
                 (form_id,))
     records = cur.fetchall()
 
@@ -340,11 +341,11 @@ def get_all_completer_data():
 
     # This single query gets distinct values for all 3 columns
     # and returns them as a single dictionary.
-    cur.execute("""
+    cur.execute(f"""
         SELECT json_build_object(
-            'customers', (SELECT array_agg(DISTINCT customer) FROM tbl_production01 WHERE customer IS NOT NULL),
-            'prod_codes', (SELECT array_agg(DISTINCT prod_code) FROM tbl_production01 WHERE prod_code IS NOT NULL),
-            'orders', (SELECT array_agg(DISTINCT order_no) FROM tbl_production01 WHERE order_no IS NOT NULL)
+            'customers', (SELECT array_agg(DISTINCT customer) FROM {schema}.tbl_production01 WHERE customer IS NOT NULL),
+            'prod_codes', (SELECT array_agg(DISTINCT prod_code) FROM {schema}.tbl_production01 WHERE prod_code IS NOT NULL),
+            'orders', (SELECT array_agg(DISTINCT order_no) FROM {schema}.tbl_production01 WHERE order_no IS NOT NULL)
         )
     """)
 
@@ -360,7 +361,7 @@ def get_lot_no():
     cur = conn.cursor()
 
     # Updated to use native BOOLEAN FALSE
-    cur.execute("SELECT DISTINCT lot_no FROM tbl_production01 WHERE lot_no IS NOT NULL AND is_deleted = FALSE")
+    cur.execute(f"SELECT DISTINCT lot_no FROM {schema}.tbl_production01 WHERE lot_no IS NOT NULL AND is_deleted = FALSE")
 
     lot_list = [row[0] for row in cur.fetchall()]
 
@@ -373,7 +374,7 @@ def get_all_user_mac():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT mac_address FROM tbl_user")
+    cur.execute(f"SELECT mac_address FROM {schema}.tbl_user")
     records = cur.fetchall()
 
     cur.close()
@@ -387,9 +388,9 @@ def get_all_user_mac():
 def get_user_info_by_mac(mac):
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("""
+    cur.execute(f"""
         SELECT hostname, ip_address 
-        FROM tbl_user 
+        FROM {schema}.tbl_user 
         WHERE mac_address = %s
     """, (mac,))
     record = cur.fetchone()
@@ -404,7 +405,7 @@ def get_audit_trail_report(start_date=None, end_date=None):
         cursor = conn.cursor()
 
         # 1. Base Query - Added u.username to the selection
-        query = """
+        query = f"""
             SELECT 
                 a.timestamp, 
                 u.hostname, 
@@ -413,8 +414,8 @@ def get_audit_trail_report(start_date=None, end_date=None):
                 a.details, 
                 u.ip_address, 
                 u.mac_address
-            FROM tbl_audit_trail a
-            INNER JOIN tbl_user u ON a.user_id = u.user_id
+            FROM {schema}.tbl_audit_trail a
+            INNER JOIN {schema}.tbl_user u ON a.user_id = u.user_id
         """
 
         params = []
@@ -460,7 +461,7 @@ def get_audit_date_bounds():
         conn = get_connection()
         cursor = conn.cursor()
         # Query for the absolute min and max timestamps
-        cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM tbl_audit_trail")
+        cursor.execute(f"SELECT MIN(timestamp), MAX(timestamp) FROM {schema}.tbl_audit_trail")
         res = cursor.fetchone()
         cursor.close()
         conn.close()
@@ -480,10 +481,10 @@ def get_user_management_list():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
+    cur.execute(f"""
             SELECT u.user_id, u.hostname, u.username, u.ip_address, u.mac_address, r.role, r.department, u.password, u.role_id
-            FROM tbl_user u
-            JOIN tbl_role r ON u.role_id = r.role_id
+            FROM {schema}.tbl_user u
+            JOIN {schema}.tbl_role r ON u.role_id = r.role_id
             ORDER BY u.user_id ASC
         """)
     records = cur.fetchall()
@@ -501,9 +502,9 @@ def get_material_note(material_code):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
+    cur.execute(f"""
         SELECT note 
-        FROM public.tbl_rm_incoming 
+        FROM {schema}.tbl_rm_incoming 
         WHERE material_code = %s
         ORDER BY date DESC 
         LIMIT 1
@@ -525,10 +526,10 @@ def authenticate_user(username, password):
         conn = get_connection()
         cur = conn.cursor()
 
-        cur.execute("""
+        cur.execute(f"""
             SELECT r.role
-            FROM tbl_user u
-            JOIN tbl_role r ON u.role_id = r.role_id
+            FROM {schema}.tbl_user u
+            JOIN {schema}.tbl_role r ON u.role_id = r.role_id
             WHERE u.username = %s AND u.password = %s
             LIMIT 1
         """, (username, password))
@@ -552,7 +553,7 @@ def get_all_roles():
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute("SELECT role_id, role FROM tbl_role ORDER BY role_id ASC")
+        cur.execute(f"SELECT role_id, role FROM {schema}.tbl_role ORDER BY role_id ASC")
         records = cur.fetchall()
         cur.close()
         conn.close()
@@ -566,7 +567,7 @@ def get_access_points():
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute("SELECT access_id, access_name FROM tbl_access_points ORDER BY access_id ASC")
+        cur.execute(f"SELECT access_id, access_name FROM {schema}.tbl_access_points ORDER BY access_id ASC")
         records = cur.fetchall()
         cur.close()
         conn.close()
@@ -581,7 +582,7 @@ def get_permission_matrix():
         conn = get_connection()
         cur = conn.cursor()
         # Fetches native BOOLEAN
-        cur.execute("SELECT role_id, access_id, is_enabled FROM tbl_role_permissions")
+        cur.execute(f"SELECT role_id, access_id, is_enabled FROM {schema}.tbl_role_permissions")
         records = cur.fetchall()
         cur.close()
         conn.close()
@@ -599,11 +600,11 @@ def get_allowed_access_points(role_name):
     try:
         conn = get_connection()
         cur = conn.cursor()
-        query = """
+        query = f"""
             SELECT a.access_name
-            FROM tbl_role_permissions p
-            JOIN tbl_role r ON p.role_id = r.role_id
-            JOIN tbl_access_points a ON p.access_id = a.access_id
+            FROM {schema}.tbl_role_permissions p
+            JOIN {schema}.tbl_role r ON p.role_id = r.role_id
+            JOIN {schema}.tbl_access_points a ON p.access_id = a.access_id
             WHERE r.role = %s AND p.is_enabled = TRUE
         """
         cur.execute(query, (role_name,))
@@ -625,10 +626,10 @@ def get_production_confirmed_by(prod_id):
     cur = conn.cursor()
     try:
         # Searches for audit logs where action_type is 'CONFIRM' and details mention the production ID
-        cur.execute("""
+        cur.execute(f"""
             SELECT u.hostname, u.username
-            FROM tbl_audit_trail a
-            JOIN tbl_user u ON a.user_id = u.user_id
+            FROM {schema}.tbl_audit_trail a
+            JOIN {schema}.tbl_user u ON a.user_id = u.user_id
             WHERE a.action_type = 'CONFIRM' 
               AND a.details LIKE %s
             ORDER BY a.timestamp DESC

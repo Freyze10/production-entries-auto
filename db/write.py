@@ -1,9 +1,9 @@
-from db.connection import get_connection
+from db.connection import get_connection, get_production_schema
 from datetime import datetime
 
 from workstation.workstation_details import _get_workstation_info
 
-
+schema = get_production_schema() or "public"
 def create_current_user(workstation):
     con = get_connection()
     cursor = con.cursor()
@@ -15,8 +15,8 @@ def create_current_user(workstation):
     role_id = 3
     password = "mbpi"
 
-    cursor.execute("""
-        INSERT INTO tbl_user (role_id, hostname, ip_address, mac_address, username, password)
+    cursor.execute(f"""
+        INSERT INTO {schema}.tbl_user (role_id, hostname, ip_address, mac_address, username, password)
         VALUES (%s, %s, %s, %s, %s, %s)
     """, (role_id, hostname, ip_address, mac_address, username, password))
 
@@ -29,8 +29,8 @@ def update_user_workstation(mac, new_host, new_ip):
     conn = get_connection()
     cur = conn.cursor()
     try:
-        cur.execute("""
-            UPDATE tbl_user 
+        cur.execute(f"""
+            UPDATE {schema}.tbl_user 
             SET hostname = %s, ip_address = %s 
             WHERE mac_address = %s
         """, (new_host, new_ip, mac))
@@ -48,8 +48,8 @@ def save_user_changes(user_id, data):
         conn = get_connection()
         cursor = conn.cursor()
 
-        query = """
-            UPDATE tbl_user 
+        query = f"""
+            UPDATE {schema}.tbl_user 
             SET 
                 username = %s, 
                 hostname = %s, 
@@ -86,9 +86,9 @@ def log_audit_trail(mac_address: str, action_type: str, details: str):
 
     try:
         # Step 1: Get user_id using mac_address
-        cur.execute("""
+        cur.execute(f"""
             SELECT user_id 
-            FROM tbl_user 
+            FROM {schema}.tbl_user 
             WHERE mac_address = %s 
             LIMIT 1
         """, (mac_address,))
@@ -102,8 +102,8 @@ def log_audit_trail(mac_address: str, action_type: str, details: str):
             user_id = result[0]
 
         # Step 2: Insert into audit trail
-        cur.execute("""
-            INSERT INTO tbl_audit_trail 
+        cur.execute(f"""
+            INSERT INTO {schema}.tbl_audit_trail 
                 (timestamp, user_id, action_type, details)
             VALUES 
                 (NOW(), %s, %s, %s)
@@ -126,7 +126,7 @@ def add_new_role(name, dept):
         conn = get_connection()
         cur = conn.cursor()
 
-        query = "INSERT INTO tbl_role (role, department) VALUES (%s, %s)"
+        query = f"INSERT INTO {schema}.tbl_role (role, department) VALUES (%s, %s)"
         cur.execute(query, (name.upper(), dept))
 
         conn.commit()
@@ -147,8 +147,8 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
     try:
         if is_update:
             # 1. Update Header
-            cursor.execute("""
-                UPDATE tbl_production01 SET 
+            cursor.execute(f"""
+                UPDATE {schema}.tbl_production01 SET 
                     prod_date=%s, customer=%s, form_id=%s, index_no=%s, prod_code=%s, 
                     prod_color=%s, dosage=%s, ld=%s, lot_no=%s, order_no=%s, 
                     mix_time=%s, machine_no=%s, note=%s, inventory_c_date=%s, form_type=%s
@@ -159,24 +159,24 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
                   header['note'], header['inventory_c_date'], header['form_type'], header['prod_id']))
 
             # 2. Update Quantity
-            cursor.execute("""
-                UPDATE tbl_production_quantity SET 
+            cursor.execute(f"""
+                UPDATE {schema}.tbl_production_quantity SET 
                     quantity_req=%s, quantity_batch=%s, quantity_prod=%s
                 WHERE prod_id = %s
             """, (quantity['req'], quantity['batch'], quantity['prod'], header['prod_id']))
 
             # 3. Update Encode
-            cursor.execute("""
-                UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
+            cursor.execute(f"""
+                UPDATE {schema}.tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
             """, (encode['prepared_by'], header['prod_id']))
 
             # 4. Refresh Materials (Delete old, Insert new including separators)
-            cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
+            cursor.execute(f"DELETE FROM {schema}.tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
 
         else:
             # --- INSERT MODE ---
-            cursor.execute("""
-                INSERT INTO tbl_production01 (
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production01 (
                     prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, 
                     dosage, ld, lot_no, order_no, mix_time, machine_no, note, 
                     user_id, inventory_c_date, form_type, is_deleted, is_printed
@@ -187,19 +187,19 @@ def save_production_record(header, quantity, encode, materials, is_update=False)
                   header['machine_no'], header['note'], header['user_id'], header['inventory_c_date'],
                   header['form_type']))
 
-            cursor.execute("""
-                INSERT INTO tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod)
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod)
                 VALUES (%s, %s, %s, %s)
             """, (header['prod_id'], quantity['req'], quantity['batch'], quantity['prod']))
 
-            cursor.execute("""
-                INSERT INTO tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on)
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on)
                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
             """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
 
         # 5. Insert Materials & Separators (Maintains sequence numbers completely)
-        material_query = """
-            INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
+        material_query = f"""
+            INSERT INTO {schema}.tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
             VALUES (%s, %s, %s, %s, %s, %s, FALSE)
         """
         cursor.executemany(material_query, materials)
@@ -233,8 +233,8 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
 
         if is_update:
             # 1. Update Header
-            cursor.execute("""
-                UPDATE tbl_production01 SET 
+            cursor.execute(f"""
+                UPDATE {schema}.tbl_production01 SET 
                     prod_date=%s, customer=%s, form_id=%s, index_no=%s, prod_code=%s, 
                     prod_color=%s, dosage=%s, ld=%s, lot_no=%s, order_no=%s, 
                     mix_time=%s, machine_no=%s, note=%s, inventory_c_date=%s, form_type=%s
@@ -245,32 +245,32 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
                   header['note'], header['inventory_c_date'], header['form_type'], header['prod_id']))
 
             # 2. Update Quantity
-            cursor.execute("""
-                UPDATE tbl_production_quantity SET 
+            cursor.execute(f"""
+                UPDATE {schema}.tbl_production_quantity SET 
                     quantity_req=%s, quantity_batch=%s, quantity_prod=%s
                 WHERE prod_id = %s
             """, (quantity['req'], quantity['batch'], quantity['prod'], header['prod_id']))
 
             # 3. Update Encode
-            cursor.execute("""
-                UPDATE tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
+            cursor.execute(f"""
+                UPDATE {schema}.tbl_production_encode SET prepared_by=%s WHERE prod_id = %s
             """, (encode['prepared_by'], header['prod_id']))
 
             # 4. INTELLIGENT MATERIALS SYNC
             incoming_sequences = [mat[1] for mat in materials]
 
             if incoming_sequences:
-                cursor.execute("""
-                    DELETE FROM tbl_production02 
+                cursor.execute(f"""
+                    DELETE FROM {schema}.tbl_production02 
                     WHERE prod_id = %s AND sequence_no NOT IN %s
                 """, (header['prod_id'], tuple(incoming_sequences)))
             else:
-                cursor.execute("DELETE FROM tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
+                cursor.execute(f"DELETE FROM {schema}.tbl_production02 WHERE prod_id = %s", (header['prod_id'],))
 
         else:
             # --- INSERT MODE ---
-            cursor.execute("""
-                INSERT INTO tbl_production01 (
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production01 (
                     prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, 
                     dosage, ld, lot_no, order_no, mix_time, machine_no, note, 
                     user_id, inventory_c_date, form_type, is_deleted, is_printed
@@ -281,20 +281,20 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
                   header['machine_no'], header['note'], header['user_id'], header['inventory_c_date'],
                   header['form_type']))
 
-            cursor.execute("""
-                INSERT INTO tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod)
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod)
                 VALUES (%s, %s, %s, %s)
             """, (header['prod_id'], quantity['req'], quantity['batch'], quantity['prod']))
 
-            cursor.execute("""
-                INSERT INTO tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on)
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on)
                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
             """, (header['prod_id'], encode['prepared_by'], encode['encoded_by']))
 
         # 5. UPSERT Materials & Separators into tbl_production02
         for mat in materials:
-            cursor.execute("""
-                INSERT INTO tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
+            cursor.execute(f"""
+                INSERT INTO {schema}.tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted)
                 VALUES (%s, %s, %s, %s, %s, %s, FALSE)
                 ON CONFLICT (prod_id, sequence_no) DO UPDATE SET 
                     material_code = EXCLUDED.material_code,
@@ -315,9 +315,9 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
                 change_reason = payload.get("change_reason", "")
 
                 if source_deductions:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT id, version_no, created_at, created_by 
-                        FROM tbl_production03_header 
+                        FROM {schema}.tbl_production03_header 
                         WHERE production02_id = %s AND is_cancelled = FALSE
                     """, (prod02_id,))
                     active_header = cursor.fetchone()
@@ -328,8 +328,8 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
                         original_created_at = active_header[2]
                         original_created_by = active_header[3]
 
-                        cursor.execute("""
-                            UPDATE tbl_production03_header 
+                        cursor.execute(f"""
+                            UPDATE {schema}.tbl_production03_header 
                             SET is_cancelled = TRUE, 
                                 cancel_reason = %s, 
                                 updated_at = CURRENT_TIMESTAMP, 
@@ -337,8 +337,8 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
                             WHERE id = %s
                         """, (change_reason, user_full_name, old_header_id))
 
-                        cursor.execute("""
-                            INSERT INTO tbl_production03_header (
+                        cursor.execute(f"""
+                            INSERT INTO {schema}.tbl_production03_header (
                                 production02_id, version_no, created_at, updated_at, 
                                 created_by, modified_by, is_cancelled, cancel_reason
                             ) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
@@ -348,18 +348,18 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
 
                     elif active_header:
                         header_03_id = active_header[0]
-                        cursor.execute("""
-                            UPDATE tbl_production03_header 
+                        cursor.execute(f"""
+                            UPDATE {schema}.tbl_production03_header 
                             SET updated_at = CURRENT_TIMESTAMP, modified_by = %s 
                             WHERE id = %s
                         """, (user_full_name, header_03_id))
 
-                        cursor.execute("""
-                            DELETE FROM tbl_production03_detail WHERE production03_header_id = %s
+                        cursor.execute(f"""
+                            DELETE FROM {schema}.tbl_production03_detail WHERE production03_header_id = %s
                         """, (header_03_id,))
                     else:
-                        cursor.execute("""
-                            INSERT INTO tbl_production03_header (
+                        cursor.execute(f"""
+                            INSERT INTO {schema}.tbl_production03_header (
                                 production02_id, version_no, created_at, updated_at, 
                                 created_by, modified_by, is_cancelled, cancel_reason
                             ) VALUES (%s, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, FALSE, NULL)
@@ -397,8 +397,8 @@ def save_manual_production_record(header, quantity, encode, materials, is_update
                             loc_val = match_loc.group(1).strip()
 
                         # Insert into normalized columns including location
-                        cursor.execute("""
-                                                    INSERT INTO tbl_production03_detail (
+                        cursor.execute(f"""
+                                                    INSERT INTO {schema}.tbl_production03_detail (
                                                         production03_header_id, prod_code, lot_no, container_no, location, total_weight, status
                                                     ) VALUES (%s, %s, %s, %s, %s, %s, %s);
                                                 """, (
@@ -423,8 +423,8 @@ def confirm_production_record_in_db(prod_id):
     conn = get_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("""
-            UPDATE tbl_production_encode 
+        cursor.execute(f"""
+            UPDATE {schema}.tbl_production_encode 
             SET confirmation_encoded_on = CURRENT_TIMESTAMP 
             WHERE prod_id = %s
         """, (prod_id,))
