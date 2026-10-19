@@ -205,14 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00547" summary="added more restriction on the  records that is already printed">
-      <option name="closed" value="true" />
-      <created>1778306985973</created>
-      <option name="number" value="00547" />
-      <option name="presentableId" value="LOCAL-00547" />
-      <option name="project" value="LOCAL" />
-      <updated>1778306985973</updated>
-    </task>
     <task id="LOCAL-00548" summary="added more restriction on the  records that is already printed in auto entries">
       <option name="closed" value="true" />
       <created>1778307295572</created>
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792386219208</updated>
     </task>
-    <option name="localTasksCounter" value="596" />
+    <task id="LOCAL-00596" summary="added a schema for all the currently public">
+      <option name="closed" value="true" />
+      <created>1792390573572</created>
+      <option name="number" value="00596" />
+      <option name="presentableId" value="LOCAL-00596" />
+      <option name="project" value="LOCAL" />
+      <updated>1792390573573</updated>
+    </task>
+    <option name="localTasksCounter" value="597" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -625,7 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="modified the getting of the ip address of the workstation" />
     <MESSAGE value="added new selection of the material code dialog" />
     <MESSAGE value="fixed the legacy sync to not delete anything when updating, and added a dynamic field and button depending on the selected oprtion" />
     <MESSAGE value="added save in json when the user clicks/selects a fg materials" />
@@ -650,7 +649,8 @@
     <MESSAGE value="added .env in the git ignore" />
     <MESSAGE value="modified the connection to use dotenv for more secure and more easier change in connection" />
     <MESSAGE value="added a schema for calling the fb table" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a schema for calling the fb table" />
+    <MESSAGE value="added a schema for all the currently public" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a schema for all the currently public" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
