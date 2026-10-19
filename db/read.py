@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from functools import lru_cache
 
 from psycopg2.extras import RealDictCursor
-from db.connection import get_connection
+from db.connection import get_connection, get_fg_schema
 
 
 def get_all_production_data():
@@ -638,11 +638,13 @@ def get_fginv_passed_records():
     conn = get_connection()
     cur = conn.cursor()
     try:
-        cur.execute("""
+        schema = get_fg_schema()
+        query = f"""
             SELECT product_code, lot_number, current_balance, location, bag_box_number
-            FROM schema_fg.view_fginv_passed
+            FROM {schema}.view_fginv_passed
             ORDER BY product_code ASC;
-        """)
+        """
+        cur.execute(query)
         records = cur.fetchall()
         return records
     except Exception as e:
@@ -658,11 +660,13 @@ def get_fginv_failed_records():
     conn = get_connection()
     cur = conn.cursor()
     try:
-        cur.execute("""
+        schema = get_fg_schema()
+        query = f"""
             SELECT product_code, lot_number, current_balance, location, bag_box_number
-            FROM schema_fg.view_fginv_failed
+            FROM {schema}.view_fginv_failed
             ORDER BY product_code ASC;
-        """)
+        """
+        cur.execute(query)
         records = cur.fetchall()
         return records
     except Exception as e:

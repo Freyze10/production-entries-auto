@@ -9,3 +9,11 @@ def show_printed_locked_message(self):
         "This production record has already been printed.\n\n"
         "To maintain data integrity, saving are disabled for this ID."
     )
+def show_confirmed_locked_message(self):
+    """Helper to show the popup after data is visible."""
+    QMessageBox.information(
+        self,
+        "Record Locked",
+        "This production record has already been CONFIRMED.\n\n"
+        "To maintain data integrity, saving are disabled for this ID."
+    )

@@ -5,16 +5,17 @@
 ; MyIcon: the .ico path, para sa icon ng installer/SetUp (remove kung default)
 
 #define MyAppName "MBPI Production"
-#define MyAppVersion "2.0.1"
+#define MyAppVersion "2.1.1"
 #define MyAppId "MBPI_Production_System"
 #define MyAppExe "main.exe"
 #define MySourceDir "output\main"
-;#define MyIcon "css\img\production_icon.ico"
+#define MyAppPublisher "Masterbatch Philippines, INC."
 
 [Setup]
 AppId={#MyAppId}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+AppPublisher={#MyAppPublisher}
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 DefaultDirName={autopf}\{#MyAppName}

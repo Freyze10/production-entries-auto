@@ -50,7 +50,7 @@
     &quot;Python.styles.executor&quot;: &quot;Run&quot;,
     &quot;Python.test_print.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;template-print&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Brant/PycharmProjects/ProductionSystem&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
@@ -64,6 +64,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Brant\PycharmProjects\ProductionSystem\print" />
       <recent name="C:\Users\Brant\PycharmProjects\ProductionSystem\menu" />
     </key>
   </component>
@@ -203,14 +204,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
-    </task>
-    <task id="LOCAL-00542" summary="updated text display of those unprinted">
-      <option name="closed" value="true" />
-      <created>1778212014735</created>
-      <option name="number" value="00542" />
-      <option name="presentableId" value="LOCAL-00542" />
-      <option name="project" value="LOCAL" />
-      <updated>1778212014735</updated>
     </task>
     <task id="LOCAL-00543" summary="call the refresh record first after the set up is loaded">
       <option name="closed" value="true" />
@@ -596,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791529839881</updated>
     </task>
-    <option name="localTasksCounter" value="591" />
+    <task id="LOCAL-00591" summary="merge main">
+      <option name="closed" value="true" />
+      <created>1791597839803</created>
+      <option name="number" value="00591" />
+      <option name="presentableId" value="LOCAL-00591" />
+      <option name="project" value="LOCAL" />
+      <updated>1791597839803</updated>
+    </task>
+    <option name="localTasksCounter" value="592" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="addes a remove viewer restriction on the auto formula entries" />
     <MESSAGE value="fix the saving function of the auto entries to handle correctly the seperator" />
     <MESSAGE value="renoed the hars validation for the lot number even if the fields is readonly" />
     <MESSAGE value="changed the display of the production details and the row selection" />
@@ -649,7 +649,8 @@
     <MESSAGE value="creasted the installer" />
     <MESSAGE value="changed the locking of production form based on confirmation in manual" />
     <MESSAGE value="update the initial total display in the breakdown and not enable the update if the form is already confirmed" />
-    <option name="LAST_COMMIT_MESSAGE" value="update the initial total display in the breakdown and not enable the update if the form is already confirmed" />
+    <MESSAGE value="merge main" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
