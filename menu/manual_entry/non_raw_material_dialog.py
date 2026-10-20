@@ -40,6 +40,25 @@ class RowColorDelegate(QStyledItemDelegate):
         painter.drawText(option.rect.adjusted(8, 0, -8, 0), int(align), text)
         painter.restore()
 
+class DeductionTable(QTableWidget):
+    """Tab / Shift+Tab only move between the 'Total Deduction' cells (last column)."""
+    DEDUCTION_COL = 2
+
+    def moveCursor(self, action, modifiers):
+        if action in (QAbstractItemView.CursorAction.MoveNext,
+                      QAbstractItemView.CursorAction.MovePrevious):
+            rows = self.rowCount()
+            if rows == 0:
+                return self.currentIndex()
+
+            row = self.currentRow()
+            if action == QAbstractItemView.CursorAction.MoveNext:
+                row = row + 1 if row + 1 < rows else 0      # wrap to first row
+            else:
+                row = row - 1 if row - 1 >= 0 else rows - 1  # wrap to last row
+            return self.model().index(row, self.DEDUCTION_COL)
+
+        return super().moveCursor(action, modifiers)
 
 class NonRawMaterialWizard(QDialog):
     PASS_BG = QColor(212, 237, 218)  # Soft green (#d4edda)
@@ -293,7 +312,7 @@ class NonRawMaterialWizard(QDialog):
 
         right_layout.addWidget(QLabel("<b>Selected Deductions Allocation</b>"))
 
-        self.right_table = QTableWidget()
+        self.right_table = DeductionTable()
         self.right_table.setColumnCount(3)
         self.right_table.setHorizontalHeaderLabels(["Product code", "Qty", "Total Deduction"])
 
@@ -306,6 +325,7 @@ class NonRawMaterialWizard(QDialog):
         self.right_table.setAlternatingRowColors(False)
         self.right_table.setItemDelegate(RowColorDelegate(self.right_table))
         self.right_table.itemChanged.connect(self.validate_total_deductions_match)
+        self.right_table.cellDoubleClicked.connect(self.on_right_table_double_clicked)
         right_layout.addWidget(self.right_table)
 
         remove_right_btn = QPushButton("Remove Selected")
@@ -380,6 +400,7 @@ class NonRawMaterialWizard(QDialog):
         table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         table.setAlternatingRowColors(False)
         table.setItemDelegate(RowColorDelegate(table))
+        table.cellDoubleClicked.connect(self.move_selected_record_to_right)
 
         if status_type == "pass":
             self.pass_search_input = search_input
@@ -433,7 +454,9 @@ class NonRawMaterialWizard(QDialog):
     def go_back_to_step_one(self):
         self.stacked_widget.setCurrentIndex(0)
 
-    def move_selected_record_to_right(self):
+    def move_selected_record_to_right(self, *args):
+        if self.is_read_only:
+            return
         current_tab_idx = self.tab_widget.currentIndex()
         is_passed = (current_tab_idx == 0)
         active_table = self.pass_table if is_passed else self.fail_table
@@ -489,8 +512,20 @@ class NonRawMaterialWizard(QDialog):
                 self.right_table.setItem(right_row, col, item)
         finally:
             self.right_table.blockSignals(False)
+            self.right_table.setCurrentCell(right_row, 2)
+            self.right_table.editItem(self.right_table.item(right_row, 2))
 
         self.validate_total_deductions_match()
+
+    def on_right_table_double_clicked(self, row, column):
+        """Double-clicking a right-table row removes it, same as 'Remove Selected'.
+        Column 2 (Total Deduction) is editable, so we skip it to allow typing."""
+        if self.is_read_only:
+            return
+        if column == 2:
+            return
+        self.right_table.selectRow(row)
+        self.remove_from_right_table()
 
     def remove_from_right_table(self):
         current_row = self.right_table.currentRow()
