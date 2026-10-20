@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from functools import lru_cache
 import requests
 from psycopg2.extras import RealDictCursor
-from db.connection import get_connection, get_fg_schema, get_rm_endpint, get_production_schema
+from db.connection import get_connection, get_fg_schema, get_rm_endpoint, get_production_schema, get_rm_endpoint_key
 
 schema = get_production_schema() or "public"
 def get_all_production_data():
@@ -196,19 +196,16 @@ def get_non_raw_breakdowns_for_production(prod_id):
 
 def get_rm_code_lists():
     # Try API first
-    endpoint = get_rm_endpint()
+    endpoint = get_rm_endpoint()
+    endpoint_key = get_rm_endpoint_key()
     if endpoint:
         try:
-            response = requests.get(endpoint, timeout=10)
+            response = requests.get(endpoint, headers=endpoint_key, timeout=10)
             response.raise_for_status()
             data = response.json()
 
-            # Adjust according to your real API response
-            if isinstance(data, list):
-                return [item["rm_code"] for item in data if "rm_code" in item]
-            if isinstance(data, dict) and "data" in data:
-                return [item["rm_code"] for item in data["data"] if "rm_code" in item]
-        except Exception:
+            return data
+        except Exception as e:
             pass  # fall through to database
 
     # Fallback to database

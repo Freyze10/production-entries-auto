@@ -81,5 +81,8 @@ def get_fg_schema():
     return os.environ.get('FG_SCHEMA')
 
 
-def get_rm_endpint():
+def get_rm_endpoint():
     return os.environ.get('RM_ENDPOINT')
+
+def get_rm_endpoint_key():
+    return os.environ.get('RM_ENDPOINT_HEADERS')

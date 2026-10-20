@@ -1326,6 +1326,7 @@ class MBManualEntry(QWidget):
 
     def setup_rm_code_completer(self):
         self.rm_list = get_rm_code_lists()
+        print(self.rm_list)
         self.rm_list.insert(0, "")
         self.material_code_combo.clear()
         self.material_code_combo.addItems(self.rm_list)

@@ -205,14 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00552" summary="updated database call for cancelled">
-      <option name="closed" value="true" />
-      <created>1778809522890</created>
-      <option name="number" value="00552" />
-      <option name="presentableId" value="LOCAL-00552" />
-      <option name="project" value="LOCAL" />
-      <updated>1778809522891</updated>
-    </task>
     <task id="LOCAL-00553" summary="updated all display details to accept null values">
       <option name="closed" value="true" />
       <created>1778813738342</created>
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792467992338</updated>
     </task>
-    <option name="localTasksCounter" value="601" />
+    <task id="LOCAL-00601" summary="created a EXE and a installer for the user">
+      <option name="closed" value="true" />
+      <created>1792479096637</created>
+      <option name="number" value="00601" />
+      <option name="presentableId" value="LOCAL-00601" />
+      <option name="project" value="LOCAL" />
+      <updated>1792479096639</updated>
+    </task>
+    <option name="localTasksCounter" value="602" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -625,7 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix the selection of the materials and successfully adds them in the formula records" />
     <MESSAGE value="make the tables to be read only so edit in un allowed fields is not possible" />
     <MESSAGE value="modified the raw material and non raw material field to change dynamically" />
     <MESSAGE value="fix the saving of the material and the breakdown of the materials" />
@@ -650,7 +649,8 @@
     <MESSAGE value="updated the requiremennts.txt" />
     <MESSAGE value="updated the installer" />
     <MESSAGE value="added a new function for the selection of finished goods as a material" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a new function for the selection of finished goods as a material" />
+    <MESSAGE value="created a EXE and a installer for the user" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a EXE and a installer for the user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
