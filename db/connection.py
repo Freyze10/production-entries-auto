@@ -1,11 +1,23 @@
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+def load_environment():
+    if getattr(sys, 'frozen', False):
+        # Running as compiled .exe (PyInstaller)
+        base_path = Path(sys.executable).parent
+    else:
+        # Running as normal Python script
+        base_path = Path(__file__).resolve().parent.parent
+
+    env_path = base_path / ".env"
+    load_dotenv(env_path)
+
+# Load the .env file
+load_environment()
 # V2 debug
 # def get_connection():
 #     # localhost
