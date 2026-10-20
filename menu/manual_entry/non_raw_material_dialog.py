@@ -60,6 +60,264 @@ class DeductionTable(QTableWidget):
 
         return super().moveCursor(action, modifiers)
 
+class DecimalEditorDelegate(RowColorDelegate):
+    """Same painting as RowColorDelegate, but cols 1-3 get a decimal-only editor."""
+
+    def createEditor(self, parent, option, index):
+        if index.column() == 0:
+            return None  # Lot Number is not editable
+        editor = QLineEdit(parent)
+        validator = QDoubleValidator(0.0, 99999999.999999, 6, editor)
+        validator.setNotation(QDoubleValidator.Notation.StandardNotation)
+        editor.setValidator(validator)
+        return editor
+
+
+class LotSelectionDialog(QDialog):
+    """Skip-mode dialog: pick records on the left, enter scales/weight freely on the right."""
+    PASS_BG = QColor(212, 237, 218)
+    FAIL_BG = QColor(248, 215, 218)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Select Lots (Skip)")
+        self.setMinimumSize(1000, 600)
+        self.resize(1350, 750)
+
+        self.final_rows = []  # [(lot_number, large, small, weight), ...]
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(15, 15, 15, 15)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
+
+        # ---------------- LEFT ----------------
+        left_frame = QFrame()
+        left_frame.setObjectName("ContentCard")
+        left_layout = QVBoxLayout(left_frame)
+
+        self.tab_widget = QTabWidget()
+        self.pass_tab = QWidget()
+        self.fail_tab = QWidget()
+        self.tab_widget.addTab(self.pass_tab, "Pass Records")
+        self.tab_widget.addTab(self.fail_tab, "Failed Records")
+        self.setup_left_tab_content(self.pass_tab, "pass")
+        self.setup_left_tab_content(self.fail_tab, "fail")
+        left_layout.addWidget(self.tab_widget)
+
+        self.select_row_btn = QPushButton("Select Record >>")
+        self.select_row_btn.setObjectName("SuccessButton")
+        self.select_row_btn.clicked.connect(self.move_selected_record_to_right)
+        left_layout.addWidget(self.select_row_btn, alignment=Qt.AlignmentFlag.AlignRight)
+        splitter.addWidget(left_frame)
+
+        # ---------------- RIGHT ----------------
+        right_frame = QFrame()
+        right_frame.setObjectName("ContentCard")
+        right_layout = QVBoxLayout(right_frame)
+        right_layout.addWidget(QLabel("<b>Selected Lots</b>"))
+
+        self.right_table = QTableWidget()
+        self.right_table.setColumnCount(4)
+        self.right_table.setHorizontalHeaderLabels(
+            ["Lot Number", "Large Scale (KG)", "Small Scale (G)", "Total Weight (KG)"])
+        header = self.right_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        for c in (1, 2, 3):
+            header.setSectionResizeMode(c, QHeaderView.ResizeMode.ResizeToContents)
+        self.right_table.verticalHeader().setVisible(False)
+        self.right_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.right_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.right_table.setAlternatingRowColors(False)
+        self.right_table.setItemDelegate(DecimalEditorDelegate(self.right_table))
+        self.right_table.itemChanged.connect(self.format_cell)
+        self.right_table.cellDoubleClicked.connect(self.on_right_table_double_clicked)
+        right_layout.addWidget(self.right_table)
+
+        remove_btn = QPushButton("Remove Selected")
+        remove_btn.setObjectName("DangerButton")
+        remove_btn.clicked.connect(self.remove_from_right_table)
+        right_layout.addWidget(remove_btn, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        btn_layout = QHBoxLayout()
+        cancel_btn = QPushButton("Cancel")
+        cancel_btn.setObjectName("SecondaryButton")
+        cancel_btn.setFixedWidth(100)
+        cancel_btn.clicked.connect(self.reject)
+        btn_layout.addWidget(cancel_btn)
+        btn_layout.addStretch()
+
+        self.final_add_btn = QPushButton("Add Composition")
+        self.final_add_btn.setObjectName("PrimaryButton")
+        self.final_add_btn.setEnabled(False)
+        self.final_add_btn.clicked.connect(self.finalize_and_save)
+        btn_layout.addWidget(self.final_add_btn)
+        right_layout.addLayout(btn_layout)
+
+        splitter.addWidget(right_frame)
+        splitter.setSizes([750, 600])
+        layout.addWidget(splitter)
+
+        self.load_inventory_data()
+
+    # ---------- LEFT SIDE ----------
+    def setup_left_tab_content(self, tab_widget, status_type):
+        layout = QVBoxLayout(tab_widget)
+
+        search_input = QLineEdit()
+        search_input.setPlaceholderText(f"Search {status_type} records...")
+        search_input.textChanged.connect(lambda text, st=status_type: self.filter_left_table(text, st))
+        layout.addWidget(search_input)
+
+        table = QTableWidget()
+        table.setColumnCount(6)
+        table.setHorizontalHeaderLabels(["Product code", "Lot no", "Qty", "Warehouse #", "Bag No.", "Status"])
+        table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        table.verticalHeader().setVisible(False)
+        table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        table.setAlternatingRowColors(False)
+        table.setItemDelegate(RowColorDelegate(table))
+        table.cellDoubleClicked.connect(self.move_selected_record_to_right)
+
+        if status_type == "pass":
+            self.pass_search_input = search_input
+            self.pass_table = table
+        else:
+            self.fail_search_input = search_input
+            self.fail_table = table
+        layout.addWidget(table)
+
+    def filter_left_table(self, query, status_type):
+        table = self.pass_table if status_type == "pass" else self.fail_table
+        query = query.lower().strip()
+        for row in range(table.rowCount()):
+            match = any(
+                table.item(row, col) and query in table.item(row, col).text().lower()
+                for col in range(table.columnCount())
+            )
+            table.setRowHidden(row, not match)
+
+    def load_inventory_data(self):
+        def populate_table(table, data, is_passed):
+            table.setRowCount(0)
+            bg_color = self.PASS_BG if is_passed else self.FAIL_BG
+            for row_idx, row_data in enumerate(data):
+                table.insertRow(row_idx)
+                for col in range(5):
+                    default = "0" if col == 2 else ""
+                    table.setItem(row_idx, col, QTableWidgetItem(str(row_data[col] or default)))
+
+                status_item = QTableWidgetItem("Passed" if is_passed else "Failed")
+                status_item.setForeground(QColor("green" if is_passed else "red"))
+                status_item.setFont(QFont("Segoe UI", 9, QFont.Weight.Bold))
+                table.setItem(row_idx, 5, status_item)
+
+                for col in range(table.columnCount()):
+                    table.item(row_idx, col).setBackground(bg_color)
+
+        populate_table(self.pass_table, get_fginv_passed_records(), True)
+        populate_table(self.fail_table, get_fginv_failed_records(), False)
+
+    # ---------- MOVE / REMOVE ----------
+    def move_selected_record_to_right(self, *args):
+        is_passed = (self.tab_widget.currentIndex() == 0)
+        active_table = self.pass_table if is_passed else self.fail_table
+
+        row = active_table.currentRow()
+        if row < 0:
+            QMessageBox.warning(self, "No Selection", "Please select a record from the table first.")
+            return
+
+        def cell_text(col):
+            item = active_table.item(row, col)
+            return item.text().strip() if item else ""
+
+        lot_no = cell_text(1)
+        bag_no = cell_text(4)
+        lot_number = f"{bag_no}-{lot_no}" if bag_no else lot_no   # e.g. 20-7857K or 7857K
+
+        for r in range(self.right_table.rowCount()):
+            existing = self.right_table.item(r, 0)
+            if existing and existing.text() == lot_number:
+                QMessageBox.warning(self, "Duplicate", f"Lot '{lot_number}' is already in the list.")
+                return
+
+        bg_color = self.PASS_BG if is_passed else self.FAIL_BG
+        right_align = Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter
+
+        self.right_table.blockSignals(True)
+        try:
+            right_row = self.right_table.rowCount()
+            self.right_table.insertRow(right_row)
+
+            lot_item = QTableWidgetItem(lot_number)
+            lot_item.setFlags(lot_item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.right_table.setItem(right_row, 0, lot_item)
+
+            for col in (1, 2, 3):
+                self.right_table.setItem(right_row, col, QTableWidgetItem("0.000000"))
+                self.right_table.item(right_row, col).setTextAlignment(right_align)
+
+            for col in range(4):
+                self.right_table.item(right_row, col).setBackground(bg_color)
+        finally:
+            self.right_table.blockSignals(False)
+
+        self.right_table.setCurrentCell(right_row, 1)
+        self.right_table.editItem(self.right_table.item(right_row, 1))
+        self.update_add_button()
+
+    def on_right_table_double_clicked(self, row, column):
+        if column != 0:   # cols 1-3 are editable; only the lot column removes
+            return
+        self.right_table.selectRow(row)
+        self.remove_from_right_table()
+
+    def remove_from_right_table(self):
+        current_row = self.right_table.currentRow()
+        if current_row >= 0:
+            self.right_table.removeRow(current_row)
+            self.update_add_button()
+        else:
+            QMessageBox.warning(self, "No Selection", "Please select an item from the table to remove.")
+
+    # ---------- FORMATTING ----------
+    def format_cell(self, item):
+        """Format editable cells to 6 decimals."""
+        if item.column() == 0:
+            return
+        try:
+            value = float(item.text().strip() or "0")
+        except ValueError:
+            value = 0.0
+        if value < 0:
+            value = 0.0
+
+        self.right_table.blockSignals(True)
+        item.setText(f"{value:.6f}")
+        self.right_table.blockSignals(False)
+
+    def update_add_button(self):
+        self.final_add_btn.setEnabled(self.right_table.rowCount() > 0)
+
+    # ---------- SAVE ----------
+    def finalize_and_save(self):
+        rows = []
+        for r in range(self.right_table.rowCount()):
+            lot = self.right_table.item(r, 0).text().strip()
+            try:
+                large = float(self.right_table.item(r, 1).text() or 0)
+                small = float(self.right_table.item(r, 2).text() or 0)
+                weight = float(self.right_table.item(r, 3).text() or 0)
+            except ValueError:
+                QMessageBox.warning(self, "Invalid Input", f"Please check the numbers in row {r + 1}.")
+                return
+            rows.append((lot, large, small, weight))
+
+        self.final_rows = rows
+        self.accept()
+
 class NonRawMaterialWizard(QDialog):
     PASS_BG = QColor(212, 237, 218)  # Soft green (#d4edda)
     FAIL_BG = QColor(248, 215, 218)  # Soft red (#f8d7da)
@@ -73,6 +331,7 @@ class NonRawMaterialWizard(QDialog):
 
         # Data container to store the final compiled output
         self.final_result_data = None
+        self.skipped_rows = None
         self.step1_data = {}
         self.initial_edit_deductions = []
         self.is_edit_mode = is_edit # Store flag
@@ -175,6 +434,12 @@ class NonRawMaterialWizard(QDialog):
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
 
+        self.skip_btn = QPushButton("Select FG")
+        self.skip_btn.setObjectName("SecondaryButton")
+        self.skip_btn.setFixedWidth(120)
+        self.skip_btn.clicked.connect(self.open_skip_dialog)
+        btn_layout.addWidget(self.skip_btn)
+
         self.next_btn = QPushButton("Next")
         self.next_btn.setObjectName("PrimaryButton")
         self.next_btn.setFixedWidth(120)
@@ -183,6 +448,12 @@ class NonRawMaterialWizard(QDialog):
 
         layout.addLayout(btn_layout)
         self.stacked_widget.addWidget(self.step_one_widget)
+
+    def open_skip_dialog(self):
+        dialog = LotSelectionDialog(self)
+        if dialog.exec() == QDialog.DialogCode.Accepted and dialog.final_rows:
+            self.skipped_rows = dialog.final_rows
+            self.accept()   # close the wizard; manual entry picks up skipped_rows
 
     def validate_and_go_to_step_two(self):
         mat_code = self.display_mat_code_input.text().strip()

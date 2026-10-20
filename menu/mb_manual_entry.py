@@ -589,6 +589,13 @@ class MBManualEntry(QWidget):
         # Pass is_edit=False because this is a brand new material line
         dialog = NonRawMaterialWizard(self, edit_data=None, is_edit=False)
         if dialog.exec() == QDialog.DialogCode.Accepted:
+
+            # --- SKIP PATH: rows go straight into the materials table ---
+            if dialog.skipped_rows:
+                self.add_skipped_rows(dialog.skipped_rows)
+                return
+
+            # --- NORMAL PATH ---
             result_data = dialog.final_result_data
 
             if result_data:
@@ -603,6 +610,22 @@ class MBManualEntry(QWidget):
                 self.large_scale_input.setText(f"{comp_info['large_scale']:.6f}")
                 self.small_scale_input.setText(f"{comp_info['small_scale']:.6f}")
                 self.total_weight_input.setText(f"{comp_info['total_weight']:.6f}")
+
+    def add_skipped_rows(self, rows):
+        """Transfers rows from the Skip dialog straight into the materials table."""
+        right_align = Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter
+
+        for lot_number, large, small, weight in rows:
+            row = self.materials_table.rowCount()
+            self.materials_table.insertRow(row)
+            self.materials_table.setItem(row, 0, QTableWidgetItem(lot_number))
+
+            for col, val in ((1, large), (2, small), (3, weight)):
+                item = NumericTableWidgetItem(val, is_float=True)
+                item.setTextAlignment(right_align)
+                self.materials_table.setItem(row, col, item)
+
+        self.update_totals()
 
     def edit_material_composition(self, row, column):
         """Triggers when a row in the materials table is double-clicked to edit non-raw materials."""
