@@ -205,14 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00553" summary="updated all display details to accept null values">
-      <option name="closed" value="true" />
-      <created>1778813738342</created>
-      <option name="number" value="00553" />
-      <option name="presentableId" value="LOCAL-00553" />
-      <option name="project" value="LOCAL" />
-      <updated>1778813738342</updated>
-    </task>
     <task id="LOCAL-00554" summary="updated all display details to accept null values">
       <option name="closed" value="true" />
       <created>1778814933367</created>
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792479096639</updated>
     </task>
-    <option name="localTasksCounter" value="602" />
+    <task id="LOCAL-00602" summary="UPDATED THE GETTING OF THE REPONSE FROM THE API">
+      <option name="closed" value="true" />
+      <created>1792484673774</created>
+      <option name="number" value="00602" />
+      <option name="presentableId" value="LOCAL-00602" />
+      <option name="project" value="LOCAL" />
+      <updated>1792484673774</updated>
+    </task>
+    <option name="localTasksCounter" value="603" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -606,12 +606,18 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="71" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="155" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="template-print" />
                       </list>
                     </value>
                   </entry>
@@ -625,7 +631,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="make the tables to be read only so edit in un allowed fields is not possible" />
     <MESSAGE value="modified the raw material and non raw material field to change dynamically" />
     <MESSAGE value="fix the saving of the material and the breakdown of the materials" />
     <MESSAGE value="updated the current sving updatess into database. no deleteing of old" />
@@ -650,7 +655,8 @@
     <MESSAGE value="updated the installer" />
     <MESSAGE value="added a new function for the selection of finished goods as a material" />
     <MESSAGE value="created a EXE and a installer for the user" />
-    <option name="LAST_COMMIT_MESSAGE" value="created a EXE and a installer for the user" />
+    <MESSAGE value="UPDATED THE GETTING OF THE REPONSE FROM THE API" />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATED THE GETTING OF THE REPONSE FROM THE API" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

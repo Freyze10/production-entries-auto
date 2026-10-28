@@ -848,6 +848,8 @@ class MBManualEntry(QWidget):
             # Optional: Customize the locked message popup message if desired,
             # or keep show_printed_locked_message(self)
             QTimer.singleShot(200, lambda: show_confirmed_locked_message(self))
+            # QTimer.singleShot(200, lambda: show_printed_locked_message(self)) for printed
+
         else:
             self.save_btn.setEnabled(True)
             self.save_btn.setToolTip("")
