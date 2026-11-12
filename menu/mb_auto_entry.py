@@ -19,6 +19,7 @@ from util.display_print_message import show_printed_locked_message
 from util.field_format import format_to_float, SmartDateEdit, production_mixing_time, NumericTableWidgetItem, \
     add_batch_text, setup_auto_completers, parse_date_to_sql
 from util.loading import LoadingDialog
+from util.stock_check import check_stock_before_save, deduct_stock_on_save
 from util.validate_input import validate_lot_field
 from workstation.workstation_details import _get_workstation_info
 
@@ -820,6 +821,9 @@ class MBAutoEntry(QWidget):
         # 2. Determine Mode (Save vs Update)
         is_update = (self.save_btn.text() == "Update")
 
+        if not is_update and not check_stock_before_save(self, self.materials_table, ignore_unlisted=False):
+            return
+
         # 3. Collect Data
         try:
             # Header Data (Matching tbl_production01)
@@ -891,6 +895,11 @@ class MBAutoEntry(QWidget):
         success, message = save_production_record(header, quantity, encode, materials, is_update)
 
         if success:
+            if not is_update:
+                ok, msg = deduct_stock_on_save(self.materials_table, ignore_unlisted=False)
+                if not ok:
+                    QMessageBox.warning(self, "Stock Deduction Failed", msg)
+
             action = "updated" if is_update else "created"
             QMessageBox.information(self, "Success", f"Production {header['prod_id']} has been {action} successfully.")
 

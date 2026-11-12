@@ -205,14 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00555" summary="modified">
-      <option name="closed" value="true" />
-      <created>1780293708092</created>
-      <option name="number" value="00555" />
-      <option name="presentableId" value="LOCAL-00555" />
-      <option name="project" value="LOCAL" />
-      <updated>1780293708092</updated>
-    </task>
     <task id="LOCAL-00556" summary="added dashboard in the main Navigation">
       <option name="closed" value="true" />
       <created>1780543398761</created>
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793168191102</updated>
     </task>
-    <option name="localTasksCounter" value="604" />
+    <task id="LOCAL-00604" summary="removed the duplicate function">
+      <option name="closed" value="true" />
+      <created>1794451213388</created>
+      <option name="number" value="00604" />
+      <option name="presentableId" value="LOCAL-00604" />
+      <option name="project" value="LOCAL" />
+      <updated>1794451213389</updated>
+    </task>
+    <option name="localTasksCounter" value="605" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -631,7 +631,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix the saving of the material and the breakdown of the materials" />
     <MESSAGE value="updated the current sving updatess into database. no deleteing of old" />
     <MESSAGE value="updated the save and update function of the production materials" />
     <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
@@ -656,14 +655,15 @@
     <MESSAGE value="created a EXE and a installer for the user" />
     <MESSAGE value="UPDATED THE GETTING OF THE REPONSE FROM THE API" />
     <MESSAGE value="added the for printed lock for the manual" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the for printed lock for the manual" />
+    <MESSAGE value="removed the duplicate function" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the duplicate function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/menu/mb_auto_entry.py</url>
-          <line>114</line>
+          <line>115</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
