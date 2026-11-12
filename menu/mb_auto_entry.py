@@ -529,49 +529,6 @@ class MBAutoEntry(QWidget):
         dialog.accept()
         QMessageBox.information(self, "Success", "Formula loaded successfully!")
 
-    def confirm_production_form(self):
-        """Validates, confirms, and updates the production confirmation timestamp."""
-        raw_id = self.production_id_input.text().strip()
-
-        if not raw_id or raw_id == "0":
-            QMessageBox.warning(self, "Selection Required", "Please enter or select a production ID first.")
-            return
-
-        try:
-            prod_id = int(raw_id)
-        except ValueError:
-            QMessageBox.warning(self, "Invalid ID", "Production ID must be a number.")
-            return
-
-        if not check_production_exists(prod_id):
-            QMessageBox.warning(self, "Not Saved", f"Production ID {prod_id} is not yet saved in the database.")
-            return
-
-        current_timestamp_str = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-
-        msg = (f"Are you sure you want to confirm Production ID: {prod_id}?\n\n"
-               f"Confirmation Timestamp: {current_timestamp_str}")
-        reply = QMessageBox.question(self, "Confirm Production Form", msg,
-                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                                     QMessageBox.StandardButton.No)
-
-        if reply == QMessageBox.StandardButton.No:
-            return
-
-        success, message = confirm_production_record_in_db(prod_id)
-
-        if success:
-            self.production_confirmation_display.setText(current_timestamp_str)
-
-            audit_details = f"(MB-Auto) Production ID: {prod_id} has been CONFIRMED"
-            log_audit_trail(self.work_station['m'], "CONFIRM", audit_details)
-
-            QMessageBox.information(self, "Success", f"Production ID {prod_id} successfully confirmed.")
-            if hasattr(self, 'btn_confirm'):
-                self.btn_confirm.setVisible(False)
-        else:
-            QMessageBox.critical(self, "Database Error", f"Failed to confirm production form: {message}")
-
     def validate_lot_no(self, event):
         if self.lot_no_input.isReadOnly() or not self.lot_no_input.isEnabled():
             return
@@ -848,53 +805,6 @@ class MBAutoEntry(QWidget):
                 self.btn_confirm.setVisible(False)
         else:
             QMessageBox.critical(self, "Database Error", f"Failed to confirm production form: {message}")
-
-    def generate_detailed_audit_details(self, header, quantity, encode, materials, is_update):
-        """Generates audit details containing ONLY the fields modified for MB-Auto."""
-        if not is_update:
-            mat_summary = ", ".join([m[2] for m in materials if m[2]])
-            return (
-                f"(MB-Auto) Created Production ID: {header['prod_id']} | "
-                f"Customer: {header['customer']} | Product: {header['prod_code']} | "
-                f"Lot: {header['lot_no']} | Qty: {quantity['prod']} | Materials: [{mat_summary}]"
-            )
-
-        changes = []
-        if self.prod_results:
-            fields_to_check = [
-                ('Customer', str(self.prod_results.get('customer') or '').strip(),
-                 str(header['customer'] or '').strip()),
-                ('Product Code', str(self.prod_results.get('prod_code') or '').strip(),
-                 str(header['prod_code'] or '').strip()),
-                ('Product Color', str(self.prod_results.get('prod_color') or '').strip(),
-                 str(header['prod_color'] or '').strip()),
-                ('Lot No', str(self.prod_results.get('lot_no') or '').strip(), str(header['lot_no'] or '').strip()),
-                ('Order No', str(self.prod_results.get('order_no') or '').strip(),
-                 str(header['order_no'] or '').strip()),
-                ('Form Type', str(self.prod_results.get('form_type') or '').strip(),
-                 str(header['form_type'] or '').strip()),
-                ('Machine No', str(self.prod_results.get('machine_no') or '').strip(),
-                 str(header['machine_no'] or '').strip()),
-                ('Mix Time', str(self.prod_results.get('mix_time') or '').strip(),
-                 str(header['mix_time'] or '').strip()),
-                ('Notes', str(self.prod_results.get('note') or '').strip(), str(header['note'] or '').strip()),
-                ('Prepared By', str(self.prod_results.get('prepared_by') or '').strip(),
-                 str(encode.get('prepared_by') or '').strip()),
-                ('Dosage', float(self.prod_results.get('dosage') or 0.0), float(header['dosage'] or 0.0)),
-                ('LD', float(self.prod_results.get('ld') or 0.0), float(header['ld'] or 0.0)),
-                ('Qty Required', float(self.prod_results.get('quantity_req') or 0.0), float(quantity['req'] or 0.0)),
-                ('Qty Batch', float(self.prod_results.get('quantity_batch') or 0.0), float(quantity['batch'] or 0.0)),
-                ('Qty Produced', float(self.prod_results.get('quantity_prod') or 0.0), float(quantity['prod'] or 0.0)),
-            ]
-
-            for label, old_val, new_val in fields_to_check:
-                if old_val != new_val:
-                    changes.append(f"{label}: '{old_val}' -> '{new_val}'")
-
-        if not changes:
-            return f"(MB-Auto) Updated Production ID: {header['prod_id']} (No data attribute fields altered)"
-
-        return f"(MB-Auto) Updated Prod ID {header['prod_id']} -> " + " | ".join(changes)
 
     def save_production(self):
         # 1. Validation
