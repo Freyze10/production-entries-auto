@@ -205,22 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00556" summary="added dashboard in the main Navigation">
-      <option name="closed" value="true" />
-      <created>1780543398761</created>
-      <option name="number" value="00556" />
-      <option name="presentableId" value="LOCAL-00556" />
-      <option name="project" value="LOCAL" />
-      <updated>1780543398761</updated>
-    </task>
-    <task id="LOCAL-00557" summary="created basic template for the dashboard">
-      <option name="closed" value="true" />
-      <created>1780543445921</created>
-      <option name="number" value="00557" />
-      <option name="presentableId" value="LOCAL-00557" />
-      <option name="project" value="LOCAL" />
-      <updated>1780543445921</updated>
-    </task>
     <task id="LOCAL-00558" summary="returned back to original">
       <option name="closed" value="true" />
       <created>1780544068219</created>
@@ -597,7 +581,23 @@
       <option name="project" value="LOCAL" />
       <updated>1794451213389</updated>
     </task>
-    <option name="localTasksCounter" value="605" />
+    <task id="LOCAL-00605" summary="added a temporary deduction function for the production entries. but not yet the actual datasbase">
+      <option name="closed" value="true" />
+      <created>1794460934486</created>
+      <option name="number" value="00605" />
+      <option name="presentableId" value="LOCAL-00605" />
+      <option name="project" value="LOCAL" />
+      <updated>1794460934486</updated>
+    </task>
+    <task id="LOCAL-00606" summary="added a temporary deduction function for the production entries. but not yet the actual datasbase">
+      <option name="closed" value="true" />
+      <created>1794461005021</created>
+      <option name="number" value="00606" />
+      <option name="presentableId" value="LOCAL-00606" />
+      <option name="project" value="LOCAL" />
+      <updated>1794461005021</updated>
+    </task>
+    <option name="localTasksCounter" value="607" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -631,7 +631,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated the current sving updatess into database. no deleteing of old" />
     <MESSAGE value="updated the save and update function of the production materials" />
     <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
     <MESSAGE value="created a installer for  the generated app" />
@@ -656,7 +655,8 @@
     <MESSAGE value="UPDATED THE GETTING OF THE REPONSE FROM THE API" />
     <MESSAGE value="added the for printed lock for the manual" />
     <MESSAGE value="removed the duplicate function" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed the duplicate function" />
+    <MESSAGE value="added a temporary deduction function for the production entries. but not yet the actual datasbase" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a temporary deduction function for the production entries. but not yet the actual datasbase" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

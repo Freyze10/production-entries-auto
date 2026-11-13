@@ -297,7 +297,7 @@ def perform_rm_incoming_sync_logic(engine, progress_callback=None):
     data = list(latest_by_code.values())
     with engine.connect() as conn:
         with conn.begin():
-            conn.execute(text("""
+            conn.execute(text(f"""
                 INSERT INTO {schema}.tbl_rm_incoming (date, material_code, note)
                 VALUES (:date, :material_code, :note)
                 ON CONFLICT (material_code) DO UPDATE SET note = EXCLUDED.note, date = EXCLUDED.date
