@@ -30,6 +30,8 @@ from collections import defaultdict
 
 from PyQt6.QtWidgets import QMessageBox
 
+from db.connection import get_connection
+
 try:
     from dbfread import DBF, DBFNotFound
 except ImportError:  # keeps the module importable if dbfread is missing
@@ -71,14 +73,6 @@ class StockCheckError(Exception):
         super().__init__(message)
         self.message = message
         self.title = title
-
-
-def _connect():
-    """TODO: return a psycopg connection using your project's own connection helper.
-    Replace the import below with whatever your db module actually exposes."""
-    from db.connection import get_connection  # <-- adjust to your project
-    return get_connection()
-
 
 def _norm(name):
     return str(name).strip().upper()
@@ -310,7 +304,7 @@ def validate_stock(table, prod_id_raw, is_update, ignore_unlisted=False):
     if prod_id is None:
         raise StockCheckError("Production ID must be a number.", "Validation Error")
 
-    conn = _connect()
+    conn = get_connection()
     try:
         with conn.cursor() as cur:
             excluded = get_excluded_prod_ids(cur)

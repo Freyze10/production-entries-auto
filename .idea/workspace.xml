@@ -205,14 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00558" summary="returned back to original">
-      <option name="closed" value="true" />
-      <created>1780544068219</created>
-      <option name="number" value="00558" />
-      <option name="presentableId" value="LOCAL-00558" />
-      <option name="project" value="LOCAL" />
-      <updated>1780544068219</updated>
-    </task>
     <task id="LOCAL-00559" summary="updated the connection to server">
       <option name="closed" value="true" />
       <created>1790745338871</created>
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1794461005021</updated>
     </task>
-    <option name="localTasksCounter" value="607" />
+    <task id="LOCAL-00607" summary="added the new check stock from the view table and dbf temporary">
+      <option name="closed" value="true" />
+      <created>1794540809285</created>
+      <option name="number" value="00607" />
+      <option name="presentableId" value="LOCAL-00607" />
+      <option name="project" value="LOCAL" />
+      <updated>1794540809285</updated>
+    </task>
+    <option name="localTasksCounter" value="608" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -631,7 +631,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated the save and update function of the production materials" />
     <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
     <MESSAGE value="created a installer for  the generated app" />
     <MESSAGE value="updated the saving and displaying of break down lot from fg" />
@@ -656,7 +655,8 @@
     <MESSAGE value="added the for printed lock for the manual" />
     <MESSAGE value="removed the duplicate function" />
     <MESSAGE value="added a temporary deduction function for the production entries. but not yet the actual datasbase" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a temporary deduction function for the production entries. but not yet the actual datasbase" />
+    <MESSAGE value="added the new check stock from the view table and dbf temporary" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the new check stock from the view table and dbf temporary" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
