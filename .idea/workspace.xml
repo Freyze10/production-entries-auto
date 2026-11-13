@@ -205,14 +205,6 @@
       <option name="presentableId" value="Default" />
       <updated>1773802687107</updated>
     </task>
-    <task id="LOCAL-00559" summary="updated the connection to server">
-      <option name="closed" value="true" />
-      <created>1790745338871</created>
-      <option name="number" value="00559" />
-      <option name="presentableId" value="LOCAL-00559" />
-      <option name="project" value="LOCAL" />
-      <updated>1790745338871</updated>
-    </task>
     <task id="LOCAL-00560" summary="updated the manual new entry button, to re-enable  the fields and button">
       <option name="closed" value="true" />
       <created>1791162819969</created>
@@ -597,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1794540809285</updated>
     </task>
-    <option name="localTasksCounter" value="608" />
+    <task id="LOCAL-00608" summary="removed the redundant connection declaration">
+      <option name="closed" value="true" />
+      <created>1794541051880</created>
+      <option name="number" value="00608" />
+      <option name="presentableId" value="LOCAL-00608" />
+      <option name="project" value="LOCAL" />
+      <updated>1794541051880</updated>
+    </task>
+    <option name="localTasksCounter" value="609" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -631,7 +631,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated the logginng of the audit trail for more detailed log" />
     <MESSAGE value="created a installer for  the generated app" />
     <MESSAGE value="updated the saving and displaying of break down lot from fg" />
     <MESSAGE value="fixed the date saving of the producttion" />
@@ -656,7 +655,8 @@
     <MESSAGE value="removed the duplicate function" />
     <MESSAGE value="added a temporary deduction function for the production entries. but not yet the actual datasbase" />
     <MESSAGE value="added the new check stock from the view table and dbf temporary" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the new check stock from the view table and dbf temporary" />
+    <MESSAGE value="removed the redundant connection declaration" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the redundant connection declaration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

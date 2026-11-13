@@ -13,7 +13,7 @@ reserved  = SUM(tbl_production02.total_weight) per material, only for rows where
             - prod_id is not the record currently being saved (its old rows are ignored)
 
 Update rules (checked fresh from the database on every save)
-            1. inventory_c_date has a value        -> blocked (already confirmed)
+            1. confirmation_encoded_on has a value -> blocked (already confirmed)
             2. prod_id is in view B                -> blocked (already prepared)
             3. otherwise                           -> allowed, validated like a new record
 
@@ -48,17 +48,17 @@ STOCK_DB_READY = False
 
 # --- PostgreSQL objects (schemas come from .env) ---
 PRODUCTION_SCHEMA = os.environ.get('PRODUCTION_SCHEMA')   # tbl_production01 / tbl_production02
-VIEW_SCHEMA = os.environ.get('VIEW_SCHEMA')               # view_stock_on_hand / view_prepared (set this in .env)
-STOCK_VIEW = "view_stock_on_hand"        # view A
-STOCK_CODE_COL = "rm code"               # has a space, it is quoted in the SQL
-STOCK_QTY_COL = "stocks"
+VIEW_SCHEMA = os.environ.get('VIEW_SCHEMA')               # view_adjusted_ending_overall / view_prepared (set this in .env)
+STOCK_VIEW = "view_adjusted_ending_overall"        # view A
+STOCK_CODE_COL = "rmcode"               # has a space, it is quoted in the SQL
+STOCK_QTY_COL = "overall_qty"
 EXCLUDE_VIEW = "view_prepared"           # view B
 EXCLUDE_PREP_COL = "prep_id"
 EXCLUDE_PROD_COL = "prod_id"             # may not exist yet, detected automatically
 
 # --- Old .dbf database (placeholders, used only while view B has no prod_id column) ---
 DBF_BASE_PATH = r'\\system-server\SYSTEM-NEW-OLD'
-PRODUCTION_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')   # placeholder file name
+PREPERATION_DBF = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')   # placeholder file name
 DBF_PREP_FIELD = 'prep_id'               # placeholder field name
 DBF_PROD_FIELD = 'prod_id'               # placeholder field name
 DBF_CACHE_SECONDS = 300                  # how long a scanned prep_id -> prod_id map is reused
@@ -73,6 +73,7 @@ class StockCheckError(Exception):
         super().__init__(message)
         self.message = message
         self.title = title
+
 
 def _norm(name):
     return str(name).strip().upper()
@@ -139,7 +140,7 @@ def _scan_dbf(wanted):
     found = defaultdict(set)
     try:
         table = DBF(
-            PRODUCTION_PRIMARY_DBF_PATH,
+            PREPERATION_DBF,
             lowernames=True,
             load=False,
             ignore_missing_memofile=True,
@@ -274,9 +275,15 @@ def fetch_reserved(cur, material_names, excluded_ids, current_prod_id):
 
 
 def fetch_record_status(cur, prod_id):
-    """Returns {'confirmed': bool, 'deleted': bool} or None if the prod_id doesn't exist."""
+    """Returns {'confirmed': bool, 'deleted': bool} or None if the prod_id doesn't exist.
+    Confirmed = tbl_production_encode.confirmation_encoded_on has a value."""
     cur.execute(
-        f"SELECT inventory_c_date, COALESCE(is_deleted, FALSE) FROM {PRODUCTION_SCHEMA}.tbl_production01 WHERE prod_id = %s",
+        f"""
+        SELECT e.confirmation_encoded_on, COALESCE(p1.is_deleted, FALSE)
+        FROM {PRODUCTION_SCHEMA}.tbl_production01 p1
+        LEFT JOIN {PRODUCTION_SCHEMA}.tbl_production_encode e ON e.prod_id = p1.prod_id
+        WHERE p1.prod_id = %s
+        """,
         (prod_id,),
     )
     row = cur.fetchone()

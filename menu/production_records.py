@@ -25,6 +25,7 @@ class ProductionRecords(QWidget):
         self.mac_address = mac_address
         self.init_ui()
 
+
     def init_ui(self):
         self.setup_ui()
         self.refresh_records()
@@ -90,7 +91,7 @@ class ProductionRecords(QWidget):
         # set of rows
         self.headers = ["prod_id", "Date", "Customer", "Product Code",
                         "Product Color", "Lot No", "Qty Produced", "WIP", "is_printed"]
-        self.rows = get_all_production_data()
+        self.rows = []
 
         self.table_records = QTableView()
         self.table_model = TableModel(self.rows, self.headers)
@@ -323,18 +324,26 @@ class ProductionRecords(QWidget):
 
     def refresh_records(self):
         try:
+            # Clear the cache first, in case get_all_production_data uses @lru_cache
+            if hasattr(get_all_production_data, "cache_clear"):
+                get_all_production_data.cache_clear()
+
+            # Reload from the database so is_printed (and everything else) is current
+            self.rows = get_all_production_data()
+
+            # If the Cancelled view is open, switch back to the normal records view
+            if self.btn_cancelled.text() != "Cancelled":
+                self.production_records()
+                return
+
             self.table_model.set_data(self.rows)
-            # get_all_production_data()
-            # Reset the selection in the UI
+
             self.table_records.clearSelection()
             self.table_records.sortByColumn(0, Qt.SortOrder.DescendingOrder)
             self.table_records.scrollToTop()
             self.selected_production_label.setText("INDEX REF. - FORMULATION NO.: No Selection")
 
-            # Reset the details table to its default empty state
             self.details_table_model.set_data(self.details_row)
-
-            # Clear search bar if text was entered
             self.search_input.clear()
 
             self.check_for_unprinted_alerts()
