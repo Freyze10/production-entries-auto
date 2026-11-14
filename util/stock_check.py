@@ -291,6 +291,81 @@ def fetch_record_status(cur, prod_id):
         return None
     return {"confirmed": row[0] is not None, "deleted": bool(row[1])}
 
+def print_all_available_stocks():
+    """Console only. Prints the remaining stock of every raw material in view A:
+    available = stock - reserved by unprepared productions (same rules as validate_stock).
+    Never raises, so it can't break the screen."""
+    try:
+        if not STOCK_DB_READY or not PRODUCTION_SCHEMA or not VIEW_SCHEMA:
+            print("[stock overview] skipped: STOCK_DB_READY is False or schemas not set in .env", flush=True)
+            return
+
+        conn = get_connection()
+        try:
+            with conn.cursor() as cur:
+                excluded = get_excluded_prod_ids(cur)
+                cutoff = min(excluded)
+
+                cur.execute(
+                    f"""
+                    SELECT UPPER(TRIM("{STOCK_CODE_COL}")) AS code, SUM("{STOCK_QTY_COL}")
+                    FROM {VIEW_SCHEMA}."{STOCK_VIEW}"
+                    GROUP BY 1
+                    """
+                )
+                stock = {code: float(qty or 0) for code, qty in cur.fetchall() if code}
+
+                cur.execute(
+                    f"""
+                                    SELECT UPPER(TRIM(p2.material_code)) AS code,
+                                           SUM(p2.total_weight) AS reserved,
+                                           ARRAY_AGG(DISTINCT p2.prod_id ORDER BY p2.prod_id) AS holders
+                                    FROM {PRODUCTION_SCHEMA}.tbl_production02 p2
+                                    JOIN {PRODUCTION_SCHEMA}.tbl_production01 p1 ON p1.prod_id = p2.prod_id
+                                    WHERE COALESCE(p1.is_deleted, FALSE) = FALSE
+                                      AND COALESCE(p2.is_deleted, FALSE) = FALSE
+                                      AND p2.prod_id >= %s
+                                      AND NOT (p2.prod_id = ANY(%s))
+                                      AND TRIM(COALESCE(p2.material_code, '')) <> ''
+                                    GROUP BY 1
+                                    """,
+                    (cutoff, list(excluded)),
+                )
+                reserved_rows = cur.fetchall()
+                reserved = {code: float(total or 0) for code, total, _ in reserved_rows}
+                holders = {code: list(h or []) for code, _, h in reserved_rows}
+        finally:
+            try:
+                conn.rollback()
+            except Exception:
+                pass
+            try:
+                conn.close()
+            except Exception:
+                pass
+
+        rows = []
+        for code, on_hand in stock.items():
+            res = reserved.get(code, 0.0)
+            rows.append((code, on_hand, res, on_hand - res))
+        rows.sort(key=lambda r: r[3])  # lowest available first; use r[0] to sort A-Z instead
+
+        low = sum(1 for r in rows if r[3] <= 0)
+        print(f"\n===== AVAILABLE RAW MATERIAL STOCKS ({len(rows)} materials, {low} at or below zero) =====")
+        print(f"Cutoff prod_id (lowest in view B): {cutoff} | view B has {len(excluded)} prod_ids "
+              f"(lowest 5: {sorted(excluded)[:5]})")
+        print(f"{'MATERIAL':<26}{'STOCK':>16}{'RESERVED':>16}{'AVAILABLE':>16}  STATUS / HOLDERS")
+        for code, on_hand, res, avail in rows:
+            status = "OUT / NEGATIVE" if avail < 0 else ("ZERO" if avail == 0 else "")
+            if avail < 0:
+                h = holders.get(code, [])
+                status += f"  prod IDs: {', '.join(map(str, h[:15]))}{' ...' if len(h) > 15 else ''}"
+            print(f"{code[:25]:<26}{on_hand:>16.6f}{res:>16.6f}{avail:>16.6f}  {status}")
+        print("=" * 100, flush=True)
+    except Exception as e:
+        import traceback
+        print(f"[stock overview skipped] {e}")
+        traceback.print_exc()
 
 # ==========================================
 # 4. VALIDATION (before saving)

@@ -13,7 +13,7 @@ from util.audit_record_colors import RowColorDelegate
 from util.debounce import finished_typing
 from util.field_format import setup_auto_completers
 from util.loading import LoadingDialog
-
+from util.stock_check import print_all_available_stocks
 
 
 class ProductionRecords(QWidget):
@@ -348,6 +348,7 @@ class ProductionRecords(QWidget):
             self.search_input.clear()
 
             self.check_for_unprinted_alerts()
+            print_all_available_stocks()
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to refresh data: {e}")
