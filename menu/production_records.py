@@ -15,6 +15,7 @@ from util.field_format import setup_auto_completers
 from util.loading import LoadingDialog
 
 
+
 class ProductionRecords(QWidget):
     go_to_manual_entry = pyqtSignal(int)
     go_to_auto_entry = pyqtSignal(int)

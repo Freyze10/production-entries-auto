@@ -44,16 +44,16 @@ log = logging.getLogger(__name__)
 # SETTINGS (change these, the logic stays the same)
 # ==========================================
 # While False, validation always passes.
-STOCK_DB_READY = False
+STOCK_DB_READY = True
 
 # --- PostgreSQL objects (schemas come from .env) ---
 PRODUCTION_SCHEMA = os.environ.get('PRODUCTION_SCHEMA')   # tbl_production01 / tbl_production02
-VIEW_SCHEMA = os.environ.get('VIEW_SCHEMA')               # view_adjusted_ending_overall / view_prepared (set this in .env)
+VIEW_SCHEMA = os.environ.get('VIEW_SCHEMA')               # view_adjusted_ending_overall / view_encoded_prep (set this in .env)
 STOCK_VIEW = "view_adjusted_ending_overall"        # view A
 STOCK_CODE_COL = "rmcode"
 STOCK_QTY_COL = "overall_qty"
-EXCLUDE_VIEW = "view_prepared"           # view B
-EXCLUDE_PREP_COL = "prep_id"
+EXCLUDE_VIEW = "view_encoded_prep"           # view B
+EXCLUDE_PREP_COL = "prep_form_no"
 EXCLUDE_PROD_COL = "prod_id"             # may not exist yet, detected automatically
 
 # --- Old .dbf database (placeholders, used only while view B has no prod_id column) ---
@@ -295,6 +295,7 @@ def fetch_record_status(cur, prod_id):
 # ==========================================
 # 4. VALIDATION (before saving)
 # ==========================================
+
 def validate_stock(table, prod_id_raw, is_update, ignore_unlisted=False):
     """Returns (ok, issues). Raises StockCheckError for blocking problems
     (update not allowed, server unreachable, ...).
