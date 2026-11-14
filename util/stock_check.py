@@ -50,7 +50,7 @@ STOCK_DB_READY = False
 PRODUCTION_SCHEMA = os.environ.get('PRODUCTION_SCHEMA')   # tbl_production01 / tbl_production02
 VIEW_SCHEMA = os.environ.get('VIEW_SCHEMA')               # view_adjusted_ending_overall / view_prepared (set this in .env)
 STOCK_VIEW = "view_adjusted_ending_overall"        # view A
-STOCK_CODE_COL = "rmcode"               # has a space, it is quoted in the SQL
+STOCK_CODE_COL = "rmcode"
 STOCK_QTY_COL = "overall_qty"
 EXCLUDE_VIEW = "view_prepared"           # view B
 EXCLUDE_PREP_COL = "prep_id"
@@ -58,9 +58,9 @@ EXCLUDE_PROD_COL = "prod_id"             # may not exist yet, detected automatic
 
 # --- Old .dbf database (placeholders, used only while view B has no prod_id column) ---
 DBF_BASE_PATH = r'\\system-server\SYSTEM-NEW-OLD'
-PREPERATION_DBF = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')   # placeholder file name
-DBF_PREP_FIELD = 'prep_id'               # placeholder field name
-DBF_PROD_FIELD = 'prod_id'               # placeholder field name
+PREPERATION_DBF = os.path.join(DBF_BASE_PATH, 'tbl_wh3.dbf')
+DBF_PREP_FIELD = 'T_PID'
+DBF_PROD_FIELD = 'T_PRODID'
 DBF_CACHE_SECONDS = 300                  # how long a scanned prep_id -> prod_id map is reused
 
 SERVER_UNREACHABLE_MSG = "System server is unreachable. Please try again later."
