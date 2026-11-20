@@ -18,51 +18,6 @@ def load_environment():
 
 # Load the .env file
 load_environment()
-# V2 debug
-# def get_connection():
-#     # localhost
-#     return psycopg2.connect(
-#         host="localhost",
-#         dbname="db_production_v2",
-#         user="postgres",
-#         password="password",
-#         port="5433"
-#     )
-
-# localhost
-# def get_connection():
-#     # localhost
-#     return psycopg2.connect(
-#         host="localhost",
-#         dbname="db_production",
-#         user="postgres",
-#         password="password",
-#         port="5433"
-#     )
-
-
-# Server
-# def get_connection():
-#     # localhost
-#     return psycopg2.connect(
-#         host="192.168.1.13",
-#         dbname="db_production",
-#         user="postgres",
-#         password="mbpi",
-#         port="5432"
-#     )
-
-# Server V2
-# def get_connection():
-#     # localhost
-#     return psycopg2.connect(
-#         host="192.168.1.13",
-#         dbname="db_production_v2",
-#         user="postgres",
-#         password="mbpi",
-#         port="5432"
-#     )
-
 
 # dotENV
 def get_connection():
