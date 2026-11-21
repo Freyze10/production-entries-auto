@@ -20,7 +20,7 @@ DB_CONFIG = {
 }
 temp_conn.close()
 
-DBF_BASE_PATH = r'\\system-server\SYSTEM-NEW-OLD'
+DBF_BASE_PATH = r'\\192.168.1.13\SYSTEM-NEW-OLD'
 FORMULA_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula01.dbf')
 FORMULA_ITEMS_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_formula02.dbf')
 PRODUCTION_PRIMARY_DBF_PATH = os.path.join(DBF_BASE_PATH, 'tbl_prod01.dbf')
@@ -81,6 +81,36 @@ def _is_valid_date(d):
         return bool(s) and not s.startswith('1899')
     except:
         return False
+
+from psycopg2.extras import execute_values
+
+
+def bulk_upsert(conn, table, mapping, rows, conflict_cols, update_cols, page_size=5000):
+    """Batched INSERT ... ON CONFLICT DO UPDATE.
+    mapping: list of "column" (dict key has the same name) or ("column", "dict_key").
+    Duplicate conflict keys inside the data are collapsed (last one wins), because
+    PostgreSQL refuses to update the same row twice in a single statement."""
+    if not rows:
+        return
+    pairs = [(m, m) if isinstance(m, str) else m for m in mapping]
+    cols = [c for c, _ in pairs]
+    keys = [k for _, k in pairs]
+    idx = [cols.index(c) for c in conflict_cols]
+
+    unique = {}
+    for r in rows:
+        vals = tuple(r[k] for k in keys)
+        unique[tuple(vals[i] for i in idx)] = vals
+
+    sql = (f"INSERT INTO {schema}.{table} ({', '.join(cols)}) VALUES %s "
+           f"ON CONFLICT ({', '.join(conflict_cols)}) DO UPDATE SET "
+           + ", ".join(f"{c} = EXCLUDED.{c}" for c in update_cols))
+
+    cur = conn.connection.cursor()   # same transaction as the SQLAlchemy connection
+    try:
+        execute_values(cur, sql, list(unique.values()), page_size=page_size)
+    finally:
+        cur.close()
 
 
 class Sync(QObject):
@@ -181,72 +211,59 @@ class Sync(QObject):
                 with conn.begin():
                     # --- 1. FORMULA SYNC ---
                     if primary_recs:
-                        # Headers (UPSERT)
-                        conn.execute(text(f"""
-                            INSERT INTO {schema}.tbl_formula01 (form_id, index_no, date, customer, prod_code, prod_color, dosage, total_concentration, ld, mix_time, resin, application, colormatch_no, colormatch_date, notes, date_time, is_deleted, is_used)
-                            VALUES (:uid, :index_no, :date, :customer, :prod_code, :prod_color, :dosage, :total_concentration, :ld, :mix_time, :resin, :application, :cm_num, :cm_date, :notes, :date_time, :is_deleted, :is_used)
-                            ON CONFLICT (form_id) DO UPDATE SET customer=EXCLUDED.customer, is_deleted=EXCLUDED.is_deleted, is_used=EXCLUDED.is_used, notes=EXCLUDED.notes;
-                        """), primary_recs)
+                        bulk_upsert(conn, "tbl_formula01",
+                                    [("form_id", "uid"),
+                                     "index_no", "date", "customer", "prod_code", "prod_color", "dosage",
+                                     "total_concentration", "ld", "mix_time", "resin", "application",
+                                     ("colormatch_no", "cm_num"), ("colormatch_date", "cm_date"),
+                                     "notes", "date_time", "is_deleted", "is_used"],
+                                    primary_recs, ["form_id"],
+                                    ["customer", "is_deleted", "is_used", "notes"])
 
-                        # Formula Encode Sub-table (UPSERT instead of DELETE-INSERT)
-                        conn.execute(text(f"""
-                            INSERT INTO {schema}.tbl_formula_encode (form_id, match_by, encoded_by, updated_by) 
-                            VALUES (:uid, :matched_by, :encoded_by, :updated_by)
-                            ON CONFLICT (form_id) DO UPDATE 
-                            SET match_by = EXCLUDED.match_by, encoded_by = EXCLUDED.encoded_by, updated_by = EXCLUDED.updated_by;
-                        """), primary_recs)
+                        bulk_upsert(conn, "tbl_formula_encode",
+                                    [("form_id", "uid"), ("match_by", "matched_by"), "encoded_by", "updated_by"],
+                                    primary_recs, ["form_id"],
+                                    ["match_by", "encoded_by", "updated_by"])
 
-                        # Formula Details Sub-table (UPSERT instead of DELETE-INSERT)
                         all_f_items = [i for r in primary_recs for i in items_by_uid.get(r['uid'], [])]
-                        if all_f_items:
-                            conn.execute(text(f"""
-                                INSERT INTO {schema}.tbl_formula02 (form_id, sequence_no, material_code, concentration, is_deleted) 
-                                VALUES (:uid, :seq, :material_code, :concentration, :is_deleted)
-                                ON CONFLICT (form_id, sequence_no) DO UPDATE 
-                                SET material_code = EXCLUDED.material_code, concentration = EXCLUDED.concentration, is_deleted = EXCLUDED.is_deleted;
-                            """), all_f_items)
+                        bulk_upsert(conn, "tbl_formula02",
+                                    [("form_id", "uid"), ("sequence_no", "seq"), "material_code",
+                                     "concentration", "is_deleted"],
+                                    all_f_items, ["form_id", "sequence_no"],
+                                    ["material_code", "concentration", "is_deleted"])
 
                     # --- 2. PRODUCTION SYNC ---
                     if prod_recs:
-                        # Headers (UPSERT)
-                        conn.execute(text(f"""
-                            INSERT INTO {schema}.tbl_production01 (prod_id, prod_date, customer, form_id, index_no, prod_code, prod_color, dosage, ld, lot_no, order_no, colormatch_no, colormatch_date, mix_time, machine_no, note, user_id, is_deleted, is_printed, inventory_c_date, form_type)
-                            VALUES (:prod_id, :prod_date, :customer, :form_id, :index_no, :prod_code, :prod_color, :dosage, :ld, :lot_no, :order_no, :colormatch_no, :colormatch_date, :mix_time, :machine_no, :note, :user_id, :is_deleted, :is_printed, :inventory_c_date, :form_type)
-                            ON CONFLICT (prod_id) DO UPDATE SET customer=EXCLUDED.customer, lot_no=EXCLUDED.lot_no, is_deleted=EXCLUDED.is_deleted, is_printed=EXCLUDED.is_printed, note=EXCLUDED.note;
-                        """), prod_recs)
+                        bulk_upsert(conn, "tbl_production01",
+                                    ["prod_id", "prod_date", "customer", "form_id", "index_no", "prod_code",
+                                     "prod_color", "dosage", "ld", "lot_no", "order_no", "colormatch_no",
+                                     "colormatch_date", "mix_time", "machine_no", "note", "user_id",
+                                     "is_deleted", "is_printed", "inventory_c_date", "form_type"],
+                                    prod_recs, ["prod_id"],
+                                    ["customer", "lot_no", "is_deleted", "is_printed", "note"])
 
-                        # Production Encode Sub-table (UPSERT instead of DELETE-INSERT)
-                        conn.execute(text(f"""
-                            INSERT INTO {schema}.tbl_production_encode (prod_id, prepared_by, encoded_by, encoded_on, confirmation_encoded_on) 
-                            VALUES (:prod_id, :prepared_by, :encoded_by, :encoded_on, :conf_encoded_on)
-                            ON CONFLICT (prod_id) DO UPDATE 
-                            SET prepared_by = EXCLUDED.prepared_by, encoded_by = EXCLUDED.encoded_by, 
-                                encoded_on = EXCLUDED.encoded_on, confirmation_encoded_on = EXCLUDED.confirmation_encoded_on;
-                        """), prod_recs)
+                        bulk_upsert(conn, "tbl_production_encode",
+                                    ["prod_id", "prepared_by", "encoded_by", "encoded_on",
+                                     ("confirmation_encoded_on", "conf_encoded_on")],
+                                    prod_recs, ["prod_id"],
+                                    ["prepared_by", "encoded_by", "encoded_on", "confirmation_encoded_on"])
 
-                        # Production Quantity Sub-table (UPSERT instead of DELETE-INSERT)
-                        conn.execute(text(f"""
-                            INSERT INTO {schema}.tbl_production_quantity (prod_id, quantity_req, quantity_batch, quantity_prod) 
-                            VALUES (:prod_id, :qty_req, :qty_batch, :qty_prod)
-                            ON CONFLICT (prod_id) DO UPDATE 
-                            SET quantity_req = EXCLUDED.quantity_req, quantity_batch = EXCLUDED.quantity_batch, quantity_prod = EXCLUDED.quantity_prod;
-                        """), prod_recs)
+                        bulk_upsert(conn, "tbl_production_quantity",
+                                    ["prod_id", ("quantity_req", "qty_req"), ("quantity_batch", "qty_batch"),
+                                     ("quantity_prod", "qty_prod")],
+                                    prod_recs, ["prod_id"],
+                                    ["quantity_req", "quantity_batch", "quantity_prod"])
 
-                        # Production Details Sub-table (UPSERT instead of DELETE-INSERT)
                         all_p_items = [i for r in prod_recs for i in items_by_prod_id.get(r['prod_id'], [])]
-                        if all_p_items:
-                            for item in all_p_items:
-                                item['is_deleted'] = bool(item['is_deleted'])
-
-                            conn.execute(text(f"""
-                                INSERT INTO {schema}.tbl_production02 (prod_id, sequence_no, material_code, large_scale, small_scale, total_weight, is_deleted, total_loss, total_consumption)
-                                VALUES (:prod_id, :seq, :material_code, :large_scale, :small_scale, :total_weight, :is_deleted, :total_loss, :total_consumption)
-                                ON CONFLICT (prod_id, sequence_no) DO UPDATE 
-                                SET material_code = EXCLUDED.material_code, large_scale = EXCLUDED.large_scale, 
-                                    small_scale = EXCLUDED.small_scale, total_weight = EXCLUDED.total_weight, 
-                                    is_deleted = EXCLUDED.is_deleted, total_loss = EXCLUDED.total_loss, 
-                                    total_consumption = EXCLUDED.total_consumption;
-                            """), all_p_items)
+                        for item in all_p_items:
+                            item['is_deleted'] = bool(item['is_deleted'])
+                        bulk_upsert(conn, "tbl_production02",
+                                    ["prod_id", ("sequence_no", "seq"), "material_code", "large_scale",
+                                     "small_scale", "total_weight", "is_deleted", "total_loss",
+                                     "total_consumption"],
+                                    all_p_items, ["prod_id", "sequence_no"],
+                                    ["material_code", "large_scale", "small_scale", "total_weight",
+                                     "is_deleted", "total_loss", "total_consumption"])
 
             perform_rm_incoming_sync_logic(engine)
             self.finished.emit(True, "Mirror completed successfully using UPSERT strategy.")

@@ -45,6 +45,7 @@ log = logging.getLogger(__name__)
 # ==========================================
 # While False, validation always passes.
 STOCK_DB_READY = True
+MIN_PROD_ID = 103950
 
 # --- PostgreSQL objects (schemas come from .env) ---
 PRODUCTION_SCHEMA = os.environ.get('PRODUCTION_SCHEMA')   # tbl_production01 / tbl_production02
@@ -251,7 +252,7 @@ def fetch_reserved(cur, material_names, excluded_ids, current_prod_id):
     if not material_names:
         return {}
 
-    cutoff = min(excluded_ids)
+    cutoff = MIN_PROD_ID
 
     cur.execute(
         f"""
@@ -295,6 +296,8 @@ def print_all_available_stocks():
     """Console only. Prints the remaining stock of every raw material in view A:
     available = stock - reserved by unprepared productions (same rules as validate_stock).
     Never raises, so it can't break the screen."""
+    MAX_HOLDERS_SHOWN = 15  # how many prod IDs to list per material
+
     try:
         if not STOCK_DB_READY or not PRODUCTION_SCHEMA or not VIEW_SCHEMA:
             print("[stock overview] skipped: STOCK_DB_READY is False or schemas not set in .env", flush=True)
@@ -304,7 +307,7 @@ def print_all_available_stocks():
         try:
             with conn.cursor() as cur:
                 excluded = get_excluded_prod_ids(cur)
-                cutoff = min(excluded)
+                cutoff = MIN_PROD_ID
 
                 cur.execute(
                     f"""
@@ -317,18 +320,18 @@ def print_all_available_stocks():
 
                 cur.execute(
                     f"""
-                                    SELECT UPPER(TRIM(p2.material_code)) AS code,
-                                           SUM(p2.total_weight) AS reserved,
-                                           ARRAY_AGG(DISTINCT p2.prod_id ORDER BY p2.prod_id) AS holders
-                                    FROM {PRODUCTION_SCHEMA}.tbl_production02 p2
-                                    JOIN {PRODUCTION_SCHEMA}.tbl_production01 p1 ON p1.prod_id = p2.prod_id
-                                    WHERE COALESCE(p1.is_deleted, FALSE) = FALSE
-                                      AND COALESCE(p2.is_deleted, FALSE) = FALSE
-                                      AND p2.prod_id >= %s
-                                      AND NOT (p2.prod_id = ANY(%s))
-                                      AND TRIM(COALESCE(p2.material_code, '')) <> ''
-                                    GROUP BY 1
-                                    """,
+                    SELECT UPPER(TRIM(p2.material_code)) AS code,
+                           SUM(p2.total_weight) AS reserved,
+                           ARRAY_AGG(DISTINCT p2.prod_id ORDER BY p2.prod_id) AS holders
+                    FROM {PRODUCTION_SCHEMA}.tbl_production02 p2
+                    JOIN {PRODUCTION_SCHEMA}.tbl_production01 p1 ON p1.prod_id = p2.prod_id
+                    WHERE COALESCE(p1.is_deleted, FALSE) = FALSE
+                      AND COALESCE(p2.is_deleted, FALSE) = FALSE
+                      AND p2.prod_id >= %s
+                      AND NOT (p2.prod_id = ANY(%s))
+                      AND TRIM(COALESCE(p2.material_code, '')) <> ''
+                    GROUP BY 1
+                    """,
                     (cutoff, list(excluded)),
                 )
                 reserved_rows = cur.fetchall()
@@ -350,23 +353,29 @@ def print_all_available_stocks():
             rows.append((code, on_hand, res, on_hand - res))
         rows.sort(key=lambda r: r[3])  # lowest available first; use r[0] to sort A-Z instead
 
+        def fmt_holders(code):
+            h = holders.get(code, [])
+            if not h:
+                return ""
+            shown = ", ".join(map(str, h[:MAX_HOLDERS_SHOWN]))
+            if len(h) > MAX_HOLDERS_SHOWN:
+                shown += f" ... +{len(h) - MAX_HOLDERS_SHOWN} more"
+            return f"[{shown}]"
+
         low = sum(1 for r in rows if r[3] <= 0)
         print(f"\n===== AVAILABLE RAW MATERIAL STOCKS ({len(rows)} materials, {low} at or below zero) =====")
-        print(f"Cutoff prod_id (lowest in view B): {cutoff} | view B has {len(excluded)} prod_ids "
-              f"(lowest 5: {sorted(excluded)[:5]})")
-        print(f"{'MATERIAL':<26}{'STOCK':>16}{'RESERVED':>16}{'AVAILABLE':>16}  STATUS / HOLDERS")
+        print(f"Cutoff prod_id (fixed MIN_PROD_ID): {cutoff} | view B has {len(excluded)} prod_ids")
+        print(f"{'MATERIAL':<26}{'STOCK':>16}{'RESERVED':>16}{'AVAILABLE':>16}  STATUS | RESERVED BY PROD ID")
         for code, on_hand, res, avail in rows:
-            status = "OUT / NEGATIVE" if avail < 0 else ("ZERO" if avail == 0 else "")
-            if avail < 0:
-                h = holders.get(code, [])
-                status += f"  prod IDs: {', '.join(map(str, h[:15]))}{' ...' if len(h) > 15 else ''}"
-            print(f"{code[:25]:<26}{on_hand:>16.6f}{res:>16.6f}{avail:>16.6f}  {status}")
+            status = "OUT/NEGATIVE" if avail < 0 else ("ZERO" if avail == 0 else "")
+            h_text = fmt_holders(code)
+            tail = f"{status} {h_text}".strip()
+            print(f"{code[:25]:<26}{on_hand:>16.6f}{res:>16.6f}{avail:>16.6f}  {tail}")
         print("=" * 100, flush=True)
     except Exception as e:
         import traceback
         print(f"[stock overview skipped] {e}")
         traceback.print_exc()
-
 # ==========================================
 # 4. VALIDATION (before saving)
 # ==========================================
