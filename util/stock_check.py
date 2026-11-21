@@ -435,8 +435,8 @@ def validate_stock(table, prod_id_raw, is_update, ignore_unlisted=False):
         available = on_hand - res_total
 
         if needed - available > 1e-9:
-            msg = (f"{name}: needs {needed:.6f}, only {max(available, 0.0):.6f} available "
-                   f"(stock {on_hand:.6f}, reserved {res_total:.6f}")
+            msg = (f"{name}: Needs {needed:.6f} | Theoretically Available: {max(available, 0.0):.6f} \n"
+                   f"(Actual stock {on_hand:.6f} | Reserved {res_total:.6f}")
             if holders:
                 shown = ", ".join(str(h) for h in holders[:10])
                 if len(holders) > 10:
