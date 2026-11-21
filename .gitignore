@@ -2,3 +2,13 @@
 .env
 .env.local
 .env.*.local
+
+# Build output and installer
+output/
+installer_output/
+installer.iss
+
+# Optional: IDE and Python cache
+.idea/
+__pycache__/
+*.py[cod]
